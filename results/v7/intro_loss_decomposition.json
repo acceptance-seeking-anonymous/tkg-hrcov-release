@@ -1,0 +1,466 @@
+{
+ "tkgl-polecat": {
+  "n": 532636,
+  "MRR_base": 0.22048835044716594,
+  "total_loss": 0.779511649552834,
+  "cells": {
+   "recurrent_in": {
+    "n": 201266,
+    "share": 0.37786781216440496,
+    "MRR_base": 0.49822103410721486,
+    "loss_share": 0.24323705763831963
+   },
+   "recurrent_out": {
+    "n": 25184,
+    "share": 0.047281820980932567,
+    "MRR_base": 0.008302610212997613,
+    "loss_share": 0.060152094555694105
+   },
+   "recurrent": {
+    "n": 226450,
+    "share": 0.42514963314533755,
+    "MRR_base": 0.4437361341851484,
+    "loss_share": 0.3033891521940137
+   },
+   "pair_only_in": {
+    "n": 52695,
+    "share": 0.09893247921657568,
+    "MRR_base": 0.22924851176889108,
+    "loss_share": 0.0978206748216156
+   },
+   "pair_only_out": {
+    "n": 47963,
+    "share": 0.09004836323492967,
+    "MRR_base": 0.005341971225888438,
+    "loss_share": 0.11490184594543332
+   },
+   "pair_only": {
+    "n": 100658,
+    "share": 0.18898084245150534,
+    "MRR_base": 0.12255823971834331,
+    "loss_share": 0.2127225207670489
+   },
+   "none_in": {
+    "n": 29719,
+    "share": 0.05579607837247201,
+    "MRR_base": 0.14395024677013804,
+    "loss_share": 0.061274541758739066
+   },
+   "none_out": {
+    "n": 175809,
+    "share": 0.3300734460306851,
+    "MRR_base": 0.0019422257405428737,
+    "loss_share": 0.42261378528019833
+   },
+   "none": {
+    "n": 205528,
+    "share": 0.38586952440315714,
+    "MRR_base": 0.022476344580693797,
+    "loss_share": 0.4838883270389374
+   },
+   "in": {
+    "share": 0.5325963697534526,
+    "loss_share": 0.40233227421867424,
+    "MRR_base": 0.4111437618515446
+   },
+   "out": {
+    "share": 0.46740363024654735,
+    "loss_share": 0.5976677257813258,
+    "MRR_base": 0.0032406154771546826
+   },
+   "first_seen_in_none": {
+    "share": 0.10766076645213617
+   }
+  },
+  "rank_source": "ranks_test_polecat_tirgn.npz:base",
+  "strata_source": "pilot_polecat/work/strata_test.npz",
+  "pool": "TiRGN top-50 (filtered rank <= 50)",
+  "note": "strata from strata_test.npz (trip = (s,r,o) occurred before t; dyad = (s,o) pair occurred before t under any relation/direction); first-seen entities are included in 'none'",
+  "rank_source_detail": "ranks_test_polecat_tirgn.npz:base of the A10/A11 ablation job (harness ranks; MRR equal to the official evaluator, 0.22048835 vs 0.22048834; equal per-query rank on 94.4% of queries; differences are deep-tail ties)",
+  "derived": {
+   "familiar_share": 0.6141304755968429,
+   "familiar_loss_share": 0.5161116729610626,
+   "familiar_in_loss_share": 0.3410577324599352,
+   "familiar_out_share": 0.13733018421586224,
+   "familiar_out_loss_share": 0.17505394050112744,
+   "sum_cells_share": 1.0,
+   "sum_cells_loss": 1.0
+  }
+ },
+ "tkgl-smallpedia": {
+  "n": 163172,
+  "MRR_base": 0.618058086017595,
+  "total_loss": 0.38194191398240496,
+  "cells": {
+   "recurrent_in": {
+    "n": 116568,
+    "share": 0.7143872723261344,
+    "MRR_base": 0.8512195055896696,
+    "loss_share": 0.2782802507033204
+   },
+   "recurrent_out": {
+    "n": 232,
+    "share": 0.0014218125658814011,
+    "MRR_base": 0.009074279778957878,
+    "loss_share": 0.0036888086624875115
+   },
+   "recurrent": {
+    "n": 116800,
+    "share": 0.7158090848920158,
+    "MRR_base": 0.8495467513740181,
+    "loss_share": 0.2819690593658079
+   },
+   "pair_only_in": {
+    "n": 429,
+    "share": 0.0026291275463927633,
+    "MRR_base": 0.41125346366179755,
+    "loss_share": 0.004052683614612151
+   },
+   "pair_only_out": {
+    "n": 265,
+    "share": 0.0016240531463731522,
+    "MRR_base": 0.00454966882169498,
+    "loss_share": 0.004232748968427692
+   },
+   "pair_only": {
+    "n": 694,
+    "share": 0.0042531806927659154,
+    "MRR_base": 0.2559559051133434,
+    "loss_share": 0.008285432583039843
+   },
+   "none_in": {
+    "n": 7918,
+    "share": 0.04852548231314196,
+    "MRR_base": 0.16923544816554922,
+    "loss_share": 0.10554811894325135
+   },
+   "none_out": {
+    "n": 37760,
+    "share": 0.23141225210207633,
+    "MRR_base": 0.0027826741116055796,
+    "loss_share": 0.6041973891079009
+   },
+   "none": {
+    "n": 45678,
+    "share": 0.2799377344152183,
+    "MRR_base": 0.03163623742346524,
+    "loss_share": 0.7097455080511522
+   },
+   "in": {
+    "share": 0.7655418821856691,
+    "loss_share": 0.38788105326118383,
+    "MRR_base": 0.8064795208106498
+   },
+   "out": {
+    "share": 0.2344581178143309,
+    "loss_share": 0.6121189467388161,
+    "MRR_base": 0.002833067663452285
+   },
+   "first_seen_in_none": {
+    "share": 0.08293089500649621
+   }
+  },
+  "rank_source": "official_test_smallpedia_tirgn.npz:rank_base",
+  "strata_source": "pilot_smallpedia/work/strata_test.npz",
+  "pool": "TiRGN top-50 (filtered rank <= 50)",
+  "note": "strata from strata_test.npz (trip = (s,r,o) occurred before t; dyad = (s,o) pair occurred before t under any relation/direction); first-seen entities are included in 'none'",
+  "rank_source_detail": "official_test_smallpedia_tirgn.npz:rank_base (official py-tgb evaluator)",
+  "derived": {
+   "familiar_share": 0.7200622655847817,
+   "familiar_loss_share": 0.2902544919488477,
+   "familiar_in_loss_share": 0.28233293431793255,
+   "familiar_out_share": 0.003045865712254553,
+   "familiar_out_loss_share": 0.007921557630915203,
+   "sum_cells_share": 1.0,
+   "sum_cells_loss": 1.0
+  }
+ },
+ "ICEWS18": {
+  "n": 99090,
+  "MRR_base": 0.3370064334268991,
+  "total_loss": 0.6629935665731008,
+  "cells": {
+   "recurrent_in": {
+    "n": 47276,
+    "share": 0.477102,
+    "loss_share": 0.3103790912868701,
+    "MRR_base": 0.568689,
+    "taxonomy_categories": [
+     "R_rec_in"
+    ]
+   },
+   "recurrent_out": {
+    "n": 2694,
+    "share": 0.027187,
+    "loss_share": 0.04056762126972234,
+    "MRR_base": 0.010701,
+    "taxonomy_categories": [
+     "R_rec_out"
+    ]
+   },
+   "recurrent": {
+    "n": 49970,
+    "share": 0.504289,
+    "loss_share": 0.3509467125565924,
+    "MRR_base": 0.5386070038509665,
+    "taxonomy_categories": [
+     "R_rec_in",
+     "R_rec_out"
+    ]
+   },
+   "pair_only_in": {
+    "n": 16690,
+    "share": 0.168433,
+    "loss_share": 0.18632224015160137,
+    "MRR_base": 0.26659,
+    "taxonomy_categories": [
+     "D_dyad_in"
+    ]
+   },
+   "pair_only_out": {
+    "n": 6454,
+    "share": 0.065133,
+    "loss_share": 0.09743107183963558,
+    "MRR_base": 0.008242,
+    "taxonomy_categories": [
+     "D_dyad_out"
+    ]
+   },
+   "pair_only": {
+    "n": 23144,
+    "share": 0.233566,
+    "loss_share": 0.283753311991237,
+    "MRR_base": 0.19454620816385948,
+    "taxonomy_categories": [
+     "D_dyad_in",
+     "D_dyad_out"
+    ]
+   },
+   "none_in": {
+    "n": 9156,
+    "share": 0.09240100000000001,
+    "loss_share": 0.1147938671567916,
+    "MRR_base": 0.17633363917057174,
+    "taxonomy_categories": [
+     "P_pat_in",
+     "U_deep_in"
+    ]
+   },
+   "none_out": {
+    "n": 14082,
+    "share": 0.14211400000000002,
+    "loss_share": 0.21326688671029512,
+    "MRR_base": 0.005062317210127081,
+    "taxonomy_categories": [
+     "P_pat_out",
+     "U_deep_out"
+    ]
+   },
+   "first_seen": {
+    "n": 2738,
+    "share": 0.027631,
+    "loss_share": 0.037240406275160585,
+    "MRR_base": 0.106433,
+    "taxonomy_categories": [
+     "E_emerging"
+    ]
+   },
+   "none": {
+    "n": 25976,
+    "share": 0.26214600000000005,
+    "loss_share": 0.36530116014224734,
+    "MRR_base": 0.07611667148840721,
+    "taxonomy_categories": [
+     "P_pat_in",
+     "U_deep_in",
+     "P_pat_out",
+     "U_deep_out",
+     "E_emerging"
+    ]
+   },
+   "in": {
+    "n": 73122,
+    "share": 0.7379359999999999,
+    "loss_share": 0.6114951985952629,
+    "MRR_base": 0.450606309139275,
+    "taxonomy_categories": [
+     "R_rec_in",
+     "D_dyad_in",
+     "P_pat_in",
+     "U_deep_in"
+    ]
+   },
+   "out": {
+    "n": 23230,
+    "share": 0.234434,
+    "loss_share": 0.35126557981965306,
+    "MRR_base": 0.006599641779775971,
+    "taxonomy_categories": [
+     "R_rec_out",
+     "D_dyad_out",
+     "P_pat_out",
+     "U_deep_out"
+    ]
+   }
+  },
+  "rank_source": "error_taxonomy.json (file version redacted-id): datasets.<ds>.categories.<c>.share and .systems.tirgn.MRR; base MRR = reproduction_checks.<ds>.mrr.tirgn_base",
+  "pool": "taxonomy candidate set C = TiRGN top-50 plus promoted bridge candidates",
+  "note": "first-seen queries (category E) are a separate taxonomy category and are not split by pool; they are included in the 'none' total only",
+  "derived": {
+   "familiar_share": 0.7378549999999999,
+   "familiar_loss_share": 0.6347000245478294,
+   "familiar_in_loss_share": 0.49670133143847145,
+   "familiar_out_share": 0.09232,
+   "familiar_out_loss_share": 0.13799869310935792,
+   "sum_cells_share": 1.0000010000000001,
+   "sum_cells_loss": 1.0000011846900767
+  }
+ },
+ "GDELT": {
+  "n": 610482,
+  "MRR_base": 0.21670066536694588,
+  "total_loss": 0.7832993346330541,
+  "cells": {
+   "recurrent_in": {
+    "n": 315994,
+    "share": 0.517614,
+    "loss_share": 0.40617369624224653,
+    "MRR_base": 0.385342,
+    "taxonomy_categories": [
+     "R_rec_in"
+    ]
+   },
+   "recurrent_out": {
+    "n": 80364,
+    "share": 0.13164,
+    "loss_share": 0.16639962200537253,
+    "MRR_base": 0.00987,
+    "taxonomy_categories": [
+     "R_rec_out"
+    ]
+   },
+   "recurrent": {
+    "n": 396358,
+    "share": 0.649254,
+    "loss_share": 0.572573318247619,
+    "MRR_base": 0.3092128824589452,
+    "taxonomy_categories": [
+     "R_rec_in",
+     "R_rec_out"
+    ]
+   },
+   "pair_only_in": {
+    "n": 58335,
+    "share": 0.095556,
+    "loss_share": 0.10434582553333749,
+    "MRR_base": 0.144648,
+    "taxonomy_categories": [
+     "D_dyad_in"
+    ]
+   },
+   "pair_only_out": {
+    "n": 105567,
+    "share": 0.172924,
+    "loss_share": 0.21928097576702812,
+    "MRR_base": 0.006716,
+    "taxonomy_categories": [
+     "D_dyad_out"
+    ]
+   },
+   "pair_only": {
+    "n": 163902,
+    "share": 0.26848,
+    "loss_share": 0.32362680130036564,
+    "MRR_base": 0.0558080373659118,
+    "taxonomy_categories": [
+     "D_dyad_in",
+     "D_dyad_out"
+    ]
+   },
+   "none_in": {
+    "n": 5057,
+    "share": 0.008284,
+    "loss_share": 0.009773601358395615,
+    "MRR_base": 0.0758503813375181,
+    "taxonomy_categories": [
+     "P_pat_in",
+     "U_deep_in"
+    ]
+   },
+   "none_out": {
+    "n": 44193,
+    "share": 0.07239,
+    "loss_share": 0.09206882757507291,
+    "MRR_base": 0.0037650037297969332,
+    "taxonomy_categories": [
+     "P_pat_out",
+     "U_deep_out"
+    ]
+   },
+   "first_seen": {
+    "n": 972,
+    "share": 0.001592,
+    "loss_share": 0.0019573202378861086,
+    "MRR_base": 0.036955,
+    "taxonomy_categories": [
+     "E_emerging"
+    ]
+   },
+   "none": {
+    "n": 50222,
+    "share": 0.08226599999999999,
+    "loss_share": 0.10379974917135464,
+    "MRR_base": 0.011666126212530088,
+    "taxonomy_categories": [
+     "P_pat_in",
+     "U_deep_in",
+     "P_pat_out",
+     "U_deep_out",
+     "E_emerging"
+    ]
+   },
+   "in": {
+    "n": 379386,
+    "share": 0.6214540000000001,
+    "loss_share": 0.5202931231339797,
+    "MRR_base": 0.34420688069430716,
+    "taxonomy_categories": [
+     "R_rec_in",
+     "D_dyad_in",
+     "P_pat_in",
+     "U_deep_in"
+    ]
+   },
+   "out": {
+    "n": 230124,
+    "share": 0.376954,
+    "loss_share": 0.4777494253474735,
+    "MRR_base": 0.007250733521862083,
+    "taxonomy_categories": [
+     "R_rec_out",
+     "D_dyad_out",
+     "P_pat_out",
+     "U_deep_out"
+    ]
+   }
+  },
+  "rank_source": "error_taxonomy.json (file version redacted-id): datasets.<ds>.categories.<c>.share and .systems.tirgn.MRR; base MRR = reproduction_checks.<ds>.mrr.tirgn_base",
+  "pool": "taxonomy candidate set C = TiRGN top-50 plus promoted bridge candidates",
+  "note": "first-seen queries (category E) are a separate taxonomy category and are not split by pool; they are included in the 'none' total only",
+  "derived": {
+   "familiar_share": 0.917734,
+   "familiar_loss_share": 0.8962001195479847,
+   "familiar_in_loss_share": 0.510519521775584,
+   "familiar_out_share": 0.304564,
+   "familiar_out_loss_share": 0.38568059777240066,
+   "sum_cells_share": 0.9999999999999999,
+   "sum_cells_loss": 0.9999998687193393
+  }
+ },
+ "_provenance": {
+  "created": "2026-10-14",
+  "purpose": "Manuscript A v6 introduction: per-stratum decomposition of TiRGN's lost reciprocal rank (sum of 1-RR) by history stratum x gold inside/outside the base pool",
+  "computation_TGB": "read-only script on <HOST> over the files named in rank_source/strata_source; loss = 1 - 1/rank; loss_share = sum over cell / sum over all test queries",
+  "computation_classic": "local, from the error-taxonomy JSON: loss_share = share_c*(1-MRR_tirgn_c)/(1-MRR_tirgn)"
+ }
+}

@@ -1,0 +1,27 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+[     2.2s] hist + dyad reader 6154948
+[     2.5s] test 4000/457168
+[    10.5s] test 104000/457168
+[    18.6s] test 204000/457168
+[    26.5s] test 304000/457168
+[    34.3s] test 404000/457168
+[    39.2s] test {"n": 457168, "seconds": 36.8, "base": {"MRR": 0.411451, "n": 457168, "H1": 0.284771, "H3": 0.464405, "H10": 0.668551}, "dump": "tirgn gold_rank_filt", "dump_exact_share": 1.0, "rank_agree_fullrow_vs_dump": 1.0, "rank_agree_all_rows": 1.0, "max_abs_rank_diff_exact_rows": 0, "base_dump": {"MRR": 0.411451, "n": 457168, "H1": 0.284771, "H3": 0.464405, "H10": 0.668551}, "identity_f0": 1.0, "gold_in_W100": 0.9091034368109754, "gold_in_top50": 0.8877830469324187}
+[    39.2s] ALL DONE {"test": {"dump": "tirgn gold_rank_filt", "dump_exact_share": 1.0, "rank_agree": 1.0, "rank_agree_ok": true}, "smoke": false}

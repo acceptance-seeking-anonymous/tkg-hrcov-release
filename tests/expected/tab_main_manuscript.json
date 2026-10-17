@@ -1,0 +1,222 @@
+{
+ "source": "Manuscript A v7.6.1, Table tab:main (main text); numbers as typeset (superscripts removed; '.' = not a decision base)",
+ "columns": [
+  "polecat_MRR",
+  "polecat_H10",
+  "smallpedia_MRR",
+  "smallpedia_H10",
+  "icews_MRR",
+  "icews_H10"
+ ],
+ "rows": [
+  {
+   "label": "RecB, train mode (clean) | all | rule",
+   "cells": [
+    "0.1992",
+    "0.3197",
+    "0.6046",
+    "0.7162",
+    "0.2387",
+    "0.3786"
+   ]
+  },
+  {
+   "label": "RecB-lite$^{h}$ | all | rule",
+   "cells": [
+    "0.1963",
+    "0.3146",
+    "0.6038",
+    "0.7148",
+    "0.3026",
+    "0.4673"
+   ]
+  },
+  {
+   "label": "G1 (no base) | RecB top-150 | learned",
+   "cells": [
+    "0.2482",
+    "0.3847",
+    "0.6511",
+    "0.7201",
+    "0.3353",
+    "0.5014"
+   ]
+  },
+  {
+   "label": "CognTKE | all | --",
+   "cells": [
+    "0.2914",
+    "0.4603",
+    ".",
+    ".",
+    ".",
+    "."
+   ]
+  },
+  {
+   "label": "CognTKE | top-$K$ $\\cup$ RecB / all | BASE$\\oplus$RecB or RecB-POOL",
+   "cells": [
+    "0.2941",
+    "0.4649",
+    ".",
+    ".",
+    ".",
+    "."
+   ]
+  },
+  {
+   "label": "CognTKE | top-50 | \\HR{} (ours)",
+   "cells": [
+    "0.3011",
+    "0.4683",
+    ".",
+    ".",
+    ".",
+    "."
+   ]
+  },
+  {
+   "label": "CognTKE | top-50 + $B$ | \\HRCOV{} (ours)",
+   "cells": [
+    "0.3040",
+    "0.4741",
+    ".",
+    ".",
+    ".",
+    "."
+   ]
+  },
+  {
+   "label": "TiRGN | all | --",
+   "cells": [
+    "0.2205",
+    "0.3750",
+    "0.6181",
+    "0.7239",
+    ".",
+    "."
+   ]
+  },
+  {
+   "label": "TiRGN | top-$K$ $\\cup$ RecB / all | BASE$\\oplus$RecB or RecB-POOL",
+   "cells": [
+    "0.2349",
+    "0.3879",
+    "0.6275",
+    "0.7276",
+    ".",
+    "."
+   ]
+  },
+  {
+   "label": "TiRGN | top-50 | \\HR{} (ours)",
+   "cells": [
+    "0.2694",
+    "0.4269",
+    "0.6572",
+    "0.7301",
+    ".",
+    "."
+   ]
+  },
+  {
+   "label": "TiRGN | top-50 + $B$ | \\HRCOV{} (ours)",
+   "cells": [
+    "0.2824",
+    "0.4529",
+    "0.6584",
+    "0.7318",
+    ".",
+    "."
+   ]
+  },
+  {
+   "label": "LogCL | all | --",
+   "cells": [
+    ".",
+    ".",
+    ".",
+    ".",
+    "0.3127",
+    "0.5110"
+   ]
+  },
+  {
+   "label": "LogCL | top-$K$ $\\cup$ RecB / all | BASE$\\oplus$RecB or RecB-POOL",
+   "cells": [
+    ".",
+    ".",
+    ".",
+    ".",
+    "0.3247",
+    "0.5212"
+   ]
+  },
+  {
+   "label": "LogCL | top-50 | \\HR{} (ours)",
+   "cells": [
+    ".",
+    ".",
+    ".",
+    ".",
+    "0.3663",
+    "0.5659"
+   ]
+  },
+  {
+   "label": "LogCL | top-50 + $B$ | \\HRCOV{} (ours)",
+   "cells": [
+    ".",
+    ".",
+    ".",
+    ".",
+    "0.3744",
+    "0.5874"
+   ]
+  },
+  {
+   "label": "RE-GCN | all | --",
+   "cells": [
+    ".",
+    ".",
+    "0.5907",
+    "0.6763",
+    "0.2747",
+    "0.4720"
+   ]
+  },
+  {
+   "label": "RE-GCN | top-$K$ $\\cup$ RecB / all | BASE$\\oplus$RecB or RecB-POOL",
+   "cells": [
+    ".",
+    ".",
+    "0.6249",
+    "0.7248",
+    "0.3106",
+    "0.5063"
+   ]
+  },
+  {
+   "label": "RE-GCN | top-50 | \\HR{} (ours)",
+   "cells": [
+    ".",
+    ".",
+    "0.6421",
+    "0.7035",
+    "0.3622",
+    "0.5565"
+   ]
+  },
+  {
+   "label": "RE-GCN | top-50 + $B$ | \\HRCOV{} (ours)",
+   "cells": [
+    ".",
+    ".",
+    "0.6586",
+    "0.7270",
+    "0.3753",
+    "0.5870"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+[     0.5s] slice {'split': 'valid', 'ts': 203, 'first_row': 102042, 'n': 2000, 'all_same_ts': True}
+use layer :convgcn
+activate function: <function rrelu at 0x79c054398fe0>
+activate function: <function rrelu at 0x79c054398fe0>
+[     7.6s] base done 0.03245776699623093 1.04219045501668 0.004347847949247807 9.059906005859375e-06
+[    10.8s] recb done 0.3095762369921431 0.17888769804267213
+[    13.6s] blend done 0.5319461260223761 0.0016934180166572332
+[    32.6s] hrcov lists 2.5249916710308753 1.1208595499629155 1.0
+[    37.4s] hrcov feats 0.5755873550078832 0.10073177801677957 0.0
+[    39.7s] hrcov ranker 0.467379306035582 0.0005032859626226127
+[    42.6s] sa hist 0.5317475910414942 0.0020838729687966406 1.0
+[    60.9s] sa lists 2.4952870670240372 1.1533882099902257 1.0
+[    63.6s] sa feats 0.44446711300406605 0.06899323500692844 0.0
+[    65.5s] sa ranker 0.38262528396444395 0.00032804900547489524
+[    67.4s] ext 0.36130222596693784 0.006850568053778261
+[    67.4s] ALL DONE
+Exception ignored in: <generator object source at 0x2534b2f0>
+Traceback (most recent call last):
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/hd_tirgn_replay.py", line 37, in source
+  File "/usr/local/lib/python3.12/dist-packages/torch/autograd/grad_mode.py", line 85, in __exit__
+AttributeError: 'NoneType' object has no attribute 'set_grad_enabled'

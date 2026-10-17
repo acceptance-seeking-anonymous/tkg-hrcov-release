@@ -1,0 +1,2403 @@
+{
+ "title": "Redaction map for registration/ (Manuscript A bundle)",
+ "note": "Lists, for every redacted file, each JSON field (RFC 6901 JSON Pointer) whose string value was changed, the placeholder(s) inserted and the reason. No original values are recorded. Keys and the JSON structure are unchanged by the redaction (structure_sha256 is the sha256 of the sorted-as-written list of JSON paths with value types, identical for original and redacted copy). Unredacted originals are available to the editor and reviewers on request; they contain internal server addresses and are not published. Release v4: entries of v2-redacted files also give, per changed field, the server labels inserted (labels) and list renamed JSON keys (renamed_keys, pointers in the redacted copy). Entries of v2-redacted files also give, for fields where analysis-platform identifiers were replaced, the neutral tokens inserted (platform).",
+ "placeholders": {
+  "<HOST>": "host address (internal compute-server IP address or host label)",
+  "<SCRATCH>": "remote path (scratch directory on the compute server)",
+  "<HOME>": "local or remote home-directory path"
+ },
+ "files": [
+  {
+   "file": "registration/hardening_decision_rule.json",
+   "n_changed_fields": 2,
+   "structure_sha256": "6dcb167bb19044ec8c02ebd95ccfc2047f9b0c88f93fb48f9c9c81c241549988",
+   "changed_fields": [
+    {
+     "json_pointer": "/recb/implementation",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/hosts",
+     "placeholders": {
+      "<HOST>": 3
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/stageB_rule.json",
+   "n_changed_fields": 2,
+   "structure_sha256": "b28e9647bf52b842e443433af9de19b615ce0f4e3f3331e037ccfcf0b97a6bfd",
+   "changed_fields": [
+    {
+     "json_pointer": "/comparators/fallback_preregistered",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/hosts",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/a_presub_rule.json",
+   "n_changed_fields": 1,
+   "structure_sha256": "c4ffbd714d99a5ef878edfca7de130b42442d296c494ceb1c3c56f49e9a4b782",
+   "changed_fields": [
+    {
+     "json_pointer": "/common/hosts",
+     "placeholders": {
+      "<HOST>": 5
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/ablation_rule.json",
+   "n_changed_fields": 2,
+   "structure_sha256": "cf8e7758dd6957fc4f7f44df61b5949776ec474e6a46747318faeed5663ca440",
+   "changed_fields": [
+    {
+     "json_pointer": "/evaluation",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/hosts",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/g8_rule.json",
+   "n_changed_fields": 1,
+   "structure_sha256": "e99596e4033b05c2942b4749677a8bc37e874f2dffe5fb94a2d6f71a0e000395",
+   "changed_fields": [
+    {
+     "json_pointer": "/hosts",
+     "placeholders": {
+      "<HOST>": 3,
+      "<SCRATCH>": 1
+     },
+     "reason": "host address; remote path"
+    }
+   ]
+  },
+  {
+   "file": "registration/g8_deviation_B.json",
+   "n_changed_fields": 1,
+   "structure_sha256": "fce528363b2bb779d1b672822c46b8e9cb57130b04f2a1671079dc3a0f885f3f",
+   "changed_fields": [
+    {
+     "json_pointer": "/unchanged/3",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/g6_protocol.json",
+   "n_changed_fields": 3,
+   "structure_sha256": "aa88accf2ad2398760165dca22321b9826ab1a464e701ab8899c2ec6937a45b2",
+   "changed_fields": [
+    {
+     "json_pointer": "/systems/optional",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/environment",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/outputs",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/tois_v7_rule.json",
+   "n_changed_fields": 2,
+   "structure_sha256": "a33f3a8bc3fe6f4487ee7579d551c275acf62e0b15f0b19dddb3e4d51a8a7997",
+   "changed_fields": [
+    {
+     "json_pointer": "/evaluators/TGB (polecat, smallpedia, tkgl-icews)",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/budget",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/fh_decision_rule.json",
+   "n_changed_fields": 7,
+   "structure_sha256": "30d3c648a011e6cf38b0c4e25e8ac7ea45088e2712a568fcaabe27b5b0e431be",
+   "changed_fields": [
+    {
+     "json_pointer": "/chronology/dataset_origin",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/hosts_and_budget",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/files/code_dir",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "reason": "remote path"
+    },
+    {
+     "json_pointer": "/files/stage1",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "reason": "remote path"
+    },
+    {
+     "json_pointer": "/files/stage2_test",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "reason": "remote path"
+    },
+    {
+     "json_pointer": "/files/decision_code",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "reason": "remote path"
+    },
+    {
+     "json_pointer": "/files/manifest",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "reason": "remote path"
+    }
+   ]
+  },
+  {
+   "file": "registration/c4_protocol.json",
+   "n_changed_fields": 1,
+   "structure_sha256": "8d9c81e0aab7033535cafc328a416e16ef70a6a02c756e752ce3357576a10b8c",
+   "changed_fields": [
+    {
+     "json_pointer": "/base/host",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/v76_rule.json",
+   "n_changed_fields": 3,
+   "structure_sha256": "3e00940df35ec94449ede044ace342e2ab8a4da91d4ebdb0bf8dac12188e6691",
+   "changed_fields": [
+    {
+     "json_pointer": "/items/M3a_validation_trained_base/feasibility_stop",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/items/M6_base_seeds_smallpedia/priority",
+     "placeholders": {
+      "<HOST>": 2
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/hosts_budget",
+     "placeholders": {
+      "<HOST>": 3
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/v76_rule_amendment_1.json",
+   "n_changed_fields": 2,
+   "structure_sha256": "38e6bbee941f8f52c0eb3d1856430a60ff7705bd25e27df7c038cbe358aaa904",
+   "changed_fields": [
+    {
+     "json_pointer": "/how_detected",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/infrastructure_notes_no_protocol_change/0",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/v76_rule_registered.json",
+   "n_changed_fields": 3,
+   "structure_sha256": "6608e630cf2bb4f0f4f7b7255641212531aa35d85d01bc97a4eb8dfa758f30b7",
+   "changed_fields": [
+    {
+     "json_pointer": "/hosts_budget",
+     "placeholders": {
+      "<HOST>": 3
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/items/M3a_validation_trained_base/feasibility_stop",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/items/M6_base_seeds_smallpedia/priority",
+     "placeholders": {
+      "<HOST>": 2
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/v76_rule_amendment_1_registered.json",
+   "n_changed_fields": 2,
+   "structure_sha256": "351634a562d2ca09384852bd0017ee6e456c0cf0324cacc990fb01bc55e94dc4",
+   "changed_fields": [
+    {
+     "json_pointer": "/how_detected",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    },
+    {
+     "json_pointer": "/infrastructure_notes_no_protocol_change/0",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/v78_external_protocol_note.json",
+   "n_changed_fields": 1,
+   "structure_sha256": "7565d9e0bdd4cf14da9ca2481040657f568cfffb22e4d3ca440f5f4b8188c3d9",
+   "changed_fields": [
+    {
+     "json_pointer": "/resources",
+     "placeholders": {
+      "<HOST>": 1
+     },
+     "reason": "host address"
+    }
+   ]
+  },
+  {
+   "file": "registration/fresh_window_implementation_note.json",
+   "n_changed_fields": 1,
+   "structure_sha256": "87994663b15de8c27ab1ed4e7a95d62da026c531b1a5b4fbee345c7570f58098",
+   "changed_fields": [
+    {
+     "json_pointer": "/data/host_path",
+     "placeholders": {},
+     "labels": {
+      "serverA": 2
+     },
+     "reason": "host address or host label"
+    }
+   ],
+   "renamed_keys": []
+  },
+  {
+   "file": "registration/fresh_window_freeze_manifest.json",
+   "n_changed_fields": 204,
+   "structure_sha256": "48baf00547e6035052e258751713596177a879dc26d6c4a17fe1bc76c7608f67",
+   "changed_fields": [
+    {
+     "json_pointer": "/host",
+     "placeholders": {},
+     "labels": {
+      "serverA": 1
+     },
+     "reason": "host address or host label"
+    },
+    {
+     "json_pointer": "/track_dir",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/rule/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/rule/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/rule/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/rule/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/rule/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/5/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/6/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/7/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/8/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/9/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/10/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/11/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/12/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/13/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/14/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/15/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/16/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/17/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/18/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/19/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/20/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/21/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/22/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/23/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/24/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/25/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/26/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/27/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/28/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/29/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/30/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/31/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/32/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/33/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/34/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/35/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/36/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/37/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/38/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/39/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/40/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/41/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/42/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/43/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/44/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/45/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/46/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/47/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/48/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/49/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/50/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/51/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/52/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/53/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/54/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/55/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/56/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/57/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/58/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/59/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/60/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/61/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/62/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/63/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/64/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/code/65/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/5/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/6/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/7/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/8/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/9/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/10/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/11/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/12/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/13/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/14/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/15/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/16/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/17/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/18/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/19/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/20/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/21/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/22/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/23/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/24/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/25/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/26/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/27/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/28/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/29/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/30/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/31/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/32/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/33/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/34/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/35/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/36/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/37/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/38/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/39/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/40/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/41/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/42/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/43/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_code/44/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/data/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/data/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/data/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/data/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/data/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/data/5/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/data/6/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/data/7/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/base_model/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/base_model/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/valid_base_rows/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/valid_base_rows/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/valid_base_rows/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/prep/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/prep/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/prep/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/prep/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/controls/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/controls/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/controls/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/controls/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/controls/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/controls/5/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/controls/6/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/recb_xf/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/recb_xf/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/features_valid/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/features_valid/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/features_valid/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/features_valid/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/features_valid/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/features_valid/5/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/features_valid/6/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/features_valid/7/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/features_valid/8/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/features_valid/9/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/features_valid/10/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/hrcov_reranker/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/hrcov_reranker/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/hrcov_reranker/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/hrcov_reranker/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/hrcov_reranker/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/hrcov_reranker/5/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/hrcov_reranker/6/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/hrcov_reranker/7/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/5/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/6/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/7/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/8/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/9/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/10/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/11/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/12/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_valid/13/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_ranker/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_ranker/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_ranker/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_ranker/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/sa_ranker/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/5/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/6/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/7/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/8/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/9/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/10/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/11/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/12/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/13/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/14/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ct_stage1/15/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ext_selection/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ext_selection/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/ext_selection/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/latency/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/groups/latency/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/chronology_utc/2/1",
+     "placeholders": {},
+     "labels": {
+      "serverA": 1,
+      "serverB": 1,
+      "serverC": 1
+     },
+     "reason": "host address or host label"
+    }
+   ],
+   "renamed_keys": []
+  },
+  {
+   "file": "registration/fresh_window_uninspected_check.json",
+   "n_changed_fields": 45,
+   "structure_sha256": "ee59e256fff3084303fc8d9662a0d0951cd1aeb08ff65941f5fa165fdd22657b",
+   "changed_fields": [
+    {
+     "json_pointer": "/artifact_store_check/method",
+     "placeholders": {},
+     "labels": {},
+     "platform": {
+      "<id>": 1
+     },
+     "reason": "analysis-platform identifier"
+    },
+    {
+     "json_pointer": "/artifact_store_check/verdict",
+     "placeholders": {},
+     "labels": {},
+     "platform": {
+      "<LLM model id>": 2
+     },
+     "reason": "analysis-platform identifier"
+    },
+    {
+     "json_pointer": "/build/host",
+     "placeholders": {},
+     "labels": {
+      "serverA": 1
+     },
+     "reason": "host address or host label"
+    },
+    {
+     "json_pointer": "/caveats/0",
+     "placeholders": {},
+     "labels": {
+      "serverA": 1,
+      "serverB": 1,
+      "serverC": 1
+     },
+     "reason": "host address or host label"
+    },
+    {
+     "json_pointer": "/caveats/2",
+     "placeholders": {},
+     "labels": {
+      "serverA": 1
+     },
+     "reason": "host address or host label"
+    },
+    {
+     "json_pointer": "/hosts/serverA/gdelt_build_summaries/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/gdelt_build_summaries/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/gdelt_build_summaries/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/gdelt_build_summaries/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/gdelt_build_summaries/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/gdelt_build_summaries/5/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/gdelt_build_summaries/6/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/gdelt_build_summaries/7/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/gdelt_build_summaries/8/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/gdelt_build_summaries/9/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/roots/0",
+     "placeholders": {
+      "<HOME>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/scan_errors/0",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path; analysis-platform identifier",
+     "platform": {
+      ".jobs/": 1
+     }
+    },
+    {
+     "json_pointer": "/hosts/serverA/timestamp2id/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/timestamp2id/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/timestamp2id/10/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/timestamp2id/11/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/timestamp2id/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/timestamp2id/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/timestamp2id/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/timestamp2id/5/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/timestamp2id/6/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/timestamp2id/7/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/timestamp2id/8/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverA/timestamp2id/9/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverB/gdelt_build_summaries/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path; analysis-platform identifier",
+     "platform": {
+      ".jobs/": 1
+     }
+    },
+    {
+     "json_pointer": "/hosts/serverB/gdelt_build_summaries/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path; analysis-platform identifier",
+     "platform": {
+      ".jobs/": 1
+     }
+    },
+    {
+     "json_pointer": "/hosts/serverB/gdelt_build_summaries/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path; analysis-platform identifier",
+     "platform": {
+      ".jobs/": 1
+     }
+    },
+    {
+     "json_pointer": "/hosts/serverB/gdelt_build_summaries/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path; analysis-platform identifier",
+     "platform": {
+      ".jobs/": 1
+     }
+    },
+    {
+     "json_pointer": "/hosts/serverB/gdelt_build_summaries/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path; analysis-platform identifier",
+     "platform": {
+      ".jobs/": 1
+     }
+    },
+    {
+     "json_pointer": "/hosts/serverB/gdelt_build_summaries/5/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverB/gdelt_build_summaries/6/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverB/roots/0",
+     "placeholders": {
+      "<HOME>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverB/timestamp2id/0/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverB/timestamp2id/1/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverB/timestamp2id/2/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverB/timestamp2id/3/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverB/timestamp2id/4/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverB/timestamp2id/5/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverB/timestamp2id/6/path",
+     "placeholders": {
+      "<SCRATCH>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    },
+    {
+     "json_pointer": "/hosts/serverC/roots/0",
+     "placeholders": {
+      "<HOME>": 1
+     },
+     "labels": {},
+     "reason": "local path"
+    }
+   ],
+   "renamed_keys": [
+    "/hosts/serverA",
+    "/hosts/serverA/gdelt_files/dirs/<SCRATCH>~1open_ideas_harness~1tracks~1phase2_memtest~1post~1raw~1gdelt",
+    "/hosts/serverA/gdelt_files/dirs/<SCRATCH>~1open_ideas_harness~1tracks~1phase2_memtest~1pre~1raw~1gdelt",
+    "/hosts/serverB",
+    "/hosts/serverB/gdelt_files/dirs/<SCRATCH>~1open_ideas_harness~1tracks~1pilot_story~1gdelt25~1raw~1gdelt",
+    "/hosts/serverC"
+   ]
+  }
+ ]
+}

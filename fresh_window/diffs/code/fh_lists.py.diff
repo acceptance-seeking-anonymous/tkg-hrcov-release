@@ -1,0 +1,9 @@
+--- a/phase2_forward_holdout/code/fh_lists.py
++++ b/code/fh_lists.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""phase2_forward_holdout / fh_lists.py (derived from presub/g2_lists.py; changes: dataset via fh_common, --splits so that
++"""phase2_fresh_window / fh_lists.py (derived from presub/g2_lists.py; changes: dataset via fh_common, --splits so that
+ Stage 1 touches valid only, summary names carry the split) -- per-base pattern-prior lists and the HRCOV_PAT layout (CPU).
+ 
+ Pattern prior = pilot_smallpedia/sp_lists.py's (pilot-1 pc_lists recipe with EXACT base probabilities from the full

@@ -1,0 +1,352 @@
+{
+ "name": "g1_verdict",
+ "rule": "a_presub_rule.json (G1)",
+ "datasets": {
+  "polecat": {
+   "valid_select_MRR": {
+    "G1_K50": 0.2496065216139247,
+    "G1_K150": 0.2557327172304593
+   },
+   "G1_arm": "G1_K150",
+   "n_seeds": 3,
+   "G1_test_MRR": 0.24824139343487128,
+   "other_arm": {
+    "G1_K50": 0.2413389158606911
+   },
+   "recb_row_MRR": 0.19921642241664514,
+   "recb_check": 0.19923,
+   "per_base": {
+    "tirgn": {
+     "HRCOV_MRR": 0.28237537939111534,
+     "G1_MRR": 0.24824139343487128,
+     "HRCOV_minus_G1": {
+      "query": {
+       "delta": 0.034133985956244096,
+       "CI95": [
+        0.03361960450478994,
+        0.034701952266922596
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 532636
+      },
+      "ts": {
+       "delta": 0.034133985956244096,
+       "CI95": [
+        0.03299170006718359,
+        0.03526513880681971
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 304,
+       "mean_cluster_size": 1752.092105263158,
+       "max_cluster_size": 3134
+      },
+      "fact": {
+       "delta": 0.034133985956244096,
+       "CI95": [
+        0.033486440330552134,
+        0.034751497122409096
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 266318,
+       "mean_cluster_size": 2.0,
+       "max_cluster_size": 2
+      }
+     },
+     "secondary": {
+      "G1 - RecB trained": {
+       "delta": 0.04902497101822616,
+       "CI95": [
+        0.04842319498801465,
+        0.049604637471124736
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 532636
+      },
+      "G1 - POOL of tirgn": {
+       "delta": 0.013379762908356307,
+       "CI95": [
+        0.012807229289542433,
+        0.01398499497774899
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 532636
+      },
+      "HR - G1_K50": {
+       "delta": 0.028088572276148728,
+       "CI95": [
+        0.027537732379263748,
+        0.028641975620716752
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 532636
+      }
+     },
+     "flags": {
+      "base": "tirgn",
+      "BASE_CONTRIBUTES": true,
+      "LEARNED_RECURRENCY": false
+     }
+    },
+    "logcl": {
+     "HRCOV_MRR": 0.2720573455693462,
+     "G1_MRR": 0.24824139343487128,
+     "HRCOV_minus_G1": {
+      "query": {
+       "delta": 0.023815952134474884,
+       "CI95": [
+        0.02327536923432001,
+        0.024409947186220145
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 532636
+      },
+      "ts": {
+       "delta": 0.023815952134474884,
+       "CI95": [
+        0.022512779229500596,
+        0.025141402491412564
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 304,
+       "mean_cluster_size": 1752.092105263158,
+       "max_cluster_size": 3134
+      },
+      "fact": {
+       "delta": 0.023815952134474884,
+       "CI95": [
+        0.02313358696276945,
+        0.02448173446834241
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 266318,
+       "mean_cluster_size": 2.0,
+       "max_cluster_size": 2
+      }
+     },
+     "secondary": {
+      "G1 - RecB trained": {
+       "delta": 0.04902497101822616,
+       "CI95": [
+        0.04842319498801465,
+        0.049604637471124736
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 532636
+      },
+      "G1 - POOL of logcl": {
+       "delta": 0.03516522483954372,
+       "CI95": [
+        0.03449525043154382,
+        0.03582308090735077
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 532636
+      },
+      "HR - G1_K50": {
+       "delta": -0.00523821661735587,
+       "CI95": [
+        -0.005850737127451828,
+        -0.004595897917462198
+       ],
+       "p_one_sided": 1.0,
+       "p_le_margin": 1.0,
+       "n": 532636
+      }
+     },
+     "flags": {
+      "base": "logcl",
+      "BASE_CONTRIBUTES": true,
+      "LEARNED_RECURRENCY": false
+     }
+    }
+   },
+   "recb_check_absdiff": 1.3577583354851264e-05,
+   "outcome": "BASE_CONTRIBUTES"
+  },
+  "smallpedia": {
+   "valid_select_MRR": {
+    "G1_K50": 0.6562663449693616,
+    "G1_K150": 0.6572957153974278
+   },
+   "G1_arm": "G1_K150",
+   "n_seeds": 3,
+   "G1_test_MRR": 0.6510953232866622,
+   "other_arm": {
+    "G1_K50": 0.6505076221820763
+   },
+   "recb_row_MRR": 0.6045850377279159,
+   "recb_check": 0.60464,
+   "per_base": {
+    "tirgn": {
+     "HRCOV_MRR": 0.6601232772589116,
+     "G1_MRR": 0.6510953232866622,
+     "HRCOV_minus_G1": {
+      "query": {
+       "delta": 0.009027953972249451,
+       "CI95": [
+        0.008461199031789313,
+        0.009586955543646586
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      },
+      "ts": {
+       "delta": 0.009027953972249451,
+       "CI95": [
+        0.007818729706237605,
+        0.010209594917933834
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      },
+      "fact": {
+       "delta": 0.009027953972249451,
+       "CI95": [
+        0.008445768704832175,
+        0.009582928851799797
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 81586,
+       "mean_cluster_size": 2.0,
+       "max_cluster_size": 2
+      }
+     },
+     "secondary": {
+      "G1 - RecB trained": {
+       "delta": 0.04651028555874626,
+       "CI95": [
+        0.045357097326648235,
+        0.04768136901593387
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      },
+      "G1 - BLEND of tirgn": {
+       "delta": 0.023636433496917228,
+       "CI95": [
+        0.022670030360295173,
+        0.024650191270481688
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      },
+      "HR - G1_K50": {
+       "delta": 0.006737799483119603,
+       "CI95": [
+        0.006189095013625055,
+        0.007258154364711721
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      }
+     },
+     "flags": {
+      "base": "tirgn",
+      "BASE_CONTRIBUTES": true,
+      "LEARNED_RECURRENCY": false
+     }
+    },
+    "regcn_tuned": {
+     "HRCOV_MRR": 0.6587454371206725,
+     "G1_MRR": 0.6510953232866622,
+     "HRCOV_minus_G1": {
+      "query": {
+       "delta": 0.0076501138340102125,
+       "CI95": [
+        0.0070644010645098225,
+        0.008250624069678815
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      },
+      "ts": {
+       "delta": 0.0076501138340102125,
+       "CI95": [
+        0.006516288993755954,
+        0.008841872817725981
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      },
+      "fact": {
+       "delta": 0.0076501138340102125,
+       "CI95": [
+        0.007007438110927117,
+        0.008261465986820442
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 81586,
+       "mean_cluster_size": 2.0,
+       "max_cluster_size": 2
+      }
+     },
+     "secondary": {
+      "G1 - RecB trained": {
+       "delta": 0.04651028555874626,
+       "CI95": [
+        0.045357097326648235,
+        0.04768136901593387
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      },
+      "G1 - BLEND of regcn_tuned": {
+       "delta": 0.04030256634871898,
+       "CI95": [
+        0.0391169346137644,
+        0.041411392249438454
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      },
+      "HR - G1_K50": {
+       "delta": -0.049089035746666586,
+       "CI95": [
+        -0.050408885871186186,
+        -0.04771168811563895
+       ],
+       "p_one_sided": 1.0,
+       "p_le_margin": 1.0,
+       "n": 163172
+      }
+     },
+     "flags": {
+      "base": "regcn_tuned",
+      "BASE_CONTRIBUTES": true,
+      "LEARNED_RECURRENCY": false
+     }
+    }
+   },
+   "recb_check_absdiff": 5.496227208401372e-05,
+   "outcome": "BASE_CONTRIBUTES"
+  }
+ },
+ "manuscript_consequence": "base contribution demonstrated on both TGB datasets",
+ "smoke": 0
+}

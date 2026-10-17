@@ -1,0 +1,17 @@
+{
+ "config": "C0",
+ "variant": "blend",
+ "a": 0.1,
+ "tau": 0.5,
+ "selection_MRR": 0.4077166244352452,
+ "alone_selection_MRR": 0.3684073815105022,
+ "best_blend_selection_MRR": 0.4077166244352452,
+ "base_selection_MRR": 0.4040776992600792,
+ "n_selection_queries": 50192,
+ "cut_ts": 203,
+ "candidates": "EXT_alone(C0) + 52 EXT_blend(C0) (a in 13 BLEND betas x tau in {0.5,1,2,4})",
+ "rule": "external_comparator = argmax selection-part MRR (ties averaged) over the CountTRuCoLa alone and blend candidates (v79 amendment 1; implementation note + addendum 1)",
+ "ct_params": "LEARN_WINDOW_SIZE=10 DATAPOINT_THRESHOLD_MULTI=0 RULE_UNSEEN_NEGATIVES=30 AGGREGATION_DECAY=0.8 NUM_TOP_RULES=10 RULE_TYPE_C=True F_UNSEEN_NEGATIVES=10 Z_RULES_FACTOR=0.1",
+ "ct_release": "JuliaGast/counttrucola_submission @ 5d9aedf4106926d13befa141e0855d684f3f5f9d (config-default.yaml top level)",
+ "selected_utc": "2026-10-16T16:20:19Z"
+}

@@ -1,0 +1,1150 @@
+{
+ "title": "Registration files of Manuscript A: recorded hashes, conventions and time stamps (code-release copy)",
+ "hash_convention": {
+  "indent1_sorted": "sha256(json.dumps(body, indent=1, sort_keys=True, default=str)), body = file content without the 'sha256' field (registered_utc kept)",
+  "oneline_sorted": "sha256(json.dumps(body, sort_keys=True, default=str)), same body, default separators, one line",
+  "note": "the hash is computed before writing; the file is written in insertion order with the 'sha256' field embedded, so sha256(file bytes) differs from the recorded hash",
+  "file_sha256": "v7.9 outcome documents without a registration-time hash (freeze manifest, uninspected check, verdict): content_hash = sha256 of the original file bytes, recorded at release time (content_hash_kind = file_sha256); recorded_sha256 stays null"
+ },
+ "redaction": "host names, IP addresses and local paths replaced by <HOST>, <SCRATCH>, <HOME>; files with redacted=true cannot reproduce their recorded hash without the unredacted original (run the checker with --originals DIR); per-file changed fields, placeholders and reasons (no original values) in registration/redaction_map.json; structure_sha256 fingerprints the JSON structure (pointers and value types), which redaction does not change; release v4 (redaction_rules = v2, the v7.9 documents): addresses and bare host numbers are first replaced by the neutral server labels serverA/serverB/serverC (by last octet), so that host-keyed objects keep distinct keys, then the path rules apply; key renames are listed per file in redaction_map.json (renamed_keys) and structure_sha256 fingerprints the bundled copy",
+ "store_saved_utc": "time at which the file was saved to the project's internal file store (independent of the registered_utc field written in the file; not an external time-stamping authority)",
+ "build_check_against_original": "result of recomputing the recorded hash from the unredacted original at bundle build time",
+ "files": [
+  {
+   "bundled_path": "registration/hardening_decision_rule.json",
+   "role": "Main test (Table 16)",
+   "registered_utc": "2026-10-12T18:43:20Z",
+   "recorded_sha256": null,
+   "recorded_in": null,
+   "convention": null,
+   "canonical_bytes_of": null,
+   "original_file_sha256": "755559978a352c5e134ca1132941a7a06e8aa204223daf922dcc304e12e726b4",
+   "bundled_file_sha256": "27b99ed80969847a9f5e546236424d06a223aa287fbe47c5565d73612aba19c6",
+   "redacted": true,
+   "store_saved_utc": "2026-10-12T18:43:25Z",
+   "build_check_against_original": "no recorded hash",
+   "cited_in": [],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "6dcb167bb19044ec8c02ebd95ccfc2047f9b0c88f93fb48f9c9c81c241549988",
+   "placeholder_counts": {
+    "<HOST>": 3
+   },
+   "redacted_pointers": [
+    "/recb/implementation",
+    "/hosts"
+   ]
+  },
+  {
+   "bundled_path": "registration/stageA_decision_rule.json",
+   "role": "tkgl-icews Stage A pilot",
+   "registered_utc": "2026-10-12T14:54:56Z",
+   "recorded_sha256": null,
+   "recorded_in": null,
+   "convention": null,
+   "canonical_bytes_of": null,
+   "original_file_sha256": "346c7811be74b739975b5070da522652f276461f3161d62e1b7b24ade653cb68",
+   "bundled_file_sha256": "346c7811be74b739975b5070da522652f276461f3161d62e1b7b24ade653cb68",
+   "redacted": false,
+   "store_saved_utc": "2026-10-12T14:54:57Z",
+   "build_check_against_original": "no recorded hash",
+   "cited_in": [],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "28f07e603c73a9c3c8df477b209cf18a8ea263e86acb91bdb38baba488ce51e4",
+   "placeholder_counts": {},
+   "redacted_pointers": []
+  },
+  {
+   "bundled_path": "registration/stageB_rule.json",
+   "role": "tkgl-icews Stage B (Table 16)",
+   "registered_utc": "2026-10-13T05:46:34Z",
+   "recorded_sha256": null,
+   "recorded_in": null,
+   "convention": null,
+   "canonical_bytes_of": null,
+   "original_file_sha256": "cf98b8a99675e21b2baffccc43c6766803dc50c468c213ac982518081b726057",
+   "bundled_file_sha256": "2e19aeb31bc25c78c8ee4070d7cc5ce5b3f8b9f25642480501765e495bf99484",
+   "redacted": true,
+   "store_saved_utc": "2026-10-13T05:46:38Z",
+   "build_check_against_original": "no recorded hash",
+   "cited_in": [],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "b28e9647bf52b842e443433af9de19b615ce0f4e3f3331e037ccfcf0b97a6bfd",
+   "placeholder_counts": {
+    "<HOST>": 2
+   },
+   "redacted_pointers": [
+    "/comparators/fallback_preregistered",
+    "/hosts"
+   ]
+  },
+  {
+   "bundled_path": "registration/a_presub_rule.json",
+   "role": "pre-submission rule: TGB-config. RE-GCN, base-free control G1, cluster bootstrap G7, ICEWS18/GDELT controls G2 (Table 16)",
+   "registered_utc": "2026-10-13T13:35:00Z",
+   "recorded_sha256": null,
+   "recorded_in": null,
+   "convention": null,
+   "canonical_bytes_of": null,
+   "original_file_sha256": "03cc191588a4faff1ee325bac6a3d4fbccece60a427cd7c5291b13851fe2f97a",
+   "bundled_file_sha256": "6057f6beef0b8f47519a8f35ca35c894e99c2101cdc57b409f92bdfc9f2113c5",
+   "redacted": true,
+   "store_saved_utc": "2026-10-13T13:33:23Z",
+   "build_check_against_original": "no recorded hash",
+   "cited_in": [],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "c4ffbd714d99a5ef878edfca7de130b42442d296c494ceb1c3c56f49e9a4b782",
+   "placeholder_counts": {
+    "<HOST>": 2
+   },
+   "redacted_pointers": [
+    "/common/hosts"
+   ]
+  },
+  {
+   "bundled_path": "registration/ablation_rule.json",
+   "role": "feature-group ablation A10/A11 (Table 16)",
+   "registered_utc": "2026-10-13T19:16:03Z",
+   "recorded_sha256": "11bf117ef6fba8dac880dac97d5f5721d8dde2f80ff674527c8b6d0ed1b74812",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "98a326392d4aa435dc40a7a1865893ced0c19dd9494db83d416b22910a84a8c8",
+   "bundled_file_sha256": "70bc2c7a93b4e5236ccf0b354e19ab624cba9ca074a60f853c083f8250f2b504",
+   "redacted": true,
+   "store_saved_utc": "2026-10-13T19:16:09Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "cf8e7758dd6957fc4f7f44df61b5949776ec474e6a46747318faeed5663ca440",
+   "placeholder_counts": {
+    "<HOST>": 2
+   },
+   "redacted_pointers": [
+    "/evaluation",
+    "/hosts"
+   ]
+  },
+  {
+   "bundled_path": "registration/g8_rule.json",
+   "role": "CognTKE base G8 (Table 16)",
+   "registered_utc": "2026-10-13T18:28:20Z",
+   "recorded_sha256": "273be7b98b2ba2e7d6231bc79daee3fdb63ff6d3bb39b3722988390645e397c3",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "d6bfedda7e776b651dafaa1322be6e8784527e96af96ca99d9398ff130deef23",
+   "bundled_file_sha256": "8d80360fc3b1d015676baaf0a1a23c997bda114a67b9e390b8c6234e32a2893e",
+   "redacted": true,
+   "store_saved_utc": "2026-10-13T18:28:23Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "e99596e4033b05c2942b4749677a8bc37e874f2dffe5fb94a2d6f71a0e000395",
+   "placeholder_counts": {
+    "<HOST>": 3,
+    "<SCRATCH>": 1
+   },
+   "redacted_pointers": [
+    "/hosts"
+   ]
+  },
+  {
+   "bundled_path": "registration/g8_deviation_B.json",
+   "role": "CognTKE base, deviation B (Table 16)",
+   "registered_utc": "2026-10-13T18:43:00Z",
+   "recorded_sha256": "24d818f604e0f8824f8c8102d57ce3de70e950a42925627db35dfa0483e7d02e",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "1696cb57cc0acb7c867a72a039a0380034345b2ccdb77da787d36383eedb6b88",
+   "bundled_file_sha256": "24c2da1970d391dd5ae8090e737f9ba48a31ed3fdb879b6602e491938985698a",
+   "redacted": true,
+   "store_saved_utc": "2026-10-13T18:43:04Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "fce528363b2bb779d1b672822c46b8e9cb57130b04f2a1671079dc3a0f885f3f",
+   "placeholder_counts": {
+    "<HOST>": 1
+   },
+   "redacted_pointers": [
+    "/unchanged/3"
+   ]
+  },
+  {
+   "bundled_path": "registration/g6_protocol.json",
+   "role": "latency profiling G6 (Table 16)",
+   "registered_utc": "2026-10-14T04:23:49Z",
+   "recorded_sha256": "0c0638d4002a9c1b08638d2c0df27d7ce26c7a3e15915d6a65a267c8c1612d75",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "7738e6cec9de59e93f5564c5c531e379cab22661a12d1e42c3ce04057b9d9b92",
+   "bundled_file_sha256": "b0e42f6c9151f79e25760536fcfe2f949152d5776f0f1844c69c2ddb2be76db6",
+   "redacted": true,
+   "store_saved_utc": "2026-10-14T04:23:53Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "aa88accf2ad2398760165dca22321b9826ab1a464e701ab8899c2ec6937a45b2",
+   "placeholder_counts": {
+    "<HOST>": 3
+   },
+   "redacted_pointers": [
+    "/systems/optional",
+    "/environment",
+    "/outputs"
+   ]
+  },
+  {
+   "bundled_path": "registration/tois_v7_rule.json",
+   "role": "later analyses (Table 16)",
+   "registered_utc": "2026-10-14T10:13:36Z",
+   "recorded_sha256": "bfef91681490278623925e1494890719e9b4529d8ddbf9375dfa83ec2a954a8d",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "306cae8455d15a9acee8557084c2f98b38deeaeec7fa81b87260011d5785f4d8",
+   "bundled_file_sha256": "d2bbef86aa00321823880bf32ab68d081c19fa8b3577dc1f8f0ee04b1f2a5fa3",
+   "redacted": true,
+   "store_saved_utc": "2026-10-14T10:13:42Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [
+    {
+     "file": "results/v7/a5_multi_positive_sensitivity.json",
+     "key": "rule.sha256"
+    },
+    {
+     "file": "results/v7/b1_ranker_form.json",
+     "key": "rule.sha256"
+    },
+    {
+     "file": "results/v7/b2_matched_pool.json",
+     "key": "rule.sha256"
+    },
+    {
+     "file": "results/v7/b3_common_pool_base_ablation.json",
+     "key": "rule.sha256"
+    },
+    {
+     "file": "results/v7/b4_g1_tkgl_icews.json",
+     "key": "rule.sha256"
+    },
+    {
+     "file": "results/v7/c1_no_dyad_lr.json",
+     "key": "rule.sha256"
+    },
+    {
+     "file": "results/v7/c2_pattern_design.json",
+     "key": "rule.sha256"
+    },
+    {
+     "file": "results/v7/c3_relnorm_tkgl_icews.json",
+     "key": "rule.sha256"
+    },
+    {
+     "file": "registration/c4_protocol.json",
+     "key": "parent_rule.sha256"
+    },
+    {
+     "file": "registration/v76_rule.json",
+     "key": "parent_rule.sha256"
+    },
+    {
+     "file": "registration/v76_rule_registered.json",
+     "key": "parent_rule.sha256"
+    }
+   ],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "a33f3a8bc3fe6f4487ee7579d551c275acf62e0b15f0b19dddb3e4d51a8a7997",
+   "placeholder_counts": {
+    "<HOST>": 2
+   },
+   "redacted_pointers": [
+    "/evaluators/TGB (polecat, smallpedia, tkgl-icews)",
+    "/budget"
+   ]
+  },
+  {
+   "bundled_path": "registration/fh_decision_rule.json",
+   "role": "forward holdout GDELT25X (Table 16)",
+   "registered_utc": "2026-10-14T10:28:13Z",
+   "recorded_sha256": "2bb027715962a746214047b116c7ba56ff1b6bdb2adecc2af12155e06380508c",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "07b9c2caa65463c1e3ef6b4078a6101e3e4f5178606ddd5f549cfa6894db2702",
+   "bundled_file_sha256": "944bf8029e07b86b0f6340e2a8264e355d6d331895c5a7034b3d23cb3d8dcd1e",
+   "redacted": true,
+   "store_saved_utc": "2026-10-14T10:28:19Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [
+    {
+     "file": "results/forward_holdout/fh_freeze_manifest.json",
+     "key": "rule.content_sha256_write_prereg"
+    }
+   ],
+   "other_copies": [],
+   "file_sha256_cited_in": [
+    {
+     "file": "results/forward_holdout/fh_freeze_manifest.json",
+     "key": "groups.rule.0.sha256"
+    },
+    {
+     "file": "results/forward_holdout/fh_freeze_manifest.json",
+     "key": "rule.file_sha256"
+    },
+    {
+     "file": "results/forward_holdout/fh_verdict.json",
+     "key": "rule_sha256_expected"
+    }
+   ],
+   "structure_sha256": "30d3c648a011e6cf38b0c4e25e8ac7ea45088e2712a568fcaabe27b5b0e431be",
+   "placeholder_counts": {
+    "<HOST>": 2,
+    "<SCRATCH>": 5
+   },
+   "redacted_pointers": [
+    "/chronology/dataset_origin",
+    "/hosts_and_budget",
+    "/files/code_dir",
+    "/files/stage1",
+    "/files/stage2_test",
+    "/files/decision_code",
+    "/files/manifest"
+   ]
+  },
+  {
+   "bundled_path": "registration/c4_protocol.json",
+   "role": "second base seed C4 (Table 16)",
+   "registered_utc": "2026-10-14T18:54:49Z",
+   "recorded_sha256": "171774ea1da536fb8c0ad74aa24096c3fb4e5024ac0c944db78d0cc72da83d3f",
+   "recorded_in": "embedded",
+   "convention": "oneline_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "5e55c45da6a037764917b85538e81be0df95fb984aa0dd4207342f6e49e19f42",
+   "bundled_file_sha256": "6d847d2c169e2c41983fb62c18bb0e4ccdbcfba3130dcd589ba01488d63ece3a",
+   "redacted": true,
+   "store_saved_utc": "2026-10-14T18:54:55Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "8d9c81e0aab7033535cafc328a416e16ef70a6a02c756e752ce3357576a10b8c",
+   "placeholder_counts": {
+    "<HOST>": 1
+   },
+   "redacted_pointers": [
+    "/base/host"
+   ]
+  },
+  {
+   "bundled_path": "registration/v76_rule.json",
+   "role": "reviewer-requested analyses v7.6 (Table 16)",
+   "registered_utc": "2026-10-15T12:07:43Z",
+   "recorded_sha256": "edcfca14128e22f6aaec415eca54da083d2678354bd4cdc95f475638863e0a04",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "4daf8b0f99271ff8f3018762dd12f03695a406e89c3837af44d4aa7370b8471d",
+   "bundled_file_sha256": "5115881c594944e88f723a7a9460b89e60bdc75777b74518e7a4ea00ee53179d",
+   "redacted": true,
+   "store_saved_utc": "2026-10-15T12:07:47Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [
+    {
+     "file": "registration/v76_rule_amendment_1.json",
+     "key": "amends.sha256"
+    },
+    {
+     "file": "registration/v76_rule_amendment_1_registered.json",
+     "key": "amends.sha256"
+    },
+    {
+     "file": "results/derived/v76_derived.json",
+     "key": "rule.sha256"
+    },
+    {
+     "file": "results/v76/v76_results.json",
+     "key": "amendments.0.amends_sha256"
+    },
+    {
+     "file": "results/v76/v76_results.json",
+     "key": "rule.registered_bytes.sha256"
+    },
+    {
+     "file": "results/v76/v76_results.json",
+     "key": "rule.sha256"
+    }
+   ],
+   "other_copies": [],
+   "file_sha256_cited_in": [
+    {
+     "file": "results/v76/v76_results.json",
+     "key": "rule.file_sha256"
+    }
+   ],
+   "structure_sha256": "3e00940df35ec94449ede044ace342e2ab8a4da91d4ebdb0bf8dac12188e6691",
+   "placeholder_counts": {
+    "<HOST>": 3
+   },
+   "redacted_pointers": [
+    "/items/M3a_validation_trained_base/feasibility_stop",
+    "/items/M6_base_seeds_smallpedia/priority",
+    "/hosts_budget"
+   ]
+  },
+  {
+   "bundled_path": "registration/v76_rule_amendment_1.json",
+   "role": "v7.6 amendment 1 (Table 16)",
+   "registered_utc": "2026-10-15T12:49:21Z",
+   "recorded_sha256": "bc8cd8f87192ee980dc0fdde8a3a8e8bd3770bdf01339bb133be16df260697ff",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "f02c5f6b85dc726be51392a9ef54ba28722ceb73321532f7aab01527b3b458d1",
+   "bundled_file_sha256": "c41e1930d0e13832cc9a1dd67da4c13b47aec411b775b5482a62a5e31ffb1bf5",
+   "redacted": true,
+   "store_saved_utc": "2026-10-15T12:49:25Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [
+    {
+     "file": "results/derived/v76_derived.json",
+     "key": "amendment.sha256"
+    },
+    {
+     "file": "results/v76/v76_results.json",
+     "key": "amendments.0.registered_bytes.sha256"
+    },
+    {
+     "file": "results/v76/v76_results.json",
+     "key": "amendments.0.sha256"
+    }
+   ],
+   "other_copies": [],
+   "file_sha256_cited_in": [
+    {
+     "file": "results/v76/v76_results.json",
+     "key": "amendments.0.file_sha256"
+    }
+   ],
+   "structure_sha256": "38e6bbee941f8f52c0eb3d1856430a60ff7705bd25e27df7c038cbe358aaa904",
+   "placeholder_counts": {
+    "<HOST>": 2
+   },
+   "redacted_pointers": [
+    "/how_detected",
+    "/infrastructure_notes_no_protocol_change/0"
+   ]
+  },
+  {
+   "bundled_path": "registration/v76_rule_registered.json",
+   "role": "v7.6 rule, registered canonical serialisation",
+   "registered_utc": "2026-10-15T12:07:43Z",
+   "recorded_sha256": "edcfca14128e22f6aaec415eca54da083d2678354bd4cdc95f475638863e0a04",
+   "recorded_in": "file bytes (registered canonical serialisation)",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": "registration/v76_rule.json",
+   "original_file_sha256": "edcfca14128e22f6aaec415eca54da083d2678354bd4cdc95f475638863e0a04",
+   "bundled_file_sha256": "a2d7cb96f55b869cd1d8203431da90ac5dd2d3afc49c01f3c9fafea11879aa92",
+   "redacted": true,
+   "store_saved_utc": "2026-10-15T14:49:28Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "6608e630cf2bb4f0f4f7b7255641212531aa35d85d01bc97a4eb8dfa758f30b7",
+   "placeholder_counts": {
+    "<HOST>": 3
+   },
+   "redacted_pointers": [
+    "/hosts_budget",
+    "/items/M3a_validation_trained_base/feasibility_stop",
+    "/items/M6_base_seeds_smallpedia/priority"
+   ]
+  },
+  {
+   "bundled_path": "registration/v76_rule_amendment_1_registered.json",
+   "role": "v7.6 amendment 1, registered canonical serialisation",
+   "registered_utc": "2026-10-15T12:49:21Z",
+   "recorded_sha256": "bc8cd8f87192ee980dc0fdde8a3a8e8bd3770bdf01339bb133be16df260697ff",
+   "recorded_in": "file bytes (registered canonical serialisation)",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": "registration/v76_rule_amendment_1.json",
+   "original_file_sha256": "bc8cd8f87192ee980dc0fdde8a3a8e8bd3770bdf01339bb133be16df260697ff",
+   "bundled_file_sha256": "e7dae3d592163a180b710ddd3c467c0079b61c92559cafecb247ef5608a4b7da",
+   "redacted": true,
+   "store_saved_utc": "2026-10-15T14:49:28Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "351634a562d2ca09384852bd0017ee6e456c0cf0324cacc990fb01bc55e94dc4",
+   "placeholder_counts": {
+    "<HOST>": 2
+   },
+   "redacted_pointers": [
+    "/how_detected",
+    "/infrastructure_notes_no_protocol_change/0"
+   ]
+  },
+  {
+   "bundled_path": "registration/v78_framing_rule.json",
+   "role": "v7.8 framing rule: standalone ladder, external comparators (EdgeReMIND, CountTRuCoLa), reproduction gate, outcome labels F1-F4",
+   "registered_utc": "2026-10-15T17:34:21Z",
+   "recorded_sha256": "8e05c67b7ce8f3a475ac391e813463b9d435f8add5af13e5c4d03f78483a5f2d",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "c94240caa2ffe82c8fb198ddf70ac6d1395e51c3545b5f65de836db2818df042",
+   "bundled_file_sha256": "c94240caa2ffe82c8fb198ddf70ac6d1395e51c3545b5f65de836db2818df042",
+   "redacted": false,
+   "store_saved_utc": "2026-10-15T17:34:22Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [
+    {
+     "file": "registration/v78_rule_amendment_1.json",
+     "key": "amends.sha256"
+    },
+    {
+     "file": "registration/v78_rule_amendment_1_registered.json",
+     "key": "amends.sha256"
+    },
+    {
+     "file": "registration/v78_external_protocol_note.json",
+     "key": "parent_rule.sha256"
+    },
+    {
+     "file": "registration/v78_external_protocol_note_2_ext_adapted.json",
+     "key": "parent_rule.sha256"
+    },
+    {
+     "file": "results/v78/v78_adapted_check.json",
+     "key": "rule.sha256"
+    },
+    {
+     "file": "results/v78/v78_results.json",
+     "key": "rule.sha256"
+    },
+    {
+     "file": "results/v78/v78_verdict.json",
+     "key": "rule_sha256"
+    },
+    {
+     "file": "results/fitpop/fitpop_audit.json",
+     "key": "rule.sha256"
+    }
+   ],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "dfb293dfe9f2936a32ebb6323bc4802cd0679413b7044ee0e1944bc36e01e650",
+   "placeholder_counts": {},
+   "redacted_pointers": [],
+   "added_in": "code release v3 (2026-10-16); registered after the manuscript bundle was built"
+  },
+  {
+   "bundled_path": "registration/v78_rule_amendment_1.json",
+   "role": "v7.8 amendment 1: implementation details of the v7.8 rule (data split, SA, SA_ERM, REL_LIN, EXT), registered before any v7.8 number",
+   "registered_utc": "2026-10-15T18:54:33Z",
+   "recorded_sha256": "8fffffcaad75b066fe0fb35127e101c5bbe11f65de7ff4654068f5170962d84e",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "f0c5a3a2be190f56ef584a86a30a576d77db553a769662e7fce460a8acc77d70",
+   "bundled_file_sha256": "f0c5a3a2be190f56ef584a86a30a576d77db553a769662e7fce460a8acc77d70",
+   "redacted": false,
+   "store_saved_utc": "2026-10-15T18:54:37Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [
+    {
+     "file": "registration/v78_external_protocol_note_2_ext_adapted.json",
+     "key": "amendment.sha256"
+    }
+   ],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "0d31ccf9d3d796249b3320fcf3f54233b08fb06089e075788642e83f3efcdc1c",
+   "placeholder_counts": {},
+   "redacted_pointers": [],
+   "added_in": "code release v3 (2026-10-16); registered after the manuscript bundle was built"
+  },
+  {
+   "bundled_path": "registration/v78_rule_amendment_1_registered.json",
+   "role": "v7.8 amendment 1, registered canonical serialisation",
+   "registered_utc": "2026-10-15T18:54:33Z",
+   "recorded_sha256": "8fffffcaad75b066fe0fb35127e101c5bbe11f65de7ff4654068f5170962d84e",
+   "recorded_in": "file bytes (registered canonical serialisation)",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": "registration/v78_rule_amendment_1.json",
+   "original_file_sha256": "8fffffcaad75b066fe0fb35127e101c5bbe11f65de7ff4654068f5170962d84e",
+   "bundled_file_sha256": "8fffffcaad75b066fe0fb35127e101c5bbe11f65de7ff4654068f5170962d84e",
+   "redacted": false,
+   "store_saved_utc": "2026-10-15T18:54:37Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [
+    {
+     "file": "results/v78/v78_adapted_check.json",
+     "key": "rule.amendment_sha256"
+    },
+    {
+     "file": "results/v78/v78_results.json",
+     "key": "amendment.sha256"
+    },
+    {
+     "file": "results/v78/v78_verdict.json",
+     "key": "amendment_sha256"
+    },
+    {
+     "file": "results/fitpop/fitpop_audit.json",
+     "key": "rule.amendment_sha256"
+    }
+   ],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "249eb336a0201bf6ba56f415f45671c7af0c43b88685edfec1134474945b071b",
+   "placeholder_counts": {},
+   "redacted_pointers": [],
+   "added_in": "code release v3 (2026-10-16); registered after the manuscript bundle was built"
+  },
+  {
+   "bundled_path": "registration/v78_external_protocol_note.json",
+   "role": "v7.8 external comparators, protocol note 1: reproduction-gate definition, history boundary, configuration of the external runs (written before any reproduction number)",
+   "registered_utc": "2026-10-15T17:52:22Z",
+   "recorded_sha256": "52a12ef8bd3c1e54fffa2dd755e298d698df33f7112c77ba4f9d1418cf0cc352",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "464e69cd7657f8cb62d77a205d7834c1112ee997e8126031333f82b46a533e3a",
+   "bundled_file_sha256": "93c39677e836b21ebd1ff435d0b0d01ffda3cc18735fbc5979d7c15874b5e2e0",
+   "redacted": true,
+   "store_saved_utc": "2026-10-15T17:52:27Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "7565d9e0bdd4cf14da9ca2481040657f568cfffb22e4d3ca440f5f4b8188c3d9",
+   "placeholder_counts": {
+    "<HOST>": 1
+   },
+   "redacted_pointers": [
+    "/resources"
+   ],
+   "time_field": "created_utc",
+   "added_in": "code release v3 (2026-10-16); registered after the manuscript bundle was built"
+  },
+  {
+   "bundled_path": "registration/v78_external_protocol_note_2_ext_adapted.json",
+   "role": "v7.8 external comparators, protocol note 2: label-adapted CountTRuCoLa (EXT_adapted), registered-optional comparator run decided after the v7.8 verdict and written before any adapted number",
+   "registered_utc": "2026-10-16T08:20:08Z",
+   "recorded_sha256": "ce9ef0ebc845dafd70fbf5ecee0911a7357295b4408032c7dcc423b1d48e7d6b",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "1b70c453b0dfa87cf07be0b9d6968a0bc06080eb8c4d312eeef8771b2daa816f",
+   "bundled_file_sha256": "1b70c453b0dfa87cf07be0b9d6968a0bc06080eb8c4d312eeef8771b2daa816f",
+   "redacted": false,
+   "store_saved_utc": "2026-10-16T08:20:17Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [
+    {
+     "file": "results/v78/v78_adapted_check.json",
+     "key": "protocol_note.sha256"
+    },
+    {
+     "file": "results/v78/v78_results.json",
+     "key": "post_verdict_checks.EXT_adapted.protocol_note.sha256"
+    }
+   ],
+   "other_copies": [],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "ea722d432e9b049e3570d0c8021a616782a2ab3a823bea1392e56df81ca9184f",
+   "placeholder_counts": {},
+   "redacted_pointers": [],
+   "time_field": "created_utc",
+   "added_in": "code release v3 (2026-10-16); registered after the manuscript bundle was built"
+  },
+  {
+   "bundled_path": "registration/v79_fresh_window_rule.json",
+   "role": "v7.9 fresh-window rule: registered replication of the HRcov - SA and HRcov - CountTRuCoLa comparisons on the uninspected 2026 GDELT window (GDELTFW), with outcome labels",
+   "registered_utc": "2026-10-16T14:24:12Z",
+   "recorded_sha256": "209bb1b57495aefb0509b55f69b3e5eaf88a349be2362a24cd1890583ed9bc80",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "14917cbaaef0306f4abb21516cf3941ae3b281a4b336dbdd2f9d43731d171929",
+   "bundled_file_sha256": "14917cbaaef0306f4abb21516cf3941ae3b281a4b336dbdd2f9d43731d171929",
+   "redacted": false,
+   "store_saved_utc": "2026-10-16T14:24:13Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [
+    {
+     "file": "registration/v79_fresh_window_rule_amendment_1.json",
+     "key": "amends.sha256"
+    }
+   ],
+   "other_copies": [
+    "fresh_window/registration/v79_fresh_window_rule.json"
+   ],
+   "file_sha256_cited_in": [
+    {
+     "file": "registration/fresh_window_freeze_manifest.json",
+     "key": "groups.rule.3.sha256"
+    }
+   ],
+   "structure_sha256": "91a0b68fb39426bb49ae84e0ba05e482585cde5cd804af11370ded1237bafcff",
+   "placeholder_counts": {},
+   "redacted_pointers": [],
+   "redaction_rules": "v2",
+   "content_hash": "209bb1b57495aefb0509b55f69b3e5eaf88a349be2362a24cd1890583ed9bc80",
+   "content_hash_kind": "registration_hash",
+   "added_in": "code release v4 (2026-10-17); registered after the manuscript bundle was built"
+  },
+  {
+   "bundled_path": "registration/v79_fresh_window_rule_amendment_1.json",
+   "role": "v7.9 fresh-window rule, amendment 1 (scope changes, interpretation of the outcome labels, latency protocol), registered before the window was built",
+   "registered_utc": "2026-10-16T14:24:46Z",
+   "recorded_sha256": "207689b83c46d7c873a8dde6a192acdcbdee3f237f601880db5b4c956407b8c8",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "2c69d03b316d9ff8ddcb5b2442f67ee036699869bf5c95424412ee832beaaf23",
+   "bundled_file_sha256": "2c69d03b316d9ff8ddcb5b2442f67ee036699869bf5c95424412ee832beaaf23",
+   "redacted": false,
+   "store_saved_utc": "2026-10-16T14:24:47Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [],
+   "other_copies": [
+    "fresh_window/registration/v79_fresh_window_rule_amendment_1.json"
+   ],
+   "file_sha256_cited_in": [
+    {
+     "file": "registration/fresh_window_freeze_manifest.json",
+     "key": "groups.rule.4.sha256"
+    }
+   ],
+   "structure_sha256": "7b3dffc850846ce232fb89d616ca6c83c0d0123fe0716ebad9facee68fc3532c",
+   "placeholder_counts": {},
+   "redacted_pointers": [],
+   "redaction_rules": "v2",
+   "content_hash": "207689b83c46d7c873a8dde6a192acdcbdee3f237f601880db5b4c956407b8c8",
+   "content_hash_kind": "registration_hash",
+   "added_in": "code release v4 (2026-10-17); registered after the manuscript bundle was built"
+  },
+  {
+   "bundled_path": "registration/fresh_window_implementation_note.json",
+   "role": "fresh-window implementation note (data, validation parts, base, code, systems, comparator candidates), registered before any model was fitted",
+   "registered_utc": "2026-10-16T14:49:29Z",
+   "recorded_sha256": "c99bb4b7f690a84ddd1b4f3ec5bfa8f9b860e8d89fde4b05a7eecd56ccb21dc8",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "f677798b23240c81bc2312d83c51f96920848c48c2313086f756699517e5bf7d",
+   "bundled_file_sha256": "da2d770443448a483a80d52a8c4cfe85be2720d90a2b8f272bf49fba8623ecf9",
+   "redacted": true,
+   "store_saved_utc": "2026-10-16T14:49:35Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [],
+   "other_copies": [
+    "fresh_window/registration/fresh_window_implementation_note.json"
+   ],
+   "file_sha256_cited_in": [
+    {
+     "file": "registration/fresh_window_freeze_manifest.json",
+     "key": "groups.rule.0.sha256"
+    }
+   ],
+   "structure_sha256": "87994663b15de8c27ab1ed4e7a95d62da026c531b1a5b4fbee345c7570f58098",
+   "placeholder_counts": {},
+   "redacted_pointers": [
+    "/data/host_path"
+   ],
+   "redaction_rules": "v2",
+   "content_hash": "c99bb4b7f690a84ddd1b4f3ec5bfa8f9b860e8d89fde4b05a7eecd56ccb21dc8",
+   "content_hash_kind": "registration_hash",
+   "added_in": "code release v4 (2026-10-17); registered after the manuscript bundle was built"
+  },
+  {
+   "bundled_path": "registration/fresh_window_implementation_note_addendum_1.json",
+   "role": "fresh-window implementation note, addendum 1 (the two CountTRuCoLa learning-window-50 configurations stopped before any rule or score existed)",
+   "registered_utc": "2026-10-16T16:08:05Z",
+   "recorded_sha256": "57cab0671627848154237becf2e4a6e7ebea60a6b0305715fb6c7cf8f0d544cd",
+   "recorded_in": "embedded",
+   "convention": "indent1_sorted",
+   "canonical_bytes_of": null,
+   "original_file_sha256": "5856d3bba6b7ba8d3f796964ba406158bbc7e54fa6857f137c3e66cf2f629d25",
+   "bundled_file_sha256": "5856d3bba6b7ba8d3f796964ba406158bbc7e54fa6857f137c3e66cf2f629d25",
+   "redacted": false,
+   "store_saved_utc": "2026-10-16T16:08:06Z",
+   "build_check_against_original": "PASS",
+   "cited_in": [],
+   "other_copies": [
+    "fresh_window/registration/fresh_window_implementation_note_addendum_1.json"
+   ],
+   "file_sha256_cited_in": [
+    {
+     "file": "registration/fresh_window_freeze_manifest.json",
+     "key": "groups.rule.1.sha256"
+    }
+   ],
+   "structure_sha256": "32b7da2c59a5877715d2fcbf888c3e6385aac878af3307ea5d700a86d296b3af",
+   "placeholder_counts": {},
+   "redacted_pointers": [],
+   "redaction_rules": "v2",
+   "content_hash": "57cab0671627848154237becf2e4a6e7ebea60a6b0305715fb6c7cf8f0d544cd",
+   "content_hash_kind": "registration_hash",
+   "added_in": "code release v4 (2026-10-17); registered after the manuscript bundle was built"
+  },
+  {
+   "bundled_path": "registration/fresh_window_freeze_manifest.json",
+   "role": "fresh-window freeze manifest: SHA-256 of the 201 files frozen before the single test pass, with the chronology (time-stamped; no registration-time content hash)",
+   "registered_utc": "2026-10-16T16:32:23Z",
+   "recorded_sha256": null,
+   "recorded_in": null,
+   "convention": null,
+   "canonical_bytes_of": null,
+   "original_file_sha256": "ee433c5b87993e3cd7f2d5f4509e0c864b9aa797d3df413f91a360a5a9dad98c",
+   "bundled_file_sha256": "297289f4ee3ddc737a579579f9ef07bf92df406a30988b5e2cf743da60e3f269",
+   "redacted": true,
+   "store_saved_utc": "2026-10-16T16:33:17Z",
+   "build_check_against_original": "file hash recorded at release",
+   "cited_in": [],
+   "other_copies": [
+    "fresh_window/registration/fresh_window_freeze_manifest.json"
+   ],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "48baf00547e6035052e258751713596177a879dc26d6c4a17fe1bc76c7608f67",
+   "placeholder_counts": {
+    "<SCRATCH>": 202
+   },
+   "redacted_pointers": [
+    "/host",
+    "/track_dir",
+    "/groups/rule/0/path",
+    "/groups/rule/1/path",
+    "/groups/rule/2/path",
+    "/groups/rule/3/path",
+    "/groups/rule/4/path",
+    "/groups/code/0/path",
+    "/groups/code/1/path",
+    "/groups/code/2/path",
+    "/groups/code/3/path",
+    "/groups/code/4/path",
+    "/groups/code/5/path",
+    "/groups/code/6/path",
+    "/groups/code/7/path",
+    "/groups/code/8/path",
+    "/groups/code/9/path",
+    "/groups/code/10/path",
+    "/groups/code/11/path",
+    "/groups/code/12/path",
+    "/groups/code/13/path",
+    "/groups/code/14/path",
+    "/groups/code/15/path",
+    "/groups/code/16/path",
+    "/groups/code/17/path",
+    "/groups/code/18/path",
+    "/groups/code/19/path",
+    "/groups/code/20/path",
+    "/groups/code/21/path",
+    "/groups/code/22/path",
+    "/groups/code/23/path",
+    "/groups/code/24/path",
+    "/groups/code/25/path",
+    "/groups/code/26/path",
+    "/groups/code/27/path",
+    "/groups/code/28/path",
+    "/groups/code/29/path",
+    "/groups/code/30/path",
+    "/groups/code/31/path",
+    "/groups/code/32/path",
+    "/groups/code/33/path",
+    "/groups/code/34/path",
+    "/groups/code/35/path",
+    "/groups/code/36/path",
+    "/groups/code/37/path",
+    "/groups/code/38/path",
+    "/groups/code/39/path",
+    "/groups/code/40/path",
+    "/groups/code/41/path",
+    "/groups/code/42/path",
+    "/groups/code/43/path",
+    "/groups/code/44/path",
+    "/groups/code/45/path",
+    "/groups/code/46/path",
+    "/groups/code/47/path",
+    "/groups/code/48/path",
+    "/groups/code/49/path",
+    "/groups/code/50/path",
+    "/groups/code/51/path",
+    "/groups/code/52/path",
+    "/groups/code/53/path",
+    "/groups/code/54/path",
+    "/groups/code/55/path",
+    "/groups/code/56/path",
+    "/groups/code/57/path",
+    "/groups/code/58/path",
+    "/groups/code/59/path",
+    "/groups/code/60/path",
+    "/groups/code/61/path",
+    "/groups/code/62/path",
+    "/groups/code/63/path",
+    "/groups/code/64/path",
+    "/groups/code/65/path",
+    "/groups/ct_code/0/path",
+    "/groups/ct_code/1/path",
+    "/groups/ct_code/2/path",
+    "/groups/ct_code/3/path",
+    "/groups/ct_code/4/path",
+    "/groups/ct_code/5/path",
+    "/groups/ct_code/6/path",
+    "/groups/ct_code/7/path",
+    "/groups/ct_code/8/path",
+    "/groups/ct_code/9/path",
+    "/groups/ct_code/10/path",
+    "/groups/ct_code/11/path",
+    "/groups/ct_code/12/path",
+    "/groups/ct_code/13/path",
+    "/groups/ct_code/14/path",
+    "/groups/ct_code/15/path",
+    "/groups/ct_code/16/path",
+    "/groups/ct_code/17/path",
+    "/groups/ct_code/18/path",
+    "/groups/ct_code/19/path",
+    "/groups/ct_code/20/path",
+    "/groups/ct_code/21/path",
+    "/groups/ct_code/22/path",
+    "/groups/ct_code/23/path",
+    "/groups/ct_code/24/path",
+    "/groups/ct_code/25/path",
+    "/groups/ct_code/26/path",
+    "/groups/ct_code/27/path",
+    "/groups/ct_code/28/path",
+    "/groups/ct_code/29/path",
+    "/groups/ct_code/30/path",
+    "/groups/ct_code/31/path",
+    "/groups/ct_code/32/path",
+    "/groups/ct_code/33/path",
+    "/groups/ct_code/34/path",
+    "/groups/ct_code/35/path",
+    "/groups/ct_code/36/path",
+    "/groups/ct_code/37/path",
+    "/groups/ct_code/38/path",
+    "/groups/ct_code/39/path",
+    "/groups/ct_code/40/path",
+    "/groups/ct_code/41/path",
+    "/groups/ct_code/42/path",
+    "/groups/ct_code/43/path",
+    "/groups/ct_code/44/path",
+    "/groups/data/0/path",
+    "/groups/data/1/path",
+    "/groups/data/2/path",
+    "/groups/data/3/path",
+    "/groups/data/4/path",
+    "/groups/data/5/path",
+    "/groups/data/6/path",
+    "/groups/data/7/path",
+    "/groups/base_model/0/path",
+    "/groups/base_model/1/path",
+    "/groups/valid_base_rows/0/path",
+    "/groups/valid_base_rows/1/path",
+    "/groups/valid_base_rows/2/path",
+    "/groups/prep/0/path",
+    "/groups/prep/1/path",
+    "/groups/prep/2/path",
+    "/groups/prep/3/path",
+    "/groups/controls/0/path",
+    "/groups/controls/1/path",
+    "/groups/controls/2/path",
+    "/groups/controls/3/path",
+    "/groups/controls/4/path",
+    "/groups/controls/5/path",
+    "/groups/controls/6/path",
+    "/groups/recb_xf/0/path",
+    "/groups/recb_xf/1/path",
+    "/groups/features_valid/0/path",
+    "/groups/features_valid/1/path",
+    "/groups/features_valid/2/path",
+    "/groups/features_valid/3/path",
+    "/groups/features_valid/4/path",
+    "/groups/features_valid/5/path",
+    "/groups/features_valid/6/path",
+    "/groups/features_valid/7/path",
+    "/groups/features_valid/8/path",
+    "/groups/features_valid/9/path",
+    "/groups/features_valid/10/path",
+    "/groups/hrcov_reranker/0/path",
+    "/groups/hrcov_reranker/1/path",
+    "/groups/hrcov_reranker/2/path",
+    "/groups/hrcov_reranker/3/path",
+    "/groups/hrcov_reranker/4/path",
+    "/groups/hrcov_reranker/5/path",
+    "/groups/hrcov_reranker/6/path",
+    "/groups/hrcov_reranker/7/path",
+    "/groups/sa_valid/0/path",
+    "/groups/sa_valid/1/path",
+    "/groups/sa_valid/2/path",
+    "/groups/sa_valid/3/path",
+    "/groups/sa_valid/4/path",
+    "/groups/sa_valid/5/path",
+    "/groups/sa_valid/6/path",
+    "/groups/sa_valid/7/path",
+    "/groups/sa_valid/8/path",
+    "/groups/sa_valid/9/path",
+    "/groups/sa_valid/10/path",
+    "/groups/sa_valid/11/path",
+    "/groups/sa_valid/12/path",
+    "/groups/sa_valid/13/path",
+    "/groups/sa_ranker/0/path",
+    "/groups/sa_ranker/1/path",
+    "/groups/sa_ranker/2/path",
+    "/groups/sa_ranker/3/path",
+    "/groups/sa_ranker/4/path",
+    "/groups/ct_stage1/0/path",
+    "/groups/ct_stage1/1/path",
+    "/groups/ct_stage1/2/path",
+    "/groups/ct_stage1/3/path",
+    "/groups/ct_stage1/4/path",
+    "/groups/ct_stage1/5/path",
+    "/groups/ct_stage1/6/path",
+    "/groups/ct_stage1/7/path",
+    "/groups/ct_stage1/8/path",
+    "/groups/ct_stage1/9/path",
+    "/groups/ct_stage1/10/path",
+    "/groups/ct_stage1/11/path",
+    "/groups/ct_stage1/12/path",
+    "/groups/ct_stage1/13/path",
+    "/groups/ct_stage1/14/path",
+    "/groups/ct_stage1/15/path",
+    "/groups/ext_selection/0/path",
+    "/groups/ext_selection/1/path",
+    "/groups/ext_selection/2/path",
+    "/groups/latency/0/path",
+    "/groups/latency/1/path",
+    "/chronology_utc/2/1"
+   ],
+   "time_field": "created_utc",
+   "redaction_rules": "v2",
+   "content_hash": "ee433c5b87993e3cd7f2d5f4509e0c864b9aa797d3df413f91a360a5a9dad98c",
+   "content_hash_kind": "file_sha256",
+   "added_in": "code release v4 (2026-10-17); registered after the manuscript bundle was built"
+  },
+  {
+   "bundled_path": "registration/fresh_window_uninspected_check.json",
+   "role": "fresh-window uninspected check, recorded before any model was fitted (time-stamped; no registration-time content hash)",
+   "registered_utc": "2026-10-16T14:46:47Z",
+   "recorded_sha256": null,
+   "recorded_in": null,
+   "convention": null,
+   "canonical_bytes_of": null,
+   "original_file_sha256": "bfd93379c66b3914085fd11a53ce43648bc8325652d96e7ef76669ba3f8b754e",
+   "bundled_file_sha256": "8c0102ae225bc98bc97f916983165a3d24c7dd6b8c6fa096a128731e829e02fe",
+   "redacted": true,
+   "store_saved_utc": "2026-10-16T14:47:01Z",
+   "build_check_against_original": "file hash recorded at release",
+   "cited_in": [],
+   "other_copies": [
+    "fresh_window/registration/fresh_window_uninspected_check.json"
+   ],
+   "file_sha256_cited_in": [
+    {
+     "file": "registration/fresh_window_freeze_manifest.json",
+     "key": "groups.rule.2.sha256"
+    }
+   ],
+   "structure_sha256": "ee59e256fff3084303fc8d9662a0d0951cd1aeb08ff65941f5fa165fdd22657b",
+   "placeholder_counts": {
+    "<HOME>": 3,
+    "<SCRATCH>": 37
+   },
+   "redacted_pointers": [
+    "/hosts/serverA/roots/0",
+    "/hosts/serverA/timestamp2id/0/path",
+    "/hosts/serverA/timestamp2id/1/path",
+    "/hosts/serverA/timestamp2id/2/path",
+    "/hosts/serverA/timestamp2id/3/path",
+    "/hosts/serverA/timestamp2id/4/path",
+    "/hosts/serverA/timestamp2id/5/path",
+    "/hosts/serverA/timestamp2id/6/path",
+    "/hosts/serverA/timestamp2id/7/path",
+    "/hosts/serverA/timestamp2id/8/path",
+    "/hosts/serverA/timestamp2id/9/path",
+    "/hosts/serverA/timestamp2id/10/path",
+    "/hosts/serverA/timestamp2id/11/path",
+    "/hosts/serverA/gdelt_build_summaries/0/path",
+    "/hosts/serverA/gdelt_build_summaries/1/path",
+    "/hosts/serverA/gdelt_build_summaries/2/path",
+    "/hosts/serverA/gdelt_build_summaries/3/path",
+    "/hosts/serverA/gdelt_build_summaries/4/path",
+    "/hosts/serverA/gdelt_build_summaries/5/path",
+    "/hosts/serverA/gdelt_build_summaries/6/path",
+    "/hosts/serverA/gdelt_build_summaries/7/path",
+    "/hosts/serverA/gdelt_build_summaries/8/path",
+    "/hosts/serverA/gdelt_build_summaries/9/path",
+    "/hosts/serverA/scan_errors/0",
+    "/hosts/serverB/roots/0",
+    "/hosts/serverB/timestamp2id/0/path",
+    "/hosts/serverB/timestamp2id/1/path",
+    "/hosts/serverB/timestamp2id/2/path",
+    "/hosts/serverB/timestamp2id/3/path",
+    "/hosts/serverB/timestamp2id/4/path",
+    "/hosts/serverB/timestamp2id/5/path",
+    "/hosts/serverB/timestamp2id/6/path",
+    "/hosts/serverB/gdelt_build_summaries/0/path",
+    "/hosts/serverB/gdelt_build_summaries/1/path",
+    "/hosts/serverB/gdelt_build_summaries/2/path",
+    "/hosts/serverB/gdelt_build_summaries/3/path",
+    "/hosts/serverB/gdelt_build_summaries/4/path",
+    "/hosts/serverB/gdelt_build_summaries/5/path",
+    "/hosts/serverB/gdelt_build_summaries/6/path",
+    "/hosts/serverC/roots/0",
+    "/caveats/0",
+    "/caveats/2",
+    "/build/host"
+   ],
+   "time_field": "recorded_utc",
+   "redaction_rules": "v2",
+   "content_hash": "bfd93379c66b3914085fd11a53ce43648bc8325652d96e7ef76669ba3f8b754e",
+   "content_hash_kind": "file_sha256",
+   "added_in": "code release v4 (2026-10-17); registered after the manuscript bundle was built"
+  },
+  {
+   "bundled_path": "registration/fresh_window_verdict.json",
+   "role": "fresh-window verdict, outcome R4_OTHER (mixed), decided after the single test pass (time-stamped; no registration-time content hash)",
+   "registered_utc": "2026-10-16T17:12:18Z",
+   "recorded_sha256": null,
+   "recorded_in": null,
+   "convention": null,
+   "canonical_bytes_of": null,
+   "original_file_sha256": "a96619d3e6cd71a3d32938201e3220969f2770f7e3316dc6c8994266cd62f627",
+   "bundled_file_sha256": "a96619d3e6cd71a3d32938201e3220969f2770f7e3316dc6c8994266cd62f627",
+   "redacted": false,
+   "store_saved_utc": "2026-10-16T17:13:48Z",
+   "build_check_against_original": "file hash recorded at release",
+   "cited_in": [],
+   "other_copies": [
+    "fresh_window/registration/fresh_window_verdict.json"
+   ],
+   "file_sha256_cited_in": [],
+   "structure_sha256": "77a8cc2c47fd6138fd8099121857003934ccfda4f7c968cf6d318b544f7523b8",
+   "placeholder_counts": {},
+   "redacted_pointers": [],
+   "time_field": "decided_utc",
+   "redaction_rules": "v2",
+   "content_hash": "a96619d3e6cd71a3d32938201e3220969f2770f7e3316dc6c8994266cd62f627",
+   "content_hash_kind": "file_sha256",
+   "added_in": "code release v4 (2026-10-17); registered after the manuscript bundle was built"
+  }
+ ],
+ "redaction_map": "registration/redaction_map.json",
+ "originals_policy": "Unredacted originals are available to the editor and reviewers on request; they contain internal server addresses and are not published.",
+ "release_changes": "Code-release copy of the bundle manifest: the internal store identifiers of each file were removed; paths of the result files that cite a recorded hash were changed to their location under results/; references to duplicate copies of rule files that exist in the manuscript bundle but not in this repository (a second copy of tois_v7_rule.json, fh_decision_rule.json, c4_protocol.json and of the four v7.6 rule files) were removed. The rule files themselves were byte-identical to the manuscript bundle up to release v3 (see the release v4 note on host numbers below). Release v3 (2026-10-16) adds the five v7.8 registration files (framing rule, amendment 1 and its registered serialisation, external-comparator protocol notes 1 and 2), redacted with the same rules; they were registered after the manuscript bundle was built and are marked added_in. The two protocol notes are time-stamped in created_utc (manifest key time_field). Release v4 (2026-10-17) adds the seven v7.9 fresh-window documents (rule, amendment 1, implementation note, addendum 1, freeze manifest, uninspected check, verdict) with content_hash and content_hash_kind; byte-identical copies are also under fresh_window/registration/. Release v4 also lists, under cited_in, the hash fields of the v7.8 and fit-population result files now shipped under results/v78/ and results/fitpop/. Release v4 redaction rules v2 also replace analysis-platform identifiers by neutral text (one field group of fresh_window_uninspected_check.json); their patterns are not published and are read with --originals from platform_rules.json, provided with the originals. Release v4 also redacts bare host numbers that releases 1-3 had left in host-context sentences of four v1-redacted files (hardening_decision_rule.json, a_presub_rule.json, v76_rule.json, v76_rule_registered.json; same changed fields, more <HOST> placeholders, counts in redaction_map.json); the host rules (address-octet labels and bare-host-number contexts) are likewise not published and are read with --originals from label_rules.json, provided with the originals. These four copies therefore differ from the copies in the manuscript bundle, whose recorded hashes (computed from the originals) are unchanged."
+}

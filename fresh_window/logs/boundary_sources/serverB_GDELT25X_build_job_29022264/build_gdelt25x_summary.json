@@ -1,0 +1,45 @@
+{
+ "host": "serverB",
+ "source": "GDELT 2.0 event exports (15-min), 20250101..20251001 (end exclusive), valid from 20250701, test from 20250801",
+ "n_files": 24527,
+ "n_files_expected": 26208,
+ "n_event_rows": 1422918,
+ "n_unique_quads": 791436,
+ "n_entities": 1173,
+ "n_relations": 218,
+ "n_days": 256,
+ "splits": {
+  "train": {
+   "n_facts": 514299,
+   "t_range": [
+    0,
+    164
+   ]
+  },
+  "valid": {
+   "n_facts": 94778,
+   "t_range": [
+    165,
+    194
+   ]
+  },
+  "test": {
+   "n_facts": 182359,
+   "t_range": [
+    195,
+    255
+   ]
+  }
+ },
+ "docs": {
+  "n_referenced": 380142,
+  "src_counts": {
+   "fulltext": 0,
+   "slug": 305421,
+   "none": 74721
+  },
+  "frac_slug": 0.8034392411256847
+ },
+ "filters": "root events; >=1 actor country in ME; URL first-seen day only; entity >=10 / relation >=5 train events",
+ "elapsed_s": 1986.6
+}

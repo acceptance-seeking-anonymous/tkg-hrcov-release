@@ -1,0 +1,39 @@
+dataset,base,arm,test_MRR,H1,H3,H10,evaluator,seeds
+ICEWS18,-,"RecB default (TGB script, faithful)",0.26278,0.19083,0.29274,0.39813,"hd_recb formula (average ties, harness filter)",-
+ICEWS18,-,"RecB trained (TGB train mode, faithful)",0.28691,0.20809,0.32279,0.43518,"hd_recb formula (average ties, harness filter)",-
+ICEWS18,-,RecB default (clean psi reset),0.26345,0.19136,0.29345,0.39924,"hd_recb formula (average ties, harness filter)",-
+ICEWS18,-,RecB trained (clean psi reset),0.28767,0.20861,0.32356,0.43659,"hd_recb formula (average ties, harness filter)",-
+ICEWS18,tirgn,base,0.33701,0.23165,0.38165,0.54247,harness exact filtered,-
+ICEWS18,tirgn,BLEND,0.34991,0.24556,0.39523,0.55287,harness exact filtered,-
+ICEWS18,tirgn,POOL,0.34986,0.24556,0.39523,0.55287,harness exact filtered,-
+ICEWS18,tirgn,HR,0.36700,0.26263,0.41465,0.57016,harness exact filtered,3
+ICEWS18,tirgn,HRCOV_PAT,0.37088,0.26537,0.41884,0.57629,harness exact filtered,3
+ICEWS18,regcn,base,0.28691,0.19326,0.32187,0.47170,harness exact filtered,-
+ICEWS18,regcn,BLEND,0.32376,0.22655,0.36618,0.51107,harness exact filtered,-
+ICEWS18,regcn,POOL,0.32373,0.22655,0.36618,0.51107,harness exact filtered,-
+ICEWS18,regcn,HR,0.34183,0.24546,0.38692,0.52884,harness exact filtered,3
+ICEWS18,regcn,HRCOV_PAT,0.35922,0.25684,0.40701,0.55911,harness exact filtered,3
+ICEWS18,logcl,base,0.28784,0.19490,0.32429,0.47111,harness exact filtered,-
+ICEWS18,logcl,BLEND,0.31883,0.22202,0.35953,0.50701,harness exact filtered,-
+ICEWS18,logcl,POOL,0.31884,0.22202,0.35953,0.50701,harness exact filtered,-
+ICEWS18,logcl,HR,0.34030,0.24444,0.38588,0.52610,harness exact filtered,3
+ICEWS18,logcl,HRCOV_PAT,0.35767,0.25577,0.40480,0.55776,harness exact filtered,3
+GDELT,-,"RecB default (TGB script, faithful)",0.20997,0.13525,0.22970,0.35322,"hd_recb formula (average ties, harness filter)",-
+GDELT,-,"RecB trained (TGB train mode, faithful)",0.24367,0.16443,0.26789,0.39669,"hd_recb formula (average ties, harness filter)",-
+GDELT,-,RecB default (clean psi reset),0.21069,0.13601,0.23045,0.35380,"hd_recb formula (average ties, harness filter)",-
+GDELT,-,RecB trained (clean psi reset),0.24460,0.16532,0.26892,0.39768,"hd_recb formula (average ties, harness filter)",-
+GDELT,tirgn,base,0.21670,0.13629,0.23274,0.37603,harness exact filtered,-
+GDELT,tirgn,BLEND,0.25945,0.17264,0.28630,0.42869,harness exact filtered,-
+GDELT,tirgn,POOL,0.25945,0.17264,0.28630,0.42869,harness exact filtered,-
+GDELT,tirgn,HR,0.26602,0.17993,0.29433,0.43427,harness exact filtered,3
+GDELT,tirgn,HRCOV_PAT,0.26933,0.18162,0.29771,0.44177,harness exact filtered,3
+GDELT,regcn,base,0.19735,0.12473,0.20972,0.33913,harness exact filtered,-
+GDELT,regcn,BLEND,0.25916,0.17176,0.28592,0.42997,harness exact filtered,-
+GDELT,regcn,POOL,0.25916,0.17176,0.28592,0.42997,harness exact filtered,-
+GDELT,regcn,HR,0.24314,0.16412,0.26745,0.39685,harness exact filtered,3
+GDELT,regcn,HRCOV_PAT,0.26390,0.17869,0.29167,0.43118,harness exact filtered,3
+GDELT,logcl,base,0.21139,0.13360,0.22716,0.36386,harness exact filtered,-
+GDELT,logcl,BLEND,0.25822,0.17080,0.28541,0.42894,harness exact filtered,-
+GDELT,logcl,POOL,0.25821,0.17080,0.28541,0.42894,harness exact filtered,-
+GDELT,logcl,HR,0.25360,0.17118,0.27931,0.41439,harness exact filtered,3
+GDELT,logcl,HRCOV_PAT,0.26590,0.17936,0.29383,0.43588,harness exact filtered,3

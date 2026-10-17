@@ -1,0 +1,34 @@
+{
+ "counttrucola/tkgl-polecat/test": {
+  "rows": 532636,
+  "gold_scored_above_floor": 337877,
+  "gold_tied_with_other_listed": 10544,
+  "frac_tied": 0.019795883117175707,
+  "mean_official_rr_of_tied": 0.01681768910770166,
+  "gold_at_or_below_floor": 194759
+ },
+ "counttrucola/tkgl-smallpedia/test": {
+  "rows": 163172,
+  "gold_scored_above_floor": 117437,
+  "gold_tied_with_other_listed": 27725,
+  "frac_tied": 0.1699127301252666,
+  "mean_official_rr_of_tied": 0.6545811510031642,
+  "gold_at_or_below_floor": 45735
+ },
+ "edgeremind_s1337/tkgl-polecat/test": {
+  "rows": 532636,
+  "gold_scored_above_floor": 363041,
+  "gold_tied_with_other_listed": 12323,
+  "frac_tied": 0.023135875156767474,
+  "mean_official_rr_of_tied": 0.006541945242495597,
+  "gold_at_or_below_floor": 169595
+ },
+ "edgeremind_s1337/tkgl-smallpedia/test": {
+  "rows": 163172,
+  "gold_scored_above_floor": 134649,
+  "gold_tied_with_other_listed": 21030,
+  "frac_tied": 0.1288824062951977,
+  "mean_official_rr_of_tied": 0.25054341117871143,
+  "gold_at_or_below_floor": 28523
+ }
+}

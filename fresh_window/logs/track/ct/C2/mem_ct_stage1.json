@@ -1,0 +1,32 @@
+{
+ "cmd": [
+  "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/env/ct/bin/python",
+  "rule_based/fw_ct_main.py",
+  "--fw_dd",
+  "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW",
+  "--fw_root",
+  "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/root",
+  "--params",
+  "DATASET_NAME=tkgl-gdeltfw",
+  "NUM_CPUS=10",
+  "EVAL_TESTSET_FLAG=False",
+  "EVAL_VALSET_FLAG=True",
+  "LEARN_WINDOW_SIZE=50",
+  "DATAPOINT_THRESHOLD_MULTI=50",
+  "RULE_UNSEEN_NEGATIVES=100",
+  "AGGREGATION_DECAY=0.8",
+  "NUM_TOP_RULES=10",
+  "RULE_TYPE_C=True",
+  "F_UNSEEN_NEGATIVES=10",
+  "Z_RULES_FACTOR=0.1"
+ ],
+ "returncode": -15,
+ "wall_s": 4112.2,
+ "peak_pss_gb": 134.6,
+ "peak_rss_sum_gb": 134.65,
+ "min_host_avail_gb": 198.8,
+ "peak_nproc": 1,
+ "killed_for_memory": false,
+ "samples": 375,
+ "note": "peak_pss_gb = max over samples of summed PSS of the process tree (shared pages counted once); rss_sum double-counts fork-shared pages"
+}

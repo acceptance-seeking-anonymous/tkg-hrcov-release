@@ -1,0 +1,77 @@
+[stage1a] start 2026-10-16T14:50:41Z host [REDACTED:HOST] workers 8
+ 22:50:41 up 4 days, 23:14,  8 users,  load average: 1.17, 1.44, 1.13
+Fri Oct 16 22:50:41 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX PRO 6000 Blac...    Off |   00000000:C1:00.0 Off |                  Off |
+| 37%   66C    P1             82W /  300W |    3084MiB /  97887MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA RTX PRO 6000 Blac...    Off |   00000000:E1:00.0 Off |                  Off |
+| 30%   41C    P8             13W /  300W |       2MiB /  97887MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  [GPU process rows removed for the release: the table does not show their owner]        |
++-----------------------------------------------------------------------------------------+
+[gpu] tirgn_train start 2026-10-16T14:50:42Z gpu 0
+[stage-time] prep_stage1 rc=0 140s 2026-10-16T14:53:01Z
+[stage-time] recb_valid rc=0 157s 2026-10-16T14:53:18Z
+[stage-time] recb_validcsr rc=0 165s 2026-10-16T14:53:26Z
+[stage-time] tirgn_train rc=0 620s 2026-10-16T15:01:01Z
+index, memory.used [MiB], utilization.gpu [%]
+0, 4116 MiB, 12 %
+1, 2 MiB, 0 %
+[stage-time] tirgn_rows_valid rc=0 627s 2026-10-16T15:01:08Z
+[gpu] stage1 GPU wall seconds 626 on gpu 0
+[stage1a] end 2026-10-16T15:01:08Z
+[stage1b] start 2026-10-16T15:01:48Z host [REDACTED:HOST] workers 8
+ 23:01:49 up 4 days, 23:25,  8 users,  load average: 4.82, 4.59, 3.31
+[stage1b] validation cut ts = 
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+203
+[stage-time] recb_xf_select rc=2 1s 2026-10-16T15:01:49Z
+[stage-time] recb_xf_validcsr rc=1 2s 2026-10-16T15:01:50Z
+[stage-time] sa_hist_valid rc=1 4s 2026-10-16T15:01:52Z
+[stage-time] sa_lists_valid rc=1 6s 2026-10-16T15:01:54Z
+[stage-time] sa_pools_valid rc=1 9s 2026-10-16T15:01:57Z
+[stage-time] sa_fit rc=1 11s 2026-10-16T15:01:59Z
+[stage-time] lists_valid rc=0 32s 2026-10-16T15:02:20Z
+[stage-time] features_valid rc=0 47s 2026-10-16T15:02:35Z
+[stage-time] blend_valid rc=0 69s 2026-10-16T15:02:57Z
+[stage-time] select rc=0 70s 2026-10-16T15:02:58Z
+[stage1b-sa] start 2026-10-16T15:06:52Z host [REDACTED:HOST] workers 8
+ 23:06:52 up 4 days, 23:30,  8 users,  load average: 11.29, 8.70, 5.46
+[stage1b] validation cut ts = 203
+[stage-time] recb_xf_select rc=0 1s 2026-10-16T15:06:53Z
+[stage-time] recb_xf_validcsr rc=0 8s 2026-10-16T15:07:00Z
+[stage-time] sa_hist_valid rc=0 12s 2026-10-16T15:07:04Z
+[stage-time] train_hrcov rc=0 319s 2026-10-16T15:07:07Z
+[stage1b] end 2026-10-16T15:07:07Z

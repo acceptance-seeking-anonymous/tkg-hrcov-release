@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code_ct/fw_ct_score.py", line 56, in <module>
+    kd, ptr, cand, score, nkeys = read_rankings(a.rankings); log(a.split, "rankings parsed", nkeys, "lines,", len(cand), "entries")
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code_ct/fw_ct_score.py", line 44, in read_rankings
+    with open(path) as f:
+         ^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: ''

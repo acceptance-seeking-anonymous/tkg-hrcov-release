@@ -1,0 +1,73 @@
+{
+ "latency_ratio_b1_p50": {
+  "tkgl-polecat": {
+   "HR": 2.019794168697512,
+   "HRCOV_PAT": 3.398109998772726
+  },
+  "tkgl-smallpedia": {
+   "HR": 2.4784044577330797,
+   "HRCOV_PAT": 3.42016852405545
+  }
+ },
+ "latency_ratio_batched_mean": {
+  "tkgl-polecat": {
+   "HR": 1.4832542627648082,
+   "HRCOV_PAT": 7.322467001737987
+  },
+  "tkgl-smallpedia": {
+   "HR": 3.06670113753878,
+   "HRCOV_PAT": 40.97776628748708
+  }
+ },
+ "_provenance": "derived in tables_v7.py from g6_latency_table.csv (b1: p50_ms; batched: mean_ms)",
+ "decomp": [
+  {
+   "label": "tkgl-polecat, CognTKE",
+   "G1_minus_RecB": 0.04902497101822614,
+   "HRCOV_minus_G1": 0.055751205814014826,
+   "HRCOV_minus_RecB": 0.10477617683224097,
+   "HR_minus_control": 0.007003128528594971,
+   "HRCOV_minus_HR": 0.002910822629928589
+  },
+  {
+   "label": "tkgl-polecat, TiRGN",
+   "G1_minus_RecB": 0.04902497101822614,
+   "HRCOV_minus_G1": 0.03413637397333069,
+   "HRCOV_minus_RecB": 0.08316134499155683,
+   "HR_minus_control": 0.034565847786931087,
+   "HRCOV_minus_HR": 0.012950289094755929
+  },
+  {
+   "label": "tkgl-polecat, LogCL (pilot)",
+   "G1_minus_RecB": 0.04902497101822614,
+   "HRCOV_minus_G1": 0.022557655442402513,
+   "HRCOV_minus_RecB": 0.07158262646062866,
+   "HR_minus_control": 0.02302453488253195,
+   "HRCOV_minus_HR": 0.0346983453994143
+  },
+  {
+   "label": "tkgl-smallpedia, TiRGN",
+   "G1_minus_RecB": 0.046510285558746256,
+   "HRCOV_minus_G1": 0.00732286227680512,
+   "HRCOV_minus_RecB": 0.053833147835551376,
+   "HR_minus_control": 0.02978652764621903,
+   "HRCOV_minus_HR": 0.001172768127503332
+  },
+  {
+   "label": "tkgl-smallpedia, RE-GCN (TGB config.)",
+   "G1_minus_RecB": 0.046510285558746256,
+   "HRCOV_minus_G1": 0.0074686484673341935,
+   "HRCOV_minus_RecB": 0.05397893402608045,
+   "HR_minus_control": 0.017194201333151304,
+   "HRCOV_minus_HR": 0.016428729132892506
+  }
+ ],
+ "hrcov_seed_sd": {
+  "polecat_tirgn": 0.0001040889417145484,
+  "polecat_logcl": 0.0002856143594113641,
+  "smallpedia_G3_pool_tirgn": 0.00032583314028987486,
+  "smallpedia_G3_pool_regcn_tgb": 0.0003511070455117325
+ },
+ "hrcov_seed_sd_max": 0.0003511070455117325,
+ "threshold_over_max_seed_sd": 14.24067122524581
+}

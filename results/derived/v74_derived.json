@@ -1,0 +1,22 @@
+{
+ "hrcov_minus_g1": 0.0558,
+ "blend_minus_g1": 0.0458,
+ "base_minus_g1": 0.0432,
+ "g1_share_of_gain_over_recb": 0.468,
+ "fifth_ratio": 0.209,
+ "blend_minus_base": 0.0027,
+ "pool_minus_base": 0.0022,
+ "harness_base": 0.323,
+ "harness_blend_minus_official": 0.0009,
+ "shares_pct": {
+  "head": 45.5,
+  "mid": 21.2,
+  "cold": 33.3,
+  "first_seen": 10.8,
+  "no_pair": 38.6,
+  "pool_absent": 40.1,
+  "unreached": 24.1
+ },
+ "fidelity_abs_diff": 0.0044,
+ "abstract_words": 250
+}

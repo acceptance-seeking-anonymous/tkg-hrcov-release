@@ -1,0 +1,74 @@
+panel,row,column,rebuilt,tex,match
+a,Frozen base (TiRGN),row label,Frozen base (TiRGN),Frozen base (TiRGN),True
+a,Frozen base (TiRGN),MRR,0.4115,0.4115,True
+a,Frozen base (TiRGN),H@1,0.2848,0.2848,True
+a,Frozen base (TiRGN),H@10,0.6686,0.6686,True
+a,Frozen base (TiRGN),ms/query batch size 1,0.537,0.537,True
+a,Frozen base (TiRGN),ms/query batched,0.018,0.018,True
+a,BASE$\oplus$RecB (reference),row label,BASE$\oplus$RecB (reference),BASE$\oplus$RecB (reference),True
+a,BASE$\oplus$RecB (reference),MRR,0.4380,0.4380,True
+a,BASE$\oplus$RecB (reference),H@1,0.3115,0.3115,True
+a,BASE$\oplus$RecB (reference),H@10,0.6912,0.6912,True
+a,BASE$\oplus$RecB (reference),ms/query batch size 1,0.984,0.984,True
+a,BASE$\oplus$RecB (reference),ms/query batched,0.109,0.109,True
+a,\HRCOV{},row label,\HRCOV{},\HRCOV{},True
+a,\HRCOV{},MRR,0.4501,0.4501,True
+a,\HRCOV{},H@1,0.3236,0.3236,True
+a,\HRCOV{},H@10,0.7044,0.7044,True
+a,\HRCOV{},ms/query batch size 1,2.321,2.321,True
+a,\HRCOV{},ms/query batched,0.629,0.629,True
+a,"SA (matched standalone, no base)",row label,"SA (matched standalone, no base)","SA (matched standalone, no base)",True
+a,"SA (matched standalone, no base)",MRR,0.4462,0.4462,True
+a,"SA (matched standalone, no base)",H@1,0.3195,0.3195,True
+a,"SA (matched standalone, no base)",H@10,0.7027,0.7027,True
+a,"SA (matched standalone, no base)",ms/query batch size 1,2.108,2.108,True
+a,"SA (matched standalone, no base)",ms/query batched,0.702,0.702,True
+a,"CountTRuCoLa, default configuration, $+$ base (blend)$^{\dagger}$",row label,"CountTRuCoLa, default configuration, $+$ base (blend)$^{\dagger}$","CountTRuCoLa, default configuration, $+$ base (blend)$^{\dagger}$",True
+a,"CountTRuCoLa, default configuration, $+$ base (blend)$^{\dagger}$",MRR,0.4142,0.4142,True
+a,"CountTRuCoLa, default configuration, $+$ base (blend)$^{\dagger}$",H@1,0.2824,0.2824,True
+a,"CountTRuCoLa, default configuration, $+$ base (blend)$^{\dagger}$",H@10,0.6772,0.6772,True
+a,"CountTRuCoLa, default configuration, $+$ base (blend)$^{\dagger}$",ms/query batch size 1,35.077,35.077,True
+a,"CountTRuCoLa, default configuration, $+$ base (blend)$^{\dagger}$",ms/query batched,10.057,10.057,True
+b,\HRCOV{} $-$ SA,row label,\HRCOV{} $-$ SA,\HRCOV{} $-$ SA,True
+b,\HRCOV{} $-$ SA,Delta MRR,+0.0039,+0.0039,True
+b,\HRCOV{} $-$ SA,query L,+0.0036,+0.0036,True
+b,\HRCOV{} $-$ SA,query U,+0.0042,+0.0042,True
+b,\HRCOV{} $-$ SA,ts-block L,+0.0027,+0.0027,True
+b,\HRCOV{} $-$ SA,ts-block U,+0.0053,+0.0053,True
+b,\HRCOV{} $-$ SA,Call,SMALL,SMALL,True
+b,\HRCOV{} $-$ CountTRuCoLa comparator$^{\dagger}$,row label,\HRCOV{} $-$ CountTRuCoLa comparator$^{\dagger}$,\HRCOV{} $-$ CountTRuCoLa comparator$^{\dagger}$,True
+b,\HRCOV{} $-$ CountTRuCoLa comparator$^{\dagger}$,Delta MRR,+0.0359,+0.0359,True
+b,\HRCOV{} $-$ CountTRuCoLa comparator$^{\dagger}$,query L,+0.0354,+0.0354,True
+b,\HRCOV{} $-$ CountTRuCoLa comparator$^{\dagger}$,query U,+0.0364,+0.0364,True
+b,\HRCOV{} $-$ CountTRuCoLa comparator$^{\dagger}$,ts-block L,+0.0343,+0.0343,True
+b,\HRCOV{} $-$ CountTRuCoLa comparator$^{\dagger}$,ts-block U,+0.0375,+0.0375,True
+b,\HRCOV{} $-$ CountTRuCoLa comparator$^{\dagger}$,Call,BEATS,BEATS,True
+b,\HRCOV{} $-$ BASE$\oplus$RecB,row label,\HRCOV{} $-$ BASE$\oplus$RecB,\HRCOV{} $-$ BASE$\oplus$RecB,True
+b,\HRCOV{} $-$ BASE$\oplus$RecB,Delta MRR,+0.0121,+0.0121,True
+b,\HRCOV{} $-$ BASE$\oplus$RecB,query L,+0.0118,+0.0118,True
+b,\HRCOV{} $-$ BASE$\oplus$RecB,query U,+0.0124,+0.0124,True
+b,\HRCOV{} $-$ BASE$\oplus$RecB,ts-block L,+0.0117,+0.0117,True
+b,\HRCOV{} $-$ BASE$\oplus$RecB,ts-block U,+0.0126,+0.0126,True
+b,\HRCOV{} $-$ BASE$\oplus$RecB,Call,(reference),(reference),True
+b,\HRCOV{} $-$ frozen base,row label,\HRCOV{} $-$ frozen base,\HRCOV{} $-$ frozen base,True
+b,\HRCOV{} $-$ frozen base,Delta MRR,+0.0387,+0.0387,True
+b,\HRCOV{} $-$ frozen base,query L,+0.0382,+0.0382,True
+b,\HRCOV{} $-$ frozen base,query U,+0.0391,+0.0391,True
+b,\HRCOV{} $-$ frozen base,ts-block L,+0.0368,+0.0368,True
+b,\HRCOV{} $-$ frozen base,ts-block U,+0.0403,+0.0403,True
+b,\HRCOV{} $-$ frozen base,Call,--,--,True
+footnote,test window,value,2026-03-01 to 2026-04-30,(present in TeX footnote),True
+footnote,test queries,value,"457,168",(present in TeX footnote),True
+footnote,test days,value,61,(present in TeX footnote),True
+footnote,entities,value,"1,209",(present in TeX footnote),True
+footnote,ranker seeds,value,0--2,(present in TeX footnote),True
+footnote,CT learning window,value,10,(present in TeX footnote),True
+footnote,blend a,value,0.1,(present in TeX footnote),True
+footnote,blend tau,value,0.5,(present in TeX footnote),True
+footnote,number of blends,value,52,(present in TeX footnote),True
+footnote,bootstrap B,value,2000,(present in TeX footnote),True
+footnote,shared draws,value,True,(present in TeX footnote),True
+footnote,latency slice size,value,"2,000",(present in TeX footnote),True
+footnote,latency repeats,value,five,(present in TeX footnote),True
+footnote,latency CPU threads,value,eight,(present in TeX footnote),True
+footnote,outcome,value,R4_OTHER,(present in TeX footnote),True

@@ -1,0 +1,6248 @@
+{
+ "generated": "2026-10-12",
+ "scripts": [
+  "profile_tkg.py",
+  "reach_tkg.py",
+  "reach_static.py"
+ ],
+ "definitions": {
+  "rec": "share of test facts whose (s,r,o) occurred at an earlier timestamp (Gastinger Rec)",
+  "drec": "(s,r,o) at the previous timestamp (Gastinger DRec)",
+  "pair_history_online": "unordered {s,o} co-occurred (any relation) before t",
+  "pair_history_trainval": "pair in train+valid (= harness hist=yes)",
+  "firstseen_entity_fact": "s or o has no fact before t (TransFIR 'emerging' triple)",
+  "gold_unseen_in_train": "query-level, both directions",
+  "cold_gold_lt50": "gold has <50 train facts (= harness cold)",
+  "hist_sr": "#earlier events with same (query entity, direction-specific relation)",
+  "hist_e": "#earlier facts of the query entity",
+  "reach_2hop": "s and o share a neighbour in history before t (untyped upper bound for bridge/path evidence)",
+  "recb_lite": "time-weighted frequency sum_k lam^(t-k), one global lam from {0.01,0.5,0.9,0.99,1.0} chosen on valid MRR; seen candidates above unseen; ties broken by train answer frequency for the relation, residual ties 1/2"
+ },
+ "validation_against_published": [
+  {
+   "dataset": "ICEWS14s",
+   "rec_ours": 0.5237,
+   "rec_published": 0.524,
+   "drec_ours": 0.1053,
+   "drec_published": 0.105,
+   "recb_ours": 0.3732,
+   "recb_published": 0.372,
+   "source": "Gastinger et al. IJCAI'24 Tab.1-2 (arXiv:2404.16726)",
+   "note": ""
+  },
+  {
+   "dataset": "ICEWS18",
+   "rec_ours": 0.5043,
+   "rec_published": 0.504,
+   "drec_ours": 0.1079,
+   "drec_published": 0.108,
+   "recb_ours": 0.2838,
+   "recb_published": 0.287,
+   "source": "Gastinger et al. IJCAI'24 Tab.1-2 (arXiv:2404.16726)",
+   "note": ""
+  },
+  {
+   "dataset": "GDELT",
+   "rec_ours": 0.6493,
+   "rec_published": 0.649,
+   "drec_ours": 0.0238,
+   "drec_published": 0.022,
+   "recb_ours": 0.2423,
+   "recb_published": 0.245,
+   "source": "Gastinger et al. IJCAI'24 Tab.1-2 (arXiv:2404.16726)",
+   "note": ""
+  },
+  {
+   "dataset": "YAGO",
+   "rec_ours": 0.9273,
+   "rec_published": 0.927,
+   "drec_ours": 0.9272,
+   "drec_published": 0.927,
+   "recb_ours": 0.9083,
+   "recb_published": 0.909,
+   "source": "Gastinger et al. IJCAI'24 Tab.1-2 (arXiv:2404.16726)",
+   "note": ""
+  },
+  {
+   "dataset": "WIKI",
+   "rec_ours": 0.8704,
+   "rec_published": 0.87,
+   "drec_ours": 0.8562,
+   "drec_published": 0.856,
+   "recb_ours": 0.8148,
+   "recb_published": 0.815,
+   "source": "Gastinger et al. IJCAI'24 Tab.1-2 (arXiv:2404.16726)",
+   "note": ""
+  },
+  {
+   "dataset": "tkgl-smallpedia",
+   "rec_ours": 0.7158,
+   "rec_published": 0.72,
+   "drec_ours": 0.7085,
+   "drec_published": 0.71,
+   "recb_ours": 0.6038,
+   "recb_published": 0.605,
+   "source": "TGB 2.0 Tab.1 + leaderboard RecB(train) (arXiv:2406.09639)",
+   "note": ""
+  },
+  {
+   "dataset": "tkgl-polecat",
+   "rec_ours": 0.4251,
+   "rec_published": 0.43,
+   "drec_ours": 0.0707,
+   "drec_published": 0.07,
+   "recb_ours": 0.1963,
+   "recb_published": 0.198,
+   "source": "TGB 2.0 Tab.1 + leaderboard RecB(train) (arXiv:2406.09639)",
+   "note": ""
+  },
+  {
+   "dataset": "tkgl-icews",
+   "rec_ours": 0.6294,
+   "rec_published": 0.63,
+   "drec_ours": 0.1138,
+   "drec_published": 0.11,
+   "recb_ours": 0.3026,
+   "recb_published": 0.211,
+   "source": "TGB 2.0 Tab.1 + leaderboard RecB(train) (arXiv:2406.09639)",
+   "note": "TGB RecB(train) on tkgl-icews used window=100 (TGB 2.0 Tab.8); ours uses full history"
+  },
+  {
+   "dataset": "tkgl-wikidata",
+   "rec_ours": 0.6092,
+   "rec_published": 0.61,
+   "drec_ours": 0.6072,
+   "drec_published": 0.61,
+   "recb_ours": 0.4877,
+   "recb_published": null,
+   "source": "TGB 2.0 Tab.1 + leaderboard RecB(train) (arXiv:2406.09639)",
+   "note": "TGB uses 1-vs-1k negatives; RecB not run (OOM/OOT)"
+  },
+  {
+   "dataset": "tkgl-smallpedia",
+   "split_counts_ours": [
+    387757,
+    81033,
+    81586
+   ],
+   "split_counts_published": [
+    387757,
+    81033,
+    81586
+   ],
+   "match": true,
+   "source": "arXiv:2509.09474 Tab.3"
+  },
+  {
+   "dataset": "tkgl-polecat",
+   "split_counts_ours": [
+    1246556,
+    266736,
+    266318
+   ],
+   "split_counts_published": [
+    1246556,
+    266736,
+    266318
+   ],
+   "match": true,
+   "source": "arXiv:2509.09474 Tab.3"
+  },
+  {
+   "dataset": "tkgl-icews",
+   "split_counts_ours": [
+    10861600,
+    2326157,
+    2325689
+   ],
+   "split_counts_published": [
+    10861600,
+    2326157,
+    2325689
+   ],
+   "match": true,
+   "source": "arXiv:2509.09474 Tab.3"
+  },
+  {
+   "dataset": "tkgl-wikidata",
+   "split_counts_ours": [
+    6982503,
+    1434950,
+    1438750
+   ],
+   "split_counts_published": [
+    6982503,
+    1434950,
+    1438750
+   ],
+   "match": true,
+   "source": "arXiv:2509.09474 Tab.3"
+  },
+  {
+   "dataset": "festival-concertp",
+   "split_counts_ours": [
+    83889,
+    5949,
+    5570
+   ],
+   "split_counts_published": [
+    83889,
+    5949,
+    5570
+   ],
+   "match": true,
+   "source": "arXiv:2609.24467 Tab.2"
+  },
+  {
+   "dataset": "festival-concertp",
+   "rec_ours": 0.2941,
+   "rec_published": 0.294,
+   "drec_ours": 0.0287,
+   "drec_published": 0.029,
+   "source": "arXiv:2609.24467 Tab.2"
+  },
+  {
+   "dataset": "ICEWS18 (harness)",
+   "cold_share_ours": 0.19994,
+   "cold_share_harness": 0.19994,
+   "hist_no_share_ours": 0.31569,
+   "hist_no_share_harness": 0.31569,
+   "source": "fulltest_baseline.json v07247bb1 strata"
+  },
+  {
+   "dataset": "GDELT (harness)",
+   "cold_share_ours": 0.01763,
+   "cold_share_harness": 0.01763,
+   "hist_no_share_ours": 0.10691,
+   "hist_no_share_harness": 0.10691,
+   "source": "fulltest_baseline.json v07247bb1 strata"
+  }
+ ],
+ "harness_reference": {
+  "ICEWS18": {
+   "base_MRR": {
+    "TiRGN": 0.337006,
+    "RE-GCN": 0.286905,
+    "LogCL": 0.287839
+   },
+   "recb_lite_MRR": 0.2837877581867232,
+   "tirgn_strata": {
+    "ALL": {
+     "share": 1.0,
+     "MRR": 0.337
+    },
+    "cold": {
+     "share": 0.1999,
+     "MRR": 0.119
+    },
+    "pool=in_top50|hist=yes": {
+     "share": 0.5992,
+     "MRR": 0.4921
+    },
+    "pool=in_top50|hist=no": {
+     "share": 0.1434,
+     "MRR": 0.2824
+    },
+    "pool=out_top50|hist=yes": {
+     "share": 0.0851,
+     "MRR": 0.009
+    },
+    "pool=out_top50|hist=no": {
+     "share": 0.1723,
+     "MRR": 0.005
+    }
+   },
+   "source": "fulltest_baseline.json v07247bb1"
+  },
+  "GDELT": {
+   "base_MRR": {
+    "TiRGN": 0.216701,
+    "RE-GCN": 0.197346,
+    "LogCL": 0.211389
+   },
+   "recb_lite_MRR": 0.24227558240262867,
+   "tirgn_strata": {
+    "ALL": {
+     "share": 1.0,
+     "MRR": 0.2167
+    },
+    "cold": {
+     "share": 0.0176,
+     "MRR": 0.0309
+    },
+    "pool=in_top50|hist=yes": {
+     "share": 0.6003,
+     "MRR": 0.3475
+    },
+    "pool=in_top50|hist=no": {
+     "share": 0.0227,
+     "MRR": 0.2382
+    },
+    "pool=out_top50|hist=yes": {
+     "share": 0.2928,
+     "MRR": 0.0081
+    },
+    "pool=out_top50|hist=no": {
+     "share": 0.0843,
+     "MRR": 0.004
+    }
+   },
+   "source": "fulltest_baseline.json v07247bb1"
+  }
+ },
+ "datasets": {
+  "ACLED-zero": {
+   "group": "zero-shot-relation",
+   "split": "zrLLM repo",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 621,
+    "relations_present": 23,
+    "timestamps": 31,
+    "train": 2118,
+    "valid": 931,
+    "test": 146
+   },
+   "recurrence": {
+    "rec": 0.3424657534246575,
+    "drec": 0.17123287671232876,
+    "rec_trainval": 0.0
+   },
+   "dyadic": {
+    "pair_history_online": 0.821917808219178,
+    "pair_history_trainval": 0.7808219178082192,
+    "no_pair_history_online": 0.17808219178082196
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.0,
+    "gold_unseen_in_train": 0.0,
+    "subject_unseen_fact": 0.0,
+    "object_unseen_fact": 0.0,
+    "any_unseen_fact": 0.0,
+    "firstseen_entity_fact": 0.0,
+    "unseen_share_of_test_entities": 0.0,
+    "test_facts_relation_unseen_in_train": 1.0
+   },
+   "cold_gold_lt50": 0.6335616438356164,
+   "history_length": {
+    "hist_sr": {
+     "mean": 0.9863013698630136,
+     "median": 0.0,
+     "p10": 0.0,
+     "p90": 3.0,
+     "share_zero": 0.5821917808219178
+    },
+    "hist_e": {
+     "mean": 64.25,
+     "median": 38.5,
+     "p10": 4.0,
+     "p90": 133.80000000000007,
+     "share_zero": 0.0
+    }
+   },
+   "relation_skew": {
+    "gini": 0.7269510784513846,
+    "top10pct_share": 0.5286384976525822,
+    "norm_entropy": 0.6718546626390131
+   },
+   "reachability": {
+    "pair_1hop": 0.821917808219178,
+    "reach_2hop": 0.9315068493150684,
+    "object_no_history": 0.0,
+    "subject_no_history": 0.0,
+    "no_pair_share": 0.1780821917808219,
+    "within_no_pair": {
+     "reach_2hop": 0.6153846153846154,
+     "has_history_unreachable_2hop": 0.38461538461538464,
+     "an_endpoint_has_no_history": 0.0
+    },
+    "self_loop_test_share": 0.0547945205479452
+   },
+   "recb_lite": {
+    "lambda_selected": 0.9,
+    "valid": {
+     "MRR": 0.7700706794201247,
+     "H1": 0.706766917293233,
+     "H3": 0.8168635875402793,
+     "H10": 0.8737916219119226,
+     "n": 1862
+    },
+    "test": {
+     "MRR": 0.33259353401032665,
+     "H1": 0.3184931506849315,
+     "H3": 0.3424657534246575,
+     "H10": 0.3424657534246575,
+     "n": 292
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.33259353041648865,
+     "0.5": 0.33259353041648865,
+     "0.9": 0.33259353041648865,
+     "0.99": 0.33259353041648865,
+     "1.0": 0.3333926200866699
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": null,
+      "no": {
+       "MRR": 0.33259353401032665,
+       "H1": 0.3184931506849315,
+       "H3": 0.3424657534246575,
+       "H10": 0.3424657534246575,
+       "n": 292
+      }
+     },
+     "query_unseen": {
+      "yes": null,
+      "no": {
+       "MRR": 0.33259353401032665,
+       "H1": 0.3184931506849315,
+       "H3": 0.3424657534246575,
+       "H10": 0.3424657534246575,
+       "n": 292
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.0032151663073717875,
+       "H1": 0.0,
+       "H3": 0.0,
+       "H10": 0.0,
+       "n": 192
+      },
+      "no": {
+       "MRR": 0.9649999999999999,
+       "H1": 0.93,
+       "H3": 1.0,
+       "H10": 1.0,
+       "n": 100
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.20563705813753624,
+       "H1": 0.1875,
+       "H3": 0.21875,
+       "H10": 0.21875,
+       "n": 64
+      },
+      "no": {
+       "MRR": 0.36823043951847834,
+       "H1": 0.35526315789473684,
+       "H3": 0.37719298245614036,
+       "H10": 0.37719298245614036,
+       "n": 228
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.0032154344032600504,
+       "H1": 0.0,
+       "H3": 0.0,
+       "H10": 0.0,
+       "n": 52
+      },
+      "no": {
+       "MRR": 0.4039587889251911,
+       "H1": 0.3875,
+       "H3": 0.4166666666666667,
+       "H10": 0.4166666666666667,
+       "n": 240
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.26090465041691097,
+       "H1": 0.24864864864864866,
+       "H3": 0.2702702702702703,
+       "H10": 0.2702702702702703,
+       "n": 185
+      },
+      "no": {
+       "MRR": 0.45654160377464353,
+       "H1": 0.4392523364485981,
+       "H3": 0.4672897196261682,
+       "H10": 0.4672897196261682,
+       "n": 107
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.0032154949992796726,
+       "H1": 0.0,
+       "H3": 0.0,
+       "H10": 0.0,
+       "n": 170
+      },
+      "no": {
+       "MRR": 0.7915629326322773,
+       "H1": 0.7622950819672131,
+       "H3": 0.819672131147541,
+       "H10": 0.819672131147541,
+       "n": 122
+      }
+     },
+     "fact_any_unseen": {
+      "yes": null,
+      "no": {
+       "MRR": 0.33259353401032665,
+       "H1": 0.3184931506849315,
+       "H3": 0.3424657534246575,
+       "H10": 0.3424657534246575,
+       "n": 292
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": null,
+      "no": {
+       "MRR": 0.33259353401032665,
+       "H1": 0.3184931506849315,
+       "H3": 0.3424657534246575,
+       "H10": 0.3424657534246575,
+       "n": 292
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.755,
+    "best_method": "CENET+zrLLM",
+    "deep": 0.693,
+    "deep_method": "RE-GCN",
+    "protocol_comparable": false
+   },
+   "meta": {
+    "group": "zero-shot-relation",
+    "split": "zrLLM repo"
+   }
+  },
+  "FinDKG-full": {
+   "group": "text-derived",
+   "split": "FinDKG repo",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 13637,
+    "relations_present": 15,
+    "timestamps": 261,
+    "train": 222732,
+    "valid": 9404,
+    "test": 10013
+   },
+   "recurrence": {
+    "rec": 0.47258563866972936,
+    "drec": 0.08788574852691501,
+    "rec_trainval": 0.4494157595126336
+   },
+   "dyadic": {
+    "pair_history_online": 0.6462598621791671,
+    "pair_history_trainval": 0.6173973834015779,
+    "no_pair_history_online": 0.3537401378208329
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.04833716168980325,
+    "gold_unseen_in_train": 0.04833716168980325,
+    "subject_unseen_fact": 0.05373015080395486,
+    "object_unseen_fact": 0.042944172575651654,
+    "any_unseen_fact": 0.08778587835813442,
+    "firstseen_entity_fact": 0.026765205233196844,
+    "unseen_share_of_test_entities": 0.08685121107266436,
+    "test_facts_relation_unseen_in_train": 0.0
+   },
+   "cold_gold_lt50": 0.3031558973334665,
+   "history_length": {
+    "hist_sr": {
+     "mean": 298.59048237291523,
+     "median": 32.0,
+     "p10": 1.0,
+     "p90": 739.0,
+     "share_zero": 0.0967741935483871
+    },
+    "hist_e": {
+     "mean": 1919.8833516428642,
+     "median": 265.0,
+     "p10": 9.0,
+     "p90": 6570.0,
+     "share_zero": 0.015130330570258664
+    }
+   },
+   "relation_skew": {
+    "gini": 0.5683503407681496,
+    "top10pct_share": 0.4729980301384685,
+    "norm_entropy": 0.7874960790994521
+   },
+   "reachability": {
+    "pair_1hop": 0.6462598621791671,
+    "reach_2hop": 0.9137121741735743,
+    "object_no_history": 0.011085588734644962,
+    "subject_no_history": 0.019175072405872365,
+    "no_pair_share": 0.3537401378208329,
+    "within_no_pair": {
+     "reach_2hop": 0.7560700169395822,
+     "has_history_unreachable_2hop": 0.16826651609260304,
+     "an_endpoint_has_no_history": 0.0756634669678148
+    },
+    "self_loop_test_share": 0.004893638270248676
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.2482949252291558,
+     "H1": 0.18417694598043385,
+     "H3": 0.2721714164185453,
+     "H10": 0.3714376860910251,
+     "n": 18808
+    },
+    "test": {
+     "MRR": 0.2662448957438205,
+     "H1": 0.19934085688604813,
+     "H3": 0.2924198541895536,
+     "H10": 0.39498651752721464,
+     "n": 20026
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.22488784790039062,
+     "0.5": 0.22791306674480438,
+     "0.9": 0.24546873569488525,
+     "0.99": 0.26624488830566406,
+     "1.0": 0.26229891180992126
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.06258450599680698,
+       "H1": 0.04648760330578512,
+       "H3": 0.07128099173553719,
+       "H10": 0.09504132231404959,
+       "n": 968
+      },
+      "no": {
+       "MRR": 0.2765892790618554,
+       "H1": 0.20710462797775211,
+       "H3": 0.30365200965473815,
+       "H10": 0.41022142932102007,
+       "n": 19058
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.14511901640236682,
+       "H1": 0.1115702479338843,
+       "H3": 0.1487603305785124,
+       "H10": 0.2190082644628099,
+       "n": 968
+      },
+      "no": {
+       "MRR": 0.2723971599479619,
+       "H1": 0.20379892958337706,
+       "H3": 0.2997166544233393,
+       "H10": 0.40392486095078184,
+       "n": 19058
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.023969956567022197,
+       "H1": 0.0045445938269267185,
+       "H3": 0.015811399356182542,
+       "H10": 0.05917439878810831,
+       "n": 10562
+      },
+      "no": {
+       "MRR": 0.5366282334007672,
+       "H1": 0.4167371090448014,
+       "H3": 0.6011200338123415,
+       "H10": 0.7697590870667794,
+       "n": 9464
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.0399265370227355,
+       "H1": 0.019707648133646567,
+       "H3": 0.03680501174628034,
+       "H10": 0.07556773688332029,
+       "n": 7662
+      },
+      "no": {
+       "MRR": 0.40649491713826835,
+       "H1": 0.31065998058880623,
+       "H3": 0.45082497573600777,
+       "H10": 0.5929310902620512,
+       "n": 12364
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.020995206033897006,
+       "H1": 0.004799548277809147,
+       "H3": 0.014963297571993224,
+       "H10": 0.04912478825522304,
+       "n": 7084
+      },
+      "no": {
+       "MRR": 0.4004860332731899,
+       "H1": 0.3058259928913615,
+       "H3": 0.44428990882398395,
+       "H10": 0.5842991809612116,
+       "n": 12942
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.08856766001207048,
+       "H1": 0.06160434854225004,
+       "H3": 0.09668917805962773,
+       "H10": 0.14379838576840717,
+       "n": 6071
+      },
+      "no": {
+       "MRR": 0.3435418142767803,
+       "H1": 0.25926191329272663,
+       "H3": 0.3775707631673235,
+       "H10": 0.5042637047653171,
+       "n": 13955
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.05928355727949269,
+       "H1": 0.023735810113519093,
+       "H3": 0.05933952528379773,
+       "H10": 0.13157894736842105,
+       "n": 1938
+      },
+      "no": {
+       "MRR": 0.2884193248649985,
+       "H1": 0.21815568332596197,
+       "H3": 0.31739274657231314,
+       "H10": 0.42320875718708534,
+       "n": 18088
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.10433445534758137,
+       "H1": 0.07792946530147896,
+       "H3": 0.11035267349260523,
+       "H10": 0.161547212741752,
+       "n": 1758
+      },
+      "no": {
+       "MRR": 0.2818261610282845,
+       "H1": 0.21102474271950952,
+       "H3": 0.3099408802277206,
+       "H10": 0.4174512809283994,
+       "n": 18268
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.022483625140709992,
+       "H1": 0.009328358208955223,
+       "H3": 0.020522388059701493,
+       "H10": 0.05037313432835821,
+       "n": 536
+      },
+      "no": {
+       "MRR": 0.27294864336020164,
+       "H1": 0.20456644433042587,
+       "H3": 0.2998973832734736,
+       "H10": 0.40446382760389943,
+       "n": 19490
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": null,
+   "meta": {
+    "group": "text-derived",
+    "split": "FinDKG repo"
+   }
+  },
+  "FinDKG": {
+   "group": "text-derived",
+   "split": "FinDKG repo",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 10670,
+    "relations_present": 15,
+    "timestamps": 126,
+    "train": 119549,
+    "valid": 11444,
+    "test": 13069
+   },
+   "recurrence": {
+    "rec": 0.3294819802586273,
+    "drec": 0.06060142321524217,
+    "rec_trainval": 0.28165888744356876
+   },
+   "dyadic": {
+    "pair_history_online": 0.49185094498431403,
+    "pair_history_trainval": 0.4230622082791338,
+    "no_pair_history_online": 0.508149055015686
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.14928456653148672,
+    "gold_unseen_in_train": 0.14928456653148672,
+    "subject_unseen_fact": 0.0929680924324738,
+    "object_unseen_fact": 0.20560104063049967,
+    "any_unseen_fact": 0.27201775193205296,
+    "firstseen_entity_fact": 0.07728211798913459,
+    "unseen_share_of_test_entities": 0.2721649484536082,
+    "test_facts_relation_unseen_in_train": 0.0
+   },
+   "cold_gold_lt50": 0.4786900298416099,
+   "history_length": {
+    "hist_sr": {
+     "mean": 166.35962965796924,
+     "median": 15.0,
+     "p10": 0.0,
+     "p90": 452.0,
+     "share_zero": 0.15819879103221363
+    },
+    "hist_e": {
+     "mean": 1083.2076287397658,
+     "median": 135.0,
+     "p10": 4.0,
+     "p90": 2995.0,
+     "share_zero": 0.0404392072844135
+    }
+   },
+   "relation_skew": {
+    "gini": 0.5705673020412507,
+    "top10pct_share": 0.4878941011508934,
+    "norm_entropy": 0.7864455796893421
+   },
+   "reachability": {
+    "pair_1hop": 0.49185094498431403,
+    "reach_2hop": 0.816206289693167,
+    "object_no_history": 0.049736016527660874,
+    "subject_no_history": 0.031142398041166117,
+    "no_pair_share": 0.508149055015686,
+    "within_no_pair": {
+     "reach_2hop": 0.6383074838126788,
+     "has_history_unreachable_2hop": 0.2096069868995633,
+     "an_endpoint_has_no_history": 0.15208552928775787
+    },
+    "self_loop_test_share": 0.006044838931823399
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.2179676554106065,
+     "H1": 0.1537486892694862,
+     "H3": 0.24248514505417687,
+     "H10": 0.34127053477804964,
+     "n": 22888
+    },
+    "test": {
+     "MRR": 0.18266275415571312,
+     "H1": 0.1256408294437218,
+     "H3": 0.20422373555742596,
+     "H10": 0.2913382814293366,
+     "n": 26138
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.159346804022789,
+     "0.5": 0.16413185000419617,
+     "0.9": 0.17842546105384827,
+     "0.99": 0.1826627552509308,
+     "1.0": 0.1799914687871933
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.03723596271182273,
+       "H1": 0.025884161968221426,
+       "H3": 0.04202972834443875,
+       "H10": 0.05689390056381343,
+       "n": 3902
+      },
+      "no": {
+       "MRR": 0.2081824222711143,
+       "H1": 0.14314624932541825,
+       "H3": 0.23268573484439647,
+       "H10": 0.33247886310487496,
+       "n": 22236
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.13706838534065086,
+       "H1": 0.09174782162993336,
+       "H3": 0.15479241414659148,
+       "H10": 0.22321886212198871,
+       "n": 3902
+      },
+      "no": {
+       "MRR": 0.1906637087840803,
+       "H1": 0.1315884151825868,
+       "H3": 0.21289800323799243,
+       "H10": 0.30329195898542904,
+       "n": 22236
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.03055814375922725,
+       "H1": 0.008958119365514093,
+       "H3": 0.029270797672030127,
+       "H10": 0.07012438662558484,
+       "n": 17526
+      },
+      "no": {
+       "MRR": 0.4922058802366247,
+       "H1": 0.3630980027868091,
+       "H3": 0.5602647468648397,
+       "H10": 0.7415234556432885,
+       "n": 8612
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.05337285660527942,
+       "H1": 0.028580901856763926,
+       "H3": 0.05669761273209549,
+       "H10": 0.09854111405835544,
+       "n": 15080
+      },
+      "no": {
+       "MRR": 0.3589777889776104,
+       "H1": 0.2580032555615844,
+       "H3": 0.40540784952070896,
+       "H10": 0.5542593597395551,
+       "n": 11058
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.02811911510156831,
+       "H1": 0.009260653516036742,
+       "H3": 0.02702906188826984,
+       "H10": 0.06234000903478392,
+       "n": 13282
+      },
+      "no": {
+       "MRR": 0.34232739431728376,
+       "H1": 0.24587741132545116,
+       "H3": 0.3872899813316739,
+       "H10": 0.5279247044181705,
+       "n": 12856
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.07705859489430422,
+       "H1": 0.05171035805626598,
+       "H3": 0.08695652173913043,
+       "H10": 0.1242007672634271,
+       "n": 12512
+      },
+      "no": {
+       "MRR": 0.2796331960079623,
+       "H1": 0.19352708058124174,
+       "H3": 0.31190371348891827,
+       "H10": 0.4448113899897255,
+       "n": 13626
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.07167882007290362,
+       "H1": 0.037484885126964934,
+       "H3": 0.08101571946795647,
+       "H10": 0.13494558645707377,
+       "n": 4135
+      },
+      "no": {
+       "MRR": 0.20351984489026828,
+       "H1": 0.14220788074353496,
+       "H3": 0.22737808480661728,
+       "H10": 0.3207289915011589,
+       "n": 22003
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.08721293185567759,
+       "H1": 0.057243319268635726,
+       "H3": 0.09859353023909986,
+       "H10": 0.14360056258790435,
+       "n": 7110
+      },
+      "no": {
+       "MRR": 0.21832852231596392,
+       "H1": 0.15119823418120665,
+       "H3": 0.24369350430943873,
+       "H10": 0.3465419381963422,
+       "n": 19028
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.04456094531723715,
+       "H1": 0.024257425742574258,
+       "H3": 0.05198019801980198,
+       "H10": 0.0801980198019802,
+       "n": 2020
+      },
+      "no": {
+       "MRR": 0.1942294534613654,
+       "H1": 0.13413218343146197,
+       "H3": 0.21697487353843603,
+       "H10": 0.3090223069906294,
+       "n": 24118
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": null,
+   "meta": {
+    "group": "text-derived",
+    "split": "FinDKG repo"
+   }
+  },
+  "GDELT": {
+   "group": "reference",
+   "split": "RE-GCN",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 7691,
+    "relations_present": 240,
+    "timestamps": 2751,
+    "train": 1734399,
+    "valid": 238765,
+    "test": 305241
+   },
+   "recurrence": {
+    "rec": 0.6492541958649067,
+    "drec": 0.023840178744008834,
+    "rec_trainval": 0.5620739022608365
+   },
+   "dyadic": {
+    "pair_history_online": 0.9177338561988724,
+    "pair_history_trainval": 0.8930910329870496,
+    "no_pair_history_online": 0.08226614380112762
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.001251470149816047,
+    "gold_unseen_in_train": 0.001251470149816047,
+    "subject_unseen_fact": 0.001359581445480784,
+    "object_unseen_fact": 0.00114335885415131,
+    "any_unseen_fact": 0.0024996641997634657,
+    "firstseen_entity_fact": 0.0015921845361534,
+    "unseen_share_of_test_entities": 0.07302275189599133,
+    "test_facts_relation_unseen_in_train": 3.2760998686283953e-06
+   },
+   "cold_gold_lt50": 0.017633607542892338,
+   "history_length": {
+    "hist_sr": {
+     "mean": 1059.8288581809127,
+     "median": 157.0,
+     "p10": 6.0,
+     "p90": 2273.0,
+     "share_zero": 0.028007377776904152
+    },
+    "hist_e": {
+     "mean": 48421.913419232675,
+     "median": 10582.0,
+     "p10": 689.0,
+     "p90": 92454.0,
+     "share_zero": 0.0007977303180110143
+    }
+   },
+   "relation_skew": {
+    "gini": 0.8607027705053901,
+    "top10pct_share": 0.7936552105529965,
+    "norm_entropy": 0.6828621698432804
+   },
+   "reachability": {
+    "pair_1hop": 0.9177338561988724,
+    "reach_2hop": 0.9977231105913033,
+    "object_no_history": 0.0006847048725433346,
+    "subject_no_history": 0.0009107557634786939,
+    "no_pair_share": 0.08226614380112764,
+    "within_no_pair": {
+     "reach_2hop": 0.9723228863844531,
+     "has_history_unreachable_2hop": 0.008323045677193263,
+     "an_endpoint_has_no_history": 0.01935406793835371
+    },
+    "self_loop_test_share": 0.0
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.24846494828751395,
+     "H1": 0.16866793709295752,
+     "H3": 0.27213787615437773,
+     "H10": 0.40489602747471365,
+     "n": 477530
+    },
+    "test": {
+     "MRR": 0.24227558240262867,
+     "H1": 0.16367722553654326,
+     "H3": 0.26551970410265985,
+     "H10": 0.39429991383857343,
+     "n": 610482
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.21484775841236115,
+     "0.5": 0.21268557012081146,
+     "0.9": 0.2212684005498886,
+     "0.99": 0.24227556586265564,
+     "1.0": 0.21752505004405975
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.10689696839257921,
+       "H1": 0.08507853403141362,
+       "H3": 0.12172774869109948,
+       "H10": 0.14659685863874344,
+       "n": 764
+      },
+      "no": {
+       "MRR": 0.24244521698960772,
+       "H1": 0.1637757127065299,
+       "H3": 0.2656998809285604,
+       "H10": 0.3946102952512473,
+       "n": 609718
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.25032007129950173,
+       "H1": 0.2094240837696335,
+       "H3": 0.25523560209424084,
+       "H10": 0.3193717277486911,
+       "n": 764
+      },
+      "no": {
+       "MRR": 0.24226550235001876,
+       "H1": 0.16361990297153767,
+       "H3": 0.26553259047625294,
+       "H10": 0.39439380172473176,
+       "n": 609718
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.025086253475940953,
+       "H1": 0.005608899516168202,
+       "H3": 0.016317647718144628,
+       "H10": 0.04930320748725038,
+       "n": 214124
+      },
+      "no": {
+       "MRR": 0.35960750926445073,
+       "H1": 0.24907028494441893,
+       "H3": 0.40014582776177093,
+       "H10": 0.5806770646738555,
+       "n": 396358
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.12747593592194242,
+       "H1": 0.09723286243986148,
+       "H3": 0.13722305641528515,
+       "H10": 0.17586492201146078,
+       "n": 65266
+      },
+      "no": {
+       "MRR": 0.2560178675285392,
+       "H1": 0.17163105998356615,
+       "H3": 0.2808776705012325,
+       "H10": 0.42044804261063506,
+       "n": 545216
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.015375328990567858,
+       "H1": 0.0035243518776631754,
+       "H3": 0.009637210784118513,
+       "H10": 0.028254549798892914,
+       "n": 50222
+      },
+      "no": {
+       "MRR": 0.26261504002384123,
+       "H1": 0.17803341305822296,
+       "H3": 0.2884571448970121,
+       "H10": 0.4271124120943848,
+       "n": 560260
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.12013687015598662,
+       "H1": 0.08666976312122619,
+       "H3": 0.13562470970738505,
+       "H10": 0.1849512308406874,
+       "n": 10765
+      },
+      "no": {
+       "MRR": 0.24446798854975324,
+       "H1": 0.1650595197401441,
+       "H3": 0.2678513365470714,
+       "H10": 0.3980577505723533,
+       "n": 599717
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.11774778936374908,
+       "H1": 0.06913089250204703,
+       "H3": 0.12048192771084337,
+       "H10": 0.20598900456193706,
+       "n": 17098
+      },
+      "no": {
+       "MRR": 0.24586377521770084,
+       "H1": 0.166401520769013,
+       "H3": 0.26969887964623246,
+       "H10": 0.3997259784557723,
+       "n": 593384
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.17884228611214514,
+       "H1": 0.1474442988204456,
+       "H3": 0.18872870249017037,
+       "H10": 0.23328964613368283,
+       "n": 1526
+      },
+      "no": {
+       "MRR": 0.24243454168727208,
+       "H1": 0.1637179040850242,
+       "H3": 0.26571213683747263,
+       "H10": 0.3947033940054782,
+       "n": 608956
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.04887521410134064,
+       "H1": 0.0257201646090535,
+       "H3": 0.050411522633744855,
+       "H10": 0.0874485596707819,
+       "n": 972
+      },
+      "no": {
+       "MRR": 0.24258400254009788,
+       "H1": 0.16389722892159275,
+       "H3": 0.265862742202753,
+       "H10": 0.39478925694410266,
+       "n": 609510
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.2658,
+    "best_method": "HisRES; CHE-TKG preprint 0.2738",
+    "deep": 0.2167,
+    "deep_method": "TiRGN",
+    "protocol_comparable": true
+   },
+   "meta": {
+    "group": "reference",
+    "split": "RE-GCN"
+   },
+   "headroom": {
+    "best_minus_recb_lite": 0.02352441759737131,
+    "deep_minus_recb_lite": -0.025575582402628666
+   }
+  },
+  "ICEWS05-15": {
+   "group": "reference",
+   "split": "RE-GCN",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 10488,
+    "relations_present": 251,
+    "timestamps": 4017,
+    "train": 368868,
+    "valid": 46302,
+    "test": 46159
+   },
+   "recurrence": {
+    "rec": 0.683875300591434,
+    "drec": 0.12736411100760414,
+    "rec_trainval": 0.6017678025953769
+   },
+   "dyadic": {
+    "pair_history_online": 0.8625620139084469,
+    "pair_history_trainval": 0.8053034077861305,
+    "no_pair_history_online": 0.1374379860915531
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.052091683095387684,
+    "gold_unseen_in_train": 0.052091683095387684,
+    "subject_unseen_fact": 0.06399618709244134,
+    "object_unseen_fact": 0.04018717909833402,
+    "any_unseen_fact": 0.09911393227756234,
+    "firstseen_entity_fact": 0.010637145518750406,
+    "unseen_share_of_test_entities": 0.1897590361445783,
+    "test_facts_relation_unseen_in_train": 6.499274247709005e-05
+   },
+   "cold_gold_lt50": 0.15277627331614638,
+   "history_length": {
+    "hist_sr": {
+     "mean": 410.5902965835482,
+     "median": 65.0,
+     "p10": 1.0,
+     "p90": 1219.0,
+     "share_zero": 0.07950778829697351
+    },
+    "hist_e": {
+     "mean": 8099.74418856561,
+     "median": 1595.5,
+     "p10": 46.0,
+     "p90": 28659.0,
+     "share_zero": 0.0053943976255984745
+    }
+   },
+   "relation_skew": {
+    "gini": 0.8942348521760434,
+    "top10pct_share": 0.8754684834467376,
+    "norm_entropy": 0.6208714309779856
+   },
+   "reachability": {
+    "pair_1hop": 0.8625620139084469,
+    "reach_2hop": 0.9750861153837821,
+    "object_no_history": 0.005264412140644294,
+    "subject_no_history": 0.005524383110552655,
+    "no_pair_share": 0.1374379860915531,
+    "within_no_pair": {
+     "reach_2hop": 0.8187263556116016,
+     "has_history_unreachable_2hop": 0.10387767969735183,
+     "an_endpoint_has_no_history": 0.07739596469104666
+    },
+    "self_loop_test_share": 2.1664247492363353e-05
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.4443741654493471,
+     "H1": 0.3517342663383871,
+     "H3": 0.4963500496738802,
+     "H10": 0.6166580277309835,
+     "n": 92604
+    },
+    "test": {
+     "MRR": 0.44553536181562176,
+     "H1": 0.35195736476093503,
+     "H3": 0.49784440737450986,
+     "H10": 0.6213631144522195,
+     "n": 92318
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.43608278036117554,
+     "0.5": 0.43808630108833313,
+     "0.9": 0.4419540464878082,
+     "0.99": 0.4455353617668152,
+     "1.0": 0.41191062331199646
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.17496700098533627,
+       "H1": 0.12954876273653565,
+       "H3": 0.19629860677895614,
+       "H10": 0.27386150966936995,
+       "n": 4809
+      },
+      "no": {
+       "MRR": 0.46040426955348684,
+       "H1": 0.3641796843753214,
+       "H3": 0.5144156601035322,
+       "H10": 0.64045983841662,
+       "n": 87509
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.32562380223675746,
+       "H1": 0.26699937616968183,
+       "H3": 0.35288001663547514,
+       "H10": 0.4289873154501975,
+       "n": 4809
+      },
+      "no": {
+       "MRR": 0.45212502333631965,
+       "H1": 0.35662617559336757,
+       "H3": 0.505810830885966,
+       "H10": 0.6319350009713287,
+       "n": 87509
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.032691607674110924,
+       "H1": 0.008429276315789474,
+       "H3": 0.02456825657894737,
+       "H10": 0.07798793859649122,
+       "n": 29184
+      },
+      "no": {
+       "MRR": 0.6363744045004802,
+       "H1": 0.5107549022713593,
+       "H3": 0.7166186207115025,
+       "H10": 0.8725409446573954,
+       "n": 63134
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.13951818606086955,
+       "H1": 0.10231445421163904,
+       "H3": 0.14843663068877266,
+       "H10": 0.21086013130076778,
+       "n": 17974
+      },
+      "no": {
+       "MRR": 0.51952052157318,
+       "H1": 0.4123130313138922,
+       "H3": 0.5823200258258905,
+       "H10": 0.7206095986226192,
+       "n": 74344
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.026005867052457454,
+       "H1": 0.0074873896595208074,
+       "H3": 0.01978247162673392,
+       "H10": 0.059505044136191676,
+       "n": 12688
+      },
+      "no": {
+       "MRR": 0.5123819049470423,
+       "H1": 0.4068441542132362,
+       "H3": 0.5740173301519528,
+       "H10": 0.710887856335552,
+       "n": 79630
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.18571895408923153,
+       "H1": 0.1349262620533182,
+       "H3": 0.2139818491208168,
+       "H10": 0.28736528644356213,
+       "n": 14104
+      },
+      "no": {
+       "MRR": 0.49238695634566765,
+       "H1": 0.39109366609558394,
+       "H3": 0.5490321425831692,
+       "H10": 0.6815915309279669,
+       "n": 78214
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.07430694509102354,
+       "H1": 0.032833787465940054,
+       "H3": 0.0720708446866485,
+       "H10": 0.158991825613079,
+       "n": 7340
+      },
+      "no": {
+       "MRR": 0.47760032661543517,
+       "H1": 0.37952175857280707,
+       "H3": 0.5346207253642119,
+       "H10": 0.6613005719127304,
+       "n": 84978
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.25267780475456325,
+       "H1": 0.1994535519125683,
+       "H3": 0.2768306010928962,
+       "H10": 0.3571584699453552,
+       "n": 9150
+      },
+      "no": {
+       "MRR": 0.4667532178072133,
+       "H1": 0.36873557137360524,
+       "H3": 0.5221599653712966,
+       "H10": 0.6504304540207773,
+       "n": 83168
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.030751405278604593,
+       "H1": 0.012219959266802444,
+       "H3": 0.031568228105906315,
+       "H10": 0.06313645621181263,
+       "n": 982
+      },
+      "no": {
+       "MRR": 0.4499949160474618,
+       "H1": 0.35561005518087063,
+       "H3": 0.5028575808005605,
+       "H10": 0.6273648944556364,
+       "n": 91336
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.5907,
+    "best_method": "HisRES; CHE-TKG preprint 0.6037",
+    "deep": 0.5004,
+    "deep_method": "TiRGN",
+    "protocol_comparable": true
+   },
+   "meta": {
+    "group": "reference",
+    "split": "RE-GCN"
+   },
+   "headroom": {
+    "best_minus_recb_lite": 0.14516463818437825,
+    "deep_minus_recb_lite": 0.0548646381843782
+   }
+  },
+  "ICEWS14s": {
+   "group": "reference",
+   "split": "RE-GCN",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 7128,
+    "relations_present": 230,
+    "timestamps": 365,
+    "train": 74845,
+    "valid": 8514,
+    "test": 7371
+   },
+   "recurrence": {
+    "rec": 0.5236738570071904,
+    "drec": 0.10527743861077195,
+    "rec_trainval": 0.4436304436304436
+   },
+   "dyadic": {
+    "pair_history_online": 0.7433184099850767,
+    "pair_history_trainval": 0.6905440238773572,
+    "no_pair_history_online": 0.2566815900149233
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.029982363315696647,
+    "gold_unseen_in_train": 0.029982363315696647,
+    "subject_unseen_fact": 0.030525030525030524,
+    "object_unseen_fact": 0.029439696106362774,
+    "any_unseen_fact": 0.0564373897707231,
+    "firstseen_entity_fact": 0.037715371048704385,
+    "unseen_share_of_test_entities": 0.12344497607655502,
+    "test_facts_relation_unseen_in_train": 0.000271333604666938
+   },
+   "cold_gold_lt50": 0.28177994844661514,
+   "history_length": {
+    "hist_sr": {
+     "mean": 56.509496676163344,
+     "median": 10.0,
+     "p10": 0.0,
+     "p90": 155.0,
+     "share_zero": 0.17188983855650522
+    },
+    "hist_e": {
+     "mean": 966.3196309862976,
+     "median": 255.0,
+     "p10": 9.0,
+     "p90": 3003.0,
+     "share_zero": 0.02021435354768688
+    }
+   },
+   "relation_skew": {
+    "gini": 0.8838779177588545,
+    "top10pct_share": 0.8473492780778132,
+    "norm_entropy": 0.631946414783803
+   },
+   "reachability": {
+    "pair_1hop": 0.7433184099850767,
+    "reach_2hop": 0.9185999185999186,
+    "object_no_history": 0.019671686338353006,
+    "subject_no_history": 0.020757020757020756,
+    "no_pair_share": 0.25668159001492336,
+    "within_no_pair": {
+     "reach_2hop": 0.6828752642706131,
+     "has_history_unreachable_2hop": 0.17019027484143764,
+     "an_endpoint_has_no_history": 0.14693446088794926
+    },
+    "self_loop_test_share": 0.0
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.3855333650409421,
+     "H1": 0.3038524782710829,
+     "H3": 0.428646934460888,
+     "H10": 0.5345900869156683,
+     "n": 17028
+    },
+    "test": {
+     "MRR": 0.37321343669557655,
+     "H1": 0.29446479446479445,
+     "H3": 0.4142585809252476,
+     "H10": 0.5219101885768552,
+     "n": 14742
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.369055837392807,
+     "0.5": 0.36799758672714233,
+     "0.9": 0.3716179132461548,
+     "0.99": 0.37321344017982483,
+     "1.0": 0.3634418845176697
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.07493268900535495,
+       "H1": 0.06787330316742081,
+       "H3": 0.07918552036199095,
+       "H10": 0.083710407239819,
+       "n": 442
+      },
+      "no": {
+       "MRR": 0.38243302344236524,
+       "H1": 0.3014685314685315,
+       "H3": 0.4246153846153846,
+       "H10": 0.5354545454545454,
+       "n": 14300
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.1339970851204853,
+       "H1": 0.1085972850678733,
+       "H3": 0.13122171945701358,
+       "H10": 0.18099547511312217,
+       "n": 442
+      },
+      "no": {
+       "MRR": 0.3806073966533521,
+       "H1": 0.3002097902097902,
+       "H3": 0.423006993006993,
+       "H10": 0.5324475524475525,
+       "n": 14300
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.03954744189184599,
+       "H1": 0.011250356023924808,
+       "H3": 0.033608658501851324,
+       "H10": 0.08986043862147536,
+       "n": 7022
+      },
+      "no": {
+       "MRR": 0.6767111848188662,
+       "H1": 0.5520725388601037,
+       "H3": 0.7604922279792746,
+       "H10": 0.9148963730569948,
+       "n": 7720
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.10816985018414721,
+       "H1": 0.07650153441473038,
+       "H3": 0.11135466900482245,
+       "H10": 0.16155195089872862,
+       "n": 4562
+      },
+      "no": {
+       "MRR": 0.49198837202614054,
+       "H1": 0.39214145383104126,
+       "H3": 0.55,
+       "H10": 0.6833988212180746,
+       "n": 10180
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.027377070030577495,
+       "H1": 0.007399577167019027,
+       "H3": 0.021141649048625793,
+       "H10": 0.05708245243128964,
+       "n": 3784
+      },
+      "no": {
+       "MRR": 0.4926371281958829,
+       "H1": 0.39359372148202226,
+       "H3": 0.5500091257528746,
+       "H10": 0.682423799963497,
+       "n": 10958
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.14489548169317698,
+       "H1": 0.10327395281656235,
+       "H3": 0.1629754453538758,
+       "H10": 0.2294174289841117,
+       "n": 4154
+      },
+      "no": {
+       "MRR": 0.46278963475753043,
+       "H1": 0.3694748772194938,
+       "H3": 0.5128447298828863,
+       "H10": 0.6366641480921799,
+       "n": 10588
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.07000863013685783,
+       "H1": 0.030781373322809787,
+       "H3": 0.07221783741120757,
+       "H10": 0.13891081294396213,
+       "n": 2534
+      },
+      "no": {
+       "MRR": 0.4361492967725583,
+       "H1": 0.349197247706422,
+       "H3": 0.48525557011795545,
+       "H10": 0.6014089121887287,
+       "n": 12208
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.10857643460074302,
+       "H1": 0.09134615384615384,
+       "H3": 0.109375,
+       "H10": 0.13822115384615385,
+       "n": 832
+      },
+      "no": {
+       "MRR": 0.38904219196106193,
+       "H1": 0.3066139468008627,
+       "H3": 0.43249460819554275,
+       "H10": 0.5448598130841121,
+       "n": 13910
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.02547839618018859,
+       "H1": 0.012589928057553957,
+       "H3": 0.023381294964028777,
+       "H10": 0.046762589928057555,
+       "n": 556
+      },
+      "no": {
+       "MRR": 0.38684241473917985,
+       "H1": 0.30551247709008883,
+       "H3": 0.4295784576342873,
+       "H10": 0.5405329197800649,
+       "n": 14186
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.5084,
+    "best_method": "SRM-LLM (peer-reviewed); CHE-TKG preprint 0.5191",
+    "deep": 0.4404,
+    "deep_method": "TiRGN",
+    "protocol_comparable": true
+   },
+   "meta": {
+    "group": "reference",
+    "split": "RE-GCN"
+   },
+   "headroom": {
+    "best_minus_recb_lite": 0.1351865633044234,
+    "deep_minus_recb_lite": 0.06718656330442346
+   }
+  },
+  "ICEWS18": {
+   "group": "reference",
+   "split": "RE-GCN",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 23033,
+    "relations_present": 256,
+    "timestamps": 304,
+    "train": 373018,
+    "valid": 45995,
+    "test": 49545
+   },
+   "recurrence": {
+    "rec": 0.5042890301745887,
+    "drec": 0.10786154001412857,
+    "rec_trainval": 0.4431123221313957
+   },
+   "dyadic": {
+    "pair_history_online": 0.7378544757291351,
+    "pair_history_trainval": 0.6843071954788577,
+    "no_pair_history_online": 0.2621455242708649
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.020435967302452316,
+    "gold_unseen_in_train": 0.020435967302452316,
+    "subject_unseen_fact": 0.02119285498032092,
+    "object_unseen_fact": 0.019679079624583713,
+    "any_unseen_fact": 0.039317791906347765,
+    "firstseen_entity_fact": 0.027631446160056514,
+    "unseen_share_of_test_entities": 0.13829916292611913,
+    "test_facts_relation_unseen_in_train": 0.00014128569986880614
+   },
+   "cold_gold_lt50": 0.1999394489857705,
+   "history_length": {
+    "hist_sr": {
+     "mean": 183.0002018367141,
+     "median": 25.0,
+     "p10": 0.0,
+     "p90": 412.0,
+     "share_zero": 0.1282268644666465
+    },
+    "hist_e": {
+     "mean": 3183.4528004844083,
+     "median": 649.0,
+     "p10": 18.0,
+     "p90": 13054.0,
+     "share_zero": 0.014158845493995358
+    }
+   },
+   "relation_skew": {
+    "gini": 0.8892260436541474,
+    "top10pct_share": 0.8651308909462649,
+    "norm_entropy": 0.6283598535289092
+   },
+   "reachability": {
+    "pair_1hop": 0.7378544757291351,
+    "reach_2hop": 0.9390251286709053,
+    "object_no_history": 0.013240488444848118,
+    "subject_no_history": 0.015077202543142598,
+    "no_pair_share": 0.26214552427086485,
+    "within_no_pair": {
+     "reach_2hop": 0.7674006775485063,
+     "has_history_unreachable_2hop": 0.12719433323067447,
+     "an_endpoint_has_no_history": 0.10540498922081921
+    },
+    "self_loop_test_share": 0.0
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.28918327357643764,
+     "H1": 0.20785954995108163,
+     "H3": 0.32616588759647785,
+     "H10": 0.4461571909990216,
+     "n": 91990
+    },
+    "test": {
+     "MRR": 0.2837877581867232,
+     "H1": 0.20387526491068725,
+     "H3": 0.3201433040670098,
+     "H10": 0.43637097588051266,
+     "n": 99090
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.2674228549003601,
+     "0.5": 0.2669789493083954,
+     "0.9": 0.27599644660949707,
+     "0.99": 0.28378772735595703,
+     "1.0": 0.2757584750652313
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.04038400390246639,
+       "H1": 0.03111111111111111,
+       "H3": 0.044938271604938275,
+       "H10": 0.056790123456790124,
+       "n": 2025
+      },
+      "no": {
+       "MRR": 0.2888657224624726,
+       "H1": 0.207479524030289,
+       "H3": 0.32588471642713646,
+       "H10": 0.44428990882398395,
+       "n": 97065
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.10045453697548248,
+       "H1": 0.07901234567901234,
+       "H3": 0.09925925925925926,
+       "H10": 0.13580246913580246,
+       "n": 2025
+      },
+      "no": {
+       "MRR": 0.2876125124539953,
+       "H1": 0.20648019368464432,
+       "H3": 0.324751455210426,
+       "H10": 0.4426415288724051,
+       "n": 97065
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.028975950056439746,
+       "H1": 0.009527687296416938,
+       "H3": 0.02276058631921824,
+       "H10": 0.05934446254071661,
+       "n": 49120
+      },
+      "no": {
+       "MRR": 0.5342651649379644,
+       "H1": 0.3949169501701021,
+       "H3": 0.612467480488293,
+       "H10": 0.8069841905143086,
+       "n": 49970
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.08119038817350155,
+       "H1": 0.055495172942906464,
+       "H3": 0.084521450035164,
+       "H10": 0.1241928265456173,
+       "n": 31282
+      },
+      "no": {
+       "MRR": 0.3772524073247836,
+       "H1": 0.2723277489381784,
+       "H3": 0.4288432043416706,
+       "H10": 0.580388744690892,
+       "n": 67808
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.020783887600530328,
+       "H1": 0.007891900215583615,
+       "H3": 0.015283338466276563,
+       "H10": 0.03957499230058516,
+       "n": 25976
+      },
+      "no": {
+       "MRR": 0.3772279822525238,
+       "H1": 0.2735043904040266,
+       "H3": 0.4284541948190497,
+       "H10": 0.5773449681319583,
+       "n": 73114
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.0909234554368768,
+       "H1": 0.06223500908540278,
+       "H3": 0.1041288108217242,
+       "H10": 0.14622451039773873,
+       "n": 19812
+      },
+      "no": {
+       "MRR": 0.33198558817839746,
+       "H1": 0.2392719291606751,
+       "H3": 0.3741264915865688,
+       "H10": 0.5088801432932213,
+       "n": 79278
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.06427968976670652,
+       "H1": 0.03636077443727373,
+       "H3": 0.06367070675271526,
+       "H10": 0.11451282858492051,
+       "n": 12706
+      },
+      "no": {
+       "MRR": 0.3160746344293692,
+       "H1": 0.22851453972957955,
+       "H3": 0.3578671976291906,
+       "H10": 0.4837122615299129,
+       "n": 86384
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.06917899668556284,
+       "H1": 0.053388090349075976,
+       "H3": 0.07084188911704312,
+       "H10": 0.0959958932238193,
+       "n": 3896
+      },
+      "no": {
+       "MRR": 0.29257104006172074,
+       "H1": 0.21003424585583125,
+       "H3": 0.3303464504065382,
+       "H10": 0.45030148958968,
+       "n": 95194
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.022227905469848774,
+       "H1": 0.012783053323593864,
+       "H3": 0.019722425127830533,
+       "H10": 0.03907962016070124,
+       "n": 2738
+      },
+      "no": {
+       "MRR": 0.29122041009575256,
+       "H1": 0.20930546330122882,
+       "H3": 0.3286802557289937,
+       "H10": 0.4476606609099967,
+       "n": 96352
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.3769,
+    "best_method": "HisRES (ICDE'25); CHE-TKG preprint 0.3877",
+    "deep": 0.3366,
+    "deep_method": "TiRGN",
+    "protocol_comparable": true
+   },
+   "meta": {
+    "group": "reference",
+    "split": "RE-GCN"
+   },
+   "headroom": {
+    "best_minus_recb_lite": 0.09311224181327682,
+    "deep_minus_recb_lite": 0.05281224181327682
+   }
+  },
+  "ICEWS21-zero": {
+   "group": "zero-shot-relation",
+   "split": "zrLLM repo",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 18205,
+    "relations_present": 253,
+    "timestamps": 243,
+    "train": 247764,
+    "valid": 77195,
+    "test": 1395
+   },
+   "recurrence": {
+    "rec": 0.12043010752688173,
+    "drec": 0.06379928315412187,
+    "rec_trainval": 0.0
+   },
+   "dyadic": {
+    "pair_history_online": 0.7505376344086021,
+    "pair_history_trainval": 0.7985663082437277,
+    "no_pair_history_online": 0.2494623655913979
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.0,
+    "gold_unseen_in_train": 0.0,
+    "subject_unseen_fact": 0.0,
+    "object_unseen_fact": 0.0,
+    "any_unseen_fact": 0.0,
+    "firstseen_entity_fact": 0.0,
+    "unseen_share_of_test_entities": 0.0,
+    "test_facts_relation_unseen_in_train": 1.0
+   },
+   "cold_gold_lt50": 0.1985663082437276,
+   "history_length": {
+    "hist_sr": {
+     "mean": 0.432258064516129,
+     "median": 0.0,
+     "p10": 0.0,
+     "p90": 1.0,
+     "share_zero": 0.7874551971326165
+    },
+    "hist_e": {
+     "mean": 2039.6304659498207,
+     "median": 513.0,
+     "p10": 23.0,
+     "p90": 5604.5,
+     "share_zero": 0.0
+    }
+   },
+   "relation_skew": {
+    "gini": 0.8976649449816624,
+    "top10pct_share": 0.858086617599294,
+    "norm_entropy": 0.6215868916301015
+   },
+   "reachability": {
+    "pair_1hop": 0.7505376344086021,
+    "reach_2hop": 0.9648745519713262,
+    "object_no_history": 0.0,
+    "subject_no_history": 0.0,
+    "no_pair_share": 0.24946236559139784,
+    "within_no_pair": {
+     "reach_2hop": 0.8591954022988506,
+     "has_history_unreachable_2hop": 0.14080459770114942,
+     "an_endpoint_has_no_history": 0.0
+    },
+    "self_loop_test_share": 0.0
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.28840572907527234,
+     "H1": 0.20981928881404235,
+     "H3": 0.3253513828615843,
+     "H10": 0.4362782563637541,
+     "n": 154390
+    },
+    "test": {
+     "MRR": 0.11274397611005861,
+     "H1": 0.1043010752688172,
+     "H3": 0.11899641577060932,
+     "H10": 0.12043010752688173,
+     "n": 2790
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.11310241371393204,
+     "0.5": 0.11310241371393204,
+     "0.9": 0.11274398863315582,
+     "0.99": 0.11274398863315582,
+     "1.0": 0.11031025648117065
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": null,
+      "no": {
+       "MRR": 0.11274397611005861,
+       "H1": 0.1043010752688172,
+       "H3": 0.11899641577060932,
+       "H10": 0.12043010752688173,
+       "n": 2790
+      }
+     },
+     "query_unseen": {
+      "yes": null,
+      "no": {
+       "MRR": 0.11274397611005861,
+       "H1": 0.1043010752688172,
+       "H3": 0.11899641577060932,
+       "H10": 0.12043010752688173,
+       "n": 2790
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.00010985421187953887,
+       "H1": 0.0,
+       "H3": 0.0,
+       "H10": 0.0,
+       "n": 2454
+      },
+      "no": {
+       "MRR": 0.9353753306878306,
+       "H1": 0.8660714285714286,
+       "H3": 0.9880952380952381,
+       "H10": 1.0,
+       "n": 336
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.04132659887103343,
+       "H1": 0.033807829181494664,
+       "H3": 0.046263345195729534,
+       "H10": 0.046263345195729534,
+       "n": 562
+      },
+      "no": {
+       "MRR": 0.1307585928103872,
+       "H1": 0.12208258527827648,
+       "H3": 0.13734290843806105,
+       "H10": 0.13913824057450627,
+       "n": 2228
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.00010985431961072234,
+       "H1": 0.0,
+       "H3": 0.0,
+       "H10": 0.0,
+       "n": 696
+      },
+      "no": {
+       "MRR": 0.1501811054157662,
+       "H1": 0.13896848137535817,
+       "H3": 0.15854823304680038,
+       "H10": 0.16045845272206305,
+       "n": 2094
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.06478322758690938,
+       "H1": 0.05595667870036101,
+       "H3": 0.0703971119133574,
+       "H10": 0.0703971119133574,
+       "n": 554
+      },
+      "no": {
+       "MRR": 0.12462691648654549,
+       "H1": 0.11627906976744186,
+       "H3": 0.1310375670840787,
+       "H10": 0.13282647584973167,
+       "n": 2236
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.00010985517430923684,
+       "H1": 0.0,
+       "H3": 0.0,
+       "H10": 0.0,
+       "n": 2197
+      },
+      "no": {
+       "MRR": 0.5300410481097911,
+       "H1": 0.49072512647554806,
+       "H3": 0.5598650927487352,
+       "H10": 0.5666104553119731,
+       "n": 593
+      }
+     },
+     "fact_any_unseen": {
+      "yes": null,
+      "no": {
+       "MRR": 0.11274397611005861,
+       "H1": 0.1043010752688172,
+       "H3": 0.11899641577060932,
+       "H10": 0.12043010752688173,
+       "n": 2790
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": null,
+      "no": {
+       "MRR": 0.11274397611005861,
+       "H1": 0.1043010752688172,
+       "H3": 0.11899641577060932,
+       "H10": 0.12043010752688173,
+       "n": 2790
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.395,
+    "best_method": "CENET+zrLLM",
+    "deep": 0.276,
+    "deep_method": "RE-GCN",
+    "protocol_comparable": false
+   },
+   "meta": {
+    "group": "zero-shot-relation",
+    "split": "zrLLM repo"
+   }
+  },
+  "ICEWS22-zero": {
+   "group": "zero-shot-relation",
+   "split": "zrLLM repo",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 999,
+    "relations_present": 248,
+    "timestamps": 243,
+    "train": 265237,
+    "valid": 77651,
+    "test": 2453
+   },
+   "recurrence": {
+    "rec": 0.22380758255197716,
+    "drec": 0.08357113738279658,
+    "rec_trainval": 0.0
+   },
+   "dyadic": {
+    "pair_history_online": 0.9221361598043213,
+    "pair_history_trainval": 0.9380350591112923,
+    "no_pair_history_online": 0.07786384019567871
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.0,
+    "gold_unseen_in_train": 0.0,
+    "subject_unseen_fact": 0.0,
+    "object_unseen_fact": 0.0,
+    "any_unseen_fact": 0.0,
+    "firstseen_entity_fact": 0.0,
+    "unseen_share_of_test_entities": 0.0,
+    "test_facts_relation_unseen_in_train": 1.0
+   },
+   "cold_gold_lt50": 0.024256013045250713,
+   "history_length": {
+    "hist_sr": {
+     "mean": 1.3984916428862617,
+     "median": 0.0,
+     "p10": 0.0,
+     "p90": 4.0,
+     "share_zero": 0.6371789645332246
+    },
+    "hist_e": {
+     "mean": 6359.484916428863,
+     "median": 1094.5,
+     "p10": 118.0,
+     "p90": 19143.0,
+     "share_zero": 0.0
+    }
+   },
+   "relation_skew": {
+    "gini": 0.9113586398147282,
+    "top10pct_share": 0.8817342858218399,
+    "norm_entropy": 0.605817639071489
+   },
+   "reachability": {
+    "pair_1hop": 0.9221361598043213,
+    "reach_2hop": 0.9995923359152059,
+    "object_no_history": 0.0,
+    "subject_no_history": 0.0,
+    "no_pair_share": 0.07786384019567875,
+    "within_no_pair": {
+     "reach_2hop": 0.9947643979057592,
+     "has_history_unreachable_2hop": 0.005235602094240838,
+     "an_endpoint_has_no_history": 0.0
+    },
+    "self_loop_test_share": 0.0
+   },
+   "recb_lite": {
+    "lambda_selected": 0.9,
+    "valid": {
+     "MRR": 0.5095125305059325,
+     "H1": 0.4235682734285457,
+     "H3": 0.5534185007276146,
+     "H10": 0.671259867870343,
+     "n": 155302
+    },
+    "test": {
+     "MRR": 0.20500733074384977,
+     "H1": 0.1860986547085202,
+     "H3": 0.22013860578883002,
+     "H10": 0.22380758255197716,
+     "n": 4906
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.20334658026695251,
+     "0.5": 0.20358148217201233,
+     "0.9": 0.20500732958316803,
+     "0.99": 0.20476612448692322,
+     "1.0": 0.20152290165424347
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": null,
+      "no": {
+       "MRR": 0.20500733074384977,
+       "H1": 0.1860986547085202,
+       "H3": 0.22013860578883002,
+       "H10": 0.22380758255197716,
+       "n": 4906
+      }
+     },
+     "query_unseen": {
+      "yes": null,
+      "no": {
+       "MRR": 0.20500733074384977,
+       "H1": 0.1860986547085202,
+       "H3": 0.22013860578883002,
+       "H10": 0.22380758255197716,
+       "n": 4906
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.001999782294782918,
+       "H1": 0.0,
+       "H3": 0.0,
+       "H10": 0.0,
+       "n": 3808
+      },
+      "no": {
+       "MRR": 0.9090626535981727,
+       "H1": 0.831511839708561,
+       "H3": 0.9836065573770492,
+       "H10": 1.0,
+       "n": 1098
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.04139465197978481,
+       "H1": 0.039473684210526314,
+       "H3": 0.039473684210526314,
+       "H10": 0.039473684210526314,
+       "n": 304
+      },
+      "no": {
+       "MRR": 0.21581529561657373,
+       "H1": 0.1957844415471534,
+       "H3": 0.2320730117340287,
+       "H10": 0.23598435462842243,
+       "n": 4602
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.0019999640885309143,
+       "H1": 0.0,
+       "H3": 0.0,
+       "H10": 0.0,
+       "n": 382
+      },
+      "no": {
+       "MRR": 0.22214897841456857,
+       "H1": 0.2018125552608311,
+       "H3": 0.23872679045092837,
+       "H10": 0.2427055702917772,
+       "n": 4524
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.32067218505863904,
+       "H1": 0.31092436974789917,
+       "H3": 0.3277310924369748,
+       "H10": 0.3277310924369748,
+       "n": 119
+      },
+      "no": {
+       "MRR": 0.20213201892779378,
+       "H1": 0.1829956131188636,
+       "H3": 0.2174639649049509,
+       "H10": 0.22122414873616045,
+       "n": 4787
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.002000267806097057,
+       "H1": 0.0,
+       "H3": 0.0,
+       "H10": 0.0,
+       "n": 3126
+      },
+      "no": {
+       "MRR": 0.5615242289143078,
+       "H1": 0.5129213483146068,
+       "H3": 0.6067415730337079,
+       "H10": 0.6168539325842697,
+       "n": 1780
+      }
+     },
+     "fact_any_unseen": {
+      "yes": null,
+      "no": {
+       "MRR": 0.20500733074384977,
+       "H1": 0.1860986547085202,
+       "H3": 0.22013860578883002,
+       "H10": 0.22380758255197716,
+       "n": 4906
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": null,
+      "no": {
+       "MRR": 0.20500733074384977,
+       "H1": 0.1860986547085202,
+       "H3": 0.22013860578883002,
+       "H10": 0.22380758255197716,
+       "n": 4906
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.57,
+    "best_method": "CENET+zrLLM",
+    "deep": 0.351,
+    "deep_method": "RE-GCN",
+    "protocol_comparable": false
+   },
+   "meta": {
+    "group": "zero-shot-relation",
+    "split": "zrLLM repo"
+   }
+  },
+  "MidEast-TE": {
+   "group": "text-rich",
+   "split": "SCTc-TE repo (CE-level, time ranges overlap)",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 2717,
+    "relations_present": 218,
+    "timestamps": 2584,
+    "train": 160953,
+    "valid": 25401,
+    "test": 22440
+   },
+   "recurrence": {
+    "rec": 0.723885918003565,
+    "drec": 0.09741532976827094,
+    "rec_trainval": 0.6843582887700534
+   },
+   "dyadic": {
+    "pair_history_online": 0.9117647058823529,
+    "pair_history_trainval": 0.8888146167557932,
+    "no_pair_history_online": 0.08823529411764708
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.008600713012477718,
+    "gold_unseen_in_train": 0.008600713012477718,
+    "subject_unseen_fact": 0.008645276292335117,
+    "object_unseen_fact": 0.008556149732620321,
+    "any_unseen_fact": 0.016131907308377897,
+    "firstseen_entity_fact": 0.0022727272727272726,
+    "unseen_share_of_test_entities": 0.03888419273034658,
+    "test_facts_relation_unseen_in_train": 0.0
+   },
+   "cold_gold_lt50": 0.08721033868092691,
+   "history_length": {
+    "hist_sr": {
+     "mean": 536.9071524064171,
+     "median": 108.0,
+     "p10": 1.0,
+     "p90": 1552.199999999997,
+     "share_zero": 0.06849376114081997
+    },
+    "hist_e": {
+     "mean": 22946.574554367202,
+     "median": 11083.0,
+     "p10": 116.0,
+     "p90": 62990.0,
+     "share_zero": 0.0011809269162210338
+    }
+   },
+   "relation_skew": {
+    "gini": 0.8333247211838577,
+    "top10pct_share": 0.7156144333649435,
+    "norm_entropy": 0.707202942816308
+   },
+   "reachability": {
+    "pair_1hop": 0.9117647058823529,
+    "reach_2hop": 0.9918894830659537,
+    "object_no_history": 0.0011586452762923352,
+    "subject_no_history": 0.0012032085561497327,
+    "no_pair_share": 0.08823529411764706,
+    "within_no_pair": {
+     "reach_2hop": 0.908080808080808,
+     "has_history_unreachable_2hop": 0.06616161616161616,
+     "an_endpoint_has_no_history": 0.025757575757575757
+    },
+    "self_loop_test_share": 0.004411764705882353
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.42004856313824557,
+     "H1": 0.3055982047950868,
+     "H3": 0.4784063619542538,
+     "H10": 0.6434589189401992,
+     "n": 50802
+    },
+    "test": {
+     "MRR": 0.4366488541365754,
+     "H1": 0.32074420677361853,
+     "H3": 0.49930926916221036,
+     "H10": 0.6606729055258467,
+     "n": 44880
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.4244179427623749,
+     "0.5": 0.4180934429168701,
+     "0.9": 0.4269634783267975,
+     "0.99": 0.4366488456726074,
+     "1.0": 0.4310247600078583
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.139806470891925,
+       "H1": 0.11139896373056994,
+       "H3": 0.15544041450777202,
+       "H10": 0.19689119170984457,
+       "n": 386
+      },
+      "no": {
+       "MRR": 0.4392240588817642,
+       "H1": 0.3225603452150852,
+       "H3": 0.5022924439250236,
+       "H10": 0.6646963635546366,
+       "n": 44494
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.41166627603168476,
+       "H1": 0.3393782383419689,
+       "H3": 0.4637305699481865,
+       "H10": 0.5414507772020726,
+       "n": 386
+      },
+      "no": {
+       "MRR": 0.4368655861711977,
+       "H1": 0.3205825504562413,
+       "H3": 0.49961792601249605,
+       "H10": 0.6617071964759293,
+       "n": 44494
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.10546665086990514,
+       "H1": 0.04446417043253712,
+       "H3": 0.11701097482246611,
+       "H10": 0.22700129115558426,
+       "n": 12392
+      },
+      "no": {
+       "MRR": 0.5629727233461473,
+       "H1": 0.42612656981039154,
+       "H3": 0.6451305097266683,
+       "H10": 0.8260896330952967,
+       "n": 32488
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.09351293771545649,
+       "H1": 0.05511022044088176,
+       "H3": 0.09859719438877755,
+       "H10": 0.16052104208416834,
+       "n": 4990
+      },
+      "no": {
+       "MRR": 0.479573101390057,
+       "H1": 0.3539734269240411,
+       "H3": 0.5494359488593632,
+       "H10": 0.7232389069942341,
+       "n": 39890
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.04979605263236364,
+       "H1": 0.01818181818181818,
+       "H3": 0.047979797979797977,
+       "H10": 0.1053030303030303,
+       "n": 3960
+      },
+      "no": {
+       "MRR": 0.4740862220240797,
+       "H1": 0.35002443792766375,
+       "H3": 0.5429863147605083,
+       "H10": 0.7144183773216032,
+       "n": 40920
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.05642832532639306,
+       "H1": 0.0342360756259581,
+       "H3": 0.05927439959121104,
+       "H10": 0.10066428206438426,
+       "n": 3914
+      },
+      "no": {
+       "MRR": 0.472976129188156,
+       "H1": 0.34811795147195235,
+       "H3": 0.541351364546209,
+       "H10": 0.7141776107015574,
+       "n": 40966
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.27319286478673116,
+       "H1": 0.1785946649316851,
+       "H3": 0.324658425504229,
+       "H10": 0.4424202992843201,
+       "n": 3074
+      },
+      "no": {
+       "MRR": 0.44866779187903866,
+       "H1": 0.3311964789743099,
+       "H3": 0.5121513658326556,
+       "H10": 0.6767210448261015,
+       "n": 41806
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.2855364234890779,
+       "H1": 0.23480662983425415,
+       "H3": 0.319060773480663,
+       "H10": 0.3798342541436464,
+       "n": 724
+      },
+      "no": {
+       "MRR": 0.43912655591637395,
+       "H1": 0.3221532747531479,
+       "H3": 0.5022646978893016,
+       "H10": 0.6652776519612283,
+       "n": 44156
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.2254118312323877,
+       "H1": 0.18627450980392157,
+       "H3": 0.24509803921568626,
+       "H10": 0.3137254901960784,
+       "n": 102
+      },
+      "no": {
+       "MRR": 0.4371300318652864,
+       "H1": 0.3210505158783331,
+       "H3": 0.49988833802313637,
+       "H10": 0.6614632185448212,
+       "n": 44778
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.4978,
+    "best_method": "LoGo (complex-event context)",
+    "deep": 0.3354,
+    "deep_method": "HisMatch",
+    "protocol_comparable": false
+   },
+   "meta": {
+    "group": "text-rich",
+    "split": "SCTc-TE repo (CE-level, time ranges overlap)"
+   }
+  },
+  "TransFIR-GDELT-532": {
+   "group": "emerging-entity",
+   "split": "TransFIR 5:2:3",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 7691,
+    "relations_present": 240,
+    "timestamps": 2751,
+    "train": 1013004,
+    "valid": 486443,
+    "test": 778958
+   },
+   "recurrence": {
+    "rec": 0.6410178725939011,
+    "drec": 0.02544681484752708,
+    "rec_trainval": 0.5058616767527903
+   },
+   "dyadic": {
+    "pair_history_online": 0.9128810539207506,
+    "pair_history_trainval": 0.8677861964316433,
+    "no_pair_history_online": 0.08711894607924942
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.002048890954326164,
+    "gold_unseen_in_train": 0.002048890954326164,
+    "subject_unseen_fact": 0.002169564982964422,
+    "object_unseen_fact": 0.001928216925687906,
+    "any_unseen_fact": 0.0040836604797691274,
+    "firstseen_entity_fact": 0.001661193543169208,
+    "unseen_share_of_test_entities": 0.17914756325352352,
+    "test_facts_relation_unseen_in_train": 3.851298786327376e-06
+   },
+   "cold_gold_lt50": 0.02504692165688009,
+   "history_length": {
+    "hist_sr": {
+     "mean": 942.9982990097027,
+     "median": 142.0,
+     "p10": 5.0,
+     "p90": 2031.0,
+     "share_zero": 0.02979236364476647
+    },
+    "hist_e": {
+     "mean": 43464.68161120368,
+     "median": 9283.0,
+     "p10": 612.0,
+     "p90": 81955.0,
+     "share_zero": 0.0008312386547156586
+    }
+   },
+   "relation_skew": {
+    "gini": 0.8607027705053901,
+    "top10pct_share": 0.7936552105529965,
+    "norm_entropy": 0.6828621698432804
+   },
+   "reachability": {
+    "pair_1hop": 0.9128810539207506,
+    "reach_2hop": 0.9976019246223802,
+    "object_no_history": 0.0007766785885760208,
+    "subject_no_history": 0.0008857987208552964,
+    "no_pair_share": 0.08711894607924946,
+    "within_no_pair": {
+     "reach_2hop": 0.972473549261737,
+     "has_history_unreachable_2hop": 0.008458341929209278,
+     "an_endpoint_has_no_history": 0.019068108809053668
+    },
+    "self_loop_test_share": 0.0
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.25326973069572356,
+     "H1": 0.17311689139323622,
+     "H3": 0.2788281463604163,
+     "H10": 0.4080149164444755,
+     "n": 972886
+    },
+    "test": {
+     "MRR": 0.2426607039028473,
+     "H1": 0.16385735816308453,
+     "H3": 0.2658731279478483,
+     "H10": 0.395946251274138,
+     "n": 1557916
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.21363046765327454,
+     "0.5": 0.21164624392986298,
+     "0.9": 0.22133919596672058,
+     "0.99": 0.24266070127487183,
+     "1.0": 0.21940426528453827
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.09206937427397996,
+       "H1": 0.06610275689223058,
+       "H3": 0.10463659147869674,
+       "H10": 0.14442355889724312,
+       "n": 3192
+      },
+      "no": {
+       "MRR": 0.24296988258933785,
+       "H1": 0.16405805789323377,
+       "H3": 0.26620416228217997,
+       "H10": 0.3964626518919114,
+       "n": 1554724
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.26816648662909787,
+       "H1": 0.22650375939849623,
+       "H3": 0.27286967418546365,
+       "H10": 0.33615288220551376,
+       "n": 3192
+      },
+      "no": {
+       "MRR": 0.24260833804340073,
+       "H1": 0.16372873899161522,
+       "H3": 0.26585876335606834,
+       "H10": 0.39606901289232044,
+       "n": 1554724
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.025490085657242922,
+       "H1": 0.005966770612805402,
+       "H3": 0.016916876466212736,
+       "H10": 0.04943819019282485,
+       "n": 559264
+      },
+      "no": {
+       "MRR": 0.36428035583616314,
+       "H1": 0.25227907218931117,
+       "H3": 0.40529333541614093,
+       "H10": 0.5899973163824835,
+       "n": 998652
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.15357987848431187,
+       "H1": 0.11615318140772316,
+       "H3": 0.1668333511345872,
+       "H10": 0.21743584266280866,
+       "n": 205978
+      },
+      "no": {
+       "MRR": 0.2562328427568918,
+       "H1": 0.17112545101920354,
+       "H3": 0.28096258852107125,
+       "H10": 0.42314366487220567,
+       "n": 1351938
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.015011876962675344,
+       "H1": 0.0032639768942854617,
+       "H3": 0.00923933865786449,
+       "H10": 0.02755592231292918,
+       "n": 135724
+      },
+      "no": {
+       "MRR": 0.2643859065390792,
+       "H1": 0.17918326076929134,
+       "H3": 0.2903644514945943,
+       "H10": 0.43110283281019723,
+       "n": 1422192
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.11070411789173945,
+       "H1": 0.07762486866046488,
+       "H3": 0.12457394736167704,
+       "H10": 0.17475205658491583,
+       "n": 39021
+      },
+      "no": {
+       "MRR": 0.24605071963319036,
+       "H1": 0.16607270416980766,
+       "H3": 0.26950315854617996,
+       "H10": 0.40162881568508685,
+       "n": 1518895
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.11823496778044927,
+       "H1": 0.07077605894773129,
+       "H3": 0.12089024863187832,
+       "H10": 0.20302064032404016,
+       "n": 46414
+      },
+      "no": {
+       "MRR": 0.2464814703433714,
+       "H1": 0.166715624590639,
+       "H3": 0.2703251467745329,
+       "H10": 0.4018704573331693,
+       "n": 1511502
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.1807400112337169,
+       "H1": 0.14680917950330086,
+       "H3": 0.18940584721785603,
+       "H10": 0.2411191449229802,
+       "n": 6362
+      },
+      "no": {
+       "MRR": 0.24291460382947636,
+       "H1": 0.16392726260252624,
+       "H3": 0.2661866747789635,
+       "H10": 0.39658110513717215,
+       "n": 1551554
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.05597304417436708,
+       "H1": 0.0347758887171561,
+       "H3": 0.054482225656877895,
+       "H10": 0.09080370942812983,
+       "n": 2588
+      },
+      "no": {
+       "MRR": 0.24297134427155237,
+       "H1": 0.1640721442679615,
+       "H3": 0.26622487346720436,
+       "H10": 0.3964539955559213,
+       "n": 1555328
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.1103,
+    "best_method": "TransFIR (emerging subset)",
+    "deep": 0.0733,
+    "deep_method": "TLogic (emerging subset)",
+    "protocol_comparable": false
+   },
+   "meta": {
+    "group": "emerging-entity",
+    "split": "TransFIR 5:2:3",
+    "resplit": "TransFIR re_spilt by unique timestamps 0.5,0.2,0.3"
+   }
+  },
+  "TransFIR-ICEWS05-15-532": {
+   "group": "emerging-entity",
+   "split": "TransFIR 5:2:3",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 10488,
+    "relations_present": 251,
+    "timestamps": 4017,
+    "train": 247103,
+    "valid": 79815,
+    "test": 134411
+   },
+   "recurrence": {
+    "rec": 0.681662959132809,
+    "drec": 0.12633638615887094,
+    "rec_trainval": 0.552127430046648
+   },
+   "dyadic": {
+    "pair_history_online": 0.858121731108317,
+    "pair_history_trainval": 0.7413455743949527,
+    "no_pair_history_online": 0.14187826889168298
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.06030012424578345,
+    "gold_unseen_in_train": 0.06030012424578345,
+    "subject_unseen_fact": 0.07050762214402095,
+    "object_unseen_fact": 0.05009262634754596,
+    "any_unseen_fact": 0.11360677325516513,
+    "firstseen_entity_fact": 0.014879734545535707,
+    "unseen_share_of_test_entities": 0.3092375830433407,
+    "test_facts_relation_unseen_in_train": 3.719933636383927e-05
+   },
+   "cold_gold_lt50": 0.20624800053567044,
+   "history_length": {
+    "hist_sr": {
+     "mean": 378.0351496529302,
+     "median": 61.0,
+     "p10": 1.0,
+     "p90": 1121.0,
+     "share_zero": 0.08431229586864171
+    },
+    "hist_e": {
+     "mean": 7189.033096249563,
+     "median": 1542.0,
+     "p10": 39.0,
+     "p90": 24310.899999999994,
+     "share_zero": 0.007599824419132362
+    }
+   },
+   "relation_skew": {
+    "gini": 0.8942348521760434,
+    "top10pct_share": 0.8754684834467376,
+    "norm_entropy": 0.6208714309779856
+   },
+   "reachability": {
+    "pair_1hop": 0.858121731108317,
+    "reach_2hop": 0.9705753249362031,
+    "object_no_history": 0.006859557625491961,
+    "subject_no_history": 0.008340091212772764,
+    "no_pair_share": 0.14187826889168298,
+    "within_no_pair": {
+     "reach_2hop": 0.7926061877294179,
+     "has_history_unreachable_2hop": 0.10251704247509176,
+     "an_endpoint_has_no_history": 0.1048767697954903
+    },
+    "self_loop_test_share": 0.00014135747818258922
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.4493517493550369,
+     "H1": 0.35609221324312473,
+     "H3": 0.5001503476790077,
+     "H10": 0.6257908914364467,
+     "n": 159630
+    },
+    "test": {
+     "MRR": 0.4475401482635519,
+     "H1": 0.3551867034692101,
+     "H3": 0.4992336936709049,
+     "H10": 0.6207006866997493,
+     "n": 268822
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.44099685549736023,
+     "0.5": 0.4430229663848877,
+     "0.9": 0.44597628712654114,
+     "0.99": 0.44754016399383545,
+     "1.0": 0.4176475405693054
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.20100786419572075,
+       "H1": 0.1528685996298581,
+       "H3": 0.22652683528685996,
+       "H10": 0.29938309685379394,
+       "n": 16210
+      },
+      "no": {
+       "MRR": 0.46336001558869694,
+       "H1": 0.3681693664592339,
+       "H3": 0.5167331718208161,
+       "H10": 0.641319493927446,
+       "n": 252612
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.3216811223837953,
+       "H1": 0.26656384947563233,
+       "H3": 0.3470697100555213,
+       "H10": 0.4204811844540407,
+       "n": 16210
+      },
+      "no": {
+       "MRR": 0.45561646613250045,
+       "H1": 0.3608735927034345,
+       "H3": 0.508997989010815,
+       "H10": 0.6335486833562934,
+       "n": 252612
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.031193873880978506,
+       "H1": 0.007969524165653922,
+       "H3": 0.024072169767224455,
+       "H10": 0.0747873235486585,
+       "n": 85576
+      },
+      "no": {
+       "MRR": 0.6419741265035303,
+       "H1": 0.5173373497920828,
+       "H3": 0.7211344313109154,
+       "H10": 0.8756425788284601,
+       "n": 183246
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.2068441561999015,
+       "H1": 0.1562733705344302,
+       "H3": 0.22832652591612496,
+       "H10": 0.3021342691135017,
+       "n": 69532
+      },
+      "no": {
+       "MRR": 0.5315186405118821,
+       "H1": 0.42458728486125746,
+       "H3": 0.5937528225199458,
+       "H10": 0.7318480606151839,
+       "n": 199290
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.02494764475665942,
+       "H1": 0.007262716308337703,
+       "H3": 0.01882538017829051,
+       "H10": 0.05768222338751967,
+       "n": 38140
+      },
+      "no": {
+       "MRR": 0.5174098306997752,
+       "H1": 0.4127110047597992,
+       "H3": 0.5786624010542651,
+       "H10": 0.7137878117928577,
+       "n": 230682
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.22390757691938032,
+       "H1": 0.16721376524060313,
+       "H3": 0.2546533439145805,
+       "H10": 0.3362311521535243,
+       "n": 55444
+      },
+      "no": {
+       "MRR": 0.5056486893765356,
+       "H1": 0.4040294688299637,
+       "H3": 0.5627852918295232,
+       "H10": 0.6946170645521094,
+       "n": 213378
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.06806344514033756,
+       "H1": 0.02982572247959409,
+       "H3": 0.06684315023163467,
+       "H10": 0.14705493050959628,
+       "n": 22665
+      },
+      "no": {
+       "MRR": 0.4824806109612921,
+       "H1": 0.3851444403368582,
+       "H3": 0.5390462184703259,
+       "H10": 0.6643118010050496,
+       "n": 246157
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.26593457425376577,
+       "H1": 0.21270464963981664,
+       "H3": 0.2915520628683694,
+       "H10": 0.36814014407334644,
+       "n": 30540
+      },
+      "no": {
+       "MRR": 0.47081607439418227,
+       "H1": 0.37344826717922464,
+       "H3": 0.5258517219093343,
+       "H10": 0.6530707313183539,
+       "n": 238282
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.03221649222203078,
+       "H1": 0.01375,
+       "H3": 0.03175,
+       "H10": 0.06725,
+       "n": 4000
+      },
+      "no": {
+       "MRR": 0.45381339831138057,
+       "H1": 0.3603439291297551,
+       "H3": 0.5062947942391494,
+       "H10": 0.6290602744484974,
+       "n": 264822
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.2204,
+    "best_method": "TransFIR (emerging subset)",
+    "deep": 0.1917,
+    "deep_method": "LogCL (emerging subset)",
+    "protocol_comparable": false
+   },
+   "meta": {
+    "group": "emerging-entity",
+    "split": "TransFIR 5:2:3",
+    "resplit": "TransFIR re_spilt by unique timestamps 0.5,0.2,0.3"
+   }
+  },
+  "TransFIR-ICEWS14-532": {
+   "group": "emerging-entity",
+   "split": "TransFIR 5:2:3",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 7128,
+    "relations_present": 230,
+    "timestamps": 365,
+    "train": 44343,
+    "valid": 17417,
+    "test": 28970
+   },
+   "recurrence": {
+    "rec": 0.5154297549188817,
+    "drec": 0.12326544701415257,
+    "rec_trainval": 0.4068001380738695
+   },
+   "dyadic": {
+    "pair_history_online": 0.7370383154987918,
+    "pair_history_trainval": 0.6468760787021056,
+    "no_pair_history_online": 0.26296168450120816
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.056144287193648605,
+    "gold_unseen_in_train": 0.056144287193648605,
+    "subject_unseen_fact": 0.06030376251294443,
+    "object_unseen_fact": 0.051984811874352777,
+    "any_unseen_fact": 0.10524680704176735,
+    "firstseen_entity_fact": 0.04504659993096306,
+    "unseen_share_of_test_entities": 0.3054451974760458,
+    "test_facts_relation_unseen_in_train": 0.0007594062823610631
+   },
+   "cold_gold_lt50": 0.3746116672419745,
+   "history_length": {
+    "hist_sr": {
+     "mean": 50.75686917500863,
+     "median": 10.0,
+     "p10": 0.0,
+     "p90": 141.0,
+     "share_zero": 0.17977217811529167
+    },
+    "hist_e": {
+     "mean": 865.0494822229894,
+     "median": 227.0,
+     "p10": 8.0,
+     "p90": 2709.0,
+     "share_zero": 0.023852260959613392
+    }
+   },
+   "relation_skew": {
+    "gini": 0.8838779177588545,
+    "top10pct_share": 0.8473492780778132,
+    "norm_entropy": 0.631946414783803
+   },
+   "reachability": {
+    "pair_1hop": 0.7370383154987918,
+    "reach_2hop": 0.9064894718674491,
+    "object_no_history": 0.022575077666551605,
+    "subject_no_history": 0.02512944425267518,
+    "no_pair_share": 0.26296168450120816,
+    "within_no_pair": {
+     "reach_2hop": 0.6443948542924652,
+     "has_history_unreachable_2hop": 0.18430034129692832,
+     "an_endpoint_has_no_history": 0.17130480441060647
+    },
+    "self_loop_test_share": 0.0
+   },
+   "recb_lite": {
+    "lambda_selected": 0.9,
+    "valid": {
+     "MRR": 0.36019175050880187,
+     "H1": 0.2825113394958948,
+     "H3": 0.4021071367055176,
+     "H10": 0.49839237526554514,
+     "n": 34834
+    },
+    "test": {
+     "MRR": 0.37424971680523056,
+     "H1": 0.29618570935450467,
+     "H3": 0.41527442181567137,
+     "H10": 0.5168967897825336,
+     "n": 57940
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.3711439371109009,
+     "0.5": 0.3705601394176483,
+     "0.9": 0.3742496967315674,
+     "0.99": 0.3757046163082123,
+     "1.0": 0.3621033728122711
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.12913734978268032,
+       "H1": 0.10759299108515216,
+       "H3": 0.14509683369197662,
+       "H10": 0.1647709806332616,
+       "n": 3253
+      },
+      "no": {
+       "MRR": 0.3888299740861997,
+       "H1": 0.30740395340757404,
+       "H3": 0.43134565801744473,
+       "H10": 0.5378426317040613,
+       "n": 54687
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.20653393176916443,
+       "H1": 0.1635413464494313,
+       "H3": 0.21826006762988012,
+       "H10": 0.2846603135567169,
+       "n": 3253
+      },
+      "no": {
+       "MRR": 0.3842261179375349,
+       "H1": 0.30407592297986724,
+       "H3": 0.42699361822736664,
+       "H10": 0.5307111379304039,
+       "n": 54687
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.04041724595094019,
+       "H1": 0.011611340646815786,
+       "H3": 0.03526143325260009,
+       "H10": 0.09385240062686992,
+       "n": 28076
+      },
+      "no": {
+       "MRR": 0.6880951645585476,
+       "H1": 0.563722207339941,
+       "H3": 0.7725354942405572,
+       "H10": 0.914612911867131,
+       "n": 29864
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.15662683643955458,
+       "H1": 0.12311827956989248,
+       "H3": 0.1641739980449658,
+       "H10": 0.2108015640273705,
+       "n": 20460
+      },
+      "no": {
+       "MRR": 0.49304811948083704,
+       "H1": 0.3906616862326574,
+       "H3": 0.5523479188900747,
+       "H10": 0.683991462113127,
+       "n": 37480
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.028388320035987607,
+       "H1": 0.007022840640588081,
+       "H3": 0.02362824888422158,
+       "H10": 0.06327119978997112,
+       "n": 15236
+      },
+      "no": {
+       "MRR": 0.49764668760834474,
+       "H1": 0.3993536905207943,
+       "H3": 0.5550065567628325,
+       "H10": 0.6787420382165605,
+       "n": 42704
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.19362180295569054,
+       "H1": 0.1484450587422253,
+       "H3": 0.21875143976042385,
+       "H10": 0.2756968440451509,
+       "n": 21705
+      },
+      "no": {
+       "MRR": 0.4824470086530095,
+       "H1": 0.3846833172347178,
+       "H3": 0.532992962605216,
+       "H10": 0.6613771215675452,
+       "n": 36235
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.06970545710129974,
+       "H1": 0.031009984639016896,
+       "H3": 0.07258064516129033,
+       "H10": 0.1408410138248848,
+       "n": 10416
+      },
+      "no": {
+       "MRR": 0.4409977390482266,
+       "H1": 0.3543051931655585,
+       "H3": 0.49038380607692955,
+       "H10": 0.5993182392054541,
+       "n": 47524
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.17576955945044093,
+       "H1": 0.14135782223679896,
+       "H3": 0.1905542800918334,
+       "H10": 0.23647097408986553,
+       "n": 6098
+      },
+      "no": {
+       "MRR": 0.3975962697844658,
+       "H1": 0.3143975926854674,
+       "H3": 0.44170749585278346,
+       "H10": 0.5498823347864665,
+       "n": 51842
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.02777869989561092,
+       "H1": 0.010344827586206896,
+       "H3": 0.026436781609195402,
+       "H10": 0.06360153256704981,
+       "n": 2610
+      },
+      "no": {
+       "MRR": 0.3905932800464037,
+       "H1": 0.3096692571841677,
+       "H3": 0.43361648292065785,
+       "H10": 0.5382794144225556,
+       "n": 55330
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.1687,
+    "best_method": "TransFIR on emerging-entity triples only",
+    "deep": 0.1354,
+    "deep_method": "LogCL (emerging subset)",
+    "protocol_comparable": false
+   },
+   "meta": {
+    "group": "emerging-entity",
+    "split": "TransFIR 5:2:3",
+    "resplit": "TransFIR re_spilt by unique timestamps 0.5,0.2,0.3"
+   }
+  },
+  "TransFIR-ICEWS18-532": {
+   "group": "emerging-entity",
+   "split": "TransFIR 5:2:3",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 23033,
+    "relations_present": 256,
+    "timestamps": 304,
+    "train": 248207,
+    "valid": 88263,
+    "test": 132088
+   },
+   "recurrence": {
+    "rec": 0.5033084004602992,
+    "drec": 0.10957089213251772,
+    "rec_trainval": 0.4233844103930713
+   },
+   "dyadic": {
+    "pair_history_online": 0.7365241354248683,
+    "pair_history_trainval": 0.6649430682575252,
+    "no_pair_history_online": 0.2634758645751317
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.02730755254073042,
+    "gold_unseen_in_train": 0.02730755254073042,
+    "subject_unseen_fact": 0.028995820967839623,
+    "object_unseen_fact": 0.025619284113621223,
+    "any_unseen_fact": 0.05218490703167585,
+    "firstseen_entity_fact": 0.02725455756768215,
+    "unseen_share_of_test_entities": 0.26083684527393136,
+    "test_facts_relation_unseen_in_train": 9.841923566107443e-05
+   },
+   "cold_gold_lt50": 0.24118390769789838,
+   "history_length": {
+    "hist_sr": {
+     "mean": 170.2075661680092,
+     "median": 23.0,
+     "p10": 0.0,
+     "p90": 387.0,
+     "share_zero": 0.1314048210284053
+    },
+    "hist_e": {
+     "mean": 2946.3867421718855,
+     "median": 592.0,
+     "p10": 18.0,
+     "p90": 11756.0,
+     "share_zero": 0.01401717037126764
+    }
+   },
+   "relation_skew": {
+    "gini": 0.8892260436541474,
+    "top10pct_share": 0.8651308909462649,
+    "norm_entropy": 0.6283598535289092
+   },
+   "reachability": {
+    "pair_1hop": 0.7365241354248683,
+    "reach_2hop": 0.938821088970989,
+    "object_no_history": 0.013104899763793835,
+    "subject_no_history": 0.014929440978741446,
+    "no_pair_share": 0.2634758645751317,
+    "within_no_pair": {
+     "reach_2hop": 0.7678007011091317,
+     "has_history_unreachable_2hop": 0.1287569679903454,
+     "an_endpoint_has_no_history": 0.10344233090052296
+    },
+    "self_loop_test_share": 0.0
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.2844383220335461,
+     "H1": 0.20631521702185512,
+     "H3": 0.3203040911820355,
+     "H10": 0.4338511040866501,
+     "n": 176526
+    },
+    "test": {
+     "MRR": 0.28786148341602125,
+     "H1": 0.20769865544182667,
+     "H3": 0.3250825207437466,
+     "H10": 0.44116800920598387,
+     "n": 264176
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.26979392766952515,
+     "0.5": 0.26952528953552246,
+     "0.9": 0.27868109941482544,
+     "0.99": 0.2878614664077759,
+     "1.0": 0.2806096374988556
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.049464208544338556,
+       "H1": 0.036734128084280566,
+       "H3": 0.05614083726088162,
+       "H10": 0.07263654006099252,
+       "n": 7214
+      },
+      "no": {
+       "MRR": 0.2945542937962499,
+       "H1": 0.21249834605895035,
+       "H3": 0.33263284065348186,
+       "H10": 0.45151423167627897,
+       "n": 256962
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.12597341920460997,
+       "H1": 0.10216246187967841,
+       "H3": 0.12933185472691988,
+       "H10": 0.16370945383975602,
+       "n": 7214
+      },
+      "no": {
+       "MRR": 0.2924063596826332,
+       "H1": 0.21066149858733976,
+       "H3": 0.33057806212591745,
+       "H10": 0.448957433394821,
+       "n": 256962
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.02986010613371946,
+       "H1": 0.009724572073101956,
+       "H3": 0.024204734250918347,
+       "H10": 0.06283628271373481,
+       "n": 131214
+      },
+      "no": {
+       "MRR": 0.5424710163556578,
+       "H1": 0.40307005008949925,
+       "H3": 0.6220047833215505,
+       "H10": 0.8145259547840736,
+       "n": 132962
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.09010858151547008,
+       "H1": 0.06160607361547326,
+       "H3": 0.09545382651331992,
+       "H10": 0.13937908127527848,
+       "n": 88514
+      },
+      "no": {
+       "MRR": 0.3875068270807034,
+       "H1": 0.2813129760562899,
+       "H3": 0.4407896983980599,
+       "H10": 0.593235873438763,
+       "n": 175662
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.02181964165062056,
+       "H1": 0.00801678064479053,
+       "H3": 0.01716855353140624,
+       "H10": 0.043287742083788286,
+       "n": 69604
+      },
+      "no": {
+       "MRR": 0.38303230118136755,
+       "H1": 0.2791306046090907,
+       "H3": 0.4352322019612277,
+       "H10": 0.5835012231975824,
+       "n": 194572
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.10007318317705724,
+       "H1": 0.06664050851447853,
+       "H3": 0.11565565408459547,
+       "H10": 0.16570666248136232,
+       "n": 63715
+      },
+      "no": {
+       "MRR": 0.34754856244748167,
+       "H1": 0.25253291163867286,
+       "H3": 0.39164725308164683,
+       "H10": 0.5287212974094712,
+       "n": 200461
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.06523102954823058,
+       "H1": 0.036354208676614624,
+       "H3": 0.06651495074033531,
+       "H10": 0.11603387682203145,
+       "n": 34714
+      },
+      "no": {
+       "MRR": 0.3215419776833356,
+       "H1": 0.23362038158823684,
+       "H3": 0.3641997367755881,
+       "H10": 0.49035570159765013,
+       "n": 229462
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.08827039765643423,
+       "H1": 0.06927317568547803,
+       "H3": 0.09342811547947193,
+       "H10": 0.12004932540258233,
+       "n": 13786
+      },
+      "no": {
+       "MRR": 0.29885059124094104,
+       "H1": 0.21532010064299692,
+       "H3": 0.3378369743200607,
+       "H10": 0.4588481968129718,
+       "n": 250390
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.024033774536008464,
+       "H1": 0.013472222222222222,
+       "H3": 0.02388888888888889,
+       "H10": 0.04097222222222222,
+       "n": 7200
+      },
+      "no": {
+       "MRR": 0.29525345583343027,
+       "H1": 0.2131405267417969,
+       "H3": 0.33352141834256893,
+       "H10": 0.45238076707552455,
+       "n": 256976
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.1177,
+    "best_method": "TransFIR (emerging subset)",
+    "deep": 0.0947,
+    "deep_method": "RE-GCN (emerging subset)",
+    "protocol_comparable": false
+   },
+   "meta": {
+    "group": "emerging-entity",
+    "split": "TransFIR 5:2:3",
+    "resplit": "TransFIR re_spilt by unique timestamps 0.5,0.2,0.3"
+   }
+  },
+  "WIKI": {
+   "group": "reference",
+   "split": "RE-NET/RE-GCN",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 12435,
+    "relations_present": 24,
+    "timestamps": 232,
+    "train": 539286,
+    "valid": 67538,
+    "test": 63110
+   },
+   "recurrence": {
+    "rec": 0.8703691966407859,
+    "drec": 0.8561559182379972,
+    "rec_trainval": 0.6829187133576295
+   },
+   "dyadic": {
+    "pair_history_online": 0.8712723815560133,
+    "pair_history_trainval": 0.6835525273332277,
+    "no_pair_history_online": 0.12872761844398672
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.2697908413880526,
+    "gold_unseen_in_train": 0.2697908413880526,
+    "subject_unseen_fact": 0.36392013943907464,
+    "object_unseen_fact": 0.17566154333703057,
+    "any_unseen_fact": 0.4290762161305657,
+    "firstseen_entity_fact": 0.02598637299952464,
+    "unseen_share_of_test_entities": 0.3645295996069762,
+    "test_facts_relation_unseen_in_train": 0.0
+   },
+   "cold_gold_lt50": 0.4846854698146094,
+   "history_length": {
+    "hist_sr": {
+     "mean": 2362.6020678180953,
+     "median": 94.0,
+     "p10": 8.0,
+     "p90": 2475.0,
+     "share_zero": 0.017318966883219777
+    },
+    "hist_e": {
+     "mean": 2422.8694105530026,
+     "median": 123.0,
+     "p10": 9.0,
+     "p90": 2766.0,
+     "share_zero": 0.014118206306449057
+    }
+   },
+   "relation_skew": {
+    "gini": 0.7012152192106487,
+    "top10pct_share": 0.5642078174864986,
+    "norm_entropy": 0.6822360387719615
+   },
+   "reachability": {
+    "pair_1hop": 0.8712723815560133,
+    "reach_2hop": 0.871399144351133,
+    "object_no_history": 0.017873554111868167,
+    "subject_no_history": 0.010362858501029948,
+    "no_pair_share": 0.1287276184439867,
+    "within_no_pair": {
+     "reach_2hop": 0.0009847365829640572,
+     "has_history_unreachable_2hop": 0.7971442639094042,
+     "an_endpoint_has_no_history": 0.2018709995076317
+    },
+    "self_loop_test_share": 0.00015845349389954048
+   },
+   "recb_lite": {
+    "lambda_selected": 0.01,
+    "valid": {
+     "MRR": 0.8168701431259102,
+     "H1": 0.7848322425893571,
+     "H3": 0.846938020077586,
+     "H10": 0.8554443424442536,
+     "n": 135076
+    },
+    "test": {
+     "MRR": 0.8148242611081258,
+     "H1": 0.7677230232926636,
+     "H3": 0.8573205514181588,
+     "H10": 0.8698225320868325,
+     "n": 126220
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.8148243427276611,
+     "0.5": 0.8126148581504822,
+     "0.9": 0.7479090690612793,
+     "0.99": 0.6958423852920532,
+     "1.0": 0.6782386898994446
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.5977278907034363,
+       "H1": 0.498605115555164,
+       "H3": 0.6887205238892314,
+       "H10": 0.7123307784923502,
+       "n": 34053
+      },
+      "no": {
+       "MRR": 0.8950349948999481,
+       "H1": 0.8671541875074593,
+       "H3": 0.9196133106209381,
+       "H10": 0.9280111102672323,
+       "n": 92167
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.6328824458546041,
+       "H1": 0.5549584471265381,
+       "H3": 0.7076322203623763,
+       "H10": 0.719642909582122,
+       "n": 34053
+      },
+      "no": {
+       "MRR": 0.8820464190912236,
+       "H1": 0.8463332863172285,
+       "H3": 0.9126259941193703,
+       "H10": 0.925309492551564,
+       "n": 92167
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.008441112565496697,
+       "H1": 0.0033003300330033004,
+       "H3": 0.00562278450067229,
+       "H10": 0.012162327343845496,
+       "n": 16362
+      },
+      "no": {
+       "MRR": 0.9349251283772778,
+       "H1": 0.8815743960385225,
+       "H3": 0.9841704746126818,
+       "H10": 0.9975604871743523,
+       "n": 109858
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.49490965349307536,
+       "H1": 0.40558810274898605,
+       "H3": 0.5790646437334135,
+       "H10": 0.5961644384357319,
+       "n": 39942
+      },
+      "no": {
+       "MRR": 0.9629272451522661,
+       "H1": 0.9353717054173718,
+       "H3": 0.9861378335149169,
+       "H10": 0.9965112774983194,
+       "n": 86278
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.008481955238199767,
+       "H1": 0.0033234859675036928,
+       "H3": 0.005662235352043328,
+       "H10": 0.01224766125061546,
+       "n": 16248
+      },
+      "no": {
+       "MRR": 0.933958675193298,
+       "H1": 0.8806605317717238,
+       "H3": 0.9831502564289092,
+       "H10": 0.9965263885352635,
+       "n": 109972
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.6545123801171591,
+       "H1": 0.5706883305817546,
+       "H3": 0.7333311538650147,
+       "H10": 0.7525377184235905,
+       "n": 61177
+      },
+      "no": {
+       "MRR": 0.9656075881899696,
+       "H1": 0.9530464461971311,
+       "H3": 0.9739403164060698,
+       "H10": 0.9801362175791399,
+       "n": 65043
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.02522680627728655,
+       "H1": 0.013266239707227814,
+       "H3": 0.022872827081427266,
+       "H10": 0.04117108874656908,
+       "n": 2186
+      },
+      "no": {
+       "MRR": 0.8287402844264112,
+       "H1": 0.7810197203992454,
+       "H3": 0.8720270248480255,
+       "H10": 0.8844268507022268,
+       "n": 124034
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.6259101904359056,
+       "H1": 0.5375383138225193,
+       "H3": 0.7086856974038923,
+       "H10": 0.7279256988810517,
+       "n": 54158
+      },
+      "no": {
+       "MRR": 0.956802116836056,
+       "H1": 0.9407177153007132,
+       "H3": 0.969026671477339,
+       "H10": 0.9764647109433543,
+       "n": 72062
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.013004513017270958,
+       "H1": 0.007317073170731708,
+       "H3": 0.0125,
+       "H10": 0.020426829268292684,
+       "n": 3280
+      },
+      "no": {
+       "MRR": 0.8362165563231738,
+       "H1": 0.788010411582886,
+       "H3": 0.8798600943549699,
+       "H10": 0.8924841386041972,
+       "n": 122940
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.836,
+    "best_method": "SIBR (July table)",
+    "deep": 0.8165,
+    "deep_method": "TiRGN",
+    "protocol_comparable": true
+   },
+   "meta": {
+    "group": "reference",
+    "split": "RE-NET/RE-GCN"
+   },
+   "headroom": {
+    "best_minus_recb_lite": 0.021175738891874185,
+    "deep_minus_recb_lite": 0.0016757388918742233
+   }
+  },
+  "YAGO": {
+   "group": "reference",
+   "split": "RE-NET/RE-GCN",
+   "computed_on": "local sandbox",
+   "sizes": {
+    "entities_present": 10585,
+    "relations_present": 10,
+    "timestamps": 189,
+    "train": 161540,
+    "valid": 19523,
+    "test": 20026
+   },
+   "recurrence": {
+    "rec": 0.9272945171277339,
+    "drec": 0.9272445820433437,
+    "rec_trainval": 0.8419055228203336
+   },
+   "dyadic": {
+    "pair_history_online": 0.9279436732248078,
+    "pair_history_trainval": 0.8427044841705782,
+    "no_pair_history_online": 0.07205632677519225
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.04931089583541396,
+    "gold_unseen_in_train": 0.04931089583541396,
+    "subject_unseen_fact": 0.04359332867272546,
+    "object_unseen_fact": 0.05502846299810247,
+    "any_unseen_fact": 0.08034555078398083,
+    "firstseen_entity_fact": 0.01373214820733047,
+    "unseen_share_of_test_entities": 0.1184730144800351,
+    "test_facts_relation_unseen_in_train": 0.0
+   },
+   "cold_gold_lt50": 0.630879856186957,
+   "history_length": {
+    "hist_sr": {
+     "mean": 292.08671227404375,
+     "median": 46.0,
+     "p10": 6.0,
+     "p90": 313.0,
+     "share_zero": 0.02244582043343653
+    },
+    "hist_e": {
+     "mean": 299.48157395386,
+     "median": 53.0,
+     "p10": 10.0,
+     "p90": 315.0,
+     "share_zero": 0.0098122440826925
+    }
+   },
+   "relation_skew": {
+    "gini": 0.5733476221971366,
+    "top10pct_share": 0.2832924724873066,
+    "norm_entropy": 0.7375589908481396
+   },
+   "reachability": {
+    "pair_1hop": 0.9279436732248078,
+    "reach_2hop": 0.9304404274443224,
+    "object_no_history": 0.010985718565864376,
+    "subject_no_history": 0.008638769599520623,
+    "no_pair_share": 0.07205632677519225,
+    "within_no_pair": {
+     "reach_2hop": 0.03465003465003465,
+     "has_history_unreachable_2hop": 0.7747747747747747,
+     "an_endpoint_has_no_history": 0.19057519057519057
+    },
+    "self_loop_test_share": 0.0
+   },
+   "recb_lite": {
+    "lambda_selected": 0.5,
+    "valid": {
+     "MRR": 0.854339600101377,
+     "H1": 0.8231829124622241,
+     "H3": 0.8858013624955181,
+     "H10": 0.8895149311068996,
+     "n": 39046
+    },
+    "test": {
+     "MRR": 0.9082721653956058,
+     "H1": 0.8885199240986718,
+     "H3": 0.9277439328872465,
+     "H10": 0.9299161090582243,
+     "n": 40052
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.9082322716712952,
+     "0.5": 0.9082721471786499,
+     "0.9": 0.8683767914772034,
+     "0.99": 0.8312377333641052,
+     "1.0": 0.8139483332633972
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.6472274922631477,
+       "H1": 0.6075949367088608,
+       "H3": 0.6875949367088607,
+       "H10": 0.6886075949367089,
+       "n": 1975
+      },
+      "no": {
+       "MRR": 0.9218121824514823,
+       "H1": 0.9030911048664548,
+       "H3": 0.9402001208078368,
+       "H10": 0.9424324395304252,
+       "n": 38077
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.6630438071250708,
+       "H1": 0.6324050632911392,
+       "H3": 0.6926582278481013,
+       "H10": 0.6951898734177215,
+       "n": 1975
+      },
+      "no": {
+       "MRR": 0.9209918126258053,
+       "H1": 0.9018042387793156,
+       "H3": 0.9399374950757675,
+       "H10": 0.9420910260787352,
+       "n": 38077
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.020902049596429707,
+       "H1": 0.007898351648351648,
+       "H3": 0.02300824175824176,
+       "H10": 0.036057692307692304,
+       "n": 2912
+      },
+      "no": {
+       "MRR": 0.9778473344103392,
+       "H1": 0.9575659666128163,
+       "H3": 0.9986806677436726,
+       "H10": 1.0,
+       "n": 37140
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.48616651722039605,
+       "H1": 0.42238095238095236,
+       "H3": 0.5466666666666666,
+       "H10": 0.5580952380952381,
+       "n": 6300
+      },
+      "no": {
+       "MRR": 0.9870605507802888,
+       "H1": 0.9755273761554871,
+       "H3": 0.9988741407916568,
+       "H10": 0.9993185589002134,
+       "n": 33752
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.02018909395535756,
+       "H1": 0.007276507276507277,
+       "H3": 0.022176022176022176,
+       "H10": 0.035343035343035345,
+       "n": 2886
+      },
+      "no": {
+       "MRR": 0.977233251984869,
+       "H1": 0.9569499004466447,
+       "H3": 0.998062745520099,
+       "H10": 0.9993811548189205,
+       "n": 37166
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.8620016726471054,
+       "H1": 0.833148646509419,
+       "H3": 0.8906522083267374,
+       "H10": 0.8932246319455438,
+       "n": 25268
+      },
+      "no": {
+       "MRR": 0.9873551477257673,
+       "H1": 0.9831574675324676,
+       "H3": 0.9911390692640693,
+       "H10": 0.9926271645021645,
+       "n": 14784
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.04639727765647057,
+       "H1": 0.025583982202447165,
+       "H3": 0.05672969966629588,
+       "H10": 0.07675194660734148,
+       "n": 899
+      },
+      "no": {
+       "MRR": 0.9280618500705344,
+       "H1": 0.9083339718540087,
+       "H3": 0.9477434679334917,
+       "H10": 0.9495057849973182,
+       "n": 39153
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.6767863705708863,
+       "H1": 0.6367308887507769,
+       "H3": 0.7165941578620261,
+       "H10": 0.718769422001243,
+       "n": 3218
+      },
+      "no": {
+       "MRR": 0.9284959067146573,
+       "H1": 0.9105174566976163,
+       "H3": 0.9461910191670739,
+       "H10": 0.9483629255579085,
+       "n": 36834
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.008830058634066596,
+       "H1": 0.005454545454545455,
+       "H3": 0.007272727272727273,
+       "H10": 0.01090909090909091,
+       "n": 550
+      },
+      "no": {
+       "MRR": 0.9207954087432552,
+       "H1": 0.9008151486000708,
+       "H3": 0.9405599716470052,
+       "H10": 0.9427117614298011,
+       "n": 39502
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.914,
+    "best_method": "TV-LLM (July table)",
+    "deep": 0.8795,
+    "deep_method": "TiRGN",
+    "protocol_comparable": true
+   },
+   "meta": {
+    "group": "reference",
+    "split": "RE-NET/RE-GCN"
+   },
+   "headroom": {
+    "best_minus_recb_lite": 0.005727834604394189,
+    "deep_minus_recb_lite": -0.028772165395605898
+   }
+  },
+  "tkgl-polecat": {
+   "group": "TGB2.0",
+   "split": "TGB 70/15/15 by timestamp quantile",
+   "computed_on": "serverA",
+   "sizes": {
+    "entities_present": 150931,
+    "relations_present": 16,
+    "timestamps": 1826,
+    "train": 1246556,
+    "valid": 266736,
+    "test": 266318
+   },
+   "recurrence": {
+    "rec": 0.42514963314533755,
+    "drec": 0.07065613289375859,
+    "rec_trainval": 0.33823849683461127
+   },
+   "dyadic": {
+    "pair_history_online": 0.6141304755968429,
+    "pair_history_trainval": 0.5007847760947439,
+    "no_pair_history_online": 0.38586952440315714
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.13110454419153042,
+    "gold_unseen_in_train": 0.13110454419153042,
+    "subject_unseen_fact": 0.12930781997461682,
+    "object_unseen_fact": 0.13290126840844405,
+    "any_unseen_fact": 0.21289961624824458,
+    "firstseen_entity_fact": 0.10766076645213617,
+    "unseen_share_of_test_entities": 0.4833416341188498,
+    "test_facts_relation_unseen_in_train": 0.0
+   },
+   "cold_gold_lt50": 0.3327675936286695,
+   "history_length": {
+    "hist_sr": {
+     "mean": 337.3267653707222,
+     "median": 38.0,
+     "p10": 0.0,
+     "p90": 996.0,
+     "share_zero": 0.1530914170277638
+    },
+    "hist_e": {
+     "mean": 6291.888304583243,
+     "median": 834.0,
+     "p10": 4.0,
+     "p90": 22216.0,
+     "share_zero": 0.06621970726725193
+    }
+   },
+   "relation_skew": {
+    "gini": 0.2584672343940526,
+    "top10pct_share": 0.23447553115570266,
+    "norm_entropy": 0.9603429745622434
+   },
+   "reachability": {
+    "pair_1hop": 0.6141304755968429,
+    "reach_2hop": 0.8280026134170427,
+    "object_no_history": 0.06986384697992626,
+    "subject_no_history": 0.0625755675545776,
+    "no_pair_share": 0.38586952440315714,
+    "within_no_pair": {
+     "reach_2hop": 0.5542602467790276,
+     "has_history_unreachable_2hop": 0.16673154022809544,
+     "an_endpoint_has_no_history": 0.27900821299287687
+    },
+    "self_loop_test_share": 0.10380447435021291
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.2001753957998634,
+     "H1": 0.1405322116249775,
+     "H3": 0.22360498770319717,
+     "H10": 0.31518992561933895,
+     "n": 533472
+    },
+    "test": {
+     "MRR": 0.19625968161086696,
+     "H1": 0.13558790618733996,
+     "H3": 0.21999264037729332,
+     "H10": 0.31463513543958727,
+     "n": 532636
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.18162204325199127,
+     "0.5": 0.18244020640850067,
+     "0.9": 0.1876811534166336,
+     "0.99": 0.19625967741012573,
+     "1.0": 0.18304318189620972
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.076122631994109,
+       "H1": 0.06040297289169567,
+       "H3": 0.0849765863298535,
+       "H10": 0.10522547292749639,
+       "n": 69831
+      },
+      "no": {
+       "MRR": 0.2143867336344791,
+       "H1": 0.14693229329847343,
+       "H3": 0.2403647324467108,
+       "H10": 0.34623221443156404,
+       "n": 462805
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.11539853908488354,
+       "H1": 0.08848505677994015,
+       "H3": 0.12530251607452278,
+       "H10": 0.16133235955377984,
+       "n": 69831
+      },
+      "no": {
+       "MRR": 0.2084605317393918,
+       "H1": 0.1426950875638768,
+       "H3": 0.23428009636888106,
+       "H10": 0.33776644591134497,
+       "n": 462805
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.011619759832859573,
+       "H1": 0.0021326905867675204,
+       "H3": 0.007933086424591588,
+       "H10": 0.024857439595539967,
+       "n": 306186
+      },
+      "no": {
+       "MRR": 0.4459137292572391,
+       "H1": 0.316034444689777,
+       "H3": 0.5067211304923824,
+       "H10": 0.706447339368514,
+       "n": 226450
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.06746182753983966,
+       "H1": 0.0448251222264009,
+       "H3": 0.07308386611508086,
+       "H10": 0.1083602858217375,
+       "n": 265900
+      },
+      "no": {
+       "MRR": 0.32465385936522395,
+       "H1": 0.22606622278207666,
+       "H3": 0.36644097534640996,
+       "H10": 0.5202634814948114,
+       "n": 266736
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.010924853411256423,
+       "H1": 0.0024570861391148653,
+       "H3": 0.008514654937526761,
+       "H10": 0.023476120042038067,
+       "n": 205528
+      },
+      "no": {
+       "MRR": 0.3127089783881074,
+       "H1": 0.21923646012937623,
+       "H3": 0.35286816586570796,
+       "H10": 0.497575724225638,
+       "n": 327108
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.09376866054494695,
+       "H1": 0.071754191961364,
+       "H3": 0.10492879871815125,
+       "H10": 0.13571122294689805,
+       "n": 177244
+      },
+      "no": {
+       "MRR": 0.24737484047152766,
+       "H1": 0.16742357734557897,
+       "H3": 0.2773782189807311,
+       "H10": 0.40386952998379255,
+       "n": 355392
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.023153205368570674,
+       "H1": 0.0078977704741115,
+       "H3": 0.022307522503740403,
+       "H10": 0.04993745554438204,
+       "n": 81542
+      },
+      "no": {
+       "MRR": 0.2275512711371061,
+       "H1": 0.15866981161354396,
+       "H3": 0.2557271876815032,
+       "H10": 0.36248320749112156,
+       "n": 451094
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.08843685573157853,
+       "H1": 0.06530979382352423,
+       "H3": 0.09733857739995415,
+       "H10": 0.130434399195753,
+       "n": 113398
+      },
+      "no": {
+       "MRR": 0.2254242440051622,
+       "H1": 0.15459715006750344,
+       "H3": 0.25316884442727045,
+       "H10": 0.3644588515354047,
+       "n": 419238
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.013252654718783155,
+       "H1": 0.0047607421875,
+       "H3": 0.013235909598214286,
+       "H10": 0.028267996651785716,
+       "n": 57344
+      },
+      "no": {
+       "MRR": 0.21833948718323015,
+       "H1": 0.15137220908409987,
+       "H3": 0.2449378487329894,
+       "H10": 0.34918534290499315,
+       "n": 475292
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.256,
+    "best_method": "CountTRuCoLa",
+    "deep": 0.184,
+    "deep_method": "CEN",
+    "protocol_comparable": true
+   },
+   "meta": {
+    "group": "TGB2.0",
+    "split": "TGB 70/15/15 by timestamp quantile",
+    "tgb_zip_members": [
+     "tkgl-polecat_edgelist.csv",
+     "tkgl-polecat_edgemapping.csv",
+     "tkgl-polecat_test_ns.pkl",
+     "tkgl-polecat_val_ns.pkl"
+    ],
+    "tgb_edgelist": "tkgl-polecat_edgelist.csv",
+    "tgb_header": [
+     "date",
+     "head",
+     "tail",
+     "relation_type"
+    ],
+    "tgb_split_rule": "np.quantile(ts,[0.70,0.85]); train ts<=q70, valid q70<ts<=q85, test ts>q85"
+   },
+   "headroom": {
+    "best_minus_recb_lite": 0.059740318389133046,
+    "deep_minus_recb_lite": -0.012259681610866963
+   }
+  },
+  "tkgl-smallpedia": {
+   "group": "TGB2.0",
+   "split": "TGB 70/15/15 by timestamp quantile",
+   "computed_on": "serverA",
+   "sizes": {
+    "entities_present": 47433,
+    "relations_present": 283,
+    "timestamps": 125,
+    "train": 387757,
+    "valid": 81033,
+    "test": 81586
+   },
+   "recurrence": {
+    "rec": 0.7158090848920158,
+    "drec": 0.7085039099845561,
+    "rec_trainval": 0.36111587772411935
+   },
+   "dyadic": {
+    "pair_history_online": 0.7200622655847817,
+    "pair_history_trainval": 0.3660186796754345,
+    "no_pair_history_online": 0.2799377344152183
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.48559801926801166,
+    "gold_unseen_in_train": 0.48559801926801166,
+    "subject_unseen_fact": 0.6955359988233275,
+    "object_unseen_fact": 0.2756600397126958,
+    "any_unseen_fact": 0.7724609614394626,
+    "firstseen_entity_fact": 0.08293089500649621,
+    "unseen_share_of_test_entities": 0.6445310470252014,
+    "test_facts_relation_unseen_in_train": 0.0015688966244208566
+   },
+   "cold_gold_lt50": 0.7892162871080822,
+   "history_length": {
+    "hist_sr": {
+     "mean": 437.73601475743385,
+     "median": 17.0,
+     "p10": 1.0,
+     "p90": 210.0,
+     "share_zero": 0.06639006692324663
+    },
+    "hist_e": {
+     "mean": 472.2584205623514,
+     "median": 20.0,
+     "p10": 2.0,
+     "p90": 248.0,
+     "share_zero": 0.04852548231314196
+    }
+   },
+   "relation_skew": {
+    "gini": 0.9353625951620559,
+    "top10pct_share": 0.916262700408448,
+    "norm_entropy": 0.5059003404388819
+   },
+   "reachability": {
+    "pair_1hop": 0.7200622655847817,
+    "reach_2hop": 0.7204912607555218,
+    "object_no_history": 0.03985977986419239,
+    "subject_no_history": 0.057191184762091535,
+    "no_pair_share": 0.2799377344152183,
+    "within_no_pair": {
+     "reach_2hop": 0.001532466395201191,
+     "has_history_unreachable_2hop": 0.7022198870353343,
+     "an_endpoint_has_no_history": 0.2962476465694645
+    },
+    "self_loop_test_share": 2.4514009756575884e-05
+   },
+   "recb_lite": {
+    "lambda_selected": 0.01,
+    "valid": {
+     "MRR": 0.6374385156369752,
+     "H1": 0.5761171374625152,
+     "H3": 0.6879419495760987,
+     "H10": 0.7256056174644898,
+     "n": 162066
+    },
+    "test": {
+     "MRR": 0.6037666702605105,
+     "H1": 0.5243607971955973,
+     "H3": 0.6666217243154463,
+     "H10": 0.7148223959993136,
+     "n": 163172
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.603766679763794,
+     "0.5": 0.603969156742096,
+     "0.9": 0.5002556443214417,
+     "0.99": 0.44385555386543274,
+     "1.0": 0.4229935109615326
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.5130522318899319,
+       "H1": 0.4099904084002221,
+       "H3": 0.5908425463173305,
+       "H10": 0.6667802514008784,
+       "n": 79236
+      },
+      "no": {
+       "MRR": 0.6894015496773419,
+       "H1": 0.6323270110560427,
+       "H3": 0.7381576439191765,
+       "H10": 0.7601744186046512,
+       "n": 83936
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.6140724031177572,
+       "H1": 0.5548361855722147,
+       "H3": 0.667613206118431,
+       "H10": 0.6814326821141905,
+       "n": 79236
+      },
+      "no": {
+       "MRR": 0.5940380073664387,
+       "H1": 0.49559187952725886,
+       "H3": 0.6656857605794891,
+       "H10": 0.7463424513915364,
+       "n": 83936
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.010512763187312223,
+       "H1": 0.0017467437246614335,
+       "H3": 0.008022082291037696,
+       "H10": 0.02443284740791857,
+       "n": 46372
+      },
+      "no": {
+       "MRR": 0.8393006615173457,
+       "H1": 0.7318493150684932,
+       "H3": 0.9280993150684932,
+       "H10": 0.9889212328767123,
+       "n": 116800
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.4361617778856935,
+       "H1": 0.3463382569020184,
+       "H3": 0.5071436857164953,
+       "H10": 0.5638388369035651,
+       "n": 103448
+      },
+      "no": {
+       "MRR": 0.8940752715998391,
+       "H1": 0.8327138168910321,
+       "H3": 0.9428537941196169,
+       "H10": 0.9763411693791441,
+       "n": 59724
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.010434920961285503,
+       "H1": 0.0017513901659442182,
+       "H3": 0.0080345023862691,
+       "H10": 0.024103507158807304,
+       "n": 45678
+      },
+      "no": {
+       "MRR": 0.8344355354322638,
+       "H1": 0.7275350230650076,
+       "H3": 0.9226598805045364,
+       "H10": 0.9833523413961563,
+       "n": 117494
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.5645253515993994,
+       "H1": 0.4786687167062697,
+       "H3": 0.6335398903539424,
+       "H10": 0.6864138284489587,
+       "n": 128778
+      },
+      "no": {
+       "MRR": 0.7506939987056044,
+       "H1": 0.6954410653020876,
+       "H3": 0.7904867127987439,
+       "H10": 0.8211897423969297,
+       "n": 34394
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.032314856021923535,
+       "H1": 0.00729253207791009,
+       "H3": 0.028616265115849717,
+       "H10": 0.07957167912858858,
+       "n": 10833
+      },
+      "no": {
+       "MRR": 0.6444032603894112,
+       "H1": 0.5611301111337215,
+       "H3": 0.7119910200277014,
+       "H10": 0.7599957988433691,
+       "n": 152339
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.5561912884064263,
+       "H1": 0.46709879089841644,
+       "H3": 0.6272333470851449,
+       "H10": 0.680603598743296,
+       "n": 126044
+      },
+      "no": {
+       "MRR": 0.7652779671366199,
+       "H1": 0.7187567334626158,
+       "H3": 0.8003393665158371,
+       "H10": 0.8309900883430296,
+       "n": 37128
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.019354092027787186,
+       "H1": 0.004138338752586462,
+       "H3": 0.017957434229973396,
+       "H10": 0.046556310966597694,
+       "n": 13532
+      },
+      "no": {
+       "MRR": 0.6566153137291366,
+       "H1": 0.5714047046244319,
+       "H3": 0.72528067361668,
+       "H10": 0.7752539427960439,
+       "n": 149640
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.644,
+    "best_method": "CountTRuCoLa",
+    "deep": 0.612,
+    "deep_method": "CEN",
+    "protocol_comparable": true
+   },
+   "meta": {
+    "group": "TGB2.0",
+    "split": "TGB 70/15/15 by timestamp quantile",
+    "tgb_zip_members": [
+     "tkgl-smallpedia_edgelist.csv",
+     "tkgl-smallpedia_static_edgelist.csv",
+     "tkgl-smallpedia_test_ns.pkl",
+     "tkgl-smallpedia_val_ns.pkl"
+    ],
+    "tgb_edgelist": "tkgl-smallpedia_edgelist.csv",
+    "tgb_header": [
+     "ts",
+     "head",
+     "tail",
+     "relation_type"
+    ],
+    "tgb_split_rule": "np.quantile(ts,[0.70,0.85]); train ts<=q70, valid q70<ts<=q85, test ts>q85"
+   },
+   "headroom": {
+    "best_minus_recb_lite": 0.040233329739489565,
+    "deep_minus_recb_lite": 0.008233329739489537
+   },
+   "static_kg_reach": {
+    "n_static_edges": 978022,
+    "n_static_edges_both_endpoints_in_tkg": 715661,
+    "nopair": 22839,
+    "static_1hop": 509,
+    "temporal_2hop": 35,
+    "union_2hop": 8023,
+    "gold_no_temporal_hist": 3252,
+    "gold_no_hist_but_static": 2186,
+    "within_no_pair_share": {
+     "static_1hop": 0.022286439861640178,
+     "temporal_2hop": 0.001532466395201191,
+     "union_2hop": 0.35128508253426155,
+     "gold_in_static": 0.8164543106090459,
+     "gold_no_temporal_hist": 0.14238802049126495,
+     "gold_no_hist_but_static": 0.09571347256885153
+    },
+    "note": "static Wikidata edges shipped in tkgl-smallpedia.zip; 2-hop over temporal history (before t) U static graph"
+   }
+  },
+  "tkgl-icews": {
+   "group": "TGB2.0",
+   "split": "TGB 70/15/15 by timestamp quantile",
+   "computed_on": "serverA",
+   "sizes": {
+    "entities_present": 87856,
+    "relations_present": 391,
+    "timestamps": 10224,
+    "train": 10861600,
+    "valid": 2326157,
+    "test": 2325689
+   },
+   "recurrence": {
+    "rec": 0.6294065973567403,
+    "drec": 0.1138454023732322,
+    "rec_trainval": 0.3711476469983734
+   },
+   "dyadic": {
+    "pair_history_online": 0.8913913253233773,
+    "pair_history_trainval": 0.8114520041157696,
+    "no_pair_history_online": 0.10860867467662272
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.052315894343568724,
+    "gold_unseen_in_train": 0.052315894343568724,
+    "subject_unseen_fact": 0.06370585233021268,
+    "object_unseen_fact": 0.040925936356924764,
+    "any_unseen_fact": 0.10017504490067244,
+    "firstseen_entity_fact": 0.0017040111554038394,
+    "unseen_share_of_test_entities": 0.10846478025285973,
+    "test_facts_relation_unseen_in_train": 0.43823830271373343
+   },
+   "cold_gold_lt50": 0.10998783586283463,
+   "history_length": {
+    "hist_sr": {
+     "mean": 2564.823463498344,
+     "median": 107.0,
+     "p10": 1.0,
+     "p90": 3968.0,
+     "share_zero": 0.07249959044395016
+    },
+    "hist_e": {
+     "mean": 70132.04617491849,
+     "median": 11622.0,
+     "p10": 333.0,
+     "p90": 226365.0,
+     "share_zero": 0.0008556604085928944
+    }
+   },
+   "relation_skew": {
+    "gini": 0.9066688602965499,
+    "top10pct_share": 0.8790929494323827,
+    "norm_entropy": 0.6177773840243858
+   },
+   "reachability": {
+    "pair_1hop": 0.8913913253233773,
+    "reach_2hop": 0.9958635913916263,
+    "object_no_history": 0.0007915933729746325,
+    "subject_no_history": 0.0009197274442111563,
+    "no_pair_share": 0.10860867467662272,
+    "within_no_pair": {
+     "reach_2hop": 0.961914565105507,
+     "has_history_unreachable_2hop": 0.022395977671325073,
+     "an_endpoint_has_no_history": 0.01568945722316798
+    },
+    "self_loop_test_share": 9.029582201231548e-06
+   },
+   "recb_lite": {
+    "lambda_selected": 0.99,
+    "valid": {
+     "MRR": 0.30322358811288974,
+     "H1": 0.21381918761287394,
+     "H3": 0.3427767343304859,
+     "H10": 0.47936080840631135,
+     "n": 4652314
+    },
+    "test": {
+     "MRR": 0.30255987696750625,
+     "H1": 0.21833916744672224,
+     "H3": 0.34378134823701706,
+     "H10": 0.4673006579985544,
+     "n": 4651378
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.28081926703453064,
+     "0.5": 0.2851915657520294,
+     "0.9": 0.29392337799072266,
+     "0.99": 0.30255985260009766,
+     "1.0": 0.2817476987838745
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.20960655619439347,
+       "H1": 0.14314480502669094,
+       "H3": 0.2396842291270275,
+       "H10": 0.34171389120616746,
+       "n": 243341
+      },
+      "no": {
+       "MRR": 0.30769126629800636,
+       "H1": 0.22249019234638912,
+       "H3": 0.34952791911683134,
+       "H10": 0.47423354205057716,
+       "n": 4408037
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.2603677152042142,
+       "H1": 0.18634344397368302,
+       "H3": 0.2970029711392655,
+       "H10": 0.4049831306684858,
+       "n": 243341
+      },
+      "no": {
+       "MRR": 0.30488905043761116,
+       "H1": 0.22010545737252205,
+       "H3": 0.3463636988528,
+       "H10": 0.4707408308959294,
+       "n": 4408037
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.006309452749137395,
+       "H1": 0.0020112892091172256,
+       "H3": 0.004734390318894052,
+       "H10": 0.012672804376453935,
+       "n": 1723770
+      },
+      "no": {
+       "MRR": 0.47699156104368634,
+       "H1": 0.34571260906514806,
+       "H3": 0.5434115496336941,
+       "H10": 0.734984670078781,
+       "n": 2927608
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.12281439414689548,
+       "H1": 0.0861120993195045,
+       "H3": 0.13916976812070128,
+       "H10": 0.19349196358528087,
+       "n": 877008
+      },
+      "no": {
+       "MRR": 0.34432531766291713,
+       "H1": 0.24906328738305997,
+       "H3": 0.391324644907627,
+       "H10": 0.5309225115714675,
+       "n": 3774370
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.006123093372069138,
+       "H1": 0.002684191773229344,
+       "H3": 0.004924977235836732,
+       "H10": 0.01070707470604537,
+       "n": 505180
+      },
+      "no": {
+       "MRR": 0.3386782520033204,
+       "H1": 0.2446149460300738,
+       "H3": 0.3850681998303024,
+       "H10": 0.5229328170048801,
+       "n": 4146198
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.16247468251812258,
+       "H1": 0.10814413745247706,
+       "H3": 0.18530282743185528,
+       "H10": 0.2718986698462651,
+       "n": 511595
+      },
+      "no": {
+       "MRR": 0.31987162617134907,
+       "H1": 0.23195708567333118,
+       "H3": 0.36336614745265633,
+       "H10": 0.4914484648108367,
+       "n": 4139783
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.017008809479748647,
+       "H1": 0.01014758779798531,
+       "H3": 0.016938346435444795,
+       "H10": 0.029674725626662474,
+       "n": 337223
+      },
+      "no": {
+       "MRR": 0.32488044440920083,
+       "H1": 0.23461280366607135,
+       "H3": 0.36932956743556966,
+       "H10": 0.5015084066288763,
+       "n": 4314155
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.2363833683434439,
+       "H1": 0.16611796923288236,
+       "H3": 0.2696243389877069,
+       "H10": 0.37483045463910447,
+       "n": 465952
+      },
+      "no": {
+       "MRR": 0.30992712621439267,
+       "H1": 0.22415281025157296,
+       "H3": 0.3520370447357091,
+       "H10": 0.47759511218212913,
+       "n": 4185426
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.018203313882390108,
+       "H1": 0.012112036336109008,
+       "H3": 0.017789553368660106,
+       "H10": 0.02838758516275549,
+       "n": 7926
+      },
+      "no": {
+       "MRR": 0.3030452508055501,
+       "H1": 0.2186911806130439,
+       "H3": 0.34433779007514237,
+       "H10": 0.46804984739801336,
+       "n": 4643452
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.269,
+    "best_method": "EdgeReMIND",
+    "deep": 0.187,
+    "deep_method": "CEN",
+    "protocol_comparable": true
+   },
+   "meta": {
+    "group": "TGB2.0",
+    "split": "TGB 70/15/15 by timestamp quantile",
+    "tgb_zip_members": [
+     "tkgl-icews_edgelist.csv",
+     "tkgl-icews_edgemapping.csv",
+     "tkgl-icews_test_ns.pkl",
+     "tkgl-icews_val_ns.pkl"
+    ],
+    "tgb_edgelist": "tkgl-icews_edgelist.csv",
+    "tgb_header": [
+     "date",
+     "head",
+     "tail",
+     "relation_type"
+    ],
+    "tgb_split_rule": "np.quantile(ts,[0.70,0.85]); train ts<=q70, valid q70<ts<=q85, test ts>q85"
+   },
+   "headroom": {
+    "best_minus_recb_lite": -0.03355987696750623,
+    "deep_minus_recb_lite": -0.11555987696750625
+   },
+   "relation_vocabulary_shift": {
+    "test_only_relation_types": 117,
+    "test_fact_share_on_test_only_types": 0.43823830271373343,
+    "first_appearance_unix": 1577854800,
+    "first_appearance_date": "2020-01-01",
+    "test_period_start_unix": 1525665600.0,
+    "test_period_start_date": "2018-05-07",
+    "late_type_ids": "272-390 (119 types)",
+    "late_types_matching_an_earlier_CAMEO_code_after_stripping_leading_zeros": 117,
+    "interpretation": "probable coding artefact: CAMEO codes stored without leading zeros from 2020-01 onward (e.g. '42' vs '042') become new relation types in tkgl-icews; train-only models see untrained relation ids for 43.8% of test facts",
+    "evidence_files": [
+     "rel_drift_tkgl-icews.json",
+     "tkgl-icews_edgemapping.csv"
+    ]
+   }
+  },
+  "GDELT-TE": {
+   "group": "text-rich",
+   "split": "SCTc-TE repo (CE-level)",
+   "computed_on": "serverA",
+   "sizes": {
+    "entities_present": 1554,
+    "relations_present": 233,
+    "timestamps": 2584,
+    "train": 441120,
+    "valid": 66785,
+    "test": 65433
+   },
+   "recurrence": {
+    "rec": 0.7224947656381336,
+    "drec": 0.061834242660431284,
+    "rec_trainval": 0.6855562178105848
+   },
+   "dyadic": {
+    "pair_history_online": 0.9474882704445768,
+    "pair_history_trainval": 0.9365916280775756,
+    "no_pair_history_online": 0.05251172955542316
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.00034386318829948193,
+    "gold_unseen_in_train": 0.00034386318829948193,
+    "subject_unseen_fact": 0.0003667874008527807,
+    "object_unseen_fact": 0.0003209389757461831,
+    "any_unseen_fact": 0.000672443568230098,
+    "firstseen_entity_fact": 6.113123347546344e-05,
+    "unseen_share_of_test_entities": 0.0071301247771836,
+    "test_facts_relation_unseen_in_train": 0.0
+   },
+   "cold_gold_lt50": 0.018545687955618725,
+   "history_length": {
+    "hist_sr": {
+     "mean": 753.4175416074457,
+     "median": 178.0,
+     "p10": 5.0,
+     "p90": 2674.5,
+     "share_zero": 0.032292574083413565
+    },
+    "hist_e": {
+     "mean": 42410.69076001406,
+     "median": 11375.0,
+     "p10": 532.0,
+     "p90": 141167.0,
+     "share_zero": 3.820702092216466e-05
+    }
+   },
+   "relation_skew": {
+    "gini": 0.8380421007751953,
+    "top10pct_share": 0.7569531410790843,
+    "norm_entropy": 0.7102119102538537
+   },
+   "reachability": {
+    "pair_1hop": 0.9474882704445768,
+    "reach_2hop": 0.9998624547246802,
+    "object_no_history": 4.584842510659759e-05,
+    "subject_no_history": 3.056561673773172e-05,
+    "no_pair_share": 0.0525117295554231,
+    "within_no_pair": {
+     "reach_2hop": 0.9973806752037253,
+     "has_history_unreachable_2hop": 0.0014551804423748546,
+     "an_endpoint_has_no_history": 0.0011641443538998836
+    },
+    "self_loop_test_share": 0.03955190805862485
+   },
+   "recb_lite": {
+    "lambda_selected": 1.0,
+    "valid": {
+     "MRR": 0.3144149333480853,
+     "H1": 0.20524069776147338,
+     "H3": 0.3574380474657483,
+     "H10": 0.5286067230665569,
+     "n": 133570
+    },
+    "test": {
+     "MRR": 0.31952508189679574,
+     "H1": 0.21079577583176684,
+     "H3": 0.3616982256659484,
+     "H10": 0.5339584001956199,
+     "n": 130866
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.2862216830253601,
+     "0.5": 0.27518683671951294,
+     "0.9": 0.2816348671913147,
+     "0.99": 0.3038111925125122,
+     "1.0": 0.3195250630378723
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.09550577912824676,
+       "H1": 0.044444444444444446,
+       "H3": 0.13333333333333333,
+       "H10": 0.17777777777777778,
+       "n": 45
+      },
+      "no": {
+       "MRR": 0.31960214038606416,
+       "H1": 0.21085299760741777,
+       "H3": 0.3617767789575068,
+       "H10": 0.5340809197300128,
+       "n": 130821
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.43096310658375053,
+       "H1": 0.3111111111111111,
+       "H3": 0.5111111111111111,
+       "H10": 0.6444444444444445,
+       "n": 45
+      },
+      "no": {
+       "MRR": 0.31948674928115367,
+       "H1": 0.21076126921518717,
+       "H3": 0.3616468304018468,
+       "H10": 0.5339203950436092,
+       "n": 130821
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.07217027899923305,
+       "H1": 0.021946249586958917,
+       "H3": 0.06842713955281418,
+       "H10": 0.16874105077651724,
+       "n": 36316
+      },
+      "no": {
+       "MRR": 0.41453234812659884,
+       "H1": 0.2833315705975674,
+       "H3": 0.4743416181914331,
+       "H10": 0.6742358540454786,
+       "n": 94550
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.047659947112611574,
+       "H1": 0.01735357917570499,
+       "H3": 0.04097372860930345,
+       "H10": 0.0970113280308508,
+       "n": 8298
+      },
+      "no": {
+       "MRR": 0.33793067624800616,
+       "H1": 0.2238920436002872,
+       "H3": 0.38341165720253245,
+       "H10": 0.563540238887801,
+       "n": 122568
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.027707615352253426,
+       "H1": 0.005675203725261932,
+       "H3": 0.018189755529685683,
+       "H10": 0.057625145518044235,
+       "n": 6872
+      },
+      "no": {
+       "MRR": 0.3356982001936012,
+       "H1": 0.2221639756762424,
+       "H3": 0.3807361646531284,
+       "H10": 0.5603577592464152,
+       "n": 123994
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.015110245464177535,
+       "H1": 0.005356407086938607,
+       "H3": 0.014833127317676144,
+       "H10": 0.0288421920065925,
+       "n": 2427
+      },
+      "no": {
+       "MRR": 0.3252773441226147,
+       "H1": 0.21467778478499522,
+       "H3": 0.3682526335458856,
+       "H10": 0.5435031415691496,
+       "n": 128439
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.3004244646564011,
+       "H1": 0.1869380028395646,
+       "H3": 0.35731187884524374,
+       "H10": 0.5132513014671084,
+       "n": 4226
+      },
+      "no": {
+       "MRR": 0.32016247299327316,
+       "H1": 0.21159191408717626,
+       "H3": 0.36184459886291853,
+       "H10": 0.5346493998736576,
+       "n": 126640
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.26918903732185906,
+       "H1": 0.18181818181818182,
+       "H3": 0.32954545454545453,
+       "H10": 0.42045454545454547,
+       "n": 88
+      },
+      "no": {
+       "MRR": 0.3195589528225064,
+       "H1": 0.21081527474039977,
+       "H3": 0.3617198611387236,
+       "H10": 0.5340347764914588,
+       "n": 130778
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.06357080562437989,
+       "H1": 0.0,
+       "H3": 0.125,
+       "H10": 0.125,
+       "n": 8
+      },
+      "no": {
+       "MRR": 0.3195407296539843,
+       "H1": 0.21080866282535268,
+       "H3": 0.3617126962050467,
+       "H10": 0.5339834018554463,
+       "n": 130858
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.2533,
+    "best_method": "LoGo",
+    "deep": 0.1641,
+    "deep_method": "HisMatch",
+    "protocol_comparable": false
+   },
+   "meta": {
+    "group": "text-rich",
+    "split": "SCTc-TE repo (CE-level)"
+   }
+  },
+  "tkgl-yago": {
+   "group": "TGB2.0",
+   "split": "TGB 70/15/15 by timestamp quantile",
+   "computed_on": "serverA",
+   "sizes": {
+    "entities_present": 10585,
+    "relations_present": 10,
+    "timestamps": 189,
+    "train": 141388,
+    "valid": 31646,
+    "test": 28055
+   },
+   "recurrence": {
+    "rec": 0.9171270718232044,
+    "drec": 0.9170914275530209,
+    "rec_trainval": 0.7854927820352878
+   },
+   "dyadic": {
+    "pair_history_online": 0.91798253430761,
+    "pair_history_trainval": 0.7866690429513455,
+    "no_pair_history_online": 0.08201746569238999
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.1439672072714311,
+    "gold_unseen_in_train": 0.1439672072714311,
+    "subject_unseen_fact": 0.1489930493673142,
+    "object_unseen_fact": 0.13894136517554803,
+    "any_unseen_fact": 0.2290500801996079,
+    "firstseen_entity_fact": 0.016075565852789166,
+    "unseen_share_of_test_entities": 0.21582011644248142,
+    "test_facts_relation_unseen_in_train": 0.0
+   },
+   "cold_gold_lt50": 0.6899483158082338,
+   "history_length": {
+    "hist_sr": {
+     "mean": 285.14817323115307,
+     "median": 43.0,
+     "p10": 6.0,
+     "p90": 307.0,
+     "share_zero": 0.02439850294065229
+    },
+    "hist_e": {
+     "mean": 292.5077169844947,
+     "median": 51.0,
+     "p10": 9.0,
+     "p90": 310.0,
+     "share_zero": 0.011263589378007486
+    }
+   },
+   "relation_skew": {
+    "gini": 0.5733476221971366,
+    "top10pct_share": 0.2832924724873066,
+    "norm_entropy": 0.7375589908481396
+   },
+   "reachability": {
+    "pair_1hop": 0.91798253430761,
+    "reach_2hop": 0.9207271431117448,
+    "object_no_history": 0.012760648725717342,
+    "subject_no_history": 0.00976653003029763,
+    "no_pair_share": 0.08201746569238995,
+    "within_no_pair": {
+     "reach_2hop": 0.03346371142981312,
+     "has_history_unreachable_2hop": 0.7705345501955672,
+     "an_endpoint_has_no_history": 0.19600173837461973
+    },
+    "self_loop_test_share": 0.0
+   },
+   "recb_lite": {
+    "lambda_selected": 0.5,
+    "valid": {
+     "MRR": 0.8434009909571303,
+     "H1": 0.8137047336156228,
+     "H3": 0.8719901409340833,
+     "H10": 0.8768406749668205,
+     "n": 63292
+    },
+    "test": {
+     "MRR": 0.8954091124916994,
+     "H1": 0.8728212439850294,
+     "H3": 0.9175369809303154,
+     "H10": 0.9201390126537159,
+     "n": 56110
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.8952909708023071,
+     "0.5": 0.895409107208252,
+     "0.9": 0.8523401021957397,
+     "0.99": 0.8151593804359436,
+     "1.0": 0.7976899743080139
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.757135886132619,
+       "H1": 0.7114384748700173,
+       "H3": 0.8020549641000247,
+       "H10": 0.8036642733349839,
+       "n": 8078
+      },
+      "no": {
+       "MRR": 0.9186638410586683,
+       "H1": 0.8999625249833444,
+       "H3": 0.9369586942038641,
+       "H10": 0.9397276815456362,
+       "n": 48032
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.7629749528742812,
+       "H1": 0.7196088140628869,
+       "H3": 0.8050259965337955,
+       "H10": 0.8076256499133448,
+       "n": 8078
+      },
+      "no": {
+       "MRR": 0.9176818294593356,
+       "H1": 0.8985884410393071,
+       "H3": 0.9364590273151232,
+       "H10": 0.9390614590273151,
+       "n": 48032
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.01918665121975882,
+       "H1": 0.006881720430107527,
+       "H3": 0.02,
+       "H10": 0.03634408602150538,
+       "n": 4650
+      },
+      "no": {
+       "MRR": 0.9745858409198868,
+       "H1": 0.9510687912942091,
+       "H3": 0.9986397201710067,
+       "H10": 1.0,
+       "n": 51460
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.557292727733755,
+       "H1": 0.49256474519632415,
+       "H3": 0.6193817878028405,
+       "H10": 0.629156223893066,
+       "n": 11970
+      },
+      "no": {
+       "MRR": 0.9871003930887223,
+       "H1": 0.9759401903035795,
+       "H3": 0.9983914816492977,
+       "H10": 0.9990484821024015,
+       "n": 44140
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.01858842915537766,
+       "H1": 0.00651890482398957,
+       "H3": 0.01933941764450239,
+       "H10": 0.03541938287701,
+       "n": 4602
+      },
+      "no": {
+       "MRR": 0.9737489584324028,
+       "H1": 0.9502213248427429,
+       "H3": 0.9977867515725712,
+       "H10": 0.9991845926846316,
+       "n": 51508
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.8547660786498259,
+       "H1": 0.8239609433523623,
+       "H3": 0.8853615064706946,
+       "H10": 0.8877638002738099,
+       "n": 38713
+      },
+      "no": {
+       "MRR": 0.98585078456852,
+       "H1": 0.9815485428522159,
+       "H3": 0.9891360579410243,
+       "H10": 0.9921825602115307,
+       "n": 17397
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.04379332420198993,
+       "H1": 0.022644265887509132,
+       "H3": 0.05113221329437546,
+       "H10": 0.07962016070124178,
+       "n": 1369
+      },
+      "no": {
+       "MRR": 0.9167068968611595,
+       "H1": 0.8940830456148042,
+       "H3": 0.9392046181107396,
+       "H10": 0.9411592773241263,
+       "n": 54741
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.7744258987293825,
+       "H1": 0.7286803610333022,
+       "H3": 0.819094304388422,
+       "H10": 0.8216619981325863,
+       "n": 12852
+      },
+      "no": {
+       "MRR": 0.9313533601053963,
+       "H1": 0.9156456609182116,
+       "H3": 0.9467844098201489,
+       "H10": 0.9493966433954413,
+       "n": 43258
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.007374299246739105,
+       "H1": 0.0033259423503325942,
+       "H3": 0.007760532150776054,
+       "H10": 0.012195121951219513,
+       "n": 902
+      },
+      "no": {
+       "MRR": 0.9099180134036496,
+       "H1": 0.8870272424286335,
+       "H3": 0.9324011012896681,
+       "H10": 0.9349731922909723,
+       "n": 55208
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": null,
+   "meta": {
+    "group": "TGB2.0",
+    "split": "TGB 70/15/15 by timestamp quantile",
+    "tgb_zip_members": [
+     "tkgl-yago_edgelist.csv",
+     "tkgl-yago_test_ns.pkl",
+     "tkgl-yago_val_ns.pkl"
+    ],
+    "tgb_edgelist": "tkgl-yago_edgelist.csv",
+    "tgb_header": [
+     "timestamp",
+     "head",
+     "tail",
+     "relation_type"
+    ],
+    "tgb_split_rule": "np.quantile(ts,[0.70,0.85]); train ts<=q70, valid q70<ts<=q85, test ts>q85"
+   }
+  },
+  "tkgl-wikidata": {
+   "group": "TGB2.0",
+   "split": "TGB 70/15/15 by timestamp quantile",
+   "computed_on": "serverA",
+   "sizes": {
+    "entities_present": 1226440,
+    "relations_present": 596,
+    "timestamps": 2025,
+    "train": 6982503,
+    "valid": 1434950,
+    "test": 1438750
+   },
+   "recurrence": {
+    "rec": 0.6092045178105995,
+    "drec": 0.6072145960034753,
+    "rec_trainval": 0.2668976542137272
+   },
+   "dyadic": {
+    "pair_history_online": 0.6138404865334491,
+    "pair_history_trainval": 0.2735986099044309,
+    "no_pair_history_online": 0.38615951346655086
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.5888521285838402,
+    "gold_unseen_in_train": 0.5888521285838402,
+    "subject_unseen_fact": 0.839890877497828,
+    "object_unseen_fact": 0.3378133796698523,
+    "any_unseen_fact": 0.8814554300608167,
+    "firstseen_entity_fact": 0.23726846220677672,
+    "unseen_share_of_test_entities": 0.8507750659630607,
+    "test_facts_relation_unseen_in_train": 0.04484309296264118
+   },
+   "cold_gold_lt50": 0.7860931364031277,
+   "history_length": {
+    "hist_sr": {
+     "mean": 2937.543451607298,
+     "median": 9.0,
+     "p10": 0.0,
+     "p90": 1400.0,
+     "share_zero": 0.16684552562988705
+    },
+    "hist_e": {
+     "mean": 3034.0339721980886,
+     "median": 11.0,
+     "p10": 0.0,
+     "p90": 2136.0,
+     "share_zero": 0.14353536055603822
+    }
+   },
+   "relation_skew": {
+    "gini": 0.95742112468761,
+    "top10pct_share": 0.9592763054900554,
+    "norm_entropy": 0.5136885974581579
+   },
+   "reachability": {
+    "pair_1hop": 0.6138404865334491,
+    "reach_2hop": 0.6139669852302346,
+    "object_no_history": 0.08609695916594266,
+    "subject_no_history": 0.20097376194613378,
+    "no_pair_share": 0.3861595134665508,
+    "within_no_pair": {
+     "reach_2hop": 0.00032758145888942686,
+     "has_history_unreachable_2hop": 0.3852411953483433,
+     "an_endpoint_has_no_history": 0.6144312231927673
+    },
+    "self_loop_test_share": 1.3900955690703737e-05
+   },
+   "recb_lite": {
+    "lambda_selected": 0.5,
+    "valid": {
+     "MRR": 0.6002017088171875,
+     "H1": 0.5471936304400851,
+     "H3": 0.6344848252552354,
+     "H10": 0.6899979093348201,
+     "n": 2869900
+    },
+    "test": {
+     "MRR": 0.4876637164842326,
+     "H1": 0.43921876629018247,
+     "H3": 0.5148510860121633,
+     "H10": 0.5700875760208515,
+     "n": 2877500
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.4875573515892029,
+     "0.5": 0.48766371607780457,
+     "0.9": 0.4260979890823364,
+     "0.99": 0.39010658860206604,
+     "1.0": 0.379176527261734
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.37004351006258146,
+       "H1": 0.30845798744350583,
+       "H3": 0.40023087518929756,
+       "H10": 0.48253740803648676,
+       "n": 1694422
+      },
+      "no": {
+       "MRR": 0.656121134680993,
+       "H1": 0.6264963087809933,
+       "H3": 0.6790118656588999,
+       "H10": 0.6954782355854813,
+       "n": 1183078
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.5322229133066526,
+       "H1": 0.5063295920378749,
+       "H3": 0.5542344233018693,
+       "H10": 0.5621627906153249,
+       "n": 1694422
+      },
+      "no": {
+       "MRR": 0.42384536858304717,
+       "H1": 0.3431016382689899,
+       "H3": 0.4584456815188855,
+       "H10": 0.5814375721634584,
+       "n": 1183078
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.01123251663950036,
+       "H1": 0.006483689842901022,
+       "H3": 0.012044314254869215,
+       "H10": 0.01770987288730954,
+       "n": 1124514
+      },
+      "no": {
+       "MRR": 0.7932871237802402,
+       "H1": 0.7168117714573876,
+       "H3": 0.8373940236830186,
+       "H10": 0.9244295162653895,
+       "n": 1752986
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.36152418891104776,
+       "H1": 0.31677526767517294,
+       "H3": 0.38654352173455425,
+       "H10": 0.4366334644200132,
+       "n": 2090220
+      },
+      "no": {
+       "MRR": 0.8225628163267569,
+       "H1": 0.7643049486840768,
+       "H3": 0.8555063001727466,
+       "H10": 0.924406818412763,
+       "n": 787280
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.011310098352262375,
+       "H1": 0.006556128923102952,
+       "H3": 0.012162811584864297,
+       "H10": 0.017828890884775923,
+       "n": 1111174
+      },
+      "no": {
+       "MRR": 0.7873319290758911,
+       "H1": 0.7114015193118371,
+       "H3": 0.8310861075475309,
+       "H10": 0.9175067343174477,
+       "n": 1766326
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.4090526397918813,
+       "H1": 0.354711772811732,
+       "H3": 0.4379051478282551,
+       "H10": 0.5052266086880406,
+       "n": 2261983
+      },
+      "no": {
+       "MRR": 0.7765540624694693,
+       "H1": 0.7497762043940297,
+       "H3": 0.7976221615325003,
+       "H10": 0.8084472077944233,
+       "n": 615517
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.022542283951462447,
+       "H1": 0.015132327149873568,
+       "H3": 0.023978437735628976,
+       "H10": 0.03174976775574987,
+       "n": 480098
+      },
+      "no": {
+       "MRR": 0.5808078239456087,
+       "H1": 0.5241453039582015,
+       "H3": 0.613152070449595,
+       "H10": 0.6778938200602151,
+       "n": 2397402
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.4502389743965389,
+       "H1": 0.4005353281911127,
+       "H3": 0.4777037267168903,
+       "H10": 0.5349749328572758,
+       "n": 2536388
+      },
+      "no": {
+       "MRR": 0.7659408416933172,
+       "H1": 0.726855109172354,
+       "H3": 0.7910656910340299,
+       "H10": 0.8311727526442928,
+       "n": 341112
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.014568731990843912,
+       "H1": 0.010309927644491314,
+       "H3": 0.015317690482467703,
+       "H10": 0.019950493599320385,
+       "n": 682740
+      },
+      "no": {
+       "MRR": 0.6348328236818379,
+       "H1": 0.5726425668410213,
+       "H3": 0.6702445825511674,
+       "H10": 0.741222730503563,
+       "n": 2194760
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": 0.64,
+    "best_method": "EdgeReMIND (1-vs-1k)",
+    "deep": null,
+    "deep_method": "RE-GCN/CEN OOM",
+    "protocol_comparable": false
+   },
+   "meta": {
+    "group": "TGB2.0",
+    "split": "TGB 70/15/15 by timestamp quantile",
+    "note": "RecB-lite is 1-vs-all; TGB protocol for wikidata is 1-vs-1k edge-type negatives",
+    "tgb_zip_members": [
+     "tkgl-wikidata_edgelist.csv",
+     "tkgl-wikidata_static_edgelist.csv",
+     "tkgl-wikidata_test_ns.pkl",
+     "tkgl-wikidata_val_ns.pkl"
+    ],
+    "tgb_edgelist": "tkgl-wikidata_edgelist.csv",
+    "tgb_header": [
+     "ts",
+     "head",
+     "tail",
+     "relation_type"
+    ],
+    "tgb_split_rule": "np.quantile(ts,[0.70,0.85]); train ts<=q70, valid q70<ts<=q85, test ts>q85"
+   }
+  },
+  "festival-concertp": {
+   "group": "new-domain",
+   "split": "festival paper: train<=2023, valid 2024, test 2025 (last-k-ts 1,1)",
+   "computed_on": "serverA",
+   "sizes": {
+    "entities_present": 25399,
+    "relations_present": 1,
+    "timestamps": 53,
+    "train": 83889,
+    "valid": 5949,
+    "test": 5570
+   },
+   "recurrence": {
+    "rec": 0.2940754039497307,
+    "drec": 0.02872531418312388,
+    "rec_trainval": 0.2940754039497307
+   },
+   "dyadic": {
+    "pair_history_online": 0.2940754039497307,
+    "pair_history_trainval": 0.2940754039497307,
+    "no_pair_history_online": 0.7059245960502694
+   },
+   "unseen": {
+    "query_entity_unseen_in_train": 0.17360861759425494,
+    "gold_unseen_in_train": 0.17360861759425494,
+    "subject_unseen_fact": 0.3472172351885099,
+    "object_unseen_fact": 0.0,
+    "any_unseen_fact": 0.3472172351885099,
+    "firstseen_entity_fact": 0.2644524236983842,
+    "unseen_share_of_test_entities": 0.4024166009981613,
+    "test_facts_relation_unseen_in_train": 0.0
+   },
+   "cold_gold_lt50": 0.5176840215439856,
+   "history_length": {
+    "hist_sr": {
+     "mean": 361.3234290843806,
+     "median": 53.0,
+     "p10": 0.0,
+     "p90": 1161.0,
+     "share_zero": 0.1322262118491921
+    },
+    "hist_e": {
+     "mean": 361.3234290843806,
+     "median": 53.0,
+     "p10": 0.0,
+     "p90": 1161.0,
+     "share_zero": 0.1322262118491921
+    }
+   },
+   "relation_skew": {
+    "gini": 0.0,
+    "top10pct_share": 1.0,
+    "norm_entropy": 0.0
+   },
+   "reachability": {
+    "pair_1hop": 0.2940754039497307,
+    "reach_2hop": 0.2940754039497307,
+    "object_no_history": 0.0,
+    "subject_no_history": 0.2644524236983842,
+    "no_pair_share": 0.7059245960502692,
+    "within_no_pair": {
+     "reach_2hop": 0.0,
+     "has_history_unreachable_2hop": 0.625381485249237,
+     "an_endpoint_has_no_history": 0.37461851475076297
+    },
+    "self_loop_test_share": 0.0
+   },
+   "recb_lite": {
+    "lambda_selected": 1.0,
+    "valid": {
+     "MRR": 0.10813985950340077,
+     "H1": 0.056396032946713734,
+     "H3": 0.131450663977139,
+     "H10": 0.20583291309463775,
+     "n": 11898
+    },
+    "test": {
+     "MRR": 0.10970901603934007,
+     "H1": 0.062028725314183124,
+     "H3": 0.12082585278276481,
+     "H10": 0.20242369838420107,
+     "n": 11140
+    },
+    "test_MRR_by_lambda": {
+     "0.01": 0.09088148921728134,
+     "0.5": 0.09080272167921066,
+     "0.9": 0.10343869775533676,
+     "0.99": 0.10551751405000687,
+     "1.0": 0.10970901697874069
+    },
+    "test_by_stratum": {
+     "gold_unseen": {
+      "yes": {
+       "MRR": 0.00014902743469172238,
+       "H1": 0.0,
+       "H3": 0.0,
+       "H10": 0.0,
+       "n": 1934
+      },
+      "no": {
+       "MRR": 0.13272542033668855,
+       "H1": 0.07505974364544862,
+       "H3": 0.14620899413426028,
+       "H10": 0.24494894633934391,
+       "n": 9206
+      }
+     },
+     "query_unseen": {
+      "yes": {
+       "MRR": 0.11219013073835755,
+       "H1": 0.04498448810754912,
+       "H3": 0.14632885211995864,
+       "H10": 0.2326783867631851,
+       "n": 1934
+      },
+      "no": {
+       "MRR": 0.10918778251469313,
+       "H1": 0.06560938518357592,
+       "H3": 0.11546817293069737,
+       "H10": 0.19606778188138171,
+       "n": 9206
+      }
+     },
+     "rec_no": {
+      "yes": {
+       "MRR": 0.030841978159709214,
+       "H1": 0.006358087487283825,
+       "H3": 0.0335707019328586,
+       "H10": 0.07121057985757884,
+       "n": 7864
+      },
+      "no": {
+       "MRR": 0.29902842565027327,
+       "H1": 0.19566544566544566,
+       "H3": 0.3302808302808303,
+       "H10": 0.5173992673992674,
+       "n": 3276
+      }
+     },
+     "dyad_trainval_no": {
+      "yes": {
+       "MRR": 0.030841978159709214,
+       "H1": 0.006358087487283825,
+       "H3": 0.0335707019328586,
+       "H10": 0.07121057985757884,
+       "n": 7864
+      },
+      "no": {
+       "MRR": 0.29902842565027327,
+       "H1": 0.19566544566544566,
+       "H3": 0.3302808302808303,
+       "H10": 0.5173992673992674,
+       "n": 3276
+      }
+     },
+     "dyad_online_no": {
+      "yes": {
+       "MRR": 0.030841978159709214,
+       "H1": 0.006358087487283825,
+       "H3": 0.0335707019328586,
+       "H10": 0.07121057985757884,
+       "n": 7864
+      },
+      "no": {
+       "MRR": 0.29902842565027327,
+       "H1": 0.19566544566544566,
+       "H3": 0.3302808302808303,
+       "H10": 0.5173992673992674,
+       "n": 3276
+      }
+     },
+     "cold_gold": {
+      "yes": {
+       "MRR": 0.01997536404889512,
+       "H1": 0.008670019074041963,
+       "H3": 0.018207040055488122,
+       "H10": 0.036414080110976244,
+       "n": 5767
+      },
+      "no": {
+       "MRR": 0.20602280182547372,
+       "H1": 0.1193002047273404,
+       "H3": 0.23096966313046716,
+       "H10": 0.380606737390657,
+       "n": 5373
+      }
+     },
+     "hist_sr_zero": {
+      "yes": {
+       "MRR": 0.10713745655851051,
+       "H1": 0.03326544467073999,
+       "H3": 0.15546503733876443,
+       "H10": 0.23896809232858113,
+       "n": 1473
+      },
+      "no": {
+       "MRR": 0.1101008549878517,
+       "H1": 0.06641150305161891,
+       "H3": 0.11554773973311265,
+       "H10": 0.1968552808523844,
+       "n": 9667
+      }
+     },
+     "fact_any_unseen": {
+      "yes": {
+       "MRR": 0.056169579086524646,
+       "H1": 0.02249224405377456,
+       "H3": 0.07316442605997932,
+       "H10": 0.11633919338159256,
+       "n": 3868
+      },
+      "no": {
+       "MRR": 0.1381868133624273,
+       "H1": 0.08305830583058306,
+       "H3": 0.14617711771177117,
+       "H10": 0.24821232123212322,
+       "n": 7272
+      }
+     },
+     "fact_any_firstseen": {
+      "yes": {
+       "MRR": 0.0535896959444694,
+       "H1": 0.016632722335369995,
+       "H3": 0.07773251866938222,
+       "H10": 0.11948404616429056,
+       "n": 2946
+      },
+      "no": {
+       "MRR": 0.129885671762978,
+       "H1": 0.07835001220405174,
+       "H3": 0.13631925799365388,
+       "H10": 0.23224310471076398,
+       "n": 8194
+      }
+     }
+    },
+    "protocol": "time-aware filtered, both directions, 1-vs-all, online history"
+   },
+   "published": {
+    "best": null,
+    "best_method": "per-direction only: artists CognTKE 0.027, festivals CountTRuCoLa 0.230",
+    "deep": null,
+    "deep_method": "",
+    "protocol_comparable": false
+   },
+   "meta": {
+    "group": "new-domain",
+    "split": "festival paper: train<=2023, valid 2024, test 2025 (last-k-ts 1,1)",
+    "tgb_zip_members": [
+     "timestamp2int.txt",
+     "tkgl-concertperformanceonly_edgelist.csv",
+     "tkgl-concertperformanceonly_test_ns.pkl",
+     "tkgl-concertperformanceonly_val_ns.pkl",
+     "quadruples/",
+     "quadruples/entity2id.txt",
+     "quadruples/relation2id.txt",
+     "quadruples/test.txt",
+     "quadruples/train.txt",
+     "quadruples/valid.txt",
+     "entity2id.txt",
+     "node_mapping.csv",
+     "rel_mapping.csv",
+     "relation2id.txt"
+    ],
+    "tgb_edgelist": "tkgl-concertperformanceonly_edgelist.csv",
+    "tgb_header": [
+     "timestamp",
+     "head",
+     "tail",
+     "relation_type"
+    ],
+    "tgb_split_rule": "np.quantile(ts,[0.70,0.85]); train ts<=q70, valid q70<ts<=q85, test ts>q85",
+    "resplit": "last-k-ts valid=1 test=1 unique timestamps"
+   }
+  }
+ },
+ "not_profiled": [
+  {
+   "dataset": "ACLED-CD22",
+   "reason": "data not in the authors' repo (usc-isi-i2/isi-tkg-icl has only ICEWS14/18/WIKI/YAGO)"
+  },
+  {
+   "dataset": "POLECAT-IR/IS/EG (TGL-LLM)",
+   "reason": "no data release link in arXiv:2501.11911; Acc@k protocol"
+  },
+  {
+   "dataset": "ICEWS14/18/0515-OOG",
+   "reason": "meta-task pickle format (FITCARL repo); few-shot protocol not a chronological split"
+  },
+  {
+   "dataset": "MetaTKGR, IC14-Ext/IC0515-Ext, ICEWS18-ind, SIBR sets, sparse ICEWS/WIKI variants",
+   "reason": "no download located in session / completion settings"
+  },
+  {
+   "dataset": "ICEWS21 (ForecastTKGQuestions)",
+   "reason": "repo now ~11 KB, data absent"
+  },
+  {
+   "dataset": "Festival concert (full, 5.07M quads)",
+   "reason": "madata download ran at ~0.3 MB/s and was stopped at 168 MB; concertp (the evaluated relation) profiled instead"
+  },
+  {
+   "dataset": "MIRAI, MultiTQ/CronQuestions, ECOLA sets, GenTKG subsets",
+   "reason": "not link-prediction forecasting under full-ranking MRR, or completion setting"
+  }
+ ],
+ "conversion_logs": {
+  "tkgl-icews": {
+   "name": "tkgl-icews",
+   "edgelist": "tkgl-icews_edgelist.csv",
+   "n_entities": 87856,
+   "n_relations": 391,
+   "n_timestamps": 10224,
+   "split_rule": "TGB generate_splits quantiles 0.70/0.85",
+   "q70": 1409803200.0,
+   "q85": 1525665600.0,
+   "counts": [
+    10861600,
+    2326157,
+    2325689
+   ],
+   "expected_counts": [
+    10861600,
+    2326157,
+    2325689
+   ],
+   "counts_match": true,
+   "self_loops_dropped": false,
+   "n_self_loops": 1387
+  },
+  "tkgl-polecat": {
+   "name": "tkgl-polecat",
+   "edgelist": "tkgl-polecat_edgelist.csv",
+   "n_entities": 150931,
+   "n_relations": 16,
+   "n_timestamps": 1826,
+   "split_rule": "TGB generate_splits quantiles 0.70/0.85",
+   "q70": 1617768000.0,
+   "q85": 1646197200.0,
+   "counts": [
+    1246556,
+    266736,
+    266318
+   ],
+   "expected_counts": [
+    1246556,
+    266736,
+    266318
+   ],
+   "counts_match": true,
+   "self_loops_dropped": false,
+   "n_self_loops": 193126
+  },
+  "tkgl-polecat-noself": {
+   "name": "tkgl-polecat",
+   "edgelist": "tkgl-polecat_edgelist.csv",
+   "n_entities": 150931,
+   "n_relations": 16,
+   "n_timestamps": 1826,
+   "split_rule": "TGB generate_splits quantiles 0.70/0.85",
+   "q70": 1617768000.0,
+   "q85": 1646197200.0,
+   "counts": [
+    1110033,
+    237778,
+    238673
+   ],
+   "expected_counts": [
+    1246556,
+    266736,
+    266318
+   ],
+   "counts_match": null,
+   "self_loops_dropped": true,
+   "n_self_loops": 193126
+  },
+  "tkgl-smallpedia": {
+   "name": "tkgl-smallpedia",
+   "edgelist": "tkgl-smallpedia_edgelist.csv",
+   "n_entities": 47433,
+   "n_relations": 283,
+   "n_timestamps": 125,
+   "split_rule": "TGB generate_splits quantiles 0.70/0.85",
+   "q70": 1997.0,
+   "q85": 2007.0,
+   "counts": [
+    387757,
+    81033,
+    81586
+   ],
+   "expected_counts": [
+    387757,
+    81033,
+    81586
+   ],
+   "counts_match": true,
+   "self_loops_dropped": false,
+   "n_self_loops": 15
+  }
+ }
+}

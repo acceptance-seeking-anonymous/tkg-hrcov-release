@@ -1,0 +1,10 @@
+    1209 /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/entity2id.txt
+       1 /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/missing_export_files.txt
+     215 /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/relation2id.txt
+       1 /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/stat.txt
+  228584 /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/test.txt
+     273 /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/timestamp2id.txt
+  509717 /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/train.txt
+   76117 /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/valid.txt
+  816117 total
+1 /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/missing_export_files.txt

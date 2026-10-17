@@ -1,0 +1,23 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+[     1.1s] event index + TE
+[     1.4s] valid first-50 = base order (fraction) {}
+[    35.7s] valid {"n": 152234, "stored_block_check": {}, "first50_base_order": {}, "frac_has_pat": 1.0, "mean_union": 114.18373687875244, "mean_block": {"SA25": 24.995644862514286, "SA50": 49.181168464337794, "SA75": 63.34190128355032}, "seconds": 35.7}
+[    35.7s] ALL DONE

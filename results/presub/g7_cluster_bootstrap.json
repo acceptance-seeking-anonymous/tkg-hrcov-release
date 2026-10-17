@@ -1,0 +1,1628 @@
+{
+ "name": "g7_cluster_bootstrap",
+ "rule": "a_presub_rule.json (G7_cluster_bootstrap)",
+ "B": 2000,
+ "seed": 0,
+ "note": "post-hoc robustness of the registered hardening decision; the registered outcome is not altered. ts = timestamp-block clusters (primary G7 statistic), fact = both directions of one test fact.",
+ "datasets": {
+  "polecat": {
+   "n_test": 532636,
+   "n_timestamps": 304,
+   "n_facts": 266318,
+   "two_strongest": [
+    "tirgn",
+    "logcl"
+   ],
+   "strongest_blend_overall": "tirgn",
+   "decision_deltas": {
+    "tirgn": {
+     "better_comparator": "POOL",
+     "deltas": {
+      "C1 HRCOV - BASE(+)RecB": {
+       "query": {
+        "delta": 0.047568745334463904,
+        "CI95": [
+         0.04699662078175371,
+         0.0481238399060963
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 532636
+       },
+       "ts": {
+        "delta": 0.047568745334463904,
+        "CI95": [
+         0.046466775963721056,
+         0.048716064115808734
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 1752.092105263158,
+        "max_cluster_size": 3134
+       },
+       "fact": {
+        "delta": 0.047568745334463904,
+        "CI95": [
+         0.04694904490017602,
+         0.04816658198386238
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 266318,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "C1 HRCOV - RecB-POOL": {
+       "query": {
+        "delta": 0.0475137488646004,
+        "CI95": [
+         0.046943779757299464,
+         0.048091634866940465
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 532636
+       },
+       "ts": {
+        "delta": 0.0475137488646004,
+        "CI95": [
+         0.04640751358129775,
+         0.04866405977022547
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 1752.092105263158,
+        "max_cluster_size": 3134
+       },
+       "fact": {
+        "delta": 0.0475137488646004,
+        "CI95": [
+         0.0468936475164195,
+         0.048112733220524506
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 266318,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "C2 HRCOV - tirgn(+)RecB": {
+       "query": {
+        "delta": 0.047568745334463904,
+        "CI95": [
+         0.04699662078175371,
+         0.0481238399060963
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 532636
+       },
+       "ts": {
+        "delta": 0.047568745334463904,
+        "CI95": [
+         0.046466775963721056,
+         0.048716064115808734
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 1752.092105263158,
+        "max_cluster_size": 3134
+       },
+       "fact": {
+        "delta": 0.047568745334463904,
+        "CI95": [
+         0.04694904490017602,
+         0.04816658198386238
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 266318,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "C3 head HRCOV - POOL": {
+       "query": {
+        "delta": 0.047619221111280176,
+        "CI95": [
+         0.0467230185983096,
+         0.04855515753942871
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 242300
+       },
+       "ts": {
+        "delta": 0.047619221111280176,
+        "CI95": [
+         0.04594997091252175,
+         0.049386162930523704
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 797.0394736842105,
+        "max_cluster_size": 1575
+       },
+       "fact": {
+        "delta": 0.047619221111280176,
+        "CI95": [
+         0.046623309141061754,
+         0.04860176819424753
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 173854,
+        "mean_cluster_size": 1.3936981605254983,
+        "max_cluster_size": 2
+       }
+      },
+      "secondary HRCOV - HR": {
+       "query": {
+        "delta": 0.012947891254275545,
+        "CI95": [
+         0.012611918513966295,
+         0.013282090076628382
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 532636
+       },
+       "ts": {
+        "delta": 0.012947891254275545,
+        "CI95": [
+         0.012361560664398384,
+         0.013564013836448348
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 1752.092105263158,
+        "max_cluster_size": 3134
+       },
+       "fact": {
+        "delta": 0.012947891254275545,
+        "CI95": [
+         0.012592009709796018,
+         0.01330785242509274
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 266318,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "secondary HR - POOL": {
+       "query": {
+        "delta": 0.03456585761032485,
+        "CI95": [
+         0.03404421947234993,
+         0.035086539759479785
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 532636
+       },
+       "ts": {
+        "delta": 0.03456585761032485,
+        "CI95": [
+         0.03366417826386372,
+         0.03545666245164264
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 1752.092105263158,
+        "max_cluster_size": 3134
+       },
+       "fact": {
+        "delta": 0.03456585761032485,
+        "CI95": [
+         0.0340105537790315,
+         0.03511179230671743
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 266318,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "secondary HRCOV - RecB trained (clean)": {
+       "query": {
+        "delta": 0.08314542117789009,
+        "CI95": [
+         0.08236806675726202,
+         0.08389081627064904
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 532636
+       },
+       "ts": {
+        "delta": 0.08314542117789009,
+        "CI95": [
+         0.08121530741894722,
+         0.085096750945791
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 1752.092105263158,
+        "max_cluster_size": 3134
+       },
+       "fact": {
+        "delta": 0.08314542117789009,
+        "CI95": [
+         0.08223143059610367,
+         0.08396043092275654
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 266318,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      }
+     },
+     "reproduction_vs_verdict": {
+      "C1 HRCOV - BASE(+)RecB": {
+       "delta_absdiff": 0.0,
+       "CI_absdiff": 0.0
+      },
+      "C1 HRCOV - RecB-POOL": {
+       "delta_absdiff": 0.0,
+       "CI_absdiff": 0.0
+      },
+      "C2 HRCOV - tirgn(+)RecB": {
+       "delta_absdiff": 0.0,
+       "CI_absdiff": 0.0
+      },
+      "C3 head": {
+       "delta_absdiff": 0.0
+      }
+     },
+     "decision_under_cluster_bootstrap": {
+      "ts": {
+       "C1_pass": true,
+       "C2_pass": true,
+       "C3_damage": false,
+       "PASS": true,
+       "registered_PASS": true,
+       "changes": false
+      },
+      "fact": {
+       "C1_pass": true,
+       "C2_pass": true,
+       "C3_damage": false,
+       "PASS": true,
+       "registered_PASS": true,
+       "changes": false
+      }
+     },
+     "CI_width_ratio_cluster_over_query": {
+      "C1 HRCOV - BASE(+)RecB": {
+       "ts": 1.9954311486681944,
+       "fact": 1.080124580388443
+      },
+      "C1 HRCOV - RecB-POOL": {
+       "ts": 1.9658806847437986,
+       "fact": 1.0620553882329993
+      },
+      "C2 HRCOV - tirgn(+)RecB": {
+       "ts": 1.9954311486681944,
+       "fact": 1.080124580388443
+      },
+      "C3 head HRCOV - POOL": {
+       "ts": 1.8755084239970639,
+       "fact": 1.0798629998974267
+      },
+      "secondary HRCOV - HR": {
+       "ts": 1.7942467855149231,
+       "fact": 1.0681484491123698
+      },
+      "secondary HR - POOL": {
+       "ts": 1.7197057467956687,
+       "fact": 1.0565260422190554
+      },
+      "secondary HRCOV - RecB trained (clean)": {
+       "ts": 2.54897045950149,
+       "fact": 1.1354463169763815
+      }
+     }
+    },
+    "logcl": {
+     "better_comparator": "POOL",
+     "deltas": {
+      "C1 HRCOV - BASE(+)RecB": {
+       "query": {
+        "delta": 0.05902453971312944,
+        "CI95": [
+         0.05838584767143841,
+         0.05965273581009931
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 532636
+       },
+       "ts": {
+        "delta": 0.05902453971312944,
+        "CI95": [
+         0.057629828442157825,
+         0.06041875967174823
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 1752.092105263158,
+        "max_cluster_size": 3134
+       },
+       "fact": {
+        "delta": 0.05902453971312944,
+        "CI95": [
+         0.05832345479460125,
+         0.05966276107965221
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 266318,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "C1 HRCOV - RecB-POOL": {
+       "query": {
+        "delta": 0.058981176974018605,
+        "CI95": [
+         0.058339275239666616,
+         0.05961569968650466
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 532636
+       },
+       "ts": {
+        "delta": 0.058981176974018605,
+        "CI95": [
+         0.05758546445783888,
+         0.06037886318609346
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 1752.092105263158,
+        "max_cluster_size": 3134
+       },
+       "fact": {
+        "delta": 0.058981176974018605,
+        "CI95": [
+         0.05827897139349693,
+         0.059619125713414746
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 266318,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "C2 HRCOV - tirgn(+)RecB": {
+       "query": {
+        "delta": 0.0372507115126947,
+        "CI95": [
+         0.03658030784208333,
+         0.03791617298429357
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 532636
+       },
+       "ts": {
+        "delta": 0.0372507115126947,
+        "CI95": [
+         0.035911748056299576,
+         0.038586968498024066
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 1752.092105263158,
+        "max_cluster_size": 3134
+       },
+       "fact": {
+        "delta": 0.0372507115126947,
+        "CI95": [
+         0.03650603175890374,
+         0.03799945810899771
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 266318,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "C3 head HRCOV - POOL": {
+       "query": {
+        "delta": 0.04897232245138421,
+        "CI95": [
+         0.04796430095188614,
+         0.04994865635628482
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 242300
+       },
+       "ts": {
+        "delta": 0.04897232245138421,
+        "CI95": [
+         0.04704192008855218,
+         0.0509371729930823
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 797.0394736842105,
+        "max_cluster_size": 1575
+       },
+       "fact": {
+        "delta": 0.04897232245138421,
+        "CI95": [
+         0.047959205129509415,
+         0.050057027835981094
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 173854,
+        "mean_cluster_size": 1.3936981605254983,
+        "max_cluster_size": 2
+       }
+      },
+      "secondary HRCOV - HR": {
+       "query": {
+        "delta": 0.035956646326010935,
+        "CI95": [
+         0.03543977321289763,
+         0.03646602865048345
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 532636
+       },
+       "ts": {
+        "delta": 0.035956646326010935,
+        "CI95": [
+         0.03483836985925276,
+         0.03703981348039613
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 1752.092105263158,
+        "max_cluster_size": 3134
+       },
+       "fact": {
+        "delta": 0.035956646326010935,
+        "CI95": [
+         0.03541627407201457,
+         0.036492666034237745
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 266318,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "secondary HR - POOL": {
+       "query": {
+        "delta": 0.02302453064800767,
+        "CI95": [
+         0.022537323061369286,
+         0.023521364330724326
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 532636
+       },
+       "ts": {
+        "delta": 0.02302453064800767,
+        "CI95": [
+         0.022048462288473923,
+         0.023972294350868024
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 1752.092105263158,
+        "max_cluster_size": 3134
+       },
+       "fact": {
+        "delta": 0.02302453064800767,
+        "CI95": [
+         0.02247306232085879,
+         0.023539603674501346
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 266318,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "secondary HRCOV - RecB trained (clean)": {
+       "query": {
+        "delta": 0.07282738735612088,
+        "CI95": [
+         0.07208412297440349,
+         0.07365114321394588
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 532636
+       },
+       "ts": {
+        "delta": 0.07282738735612088,
+        "CI95": [
+         0.07076946789485575,
+         0.07488926268817156
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 304,
+        "mean_cluster_size": 1752.092105263158,
+        "max_cluster_size": 3134
+       },
+       "fact": {
+        "delta": 0.07282738735612088,
+        "CI95": [
+         0.07186782920129339,
+         0.07371966369472602
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 266318,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      }
+     },
+     "reproduction_vs_verdict": {
+      "C1 HRCOV - BASE(+)RecB": {
+       "delta_absdiff": 0.0,
+       "CI_absdiff": 0.0
+      },
+      "C1 HRCOV - RecB-POOL": {
+       "delta_absdiff": 0.0,
+       "CI_absdiff": 0.0
+      },
+      "C2 HRCOV - tirgn(+)RecB": {
+       "delta_absdiff": 0.0,
+       "CI_absdiff": 0.0
+      },
+      "C3 head": {
+       "delta_absdiff": 0.0
+      }
+     },
+     "decision_under_cluster_bootstrap": {
+      "ts": {
+       "C1_pass": true,
+       "C2_pass": true,
+       "C3_damage": false,
+       "PASS": true,
+       "registered_PASS": true,
+       "changes": false
+      },
+      "fact": {
+       "C1_pass": true,
+       "C2_pass": true,
+       "C3_damage": false,
+       "PASS": true,
+       "registered_PASS": true,
+       "changes": false
+      }
+     },
+     "CI_width_ratio_cluster_over_query": {
+      "C1 HRCOV - BASE(+)RecB": {
+       "ts": 2.201402905656924,
+       "fact": 1.0571622262298574
+      },
+      "C1 HRCOV - RecB-POOL": {
+       "ts": 2.188455991401903,
+       "fact": 1.0499284334749661
+      },
+      "C2 HRCOV - tirgn(+)RecB": {
+       "ts": 2.002612656917033,
+       "fact": 1.1179469415775316
+      },
+      "C3 head HRCOV - POOL": {
+       "ts": 1.9629814779628636,
+       "fact": 1.0571809373570262
+      },
+      "secondary HRCOV - HR": {
+       "ts": 2.145122491455037,
+       "fact": 1.0488538455448242
+      },
+      "secondary HR - POOL": {
+       "ts": 1.955031889724522,
+       "fact": 1.0838380328719235
+      },
+      "secondary HRCOV - RecB trained (clean)": {
+       "ts": 2.6290629114777113,
+       "fact": 1.1817553128563354
+      }
+     }
+    }
+   },
+   "other_bases": {
+    "regcn": {
+     "HRCOV - POOL": {
+      "query": {
+       "delta": 0.06301682264863036,
+       "CI95": [
+        0.06236751117503126,
+        0.06366062331441423
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 532636
+      },
+      "ts": {
+       "delta": 0.06301682264863036,
+       "CI95": [
+        0.061575975759200124,
+        0.06447634742321624
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 304,
+       "mean_cluster_size": 1752.092105263158,
+       "max_cluster_size": 3134
+      },
+      "fact": {
+       "delta": 0.06301682264863036,
+       "CI95": [
+        0.06230599015420226,
+        0.06370270992585632
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 266318,
+       "mean_cluster_size": 2.0,
+       "max_cluster_size": 2
+      }
+     },
+     "HRCOV - HR": {
+      "query": {
+       "delta": 0.03745146731706031,
+       "CI95": [
+        0.03693853715545508,
+        0.03801407717283299
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 532636
+      },
+      "ts": {
+       "delta": 0.03745146731706031,
+       "CI95": [
+        0.03622511755371141,
+        0.03865811438142288
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 304,
+       "mean_cluster_size": 1752.092105263158,
+       "max_cluster_size": 3134
+      },
+      "fact": {
+       "delta": 0.03745146731706031,
+       "CI95": [
+        0.0368592520772358,
+        0.037988319952452554
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 266318,
+       "mean_cluster_size": 2.0,
+       "max_cluster_size": 2
+      }
+     }
+    }
+   },
+   "outcome_registered": "PRACTICAL_ADVANCE",
+   "outcome_if_ts_cluster_bootstrap": "PRACTICAL_ADVANCE",
+   "outcome_if_fact_cluster_bootstrap": "PRACTICAL_ADVANCE"
+  },
+  "smallpedia": {
+   "n_test": 163172,
+   "n_timestamps": 17,
+   "n_facts": 81586,
+   "two_strongest": [
+    "tirgn",
+    "regcn_tuned"
+   ],
+   "strongest_blend_overall": "tirgn",
+   "decision_deltas": {
+    "tirgn": {
+     "better_comparator": "BLEND",
+     "deltas": {
+      "C1 HRCOV - BASE(+)RecB": {
+       "query": {
+        "delta": 0.032664387469166674,
+        "CI95": [
+         0.031776217239296606,
+         0.03360508773725909
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 163172
+       },
+       "ts": {
+        "delta": 0.032664387469166674,
+        "CI95": [
+         0.02883992475364485,
+         0.0350402763585553
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 17,
+        "mean_cluster_size": 9598.35294117647,
+        "max_cluster_size": 20112
+       },
+       "fact": {
+        "delta": 0.032664387469166674,
+        "CI95": [
+         0.031595060341220456,
+         0.033687361313706324
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 81586,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "C1 HRCOV - RecB-POOL": {
+       "query": {
+        "delta": 0.0327207719042107,
+        "CI95": [
+         0.031828771027687754,
+         0.033626419948408766
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 163172
+       },
+       "ts": {
+        "delta": 0.0327207719042107,
+        "CI95": [
+         0.028888657275151972,
+         0.035102514350522813
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 17,
+        "mean_cluster_size": 9598.35294117647,
+        "max_cluster_size": 20112
+       },
+       "fact": {
+        "delta": 0.0327207719042107,
+        "CI95": [
+         0.031654316146246864,
+         0.03374071504670388
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 81586,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "C2 HRCOV - tirgn(+)RecB": {
+       "query": {
+        "delta": 0.032664387469166674,
+        "CI95": [
+         0.031776217239296606,
+         0.03360508773725909
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 163172
+       },
+       "ts": {
+        "delta": 0.032664387469166674,
+        "CI95": [
+         0.02883992475364485,
+         0.0350402763585553
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 17,
+        "mean_cluster_size": 9598.35294117647,
+        "max_cluster_size": 20112
+       },
+       "fact": {
+        "delta": 0.032664387469166674,
+        "CI95": [
+         0.031595060341220456,
+         0.033687361313706324
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 81586,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "C3 head HRCOV - BLEND": {
+       "query": {
+        "delta": 0.01944310048169589,
+        "CI95": [
+         0.015997812594125835,
+         0.022940128533913754
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 4031
+       },
+       "ts": {
+        "delta": 0.01944310048169589,
+        "CI95": [
+         0.016053315341166267,
+         0.022146037949046134
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 16,
+        "mean_cluster_size": 251.9375,
+        "max_cluster_size": 564
+       },
+       "fact": {
+        "delta": 0.01944310048169589,
+        "CI95": [
+         0.016150483554243773,
+         0.0230903363930009
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 4031,
+        "mean_cluster_size": 1.0,
+        "max_cluster_size": 1
+       }
+      },
+      "secondary HRCOV - HR": {
+       "query": {
+        "delta": 0.0028778555937157774,
+        "CI95": [
+         0.0024768458588606975,
+         0.0032664090141263278
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 1.0,
+        "n": 163172
+       },
+       "ts": {
+        "delta": 0.0028778555937157774,
+        "CI95": [
+         0.0023378013735370078,
+         0.0034453498075685328
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 1.0,
+        "n_clusters": 17,
+        "mean_cluster_size": 9598.35294117647,
+        "max_cluster_size": 20112
+       },
+       "fact": {
+        "delta": 0.0028778555937157774,
+        "CI95": [
+         0.002489245119379376,
+         0.0032841779996637577
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 1.0,
+        "n_clusters": 81586,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "secondary HR - BLEND": {
+       "query": {
+        "delta": 0.0297865318754509,
+        "CI95": [
+         0.0288695899042391,
+         0.030743738759067125
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 163172
+       },
+       "ts": {
+        "delta": 0.0297865318754509,
+        "CI95": [
+         0.025673007425170143,
+         0.032345233487056875
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 17,
+        "mean_cluster_size": 9598.35294117647,
+        "max_cluster_size": 20112
+       },
+       "fact": {
+        "delta": 0.0297865318754509,
+        "CI95": [
+         0.028736025052295073,
+         0.030799457348142174
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 81586,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "secondary HRCOV - RecB trained (clean)": {
+       "query": {
+        "delta": 0.05548781175257388,
+        "CI95": [
+         0.05431396570154375,
+         0.05665657769419276
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 163172
+       },
+       "ts": {
+        "delta": 0.05548781175257388,
+        "CI95": [
+         0.049680332820484466,
+         0.05890617384696332
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 17,
+        "mean_cluster_size": 9598.35294117647,
+        "max_cluster_size": 20112
+       },
+       "fact": {
+        "delta": 0.05548781175257388,
+        "CI95": [
+         0.05420974553187775,
+         0.05682966761731287
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 81586,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      }
+     },
+     "reproduction_vs_verdict": {
+      "C1 HRCOV - BASE(+)RecB": {
+       "delta_absdiff": 0.0,
+       "CI_absdiff": 0.0
+      },
+      "C1 HRCOV - RecB-POOL": {
+       "delta_absdiff": 0.0,
+       "CI_absdiff": 0.0
+      },
+      "C2 HRCOV - tirgn(+)RecB": {
+       "delta_absdiff": 0.0,
+       "CI_absdiff": 0.0
+      },
+      "C3 head": {
+       "delta_absdiff": 0.0
+      }
+     },
+     "decision_under_cluster_bootstrap": {
+      "ts": {
+       "C1_pass": true,
+       "C2_pass": true,
+       "C3_damage": false,
+       "PASS": true,
+       "registered_PASS": true,
+       "changes": false
+      },
+      "fact": {
+       "C1_pass": true,
+       "C2_pass": true,
+       "C3_damage": false,
+       "PASS": true,
+       "registered_PASS": true,
+       "changes": false
+      }
+     },
+     "CI_width_ratio_cluster_over_query": {
+      "C1 HRCOV - BASE(+)RecB": {
+       "ts": 3.3902627943411807,
+       "fact": 1.1440399825011471
+      },
+      "C1 HRCOV - RecB-POOL": {
+       "ts": 3.4566577509909715,
+       "fact": 1.1606264584856714
+      },
+      "C2 HRCOV - tirgn(+)RecB": {
+       "ts": 3.3902627943411807,
+       "fact": 1.1440399825011471
+      },
+      "C3 head HRCOV - BLEND": {
+       "ts": 0.8776210504856385,
+       "fact": 0.999645204705151
+      },
+      "secondary HRCOV - HR": {
+       "ts": 1.4027357110640706,
+       "fact": 1.0068008809465596
+      },
+      "secondary HR - BLEND": {
+       "ts": 3.5601366693463588,
+       "fact": 1.1009970155419946
+      },
+      "secondary HRCOV - RecB trained (clean)": {
+       "ts": 3.9382710647042956,
+       "fact": 1.1183764505843474
+      }
+     }
+    },
+    "regcn_tuned": {
+     "better_comparator": "BLEND",
+     "deltas": {
+      "C1 HRCOV - BASE(+)RecB": {
+       "query": {
+        "delta": 0.0479526801827292,
+        "CI95": [
+         0.046771431974399987,
+         0.04916045889641428
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 163172
+       },
+       "ts": {
+        "delta": 0.0479526801827292,
+        "CI95": [
+         0.04271500337398278,
+         0.05089941438889088
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 17,
+        "mean_cluster_size": 9598.35294117647,
+        "max_cluster_size": 20112
+       },
+       "fact": {
+        "delta": 0.0479526801827292,
+        "CI95": [
+         0.04665946588449276,
+         0.049231114507833816
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 81586,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "C1 HRCOV - RecB-POOL": {
+       "query": {
+        "delta": 0.048019293326771025,
+        "CI95": [
+         0.04681401139775018,
+         0.049159578643842385
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 163172
+       },
+       "ts": {
+        "delta": 0.048019293326771025,
+        "CI95": [
+         0.04276139454071814,
+         0.05097752836801175
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 17,
+        "mean_cluster_size": 9598.35294117647,
+        "max_cluster_size": 20112
+       },
+       "fact": {
+        "delta": 0.048019293326771025,
+        "CI95": [
+         0.046722106091705726,
+         0.049293938556908244
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 81586,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "C2 HRCOV - tirgn(+)RecB": {
+       "query": {
+        "delta": 0.031286547330927436,
+        "CI95": [
+         0.03028481578022481,
+         0.03233053125176619
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 163172
+       },
+       "ts": {
+        "delta": 0.031286547330927436,
+        "CI95": [
+         0.027234134095715776,
+         0.03389943807864591
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 17,
+        "mean_cluster_size": 9598.35294117647,
+        "max_cluster_size": 20112
+       },
+       "fact": {
+        "delta": 0.031286547330927436,
+        "CI95": [
+         0.03013345547130155,
+         0.032404153260758004
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 81586,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "C3 head HRCOV - BLEND": {
+       "query": {
+        "delta": 0.010538008134811695,
+        "CI95": [
+         0.007012693572782481,
+         0.014198893709782506
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0015,
+        "n": 4031
+       },
+       "ts": {
+        "delta": 0.010538008134811695,
+        "CI95": [
+         0.005274780505920796,
+         0.014930357808152356
+        ],
+        "p_one_sided": 0.002,
+        "p_le_margin": 0.0215,
+        "n_clusters": 16,
+        "mean_cluster_size": 251.9375,
+        "max_cluster_size": 564
+       },
+       "fact": {
+        "delta": 0.010538008134811695,
+        "CI95": [
+         0.0068897290823447446,
+         0.014264786611265002
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0005,
+        "n_clusters": 4031,
+        "mean_cluster_size": 1.0,
+        "max_cluster_size": 1
+       }
+      },
+      "secondary HRCOV - HR": {
+       "query": {
+        "delta": 0.05732685068526272,
+        "CI95": [
+         0.05604945242660585,
+         0.05860312676704388
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 163172
+       },
+       "ts": {
+        "delta": 0.05732685068526272,
+        "CI95": [
+         0.048369048526650193,
+         0.06259834005910819
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 17,
+        "mean_cluster_size": 9598.35294117647,
+        "max_cluster_size": 20112
+       },
+       "fact": {
+        "delta": 0.05732685068526272,
+        "CI95": [
+         0.0558583835324737,
+         0.05878074623335861
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 81586,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "secondary HR - BLEND": {
+       "query": {
+        "delta": -0.009374170502533526,
+        "CI95": [
+         -0.010647551853772719,
+         -0.008083953942863278
+        ],
+        "p_one_sided": 1.0,
+        "p_le_margin": 1.0,
+        "n": 163172
+       },
+       "ts": {
+        "delta": -0.009374170502533526,
+        "CI95": [
+         -0.012140297059224231,
+         -0.005252484155728026
+        ],
+        "p_one_sided": 1.0,
+        "p_le_margin": 1.0,
+        "n_clusters": 17,
+        "mean_cluster_size": 9598.35294117647,
+        "max_cluster_size": 20112
+       },
+       "fact": {
+        "delta": -0.009374170502533526,
+        "CI95": [
+         -0.010779040992005334,
+         -0.008019933754000735
+        ],
+        "p_one_sided": 1.0,
+        "p_le_margin": 1.0,
+        "n_clusters": 81586,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      },
+      "secondary HRCOV - RecB trained (clean)": {
+       "query": {
+        "delta": 0.05410997161433465,
+        "CI95": [
+         0.052938838170640684,
+         0.05533430011714906
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n": 163172
+       },
+       "ts": {
+        "delta": 0.05410997161433465,
+        "CI95": [
+         0.04841645553235489,
+         0.05740836976713222
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 17,
+        "mean_cluster_size": 9598.35294117647,
+        "max_cluster_size": 20112
+       },
+       "fact": {
+        "delta": 0.05410997161433465,
+        "CI95": [
+         0.05274091828035336,
+         0.0554853611699805
+        ],
+        "p_one_sided": 0.0,
+        "p_le_margin": 0.0,
+        "n_clusters": 81586,
+        "mean_cluster_size": 2.0,
+        "max_cluster_size": 2
+       }
+      }
+     },
+     "reproduction_vs_verdict": {
+      "C1 HRCOV - BASE(+)RecB": {
+       "delta_absdiff": 0.0,
+       "CI_absdiff": 0.0
+      },
+      "C1 HRCOV - RecB-POOL": {
+       "delta_absdiff": 0.0,
+       "CI_absdiff": 0.0
+      },
+      "C2 HRCOV - tirgn(+)RecB": {
+       "delta_absdiff": 0.0,
+       "CI_absdiff": 0.0
+      },
+      "C3 head": {
+       "delta_absdiff": 0.0
+      }
+     },
+     "decision_under_cluster_bootstrap": {
+      "ts": {
+       "C1_pass": true,
+       "C2_pass": true,
+       "C3_damage": false,
+       "PASS": true,
+       "registered_PASS": true,
+       "changes": false
+      },
+      "fact": {
+       "C1_pass": true,
+       "C2_pass": true,
+       "C3_damage": false,
+       "PASS": true,
+       "registered_PASS": true,
+       "changes": false
+      }
+     },
+     "CI_width_ratio_cluster_over_query": {
+      "C1 HRCOV - BASE(+)RecB": {
+       "ts": 3.4258345686650813,
+       "fact": 1.076441876667001
+      },
+      "C1 HRCOV - RecB-POOL": {
+       "ts": 3.502834481075731,
+       "fact": 1.096465031854142
+      },
+      "C2 HRCOV - tirgn(+)RecB": {
+       "ts": 3.2581774326163075,
+       "fact": 1.109977326292381
+      },
+      "C3 head HRCOV - BLEND": {
+       "ts": 1.343627663877228,
+       "fact": 1.0262805639030077
+      },
+      "secondary HRCOV - HR": {
+       "ts": 5.572085409299784,
+       "fact": 1.1443756373350404
+      },
+      "secondary HR - BLEND": {
+       "ts": 2.686775829464123,
+       "fact": 1.0762636473774474
+      },
+      "secondary HRCOV - RecB trained (clean)": {
+       "ts": 3.753728690152622,
+       "fact": 1.1456841940768199
+      }
+     }
+    }
+   },
+   "other_bases": {
+    "regcn": {
+     "HRCOV - BLEND": {
+      "query": {
+       "delta": 0.04990042994562333,
+       "CI95": [
+        0.04877082327955217,
+        0.051100148646350894
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      },
+      "ts": {
+       "delta": 0.04990042994562333,
+       "CI95": [
+        0.044345851344493245,
+        0.052999779687574605
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      },
+      "fact": {
+       "delta": 0.04990042994562333,
+       "CI95": [
+        0.048583079248479544,
+        0.051195695747049345
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 81586,
+       "mean_cluster_size": 2.0,
+       "max_cluster_size": 2
+      }
+     },
+     "HRCOV - HR": {
+      "query": {
+       "delta": 0.09022391039442157,
+       "CI95": [
+        0.08868334287345142,
+        0.09180293948403767
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      },
+      "ts": {
+       "delta": 0.09022391039442157,
+       "CI95": [
+        0.07733830386172165,
+        0.09733752584685908
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      },
+      "fact": {
+       "delta": 0.09022391039442157,
+       "CI95": [
+        0.08851183559271665,
+        0.09193732577257972
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 81586,
+       "mean_cluster_size": 2.0,
+       "max_cluster_size": 2
+      }
+     }
+    },
+    "logcl": {
+     "HRCOV - POOL": {
+      "query": {
+       "delta": 0.04973049033171985,
+       "CI95": [
+        0.048571348243547814,
+        0.05086832255148734
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      },
+      "ts": {
+       "delta": 0.04973049033171985,
+       "CI95": [
+        0.04482218949335597,
+        0.052666660309106925
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      },
+      "fact": {
+       "delta": 0.04973049033171985,
+       "CI95": [
+        0.04847165424034553,
+        0.05106371887082865
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 81586,
+       "mean_cluster_size": 2.0,
+       "max_cluster_size": 2
+      }
+     },
+     "HRCOV - HR": {
+      "query": {
+       "delta": 0.07057060162191098,
+       "CI95": [
+        0.06920510796309785,
+        0.07190097075332164
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      },
+      "ts": {
+       "delta": 0.07057060162191098,
+       "CI95": [
+        0.0598789198681406,
+        0.07656173655690524
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      },
+      "fact": {
+       "delta": 0.07057060162191098,
+       "CI95": [
+        0.06901197476526463,
+        0.07213652243117673
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 81586,
+       "mean_cluster_size": 2.0,
+       "max_cluster_size": 2
+      }
+     }
+    },
+    "logcl_tuned": {
+     "HRCOV - BLEND": {
+      "query": {
+       "delta": 0.04834666171043437,
+       "CI95": [
+        0.0471573366613974,
+        0.04944856352349742
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      },
+      "ts": {
+       "delta": 0.04834666171043437,
+       "CI95": [
+        0.04308796681721756,
+        0.05130130644626466
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      },
+      "fact": {
+       "delta": 0.04834666171043437,
+       "CI95": [
+        0.04706406872936451,
+        0.04965114030977637
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 81586,
+       "mean_cluster_size": 2.0,
+       "max_cluster_size": 2
+      }
+     },
+     "HRCOV - HR": {
+      "query": {
+       "delta": 0.06211770373163664,
+       "CI95": [
+        0.06078955105982096,
+        0.06343145754573551
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n": 163172
+      },
+      "ts": {
+       "delta": 0.06211770373163664,
+       "CI95": [
+        0.0530345911586051,
+        0.06784918174136224
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      },
+      "fact": {
+       "delta": 0.06211770373163664,
+       "CI95": [
+        0.060667568255364616,
+        0.06356333613526215
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 81586,
+       "mean_cluster_size": 2.0,
+       "max_cluster_size": 2
+      }
+     }
+    }
+   },
+   "outcome_registered": "PRACTICAL_ADVANCE",
+   "outcome_if_ts_cluster_bootstrap": "PRACTICAL_ADVANCE",
+   "outcome_if_fact_cluster_bootstrap": "PRACTICAL_ADVANCE"
+  }
+ },
+ "elapsed_s": 927.4
+}

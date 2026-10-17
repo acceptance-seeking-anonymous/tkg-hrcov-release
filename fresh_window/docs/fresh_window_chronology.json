@@ -1,0 +1,886 @@
+{
+ "title": "Fresh-window chronology (GDELTFW)",
+ "generated_utc": "2026-10-17T02:50:50Z",
+ "freeze": {
+  "manifest_written_utc": "2026-10-16T16:32:23Z",
+  "manifest_files": 201,
+  "verified_utc": "2026-10-16T16:34:01Z",
+  "no_test_computation_before_utc": "2026-10-16T16:34:01Z",
+  "first_test_row_prediction_utc_approx": "2026-10-16T16:34:02Z"
+ },
+ "verified_sentence": "No test-row prediction, rank or metric was computed before 2026-10-16 16:34:01 UTC, when Stage 2 finished verifying the 201-file freeze manifest written at 16:32:23 UTC; every test step is launched only after that check, and the first one (TiRGN test rows) began at about 16:34:02 UTC.",
+ "suggested_S12_sentence": "Before the freeze (manifest 16:32 UTC), predictions, ranks and metrics were computed on the training and validation splits only, for fitting and selection (Section 6.4); test.txt was read before the freeze only for split bookkeeping, hashing, time-aware filter indices and history indices restricted to earlier time stamps, and no test-row prediction, rank or metric existed before Stage 2 began scoring at 16:34 UTC.",
+ "categories": {
+  "a": "data download, construction, uninspected check",
+  "b": "registration of rule, amendment, implementation note, addendum",
+  "c": "base training and validation row dump",
+  "d": "HRcov, SA and BLEND fitting and validation scoring",
+  "e": "CountTRuCoLa Stage-1 runs incl. the stopped window-50 configurations",
+  "f": "comparator and blend selection",
+  "g": "freeze-manifest hashing",
+  "h": "first test-row prediction of every system",
+  "i": "test scoring, aggregation, crash-recovery reruns",
+  "-": "other"
+ },
+ "events": [
+  {
+   "category": "b",
+   "utc": "2026-10-16T14:24:12Z",
+   "event": "fresh-window rule registered (lead)",
+   "source": "artifact v79_fresh_window_rule.json (artifact 13197939-8bbd-4f32-88c2-9197a2badc8b, version e10ab60d-9569-49b6-bd1e-6cf415138a78, created 2026-10-16T14:24:13.099Z); field registered_utc",
+   "n": 1
+  },
+  {
+   "category": "b",
+   "utc": "2026-10-16T14:24:46Z",
+   "event": "Amendment 1 registered (lead)",
+   "source": "artifact v79_fresh_window_rule_amendment_1.json (artifact a4c9bafc-09fe-4dc9-b6b3-aedeaab12d59, version 6debf06f-fc19-49ac-be4e-44b87bbb47da, created 2026-10-16T14:24:47.417Z); field registered_utc",
+   "n": 2
+  },
+  {
+   "category": "a",
+   "utc": "2026-10-16T14:30:28Z",
+   "event": "Uninspected scan of serverA (read-only, files dated >= 2025-10-01), job 24868d2a",
+   "source": "scans/serverA_24868d2a-00f2-4201-a925-29f33feb31d4/scan.json:L20",
+   "n": 3
+  },
+  {
+   "category": "a",
+   "utc": "2026-10-16T14:30:29Z",
+   "event": "Uninspected scan of serverB (read-only, files dated >= 2025-10-01), job 7281237c",
+   "source": "scans/serverB_7281237c-9381-4054-a66d-2109569cbc8e/scan.json:L16",
+   "n": 4
+  },
+  {
+   "category": "a",
+   "utc": "2026-10-16T14:30:30Z",
+   "event": "Uninspected scan of serverC (read-only, files dated >= 2025-10-01), job 6f3c1306",
+   "source": "scans/serverC_6f3c1306-74ba-414c-ab05-e93115855078/scan.json:L1",
+   "n": 5
+  },
+  {
+   "category": "a",
+   "utc": "2026-10-16T14:31:48Z",
+   "event": "GDELTFW build job starts (download of 26,208 official 15-minute exports, 2025-08-01..2026-04-30)",
+   "source": "track/logs/build.log:L1",
+   "n": 6
+  },
+  {
+   "category": "a",
+   "utc": "2026-10-16T14:42:59Z",
+   "event": "All 26,208 export files downloaded (0 missing)",
+   "source": "track/logs/build.log:L22",
+   "note": "671.1 s after the build start; missing_export_files.txt written 14:43:00Z (inventory/track_files.tsv:L424 (mtime of data/GDELTFW/missing_export_files.txt))",
+   "n": 7
+  },
+  {
+   "category": "a",
+   "utc": "2026-10-16T14:45:13Z",
+   "event": "Filtering: 1,552,574 Middle-East root events in the window",
+   "source": "track/logs/build.log:L23",
+   "note": "805.4 s after the build start",
+   "n": 8
+  },
+  {
+   "category": "a",
+   "utc": "2026-10-16T14:45:38Z",
+   "event": "GDELTFW split files written (train/valid/test.txt, id maps, stat.txt)",
+   "source": "inventory/track_files.tsv:L427 (mtime of data/GDELTFW/test.txt)",
+   "split": "construction",
+   "n": 9
+  },
+  {
+   "category": "a",
+   "utc": "2026-10-16T14:45:39Z",
+   "event": "Build exits 0 (1,209 entities, 215 relations, 273 days)",
+   "source": "track/logs/build.log:L25",
+   "n": 10
+  },
+  {
+   "category": "a",
+   "utc": "2026-10-16T14:45:40Z",
+   "event": "Build job records line counts and SHA-256 of every split file (test.txt read: wc -l, sha256sum)",
+   "source": "jobs/faac377d-9748-42af-9403-7352ff11995d/out/wc.txt:L5; jobs/faac377d-9748-42af-9403-7352ff11995d/out/data_sha256.txt:L5",
+   "split": "test.txt read: bookkeeping",
+   "n": 11
+  },
+  {
+   "category": "a",
+   "utc": "2026-10-16T14:46:37Z",
+   "event": "Read-only sanity check of the built splits: entity/relation coverage of every split by train, timestamp range per split (test: ts 212..272, 61 days); no model involved",
+   "source": "orchestration_commands.tsv:L14",
+   "split": "test.txt read: bookkeeping",
+   "n": 12
+  },
+  {
+   "category": "a",
+   "utc": "2026-10-16T14:46:47Z",
+   "event": "Uninspected check recorded: PASS",
+   "source": "artifact fresh_window_uninspected_check.json (artifact 950da451-f3b4-42a8-ac66-4d7c5998d0d6, version f255c8f4-129c-4055-a56d-808c26de0265, created 2026-10-16T14:47:01.087Z); field recorded_utc",
+   "n": 13
+  },
+  {
+   "category": "b",
+   "utc": "2026-10-16T14:49:29Z",
+   "event": "Implementation note registered (configurations, CountTRuCoLa candidates C0/C1/C2, freeze plan)",
+   "source": "artifact fresh_window_implementation_note.json (artifact eab28671-aec2-4a8c-a096-f897e6aa8f12, version 7ef9ae3a-6fbf-433b-b6a1-536c6512f598, created 2026-10-16T14:49:35.045Z); field registered_utc",
+   "n": 14
+  },
+  {
+   "category": "-",
+   "utc": "2026-10-16T14:50:01Z",
+   "event": "Fresh-window code directory created from the forward-holdout code (constant substitution only)",
+   "source": "orchestration_commands.tsv:L15",
+   "n": 15
+  },
+  {
+   "category": "c",
+   "utc": "2026-10-16T14:50:41Z",
+   "event": "Stage 1A starts (job c2ac489f)",
+   "source": "track/logs/stage1_chain.log:L1",
+   "n": 16
+  },
+  {
+   "category": "c",
+   "utc": "2026-10-16T14:50:42Z",
+   "event": "TiRGN training starts on serverA GPU 0 (train split; validation filtered MRR per epoch for model selection; --no_dump)",
+   "source": "track/logs/stage1_chain.log:L27",
+   "split": "train/valid",
+   "n": 17
+  },
+  {
+   "category": "c",
+   "utc": "2026-10-16T14:50:42Z",
+   "event": "TiRGN loader builds time snapshots of all three splits (train 184, valid 28, test 61; num_times 273 = time-encoder input size); history vocabulary and filter index over all facts, both masked to earlier time stamps",
+   "source": "track/logs/tirgn_train.log:L17",
+   "split": "test.txt read: split bookkeeping / filter",
+   "n": 18
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T14:53:01Z",
+   "event": "Base-independent preparation (validation strata; pattern tables on the early 70% of train timestamps; event index over all facts, queried strictly before t)",
+   "source": "track/logs/stage1_chain.log:L28",
+   "split": "test.txt read: row counts / time-masked event index",
+   "n": 19
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T14:53:18Z",
+   "event": "RecB validation grid and selection (BLEND component; validation ranks and MRR)",
+   "source": "track/logs/stage1_chain.log:L29",
+   "split": "valid",
+   "n": 20
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T14:53:26Z",
+   "event": "RecB validation CSR (--only_valid; no test rows)",
+   "source": "track/logs/stage1_chain.log:L30",
+   "split": "valid",
+   "n": 21
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T14:53:44Z",
+   "event": "CountTRuCoLa Stage 1, attempt 1 (C0, C1, C2 one minute apart)",
+   "source": "jobs/7a51145d-80e6-4474-9d1b-132197567505/h/C0/run.txt:L1",
+   "n": 22
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T14:53:54Z",
+   "event": "Attempt 1 fails at dataset construction in the wrapper (relation2id format); no rule learned, no ranking",
+   "source": "jobs/7a51145d-80e6-4474-9d1b-132197567505/h/C0/run.txt:L2; jobs/7a51145d-80e6-4474-9d1b-132197567505/h/C0/ct_tail.txt:L40",
+   "n": 23
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T14:57:05Z",
+   "event": "Smoke-test script written",
+   "source": "orchestration_commands.tsv:L21",
+   "n": 24
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T14:57:29Z",
+   "event": "Adapter smoke test: CountTRuCoLa RuleDataset built from GDELTFW (all three splits loaded; split sizes printed); no learning, no scoring",
+   "source": "orchestration_commands.tsv:L22",
+   "split": "test.txt read: split bookkeeping",
+   "n": 25
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T14:57:37Z",
+   "event": "CountTRuCoLa Stage 1 C0 starts: learn on train, apply to validation only (EVAL_TESTSET_FLAG=False)",
+   "source": "track/ct/C0/run.txt:L1; track/ct/C0/ct_stage1.log:L24",
+   "split": "train/valid",
+   "n": 26
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T14:58:37Z",
+   "event": "CountTRuCoLa Stage 1 C1 starts: learn on train, apply to validation only (EVAL_TESTSET_FLAG=False)",
+   "source": "track/ct/C1/run.txt:L1; track/ct/C1/ct_stage1.log:L24",
+   "split": "train/valid",
+   "n": 27
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T14:59:37Z",
+   "event": "CountTRuCoLa Stage 1 C2 starts: learn on train, apply to validation only (EVAL_TESTSET_FLAG=False)",
+   "source": "track/ct/C2/run.txt:L1; track/ct/C2/ct_stage1.log:L24",
+   "split": "train/valid",
+   "n": 28
+  },
+  {
+   "category": "c",
+   "utc": "2026-10-16T15:01:01Z",
+   "event": "TiRGN training ends (best epoch 11 by validation filtered MRR); no dump of any split",
+   "source": "track/logs/tirgn_train.log:L55; inventory/track_files.tsv:L595 (mtime of GDELTFW/work/base_tirgn/tirgn_GDELTFW_epoch_log.json)",
+   "split": "valid",
+   "n": 29
+  },
+  {
+   "category": "c",
+   "utc": "2026-10-16T15:01:08Z",
+   "event": "TiRGN validation rows dumped (full log-prob rows for the 152,234 validation queries)",
+   "source": "track/logs/stage1_chain.log:L35; inventory/track_files.tsv:L597 (mtime of GDELTFW/work/fullrows/tirgn_GDELTFW_valid_scores_f32.bin)",
+   "split": "valid",
+   "n": 30
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:01:48Z",
+   "event": "Stage 1B starts (job dc39717c)",
+   "source": "track/logs/stage1_chain.log:L38",
+   "n": 31
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:01:59Z",
+   "event": "SA part of Stage 1B fails at the selection-cut parse (container banner in the captured value); every SA step rc != 0 in 2-11 s, nothing computed",
+   "source": "track/logs/stage1_chain.log:L65; track/logs/stage1_chain.log:L60",
+   "n": 32
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:02:20Z",
+   "event": "HRcov candidate lists, validation",
+   "source": "track/logs/stage1_chain.log:L66",
+   "split": "valid",
+   "n": 33
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:02:35Z",
+   "event": "HRcov features, validation",
+   "source": "track/logs/stage1_chain.log:L67",
+   "split": "valid",
+   "n": 34
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:02:57Z",
+   "event": "BLEND grid scored on validation (13 betas x lambda; validation MRR)",
+   "source": "track/logs/stage1_chain.log:L68",
+   "split": "valid",
+   "n": 35
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:02:58Z",
+   "event": "BLEND / RecB-POOL selection on validation",
+   "source": "track/logs/stage1_chain.log:L69",
+   "split": "valid",
+   "n": 36
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:04:46Z",
+   "event": "HRcov re-ranker seed 0 fitted on the validation fit part, epoch chosen on the selection part",
+   "source": "inventory/track_files.tsv:L626 (mtime of GDELTFW/work/train_tirgn/models/HRCOV_PAT_s0.pt)",
+   "split": "valid",
+   "n": 37
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:06:10Z",
+   "event": "HRcov re-ranker seed 1 fitted on the validation fit part, epoch chosen on the selection part",
+   "source": "inventory/track_files.tsv:L628 (mtime of GDELTFW/work/train_tirgn/models/HRCOV_PAT_s1.pt)",
+   "split": "valid",
+   "n": 38
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:06:52Z",
+   "event": "Stage 1B-SA rerun starts (job 9ccd0e7d; crash recovery of the failed SA part, identical inputs)",
+   "source": "track/logs/stage1_chain.log:L70",
+   "n": 39
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:06:53Z",
+   "event": "RecB_xf per-relation selection (cross-fitted, validation)",
+   "source": "track/logs/stage1_chain.log:L73",
+   "split": "valid",
+   "n": 40
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:07:00Z",
+   "event": "RecB_xf validation CSR (--only_valid)",
+   "source": "track/logs/stage1_chain.log:L74",
+   "split": "valid",
+   "n": 41
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:07:04Z",
+   "event": "SA strict history order, validation",
+   "source": "track/logs/stage1_chain.log:L75",
+   "split": "valid",
+   "n": 42
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:07:06Z",
+   "event": "HRcov re-ranker seed 2 fitted on the validation fit part, epoch chosen on the selection part",
+   "source": "inventory/track_files.tsv:L653 (mtime of GDELTFW/work/train_tirgn/models/HRCOV_PAT_s2.pt)",
+   "split": "valid",
+   "n": 43
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:07:07Z",
+   "event": "HRcov fit and freeze complete (selection-part MRR per seed in train_fh.json); Stage 1B ends",
+   "source": "track/logs/stage1_chain.log:L76",
+   "split": "valid",
+   "n": 44
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:07:40Z",
+   "event": "SA candidate lists, validation",
+   "source": "track/logs/stage1_chain.log:L78",
+   "split": "valid",
+   "n": 45
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:08:05Z",
+   "event": "SA pools/features, validation",
+   "source": "track/logs/stage1_chain.log:L79",
+   "split": "valid",
+   "n": 46
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:08:14Z",
+   "event": "SA_W100 seed 0 fitted (validation fit part; selection part for the epoch)",
+   "source": "inventory/track_files.tsv:L689 (mtime of GDELTFW/work/sa/train/models/SA_W100_s0.pt)",
+   "split": "valid",
+   "n": 47
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:08:23Z",
+   "event": "SA_W100 seed 1 fitted (validation fit part; selection part for the epoch)",
+   "source": "inventory/track_files.tsv:L690 (mtime of GDELTFW/work/sa/train/models/SA_W100_s1.pt)",
+   "split": "valid",
+   "n": 48
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:08:38Z",
+   "event": "SA_W100 seed 2 fitted (validation fit part; selection part for the epoch)",
+   "source": "inventory/track_files.tsv:L691 (mtime of GDELTFW/work/sa/train/models/SA_W100_s2.pt)",
+   "split": "valid",
+   "n": 49
+  },
+  {
+   "category": "d",
+   "utc": "2026-10-16T15:08:38Z",
+   "event": "SA fit and freeze complete; Stage 1B-SA ends",
+   "source": "track/logs/stage1_chain.log:L80",
+   "split": "valid",
+   "n": 50
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T15:42:19Z",
+   "event": "CountTRuCoLa memory watchdog starts (job eea61388)",
+   "source": "track/logs/ct_memwatch.log:L1",
+   "n": 51
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T16:07:06Z",
+   "event": "C1 / C2 resident memory 135 / 132 GB (the values quoted in the manuscript)",
+   "source": "track/logs/ct_memwatch.log:L50",
+   "n": 52
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T16:07:36Z",
+   "event": "Last sample before the stop: C1 / C2 at 135 / 134 GB, host MemAvailable 198 GB",
+   "source": "track/logs/ct_memwatch.log:L51",
+   "n": 53
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T16:07:48Z",
+   "event": "Manual stop of C1 and C2 (window 50): projected memory/time infeasible; no rule set, ranking or score existed",
+   "source": "track/logs/ct_memwatch.log:L52; track/logs/ct_memwatch.log:L53; command at 16:07:53Z: orchestration_commands.tsv:L33",
+   "n": 54
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T16:07:54Z",
+   "event": "CountTRuCoLa C0 rule set learned on train (rule files written)",
+   "source": "inventory/track_files.tsv:L699 (mtime of ct/C0/repo/files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt)",
+   "split": "train",
+   "n": 55
+  },
+  {
+   "category": "b",
+   "utc": "2026-10-16T16:08:05Z",
+   "event": "Addendum 1 registered: C1/C2 dropped; comparator = C0 alone or its 52 blends, by selection-part MRR",
+   "source": "artifact fresh_window_implementation_note_addendum_1.json (artifact 9eaf6fe4-71c3-4bd1-acf7-c465a0af4ac8, version dede10e9-7120-436c-a8d0-d9c77306dc4a, created 2026-10-16T16:08:06.779Z); field registered_utc",
+   "n": 56
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T16:08:05Z",
+   "event": "C1 main process ends (SIGTERM, rc 241); no validation or test ranking file",
+   "source": "track/ct/C1/run.txt:L2; track/ct/C1/run.txt:L3",
+   "n": 57
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T16:08:09Z",
+   "event": "C2 main process ends (SIGTERM, rc 241); no validation or test ranking file",
+   "source": "track/ct/C2/run.txt:L2; track/ct/C2/run.txt:L3",
+   "n": 58
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T16:18:41Z",
+   "event": "CountTRuCoLa results CSV written by the released main.py: validation columns only, all -1 (built-in evaluation disabled); config_rankings_path holds the release's default name of the test-rankings file, which did not exist before 16:58:39Z",
+   "source": "inventory/track_files.tsv:L717 (mtime of ct/C0/repo/files/results/tkgl-gdeltfw-results.csv); content: track/ct/C0/repo/files/results/tkgl-gdeltfw-results.csv:L2",
+   "split": "valid",
+   "n": 59
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T16:19:03Z",
+   "event": "C0 rules applied to validation; validation rankings written (no test rankings: EVAL_TESTSET_FLAG=False)",
+   "source": "track/ct/C0/run.txt:L2; inventory/track_files.tsv:L715 (mtime of ct/C0/repo/files/rankings/tkgl-gdeltfw/tkgl-gdeltfw10-rankings_val_conf_0_corr_conf_0_noisyor_crules_frules_zrules_pvalue_30_num_top_rules_10_multi.txt)",
+   "split": "valid",
+   "n": 60
+  },
+  {
+   "category": "e",
+   "utc": "2026-10-16T16:19:13Z",
+   "event": "C0 validation rankings scored by fw_ct_score.py --split val",
+   "source": "track/ct/C0/run.txt:L9",
+   "split": "valid",
+   "n": 61
+  },
+  {
+   "category": "f",
+   "utc": "2026-10-16T16:19:43Z",
+   "event": "Stage 1C: CountTRuCoLa C0 alone and 52 TiRGN blends scored on the validation selection part (50,192 queries)",
+   "source": "track/logs/stage1_chain.log:L83; track/logs/ext_valid.log:L18",
+   "split": "valid",
+   "note": "job 953e4300 is recorded as exit 1: the final harvest `cp` of the non-existent C2 dump_val/meta.json (C2 was stopped) returns 1 after ext_valid rc=0 (jobs/job_status.tsv)",
+   "n": 62
+  },
+  {
+   "category": "f",
+   "utc": "2026-10-16T16:20:19Z",
+   "event": "External comparator frozen: C0 blend a=0.1, tau=0.5 (selection-part MRR 0.4077 vs alone 0.3684, base 0.4041)",
+   "source": "registration/ext_comparator.json field selected_utc (code release); artifact ext_comparator.json (artifact fa82718d-bddf-4d50-8316-76b908439c07, version b4d773ad-9d7e-4af8-924c-9907844f149c, created 2026-10-16T16:33:17.831Z)",
+   "note": "the file was staged into the freeze at 16:32:23Z and saved as an artifact at 16:33:17Z",
+   "n": 63
+  },
+  {
+   "category": "-",
+   "utc": "2026-10-16T16:20:47Z",
+   "event": "Latency protocol on a fixed 2,000-query validation slice (job c46772b5)",
+   "source": "orchestration_commands.tsv:L35; inventory/track_files.tsv:L756 (mtime of GDELTFW/work/latency/latency_systems.json); inventory/track_files.tsv:L760 (mtime of GDELTFW/work/latency/latency_ct.json)",
+   "split": "valid",
+   "n": 64
+  },
+  {
+   "category": "g",
+   "utc": "2026-10-16T16:32:23Z",
+   "event": "SHA-256 freeze manifest written: 201 files, 0 missing (rule documents, code, data, base model, validation rows, fitted rankers, selections, CT Stage-1 outputs, latency)",
+   "source": "jobs/117823f0-d9fc-4870-95e1-83bbedc15ba9/h/freeze_out.txt:L1; track/freeze/freeze_manifest_remote.json",
+   "n": 65
+  },
+  {
+   "category": "g",
+   "utc": "2026-10-16T16:33:17Z",
+   "event": "Manifest with chronology, frozen code tarball, Stage-1 validation summary and comparator saved as artifacts",
+   "source": "artifact fresh_window_freeze_manifest.json (artifact f1c68442-9ec6-4698-8cc4-97d9a34368ea, version 8911bb05-7d65-43ca-82a0-f123ab6476f9, created 2026-10-16T16:33:17.773Z); artifact fw_code_frozen.tgz (artifact 35a008b8-3c30-4519-b62b-8ee751439cfd, version 14bba154-e925-43c3-9746-3d92aa958dfb, created 2026-10-16T16:33:17.794Z)",
+   "n": 66
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T16:33:56Z",
+   "event": "Stage 2 starts (job 7349980c)",
+   "source": "track/logs/stage2_test.log:L1",
+   "n": 67
+  },
+  {
+   "category": "g",
+   "utc": "2026-10-16T16:34:01Z",
+   "event": "Freeze verified at the start of Stage 2: 201 files, 0 problems",
+   "source": "track/logs/stage2_test.log:L27; track/logs/stage2_verify.json (verified_utc, n_checked 201, problems [])",
+   "n": 68
+  },
+  {
+   "category": "h",
+   "utc": "2026-10-16T16:34:02Z",
+   "event": "FIRST TEST-ROW PREDICTION, TiRGN base: test log-prob rows (457,168 queries) computed about 16:34:02-16:34:13Z",
+   "source": "track/logs/stage2_test.log:L45; track/logs/tirgn_rows_test.log:L19 (11.1 s, file closed 16:34:13Z); inventory/track_files.tsv:L779 (mtime of GDELTFW/work/fullrows/tirgn_GDELTFW_test_scores_f32.bin)",
+   "split": "test",
+   "note": "approximate start = log end 16:34:13Z minus the logged 11.1 s; launched only after the freeze check ended at 16:34:01Z; no test output of any system has an earlier mtime",
+   "n": 69
+  },
+  {
+   "category": "h",
+   "utc": "2026-10-16T16:35:05Z",
+   "event": "First test-row prediction, CountTRuCoLa comparator: frozen C0 rules applied to the test set (Stage-2 process started 16:34:02Z)",
+   "source": "inventory/track_files.tsv:L776 (mtime of ct/C0/.stage2_marker); track/ct/C0/ct_stage2.log:L45 (serverA local time UTC+8); track/ct/C0/ct_stage2.log:L101",
+   "split": "test",
+   "n": 70
+  },
+  {
+   "category": "h",
+   "utc": "2026-10-16T16:35:47Z",
+   "event": "First test-row prediction, RecB (component of BLEND): recurrency scores of the test rows 16:35:47-16:36:14Z",
+   "source": "track/logs/stage2_test.log:L48; inventory/track_files.tsv:L792 (mtime of GDELTFW/work/recb_stage2/recb_test_ranks_GDELTFW.npz)",
+   "split": "test",
+   "n": 71
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T16:35:47Z",
+   "event": "Test strata (evaluation only) written",
+   "source": "track/logs/stage2_test.log:L47",
+   "split": "test",
+   "n": 72
+  },
+  {
+   "category": "h",
+   "utc": "2026-10-16T16:36:44Z",
+   "event": "First test-row computation, SA: strict history order of the test rows 16:36:44-16:36:50Z",
+   "source": "track/logs/stage2_test.log:L52 (block starts after recb_xf_test, track/logs/stage2_test.log:L49)",
+   "split": "test",
+   "n": 73
+  },
+  {
+   "category": "h",
+   "utc": "2026-10-16T16:36:44Z",
+   "event": "First test-row computation, HRcov: candidate lists from the TiRGN test rows 16:36:44-16:38:23Z",
+   "source": "track/logs/stage2_test.log:L53",
+   "split": "test",
+   "n": 74
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T16:36:44Z",
+   "event": "RecB_xf test CSR (component of SA) complete; recomputed validation CSR of RecB and RecB_xf identical to the frozen arrays",
+   "source": "track/logs/stage2_test.log:L49; track/logs/stage2_test.log:L50",
+   "split": "test",
+   "n": 75
+  },
+  {
+   "category": "h",
+   "utc": "2026-10-16T16:39:05Z",
+   "event": "First test-row score of the HRcov re-ranker (frozen seeds 0-2) 16:39:05-16:39:51Z",
+   "source": "track/logs/stage2_test.log:L57; inventory/track_files.tsv:L858 (mtime of GDELTFW/work/train_tirgn/ranks_test.npz)",
+   "split": "test",
+   "n": 76
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T16:39:05Z",
+   "event": "HRcov test features complete (dump/rank agreement 1.0)",
+   "source": "track/logs/stage2_test.log:L55; track/logs/features_test.log:L27",
+   "split": "test",
+   "n": 77
+  },
+  {
+   "category": "h",
+   "utc": "2026-10-16T16:39:45Z",
+   "event": "First test-row score of the SA ranker (frozen seeds 0-2) 16:39:45-16:40:01Z",
+   "source": "track/logs/stage2_test.log:L58; inventory/track_files.tsv:L865 (mtime of GDELTFW/work/sa/train/ranks_test_SA_W100.npz)",
+   "split": "test",
+   "n": 78
+  },
+  {
+   "category": "h",
+   "utc": "2026-10-16T16:40:09Z",
+   "event": "First test-row score of BLEND (frozen MIX 0.3) and official scoring of base, BLEND and HRcov 16:40:09-16:40:26Z",
+   "source": "track/logs/stage2_test.log:L60; inventory/track_files.tsv:L871 (mtime of GDELTFW/work/test_out/official_test_gdeltfw_tirgn.npz)",
+   "split": "test",
+   "n": 79
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T16:40:09Z",
+   "event": "SA official scoring on test",
+   "source": "track/logs/stage2_test.log:L59; inventory/track_files.tsv:L868 (mtime of GDELTFW/work/test_out/official_test_gdeltfw_sa.npz)",
+   "split": "test",
+   "n": 80
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T16:58:39Z",
+   "event": "CountTRuCoLa test rankings file complete",
+   "source": "inventory/track_files.tsv:L874 (mtime of ct/C0/repo_stage2/files/rankings/tkgl-gdeltfw/tkgl-gdeltfw10-rankings_test_conf_0_corr_conf_0_noisyor_crules_frules_zrules_pvalue_30_num_top_rules_10_multi.txt)",
+   "split": "test",
+   "n": 81
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T17:09:43Z",
+   "event": "CountTRuCoLa Stage-2 main.py returns rc 1 in its results-CSV writer (pandas dtype error) after rule application finished; rankings complete; not rerun",
+   "source": "track/logs/stage2_test.log:L61; track/ct/C0/ct_stage2.log:L305",
+   "split": "test",
+   "n": 82
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T17:09:52Z",
+   "event": "Validation re-application by the frozen CountTRuCoLa rules reproduces the Stage-1 validation ranks exactly (max |dRR| 0.0, n 152,234)",
+   "source": "track/logs/stage2_test.log:L63; inventory/track_files.tsv:L891 (mtime of ct/C0/dump_val_stage2/meta.json)",
+   "split": "valid",
+   "n": 83
+  },
+  {
+   "category": "h",
+   "utc": "2026-10-16T17:10:14Z",
+   "event": "First test-row score of the CountTRuCoLa comparator blend (frozen a=0.1, tau=0.5) and its official scoring 17:10:14-17:10:22Z",
+   "source": "track/logs/stage2_test.log:L65; inventory/track_files.tsv:L909 (mtime of GDELTFW/work/test_out/official_test_gdeltfw_ext.npz)",
+   "split": "test",
+   "n": 84
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T17:10:14Z",
+   "event": "CountTRuCoLa test rankings scored (fw_ct_score.py --split test)",
+   "source": "track/logs/stage2_test.log:L64; inventory/track_files.tsv:L906 (mtime of ct/C0/dump_test/meta.json)",
+   "split": "test",
+   "n": 85
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T17:10:22Z",
+   "event": "Stage 2 ends; one stage-time line per test step (no step repeated)",
+   "source": "track/logs/stage2_test.log:L66",
+   "n": 86
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T17:12:18Z",
+   "event": "Aggregation, paired query bootstrap and timestamp-block bootstrap (fw_agg.py, run once, locally): outcome R4_OTHER (SA: SMALL, comparator: BEATS)",
+   "source": "fresh_window_verdict.json field decided_utc; artifact fresh_window_verdict.json (artifact aaf891b3-b045-4dad-8a8f-0146dd247513, version 5b185ac5-16e3-485f-8810-9b4ee702ebe9, created 2026-10-16T17:13:48.316Z)",
+   "split": "test",
+   "n": 87
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T17:13:48Z",
+   "event": "Rank cross-checks (pipeline ranks = scorer strict ranks) added; results, verdict and latency table saved",
+   "source": "artifact fresh_window_results.json (artifact 6a1de31b-6e61-4e6e-89cc-163042aead0f, version 637824ba-6bdf-40ca-a734-7394c7234795, created 2026-10-16T17:13:48.336Z); artifact fresh_window_latency_table.csv (artifact c3991052-aacb-4207-9b5b-695462337417, version 6d4620fa-3789-4365-81db-aee046625d24, created 2026-10-16T17:13:48.348Z)",
+   "n": 88
+  },
+  {
+   "category": "i",
+   "utc": "2026-10-16T17:15:19Z",
+   "event": "Report saved",
+   "source": "artifact fresh_window_report.md (artifact 3a67d023-9dba-4cdc-b60b-f41537ab0ca8, version e1fd450a-735f-488a-950e-fafc89e2cdb5, created 2026-10-16T17:15:19.398Z)",
+   "n": 89
+  }
+ ],
+ "validation_computations_before_freeze": [
+  "TiRGN: validation filtered MRR after each of 17 epochs (14:50-15:01Z, track/logs/tirgn_train.log; best epoch 11) and full validation log-prob rows (15:01:08Z)",
+  "RecB / RecB_xf: validation ranks and selection (14:53Z, 15:06:53Z)",
+  "BLEND / RecB-POOL: validation grid MRR and selection (15:02:57-15:02:58Z)",
+  "HRcov: fit-part training and selection-part MRR per seed (15:04-15:07Z, train_fh.json)",
+  "SA_W100: fit-part training and selection-part MRR per seed (15:08Z, train_fw_sa.json)",
+  "CountTRuCoLa C0: validation rankings and validation MRR (16:19Z); C1/C2 produced none",
+  "Comparator: selection-part MRR of C0 alone and 52 blends (16:19:43Z) and the selection (16:20:19Z)",
+  "Latency on a 2,000-query validation slice (16:20-16:31Z)"
+ ],
+ "test_txt_reads_before_freeze": [
+  {
+   "n": 1,
+   "utc": "2026-10-16T14:45:38Z",
+   "process": "GDELTFW builder (job faac377d)",
+   "where": "fresh_window_code_v1/01_window_build/build_gdelt25x.py:L188",
+   "access": "writes test.txt",
+   "purpose": "construction",
+   "test_row_scored": false
+  },
+  {
+   "n": 2,
+   "utc": "2026-10-16T14:45:40Z",
+   "process": "build job (wc -l, sha256sum of every split file)",
+   "where": "fresh_window_code_v1/01_window_build/run_build_gdeltfw.sh:L15",
+   "access": "line count and SHA-256 of test.txt",
+   "purpose": "split bookkeeping",
+   "test_row_scored": false
+  },
+  {
+   "n": 3,
+   "utc": "2026-10-16T14:46:37Z",
+   "process": "read-only sanity check (orchestration command)",
+   "where": "fresh_window/logs/orchestration_commands.tsv:L14 (verbatim command in fresh_window_chronology.md, section 4)",
+   "access": "entity/relation ids and time stamps of every split",
+   "purpose": "split bookkeeping (vocabulary closure, ts range per split: test 212..272, 61 days)",
+   "test_row_scored": false
+  },
+  {
+   "n": 4,
+   "utc": "2026-10-16T14:50:41Z..14:53:01Z",
+   "process": "fh_prep.py --stage 1 (Stage 1A)",
+   "where": "fresh_window_code_v1/code/oih_common.py:L97; fresh_window_code_v1/code/fh_prep.py:L102; fresh_window_code_v1/code/fh_prep.py:L114; fresh_window_code_v1/code/fh_prep.py:L137",
+   "access": "all three splits loaded by the harness Split class",
+   "purpose": "split bookkeeping (row counts: test 457,168 in track/logs/prep_stage1.log:L20) and the event index, which is queried strictly before the query time (fresh_window_code_v1/code/patterns.py:L43); strata built for validation only",
+   "test_row_scored": false
+  },
+  {
+   "n": 5,
+   "utc": "2026-10-16T14:50:42Z..15:01:01Z",
+   "process": "TiRGN training, hd_tirgn.py via fh_tirgn_train.py --no_dump (Stage 1A)",
+   "where": "fresh_window_code_v1/code/hd_tirgn.py:L91; fresh_window_code_v1/code/hd_tirgn.py:L93; fresh_window_code_v1/code/hd_tirgn.py:L61; fresh_window_code_v1/code/hd_tirgn.py:L101; fresh_window_code_v1/code/hd_tirgn.py:L125; fresh_window_code_v1/code/hd_tirgn.py:L81; fresh_window_code_v1/code/fh_tirgn_train.py:L11; fresh_window_code_v1/code/hd_tirgn.py:L238",
+   "access": "all three splits",
+   "purpose": "split bookkeeping (time snapshots; num_times = 273 distinct time stamps is the input size of TiRGN's time encoder, track_extra/tirgn_rrgcn_num_times_grep.txt), history vocabulary masked to first occurrences before the query time, time-aware filter index keyed by (s, r, t); only validation snapshots are evaluated (fresh_window_code_v1/code/hd_tirgn.py:L168); the dump that would score test is disabled",
+   "test_row_scored": false
+  },
+  {
+   "n": 6,
+   "utc": "2026-10-16T14:51..14:53:26Z",
+   "process": "fh_recb.py --stage valid; fh_recb.py --stage test --only_valid (Stage 1A)",
+   "where": "fresh_window_code_v1/code/fh_recb.py:L312; fresh_window_code_v1/code/fh_recb.py:L323; fresh_window_code_v1/code/fh_recb.py:L345",
+   "access": "all three splits",
+   "purpose": "time-aware filter and online recurrency counts (facts before the query time); with --only_valid only the validation CSR is built",
+   "test_row_scored": false
+  },
+  {
+   "n": 7,
+   "utc": "2026-10-16T14:53:44Z..14:53:54Z and 14:57:37Z..16:19:03Z",
+   "process": "CountTRuCoLa Stage 1 (attempt 1; C0, C1, C2) through fw_ct_main.py",
+   "where": "fresh_window_code_v1/code_ct/fw_ct_main.py:L30",
+   "access": "all three splits written into CountTRuCoLa's dataset files with split codes",
+   "purpose": "dataset construction required by the released RuleDataset (split bookkeeping); rules learned on train and applied to validation only (EVAL_TESTSET_FLAG=False; track/ct/*/ct_stage1.log:L24)",
+   "test_row_scored": false
+  },
+  {
+   "n": 8,
+   "utc": "2026-10-16T14:57:29Z",
+   "process": "adapter smoke test (orchestration command)",
+   "where": "fresh_window/logs/orchestration_commands.tsv:L22; fresh_window_code_v1/code_ct/fw_ct_dataset_smoke.sh",
+   "access": "RuleDataset of all three splits; sizes printed",
+   "purpose": "split bookkeeping",
+   "test_row_scored": false
+  },
+  {
+   "n": 9,
+   "utc": "2026-10-16T15:01:01Z..15:01:08Z",
+   "process": "fh_tirgn_rows.py --split valid (TiRGN validation rows)",
+   "where": "fresh_window_code_v1/code/hd_tirgn_replay.py:L19; fresh_window_code_v1/code/hd_tirgn_replay.py:L36",
+   "access": "all three splits",
+   "purpose": "history vocabulary and snapshots; the replay stops after the last needed split (validation), so no test snapshot is scored",
+   "test_row_scored": false
+  },
+  {
+   "n": 10,
+   "utc": "2026-10-16T15:01:48Z..15:02:58Z",
+   "process": "fh_lists.py / fh_features.py --splits valid; fh_blend.py --stage valid (Stage 1B)",
+   "where": "fresh_window_code_v1/code/fh_lists.py:L114; fresh_window_code_v1/code/fh_lists.py:L118; fresh_window_code_v1/code/fh_blend.py:L283; fresh_window_code_v1/code/fh_blend.py:L285; fresh_window_code_v1/code/fh_blend.py:L207",
+   "access": "all three splits",
+   "purpose": "time-aware filter, event index queried before t, test query list defined but not processed (--splits valid); fh_blend scored 0 test rows (track/logs/blend_valid.log:L20-21, counter 'test': 0)",
+   "test_row_scored": false
+  },
+  {
+   "n": 11,
+   "utc": "2026-10-16T15:01:49Z..15:01:59Z and 15:06:52Z..15:08:05Z",
+   "process": "v78_hist.py / v78_lists.py / v78_pools.py --splits valid (SA, Stage 1B and 1B-SA)",
+   "where": "fresh_window_code_v1/code_sa/v78_hist.py:L25; fresh_window_code_v1/code_sa/v78_hist.py:L22; fresh_window_code_v1/code_sa/v78_lists.py:L142; fresh_window_code_v1/code_sa/v78_pools.py:L36",
+   "access": "all three splits",
+   "purpose": "time-aware filter and online history counts; only the splits named in --splits (valid) are processed",
+   "test_row_scored": false
+  },
+  {
+   "n": 12,
+   "utc": "2026-10-16T16:19:37Z..16:19:43Z",
+   "process": "fw_ext.py --stage valid (Stage 1C)",
+   "where": "fresh_window_code_v1/code_sa/fw_ext.py:L51; fresh_window_code_v1/code_sa/fw_ext.py:L66",
+   "access": "all three splits",
+   "purpose": "time-aware filter; base rows are read for the validation split only (the test-rows path in the argument did not exist yet: first written 16:34:12Z)",
+   "test_row_scored": false
+  },
+  {
+   "n": 13,
+   "utc": "2026-10-16T16:20:47Z..16:31:22Z",
+   "process": "fw_latency.py / fw_ct_latency.py (latency protocol)",
+   "where": "fresh_window_code_v1/code/fw_latency.py:L70; fresh_window_code_v1/code/fw_latency.py:L123; fresh_window_code_v1/code/fw_latency.py:L43",
+   "access": "all three splits (as the production pipelines load them)",
+   "purpose": "filter and event index; the timed slice is 2,000 validation queries of the first selection-part time stamp",
+   "test_row_scored": false
+  },
+  {
+   "n": 14,
+   "utc": "2026-10-16T16:32:23Z",
+   "process": "fw_freeze.py (freeze job 117823f0)",
+   "where": "fresh_window_code_v1/code/fw_freeze.py:L36",
+   "access": "SHA-256 of test.txt",
+   "purpose": "freeze-manifest hashing",
+   "test_row_scored": false
+  }
+ ],
+ "modules_that_do_not_read_test_txt": [
+  "code/fh_train.py (HRcov fit) refuses to run if test features exist (fresh_window_code_v1/code/fh_train.py:L41)",
+  "code_sa/v76_recb_xf_select.py reads valid.txt only (fresh_window_code_v1/code_sa/v76_recb_xf_select.py:L21)",
+  "code_ct/fw_ct_score.py --split val reads valid.txt only (fresh_window_code_v1/code_ct/fw_ct_score.py:L25)",
+  "fw_uninspected_scan.py ran before GDELTFW existed (14:30Z) and reads time-stamp tables of other datasets"
+ ],
+ "search_for_test_outputs_before_freeze": {
+  "scope": "serverA: every file of tracks/phase2_fresh_window except raw/ (the 26,208 downloaded GDELT export zips): 911 files; the 308 files of the 12 serverA job directories; the scan job directories on serverB and serverC (inventory/*.tsv, mtime UTC)",
+  "test_named_files_before_freeze": [
+   "data/GDELTFW/test.txt (the split, 14:45:38Z)",
+   "code/fulltest_eval.py (a harness library whose name contains 'test'; copied 14:50:02Z)"
+  ],
+  "test_stage_outputs": "91 test-named output files; the earliest mtime is 2026-10-16T16:34:12Z (GDELTFW/work/fullrows/tirgn_GDELTFW_test_scores_f32.bin); the CountTRuCoLa test-rankings file was first created at 16:58:39Z (ct/C0/repo_stage2), and no rankings_test file exists in ct/C0/repo, ct/C0/repo_latency, ct/C1 or ct/C2",
+  "pre_freeze_text_mentions_of_test": {
+   "library file name fulltest_eval.py in provenance fields": 18,
+   "split row/fact counts or test-split day range (bookkeeping)": 30,
+   "CountTRuCoLa option echo (EVAL_TESTSET_FLAG=False) or options dump": 57,
+   "Ray library warning (token authentication banner)": 6,
+   "validation rankings path (CountTRuCoLa)": 3,
+   "no test ranking file (rankings ... test=none)": 9,
+   "0 test rows scored (blend_valid progress counter)": 4,
+   "other track's process in a host process listing": 2,
+   "scanner command line (docker inspect / test -e)": 2,
+   "build command (builder --test argument)": 1,
+   "line count / SHA-256 of test.txt (build job)": 2,
+   "docker image tag 'latest' (substring match)": 1
+  },
+  "pre_freeze_text_mentions_note": "135 lines of the pre-freeze logs/JSONs contain the substring 'test'; none is a prediction, rank or metric on test rows (classes above)."
+ },
+ "notes": [
+  "Stage 1C job 953e4300 is recorded as exit 1: its last command copies dump_val/meta.json of C2, which does not exist because C2 was stopped; ext_valid itself returned 0 (track/logs/stage1_chain.log:L83).",
+  "Both crash-recovery reruns happened in Stage 1 on train/validation only: attempt 1 failed at dataset construction (14:53:54Z) and was rerun with the fixed wrapper (14:57:37Z); the SA part of Stage 1B failed at the cut parse (15:01:49-15:01:59Z, nothing computed) and was rerun as Stage 1B-SA (15:06:52Z). No test step was rerun: stage2_test.log has exactly one stage-time line per step, and there is one Stage-2 job.",
+  "CountTRuCoLa Stage-2 main.py returned rc 1 in its results-CSV writer after rule application had finished (17:09:43Z); the test rankings were complete (16:58:39Z) and were scored by fw_ct_score.py; the step was not rerun.",
+  "An earlier manuscript draft gave 135 and 132 GB for the stopped window-50 configurations; these are the watchdog values at 16:07:06Z. The last sample before the stop (16:07:36Z) was 135 and 134 GB, and the process-tree peaks recorded by memmon were 135.3 and 134.6 GB PSS (track/ct/C1|C2/mem_ct_stage1.json).",
+  "stage2_test.log / stage1_chain.log stage-time lines are written when a step ENDS: `[stage-time] <step> rc=<rc> <seconds since the stage started>s <UTC end time>` (fw_stage2.sh:L22). The freeze check runs first and aborts Stage 2 on any mismatch (fw_stage2.sh:L24-26); all test blocks are launched after it. Start times of test steps are therefore bounded below by 16:34:01Z; the TiRGN start of about 16:34:02Z is its log end (16:34:13Z, file mtime) minus the 11.1 s the step logged.",
+  "All times are UTC. serverA writes local time (UTC+8) in some third-party log lines (CountTRuCoLa / Ray); those were converted. Times of orchestration commands come from the command log of the analysis workstation (orchestration_commands.tsv)."
+ ],
+ "sources": "Paths 'track/', 'jobs/', 'scans/', 'inventory/', 'orchestration_commands.tsv' refer to the log bundle v2 in fresh_window/logs/; 'fresh_window_code_v1/' to the code-release tarball; 'artifact ...' to the project artifact store."
+}

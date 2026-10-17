@@ -1,0 +1,129 @@
+{
+ "label": "post-hoc secondary: G1 vs the manuscript HRCOV definition (HRCOV_PAT) and vs the G3 base; not the registered G1 decision",
+ "rows": [
+  {
+   "dataset": "polecat",
+   "base": "tirgn",
+   "system": "HRCOV_PAT",
+   "G1_arm": "G1_K150",
+   "system_MRR": 0.282377767408202,
+   "G1_MRR": 0.24824139343487128,
+   "query": {
+    "delta": 0.034136373973330685,
+    "CI95": [
+     0.03361380745094833,
+     0.034664084005643456
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "n": 532636
+   },
+   "ts_block": {
+    "delta": 0.034136373973330685,
+    "CI95": [
+     0.03292481711714281,
+     0.03536126344149466
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "n_clusters": 304,
+    "mean_cluster_size": 1752.092105263158,
+    "max_cluster_size": 3134
+   },
+   "registered_thresholds_met": true
+  },
+  {
+   "dataset": "smallpedia",
+   "base": "regcn_tuned",
+   "system": "HRCOV_PAT",
+   "G1_arm": "G1_K150",
+   "system_MRR": 0.6582982866159516,
+   "G1_MRR": 0.6510953232866622,
+   "query": {
+    "delta": 0.007202963329289403,
+    "CI95": [
+     0.006645513824102444,
+     0.00775936507530291
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "n": 163172
+   },
+   "ts_block": {
+    "delta": 0.007202963329289403,
+    "CI95": [
+     0.0059958682128513794,
+     0.008489234837455758
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "n_clusters": 17,
+    "mean_cluster_size": 9598.35294117647,
+    "max_cluster_size": 20112
+   },
+   "registered_thresholds_met": true
+  },
+  {
+   "dataset": "smallpedia",
+   "base": "regcn_tgb",
+   "system": "HRCOV",
+   "G1_arm": "G1_K150",
+   "system_MRR": 0.6599804472310058,
+   "G1_MRR": 0.6510953232866622,
+   "query": {
+    "delta": 0.008885123944343641,
+    "CI95": [
+     0.008307500669126897,
+     0.009436190057021048
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "n": 163172
+   },
+   "ts_block": {
+    "delta": 0.008885123944343641,
+    "CI95": [
+     0.007646479913716909,
+     0.009899687873649794
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "n_clusters": 17,
+    "mean_cluster_size": 9598.35294117647,
+    "max_cluster_size": 20112
+   },
+   "registered_thresholds_met": true
+  },
+  {
+   "dataset": "smallpedia",
+   "base": "regcn_tgb",
+   "system": "HRCOV_PAT",
+   "G1_arm": "G1_K150",
+   "system_MRR": 0.6585639717539964,
+   "G1_MRR": 0.6510953232866622,
+   "query": {
+    "delta": 0.007468648467334243,
+    "CI95": [
+     0.00693300885729144,
+     0.008005415308498173
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "n": 163172
+   },
+   "ts_block": {
+    "delta": 0.007468648467334243,
+    "CI95": [
+     0.006269490054319938,
+     0.008468272920499028
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "n_clusters": 17,
+    "mean_cluster_size": 9598.35294117647,
+    "max_cluster_size": 20112
+   },
+   "registered_thresholds_met": true
+  }
+ ]
+}

@@ -1,0 +1,21 @@
+{
+ "name": "v76_rule_amendment_1",
+ "amends": {
+  "file": "v76_rule.json",
+  "version_id": "caab7495-10d8-48c8-a8e5-565df3c339d1",
+  "registered_utc": "2026-10-15T12:07:43Z",
+  "sha256": "edcfca14128e22f6aaec415eca54da083d2678354bd4cdc95f475638863e0a04"
+ },
+ "item": "M2b_LambdaMART",
+ "change": "The LMART early-stopping / grid-selection statistic, and the LMART exact ranks, resolve TIES exactly as the promoted list resolves them (stable descending sort, equal scores in column order) - i.e. the rank the official evaluator gives the lifted list. The registered text ('the exact fused-rank statistic ... identical to the MLP's epoch criterion') is kept; the v7 implementation of that statistic counts tied candidates as not above the gold, which equals the evaluator's statistic only for tie-free scores (MLP, validated |dMRR| <= 1e-7) but not for tree scores, whose early rounds take only num_leaves distinct values.",
+ "how_detected": "validation-only diagnostics of the first LMART run (<HOST> job 69f852c5): best round = 1 at every grid point on polecat TiRGN and CognTKE, with the selection MRR falling after round 1 (0.320 at round 1, 0.27-0.29 at rounds 50-100 on polecat TiRGN), i.e. the optimistic tie count rewarded the coarse round-1 scores.",
+ "disclosure": "the first run's log printed the round-1 LMART test MRRs (alone / fused) for polecat TiRGN, smallpedia TiRGN, CognTKE and RE-GCN (TGB); those rows, and the LMART rows of the official files of that run, are discarded. No other setting is changed: same grid, rounds, patience, fixed parameters, fit/select rows, seeds, fusion, contrasts and margin. MLP64_PAT / LIN_PAT and the M4 arms of that run are unaffected (continuous scores, v7 code, official evaluator).",
+ "verification": "unit test: the tie-exact rank equals the gold's position among the unfiltered entries of prom_lists (360/360 and 353/353 synthetic rows with heavy ties) and equals the v7 statistic when scores have no ties (max |diff| 0).",
+ "infrastructure_notes_no_protocol_change": [
+  "polecat TiRGN replay tree path corrected to tracks/pilot_smallpedia/stage/TiRGN (as v7 official on <HOST>)",
+  "G1_xf features and the LMART MLP latency step hit CUDA OOM while the M3a TiRGN training occupied GPU 0; they are re-run unchanged",
+  "fixed LMART lists are scored in separate official passes (base tags *_lm2)"
+ ],
+ "registered_utc": "2026-10-15T12:49:21Z",
+ "sha256": "bc8cd8f87192ee980dc0fdde8a3a8e8bd3770bdf01339bb133be16df260697ff"
+}

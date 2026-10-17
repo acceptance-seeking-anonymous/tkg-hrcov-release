@@ -1,0 +1,152 @@
+{
+ "status": "FINAL",
+ "label": "F4_CONDITIONAL",
+ "label_logic": {
+  "F3": false,
+  "F2": false,
+  "F1": false
+ },
+ "sensitivity_label": "F4_CONDITIONAL",
+ "configs": {
+  "S1": {
+   "dataset": "smallpedia",
+   "base": "tirgn",
+   "standalone": {
+    "X": "SA",
+    "call": "SMALL"
+   },
+   "external": {
+    "X": "EXT_blend_counttrucola",
+    "call": "MATCHES",
+    "standalone_beats_external": false
+   },
+   "HRcov_minus_standalone": {
+    "delta": 0.003994037131749205,
+    "query_L": 0.003548628106514653,
+    "query_U": 0.004436370379501643,
+    "ts_L": 0.0015801869688362436,
+    "ts_U": 0.0055331551206270055
+   },
+   "HRcov_minus_external": {
+    "delta": 0.00371697703358712,
+    "query_L": 0.0032647847482185632,
+    "query_U": 0.004161546741043645,
+    "ts_L": 0.0028516012245184998,
+    "ts_U": 0.0044660654340723934
+   },
+   "standalone_minus_external": {
+    "delta": -0.0002770600981620853,
+    "query_L": -0.000851310921224251,
+    "query_U": 0.00032112601414588377,
+    "ts_L": -0.00205031245011198,
+    "ts_U": 0.0021952136529027272
+   },
+   "MRR": {
+    "HRcov": 0.6584181855634673,
+    "SA": 0.6544241484317181,
+    "external": 0.6547012085298802
+   }
+  },
+  "S2": {
+   "dataset": "polecat",
+   "base": "tirgn",
+   "standalone": {
+    "X": "SA",
+    "call": "BEATS"
+   },
+   "external": {
+    "X": "EXT_blend_counttrucola",
+    "call": "BEATS",
+    "standalone_beats_external": true
+   },
+   "HRcov_minus_standalone": {
+    "delta": 0.007165354730048316,
+    "query_L": 0.006881688968758297,
+    "query_U": 0.0074669057226010496,
+    "ts_L": 0.006616091889050635,
+    "ts_U": 0.007774343245586276
+   },
+   "HRcov_minus_external": {
+    "delta": 0.0168784256192536,
+    "query_L": 0.01650228332706337,
+    "query_U": 0.01725908839920588,
+    "ts_L": 0.016199672994936232,
+    "ts_U": 0.017579457106035548
+   },
+   "standalone_minus_external": {
+    "delta": 0.009713070889205281,
+    "query_L": 0.00927492406829439,
+    "query_U": 0.010141331132475492,
+    "ts_L": 0.008958352764076317,
+    "ts_U": 0.010530323696537386
+   },
+   "MRR": {
+    "HRcov": 0.282377767408202,
+    "SA": 0.27521241267815366,
+    "external": 0.26549934178894835
+   }
+  },
+  "S3": {
+   "dataset": "polecat",
+   "base": "cogn",
+   "standalone": {
+    "X": "SA",
+    "call": "BEATS"
+   },
+   "external": {
+    "X": "EXT_blend_counttrucola",
+    "call": "BEATS",
+    "standalone_beats_external": false
+   },
+   "HRcov_minus_standalone": {
+    "delta": 0.028780198738314295,
+    "query_L": 0.02833500162069946,
+    "query_U": 0.02923716924993337,
+    "ts_L": 0.0278819348202161,
+    "ts_U": 0.029672987294582738
+   },
+   "HRcov_minus_external": {
+    "delta": 0.0073793038409064645,
+    "query_L": 0.00712711553866067,
+    "query_U": 0.007632473219452025,
+    "ts_L": 0.006979295575197973,
+    "ts_U": 0.007776546888286883
+   },
+   "standalone_minus_external": {
+    "delta": -0.02140089489740783,
+    "query_L": -0.02191734109703979,
+    "query_U": -0.020884951574177697,
+    "ts_L": -0.02242589621531538,
+    "ts_U": -0.020398186700545974
+   },
+   "MRR": {
+    "HRcov": 0.30399261141646794,
+    "SA": 0.27521241267815366,
+    "external": 0.2966133075755614
+   }
+  }
+ },
+ "gates": {
+  "edgeremind": {
+   "call": "PASS",
+   "gate_number": 0.6147570167182864,
+   "published": 0.6136,
+   "published_sd": 0.0017,
+   "tolerance": 0.01,
+   "abs_diff": 0.0011570167182863855,
+   "definition": "faithful run (released code+config, seed 1337), test MRR with the authors' cutoffs (evaluate_parallel = per-query Evaluator re-score 0.61476)"
+  },
+  "counttrucola": {
+   "call": "PASS",
+   "gate_number": 0.6365796681465823,
+   "published": 0.644,
+   "published_sd": null,
+   "tolerance": 0.01,
+   "abs_diff": 0.007420331853417728,
+   "definition": "faithful run (released code+config), official py-tgb Evaluator over its rankings (ties averaged); authors' own number 0.6441"
+  }
+ },
+ "ext_adapted": "not assessed (optional, not run)",
+ "rule_sha256": "8e05c67b7ce8f3a475ac391e813463b9d435f8add5af13e5c4d03f78483a5f2d",
+ "amendment_sha256": "8fffffcaad75b066fe0fb35127e101c5bbe11f65de7ff4654068f5170962d84e"
+}

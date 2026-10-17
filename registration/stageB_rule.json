@@ -1,0 +1,87 @@
+{
+ "name": "stageB_rule",
+ "pilot": "Pilot 3 of 4 - TGB 2.0 tkgl-icews - STAGE B (full pilot; lead approval 2026-10-13)",
+ "version": 1,
+ "registered_utc": "2026-10-13T05:46:34Z",
+ "registered_before_any_stageB_number": true,
+ "status_at_registration": "Stage A (window-trained bases, 10% test sample) numbers are known (icews_stageA_report.md). For Stage B nothing has been computed except two 30-snapshot smoke runs (pipeline checks on a few snapshots, not read for any choice); the full-train LogCL job started minutes before this file and has produced no valid or test number. No full-train base, no full-test number of any arm, no BASE(+)RecB / RecB-POOL number on tkgl-icews, no HRCOV B=200/300 number exists.",
+ "question": "On the FULL tkgl-icews test set with bases trained on ALL train facts: does HRCOV (history re-ranker over base top-50 + valid-chosen B pattern-prior candidates) beat the best recurrency control {BASE(+)RecB blend, RecB-POOL, full-history RecB-lite} by a practically relevant margin on both bases, without damaging head entities? Secondary: how much of the published-model weakness on tkgl-icews is the relation-code artefact (117 post-2020 zero-stripped CAMEO codes)?",
+ "protocol": {
+  "data": "TGB 2.0 tkgl-icews as shipped (87,856 entities, 391 relations + 391 inverse, 10,224 days; 10,861,600 / 2,326,157 / 2,325,689 facts); harness dir tracks/datasets/harness_data/tkgl-icews (TGB ids = harness ids, verified)",
+  "task": "single-step extrapolation, both query directions (inverse r+391), time-aware filtered 1-vs-all over all 87,856 entities, ground-truth online history before t",
+  "test": "ALL 4,651,378 test queries (no sampling)",
+  "valid_sample": "the Stage A uniform 200,000 valid queries (default_rng(12345), sorted) for re-ranker fit/select and for BASE(+)RecB / RecB-POOL configuration selection; valid days < 70% quantile = fit, rest = select (re-rankers)"
+ },
+ "bases": {
+  "models": "harness native-torch RE-GCN and LogCL (h 200, 2 layers, history 10, dropout 0.2, Adam 1e-3, wd 1e-5, seed 42, LogCL cl_weight 0.1) - Stage A recipe, NO window: gradient steps on every train snapshot after the first (as base_dump), LogCL global history from day 0",
+  "epoch_selection": "argmax FULL-valid filtered MRR (4,652,314 queries) over the grid [1,2,3,4,6,8,10,12] (cap 12, no extension; lead instruction); stop after two consecutive grid points below the running best; checkpoint = valid-best grid point",
+  "decision_bases": [
+   "RE-GCN (full train)",
+   "LogCL (full train)"
+  ],
+  "reference_base_row_not_in_decision": "RE-GCN-RN: RE-GCN trained and replayed with relation-normalised model inputs (train triples, history graph, query relation via relnorm_mapping.csv / stage/tkgl-icews-relnorm relmap); filters, gold and evaluation with the ORIGINAL TGB ids / conflict sets; same epoch protocol"
+ },
+ "claim_system": {
+  "HRCOV_B": "Stage A pilot-3 recipe unchanged (pi_lists / pi_features / pi_train): candidates = base top-50 ++ first B pattern-prior candidates outside the top-50 (M1=64, M2=32, full online history, list length 400); 25 features (8 base + 11 evidence + 6 coverage); MLP d-64-64-1 listwise CE, Adam 1e-3, batch 512, <=30 epochs, early stop on valid-select MRR (patience 5), fit <=120,000 queries; s = alpha log p + beta f (LBFGS on valid-select NLL); seeds 0,1,2",
+  "B_grid": [
+   150,
+   200,
+   300
+  ],
+  "B_selection": "B* = argmax over the grid of the 3-seed-mean valid-select MRR, per base (ties -> smaller B); test scored for every B but only B* enters the decision",
+  "secondary": {
+   "HR": "base top-50, 19 features",
+   "HRCOV_RELNORM": "HRCOV_B* on relation-normalised history features / pattern lists (same columns, recipe, seeds); evaluation with original ids"
+  }
+ },
+ "comparators": {
+  "RecB_lite": "full-history recurrency rule (datasets-track profile_tkg_v2; Stage A): score = sum lambda^(t-k) over earlier (s, r', c, k), seen above unseen, ties by static train answer frequency, exact ties 1/2; lambda = 0.99 (selected on full valid in Stage A, independent of the base); full-test ranks",
+  "BASE(+)RecB": {
+   "implementation": "claims-hardening track code reused unchanged in algorithm (tracks/hardening/code/hd_recb.py for psi CSR files and the trained-mode valid grid; hd_blend.py for blend/pool scoring), copied into this track with a tkgl-icews dataset entry and track-local paths only",
+   "definition": "per base b: full-row blend of the base probabilities p_b (softmax of the base logits) with q = RecB / sum_e RecB(e) (q = 0 without RecB support); RecB = Gastinger psi-Delta-xi, CLEAN variant, window 0 (all facts before t), default (lambda 0.1, alpha 0.99) or per-relation trained (TGB train(): lambda_r from 14 values at alpha 1, then alpha_r from 13 values, by that relation's FULL-valid MRR)",
+   "family": "MIX s=(1-beta)p+beta q, beta in [0.02,0.05,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,0.95,0.98]; LOGLIN s=log p + w log(q+eps), w in [0.25,0.5,1,2], eps in [1e-5,1e-3]; variant in {default, trained} (42 configurations)",
+   "selection": "configuration with the highest valid MRR (harness exact filtered) on the 200k valid sample; test scored once with that configuration only"
+  },
+  "RecB-POOL": {
+   "definition": "per base b: pool = base top-K UNION RecB top-K (RecB > 0), ranked by the blended score; entities outside the pool follow in base order (pilot promotion convention); no learned model",
+   "grid": "K in [20,50,100] x the 42 BASE(+)RecB configurations (126)",
+   "selection": "highest valid MRR on the 200k valid sample; test scored once"
+  },
+  "fallback_preregistered": "if the hardening trained-mode RecB valid grid (14 x 13 configs over all 4,652,314 valid queries, window 0) is projected to exceed 10 h on <HOST> CPU (<=24 workers) or cannot fit in memory, the 'trained' variant is dropped from the BASE(+)RecB / RecB-POOL family (default variant only, 21 / 63 configurations); this is decided from run-time/memory only, before any blend number exists, and reported as a deviation",
+  "best_comparator": "C*_b = the comparator in {b(+)RecB, RecB-POOL_b, RecB-lite} with the highest TEST MRR (conservative: HRCOV must beat each of them)"
+ },
+ "reference_rows_not_in_decision": [
+  "base alone (RE-GCN, LogCL, RE-GCN-RN)",
+  "official TGB RecurrencyBaseline (unmodified modules/recurrencybaseline_predictor.py, repo commit 3b83e5cf), default mode lambda 0.1, alpha 0.99, window 100, on ALL test queries",
+  "hardening RecB standalone (default / trained; clean and faithful)",
+  "HR, HRCOV at non-selected B, HRCOV_RELNORM, RecB-lite-RN (post-hoc in Stage A; computed again here, labelled post-hoc)",
+  "TGB 2.0 tkgl-icews leaderboard rows as recorded in Stage A (RE-GCN 0.182, CEN 0.187, RecB 0.211, EdgeReMIND 0.269)"
+ ],
+ "statistic": {
+  "evaluators": "official py-tgb 2.3.0 tgb.linkproppred.evaluate.Evaluator (batched path: full score rows with the TGB time-filtered conflict set masked to -inf; conflict sets verified identical to TKGNegativeEdgeSampler.query_batch for all 3,599,019 test keys in Stage A; per-query rank = 1 + #(neg>pos) + 0.5 #(neg==pos)) for: base, BASE(+)RecB, RecB-POOL, HRCOV_B* seeds 0,1,2, official RecB w100, RecB-lite (lexicographic score vectors). Harness exact filtered ranks for every arm alongside (HR, other B, RN, RE-GCN-RN: harness primary). |official - harness| MRR > 1e-4 on a deterministic arm is flagged.",
+  "decision_ranks": "official per-query reciprocal ranks; HRCOV = mean over seeds 0,1,2 of the per-query official RR; if a comparator's official ranks are unavailable, its harness ranks are used and flagged",
+  "bootstrap": "Poisson(1) paired bootstrap over ALL test queries, B = 2000, seed 0 (harness oih_common.paired_bootstrap); one-sided p = share of replicates with delta <= 0; p(delta <= 0.005) reported as sensitivity"
+ },
+ "criteria_per_base": {
+  "C1_margin": "MRR(HRCOV_B*) - MRR(C) >= 0.005 AND one-sided p < 0.05, for EACH C in {b(+)RecB, RecB-POOL_b, RecB-lite} (i.e. against C*_b)",
+  "C2_head_guardrail": "head stratum = test queries whose gold has full-train frequency >= 500: delta(HRCOV_B* - C*_b) on the head stratum, B = 2000 bootstrap; DAMAGE iff the 95% CI lies entirely below 0 AND |delta| >= 0.001. Must not be DAMAGE.",
+  "PASS_b": "C1 and C2"
+ },
+ "outcome": {
+  "PRACTICAL_ADVANCE": "PASS_b on BOTH RE-GCN and LogCL",
+  "RECURRENCY_DONE_WELL": "C1 fails on at least one base",
+  "HEAD_DAMAGE": "C1 holds on both bases but C2 fails on at least one"
+ },
+ "secondary_preregistered_not_in_decision": {
+  "relation_code_artefact": "(i) RE-GCN-RN vs RE-GCN base MRR overall / relation-unseen-in-train (43.8% of test queries in Stage A) / seen; (ii) HRCOV_RELNORM - HRCOV_B* overall and per stratum; (iii) RecB-lite-RN - RecB-lite (post-hoc carry-over from Stage A); paired bootstrap CIs (B = 1000)",
+  "strata": "Stage A definitions on the FULL test: exact recurrence (s,r',o) before t; pair history; pool-absent (gold outside base top-50); relation-unseen-in-train; gold full-train frequency cold <50 / mid / head >=500; first-seen entity; delta HRCOV_B* - C*_b with 95% CI (B = 1000)",
+  "leaderboard_comparable_rows": "full test, official evaluator, train-only base training, valid for selection; caveat: re-ranker / blend parameters are fit on the valid sample (valid facts are online history at test time), which TGB allows for model selection but which differs from base-only entries",
+  "other": "HR vs HRCOV_B*; base vs RecB-lite; ceilings (gold in top-50 / in candidate set); Stage A -> Stage B shift of every arm"
+ },
+ "selection_discipline": "base epochs, B*, re-ranker epochs/calibration, blend / pool configurations and RecB lambda/alpha are chosen on VALID only; test passes compute only valid-selected configurations (plus the full B grid, all reported); nothing is re-chosen after a test number is read; post-hoc analyses are labelled post-hoc.",
+ "hosts": "<HOST> (2x RTX PRO 6000 Blackwell Max-Q): LogCL on GPU 1 first; RE-GCN co-scheduled on GPU 1 if >=30 GB headroom at LogCL steady state, else GPU 0 only if >=30 GB free, else queued; CPU <=24 workers. Host of every number recorded.",
+ "known_deviations_at_registration": [
+  "base epoch grid capped at 12 without the Stage A extension rule (lead instruction)",
+  "re-ranker training / selection uses the 200k valid sample (as Stage A); bases are selected on full valid"
+ ]
+}

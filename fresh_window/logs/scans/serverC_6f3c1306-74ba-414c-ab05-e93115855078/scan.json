@@ -1,0 +1,1 @@
+{"host": "serverC", "roots": ["/home/[REDACTED:~ANON]"], "scanned_utc": "2026-10-16T14:30:30Z", "gdelt_files": {"n_total": 0, "n_ge_cut": 0, "max_stamp": null, "examples_ge_cut": [], "dirs": {}}, "timestamp2id": [], "build_summaries": [], "ccnews": {"n_refs": 0, "max_day": null, "n_ge_cut": 0, "files_with_ge_cut": []}, "errors": [], "n_timestamp2id_ge_cut": 0}

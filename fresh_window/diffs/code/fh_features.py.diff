@@ -1,0 +1,18 @@
+--- a/phase2_forward_holdout/code/fh_features.py
++++ b/code/fh_features.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""phase2_forward_holdout / fh_features.py (derived from presub/g2_features.py; changes: dataset via fh_common, --splits so
++"""phase2_fresh_window / fh_features.py (derived from presub/g2_features.py; changes: dataset via fh_common, --splits so
+ that Stage 1 touches valid only, verification without a residual-track reference) -- re-ranker feature tensors, W = 100 (CPU).
+ 
+ pilot_smallpedia/sp_features.py restricted to one layout and 25 features = 8 base (exact, from the full rows) + 11 online
+@@ -156,7 +156,7 @@
+         e["identity_f0"] = float(np.mean(rk0 == r_base)); e["gold_in_W100"] = float((gpos >= 0).mean()); e["gold_in_top50"] = float((r_base <= KC).mean())
+         summ[split] = e
+         log(split, json.dumps(e))
+-    # forward holdout: no residual-track reference MRR exists for GDELT25X; the pre-registered check is the full-row vs
++    # forward holdout: no residual-track reference MRR exists for GDELTFW; the pre-registered check is the full-row vs
+     # dump filtered-rank agreement (>= 99.9%) on each processed split (dump = fh_tirgn_rows.py, same replay)
+     summ["verify"] = {sp: dict(dump=summ[sp]["dump"], dump_exact_share=summ[sp]["dump_exact_share"],
+                                rank_agree=summ[sp].get("rank_agree_fullrow_vs_dump"),

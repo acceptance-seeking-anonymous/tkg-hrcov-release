@@ -1,0 +1,32 @@
+{
+ "name": "ablations_A_rule",
+ "label": "POST-HOC ABLATION (not a decision)",
+ "requested_for": "Manuscript A Sec. 6.2.4 (PI-approved add-on alongside G8)",
+ "registered_before_any_ablation_number": true,
+ "known_beforehand": "full HRCOV_PAT official test MRR on polecat TiRGN (0.28238) and smallpedia RE-GCN TGB-config (0.65856); no number for any ablated arm, for HRCOV_PAT on polecat LogCL, or for HRCOV_PAT on smallpedia TiRGN exists.",
+ "bases": {
+  "tkgl-polecat": [
+   "TiRGN (hardening, valid-best epoch)",
+   "LogCL (pilot-1 checkpoint)"
+  ],
+  "tkgl-smallpedia": [
+   "TiRGN (pilot-2 checkpoint, valid-best epoch 20)",
+   "RE-GCN TGB-config (regcn_tgb, G3)"
+  ]
+ },
+ "candidate_set": "HRCOV bridge-free (HRCOV_PAT) for all four bases: base top-50 ++ first <= 50 pattern-prior candidates (W = 100), the cached HRCOV feature tensors with bridge columns masked (hcpat_train.py load_split); the candidate set is identical across arms, only the feature columns change.",
+ "arms": {
+  "FULL": "HRCOV_PAT, 25 features = base (8: cols 0-7) + evidence (11: cols 8-18) + coverage (6: pattern coverage cols 19-23 + is_cov_cand col 29)",
+  "A10_no_base_features": "evidence + coverage (17 features); fused as usual (alpha*log p_base + beta*f calibrated on valid-select)",
+  "A11_minus_base": "identical to A10 (same column subset) - reported under both names, trained once",
+  "A11_minus_evidence": "base + coverage (14 features)",
+  "A11_minus_coverage": "base + evidence (19 features)"
+ },
+ "recipe": "hcpat_train.py core unchanged (= pc_train.py / sp_train.py re-ranker: MLP 64-64, listwise CE over the W = 100 candidates, Adam lr 1e-3, batch 512, <= 30 epochs, patience 5 on valid-select MRR, fit <= 120,000 valid-fit queries (valid timestamps < 70% cut), calibration alpha, beta by LBFGS on valid-select), seeds 0, 1, 2; FULL is re-trained in the same run for a like-for-like reference.",
+ "evaluation": "all test queries (polecat 532,636; smallpedia 163,172). Per-query rank = exact fused rank (hcpat_train fused_ranks_float: lifted list, then base row with the average-tie base rank), which is the official py-tgb evaluator statistic (1 + #greater + 0.5 #ties over the TGB negatives = all non-filtered entities). The official evaluator itself needs full base score rows; for polecat these exist only through GPU replay of TiRGN / LogCL, which this CPU-only add-on may not use. Validation: (i) the base rank used here equals the official per-query base rank of the hardening runs; (ii) for the FULL arm, agreement with the stored official HRCOV_PAT per-query RR where it exists; (iii) where full smallpedia rows are on <HOST>, the official evaluator is also run on every arm (CPU).",
+ "statistics": "MRR and H@10 per arm (per-query RR / hit averaged over seeds 0-2); delta vs FULL with paired Poisson(1) bootstrap over test queries, B = 2000, seed 0, 95% percentile CI.",
+ "hosts": "<HOST> CPU only (no GPU), <= 8 threads; outputs under tracks/hardening/ablations_A/; no deletions.",
+ "not_a_decision": "Post-hoc ablation; no claim, rule or configuration of the hardening / pre-submission / G8 decisions is changed by these numbers.",
+ "registered_utc": "2026-10-13T19:16:03Z",
+ "sha256": "11bf117ef6fba8dac880dac97d5f5721d8dde2f80ff674527c8b6d0ed1b74812"
+}

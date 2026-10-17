@@ -1,0 +1,55 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+{
+ "clean": {
+  "cut": 203,
+  "selection_rows": "valid ts >= cut",
+  "n_select_queries": 50192,
+  "n_valid_queries": 152234,
+  "reproduces_original_selection_from_all_valid": true,
+  "n_rel_with_valid": 400,
+  "n_rel_with_select": 366,
+  "n_rel_valid_but_no_select_default": 34,
+  "n_rel_changed_vs_original": 301,
+  "n_rel_changed_among_with_select": 267,
+  "share_valid_queries_in_changed_rel": 0.7787222302507981,
+  "valid_MRR_xf_fit_rows": 0.382210627594051,
+  "valid_MRR_orig_fit_rows": 0.39029464361541233,
+  "valid_MRR_xf_select_rows": 0.40230894310811194,
+  "valid_MRR_orig_select_rows": 0.39880726765917324
+ },
+ "faith": {
+  "cut": 203,
+  "selection_rows": "valid ts >= cut",
+  "n_select_queries": 50192,
+  "n_valid_queries": 152234,
+  "reproduces_original_selection_from_all_valid": true,
+  "n_rel_with_valid": 400,
+  "n_rel_with_select": 366,
+  "n_rel_valid_but_no_select_default": 34,
+  "n_rel_changed_vs_original": 295,
+  "n_rel_changed_among_with_select": 261,
+  "share_valid_queries_in_changed_rel": 0.7604608694509768,
+  "valid_MRR_xf_fit_rows": 0.381988131289353,
+  "valid_MRR_orig_fit_rows": 0.390258754262963,
+  "valid_MRR_xf_select_rows": 0.40232962173853914,
+  "valid_MRR_orig_select_rows": 0.3985632194118719
+ }
+}

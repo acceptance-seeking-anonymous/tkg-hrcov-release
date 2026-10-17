@@ -1,0 +1,40 @@
+Parsed option: DATAPOINT_THRESHOLD_MULTI = 50
+Parsed option: RULE_UNSEEN_NEGATIVES = 100
+Parsed option: AGGREGATION_DECAY = 0.8
+Parsed option: NUM_TOP_RULES = 10
+Parsed option: RULE_TYPE_C = True
+Parsed option: F_UNSEEN_NEGATIVES = 10
+Parsed option: Z_RULES_FACTOR = 0.1
+parsed_options_dict:  {'DATASET_NAME': 'tkgl-gdeltfw', 'NUM_CPUS': 10, 'EVAL_TESTSET_FLAG': False, 'EVAL_VALSET_FLAG': True, 'LEARN_WINDOW_SIZE': 50, 'DATAPOINT_THRESHOLD_MULTI': 50, 'RULE_UNSEEN_NEGATIVES': 100, 'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'F_UNSEEN_NEGATIVES': 10, 'Z_RULES_FACTOR': 0.1}
+Using dataset name from base options: tkgl-gdeltfw
+dataset_name:  tkgl-gdeltfw
+DATASET_OVERRIDES:  {'tkgl-icews14': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 0, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 50, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-yago': {'AGGREGATION_DECAY': 0.7, 'NUM_TOP_RULES': 5, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 50, 'F_UNSEEN_NEGATIVES': 30, 'LEARN_WINDOW_SIZE': 30, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-wikiold': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 50, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 3, 'RULE_UNSEEN_NEGATIVES': 1, 'Z_RULES_FACTOR': 0.1}, 'tkgl-smallpedia': {'AGGREGATION_DECAY': 0.4, 'NUM_TOP_RULES': 5, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 10, 'F_UNSEEN_NEGATIVES': 30, 'LEARN_WINDOW_SIZE': 3, 'RULE_UNSEEN_NEGATIVES': 3, 'Z_RULES_FACTOR': 0}, 'tkgl-polecat': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': False, 'DATAPOINT_THRESHOLD_MULTI': 0, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 150, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-icews18': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 50, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 50, 'RULE_UNSEEN_NEGATIVES': 100, 'Z_RULES_FACTOR': 0.1}, 'tkgl-gdelt': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': False, 'DATAPOINT_THRESHOLD_MULTI': 0, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 200, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-wikidata': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 0, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 10, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-icews': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'DATAPOINT_THRESHOLD_MULTI': 50, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 50, 'RULE_UNSEEN_NEGATIVES': 100, 'Z_RULES_FACTOR': 0.1}}
+overwriting options from config file and command line call with parsed options
+Overwriting DATASET_NAME with tkgl-gdeltfw from command line
+Overwriting NUM_CPUS with 10 from command line
+Overwriting EVAL_TESTSET_FLAG with False from command line
+Overwriting EVAL_VALSET_FLAG with True from command line
+Overwriting LEARN_WINDOW_SIZE with 50 from command line
+Overwriting DATAPOINT_THRESHOLD_MULTI with 50 from command line
+Overwriting RULE_UNSEEN_NEGATIVES with 100 from command line
+Overwriting AGGREGATION_DECAY with 0.8 from command line
+Overwriting NUM_TOP_RULES with 10 from command line
+Overwriting RULE_TYPE_C with True from command line
+Overwriting F_UNSEEN_NEGATIVES with 10 from command line
+Overwriting Z_RULES_FACTOR with 0.1 from command line
+options:  {'DATASET_NAME': 'tkgl-gdeltfw', 'RANKINGS_PATH': 'default', 'LEARN_DATA_PATH': 'default', 'CREATE_LEARN_DATA_FLAG': True, 'LEARN_PARAMS_OPTION': 'learn', 'LOAD_PARAMS_FLAG': False, 'APPLY_RULES_FLAG': True, 'EVAL_VALSET_FLAG': True, 'EVAL_TESTSET_FLAG': False, 'NUM_CPUS': 10, 'DELETE_RANKINGS_FLAG': False, 'PLOT_FLAG': False, 'RULE_TYPE_C': True, 'RULE_UNSEEN_NEGATIVES': 100, 'LEARN_WINDOW_SIZE': 50, 'DATAPOINT_THRESHOLD_MULTI': 50, 'Z_RULES_FACTOR': 0.1, 'F_UNSEEN_NEGATIVES': 10, 'AGGREGATION_FUNCTION': 'noisyor', 'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_Z': True, 'RULE_TYPE_F': True, 'RULE_TYPE_CYC1_REC': True, 'RULE_TYPE_CYC1_NON_REC': True, 'EVAL_TYPE': 'random', 'MULTI_FLAG': True, 'SINGLE_FLAG': True, 'THRESHOLD_CORRECT_PREDICTIONS': 0, 'THRESHOLD_CONFIDENCE': 0, 'THRESHOLD_APPLY_CONFIDENCE': 0, 'C_THRESHOLD_CONFIDENCE': 0.001, 'C_RULE_RECURRENCY_ACTIVE': True, 'LARGE_DATA_HARDCODE_FLAG': None, 'VERY_LARGE_DATA_HARDCODE_FLAG': None, 'APPLY_WINDOW_SIZE': -1, 'Z_MIN_SUPPORT': 0, 'Z_MIN_CONFIDENCE': 0, 'Z_UNSEEN_NEGATIVES': 10, 'F_MIN_SUPPORT': 0, 'F_MIN_CONFIDENCE': 0, 'LMBDA_REG': 0, 'RR_OFFSET': -99}
+Traceback (most recent call last):
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/fw_ct_main.py", line 82, in <module>
+    ctmain.main()
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/main.py", line 35, in main
+    ruledataset = RuleDataset(name=dataset_name, large_data_hardcode_flag=options["LARGE_DATA_HARDCODE_FLAG"], very_large_data_hardcode_flag=options["VERY_LARGE_DATA_HARDCODE_FLAG"])
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/fw_ct_main.py", line 72, in _checked_init
+    _orig_init(self, *a, **k)
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/rule_dataset.py", line 20, in __init__
+    self.dataset = LinkPropPredDataset(name= name, root=dir_data, preprocess=True)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/fw_ct_main.py", line 59, in __init__
+    for nm, i in rels: f.write(f"{i};{nm.replace(';', ',')}\n")
+        ^^^^^
+ValueError: too many values to unpack (expected 2)

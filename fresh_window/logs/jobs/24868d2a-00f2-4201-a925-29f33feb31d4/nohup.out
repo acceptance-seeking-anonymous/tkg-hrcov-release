@@ -1,0 +1,16 @@
+total 224
+drwxrwxr-x    3 [REDACTED:~ANON] [REDACTED:~ANON]   4096 Oct 16 22:30 .
+drwxrwxr-x 2450 [REDACTED:~ANON] [REDACTED:~ANON] 167936 Oct 16 22:30 ..
+-rw-rw-r--    1 [REDACTED:~ANON] [REDACTED:~ANON]    494 Oct 16 22:30 cmd.sh
+-rw-r--r--    1 [REDACTED:~ANON] [REDACTED:~ANON]   4663 Oct 16 22:30 fw_uninspected_scan.py
+-rw-rw-r--    1 [REDACTED:~ANON] [REDACTED:~ANON]   1355 Oct 16 22:30 job.sh
+drwxrwxr-x    2 [REDACTED:~ANON] [REDACTED:~ANON]   4096 Oct 16 22:30 _lock
+-rw-rw-r--    1 [REDACTED:~ANON] [REDACTED:~ANON]      0 Oct 16 22:30 nohup.out
+-rw-rw-r--    1 [REDACTED:~ANON] [REDACTED:~ANON]     17 Oct 16 22:30 _pgid
+-rw-rw-r--    1 [REDACTED:~ANON] [REDACTED:~ANON]      0 Oct 16 22:30 scan.err
+-rw-rw-r--    1 [REDACTED:~ANON] [REDACTED:~ANON]   8538 Oct 16 22:30 scan.json
+-rw-rw-r--    1 [REDACTED:~ANON] [REDACTED:~ANON]     26 Oct 16 22:30 scan_mode.txt
+-rw-rw-r--    1 [REDACTED:~ANON] [REDACTED:~ANON]     23 Oct 16 22:30 _staged
+-rw-rw-r--    1 [REDACTED:~ANON] [REDACTED:~ANON]     52 Oct 16 22:30 _status.json
+-rw-rw-r--    1 [REDACTED:~ANON] [REDACTED:~ANON]    144 Oct 16 22:30 _submitted
+8538 scan.json

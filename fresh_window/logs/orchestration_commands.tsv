@@ -1,0 +1,38 @@
+utc	kind	intent	command_prefix
+2026-10-16T14:30:30Z	job submission		set +e if command -v docker >/dev/null 2>&1 && docker image inspect tkg-gpu:latest >/dev/null 2>&1; then   docker run 
+2026-10-16T14:31:02Z	command		H=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks cd $H && tar czf $H/phase2_forward_holdout/tmp/fw_codepac
+2026-10-16T14:31:48Z	job submission		set +e FW=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window REL=/home/[REDACTED:~ANON]/c
+2026-10-16T14:32:07Z	command		R=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/repos/counttrucola_submission ls $R; ls $R/r
+2026-10-16T14:32:22Z	command	Read CountTRuCoLa config and dataset cod	R=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/repos/counttrucola_submission/rule_based cat
+2026-10-16T14:33:13Z	command		R=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/repos/counttrucola_submission/rule_based cat
+2026-10-16T14:33:48Z	command		R=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/repos/counttrucola_submission grep -n \
+2026-10-16T14:34:05Z	command		R=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/repos/counttrucola_submission/tgb grep -n \
+2026-10-16T14:39:15Z	command		ls /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/raw/gdelt | wc -l; ls /home/[REDACTED
+2026-10-16T14:42:58Z	command		cd /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/repos/counttrucola_submission && git rev-par
+2026-10-16T14:45:08Z	command		cd /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/repos/counttrucola_submission && tar czf /tm
+2026-10-16T14:46:09Z	command		ls /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/raw/gdelt | wc -l; tail -3 /home/[RED
+2026-10-16T14:46:37Z	command		cd /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW && cat missing_export_fi
+2026-10-16T14:50:01Z	command		 set -e H=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks FH=$H/phase2_forward_holdout; FW=$H/phase2_fres
+2026-10-16T14:50:41Z	job submission	v79 fresh window St	cp fw_gpu_wait.sh fw_stage1a.sh /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/ &&
+2026-10-16T14:53:10Z	command		B=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external; cd $B/repos/counttrucola_submission && du -s
+2026-10-16T14:53:44Z	job submission	v79 fresh window Stage 1: released CountTRuCoLa (3 released configs, 10 CPUs each) learned on GDELTFW train and applied to validation only; 	bash fw_ct_stage1.sh 10
+2026-10-16T14:56:26Z	command		FW=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window; cat $FW/logs/stage1_chain.log | grep
+2026-10-16T14:56:42Z	command		D=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW; head -3 $D/entity2id.txt
+2026-10-16T14:57:05Z	command		set -e FW=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window; B=/home/[REDACTED:~ANON]/cs_
+2026-10-16T14:57:29Z	command		FW=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window; B=/home/[REDACTED:~ANON]/cs_scratch/
+2026-10-16T14:57:37Z	job submission	v79 fresh window Stage 1 (rerun after wrapper id-file fix; first attempt failed at dataset construction, no rules learned): released CountTR	bash fw_ct_stage1.sh 10
+2026-10-16T15:00:15Z	command		FW=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window; grep \
+2026-10-16T15:01:49Z	job submission	v79 fresh window Stage 1B (validation only): HRcov lists/features/fit, BLEND grid+selection, RecB_xf selection+valid CSR, SA history/lists/p	bash fw_stage1b.sh
+2026-10-16T15:06:20Z	command		FW=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window; grep \
+2026-10-16T15:06:52Z	job submission	v79 fresh window Stage 1B-SA rerun (validation only): RecB_xf selection on selection part + valid CSR, SA history order/lists/pools, SA_W100	bash fw_stage1b_sa.sh
+2026-10-16T15:10:06Z	command		FW=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window; grep \
+2026-10-16T15:41:30Z	command		FW=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window; for c in C0 C1 C2; do echo \
+2026-10-16T15:42:19Z	command	Read-only check that the watchd	FW=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window; for c in C0 C1 C2; do pgrep -f \
+2026-10-16T15:42:19Z	job submission	Memory watchdog for the three concurrent CountTRuCoLa Stage-1 runs (stops C2, then C1, only if host MemAvailable < 60 / 40 GB)	bash fw_ct_memwatch.sh
+2026-10-16T16:07:33Z	command		FW=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window; tail -3 $FW/logs/ct_memwatch.log; fo
+2026-10-16T16:07:53Z	command		FW=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window; LOG=$FW/logs/ct_memwatch.log killtr
+2026-10-16T16:19:37Z	job submission	v79 fresh window Stage 1C (validation selection part only): CountTRuCoLa C0 alone and 52 TiRGN blends, GPU 0	bash fw_stage1c_ext.sh
+2026-10-16T16:20:47Z	job submission	v79 latency protocol (validation slice, descriptive): base/BLEND/HRcov/SA/CT-comparator stage timings on GPU 0, batch 1 and batched; CT rule	bash fw_latency.sh
+2026-10-16T16:32:23Z	job submission	v79 fresh window end of Stage 1: install rule docs + Stage-2 code, write SHA-256 freeze manifest (no test computation)	bash fw_freeze_job.sh
+2026-10-16T16:33:56Z	job submission	v79 fresh window STAGE 2: verify freeze, then the single test pass per system (TiRGN, BLEND, HRcov, SA, CountTRuCoLa comparator) on GPU 0 / 	bash /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/fw_stage2.sh
+2026-10-16T17:04:26Z	command		FW=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window; grep -v \

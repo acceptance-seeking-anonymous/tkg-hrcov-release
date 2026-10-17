@@ -1,0 +1,40 @@
+-----------------fetch or learn params for config functions, option:  learn
+>>> 7.29% of the learn input rules were removed due confidence restriction, therefore the number of the rules was reduced from 459616 to 426124.
+
+ 36%|███▌      | 153396/426124 [04:01<05:00, 908.57it/s] 
+426700it [16:11, 439.23it/s]                            
+2026-10-17 00:07:58,045	WARNING authentication_token_setup.py:85 -- Token authentication is enabled for this Ray cluster. Set RAY_AUTH_MODE=disabled to opt out. For more information, see https://docs.ray.io/en/latest/ray-security/token-auth.html
+2026-10-17 00:08:05,048	INFO worker.py:2033 -- Started a local Ray instance.
+time to learn or set parameters:  985.6598323169746
+write rules to:  files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt  and  files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-strings.txt
+-----------------apply the rules to the dataset
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM before ray init21541
+{'memory': 351786522215.0, 'object_store_memory': 150765652377.0, 'node:__internal_head__': 1.0, 'accelerator_type:RTX-PRO-6000': 1.0, 'GPU': 2.0, 'node:serverA': 1.0, 'CPU': 10.0}
+gathering z-rule statistics ...
+... done with gathering z-rule statistics
+gather f-rule statistics ...
+
+MEM at beginning of f-rule aquisition: 21569
+
+... done with gathering f-rule statistics, found 325836 f-rules.
+MEM after f-rule aquisition: 21848
+apply rules to the val set
+MEM before ray starts 21848
+quads_per_task:  2000
+MEM after ray.put 21906
+MEM after appending all ray tasks 21952
+starting the parallel ray tasks 
+
+  5%|▌         | 2/37 [03:08<45:20, 77.73s/it]   
+finished all tasks, now closing the file
+MEM after finising all ray tasks 22739
+MEM at end of apply after deleting stuff 22739
+time to apply the rules:  645.951540398004
+-----------------compute the val MRR, using path rankings from  files/rankings/tkgl-gdeltfw/tkgl-gdeltfw10-rankings_val_conf_0_corr_conf_0_noisyor_crules_frules_zrules_pvalue_30_num_top_rules_10_multi.txt
+[fw] CountTRuCoLa built-in evaluation disabled (no TGB negative files); rankings scored by fw_ct_score.py
+eval time:  3.6375015042722225e-05
+-----------------done! It took  4863.110199964023  seconds
+Data appended successfully to files/results/tkgl-gdeltfw-results.csv.
+[fw] main() wall 4875.9s

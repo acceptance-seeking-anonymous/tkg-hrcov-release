@@ -1,0 +1,678 @@
+{
+ "rule": {
+  "file": "tois_v7_rule.json",
+  "version_id": "redacted-id",
+  "registered_utc": "2026-10-14T10:13:36Z",
+  "sha256": "bfef91681490278623925e1494890719e9b4529d8ddbf9375dfa83ec2a954a8d"
+ },
+ "label": "pre-specified later analysis (test numbers read after the v7 rule was registered)",
+ "item": "C1_no_dyad_lr",
+ "definition": {
+  "bases": "default",
+  "arm": "HRCOV_PAT minus ev_dyad_lr (feature 16) only, 24 features; everything else fixed",
+  "primary": "FULL - noDyadLR; exclusion claim only if U < 0.005"
+ },
+ "evaluator": "official py-tgb evaluator (hd_blend --no_controls over the promoted lists; TiRGN replay for polecat, stored float32 full rows for smallpedia); seed-mean per-query RR over seeds 0-2; H@k = mean over seeds",
+ "statistics": {
+  "query_bootstrap": "paired Poisson(1) bootstrap over test queries, B = 2000, seed 0 (hd_agg.boot)",
+  "timestamp_block_bootstrap": "multinomial resampling of test timestamps (all queries of a timestamp, both directions), B = 2000, seed 0 (g7_cluster_bootstrap.boot_cluster); statistic = resampled sum of per-query deltas / resampled number of queries",
+  "intervals": "two-sided 95% percentile CI from both bootstraps; one-sided 95% bounds L = 5th and U = 95th percentile",
+  "positive_claim": "a difference is called present only if the one-sided lower bound L > 0 under BOTH bootstraps (Holm-adjusted one-sided p < 0.05 within an item when an item has several primary comparisons)",
+  "null_claim": "an effect is called EXCLUDED (smaller than the bar) only if the one-sided upper bound U of the relevant signed delta < bar under the timestamp-block bootstrap (the more conservative); otherwise 'not excluded'. bar = 0.005 MRR unless stated",
+  "MDE": "reported only as sensitivity: MDE_80 = (z_0.95 + z_0.80) x SE_ts = 2.486 x SE of the timestamp-block bootstrap; never used to support a null",
+  "practical_margin": "0.005 MRR = the project's operational criterion (not a significance threshold)"
+ },
+ "interpretation": "ev_dyad_lr is not load-bearing: FULL - noDyadLR = +0.00015 (polecat; one-sided L > 0 under both bootstraps, i.e. detectable but negligible) and -0.00006 (smallpedia); a contribution >= 0.005 is excluded on both bases (U_ts +0.00028 / +0.00019).",
+ "notes": [
+  "Fused arms: official = exact harness rank to <= 1e-7 MRR (hrank stored alongside rank).",
+  "Score-alone arms (B_NF, NB_NF, EV_NF_*): official scoring orders the promoted list by the ranker score and breaks exact ties by list position (base top-50 order, then the generator block); the preliminary exact ranks used strict-greater (optimistic) ties. Difference official vs preliminary: polecat EV_NF_PT -0.00012, NB_NF -0.00006; smallpedia EV_NF_PT -0.00183, EV_NF_RB -0.00192, NB_NF -0.00011 (all other arms 0). The registered numbers are the official ones.",
+  "Base replay: per-query base RR identical to the stored control/HRCOV_PAT files except near-tie blocks (polecat 0.011-0.012% of queries, mean |dRR| < 1e-8; smallpedia exactly identical).",
+  "FULL re-fit vs stored HRCOV_PAT: smallpedia identical (deterministic CPU fit); polecat -0.00005, ts CI [-0.00017, +0.00006] (GPU fit)."
+ ],
+ "expansion_check": {
+  "rule": "B/C items run on the two default bases only. A second base (polecat LogCL, smallpedia regcn_tgb) is added for an item only if its primary result is AMBIGUOUS: the timestamp-block 95% CI of the primary delta contains the bar (0.005) on either default base, or the two default bases give opposite signs with both 95% CIs excluding 0.",
+  "primaries": [
+   {
+    "comparison": "FULL - noDyadLR",
+    "ts_CI_contains_bar": {
+     "tkgl-polecat": false,
+     "tkgl-smallpedia": false
+    },
+    "opposite_signs_both_excluding_0": false,
+    "ambiguous": false
+   }
+  ],
+  "second_base_added": false
+ },
+ "datasets": {
+  "tkgl-polecat": {
+   "base": "TiRGN",
+   "n_queries": 532636,
+   "n_timestamps": 304,
+   "arms": {
+    "MLP64x2 (FULL, re-fit)": {
+     "MRR": 0.2823239826123354,
+     "H1": 0.19661958010098202,
+     "H3": 0.32138708861836845,
+     "H10": 0.45268438483316936,
+     "per_seed_MRR": [
+      0.2820252478122711,
+      0.28253090381622314,
+      0.28241580724716187
+     ],
+     "n_seeds": 3,
+     "harness_MRR": 0.2823239853182435
+    },
+    "noDyadLR": {
+     "MRR": 0.2821783072795903,
+     "H1": 0.1965081844511699,
+     "H3": 0.3212112336880471,
+     "H10": 0.45258550554850463,
+     "per_seed_MRR": [
+      0.2819545269012451,
+      0.28240445256233215,
+      0.2821759283542633
+     ],
+     "n_seeds": 3,
+     "harness_MRR": 0.2821783099606677
+    },
+    "HRCOV_PAT (stored)": {
+     "MRR": 0.282377767408202,
+     "H1": 0.19677040230100856,
+     "H3": 0.32119308495858334,
+     "H10": 0.45285585903568915,
+     "per_seed_MRR": [
+      0.2824961543083191,
+      0.28233644366264343,
+      0.2823007106781006
+     ],
+     "n_seeds": 3,
+     "harness_MRR": 0.28237777007142856
+    }
+   },
+   "comparisons": [
+    {
+     "comparison": "FULL - noDyadLR",
+     "role": "primary",
+     "a": "MLP64x2 (FULL, re-fit)",
+     "b": "noDyadLR",
+     "MRR": {
+      "delta": 0.00014567533274511743,
+      "query": {
+       "CI95": [
+        1.5877427598938707e-05,
+        0.00027898536524749944
+       ],
+       "L": 3.8530929412158114e-05,
+       "U": 0.000257083325192578,
+       "p_one_sided_le0": 0.014,
+       "SE": 6.826463452482241e-05
+      },
+      "ts": {
+       "CI95": [
+        -9.262023437883792e-06,
+        0.000301191501280528
+       ],
+       "L": 2.0541627706520976e-05,
+       "U": 0.0002779039034131061,
+       "p_one_sided_le0": 0.031,
+       "SE": 7.76287817503689e-05
+      },
+      "MDE80_ts": 0.0001929851514314171,
+      "present_pos": true,
+      "present_neg": false,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 532636
+     },
+     "H1": {
+      "delta": 0.00011139564981212933,
+      "query": {
+       "CI95": [
+        -0.00010825903157618276,
+        0.0003431423081421928
+       ],
+       "L": -7.213414077902826e-05,
+       "U": 0.0003087590994258963,
+       "p_one_sided_le0": 0.167,
+       "SE": 0.00011805892059625458
+      },
+      "ts": {
+       "CI95": [
+        -0.0001280137593537072,
+        0.0003548600337489357
+       ],
+       "L": -8.3306885289419e-05,
+       "U": 0.0003152933965470781,
+       "p_one_sided_le0": 0.172,
+       "SE": 0.00012191619283317661
+      },
+      "MDE80_ts": 0.00030308365538327705,
+      "present_pos": false,
+      "present_neg": false,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 532636
+     },
+     "H3": {
+      "delta": 0.00017585493032139528,
+      "query": {
+       "CI95": [
+        -6.070419266566821e-05,
+        0.0004029811772588523
+       ],
+       "L": -2.3835646737521947e-05,
+       "U": 0.0003692212981135528,
+       "p_one_sided_le0": 0.0785,
+       "SE": 0.00012127676184559234
+      },
+      "ts": {
+       "CI95": [
+        -8.877041359784713e-05,
+        0.00045553362086064994
+       ],
+       "L": -5.338438413147902e-05,
+       "U": 0.0004091844634250032,
+       "p_one_sided_le0": 0.1035,
+       "SE": 0.00013942371576872276
+      },
+      "MDE80_ts": 0.0003466073574010448,
+      "present_pos": false,
+      "present_neg": false,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 532636
+     },
+     "H10": {
+      "delta": 9.887928466469916e-05,
+      "query": {
+       "CI95": [
+        -0.00010336031138449592,
+        0.0003103400730191803
+       ],
+       "L": -7.383500785433712e-05,
+       "U": 0.0002736089218824378,
+       "p_one_sided_le0": 0.173,
+       "SE": 0.00010643234129001438
+      },
+      "ts": {
+       "CI95": [
+        -0.00013605700737500753,
+        0.00031212470400316327
+       ],
+       "L": -0.00010266717463314983,
+       "U": 0.00027991458611753903,
+       "p_one_sided_le0": 0.197,
+       "SE": 0.00011537982331864316
+      },
+      "MDE80_ts": 0.0002868342407701469,
+      "present_pos": false,
+      "present_neg": false,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 532636
+     },
+     "ambiguous_for_expansion": false,
+     "holm_ok": true,
+     "call": "present (+); |Δ| ≥ 0.005 excluded"
+    }
+   ],
+   "training": {
+    "MLP64x2 (FULL, re-fit)": {
+     "pool": "PT",
+     "n_features": 25,
+     "n_fit_retained": 86236,
+     "n_params": 5889,
+     "model": "mlp64",
+     "loss": "masked",
+     "cols": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      29
+     ],
+     "best_epochs": [
+      11,
+      15,
+      12
+     ],
+     "cal_alpha": [
+      -0.04555804123763085,
+      -0.008262858044880673,
+      -0.011737563725510634
+     ],
+     "cal_beta": [
+      1.0154238026767715,
+      1.017781228953189,
+      1.0347402842511564
+     ]
+    },
+    "noDyadLR": {
+     "pool": "PT",
+     "n_features": 24,
+     "n_fit_retained": 86236,
+     "n_params": 5825,
+     "model": "mlp64",
+     "loss": "masked",
+     "cols": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      29
+     ],
+     "best_epochs": [
+      24,
+      15,
+      13
+     ],
+     "cal_alpha": [
+      0.01685309528395332,
+      0.010343012396247221,
+      -0.025071379390720187
+     ],
+     "cal_beta": [
+      0.9782335890481206,
+      1.0099252098317102,
+      0.9951472510080889
+     ]
+    }
+   },
+   "fit_population": {
+    "n_fit_population": 139236,
+    "n_select": 60764,
+    "n_test": 532636,
+    "valid_cut_ts": 1423
+   },
+   "refit_vs_stored_HRCOV_PAT": {
+    "delta": -5.3784795866551365e-05,
+    "query": {
+     "CI95": [
+      -0.00016310207850202745,
+      4.590055264679509e-05
+     ],
+     "L": -0.0001450528410164865,
+     "U": 3.117807026455554e-05,
+     "p_one_sided_le0": 0.8495,
+     "SE": 5.336974199440274e-05
+    },
+    "ts": {
+     "CI95": [
+      -0.00016853659193408023,
+      5.832145292702598e-05
+     ],
+     "L": -0.00014946463005095954,
+     "U": 4.0470348869319945e-05,
+     "p_one_sided_le0": 0.8315,
+     "SE": 5.71298068660103e-05
+    },
+    "MDE80_ts": 0.0001420246998689016,
+    "present_pos": false,
+    "present_neg": false,
+    "excluded_gain_ge_bar": true,
+    "excluded_loss_ge_bar": true,
+    "n": 532636
+   },
+   "base_replay_identity": {
+    "ctrl": {
+     "frac_base_rr_differs": 0.00010701492201052877,
+     "mean_abs": 6.285636686565792e-09
+    },
+    "hcpat": {
+     "frac_base_rr_differs": 0.00012015710541533054,
+     "mean_abs": 8.389571694903697e-09
+    }
+   }
+  },
+  "tkgl-smallpedia": {
+   "base": "TiRGN",
+   "n_queries": 163172,
+   "n_timestamps": 17,
+   "arms": {
+    "MLP64x2 (FULL, re-fit)": {
+     "MRR": 0.6584181855634673,
+     "H1": 0.6079637846362529,
+     "H3": 0.6998627215453632,
+     "H10": 0.7318228617654989,
+     "per_seed_MRR": [
+      0.6584767699241638,
+      0.6580670475959778,
+      0.658710777759552
+     ],
+     "n_seeds": 3,
+     "harness_MRR": 0.6584182696922376
+    },
+    "noDyadLR": {
+     "MRR": 0.6584808544316341,
+     "H1": 0.6081721537191838,
+     "H3": 0.6996809093063352,
+     "H10": 0.7316798633752524,
+     "per_seed_MRR": [
+      0.6586041450500488,
+      0.6584388613700867,
+      0.6583995819091797
+     ],
+     "n_seeds": 3,
+     "harness_MRR": 0.658480938564381
+    },
+    "HRCOV_PAT (stored)": {
+     "MRR": 0.6584181855634673,
+     "H1": 0.6079637846362529,
+     "H3": 0.6998627215453632,
+     "H10": 0.7318228617654989,
+     "per_seed_MRR": [
+      0.6584767699241638,
+      0.6580670475959778,
+      0.658710777759552
+     ],
+     "n_seeds": 3,
+     "harness_MRR": 0.6584182696922376
+    }
+   },
+   "comparisons": [
+    {
+     "comparison": "FULL - noDyadLR",
+     "role": "primary",
+     "a": "MLP64x2 (FULL, re-fit)",
+     "b": "noDyadLR",
+     "MRR": {
+      "delta": -6.266886816671668e-05,
+      "query": {
+       "CI95": [
+        -0.00026440297962816446,
+        0.0001296368231451935
+       ],
+       "L": -0.00024129268415815002,
+       "U": 9.989822299499318e-05,
+       "p_one_sided_le0": 0.729,
+       "SE": 0.00010291403207076939
+      },
+      "ts": {
+       "CI95": [
+        -0.0003632210733562519,
+        0.00022925363670722168
+       ],
+       "L": -0.00030493867541014685,
+       "U": 0.00019345938895282217,
+       "p_one_sided_le0": 0.6355,
+       "SE": 0.00015258127107769682
+      },
+      "MDE80_ts": 0.00037931703989915435,
+      "present_pos": false,
+      "present_neg": false,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 163172
+     },
+     "H1": {
+      "delta": -0.000208369082930895,
+      "query": {
+       "CI95": [
+        -0.0005736074661794612,
+        0.00013093074307394704
+       ],
+       "L": -0.0005195132941979005,
+       "U": 8.996792879399115e-05,
+       "p_one_sided_le0": 0.8635,
+       "SE": 0.00018635678259752426
+      },
+      "ts": {
+       "CI95": [
+        -0.0007370559845196583,
+        0.00034116305304156594
+       ],
+       "L": -0.0006589072637534487,
+       "U": 0.0002549899821075495,
+       "p_one_sided_le0": 0.748,
+       "SE": 0.00028014269122081576
+      },
+      "MDE80_ts": 0.000696434730374948,
+      "present_pos": false,
+      "present_neg": false,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 163172
+     },
+     "H3": {
+      "delta": 0.0001818122390279379,
+      "query": {
+       "CI95": [
+        -5.730780187542417e-05,
+        0.0004141482016657728
+       ],
+       "L": -1.4274147151353263e-05,
+       "U": 0.00038313049651782395,
+       "p_one_sided_le0": 0.0645,
+       "SE": 0.00011939547019496386
+      },
+      "ts": {
+       "CI95": [
+        -9.382574196527159e-05,
+        0.0005258230980986328
+       ],
+       "L": -6.420127379738973e-05,
+       "U": 0.00046830128753797175,
+       "p_one_sided_le0": 0.117,
+       "SE": 0.0001618958398660216
+      },
+      "MDE80_ts": 0.0004024730579069297,
+      "present_pos": false,
+      "present_neg": false,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 163172
+     },
+     "H10": {
+      "delta": 0.00014299839024669266,
+      "query": {
+       "CI95": [
+        -4.111024244670993e-05,
+        0.0003214462750923598
+       ],
+       "L": -1.4319213068485101e-05,
+       "U": 0.00029411288617957185,
+       "p_one_sided_le0": 0.073,
+       "SE": 9.398913821178435e-05
+      },
+      "ts": {
+       "CI95": [
+        -9.997077988998443e-05,
+        0.0004250470071743684
+       ],
+       "L": -6.51129018088923e-05,
+       "U": 0.000374443763573627,
+       "p_one_sided_le0": 0.119,
+       "SE": 0.00013195549566981683
+      },
+      "MDE80_ts": 0.00032804136223516466,
+      "present_pos": false,
+      "present_neg": false,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 163172
+     },
+     "ambiguous_for_expansion": false,
+     "holm_ok": false,
+     "call": "not established; |Δ| ≥ 0.005 excluded"
+    }
+   ],
+   "training": {
+    "MLP64x2 (FULL, re-fit)": {
+     "pool": "PT",
+     "n_features": 25,
+     "n_fit_retained": 81874,
+     "n_params": 5889,
+     "model": "mlp64",
+     "loss": "masked",
+     "cols": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      29
+     ],
+     "best_epochs": [
+      15,
+      13,
+      19
+     ],
+     "cal_alpha": [
+      0.03431848886146338,
+      0.06984995833218176,
+      0.07301198301217093
+     ],
+     "cal_beta": [
+      1.0014360407546277,
+      1.0037876730074013,
+      0.908897697372054
+     ]
+    },
+    "noDyadLR": {
+     "pool": "PT",
+     "n_features": 24,
+     "n_fit_retained": 81874,
+     "n_params": 5825,
+     "model": "mlp64",
+     "loss": "masked",
+     "cols": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      29
+     ],
+     "best_epochs": [
+      22,
+      27,
+      21
+     ],
+     "cal_alpha": [
+      0.07522108504525858,
+      0.07745049594764956,
+      0.0652252823524336
+     ],
+     "cal_beta": [
+      0.8998778442659795,
+      0.9348181040782974,
+      0.8743202919040012
+     ]
+    }
+   },
+   "fit_population": {
+    "n_fit_population": 105606,
+    "n_select": 56460,
+    "n_test": 163172,
+    "valid_cut_ts": 105
+   },
+   "refit_vs_stored_HRCOV_PAT": {
+    "delta": 0.0,
+    "query": {
+     "CI95": [
+      0.0,
+      0.0
+     ],
+     "L": 0.0,
+     "U": 0.0,
+     "p_one_sided_le0": 1.0,
+     "SE": 0.0
+    },
+    "ts": {
+     "CI95": [
+      0.0,
+      0.0
+     ],
+     "L": 0.0,
+     "U": 0.0,
+     "p_one_sided_le0": 1.0,
+     "SE": 0.0
+    },
+    "MDE80_ts": 0.0,
+    "present_pos": false,
+    "present_neg": false,
+    "excluded_gain_ge_bar": true,
+    "excluded_loss_ge_bar": true,
+    "n": 163172
+   },
+   "base_replay_identity": null
+  }
+ }
+}

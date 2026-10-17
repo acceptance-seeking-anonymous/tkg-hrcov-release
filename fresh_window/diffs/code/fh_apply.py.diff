@@ -1,0 +1,9 @@
+--- a/phase2_forward_holdout/code/fh_apply.py
++++ b/code/fh_apply.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""phase2_forward_holdout / fh_apply.py -- STAGE 2: apply the FROZEN re-rankers (fh_train.py models) to the test features.
++"""phase2_fresh_window / fh_apply.py -- STAGE 2: apply the FROZEN re-rankers (fh_train.py models) to the test features.
+ 
+ For every (arm, seed) model file: (i) reproduction check -- recompute the valid-select scores and fused ranks with the
+ frozen model and require them to equal the Stage-1 stored ranks (ranks_select.npz) on every row (else abort before any

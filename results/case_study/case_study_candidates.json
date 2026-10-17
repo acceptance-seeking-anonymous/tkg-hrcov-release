@@ -1,0 +1,1262 @@
+{
+ "dataset": "tkgl-smallpedia",
+ "base": "TiRGN (decision base)",
+ "source_files_on_serverA_read_only": {
+  "official_ranks": "tracks/hardening/work/blend/official_test_smallpedia_tirgn.npz (base, BLEND, POOL, HR s0-2, HRCOV+BR s0-2; official py-tgb ranks)",
+  "bridge_free_pilot": "tracks/pilot_smallpedia/work/train_tirgn/ranks_test.npz (HRCOV_PAT s0-2, harness exact)",
+  "strata": "tracks/pilot_smallpedia/work/strata_test.npz (sro, trip, dyad, pat_any, first_seen)",
+  "recb": "tracks/hardening/work/recb/recb_test_ranks_tkgl-smallpedia.npz (clean_tr = RecB trained, clean)",
+  "lists": "tracks/pilot_smallpedia/work/lists_tirgn/test_CA.npy (base top-50 order), train_tirgn/promlist_{HR,HRCOV}_s0.npy",
+  "history": "tracks/datasets/harness_data/tkgl-smallpedia/{train,valid,test}.txt",
+  "labels": "Wikidata wbgetentities (English labels), fetched 2026-10-14"
+ },
+ "selection_rule": {
+  "seed": 20261014,
+  "direction": "object-prediction (forward) queries only, for readability",
+  "draw": "5 uniform draws per stratum without replacement (numpy default_rng)",
+  "S1_recurrence_rerank": "exact (s,r,o) recurrence before t AND base filtered rank in [4,50] AND BASE+RecB rank > 1 AND HR_s0 rank = 1 AND HRCOV+BR_s0 rank = 1",
+  "S2_pool_widening": "exact recurrence AND base rank > 50 AND HR_s0 rank > 50 AND HRCOV+BR_s0 rank <= 3 AND bridge-free HRCOV_s0 rank <= 3",
+  "S3_failure": "base rank <= 2 AND HR_s0 rank >= 10 AND HRCOV+BR_s0 rank >= 10"
+ },
+ "derived_stats": {
+  "n_test": 163172,
+  "share_exact_recurrence": 0.7158090848920158,
+  "share_recurrent_and_base_rank_gt1": 0.1677248547544922,
+  "among_recurrent_base_miss": {
+   "n": 27368,
+   "RecB_trained_rank1": 0.30239695995323007,
+   "BLEND_rank1": 0.10380736626717334,
+   "HR_s0_rank1": 0.47098801520023387,
+   "HRCOVBR_s0_rank1": 0.4538146740719088
+  },
+  "share_gold_outside_base_top50": 0.2344581178143309,
+  "among_base_rank1": {
+   "n": 90121,
+   "HRCOVBR_s0_demotes": 0.041655108132399775,
+   "HRCOVBR_s0_demotes_below10": 0.00023302005082056346,
+   "BLEND_demotes": 0.016167153049788618
+  },
+  "among_base_rank1_no_recurrence": {
+   "n": 689,
+   "HRCOVBR_s0_demotes": 0.13062409288824384
+  },
+  "strata_sizes": {
+   "S1_all": 2300,
+   "S1_fwd": 358,
+   "S2_recurrent_all": 65,
+   "S2_recurrent_fwd": 16,
+   "S2_all": 123,
+   "S3_all": 24,
+   "S3_fwd": 6
+  }
+ },
+ "candidates": {
+  "S1_recurrence_rerank": [
+   {
+    "i": 26682,
+    "s": "Q391884",
+    "r": "P54",
+    "inverse": false,
+    "o": "Q54988",
+    "t": "2009",
+    "ranks": {
+     "base": 7.0,
+     "BLEND": 4.0,
+     "POOL": 4.0,
+     "HR_s0": 1.0,
+     "HR_s1": 1.0,
+     "HR_s2": 1.0,
+     "HRCOV_s0": 1.0,
+     "HRCOV_s1": 1.0,
+     "HRCOV_s2": 1.0,
+     "HRCOV_PAT_s0": 1.0,
+     "RecB_tr": 2.0
+    },
+    "n_hist_s": 36,
+    "n_pair": 1,
+    "pair_facts": [
+     [
+      "Q391884",
+      "P54",
+      "Q54988",
+      "2008"
+     ]
+    ],
+    "strata": {
+     "trip": true,
+     "dyad": true,
+     "pat": true,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q875169",
+      "Q318348",
+      "Q19442"
+     ],
+     "HR_top3": [
+      "Q54988",
+      "Q875169",
+      "Q280814"
+     ],
+     "HRCOV_top3": [
+      "Q54988",
+      "Q875169",
+      "Q24699"
+     ]
+    },
+    "subject_history": null
+   },
+   {
+    "i": 80139,
+    "s": "Q356065",
+    "r": "P54",
+    "inverse": false,
+    "o": "Q543842",
+    "t": "2012",
+    "ranks": {
+     "base": 5.0,
+     "BLEND": 3.0,
+     "POOL": 3.0,
+     "HR_s0": 1.0,
+     "HR_s1": 1.0,
+     "HR_s2": 1.0,
+     "HRCOV_s0": 1.0,
+     "HRCOV_s1": 1.0,
+     "HRCOV_s2": 1.0,
+     "HRCOV_PAT_s0": 1.0,
+     "RecB_tr": 1.0
+    },
+    "n_hist_s": 29,
+    "n_pair": 14,
+    "pair_facts": [
+     [
+      "Q356065",
+      "P54",
+      "Q543842",
+      "2006"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q543842",
+      "2007"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q543842",
+      "2008"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q543842",
+      "2009"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q543842",
+      "2010"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q543842",
+      "2011"
+     ]
+    ],
+    "strata": {
+     "trip": true,
+     "dyad": true,
+     "pat": true,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q844271",
+      "Q329510",
+      "Q482566"
+     ],
+     "HR_top3": [
+      "Q543842",
+      "Q329510",
+      "Q429630"
+     ],
+     "HRCOV_top3": [
+      "Q543842",
+      "Q329510",
+      "Q630279"
+     ]
+    },
+    "subject_history": [
+     [
+      "Q356065",
+      "P54",
+      "Q543842",
+      "2007"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q482449",
+      "2007"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q543842",
+      "2008"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q844271",
+      "2008"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q543842",
+      "2009"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q844271",
+      "2009"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q543842",
+      "2010"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q329510",
+      "2010"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q543842",
+      "2011"
+     ],
+     [
+      "Q356065",
+      "P54",
+      "Q329510",
+      "2011"
+     ]
+    ]
+   },
+   {
+    "i": 85249,
+    "s": "Q555958",
+    "r": "P39",
+    "inverse": false,
+    "o": "Q30461",
+    "t": "2012",
+    "ranks": {
+     "base": 4.0,
+     "BLEND": 2.0,
+     "POOL": 2.0,
+     "HR_s0": 1.0,
+     "HR_s1": 1.0,
+     "HR_s2": 2.0,
+     "HRCOV_s0": 1.0,
+     "HRCOV_s1": 1.0,
+     "HRCOV_s2": 1.0,
+     "HRCOV_PAT_s0": 1.0,
+     "RecB_tr": 2.0
+    },
+    "n_hist_s": 4,
+    "n_pair": 1,
+    "pair_facts": [
+     [
+      "Q555958",
+      "P39",
+      "Q30461",
+      "2011"
+     ]
+    ],
+    "strata": {
+     "trip": true,
+     "dyad": true,
+     "pat": true,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q42178",
+      "Q140686",
+      "Q428322"
+     ],
+     "HR_top3": [
+      "Q30461",
+      "Q42178",
+      "Q140686"
+     ],
+     "HRCOV_top3": [
+      "Q30461",
+      "Q42178",
+      "Q140686"
+     ]
+    },
+    "subject_history": null
+   },
+   {
+    "i": 101443,
+    "s": "Q57167",
+    "r": "P54",
+    "inverse": false,
+    "o": "Q221695",
+    "t": "2013",
+    "ranks": {
+     "base": 4.0,
+     "BLEND": 2.0,
+     "POOL": 2.0,
+     "HR_s0": 1.0,
+     "HR_s1": 1.0,
+     "HR_s2": 1.0,
+     "HRCOV_s0": 1.0,
+     "HRCOV_s1": 1.0,
+     "HRCOV_s2": 1.0,
+     "HRCOV_PAT_s0": 1.0,
+     "RecB_tr": 2.0
+    },
+    "n_hist_s": 36,
+    "n_pair": 1,
+    "pair_facts": [
+     [
+      "Q57167",
+      "P54",
+      "Q221695",
+      "2012"
+     ]
+    ],
+    "strata": {
+     "trip": true,
+     "dyad": true,
+     "pat": true,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q428211",
+      "Q17479",
+      "Q80955"
+     ],
+     "HR_top3": [
+      "Q221695",
+      "Q428211",
+      "Q189170"
+     ],
+     "HRCOV_top3": [
+      "Q221695",
+      "Q428211",
+      "Q189170"
+     ]
+    },
+    "subject_history": [
+     [
+      "Q57167",
+      "P54",
+      "Q80955",
+      "2007"
+     ],
+     [
+      "Q57167",
+      "P54",
+      "Q15789",
+      "2007"
+     ],
+     [
+      "Q57167",
+      "P54",
+      "Q15789",
+      "2008"
+     ],
+     [
+      "Q57167",
+      "P54",
+      "Q15789",
+      "2009"
+     ],
+     [
+      "Q57167",
+      "P54",
+      "Q51974",
+      "2009"
+     ],
+     [
+      "Q57167",
+      "P54",
+      "Q51974",
+      "2010"
+     ],
+     [
+      "Q57167",
+      "P54",
+      "Q51974",
+      "2011"
+     ],
+     [
+      "Q57167",
+      "P54",
+      "Q428211",
+      "2011"
+     ],
+     [
+      "Q57167",
+      "P54",
+      "Q428211",
+      "2012"
+     ],
+     [
+      "Q57167",
+      "P54",
+      "Q221695",
+      "2012"
+     ]
+    ]
+   },
+   {
+    "i": 116006,
+    "s": "Q456807",
+    "r": "P54",
+    "inverse": false,
+    "o": "Q192253",
+    "t": "2014",
+    "ranks": {
+     "base": 5.0,
+     "BLEND": 4.0,
+     "POOL": 4.0,
+     "HR_s0": 1.0,
+     "HR_s1": 1.0,
+     "HR_s2": 2.0,
+     "HRCOV_s0": 1.0,
+     "HRCOV_s1": 1.0,
+     "HRCOV_s2": 1.0,
+     "HRCOV_PAT_s0": 1.0,
+     "RecB_tr": 2.0
+    },
+    "n_hist_s": 11,
+    "n_pair": 1,
+    "pair_facts": [
+     [
+      "Q456807",
+      "P54",
+      "Q192253",
+      "2013"
+     ]
+    ],
+    "strata": {
+     "trip": true,
+     "dyad": true,
+     "pat": true,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q836991",
+      "Q737727",
+      "Q209640"
+     ],
+     "HR_top3": [
+      "Q192253",
+      "Q737727",
+      "Q836991"
+     ],
+     "HRCOV_top3": [
+      "Q192253",
+      "Q737727",
+      "Q836991"
+     ]
+    },
+    "subject_history": null
+   }
+  ],
+  "S2_pool_widening": [
+   {
+    "i": 24954,
+    "s": "Q350257",
+    "r": "P54",
+    "inverse": false,
+    "o": "Q164089",
+    "t": "2009",
+    "ranks": {
+     "base": 107.0,
+     "BLEND": 3.0,
+     "POOL": 3.0,
+     "HR_s0": 107.0,
+     "HR_s1": 107.0,
+     "HR_s2": 107.0,
+     "HRCOV_s0": 1.0,
+     "HRCOV_s1": 1.0,
+     "HRCOV_s2": 1.0,
+     "HRCOV_PAT_s0": 1.0,
+     "RecB_tr": 1.0
+    },
+    "n_hist_s": 15,
+    "n_pair": 2,
+    "pair_facts": [
+     [
+      "Q350257",
+      "P54",
+      "Q164089",
+      "2007"
+     ],
+     [
+      "Q350257",
+      "P54",
+      "Q164089",
+      "2008"
+     ]
+    ],
+    "strata": {
+     "trip": true,
+     "dyad": true,
+     "pat": true,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q50602",
+      "Q19628",
+      "Q172969"
+     ],
+     "HR_top3": [
+      "Q50602",
+      "Q172969",
+      "Q19628"
+     ],
+     "HRCOV_top3": [
+      "Q50602",
+      "Q164089",
+      "Q172969"
+     ]
+    },
+    "subject_history": [
+     [
+      "Q350257",
+      "P54",
+      "Q19628",
+      "2003"
+     ],
+     [
+      "Q350257",
+      "P54",
+      "Q19628",
+      "2004"
+     ],
+     [
+      "Q350257",
+      "P54",
+      "Q19628",
+      "2005"
+     ],
+     [
+      "Q350257",
+      "P54",
+      "Q19628",
+      "2006"
+     ],
+     [
+      "Q350257",
+      "P54",
+      "Q19628",
+      "2007"
+     ],
+     [
+      "Q350257",
+      "P54",
+      "Q172969",
+      "2007"
+     ],
+     [
+      "Q350257",
+      "P54",
+      "Q164089",
+      "2007"
+     ],
+     [
+      "Q350257",
+      "P54",
+      "Q172969",
+      "2008"
+     ],
+     [
+      "Q350257",
+      "P54",
+      "Q164089",
+      "2008"
+     ],
+     [
+      "Q350257",
+      "P54",
+      "Q50602",
+      "2008"
+     ]
+    ]
+   },
+   {
+    "i": 24990,
+    "s": "Q442676",
+    "r": "P54",
+    "inverse": false,
+    "o": "Q101859",
+    "t": "2009",
+    "ranks": {
+     "base": 184.0,
+     "BLEND": 3.0,
+     "POOL": 3.0,
+     "HR_s0": 184.0,
+     "HR_s1": 184.0,
+     "HR_s2": 184.0,
+     "HRCOV_s0": 1.0,
+     "HRCOV_s1": 1.0,
+     "HRCOV_s2": 1.0,
+     "HRCOV_PAT_s0": 1.0,
+     "RecB_tr": 1.0
+    },
+    "n_hist_s": 21,
+    "n_pair": 2,
+    "pair_facts": [
+     [
+      "Q442676",
+      "P54",
+      "Q101859",
+      "2007"
+     ],
+     [
+      "Q442676",
+      "P54",
+      "Q101859",
+      "2008"
+     ]
+    ],
+    "strata": {
+     "trip": true,
+     "dyad": true,
+     "pat": true,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q285131",
+      "Q162450",
+      "Q154408"
+     ],
+     "HR_top3": [
+      "Q285131",
+      "Q154408",
+      "Q162450"
+     ],
+     "HRCOV_top3": [
+      "Q285131",
+      "Q154408",
+      "Q101859"
+     ]
+    },
+    "subject_history": null
+   },
+   {
+    "i": 26517,
+    "s": "Q191848",
+    "r": "P54",
+    "inverse": false,
+    "o": "Q4512",
+    "t": "2009",
+    "ranks": {
+     "base": 77.0,
+     "BLEND": 5.0,
+     "POOL": 5.0,
+     "HR_s0": 77.0,
+     "HR_s1": 77.0,
+     "HR_s2": 77.0,
+     "HRCOV_s0": 1.0,
+     "HRCOV_s1": 1.0,
+     "HRCOV_s2": 1.0,
+     "HRCOV_PAT_s0": 1.0,
+     "RecB_tr": 3.0
+    },
+    "n_hist_s": 18,
+    "n_pair": 1,
+    "pair_facts": [
+     [
+      "Q191848",
+      "P54",
+      "Q4512",
+      "2008"
+     ]
+    ],
+    "strata": {
+     "trip": true,
+     "dyad": true,
+     "pat": true,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q9616",
+      "Q10329",
+      "Q47050"
+     ],
+     "HR_top3": [
+      "Q9616",
+      "Q47050",
+      "Q10329"
+     ],
+     "HRCOV_top3": [
+      "Q4512",
+      "Q9616",
+      "Q47050"
+     ]
+    },
+    "subject_history": [
+     [
+      "Q191848",
+      "P54",
+      "Q9616",
+      "2006"
+     ],
+     [
+      "Q191848",
+      "P54",
+      "Q51974",
+      "2006"
+     ],
+     [
+      "Q191848",
+      "P54",
+      "Q47050",
+      "2006"
+     ],
+     [
+      "Q191848",
+      "P54",
+      "Q47050",
+      "2007"
+     ],
+     [
+      "Q191848",
+      "P54",
+      "Q9616",
+      "2007"
+     ],
+     [
+      "Q191848",
+      "P54",
+      "Q10329",
+      "2007"
+     ],
+     [
+      "Q191848",
+      "P54",
+      "Q10329",
+      "2008"
+     ],
+     [
+      "Q191848",
+      "P54",
+      "Q47050",
+      "2008"
+     ],
+     [
+      "Q191848",
+      "P54",
+      "Q9616",
+      "2008"
+     ],
+     [
+      "Q191848",
+      "P54",
+      "Q4512",
+      "2008"
+     ]
+    ]
+   },
+   {
+    "i": 63155,
+    "s": "Q442676",
+    "r": "P54",
+    "inverse": false,
+    "o": "Q101859",
+    "t": "2011",
+    "ranks": {
+     "base": 113.0,
+     "BLEND": 3.0,
+     "POOL": 3.0,
+     "HR_s0": 113.0,
+     "HR_s1": 113.0,
+     "HR_s2": 113.0,
+     "HRCOV_s0": 1.0,
+     "HRCOV_s1": 1.0,
+     "HRCOV_s2": 1.0,
+     "HRCOV_PAT_s0": 1.0,
+     "RecB_tr": 1.0
+    },
+    "n_hist_s": 27,
+    "n_pair": 4,
+    "pair_facts": [
+     [
+      "Q442676",
+      "P54",
+      "Q101859",
+      "2007"
+     ],
+     [
+      "Q442676",
+      "P54",
+      "Q101859",
+      "2008"
+     ],
+     [
+      "Q442676",
+      "P54",
+      "Q101859",
+      "2009"
+     ],
+     [
+      "Q442676",
+      "P54",
+      "Q101859",
+      "2010"
+     ]
+    ],
+    "strata": {
+     "trip": true,
+     "dyad": true,
+     "pat": true,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q285131",
+      "Q154408",
+      "Q162289"
+     ],
+     "HR_top3": [
+      "Q285131",
+      "Q154408",
+      "Q657156"
+     ],
+     "HRCOV_top3": [
+      "Q285131",
+      "Q154408",
+      "Q101859"
+     ]
+    },
+    "subject_history": null
+   },
+   {
+    "i": 157629,
+    "s": "Q152316",
+    "r": "P166",
+    "inverse": false,
+    "o": "Q604370",
+    "t": "2021",
+    "ranks": {
+     "base": 97.0,
+     "BLEND": 3.0,
+     "POOL": 3.0,
+     "HR_s0": 97.0,
+     "HR_s1": 97.0,
+     "HR_s2": 97.0,
+     "HRCOV_s0": 3.0,
+     "HRCOV_s1": 3.0,
+     "HRCOV_s2": 3.0,
+     "HRCOV_PAT_s0": 3.0,
+     "RecB_tr": 1.0
+    },
+    "n_hist_s": 23,
+    "n_pair": 1,
+    "pair_facts": [
+     [
+      "Q152316",
+      "P166",
+      "Q604370",
+      "2018"
+     ]
+    ],
+    "strata": {
+     "trip": true,
+     "dyad": true,
+     "pat": true,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q931502",
+      "Q268200",
+      "Q459994"
+     ],
+     "HR_top3": [
+      "Q931502",
+      "Q194540",
+      "Q932650"
+     ],
+     "HRCOV_top3": [
+      "Q931502",
+      "Q194540",
+      "Q604370"
+     ]
+    },
+    "subject_history": null
+   }
+  ],
+  "S3_failure": [
+   {
+    "i": 58,
+    "s": "Q182673",
+    "r": "P166",
+    "inverse": false,
+    "o": "Q567740",
+    "t": "2008",
+    "ranks": {
+     "base": 2.0,
+     "BLEND": 5.0,
+     "POOL": 5.0,
+     "HR_s0": 46.0,
+     "HR_s1": 36.0,
+     "HR_s2": 28.0,
+     "HRCOV_s0": 24.0,
+     "HRCOV_s1": 38.0,
+     "HRCOV_s2": 27.0,
+     "HRCOV_PAT_s0": 24.0,
+     "RecB_tr": 1132.0
+    },
+    "n_hist_s": 1,
+    "n_pair": 0,
+    "pair_facts": [],
+    "strata": {
+     "trip": false,
+     "dyad": false,
+     "pat": false,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q737051",
+      "Q567740",
+      "Q458887"
+     ],
+     "HR_top3": [
+      "Q737051",
+      "Q616568",
+      "Q335233"
+     ],
+     "HRCOV_top3": [
+      "Q737051",
+      "Q999734",
+      "Q44585"
+     ]
+    },
+    "subject_history": null
+   },
+   {
+    "i": 19839,
+    "s": "Q72224",
+    "r": "P166",
+    "inverse": false,
+    "o": "Q821622",
+    "t": "2009",
+    "ranks": {
+     "base": 2.0,
+     "BLEND": 3.0,
+     "POOL": 3.0,
+     "HR_s0": 17.0,
+     "HR_s1": 20.0,
+     "HR_s2": 25.0,
+     "HRCOV_s0": 46.0,
+     "HRCOV_s1": 40.0,
+     "HRCOV_s2": 37.0,
+     "HRCOV_PAT_s0": 22.0,
+     "RecB_tr": 292.0
+    },
+    "n_hist_s": 1,
+    "n_pair": 0,
+    "pair_facts": [],
+    "strata": {
+     "trip": false,
+     "dyad": false,
+     "pat": false,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q737051",
+      "Q821622",
+      "Q634067"
+     ],
+     "HR_top3": [
+      "Q828377",
+      "Q737051",
+      "Q445673"
+     ],
+     "HRCOV_top3": [
+      "Q828377",
+      "Q737051",
+      "Q38104"
+     ]
+    },
+    "subject_history": null
+   },
+   {
+    "i": 60056,
+    "s": "Q134895",
+    "r": "P1411",
+    "inverse": false,
+    "o": "Q103916",
+    "t": "2011",
+    "ranks": {
+     "base": 2.0,
+     "BLEND": 2.0,
+     "POOL": 2.0,
+     "HR_s0": 12.0,
+     "HR_s1": 31.0,
+     "HR_s2": 15.0,
+     "HRCOV_s0": 10.0,
+     "HRCOV_s1": 11.0,
+     "HRCOV_s2": 3.0,
+     "HRCOV_PAT_s0": 9.0,
+     "RecB_tr": 12.0
+    },
+    "n_hist_s": 25,
+    "n_pair": 1,
+    "pair_facts": [
+     [
+      "Q134895",
+      "P1411",
+      "Q103916",
+      "2001"
+     ]
+    ],
+    "strata": {
+     "trip": true,
+     "dyad": true,
+     "pat": true,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q106291",
+      "Q103916",
+      "Q165313"
+     ],
+     "HR_top3": [
+      "Q548389",
+      "Q181883",
+      "Q106291"
+     ],
+     "HRCOV_top3": [
+      "Q106291",
+      "Q165313",
+      "Q518675"
+     ]
+    },
+    "subject_history": null
+   },
+   {
+    "i": 67287,
+    "s": "Q404432",
+    "r": "P54",
+    "inverse": false,
+    "o": "Q845067",
+    "t": "2011",
+    "ranks": {
+     "base": 2.0,
+     "BLEND": 11.0,
+     "POOL": 11.0,
+     "HR_s0": 14.0,
+     "HR_s1": 23.0,
+     "HR_s2": 23.0,
+     "HRCOV_s0": 52.0,
+     "HRCOV_s1": 55.0,
+     "HRCOV_s2": 63.0,
+     "HRCOV_PAT_s0": 30.0,
+     "RecB_tr": 678.0
+    },
+    "n_hist_s": 1,
+    "n_pair": 0,
+    "pair_facts": [],
+    "strata": {
+     "trip": false,
+     "dyad": false,
+     "pat": false,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q193377",
+      "Q19513",
+      "Q845067"
+     ],
+     "HR_top3": [
+      "Q193377",
+      "Q19513",
+      "Q11938"
+     ],
+     "HRCOV_top3": [
+      "Q193377",
+      "Q19512",
+      "Q172476"
+     ]
+    },
+    "subject_history": null
+   },
+   {
+    "i": 78489,
+    "s": "Q873",
+    "r": "P166",
+    "inverse": false,
+    "o": "Q687123",
+    "t": "2012",
+    "ranks": {
+     "base": 2.0,
+     "BLEND": 4.0,
+     "POOL": 4.0,
+     "HR_s0": 11.0,
+     "HR_s1": 29.0,
+     "HR_s2": 6.0,
+     "HRCOV_s0": 25.0,
+     "HRCOV_s1": 7.0,
+     "HRCOV_s2": 30.0,
+     "HRCOV_PAT_s0": 2.0,
+     "RecB_tr": 83.0
+    },
+    "n_hist_s": 52,
+    "n_pair": 1,
+    "pair_facts": [
+     [
+      "Q873",
+      "P166",
+      "Q687123",
+      "1981"
+     ]
+    ],
+    "strata": {
+     "trip": true,
+     "dyad": true,
+     "pat": true,
+     "first_seen": false
+    },
+    "lists": {
+     "base_top3": [
+      "Q103618",
+      "Q687123",
+      "Q463085"
+     ],
+     "HR_top3": [
+      "Q922226",
+      "Q106301",
+      "Q103618"
+     ],
+     "HRCOV_top3": [
+      "Q103618",
+      "Q922226",
+      "Q463085"
+     ]
+    },
+    "subject_history": null
+   }
+  ]
+ },
+ "labels": {
+  "Q101859": "VfL Wolfsburg",
+  "Q10329": "Sevilla FC",
+  "Q103618": "Academy Award for Best Actress",
+  "Q103916": "Academy Award for Best Actor",
+  "Q106291": "Academy Award for Best Supporting Actor",
+  "Q106301": "Academy Award for Best Supporting Actress",
+  "Q11938": "PSV Eindhoven",
+  "Q134895": "Javier Bardem",
+  "Q140686": "chairperson",
+  "Q152316": "Prince Harry, Duke of Sussex",
+  "Q154408": "Germany women's national football team",
+  "Q162289": "1. FC Köln (women)",
+  "Q162450": "1. FFC Turbine Potsdam",
+  "Q164089": "Mexico men's national football team",
+  "Q165313": "National Society of Film Critics Award for Best Supporting Actor",
+  "Q172476": "FC Girondins de Bordeaux",
+  "Q172969": "FC Shakhtar Donetsk",
+  "Q17479": "Clube de Regatas do Flamengo",
+  "Q181883": "Golden Globe Award for Best Actor – Motion Picture Musical or Comedy",
+  "Q182673": "Valdis Zatlers",
+  "Q189170": "Jagiellonia Białystok",
+  "Q191848": "Khalid Boulahrouz",
+  "Q192253": "ŠK Slovan Bratislava",
+  "Q193377": "Stade Malherbe Caen",
+  "Q19442": "Barnsley F.C.",
+  "Q194540": "Queen Elizabeth II Diamond Jubilee Medal",
+  "Q19512": "FC Sochaux-Montbéliard",
+  "Q19513": "Montpellier Hérault Sport Club",
+  "Q19628": "Olympiacos F.C.",
+  "Q209640": "MŠK Žilina",
+  "Q221695": "Grêmio FBPA",
+  "Q24699": "RKC Waalwijk",
+  "Q268200": "Actor Awards",
+  "Q280814": "Olympiakos Nicosia FC",
+  "Q285131": "VfL Wolfsburg",
+  "Q30461": "president",
+  "Q318348": "N.E.C.",
+  "Q329510": "FC Tom Tomsk",
+  "Q335233": "Pro Finlandia Medal of the Order of the Lion of Finland",
+  "Q350257": "Nery Castillo",
+  "Q356065": "Kim Nam-il",
+  "Q38104": "Nobel Prize in Physics",
+  "Q391884": "Georgi Hristov",
+  "Q404432": "Thibault Moulin",
+  "Q42178": "vice president",
+  "Q428211": "Al-Gharafa SC",
+  "Q428322": "président-directeur général",
+  "Q429630": "Al Jazira Club",
+  "Q442676": "Navina Omilade",
+  "Q445673": "Order of Merit of Baden-Württemberg",
+  "Q44585": "Nobel Prize in Chemistry",
+  "Q4512": "VfB Stuttgart",
+  "Q456807": "Dušan Perniš",
+  "Q458887": "Commander with Star of the Order of Merit of Hungary",
+  "Q459994": "The Nation's Actor",
+  "Q463085": "Golden Globe Award for Best Actress – Motion Picture Drama",
+  "Q47050": "Netherlands national association football team",
+  "Q482566": "Jeonnam Dragons FC",
+  "Q50602": "Manchester City F.C.",
+  "Q518675": "Actor Award for Outstanding Performance by a Cast in a Motion Picture",
+  "Q543842": "South Korea men's national football team",
+  "Q548389": "BAFTA Award for Best Actor in a Supporting Role",
+  "Q54988": "FC Baku",
+  "Q555958": "Richard William Smith",
+  "Q567740": "Order of Viesturs",
+  "Q57167": "Zé Roberto",
+  "Q604370": "Time 100",
+  "Q616568": "Israel Prize",
+  "Q630279": "Sanfrecce Hiroshima",
+  "Q634067": "Hessian Order of Merit",
+  "Q657156": "Ergotelis F.C.",
+  "Q687123": "BAFTA Award for Best Actress in a Leading Role",
+  "Q72224": "Dea Loher",
+  "Q737051": "National Medal of Science",
+  "Q737727": "FC Nitra",
+  "Q80955": "Santos F.C.",
+  "Q821622": "Berliner Literaturpreis",
+  "Q828377": "Bertolt-Brecht-Literaturpreis",
+  "Q836991": "Pogoń Szczecin",
+  "Q844271": "Vissel Kobe",
+  "Q845067": "LB Châteauroux",
+  "Q873": null,
+  "Q875169": "FC Den Bosch",
+  "Q922226": "Broadcast Film Critics Association Award for Best Actress",
+  "Q931502": "Order of Isabella the Catholic‎",
+  "Q932650": "Padma Bhushan",
+  "Q9616": "Chelsea F.C.",
+  "Q999734": "Albert Lasker Award for Basic Medical Research",
+  "Q15789": "FC Bayern Munich",
+  "Q482449": "Suwon Samsung Bluewings FC",
+  "Q51974": "Hamburger SV"
+ }
+}

@@ -1,0 +1,42 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+[     0.1s] N 1209 R 215 ts reformat {'ts_step': 1, 'dmin': 1, 'dmax': 1, 'all_multiples': True, 'n_ts': 273, 'identity': False}
+[     1.6s] valid task 0 / 410 elapsed 1
+[     5.7s] valid task 50 / 410 elapsed 5
+[     6.0s] valid task 100 / 410 elapsed 5
+[     6.1s] valid task 150 / 410 elapsed 6
+[     6.2s] valid task 200 / 410 elapsed 6
+[     6.2s] valid task 250 / 410 elapsed 6
+[     6.3s] valid task 300 / 410 elapsed 6
+[     6.3s] valid task 350 / 410 elapsed 6
+[     6.3s] valid task 400 / 410 elapsed 6
+[     6.7s] valid metrics {"clean_def": {"MRR": 0.3815057337036598, "H1": 0.26297673318706727, "H3": 0.4264093435106481, "H10": 0.6252151293403576, "n": 152234}, "clean_tr": {"MRR": 0.3931012809369334, "H1": 0.27458386431414794, "H3": 0.43885071665987885, "H10": 0.6365660759094551, "n": 152234}, "faith_def": {"MRR": 0.38075989256150183, "H1": 0.26214905999973726, "H3": 0.425824717211661, "H10": 0.6241575469343248, "n": 152234}, "faith_tr": {"MRR": 0.39299676098126535, "H1": 0.2744393499481062, "H3": 0.4389492491821801, "H10": 0.6359945872801083, "n": 152234}}
+[     7.5s] test task 0 / 480 elapsed 1
+[    19.8s] test task 50 / 480 elapsed 13
+[    24.7s] test task 100 / 480 elapsed 18
+[    26.0s] test task 150 / 480 elapsed 19
+[    26.3s] test task 200 / 480 elapsed 20
+[    26.5s] test task 250 / 480 elapsed 20
+[    26.7s] test task 300 / 480 elapsed 20
+[    26.7s] test task 350 / 480 elapsed 20
+[    26.8s] test task 400 / 480 elapsed 20
+[    26.8s] test task 450 / 480 elapsed 20
+[    28.0s] test metrics (written)
+[    28.0s] ALL DONE

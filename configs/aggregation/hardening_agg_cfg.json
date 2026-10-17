@@ -1,0 +1,103 @@
+{
+ "polecat": {
+  "name": "tkgl-polecat",
+  "dd": "../../data/datasets/harness_data/tkgl-polecat",
+  "strata": "../$RESULTS_DIR/runs/strata_pilot_polecat.npz",
+  "recb_ranks": "$RESULTS_DIR/runs/recb_test_ranks_tkgl-polecat.npz",
+  "recb_sel": "$RESULTS_DIR/runs/recb_selection_tkgl-polecat.json",
+  "published": {
+   "CountTRuCoLa (arXiv 2509.09474)": 0.256,
+   "NHCTE (KBS 2026)": 0.245,
+   "TLogic (TGB 2.0)": 0.228,
+   "RecB trained (TGB 2.0)": 0.198,
+   "CEN (TGB 2.0)": 0.184,
+   "RE-GCN (TGB 2.0)": 0.175
+  },
+  "bases": {
+   "regcn": {
+    "official": "$RESULTS_DIR/runs/official_test_polecat_regcn.npz",
+    "test_json": "$RESULTS_DIR/runs/blend_test_polecat_regcn.json",
+    "valid_json": "$RESULTS_DIR/runs/blend_valid_polecat_regcn.json",
+    "arch": "regcn",
+    "selected_epoch": "12 (pilot-1 fixed budget)",
+    "host": "GPU serverB (RTX 4090); re-rankers pilot-1 serverA",
+    "rb_ranks": "$RESULTS_DIR/runs/ranks_test_rb_polecat_regcn.npz"
+   },
+   "logcl": {
+    "official": "$RESULTS_DIR/runs/official_test_polecat_logcl.npz",
+    "test_json": "$RESULTS_DIR/runs/blend_test_polecat_logcl.json",
+    "valid_json": "$RESULTS_DIR/runs/blend_valid_polecat_logcl.json",
+    "arch": "logcl",
+    "selected_epoch": "12 (pilot-1 fixed budget)",
+    "host": "GPU serverB (RTX 4090); re-rankers pilot-1 serverA",
+    "rb_ranks": "$RESULTS_DIR/runs/ranks_test_rb_polecat_logcl.npz"
+   },
+   "tirgn": {
+    "official": "$RESULTS_DIR/runs/official_test_polecat_tirgn.npz",
+    "test_json": "$RESULTS_DIR/runs/blend_test_polecat_tirgn.json",
+    "valid_json": "$RESULTS_DIR/runs/blend_valid_polecat_tirgn.json",
+    "arch": "tirgn",
+    "selected_epoch": "4 (0-indexed, i.e. 5th epoch; valid-best, patience stop after epoch 7)",
+    "host": "training serverA GPU 0 (RTX PRO 6000); lookup + controls + official test serverB (RTX 4090); features + re-rankers serverA CPU"
+   }
+  }
+ },
+ "smallpedia": {
+  "name": "tkgl-smallpedia",
+  "dd": "../../data/datasets/harness_data/tkgl-smallpedia",
+  "strata": "../$RESULTS_DIR/runs/strata_pilot_smallpedia.npz",
+  "recb_ranks": "$RESULTS_DIR/runs/recb_test_ranks_tkgl-smallpedia.npz",
+  "recb_sel": "$RESULTS_DIR/runs/recb_selection_tkgl-smallpedia.json",
+  "published": {
+   "CountTRuCoLa (arXiv 2509.09474)": 0.644,
+   "NHCTE (KBS 2026)": 0.618,
+   "CEN (TGB 2.0)": 0.612,
+   "RecB trained (TGB 2.0 leaderboard)": 0.605,
+   "TLogic (TGB 2.0)": 0.595,
+   "RE-GCN (TGB 2.0)": 0.594
+  },
+  "bases": {
+   "regcn": {
+    "official": "$RESULTS_DIR/runs/official_test_smallpedia_regcn.npz",
+    "test_json": "$RESULTS_DIR/runs/blend_test_smallpedia_regcn.json",
+    "valid_json": "$RESULTS_DIR/runs/blend_valid_smallpedia_regcn.json",
+    "arch": "regcn",
+    "selected_epoch": "3 (pilot-2 fixed budget)",
+    "host": "CPU serverA (controls); base/re-rankers pilot-2"
+   },
+   "logcl": {
+    "official": "$RESULTS_DIR/runs/official_test_smallpedia_logcl.npz",
+    "test_json": "$RESULTS_DIR/runs/blend_test_smallpedia_logcl.json",
+    "valid_json": "$RESULTS_DIR/runs/blend_valid_smallpedia_logcl.json",
+    "arch": "logcl",
+    "selected_epoch": "3 (pilot-2 fixed budget)",
+    "host": "CPU serverA (controls); base/re-rankers pilot-2"
+   },
+   "tirgn": {
+    "official": "$RESULTS_DIR/runs/official_test_smallpedia_tirgn.npz",
+    "test_json": "$RESULTS_DIR/runs/blend_test_smallpedia_tirgn.json",
+    "valid_json": "$RESULTS_DIR/runs/blend_valid_smallpedia_tirgn.json",
+    "arch": "tirgn",
+    "selected_epoch": "20 (pilot-2 valid-best)",
+    "host": "CPU serverA (controls); base/re-rankers pilot-2",
+    "rb_ranks": "$RESULTS_DIR/runs/ranks_test_rb_smallpedia_tirgn.npz"
+   },
+   "regcn_tuned": {
+    "official": "$RESULTS_DIR/runs/official_test_smallpedia_regcn_tuned.npz",
+    "test_json": "$RESULTS_DIR/runs/blend_test_smallpedia_regcn_tuned.json",
+    "valid_json": "$RESULTS_DIR/runs/blend_valid_smallpedia_regcn_tuned.json",
+    "arch": "regcn",
+    "selected_epoch": "5 (grid L3/lr1e-3/shuffled, valid-best)",
+    "host": "GPU serverB (RTX 4090)"
+   },
+   "logcl_tuned": {
+    "official": "$RESULTS_DIR/runs/official_test_smallpedia_logcl_tuned.npz",
+    "test_json": "$RESULTS_DIR/runs/blend_test_smallpedia_logcl_tuned.json",
+    "valid_json": "$RESULTS_DIR/runs/blend_valid_smallpedia_logcl_tuned.json",
+    "arch": "logcl",
+    "selected_epoch": "12 (grid L3/lr3e-4/time-ordered, valid-best = last epoch of the 12-epoch cap)",
+    "host": "GPU serverB (RTX 4090)"
+   }
+  }
+ }
+}

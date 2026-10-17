@@ -1,0 +1,173 @@
+{
+ "rule": "v79_fresh_window_rule.json (sha256 209bb1b5...) + amendment_1 (sha256 207689b8...) + fresh_window_implementation_note.json",
+ "dataset": "GDELTFW",
+ "base": "TiRGN",
+ "test_window": "2026-03-01..2026-04-30",
+ "n_test_queries": 457168,
+ "bar": 0.005,
+ "bootstrap": {
+  "B": 2000,
+  "seed": 0,
+  "shared_draws": true
+ },
+ "comparator": {
+  "config": "C0",
+  "variant": "blend",
+  "a": 0.1,
+  "tau": 0.5,
+  "selection_MRR": 0.4077166244352452,
+  "alone_selection_MRR": 0.3684073815105022,
+  "best_blend_selection_MRR": 0.4077166244352452,
+  "base_selection_MRR": 0.4040776992600792,
+  "n_selection_queries": 50192,
+  "cut_ts": 203,
+  "candidates": "EXT_alone(C0) + 52 EXT_blend(C0) (a in 13 BLEND betas x tau in {0.5,1,2,4})",
+  "rule": "external_comparator = argmax selection-part MRR (ties averaged) over the CountTRuCoLa alone and blend candidates (v79 amendment 1; implementation note + addendum 1)",
+  "ct_params": "LEARN_WINDOW_SIZE=10 DATAPOINT_THRESHOLD_MULTI=0 RULE_UNSEEN_NEGATIVES=30 AGGREGATION_DECAY=0.8 NUM_TOP_RULES=10 RULE_TYPE_C=True F_UNSEEN_NEGATIVES=10 Z_RULES_FACTOR=0.1",
+  "ct_release": "JuliaGast/counttrucola_submission @ 5d9aedf4106926d13befa141e0855d684f3f5f9d (config-default.yaml top level)",
+  "selected_utc": "2026-10-16T16:20:19Z"
+ },
+ "calls": {
+  "SA": "SMALL",
+  "external_comparator": "BEATS"
+ },
+ "outcome": "R4_OTHER",
+ "margins": {
+  "HRcov-SA": {
+   "point": 0.003929495357117602,
+   "query": {
+    "L": 0.003624482873170557,
+    "U": 0.004212334399260957,
+    "CI95": [
+     0.0035690826182347445,
+     0.004264693407070079
+    ]
+   },
+   "ts_block": {
+    "L": 0.0027251022106706073,
+    "U": 0.005322901807787247,
+    "CI95": [
+     0.002488835308300386,
+     0.005730363966471412
+    ]
+   }
+  },
+  "HRcov-external_comparator": {
+   "point": 0.035936832080964674,
+   "query": {
+    "L": 0.03542536661053412,
+    "U": 0.03638665317229882,
+    "CI95": [
+     0.035322720464702854,
+     0.03649523556581368
+    ]
+   },
+   "ts_block": {
+    "L": 0.03426475215032898,
+    "U": 0.03746216050193539,
+    "CI95": [
+     0.03394976482628852,
+     0.037785379986532
+    ]
+   }
+  },
+  "HRcov-BLEND": {
+   "point": 0.012113059823041514,
+   "query": {
+    "L": 0.011763584095783226,
+    "U": 0.012449937062688585,
+    "CI95": [
+     0.011697659647714458,
+     0.012502732289821955
+    ]
+   },
+   "ts_block": {
+    "L": 0.011655257677930556,
+    "U": 0.012588058094672392,
+    "CI95": [
+     0.011575651641689048,
+     0.012675605608048006
+    ]
+   }
+  },
+  "HRcov-base": {
+   "point": 0.03865861515015956,
+   "query": {
+    "L": 0.03815049573368978,
+    "U": 0.03912688990456104,
+    "CI95": [
+     0.03805043913765497,
+     0.039225186685001426
+    ]
+   },
+   "ts_block": {
+    "L": 0.03679228997524203,
+    "U": 0.04033002564582233,
+    "CI95": [
+     0.036404129925893015,
+     0.04059538633508053
+    ]
+   }
+  }
+ },
+ "metrics_official": {
+  "base": {
+   "MRR": 0.4114514972997418,
+   "H1": 0.28477058761768104,
+   "H3": 0.46440477023763693,
+   "H10": 0.668550729709866
+  },
+  "BLEND": {
+   "MRR": 0.43799705262685984,
+   "H1": 0.31150255485948275,
+   "H3": 0.49522057536835473,
+   "H10": 0.6911594862282574
+  },
+  "HRcov": {
+   "MRR": 0.45011011244990135,
+   "H1": 0.3235863694163488,
+   "H3": 0.5083988088988439,
+   "H10": 0.7044434431106289,
+   "per_seed_MRR": [
+    0.450968227573548,
+    0.4499913608832962,
+    0.4493707488928598
+   ]
+  },
+  "SA": {
+   "MRR": 0.4461806170927837,
+   "H1": 0.3194740955914091,
+   "H3": 0.5046357866983983,
+   "H10": 0.702692081102206,
+   "per_seed_MRR": [
+    0.4450433125725335,
+    0.44639512288669003,
+    0.44710341581912766
+   ]
+  },
+  "external_comparator": {
+   "MRR": 0.41417328036893664,
+   "H1": 0.28244321562314073,
+   "H3": 0.47301210933398663,
+   "H10": 0.6771558814265215
+  }
+ },
+ "checks": {
+  "base_rr_equal_tirgn_vs_ext": 0.0,
+  "n_test_queries": 457168,
+  "n_test_days": 61,
+  "pipeline_ranks_equal_scorer": true,
+  "freeze_verified": true,
+  "countrucola_validation_reproduced": true
+ },
+ "decided_utc": "2026-10-16T17:12:18Z",
+ "interpretation": "R4_OTHER (amendment 1): HRcov BEATS the CountTRuCoLa comparator; versus SA the call is SMALL - the gain is positive under both bootstraps but below the 0.005 bar, and MATCHES is not established because the timestamp-block upper bound (0.0053) exceeds 0.005. Reported as mixed in the main text with all calls and intervals.",
+ "deviations": [
+  "CountTRuCoLa configuration: no released entry for GDELTFW; the released gdelt/polecat entries fail the code's own window check; candidates C1/C2 (window 50) stopped for memory/time before any rule or score existed (addendum 1); comparator from the released default configuration C0.",
+  "CountTRuCoLa built-in evaluation disabled (no TGB negative files); dataset object supplied by a harness-backed adapter; otherwise released code unchanged.",
+  "CountTRuCoLa Stage-2 main.py exited rc=1 in the released results-CSV writer after rule application had finished; rankings complete and validation re-application exact; not rerun.",
+  "Only the selected comparator (C0 blend) was applied to test; CountTRuCoLa alone is reported on validation only.",
+  "Two launches failed before computing anything (CountTRuCoLa dataset adapter; SA chain cut parse) and were relaunched with the fix; no data of any split had been scored by them.",
+  "GPU 0 was shared with another track's process (1.7-10 GB) during Stage 1 and latency; this track's processes were capped at 30 GB; GPU 1 not used."
+ ]
+}

@@ -1,0 +1,1213 @@
+{
+ "rule": {
+  "file": "tois_v7_rule.json",
+  "version_id": "redacted-id",
+  "registered_utc": "2026-10-14T10:13:36Z",
+  "sha256": "bfef91681490278623925e1494890719e9b4529d8ddbf9375dfa83ec2a954a8d"
+ },
+ "label": "pre-specified later analysis; PARTIAL (declared cuts below)",
+ "item": "C3_relnorm_tkgl_icews",
+ "definition": {
+  "setting": "Stage B, relation-normalised data (pi_relnorm map), evaluation with ORIGINAL ids/conflict sets",
+  "systems": "RE-GCN-RN base, RecB on RN data, G1-RN, HRCOV-RN (existing Stage B RN arms)",
+  "primary": "relative gains (HRCOV - base, HRCOV - G1, HRCOV - BLEND) with and without RN"
+ },
+ "setting": "tkgl-icews Stage B: full-train bases, full test 4,651,378 queries (1,696 timestamps), official py-tgb evaluator",
+ "evaluator": "official py-tgb for base, BLEND, HRCOV200 and RE-GCN-RN base; HRCOV200_RN uses exact harness ranks (official scoring of its promoted lists not run). Harness = official identity on HRCOV200: mean dRR -1.1e-08, 0.0035% of queries differ",
+ "statistics": {
+  "query_bootstrap": "paired Poisson(1) bootstrap over test queries, B = 2000, seed 0 (hd_agg.boot)",
+  "timestamp_block_bootstrap": "multinomial resampling of test timestamps (all queries of a timestamp, both directions), B = 2000, seed 0 (g7_cluster_bootstrap.boot_cluster); statistic = resampled sum of per-query deltas / resampled number of queries",
+  "intervals": "two-sided 95% percentile CI from both bootstraps; one-sided 95% bounds L = 5th and U = 95th percentile",
+  "positive_claim": "a difference is called present only if the one-sided lower bound L > 0 under BOTH bootstraps (Holm-adjusted one-sided p < 0.05 within an item when an item has several primary comparisons)",
+  "null_claim": "an effect is called EXCLUDED (smaller than the bar) only if the one-sided upper bound U of the relevant signed delta < bar under the timestamp-block bootstrap (the more conservative); otherwise 'not excluded'. bar = 0.005 MRR unless stated",
+  "MDE": "reported only as sensitivity: MDE_80 = (z_0.95 + z_0.80) x SE_ts = 2.486 x SE of the timestamp-block bootstrap; never used to support a null",
+  "practical_margin": "0.005 MRR = the project's operational criterion (not a significance threshold)"
+ },
+ "arms": {
+  "RE-GCN base": {
+   "MRR": 0.27468528712296,
+   "H1": 0.17667194538908684,
+   "H3": 0.30917504447069233,
+   "H10": 0.47198486126046946,
+   "per_seed_MRR": [
+    0.27468528712296
+   ],
+   "n_seeds": 1,
+   "scoring": "official",
+   "harness_MRR": 0.2746853681102534
+  },
+  "RE-GCN-RN base": {
+   "MRR": 0.30906037869321873,
+   "H1": 0.20965034447856098,
+   "H3": 0.34825228136694114,
+   "H10": 0.5061650547429171,
+   "per_seed_MRR": [
+    0.30906037869321873
+   ],
+   "n_seeds": 1,
+   "scoring": "official",
+   "harness_MRR": 0.3090605550161413
+  },
+  "RE-GCN BLEND": {
+   "MRR": 0.31059876414340304,
+   "H1": 0.21101015656005598,
+   "H3": 0.3502607184365579,
+   "H10": 0.5063340369241115,
+   "per_seed_MRR": [
+    0.31059876414340304
+   ],
+   "n_seeds": 1,
+   "scoring": "official",
+   "harness_MRR": 0.310598769305836
+  },
+  "HRCOV200 (RE-GCN)": {
+   "MRR": 0.3753133807455665,
+   "H1": 0.2682225210106195,
+   "H3": 0.4253277200863916,
+   "H10": 0.5870126372586074,
+   "per_seed_MRR": [
+    0.37521694916146775,
+    0.3749061710541619,
+    0.37581702202107
+   ],
+   "n_seeds": 3,
+   "scoring": "official",
+   "harness_MRR": 0.37531337974468737
+  },
+  "HRCOV200 (RE-GCN) [harness]": {
+   "MRR": 0.3753133919682293,
+   "H1": 0.2682225210106195,
+   "H3": 0.4253277917497424,
+   "H10": 0.5870126372586074,
+   "per_seed_MRR": [
+    0.37521695276765815,
+    0.37490617315279895,
+    0.3758170499842308
+   ],
+   "n_seeds": 3,
+   "scoring": "harness",
+   "harness_MRR": null
+  },
+  "HRCOV200_RN (RE-GCN base, RN features) [harness]": {
+   "MRR": 0.38469732404306467,
+   "H1": 0.27627619170061,
+   "H3": 0.43561026431307026,
+   "H10": 0.5983430430007337,
+   "per_seed_MRR": [
+    0.385091485093795,
+    0.3846646844797137,
+    0.3843358025556854
+   ],
+   "n_seeds": 3,
+   "scoring": "harness",
+   "harness_MRR": null
+  },
+  "G1": {
+   "MRR": 0.3353023326881063,
+   "H1": 0.24896141888848133,
+   "H3": 0.38236253141900456,
+   "H10": 0.5013691999804502,
+   "per_seed_MRR": [
+    0.334810988675967,
+    0.33567813403219054,
+    0.3354178753561614
+   ],
+   "n_seeds": 3,
+   "scoring": "official",
+   "harness_MRR": 0.34749074333623997
+  }
+ },
+ "comparisons": [
+  {
+   "comparison": "RE-GCN-RN base - RE-GCN base [RN effect on the base]",
+   "a": "RE-GCN-RN base",
+   "b": "RE-GCN base",
+   "role": "primary-partial",
+   "MRR": {
+    "delta": 0.03437509146928535,
+    "query": {
+     "CI95": [
+      0.03419181802482055,
+      0.03456018426047594
+     ],
+     "L": 0.03422166502174202,
+     "U": 0.034525148186708036,
+     "p_one_sided_le0": 0.0,
+     "SE": 9.237608017344195e-05
+    },
+    "ts": {
+     "CI95": [
+      0.03299751981341732,
+      0.03585045317353437
+     ],
+     "L": 0.0332131177654045,
+     "U": 0.035547496985503343,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0007193534576999022
+    },
+    "MDE80_ts": 0.001788312695841957,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H1": {
+    "delta": 0.03297839908947413,
+    "query": {
+     "CI95": [
+      0.03272478066801852,
+      0.033243758314294214
+     ],
+     "L": 0.032763777114751855,
+     "U": 0.03319123736657805,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0001316990672837252
+    },
+    "ts": {
+     "CI95": [
+      0.03165101965208659,
+      0.03439685954633957
+     ],
+     "L": 0.031824547443018485,
+     "U": 0.0341380666129271,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0006988358771291965
+    },
+    "MDE80_ts": 0.0017373059905431826,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H3": {
+    "delta": 0.03907723689624881,
+    "query": {
+     "CI95": [
+      0.038786480246024865,
+      0.03934908564799379
+     ],
+     "L": 0.03883166887270082,
+     "U": 0.039308077999347324,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00014704056930851193
+    },
+    "ts": {
+     "CI95": [
+      0.03750869948959036,
+      0.04074264460709052
+     ],
+     "L": 0.03775233612139836,
+     "U": 0.040426479153259226,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0008129146990873684
+    },
+    "MDE80_ts": 0.002020905941931198,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H10": {
+    "delta": 0.034180193482447566,
+    "query": {
+     "CI95": [
+      0.033917588288288135,
+      0.03442944016978498
+     ],
+     "L": 0.03395528756808301,
+     "U": 0.03439670741541515,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0001378591614546817
+    },
+    "ts": {
+     "CI95": [
+      0.03276306596836735,
+      0.03566904798096236
+     ],
+     "L": 0.03294797788500438,
+     "U": 0.03543469058940608,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0007573712498834027
+    },
+    "MDE80_ts": 0.0018828249272101391,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "ambiguous_for_expansion": false,
+   "call": "present (+)"
+  },
+  {
+   "comparison": "HRCOV200_RN - HRCOV200 [RN effect on the re-ranker features, harness]",
+   "a": "HRCOV200_RN (RE-GCN base, RN features) [harness]",
+   "b": "HRCOV200 (RE-GCN) [harness]",
+   "role": "primary-partial",
+   "MRR": {
+    "delta": 0.00938393212191977,
+    "query": {
+     "CI95": [
+      0.009280356813774836,
+      0.00949016770466009
+     ],
+     "L": 0.009297706861735337,
+     "U": 0.009474778805043951,
+     "p_one_sided_le0": 0.0,
+     "SE": 5.398110319545703e-05
+    },
+    "ts": {
+     "CI95": [
+      0.008937414663253885,
+      0.009859053412570661
+     ],
+     "L": 0.008995182530150142,
+     "U": 0.00978301035122955,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00023910949884995493
+    },
+    "MDE80_ts": 0.000594426214140988,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H1": {
+    "delta": 0.008053670758103345,
+    "query": {
+     "CI95": [
+      0.007905981156202089,
+      0.008209299813399554
+     ],
+     "L": 0.007925417813662008,
+     "U": 0.008179789368446565,
+     "p_one_sided_le0": 0.0,
+     "SE": 7.791560643057011e-05
+    },
+    "ts": {
+     "CI95": [
+      0.0076407279732668325,
+      0.008494638783467734
+     ],
+     "L": 0.00770245799875212,
+     "U": 0.008416483648867944,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00022064774389239877
+    },
+    "MDE80_ts": 0.0005485302913165033,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H3": {
+    "delta": 0.010282472644940642,
+    "query": {
+     "CI95": [
+      0.010125097594500004,
+      0.010436349652937497
+     ],
+     "L": 0.010151980203840819,
+     "U": 0.010411222004014413,
+     "p_one_sided_le0": 0.0,
+     "SE": 7.844867339054797e-05
+    },
+    "ts": {
+     "CI95": [
+      0.00974511480022264,
+      0.010839091918652862
+     ],
+     "L": 0.009837416127630335,
+     "U": 0.010756585800848659,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00027985803369088896
+    },
+    "MDE80_ts": 0.00069572707175555,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H10": {
+    "delta": 0.011330405817045735,
+    "query": {
+     "CI95": [
+      0.011181005983600797,
+      0.011481772196692204
+     ],
+     "L": 0.01120815464286663,
+     "U": 0.011460577665673174,
+     "p_one_sided_le0": 0.0,
+     "SE": 7.632067424692283e-05
+    },
+    "ts": {
+     "CI95": [
+      0.010754652473513145,
+      0.0119409790955021
+     ],
+     "L": 0.010854553226594572,
+     "U": 0.01186096709944414,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0003027987584220413
+    },
+    "MDE80_ts": 0.0007527577134371948,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "ambiguous_for_expansion": false,
+   "call": "present (+)"
+  },
+  {
+   "comparison": "HRCOV200 - RE-GCN base [gain without RN]",
+   "a": "HRCOV200 (RE-GCN)",
+   "b": "RE-GCN base",
+   "role": "primary-partial",
+   "MRR": {
+    "delta": 0.10062809333185135,
+    "query": {
+     "CI95": [
+      0.10037714497744814,
+      0.10090287979262347
+     ],
+     "L": 0.10042032918272531,
+     "U": 0.10084937269181858,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00013006675594520736
+    },
+    "ts": {
+     "CI95": [
+      0.09952203519463407,
+      0.10178687399243817
+     ],
+     "L": 0.09969310488474128,
+     "U": 0.10156271004160983,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0005725687693731746
+    },
+    "MDE80_ts": 0.0014234059606617123,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H1": {
+    "delta": 0.09155057591065341,
+    "query": {
+     "CI95": [
+      0.09123251992472978,
+      0.09189762262899387
+     ],
+     "L": 0.09127310319295166,
+     "U": 0.0918270670569069,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0001678826714976273
+    },
+    "ts": {
+     "CI95": [
+      0.09040472452815716,
+      0.09272124429917687
+     ],
+     "L": 0.09058428279975064,
+     "U": 0.0925248241444326,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0005887815818736791
+    },
+    "MDE80_ts": 0.0014637110125379665,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H3": {
+    "delta": 0.11615267588020141,
+    "query": {
+     "CI95": [
+      0.11581509784131218,
+      0.11650444391231075
+     ],
+     "L": 0.11586357111524248,
+     "U": 0.11644953555467297,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00017803927919127422
+    },
+    "ts": {
+     "CI95": [
+      0.1148344195764293,
+      0.11750054484309781
+     ],
+     "L": 0.11505816770725096,
+     "U": 0.11724676988261849,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0006688674641641473
+    },
+    "MDE80_ts": 0.0016628045159120704,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H10": {
+    "delta": 0.11502777616897743,
+    "query": {
+     "CI95": [
+      0.11469202449207556,
+      0.11537402855878788
+     ],
+     "L": 0.11474519226930875,
+     "U": 0.11531667451657,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0001769138626242301
+    },
+    "ts": {
+     "CI95": [
+      0.11390908235154779,
+      0.11617211282557945
+     ],
+     "L": 0.11406607051681766,
+     "U": 0.11596256225049863,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0005830235718156097
+    },
+    "MDE80_ts": 0.0014493965995336059,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "ambiguous_for_expansion": false,
+   "call": "present (+)"
+  },
+  {
+   "comparison": "HRCOV200_RN - RE-GCN-RN base [HRCOV with RN features vs the RN base]",
+   "a": "HRCOV200_RN (RE-GCN base, RN features) [harness]",
+   "b": "RE-GCN-RN base",
+   "role": "primary-partial",
+   "MRR": {
+    "delta": 0.07563694489272535,
+    "query": {
+     "CI95": [
+      0.0753937709763234,
+      0.07589265764920118
+     ],
+     "L": 0.07543575583886611,
+     "U": 0.07584501632776869,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00012606964317408544
+    },
+    "ts": {
+     "CI95": [
+      0.07513061036315938,
+      0.07612052502828363
+     ],
+     "L": 0.07520378760802082,
+     "U": 0.0760506248368348,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0002569050166834787
+    },
+    "MDE80_ts": 0.000638665871475128,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H1": {
+    "delta": 0.06662584743284601,
+    "query": {
+     "CI95": [
+      0.06630015518633026,
+      0.06695015498070957
+     ],
+     "L": 0.06635931099807382,
+     "U": 0.06690256285806796,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00016467947908272235
+    },
+    "ts": {
+     "CI95": [
+      0.06604324050473491,
+      0.06717885982631377
+     ],
+     "L": 0.06614112678162226,
+     "U": 0.06708904334111511,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0002880683165706142
+    },
+    "MDE80_ts": 0.0007161378349945471,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H3": {
+    "delta": 0.08735798314834041,
+    "query": {
+     "CI95": [
+      0.08700514800818031,
+      0.0877062258062898
+     ],
+     "L": 0.08706679300748106,
+     "U": 0.0876554060598153,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0001758226351305396
+    },
+    "ts": {
+     "CI95": [
+      0.08672691714442222,
+      0.0879859732017234
+     ],
+     "L": 0.0868409018223833,
+     "U": 0.08787844590254613,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00031765405686505705
+    },
+    "MDE80_ts": 0.0007896879853665319,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H10": {
+    "delta": 0.09217798840635269,
+    "query": {
+     "CI95": [
+      0.09184478682386485,
+      0.0925099865562643
+     ],
+     "L": 0.09190184522856742,
+     "U": 0.09244394075392275,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00016753994944151052
+    },
+    "ts": {
+     "CI95": [
+      0.09157711706704592,
+      0.09279105141811327
+     ],
+     "L": 0.09166485938770408,
+     "U": 0.09270006189125099,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00031309658931064565
+    },
+    "MDE80_ts": 0.0007783581210262651,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "ambiguous_for_expansion": false,
+   "call": "present (+)"
+  },
+  {
+   "comparison": "HRCOV200_RN - RE-GCN base",
+   "a": "HRCOV200_RN (RE-GCN base, RN features) [harness]",
+   "b": "RE-GCN base",
+   "role": "secondary",
+   "MRR": {
+    "delta": 0.11001203643941943,
+    "query": {
+     "CI95": [
+      0.1097554959138175,
+      0.1102712053292357
+     ],
+     "L": 0.10979984378618644,
+     "U": 0.11023370238909083,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00013136425939616847
+    },
+    "ts": {
+     "CI95": [
+      0.10860891669902559,
+      0.11151972961397624
+     ],
+     "L": 0.10884137446123571,
+     "U": 0.11125596746950656,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0007323737028618345
+    },
+    "MDE80_ts": 0.0018206810253145209,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H1": {
+    "delta": 0.09960424660218592,
+    "query": {
+     "CI95": [
+      0.09927343507047007,
+      0.09994112131225912
+     ],
+     "L": 0.09932394780167754,
+     "U": 0.09987939457198908,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00016994105699605835
+    },
+    "ts": {
+     "CI95": [
+      0.09819835608177492,
+      0.10109439742774501
+     ],
+     "L": 0.09842110634008028,
+     "U": 0.10085587572815105,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0007300618591040371
+    },
+    "MDE80_ts": 0.0018149337817326364,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H3": {
+    "delta": 0.12643522010804614,
+    "query": {
+     "CI95": [
+      0.12607521207651717,
+      0.1267922090329416
+     ],
+     "L": 0.12613643326042914,
+     "U": 0.12673582865426333,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00018252147414433542
+    },
+    "ts": {
+     "CI95": [
+      0.12483981177262947,
+      0.12819033159501242
+     ],
+     "L": 0.12508594752584587,
+     "U": 0.12786553636467377,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0008343081544710904
+    },
+    "MDE80_ts": 0.002074090072015131,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H10": {
+    "delta": 0.1263581819338493,
+    "query": {
+     "CI95": [
+      0.12600929621242882,
+      0.12671601520469264
+     ],
+     "L": 0.12607131268989408,
+     "U": 0.12664829537671135,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00017698462378137948
+    },
+    "ts": {
+     "CI95": [
+      0.12493628796064016,
+      0.1278627260432049
+     ],
+     "L": 0.12513314365316447,
+     "U": 0.12760353156648288,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0007462736406284707
+    },
+    "MDE80_ts": 0.0018552362706023783,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "ambiguous_for_expansion": false,
+   "call": "present (+)"
+  },
+  {
+   "comparison": "HRCOV200_RN - G1",
+   "a": "HRCOV200_RN (RE-GCN base, RN features) [harness]",
+   "b": "G1",
+   "role": "secondary",
+   "MRR": {
+    "delta": 0.049394991254277675,
+    "query": {
+     "CI95": [
+      0.04918750971756041,
+      0.049592646200570856
+     ],
+     "L": 0.04922056230691231,
+     "U": 0.049563009334975414,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00010359533701524659
+    },
+    "ts": {
+     "CI95": [
+      0.04832324756272991,
+      0.05048913796797326
+     ],
+     "L": 0.048486501456264194,
+     "U": 0.05029557976002692,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0005570645362918544
+    },
+    "MDE80_ts": 0.0013848624372215501,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H1": {
+    "delta": 0.027314772911980634,
+    "query": {
+     "CI95": [
+      0.02708829876810462,
+      0.02754922295394524
+     ],
+     "L": 0.027123324681022448,
+     "U": 0.027513149054266436,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0001181572239497528
+    },
+    "ts": {
+     "CI95": [
+      0.026541629333299666,
+      0.028073484029135294
+     ],
+     "L": 0.026665919627120838,
+     "U": 0.027963253413723226,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00039639568842560294
+    },
+    "MDE80_ts": 0.000985439681426049,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H3": {
+    "delta": 0.0532477330069563,
+    "query": {
+     "CI95": [
+      0.05296266692054045,
+      0.05352699431507874
+     ],
+     "L": 0.05301550092357705,
+     "U": 0.053478759973170614,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0001423219109477412
+    },
+    "ts": {
+     "CI95": [
+      0.05202042292739604,
+      0.05451117650705954
+     ],
+     "L": 0.05220506029040473,
+     "U": 0.054304276922819854,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0006409468586961893
+    },
+    "MDE80_ts": 0.0015933938907187269,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H10": {
+    "delta": 0.09697384313870137,
+    "query": {
+     "CI95": [
+      0.09663530637869946,
+      0.0972910372636229
+     ],
+     "L": 0.09669619993177642,
+     "U": 0.09723809270749177,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0001674066161528765
+    },
+    "ts": {
+     "CI95": [
+      0.09510291679015147,
+      0.0988636528337385
+     ],
+     "L": 0.09540985343249574,
+     "U": 0.09855597245140335,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0009610340051265823
+    },
+    "MDE80_ts": 0.0023891305367446836,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "ambiguous_for_expansion": false,
+   "call": "present (+)"
+  },
+  {
+   "comparison": "HRCOV200_RN - RE-GCN BLEND",
+   "a": "HRCOV200_RN (RE-GCN base, RN features) [harness]",
+   "b": "RE-GCN BLEND",
+   "role": "secondary",
+   "MRR": {
+    "delta": 0.07409855951574439,
+    "query": {
+     "CI95": [
+      0.07387924754663897,
+      0.07432285125972898
+     ],
+     "L": 0.07390996111058352,
+     "U": 0.0742866730344267,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00011568889780234712
+    },
+    "ts": {
+     "CI95": [
+      0.07259918128176948,
+      0.07567279945156981
+     ],
+     "L": 0.07283069070790033,
+     "U": 0.075390769579282,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0007706621597194541
+    },
+    "MDE80_ts": 0.0019158661290625632,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H1": {
+    "delta": 0.06526603535910373,
+    "query": {
+     "CI95": [
+      0.06496808982547154,
+      0.06556081980656549
+     ],
+     "L": 0.0650132838312336,
+     "U": 0.06551561374739423,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0001527173524741831
+    },
+    "ts": {
+     "CI95": [
+      0.06385897290944556,
+      0.06675670585444843
+     ],
+     "L": 0.06404591396566417,
+     "U": 0.06645166914083378,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0007354388974004076
+    },
+    "MDE80_ts": 0.0018283010989374134,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H3": {
+    "delta": 0.08534954608302285,
+    "query": {
+     "CI95": [
+      0.08502729265561446,
+      0.08567662807751052
+     ],
+     "L": 0.08508455235536769,
+     "U": 0.08561379943663161,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00016364450188619315
+    },
+    "ts": {
+     "CI95": [
+      0.08363960126349211,
+      0.08714527912317657
+     ],
+     "L": 0.08391311508476869,
+     "U": 0.08681461872541957,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0008793288065156116
+    },
+    "MDE80_ts": 0.0021860114129978107,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H10": {
+    "delta": 0.09200900624671846,
+    "query": {
+     "CI95": [
+      0.09167654612255839,
+      0.09232138534896969
+     ],
+     "L": 0.09173415664799864,
+     "U": 0.09226692221626687,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00016164505312797105
+    },
+    "ts": {
+     "CI95": [
+      0.09031074171494506,
+      0.09376261823032196
+     ],
+     "L": 0.0906118822101131,
+     "U": 0.09347965024570774,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0008731287330286969
+    },
+    "MDE80_ts": 0.0021705980303093407,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "ambiguous_for_expansion": false,
+   "call": "present (+)"
+  },
+  {
+   "comparison": "HRCOV200 - RE-GCN BLEND [without RN]",
+   "a": "HRCOV200 (RE-GCN)",
+   "b": "RE-GCN BLEND",
+   "role": "secondary",
+   "MRR": {
+    "delta": 0.06471461639303411,
+    "query": {
+     "CI95": [
+      0.06449235176686106,
+      0.0649422895911679
+     ],
+     "L": 0.06452505224034093,
+     "U": 0.06490448460931797,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00011497248719320635
+    },
+    "ts": {
+     "CI95": [
+      0.06352888523806782,
+      0.06593632948978105
+     ],
+     "L": 0.06371005658545499,
+     "U": 0.06569347858959669,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0006087335687409828
+    },
+    "MDE80_ts": 0.0015133116518900834,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H1": {
+    "delta": 0.057212364663163075,
+    "query": {
+     "CI95": [
+      0.05692538197196618,
+      0.05751063297734102
+     ],
+     "L": 0.05697322367527882,
+     "U": 0.057459191969787736,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00015212798345343309
+    },
+    "ts": {
+     "CI95": [
+      0.056032861185593336,
+      0.058429674028827656
+     ],
+     "L": 0.05622233102676928,
+     "U": 0.05818204419845562,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0005963520617104624
+    },
+    "MDE80_ts": 0.0014825312254122098,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H3": {
+    "delta": 0.07506700185030223,
+    "query": {
+     "CI95": [
+      0.07475779277693591,
+      0.07537604981434087
+     ],
+     "L": 0.07480068871452376,
+     "U": 0.07533541983131056,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.00016087936298427304
+    },
+    "ts": {
+     "CI95": [
+      0.07371219321375277,
+      0.07648013382038162
+     ],
+     "L": 0.0739080333344337,
+     "U": 0.07621894835260759,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0007072205902372912
+    },
+    "MDE80_ts": 0.001758150387329906,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "H10": {
+    "delta": 0.0806786004817825,
+    "query": {
+     "CI95": [
+      0.08037387195875989,
+      0.08099034515390023
+     ],
+     "L": 0.08042084334184513,
+     "U": 0.08093281090872537,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0001597283326947918
+    },
+    "ts": {
+     "CI95": [
+      0.07932552820684419,
+      0.08205126266464038
+     ],
+     "L": 0.07956456415239517,
+     "U": 0.08181700051762228,
+     "p_one_sided_le0": 0.0,
+     "SE": 0.0006857004958613399
+    },
+    "MDE80_ts": 0.001704651432711291,
+    "present_pos": true,
+    "present_neg": false,
+    "excluded_gain_ge_bar": false,
+    "excluded_loss_ge_bar": true
+   },
+   "ambiguous_for_expansion": false,
+   "call": "present (+)"
+  },
+  {
+   "comparison": "RE-GCN-RN base - RE-GCN BLEND",
+   "a": "RE-GCN-RN base",
+   "b": "RE-GCN BLEND",
+   "role": "secondary",
+   "MRR": {
+    "delta": -0.0015383854387057687,
+    "query": {
+     "CI95": [
+      -0.001757521890559255,
+      -0.0013161617612128555
+     ],
+     "L": -0.0017295764576495585,
+     "U": -0.001347432682985842,
+     "p_one_sided_le0": 1.0,
+     "SE": 0.00011292537406039776
+    },
+    "ts": {
+     "CI95": [
+      -0.00307915299052111,
+      1.1029504172654346e-06
+     ],
+     "L": -0.002826084787007493,
+     "U": -0.00023728904551493805,
+     "p_one_sided_le0": 0.9745,
+     "SE": 0.0007834809456632041
+    },
+    "MDE80_ts": 0.0019477336309187256,
+    "present_pos": false,
+    "present_neg": true,
+    "excluded_gain_ge_bar": true,
+    "excluded_loss_ge_bar": true
+   },
+   "H1": {
+    "delta": -0.0013598120814949893,
+    "query": {
+     "CI95": [
+      -0.0016648964502125497,
+      -0.0010561702118099718
+     ],
+     "L": -0.001613341354705362,
+     "U": -0.0010976093742614552,
+     "p_one_sided_le0": 1.0,
+     "SE": 0.00015349561627968803
+    },
+    "ts": {
+     "CI95": [
+      -0.0027806030811750146,
+      0.00010701277636455896
+     ],
+     "L": -0.0025678242379222225,
+     "U": -0.0001668318487458802,
+     "p_one_sided_le0": 0.9685,
+     "SE": 0.000733674093434653
+    },
+    "MDE80_ts": 0.0018239137962785476,
+    "present_pos": false,
+    "present_neg": true,
+    "excluded_gain_ge_bar": true,
+    "excluded_loss_ge_bar": true
+   },
+   "H3": {
+    "delta": -0.002008437069616789,
+    "query": {
+     "CI95": [
+      -0.0023243148489394735,
+      -0.0016739374137278342
+     ],
+     "L": -0.002278659342406468,
+     "U": -0.0017329925791864022,
+     "p_one_sided_le0": 1.0,
+     "SE": 0.00016541108445076807
+    },
+    "ts": {
+     "CI95": [
+      -0.00372720618608608,
+      -0.0002479870750170906
+     ],
+     "L": -0.003500881512858033,
+     "U": -0.0005327229661261307,
+     "p_one_sided_le0": 0.986,
+     "SE": 0.0008903862024495236
+    },
+    "MDE80_ts": 0.0022135000992895156,
+    "present_pos": false,
+    "present_neg": true,
+    "excluded_gain_ge_bar": true,
+    "excluded_loss_ge_bar": true
+   },
+   "H10": {
+    "delta": -0.00016898218119447612,
+    "query": {
+     "CI95": [
+      -0.0005079698071213538,
+      0.0001635245484328768
+     ],
+     "L": -0.0004503283097866599,
+     "U": 0.00010365029369077665,
+     "p_one_sided_le0": 0.852,
+     "SE": 0.00016704462697534933
+    },
+    "ts": {
+     "CI95": [
+      -0.0019721195479981907,
+      0.0016419079688425558
+     ],
+     "L": -0.0017088528524063981,
+     "U": 0.0013705024576402618,
+     "p_one_sided_le0": 0.57,
+     "SE": 0.0009248362865398362
+    },
+    "MDE80_ts": 0.002299143008338033,
+    "present_pos": false,
+    "present_neg": false,
+    "excluded_gain_ge_bar": true,
+    "excluded_loss_ge_bar": true
+   },
+   "ambiguous_for_expansion": false,
+   "call": "present (−); loss ≥ 0.005 excluded"
+  }
+ ],
+ "interpretation": "Relation normalisation helps the base (+0.03438, RE-GCN-RN ≈ RE-GCN BLEND) and the re-ranker features (+0.00938); the HRCOV margin survives when the competitor also gets RN: HRCOV200_RN - RE-GCN-RN base = +0.07564 vs HRCOV200 - RE-GCN base = +0.10063 without RN (the gain shrinks by 0.0250 but remains large).",
+ "declared_cuts": [
+  "HRCOV on the RE-GCN-RN base (requires the full Stage B pipeline - features, pattern lists, exact lookups, fits, official scoring - on the RN base; > 24 GPU-h budget share)",
+  "RecB on RN data at full scale (only a 4.65M-query sample profile exists: recbRN_profile.json) and therefore G1-RN",
+  "BLEND / POOL on the RE-GCN-RN base",
+  "official py-tgb scoring of the HRCOV200_RN promoted lists (harness ranks used; identity with official checked on HRCOV200)"
+ ],
+ "notes": [
+  "HRCOV200_RN = HRCOV200 recipe on the ORIGINAL RE-GCN base with features (evidence, patterns) computed on the relation-normalised history (feat_regcn_rn, scheme 'rn'); evaluation on original ids/conflict sets.",
+  "Because HRCOV200_RN keeps the original base, 'HRCOV200_RN - RE-GCN-RN base' compares the RN re-ranker with the RN base, not an RN-base re-ranker."
+ ]
+}

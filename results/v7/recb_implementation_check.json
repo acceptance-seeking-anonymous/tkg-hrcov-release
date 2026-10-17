@@ -1,0 +1,138 @@
+{
+ "checked_utc": "2026-10-14",
+ "recb_repo": {
+  "url": "https://github.com/nec-research/recurrency_baseline_tkg",
+  "n_commits_default_branch": 18,
+  "latest_commit": {
+   "sha": "5f196393cf1bd7b8faa13a81ceaf1e7957319785",
+   "date": "2025-06-24T15:20:48Z",
+   "message": "update readme with new results and change description"
+  },
+  "readme_notes_commit": {
+   "sha": "5f196393cf1bd7b8faa13a81ceaf1e7957319785",
+   "date": "2025-06-24T15:20:48Z",
+   "files": [
+    [
+     "README.md",
+     92,
+     0
+    ]
+   ]
+  },
+  "update2_stale_psi_fix": {
+   "readme_label": "Update 2 (2025-06-24)",
+   "readme_text": "When the baseline_psi had no predictions for a query, it incorrectly reused the scores from the previous query instead of predicting all zeros.",
+   "code_commit": "ff23bc26819cc382083e44af0e2647a57226ee85",
+   "date": "2025-06-24T15:04:35Z",
+   "files": [
+    [
+     "src/utils/apply_baselines.py",
+     2,
+     0
+    ]
+   ]
+  },
+  "update1_tie_noise_fix": {
+   "readme_label": "Update 1 (2025-09-01); body: 'updated on 09/01/2025'",
+   "readme_text": "removed the addition of small random values to scores (tie avoidance) and switched score loading to float64",
+   "code_commits": [
+    {
+     "sha": "b6f34ab7651adb589381b0b6dabe621be5a3c216",
+     "date": "2024-10-14T13:55:54Z",
+     "files": [
+      [
+       "src/utils/logging_utils.py",
+       2,
+       2
+      ],
+      [
+       "src/utils/utils.py",
+       4,
+       2
+      ]
+     ]
+    },
+    {
+     "sha": "086d010526b054ded98d39886a7e30657ba7324d",
+     "date": "2024-10-14T14:21:18Z",
+     "files": [
+      [
+       "src/evaluation/test_utils.py",
+       2,
+       2
+      ]
+     ]
+    }
+   ],
+   "date_note": "The README containing this note was committed on 2025-06-24 and the repository has no later commit, so the label cannot denote September 2025; read in the README's DD/MM/YYYY convention ('24/06/2025') it is 9 January 2025. The code change itself is dated 2024-10-14."
+  },
+  "updated_results_table": {
+   "ICEWS18": {
+    "psiDeltaXi_MRR_old": 28.7,
+    "psiDeltaXi_MRR_new": 28.7,
+    "psiDeltaXi_H10_old": 43.7,
+    "psiDeltaXi_H10_new": 43.6
+   },
+   "GDELT": {
+    "psiDeltaXi_MRR_old": 24.5,
+    "psiDeltaXi_MRR_new": 24.5,
+    "psiDeltaXi_H10_old": 39.8,
+    "psiDeltaXi_H10_new": 39.8
+   }
+  }
+ },
+ "tgb_repo": {
+  "url": "https://github.com/shenyangHuang/TGB",
+  "commit": "3b83e5cfb2010743fd4f7a80a01b0e19dfcf78cb",
+  "commit_date": "2026-07-27T00:27:07Z",
+  "commit_message": "Bump version to 2.3.0",
+  "predictor_file": "modules/recurrencybaseline_predictor.py",
+  "predictor_sha256_at_commit": "b0426ce25f10bf9c5391e11d6a59a10adc7c3bc92f5c6f999b4a3579f824984a",
+  "predictor_identical_on_main": true,
+  "predictor_file_history": [
+   {
+    "sha": "8cc05399a2b0117216a18cde2e13ddb3c5edc52b",
+    "date": "2024-06-21T07:53:12Z",
+    "message": "rename folder tgb_modules to modules for merge into tgb"
+   }
+  ],
+  "predictor_behaviour": "predictions_psi = np.zeros(num_nodes) is set once before the per-query loop of a worker chunk and overwritten only when the query has strict-recurrency candidates (lines 67-68, 105-109); predictions_xi is recomputed for every query; no random tie-breaking term",
+  "evaluator_tie_rule": "tgb/linkproppred/evaluate.py: rank = 0.5*(optimistic + pessimistic) + 1 (lines 92-96, 107-109)"
+ },
+ "our_runs": {
+  "host_clone_tkgl-polecat": {
+   "path": "tracks/pilot_polecat/stage/tgb_repo",
+   "HEAD": "3b83e5cfb2010743fd4f7a80a01b0e19dfcf78cb",
+   "working_tree": "clean",
+   "predictor_sha256": "b0426ce25f10bf9c5391e11d6a59a10adc7c3bc92f5c6f999b4a3579f824984a"
+  },
+  "host_copy_tkgl-icews": {
+   "path": "tracks/pilot_icews/stage/tgb_modules/modules",
+   "predictor_sha256": "b0426ce25f10bf9c5391e11d6a59a10adc7c3bc92f5c6f999b4a3579f824984a",
+   "script": "pi_recb_official.py records tgb_repo_commit 3b83e5cfb2010743fd4f7a80a01b0e19dfcf78cb"
+  },
+  "faithful_vs_official": "hardening_report.md §RecB: 533,450 of 533,472 per-query validation RR equal to the official per-query CSV (polecat, default mode); test MRR 0.16709 vs 0.16709",
+  "faithful_clean_table": {
+   "tkgl-polecat test": {
+    "default_faithful": 0.16709,
+    "default_clean": 0.16769,
+    "trained_faithful": 0.19843,
+    "trained_clean": 0.19923,
+    "leaderboard": [
+     0.167,
+     0.198
+    ]
+   },
+   "tkgl-smallpedia test": {
+    "default_faithful": 0.48625,
+    "default_clean": 0.4861,
+    "trained_faithful": 0.60489,
+    "trained_clean": 0.60464,
+    "leaderboard": [
+     0.486,
+     0.605
+    ]
+   }
+  }
+ }
+}

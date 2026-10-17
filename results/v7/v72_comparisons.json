@@ -1,0 +1,610 @@
+{
+ "B1_ranker_form | tkgl-polecat | MLP64x2 - LIN": {
+  "delta": 0.012173120949738495,
+  "ts_ci": [
+   0.011576760730847627,
+   0.012780478207207551
+  ],
+  "q_ci": [
+   0.011799315802446222,
+   0.012540825111386723
+  ],
+  "tsL": 0.011666264411214166,
+  "tsU": 0.01269117388433702,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": true
+ },
+ "B1_ranker_form | tkgl-polecat | MLP64x2 - QBLEND": {
+  "delta": 0.052098913582944134,
+  "ts_ci": [
+   0.05078697155696835,
+   0.05347017211593167
+  ],
+  "q_ci": [
+   0.05153596410732154,
+   0.05267710300695356
+  ],
+  "tsL": 0.05101258655699591,
+  "tsU": 0.053196364856108284,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": true
+ },
+ "B1_ranker_form | tkgl-polecat | MLP16 - LIN": {
+  "delta": 0.00938462664081357,
+  "ts_ci": [
+   0.008854415720272787,
+   0.00989301048377825
+  ],
+  "q_ci": [
+   0.009070028542914287,
+   0.00970731947258928
+  ],
+  "tsL": 0.008952088134462126,
+  "tsU": 0.009822128153074088,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B1_ranker_form | tkgl-polecat | MLP64x2 - MLP16": {
+  "delta": 0.0027884943089249233,
+  "ts_ci": [
+   0.0025324522852194047,
+   0.0030500692757879752
+  ],
+  "q_ci": [
+   0.0026086645188686964,
+   0.0029756324034138013
+  ],
+  "tsL": 0.00256861348906101,
+  "tsU": 0.0030055672737634184,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "present (+); |Δ| ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B1_ranker_form | tkgl-smallpedia | MLP64x2 - LIN": {
+  "delta": 0.015222442731491452,
+  "ts_ci": [
+   0.013133800768381327,
+   0.016534171413945822
+  ],
+  "q_ci": [
+   0.014504750188964686,
+   0.015924591768896143
+  ],
+  "tsL": 0.013538579999649804,
+  "tsU": 0.016334755760136026,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": true
+ },
+ "B1_ranker_form | tkgl-smallpedia | MLP64x2 - QBLEND": {
+  "delta": 0.03082145974733489,
+  "ts_ci": [
+   0.026770608956443332,
+   0.03326764079003515
+  ],
+  "q_ci": [
+   0.029953119080863885,
+   0.0316976749631313
+  ],
+  "tsL": 0.02762288469909287,
+  "tsU": 0.032976703027601834,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": true
+ },
+ "B1_ranker_form | tkgl-smallpedia | MLP16 - LIN": {
+  "delta": 0.008081105765221355,
+  "ts_ci": [
+   0.006584514156344978,
+   0.009068825426637872
+  ],
+  "q_ci": [
+   0.007551364335972722,
+   0.008614222838287182
+  ],
+  "tsL": 0.006866442827280438,
+  "tsU": 0.008931933820845995,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B1_ranker_form | tkgl-smallpedia | MLP64x2 - MLP16": {
+  "delta": 0.007141336966270096,
+  "ts_ci": [
+   0.0062802085246386865,
+   0.007793587317951538
+  ],
+  "q_ci": [
+   0.0066187483233131105,
+   0.007678218368399661
+  ],
+  "tsL": 0.00646281745370805,
+  "tsU": 0.007699784999659231,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B2_matched_pool | tkgl-polecat | PT_common - RB_common": {
+  "delta": 0.003406571973178828,
+  "ts_ci": [
+   0.0030626269888312818,
+   0.003759953769039664
+  ],
+  "q_ci": [
+   0.003190977606032865,
+   0.0036408096119994265
+  ],
+  "tsL": 0.0031221776596576925,
+  "tsU": 0.0037038279549938026,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "present (+); |Δ| ≥ 0.005 excluded",
+  "holm": true
+ },
+ "B2_matched_pool | tkgl-polecat | PT_gen - RB_gen": {
+  "delta": 0.009780166232949547,
+  "ts_ci": [
+   0.009170214240492348,
+   0.010394161987947157
+  ],
+  "q_ci": [
+   0.009466771213310401,
+   0.01011216870501695
+  ],
+  "tsL": 0.009270680451128966,
+  "tsU": 0.010316431302138203,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B2_matched_pool | tkgl-smallpedia | PT_common - RB_common": {
+  "delta": 6.978906290581125e-05,
+  "ts_ci": [
+   -0.00018440415332875886,
+   0.0003720868436984859
+  ],
+  "q_ci": [
+   -0.00019753825342464868,
+   0.00035749281811383064
+  ],
+  "tsL": -0.0001372190219407991,
+  "tsU": 0.0003192660582812274,
+  "present_pos": false,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "not established; |Δ| ≥ 0.005 excluded",
+  "holm": false
+ },
+ "B2_matched_pool | tkgl-smallpedia | PT_gen - RB_gen": {
+  "delta": 0.0001499889692524818,
+  "ts_ci": [
+   -0.0001922036074326313,
+   0.0006067575673002685
+  ],
+  "q_ci": [
+   -0.0001630657921679332,
+   0.00046812311561544796
+  ],
+  "tsL": -0.00012644343753561306,
+  "tsU": 0.000522525236860018,
+  "present_pos": false,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "not established; |Δ| ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-polecat | FULL - NB_NF": {
+  "delta": 0.0018304854256187887,
+  "ts_ci": [
+   0.0014669673011486965,
+   0.0021878872338936405
+  ],
+  "q_ci": [
+   0.0016173180063796368,
+   0.0020511730191674067
+  ],
+  "tsL": 0.0015304450893622872,
+  "tsU": 0.0021376419088953635,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "present (+); |Δ| ≥ 0.005 excluded",
+  "holm": true
+ },
+ "B3_common_pool_base_ablation | tkgl-polecat | FULL - NB_F": {
+  "delta": 0.0019370294883520162,
+  "ts_ci": [
+   0.0015954627779520584,
+   0.002267671295054537
+  ],
+  "q_ci": [
+   0.0017344042540976819,
+   0.0021519449560086614
+  ],
+  "tsL": 0.0016529583596713354,
+  "tsU": 0.0022163855409596507,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "present (+); |Δ| ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-polecat | FULL - B_NF": {
+  "delta": 0.0001924585454843505,
+  "ts_ci": [
+   0.00013399718859131337,
+   0.0002492864368214461
+  ],
+  "q_ci": [
+   0.00014809118227811517,
+   0.00023704517262232864
+  ],
+  "tsL": 0.00014517462979407638,
+  "tsU": 0.00023959559384507045,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "present (+); |Δ| ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-polecat | FULL - EV_NF_PT [base contribution, common pool]": {
+  "delta": 0.008629590892010338,
+  "ts_ci": [
+   0.007980835259038581,
+   0.00933423846990369
+  ],
+  "q_ci": [
+   0.008294961606710121,
+   0.008962386448199796
+  ],
+  "tsL": 0.008081059494151496,
+  "tsU": 0.00923989569626848,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-polecat | EV_NF_PT - EV_NF_RB [candidate source, common inputs]": {
+  "delta": 0.004375940956727879,
+  "ts_ci": [
+   0.004038234651941383,
+   0.004729050289715139
+  ],
+  "q_ci": [
+   0.004176285902104179,
+   0.00458731499084007
+  ],
+  "tsL": 0.0040937796100805135,
+  "tsU": 0.004662552276665314,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "present (+); |Δ| ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-polecat | EV_NF_RB - G1 [pool width, generator features, tail order]": {
+  "delta": 0.021077057328725918,
+  "ts_ci": [
+   0.020278198118874557,
+   0.021915327392250716
+  ],
+  "q_ci": [
+   0.020662368990754548,
+   0.021493181667969003
+  ],
+  "tsL": 0.020400752896046457,
+  "tsU": 0.02177810765609089,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-polecat | HRCOV_PAT(stored) - G1 [total]": {
+  "delta": 0.034136373973330685,
+  "ts_ci": [
+   0.032924817117142804,
+   0.03536126344149464
+  ],
+  "q_ci": [
+   0.03362708250567405,
+   0.034677651139764336
+  ],
+  "tsL": 0.03313342833715908,
+  "tsU": 0.03517245249789238,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-polecat | FULL - G1 [total, re-fit]": {
+  "delta": 0.03408258917746413,
+  "ts_ci": [
+   0.03287588628307746,
+   0.03533830538586155
+  ],
+  "q_ci": [
+   0.03355184629284899,
+   0.034617297557502764
+  ],
+  "tsL": 0.03307401327452495,
+  "tsU": 0.035130736689631334,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-smallpedia | FULL - NB_NF": {
+  "delta": 0.0021697472465297416,
+  "ts_ci": [
+   0.0014851815157605652,
+   0.0029223666812489718
+  ],
+  "q_ci": [
+   0.0017839357597255418,
+   0.002551055658498919
+  ],
+  "tsL": 0.001583505734090507,
+  "tsU": 0.002785011608122855,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "present (+); |Δ| ≥ 0.005 excluded",
+  "holm": true
+ },
+ "B3_common_pool_base_ablation | tkgl-smallpedia | FULL - NB_F": {
+  "delta": 0.0005334025574148988,
+  "ts_ci": [
+   0.00011047351196352405,
+   0.0009635252743773752
+  ],
+  "q_ci": [
+   0.00022241477508483184,
+   0.000853837430949385
+  ],
+  "tsL": 0.00018217287037023,
+  "tsU": 0.0009011220346329699,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "present (+); |Δ| ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-smallpedia | FULL - B_NF": {
+  "delta": -2.963873014653614e-05,
+  "ts_ci": [
+   -9.61205325227583e-05,
+   3.533223956763938e-05
+  ],
+  "q_ci": [
+   -0.00010256823971845326,
+   4.1603525166482555e-05
+  ],
+  "tsL": -8.419903559608165e-05,
+  "tsU": 2.5803627232421628e-05,
+  "present_pos": false,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "not established; |Δ| ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-smallpedia | FULL - EV_NF_PT [base contribution, common pool]": {
+  "delta": 0.005249371921518404,
+  "ts_ci": [
+   0.004413072958310964,
+   0.006148851201441117
+  ],
+  "q_ci": [
+   0.004755785838030407,
+   0.00575943963867378
+  ],
+  "tsL": 0.004542975215830485,
+  "tsU": 0.00599915425393519,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-smallpedia | EV_NF_PT - EV_NF_RB [candidate source, common inputs]": {
+  "delta": -0.00010517414371008701,
+  "ts_ci": [
+   -0.0003969688944830241,
+   0.00024121155725545109
+  ],
+  "q_ci": [
+   -0.0003856304355570662,
+   0.0001576935000982976
+  ],
+  "tsL": -0.00035418481951833704,
+  "tsU": 0.00018300328233378008,
+  "present_pos": false,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "not established; |Δ| ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-smallpedia | EV_NF_RB - G1 [pool width, generator features, tail order]": {
+  "delta": 0.0021786644989967817,
+  "ts_ci": [
+   0.001363390228894403,
+   0.0029213664794994626
+  ],
+  "q_ci": [
+   0.0017446910267405807,
+   0.002642288483200962
+  ],
+  "tsL": 0.001509713914252021,
+  "tsU": 0.0028013160855048075,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "present (+); |Δ| ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-smallpedia | HRCOV_PAT(stored) - G1 [total]": {
+  "delta": 0.007322862276805099,
+  "ts_ci": [
+   0.006165713357202617,
+   0.00850309656436167
+  ],
+  "q_ci": [
+   0.006802679260748763,
+   0.007857114198776176
+  ],
+  "tsL": 0.006367780680797014,
+  "tsU": 0.00827608562283921,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": null
+ },
+ "B3_common_pool_base_ablation | tkgl-smallpedia | FULL - G1 [total, re-fit]": {
+  "delta": 0.007322862276805099,
+  "ts_ci": [
+   0.006165713357202617,
+   0.00850309656436167
+  ],
+  "q_ci": [
+   0.006802679260748763,
+   0.007857114198776176
+  ],
+  "tsL": 0.006367780680797014,
+  "tsU": 0.00827608562283921,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": false,
+  "excl_loss": true,
+  "call": "present (+); loss ≥ 0.005 excluded",
+  "holm": null
+ },
+ "C1_no_dyad_lr | tkgl-polecat | FULL - noDyadLR": {
+  "delta": 0.00014567533274511743,
+  "ts_ci": [
+   -9.262023437883792e-06,
+   0.000301191501280528
+  ],
+  "q_ci": [
+   1.5877427598938707e-05,
+   0.00027898536524749944
+  ],
+  "tsL": 2.0541627706520976e-05,
+  "tsU": 0.0002779039034131061,
+  "present_pos": true,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "present (+); |Δ| ≥ 0.005 excluded",
+  "holm": true
+ },
+ "C1_no_dyad_lr | tkgl-smallpedia | FULL - noDyadLR": {
+  "delta": -6.266886816671668e-05,
+  "ts_ci": [
+   -0.0003632210733562519,
+   0.00022925363670722168
+  ],
+  "q_ci": [
+   -0.00026440297962816446,
+   0.0001296368231451935
+  ],
+  "tsL": -0.00030493867541014685,
+  "tsU": 0.00019345938895282217,
+  "present_pos": false,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "not established; |Δ| ≥ 0.005 excluded",
+  "holm": false
+ },
+ "A5_multi_positive_sensitivity | tkgl-polecat | UNMASKED - FULL": {
+  "delta": 2.1939381793601052e-05,
+  "ts_ci": [
+   -0.00010630685091767051,
+   0.00014593805029243403
+  ],
+  "q_ci": [
+   -9.487454586286655e-05,
+   0.00013059242533464447
+  ],
+  "tsL": -8.553979297329228e-05,
+  "tsU": 0.000128387862924353,
+  "present_pos": false,
+  "present_neg": false,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "not established; |Δ| ≥ 0.005 excluded",
+  "holm": null
+ },
+ "A5_multi_positive_sensitivity | tkgl-polecat | MULTIPOS - FULL": {
+  "delta": -0.0003383998664105641,
+  "ts_ci": [
+   -0.0004849165756647031,
+   -0.00019294290105532997
+  ],
+  "q_ci": [
+   -0.0004523570401303043,
+   -0.00022422714556009143
+  ],
+  "tsL": -0.0004578613008907092,
+  "tsU": -0.0002185648663385175,
+  "present_pos": false,
+  "present_neg": true,
+  "excl_gain": true,
+  "excl_loss": true,
+  "call": "present (-); |Δ| ≥ 0.005 excluded",
+  "holm": null
+ }
+}

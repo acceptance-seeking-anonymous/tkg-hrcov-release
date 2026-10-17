@@ -1,0 +1,18 @@
+--- a/phase2_forward_holdout/code/fh_prep.py
++++ b/code/fh_prep.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""phase2_forward_holdout / fh_prep.py (derived from presub/g2_prep.py) -- BASE-INDEPENDENT preparation for ICEWS18 / GDELT (CPU); pilot_polecat/pc_prep.py with:
++"""phase2_fresh_window / fh_prep.py (derived from presub/g2_prep.py) -- BASE-INDEPENDENT preparation for ICEWS18 / GDELT (CPU); pilot_polecat/pc_prep.py with:
+   * dataset from g2_common (env G2_DS); pattern instantiation and event-index lookups at t_snap = ts // step
+     (retriever-track convention for the RE-GCN-split datasets; polecat has step 1, so the code is otherwise unchanged)
+   * no RecB-lite stage (G2 RecB = hd_recb.py, TGB-faithful re-implementation)
+@@ -8,7 +8,7 @@
+   3. strata (EVAL ONLY) for the valid sample and every test query (pc_prep definitions)           -> work/strata_{valid,test}.npz
+   python3 fh_prep.py --workers 8 --stage 1      # valid sample, TE tables, VALID strata (no test-set statistic)
+   python3 fh_prep.py --workers 8 --stage 2      # TEST strata only (frozen TE table and valid sample untouched)
+-Forward-holdout changes vs g2_prep.py: dataset via fh_common (GDELT25X); --stage split so that nothing about the test
++Forward-holdout changes vs g2_prep.py: dataset via fh_common (GDELTFW); --stage split so that nothing about the test
+ split is computed before the freeze; summary file names carry the stage.  All computations are otherwise verbatim.
+ """
+ import os, sys, json, time, argparse

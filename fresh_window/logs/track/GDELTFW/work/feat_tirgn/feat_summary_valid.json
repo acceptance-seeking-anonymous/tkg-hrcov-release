@@ -1,0 +1,116 @@
+{
+ "ds": "GDELTFW",
+ "base": "tirgn",
+ "feat_names": [
+  "logp",
+  "logp_minus_top1",
+  "log_base_rank",
+  "is_topKc",
+  "q_p1",
+  "q_entropy50",
+  "q_margin12",
+  "q_log_tailmass",
+  "ev_log_ntrip",
+  "ev_log_ndyad",
+  "ev_rec_trip",
+  "ev_rec_dyad",
+  "ev_log_nobjrel",
+  "ev_log_nent",
+  "ev_rec_objrel",
+  "ev_log_ntrip_recent30",
+  "ev_dyad_lr",
+  "ev_q_log_nquery",
+  "ev_q_log_nsubj",
+  "pat_best_util",
+  "pat_best_te",
+  "pat_log_npat",
+  "pat_reach",
+  "pat_log_pos",
+  "is_cov_cand"
+ ],
+ "groups": {
+  "base": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7
+  ],
+  "evid": [
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18
+  ],
+  "cov": [
+   19,
+   20,
+   21,
+   22,
+   23,
+   24
+  ]
+ },
+ "W": 100,
+ "host": "serverA_(CPU)",
+ "verify": {
+  "valid": {
+   "dump": "tirgn_valid gold_rank_filt",
+   "dump_exact_share": 1.0,
+   "rank_agree": 1.0,
+   "rank_agree_ok": true
+  },
+  "smoke": false
+ },
+ "valid": {
+  "n": 152234,
+  "seconds": 11.9,
+  "base": {
+   "MRR": 0.39784,
+   "n": 152234,
+   "H1": 0.270334,
+   "H3": 0.448757,
+   "H10": 0.660733
+  },
+  "dump": "tirgn_valid gold_rank_filt",
+  "dump_exact_share": 1.0,
+  "rank_agree_fullrow_vs_dump": 1.0,
+  "rank_agree_all_rows": 1.0,
+  "max_abs_rank_diff_exact_rows": 0,
+  "base_dump": {
+   "MRR": 0.39784,
+   "n": 152234,
+   "H1": 0.270334,
+   "H3": 0.448757,
+   "H10": 0.660733
+  },
+  "identity_f0": 1.0,
+  "gold_in_W100": 0.9080560190233457,
+  "gold_in_top50": 0.8854592272422718
+ },
+ "elapsed_s": 14.0,
+ "modules": {
+  "oih_common": {
+   "file": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/oih_common.py",
+   "in_track_code_dir": true
+  },
+  "fulltest_eval": {
+   "file": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/fulltest_eval.py",
+   "in_track_code_dir": true
+  },
+  "rs_features": {
+   "file": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/rs_features.py",
+   "in_track_code_dir": true
+  }
+ }
+}

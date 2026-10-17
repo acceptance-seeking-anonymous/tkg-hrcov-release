@@ -1,0 +1,20 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+tirgn {"blend_idx": 4, "blend_cfg": ["def", "MIX", "0.3"], "valid_MRR_blend": 0.411579519145235, "pool_idx": 88, "pool_cfg": [100, ["def", "MIX", "0.3"]], "valid_MRR_pool": 0.4115726426270803, "valid_MRR_base": 0.3978399159770624, "n_valid": 152234, "host": "serverA_(CPU)"}

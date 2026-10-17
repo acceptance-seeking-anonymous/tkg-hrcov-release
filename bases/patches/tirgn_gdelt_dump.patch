@@ -1,0 +1,969 @@
+diff -ruN a/add_score_dump.py b/add_score_dump.py
+--- /dev/null
++++ b/add_score_dump.py
+@@ -0,0 +1,62 @@
++#!/usr/bin/env python3
++"""
++Insert a DUMP_SCORES-gated, try/except-wrapped per-query score dump into the
++repo's src/main.py test() object-prediction path. Idempotent. ast-parse-checks
++the result and REFUSES to write a syntactically broken file (so a bad patch can
++never break the eval — the run falls back to the unpatched, validated main.py).
++
++Anchors (stable substrings in test()):
++  init   : after 'model.eval()'
++  record : after the 'model.predict(' assignment line
++  flush  : before 'mrr_raw, hit_result_raw = utils.stat_ranks'
++"""
++import ast, sys, pathlib
++
++MAIN = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "src/main.py")
++src = MAIN.read_text()
++
++if "score_dump" in src:
++    print("[add_score_dump] already patched; skipping")
++    sys.exit(0)
++
++def block(indent, call):
++    p = " " * indent
++    return (
++        f"{p}try:\n"
++        f"{p}    import os as _os\n"
++        f'{p}    if _os.environ.get("DUMP_SCORES") == "1":\n'
++        f"{p}        import score_dump as _sd; {call}\n"
++        f"{p}except Exception as _e:\n"
++        f'{p}    print("[score_dump] skipped:", _e)\n'
++    )
++
++# --- init: after the first 'model.eval()' inside test() ---
++anchor_init = "    model.eval()\n"
++init_call = '_sd.init(_os.environ.get("DUMP_PATH", "/workspace/tirgn_scores.npz"))'
++assert anchor_init in src, "init anchor not found"
++src = src.replace(anchor_init, anchor_init + block(4, init_call), 1)
++
++# --- record: after the model.predict assignment (8-space indent, in loop) ---
++# match the line by its distinctive LHS+RHS
++import re
++m = re.search(r"^([ \t]*)test_triples, final_score, final_r_score = model\.predict\(.*\)\n",
++              src, re.M)
++assert m, "predict anchor not found"
++indent = len(m.group(1))
++rec_line = m.group(0)
++src = src.replace(rec_line, rec_line + block(indent, "_sd.record(test_triples, final_score)"), 1)
++
++# --- flush: before stat_ranks aggregation (4-space indent) ---
++anchor_flush = '    mrr_raw, hit_result_raw = utils.stat_ranks(ranks_raw, "raw_ent")\n'
++assert anchor_flush in src, "flush anchor not found"
++src = src.replace(anchor_flush, block(4, "_sd.flush()") + anchor_flush, 1)
++
++# --- validate ---
++try:
++    ast.parse(src)
++except SyntaxError as e:
++    print("[add_score_dump] REFUSING to write: patched file has SyntaxError:", e)
++    sys.exit(2)
++
++MAIN.write_text(src)
++print("[add_score_dump] patched + ast-verified:", MAIN)
+diff -ruN a/add_split_dump.py b/add_split_dump.py
+--- /dev/null
++++ b/add_split_dump.py
+@@ -0,0 +1,45 @@
++#!/usr/bin/env python3
++"""
++Add a DUMP_SPLIT-gated branch to TiRGN main.py that scores TRAIN or VALID queries.
++
++VALID: test(model, train_list, valid_list, ...valid_times, history_val_time_nogt, 'valid')
++       -- clean, leakage-free (TiRGN held valid out); history_list non-empty.
++TRAIN: test(model, train_list[:1], train_list[1:], ...train_times[1:], train_times[0], 'train')
++       -- seed history with the first train snapshot so the loop's sliding-window
++          pop(0)/append never underflows; the first snapshot (~1 ts) goes unscored.
++          Train scores are memorization-inflated by design (plan 4.4).
++
++Idempotent, ast-verified.
++"""
++import ast, sys, pathlib
++MAIN = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "src/main.py")
++src = MAIN.read_text()
++if "DUMP_SPLIT" in src:
++    print("[add_split_dump] already patched; skipping"); sys.exit(0)
++anchor = "    if args.test and os.path.exists(model_state_file):\n"
++assert anchor in src, "test-branch anchor not found"
++branch = (
++    "    import os as _os2\n"
++    "    _dsplit = _os2.environ.get('DUMP_SPLIT')\n"
++    "    if _dsplit in ('train', 'valid') and os.path.exists(model_state_file):\n"
++    "        checkpoint = torch.load(model_state_file, map_location=torch.device(args.gpu) if use_cuda else 'cpu')\n"
++    "        model.load_state_dict(checkpoint['state_dict'])\n"
++    "        if _dsplit == 'valid':\n"
++    "            _ = test(model, train_list, valid_list, num_rels, num_nodes, use_cuda,\n"
++    "                     all_ans_list_valid, all_ans_list_r_valid, model_state_file,\n"
++    "                     static_graph, valid_times, history_val_time_nogt, 'valid')\n"
++    "        else:\n"
++    "            _allA = utils.load_all_answers_for_time_filter(data.train, num_rels, num_nodes, False)\n"
++    "            _allAr = utils.load_all_answers_for_time_filter(data.train, num_rels, num_nodes, True)\n"
++    "            _ = test(model, train_list[:1], train_list[1:], num_rels, num_nodes, use_cuda,\n"
++    "                     _allA[1:], _allAr[1:], model_state_file,\n"
++    "                     static_graph, train_times[1:], train_times[0], 'train')\n"
++    "        import sys as _sys2; _sys2.exit(0)\n"
++)
++src = src.replace(anchor, branch + anchor, 1)
++try:
++    ast.parse(src)
++except SyntaxError as e:
++    print("[add_split_dump] REFUSING to write: SyntaxError:", e); sys.exit(2)
++MAIN.write_text(src)
++print("[add_split_dump] patched + ast-verified:", MAIN)
+diff -ruN a/compat_patch.py b/compat_patch.py
+--- /dev/null
++++ b/compat_patch.py
+@@ -0,0 +1,65 @@
++#!/usr/bin/env python3
++"""Minimal compatibility patches to run TiRGN (2022; torch1.6/dgl0.5 era)
++under modern torch (>=2.x) + dgl 1.1.3. Idempotent; logs each substitution.
++Run from the TiRGN repo root: python3 compat_patch.py
++"""
++import pathlib, sys
++
++REPO = pathlib.Path(__file__).resolve().parent
++SUBS = [
++    # (file, old, new, required)
++    ("rgcn/utils.py",
++     "g = dgl.DGLGraph()",
++     "g = dgl.graph(([], []))",
++     True),
++    ("rgcn/knowledge_graph.py",
++     "from dgl.data.utils import download, extract_archive, get_download_dir, _get_dgl_url",
++     "from dgl.data.utils import download, extract_archive, get_download_dir\n"
++     "try:\n"
++     "    from dgl.data.utils import _get_dgl_url\n"
++     "except ImportError:\n"
++     "    _get_dgl_url = lambda p: p",
++     True),
++    ("rgcn/knowledge_graph.py",
++     "dtype=np.int)",
++     "dtype=np.int64)",
++     False),
++    ("src/main.py",
++     "checkpoint = torch.load(model_name, map_location=torch.device(args.gpu))",
++     "checkpoint = torch.load(model_name, map_location=(torch.device('cuda:%d' % args.gpu) if args.gpu >= 0 else torch.device('cpu')), weights_only=False)",
++     True),
++    ("src/main.py",
++     "checkpoint = torch.load(model_name, map_location=torch.device('cpu'))",
++     "checkpoint = torch.load(model_name, map_location=torch.device('cpu'), weights_only=False)",
++     True),
++    # CPU support: two unguarded GPU calls (crash with --gpu -1)
++    ("src/main.py",
++     "test_triples_input = test_triples_input.to(args.gpu)",
++     "test_triples_input = test_triples_input.to(args.gpu) if args.gpu >= 0 else test_triples_input",
++     True),
++    ("rgcn/layers.py",
++     "torch.arange(0, g.number_of_nodes(), dtype=torch.long).cuda(),",
++     "torch.arange(0, g.number_of_nodes(), dtype=torch.long, device=g.device),",
++     True),
++    ("src/rrgcn.py",
++     "        self.gpu = gpu",
++     "        self.gpu = gpu if (isinstance(gpu, int) and gpu >= 0) else 'cpu'",
++     True),
++]
++
++failed = False
++for rel, old, new, required in SUBS:
++    p = REPO / rel
++    text = p.read_text()
++    if new in text:
++        print(f"[ok] {rel}: already patched ({old[:50]!r}...)")
++        continue
++    if old in text:
++        p.write_text(text.replace(old, new))
++        print(f"[patched] {rel}: {old[:60]!r}")
++    else:
++        level = "MISSING-REQUIRED" if required else "missing-optional"
++        print(f"[{level}] {rel}: pattern not found: {old[:60]!r}")
++        failed = failed or required
++
++sys.exit(1 if failed else 0)
+diff -ruN a/dgl_shim.py b/dgl_shim.py
+--- /dev/null
++++ b/dgl_shim.py
+@@ -0,0 +1,239 @@
++"""
++Pure-PyTorch DGL shim for running TiRGN under torch 2.8 / Blackwell sm_120.
++
++Why: DGL cannot run against this box. dgl 1.1.3 (repo pin) has no cp312 wheel;
++dgl 2.1.0's GPU wheel needs CUDA 11 (box has 12.8) and its CPU wheel ships a
++prebuilt graphbolt C++ library only for torch <= 2.2.1 (hard ABI break vs
++torch 2.8). See tirgn_run_log.md for the full ladder.
++
++What: TiRGN touches DGL through a tiny, fully enumerated surface (verified by
++grep across src/ + rgcn/):
++  construction : dgl.DGLGraph(), dgl.graph(), .add_nodes(), .add_edges()
++  node/edge    : .ndata (dict), .edata (dict), .apply_edges(fn)
++  aggregation  : .update_all(msg_func, fn.sum('msg','h'), apply_func)
++  message fns  : dgl.function.sum, dgl.function.copy_u  (only these two)
++  bookkeeping  : .num_nodes()/.number_of_nodes(), .in_degrees(), .to(dev),
++                 .local_var(); plus custom attrs r_to_e / r_len / uniq_r set
++                 as plain python in build_sub_graph.
++
++This module installs fake `dgl`, `dgl.function`, `dgl.nn` modules into
++sys.modules BEFORE the repo imports them, so rgcn/*.py and src/*.py run
++UNMODIFIED. Only the graph container + the one scatter-add primitive are
++reimplemented; every bit of TiRGN's math (RGCN weights, GRU cells, decoder,
++time-gate, global vector) stays the authors' own code.
++
++Usage: `import dgl_shim` at the very top of the entrypoint, before any
++`import dgl` in the repo. Idempotent.
++
++Correctness contract (VALIDATED downstream, not here): running the released
++ICEWS14s checkpoint through this shim must reproduce the DGL-path anchor MRR
++(CPU dry-run got 0.4475; published 0.4404). The validation run is the proof;
++this docstring only states the intent.
++"""
++import sys
++import types
++import torch
++
++
++# ------------------------------------------------------------------ messages
++# A "builtin message function" in DGL is just a spec object naming an op and
++# the fields it reads/writes. TiRGN uses exactly two: copy_u (copy src node
++# field into a message) and sum (reduce messages into a dst node field).
++class _MsgFn:
++    """fn.copy_u(u, out): message = src node[u] -> edge msg field `out`."""
++    def __init__(self, u, out):
++        self.u = u
++        self.out = out
++        self.kind = "copy_u"
++
++
++class _ReduceFn:
++    """fn.sum(msg, out): sum edge msg field `msg` into dst node field `out`."""
++    def __init__(self, msg, out):
++        self.msg = msg
++        self.out = out
++        self.kind = "sum"
++
++
++def _copy_u(u, out):
++    return _MsgFn(u, out)
++
++
++def _sum(msg, out):
++    return _ReduceFn(msg, out)
++
++
++# ------------------------------------------------------------------- edge view
++class _EdgeBatch:
++    """Passed to a user message-func / apply_edges-func. Exposes .src, .dst
++    (dst/src node-field dicts gathered per edge) and .data (edge-field dict)."""
++    def __init__(self, src_data, dst_data, edata):
++        self.src = src_data
++        self.dst = dst_data
++        self.data = edata
++
++
++# ------------------------------------------------------------------- the graph
++class Graph:
++    """Minimal directed multigraph with node/edge feature dicts and a
++    scatter-add update_all. Edges are stored as parallel src/dst LongTensors."""
++
++    def __init__(self, data=None):
++        self._num_nodes = 0
++        self.src = torch.empty(0, dtype=torch.long)
++        self.dst = torch.empty(0, dtype=torch.long)
++        self.ndata = {}
++        self.edata = {}
++        self.device = torch.device("cpu")
++        if data is not None:
++            u, v = data
++            u = torch.as_tensor(u, dtype=torch.long)
++            v = torch.as_tensor(v, dtype=torch.long)
++            self.src = u
++            self.dst = v
++            if u.numel():
++                self._num_nodes = int(max(u.max().item(), v.max().item())) + 1
++
++    # ---- construction ----
++    def add_nodes(self, n):
++        self._num_nodes += int(n)
++
++    def add_edges(self, u, v):
++        u = torch.as_tensor(u, dtype=torch.long, device=self.device)
++        v = torch.as_tensor(v, dtype=torch.long, device=self.device)
++        self.src = torch.cat([self.src.to(self.device), u])
++        self.dst = torch.cat([self.dst.to(self.device), v])
++        need = int(max(u.max().item(), v.max().item())) + 1 if u.numel() else 0
++        self._num_nodes = max(self._num_nodes, need)
++
++    # ---- sizes / degrees ----
++    def num_nodes(self):
++        return self._num_nodes
++
++    def number_of_nodes(self):
++        return self._num_nodes
++
++    def in_degrees(self, nodes=None):
++        deg = torch.zeros(self._num_nodes, dtype=torch.long, device=self.device)
++        if self.dst.numel():
++            deg.scatter_add_(0, self.dst,
++                             torch.ones_like(self.dst, dtype=torch.long))
++        if nodes is None:
++            return deg
++        idx = torch.as_tensor(list(nodes), dtype=torch.long, device=self.device) \
++            if not torch.is_tensor(nodes) else nodes.to(self.device)
++        return deg[idx]
++
++    # ---- device ----
++    def to(self, dev):
++        if dev is None or (isinstance(dev, int) and dev < 0):
++            return self
++        self.device = torch.device(dev) if not isinstance(dev, torch.device) else dev
++        self.src = self.src.to(self.device)
++        self.dst = self.dst.to(self.device)
++        self.ndata = {k: (v.to(self.device) if torch.is_tensor(v) else v)
++                      for k, v in self.ndata.items()}
++        self.edata = {k: (v.to(self.device) if torch.is_tensor(v) else v)
++                      for k, v in self.edata.items()}
++        return self
++
++    def local_var(self):
++        # DGL's local_var returns a view whose feature writes don't leak out.
++        # TiRGN doesn't rely on the isolation semantics for correctness of the
++        # forward pass (it pops 'h' at the end), so returning self is safe here.
++        return self
++
++    # ---- edge ops ----
++    def apply_edges(self, func):
++        eb = _EdgeBatch(self._gather(self.src), self._gather(self.dst), self.edata)
++        out = func(eb)
++        for k, val in out.items():
++            self.edata[k] = val
++
++    def _gather(self, idx):
++        """Return a dict mapping each node-field name to per-edge gathered rows
++        for the given endpoint index tensor."""
++        g = {}
++        for k, v in self.ndata.items():
++            if torch.is_tensor(v):
++                g[k] = v[idx]
++        return g
++
++    def update_all(self, message_func, reduce_func, apply_func=None):
++        """Scatter-add message passing. Supports the two patterns TiRGN uses:
++        a user callable message_func returning {'msg': tensor}, or the builtin
++        fn.copy_u; reduction is always fn.sum into a dst node field."""
++        # 1) build per-edge messages
++        if callable(message_func) and not isinstance(message_func, _MsgFn):
++            eb = _EdgeBatch(self._gather(self.src), self._gather(self.dst), self.edata)
++            md = message_func(eb)
++            msg = md[reduce_func.msg]
++        elif isinstance(message_func, _MsgFn):
++            msg = self.ndata[message_func.u][self.src]
++        else:
++            raise TypeError("unsupported message_func")
++
++        # 2) sum into destination nodes
++        out_field = reduce_func.out
++        feat = msg.shape[1:] if msg.dim() > 1 else ()
++        agg = torch.zeros((self._num_nodes, *feat), dtype=msg.dtype, device=msg.device)
++        index = self.dst
++        idx_exp = index.view(-1, *([1] * (msg.dim() - 1))).expand_as(msg)
++        agg.scatter_add_(0, idx_exp, msg)
++        self.ndata[out_field] = agg
++
++        # 3) apply (norm multiply etc.)
++        if apply_func is not None:
++            class _Nodes:
++                def __init__(s, data): s.data = data
++            res = apply_func(_Nodes(self.ndata))
++            for k, val in res.items():
++                self.ndata[k] = val
++
++
++def graph(data):
++    return Graph(data)
++
++
++def DGLGraph():
++    return Graph()
++
++
++def _install():
++    """Register fake dgl / dgl.function / dgl.nn modules into sys.modules."""
++    if isinstance(sys.modules.get("dgl"), types.ModuleType) and \
++       getattr(sys.modules.get("dgl"), "_IS_TORCH_SHIM", False):
++        return  # idempotent
++
++    dgl_mod = types.ModuleType("dgl")
++    dgl_mod._IS_TORCH_SHIM = True
++    dgl_mod.graph = graph
++    dgl_mod.DGLGraph = DGLGraph
++    dgl_mod.__version__ = "torch-shim-0.1"
++
++    fn_mod = types.ModuleType("dgl.function")
++    fn_mod.copy_u = _copy_u
++    fn_mod.copy_src = _copy_u  # old alias
++    fn_mod.sum = _sum
++    dgl_mod.function = fn_mod
++
++    # dgl.nn is imported by some repos but TiRGN's convgcn path doesn't use it;
++    # provide an empty module so `import dgl.nn` won't crash if hit.
++    nn_mod = types.ModuleType("dgl.nn")
++
++    # dgl.data.utils: knowledge_graph.py imports download/extract_archive/etc.
++    # compat_patch already guards _get_dgl_url; provide inert stubs.
++    data_mod = types.ModuleType("dgl.data")
++    data_utils = types.ModuleType("dgl.data.utils")
++    for name in ("download", "extract_archive", "get_download_dir", "_get_dgl_url"):
++        setattr(data_utils, name, (lambda *a, **k: None))
++    data_mod.utils = data_utils
++
++    sys.modules["dgl"] = dgl_mod
++    sys.modules["dgl.function"] = fn_mod
++    sys.modules["dgl.nn"] = nn_mod
++    sys.modules["dgl.data"] = data_mod
++    sys.modules["dgl.data.utils"] = data_utils
++
++
++_install()
+diff -ruN a/rgcn/knowledge_graph.py b/rgcn/knowledge_graph.py
+--- a/rgcn/knowledge_graph.py
++++ b/rgcn/knowledge_graph.py
+@@ -9,7 +9,11 @@
+ import pandas as pd
+ import rdflib as rdf
+ import scipy.sparse as sp
+-from dgl.data.utils import download, extract_archive, get_download_dir, _get_dgl_url
++from dgl.data.utils import download, extract_archive, get_download_dir
++try:
++    from dgl.data.utils import _get_dgl_url
++except ImportError:
++    _get_dgl_url = lambda p: p
+ import sys
+ 
+ np.random.seed(123)
+@@ -420,7 +424,7 @@
+ 
+             # sort indices by destination
+             edge_list = sorted(edge_list, key=lambda x: (x[1], x[0], x[2]))
+-            edge_list = np.array(edge_list, dtype=np.int)
++            edge_list = np.array(edge_list, dtype=np.int64)
+             print('Number of edges: ', len(edge_list))
+ 
+             np.savez(edge_file, edges=edge_list, n=np.array(num_node), nrel=np.array(num_rel))
+diff -ruN a/rgcn/layers.py b/rgcn/layers.py
+--- a/rgcn/layers.py
++++ b/rgcn/layers.py
+@@ -229,7 +229,7 @@
+         # self.ob = ob
+         if self.self_loop:
+             masked_index = torch.masked_select(
+-                torch.arange(0, g.number_of_nodes(), dtype=torch.long).cuda(),
++                torch.arange(0, g.number_of_nodes(), dtype=torch.long, device=g.device),
+                 (g.in_degrees(range(g.number_of_nodes())) > 0))
+             loop_message = torch.mm(g.ndata['h'], self.evolve_loop_weight)
+             loop_message[masked_index, :] = torch.mm(g.ndata['h'], self.loop_weight)[masked_index, :]
+diff -ruN a/rgcn/utils.py b/rgcn/utils.py
+--- a/rgcn/utils.py
++++ b/rgcn/utils.py
+@@ -100,7 +100,7 @@
+     src, dst = np.concatenate((src, dst)), np.concatenate((dst, src))
+     rel = np.concatenate((rel, rel + num_rels))
+ 
+-    g = dgl.DGLGraph()
++    g = dgl.graph(([], []))
+     g.add_nodes(num_nodes)
+     g.add_edges(src, dst)
+     norm = comp_deg_norm(g)
+diff -ruN a/src/dgl_shim.py b/src/dgl_shim.py
+--- /dev/null
++++ b/src/dgl_shim.py
+@@ -0,0 +1,239 @@
++"""
++Pure-PyTorch DGL shim for running TiRGN under torch 2.8 / Blackwell sm_120.
++
++Why: DGL cannot run against this box. dgl 1.1.3 (repo pin) has no cp312 wheel;
++dgl 2.1.0's GPU wheel needs CUDA 11 (box has 12.8) and its CPU wheel ships a
++prebuilt graphbolt C++ library only for torch <= 2.2.1 (hard ABI break vs
++torch 2.8). See tirgn_run_log.md for the full ladder.
++
++What: TiRGN touches DGL through a tiny, fully enumerated surface (verified by
++grep across src/ + rgcn/):
++  construction : dgl.DGLGraph(), dgl.graph(), .add_nodes(), .add_edges()
++  node/edge    : .ndata (dict), .edata (dict), .apply_edges(fn)
++  aggregation  : .update_all(msg_func, fn.sum('msg','h'), apply_func)
++  message fns  : dgl.function.sum, dgl.function.copy_u  (only these two)
++  bookkeeping  : .num_nodes()/.number_of_nodes(), .in_degrees(), .to(dev),
++                 .local_var(); plus custom attrs r_to_e / r_len / uniq_r set
++                 as plain python in build_sub_graph.
++
++This module installs fake `dgl`, `dgl.function`, `dgl.nn` modules into
++sys.modules BEFORE the repo imports them, so rgcn/*.py and src/*.py run
++UNMODIFIED. Only the graph container + the one scatter-add primitive are
++reimplemented; every bit of TiRGN's math (RGCN weights, GRU cells, decoder,
++time-gate, global vector) stays the authors' own code.
++
++Usage: `import dgl_shim` at the very top of the entrypoint, before any
++`import dgl` in the repo. Idempotent.
++
++Correctness contract (VALIDATED downstream, not here): running the released
++ICEWS14s checkpoint through this shim must reproduce the DGL-path anchor MRR
++(CPU dry-run got 0.4475; published 0.4404). The validation run is the proof;
++this docstring only states the intent.
++"""
++import sys
++import types
++import torch
++
++
++# ------------------------------------------------------------------ messages
++# A "builtin message function" in DGL is just a spec object naming an op and
++# the fields it reads/writes. TiRGN uses exactly two: copy_u (copy src node
++# field into a message) and sum (reduce messages into a dst node field).
++class _MsgFn:
++    """fn.copy_u(u, out): message = src node[u] -> edge msg field `out`."""
++    def __init__(self, u, out):
++        self.u = u
++        self.out = out
++        self.kind = "copy_u"
++
++
++class _ReduceFn:
++    """fn.sum(msg, out): sum edge msg field `msg` into dst node field `out`."""
++    def __init__(self, msg, out):
++        self.msg = msg
++        self.out = out
++        self.kind = "sum"
++
++
++def _copy_u(u, out):
++    return _MsgFn(u, out)
++
++
++def _sum(msg, out):
++    return _ReduceFn(msg, out)
++
++
++# ------------------------------------------------------------------- edge view
++class _EdgeBatch:
++    """Passed to a user message-func / apply_edges-func. Exposes .src, .dst
++    (dst/src node-field dicts gathered per edge) and .data (edge-field dict)."""
++    def __init__(self, src_data, dst_data, edata):
++        self.src = src_data
++        self.dst = dst_data
++        self.data = edata
++
++
++# ------------------------------------------------------------------- the graph
++class Graph:
++    """Minimal directed multigraph with node/edge feature dicts and a
++    scatter-add update_all. Edges are stored as parallel src/dst LongTensors."""
++
++    def __init__(self, data=None):
++        self._num_nodes = 0
++        self.src = torch.empty(0, dtype=torch.long)
++        self.dst = torch.empty(0, dtype=torch.long)
++        self.ndata = {}
++        self.edata = {}
++        self.device = torch.device("cpu")
++        if data is not None:
++            u, v = data
++            u = torch.as_tensor(u, dtype=torch.long)
++            v = torch.as_tensor(v, dtype=torch.long)
++            self.src = u
++            self.dst = v
++            if u.numel():
++                self._num_nodes = int(max(u.max().item(), v.max().item())) + 1
++
++    # ---- construction ----
++    def add_nodes(self, n):
++        self._num_nodes += int(n)
++
++    def add_edges(self, u, v):
++        u = torch.as_tensor(u, dtype=torch.long, device=self.device)
++        v = torch.as_tensor(v, dtype=torch.long, device=self.device)
++        self.src = torch.cat([self.src.to(self.device), u])
++        self.dst = torch.cat([self.dst.to(self.device), v])
++        need = int(max(u.max().item(), v.max().item())) + 1 if u.numel() else 0
++        self._num_nodes = max(self._num_nodes, need)
++
++    # ---- sizes / degrees ----
++    def num_nodes(self):
++        return self._num_nodes
++
++    def number_of_nodes(self):
++        return self._num_nodes
++
++    def in_degrees(self, nodes=None):
++        deg = torch.zeros(self._num_nodes, dtype=torch.long, device=self.device)
++        if self.dst.numel():
++            deg.scatter_add_(0, self.dst,
++                             torch.ones_like(self.dst, dtype=torch.long))
++        if nodes is None:
++            return deg
++        idx = torch.as_tensor(list(nodes), dtype=torch.long, device=self.device) \
++            if not torch.is_tensor(nodes) else nodes.to(self.device)
++        return deg[idx]
++
++    # ---- device ----
++    def to(self, dev):
++        if dev is None or (isinstance(dev, int) and dev < 0):
++            return self
++        self.device = torch.device(dev) if not isinstance(dev, torch.device) else dev
++        self.src = self.src.to(self.device)
++        self.dst = self.dst.to(self.device)
++        self.ndata = {k: (v.to(self.device) if torch.is_tensor(v) else v)
++                      for k, v in self.ndata.items()}
++        self.edata = {k: (v.to(self.device) if torch.is_tensor(v) else v)
++                      for k, v in self.edata.items()}
++        return self
++
++    def local_var(self):
++        # DGL's local_var returns a view whose feature writes don't leak out.
++        # TiRGN doesn't rely on the isolation semantics for correctness of the
++        # forward pass (it pops 'h' at the end), so returning self is safe here.
++        return self
++
++    # ---- edge ops ----
++    def apply_edges(self, func):
++        eb = _EdgeBatch(self._gather(self.src), self._gather(self.dst), self.edata)
++        out = func(eb)
++        for k, val in out.items():
++            self.edata[k] = val
++
++    def _gather(self, idx):
++        """Return a dict mapping each node-field name to per-edge gathered rows
++        for the given endpoint index tensor."""
++        g = {}
++        for k, v in self.ndata.items():
++            if torch.is_tensor(v):
++                g[k] = v[idx]
++        return g
++
++    def update_all(self, message_func, reduce_func, apply_func=None):
++        """Scatter-add message passing. Supports the two patterns TiRGN uses:
++        a user callable message_func returning {'msg': tensor}, or the builtin
++        fn.copy_u; reduction is always fn.sum into a dst node field."""
++        # 1) build per-edge messages
++        if callable(message_func) and not isinstance(message_func, _MsgFn):
++            eb = _EdgeBatch(self._gather(self.src), self._gather(self.dst), self.edata)
++            md = message_func(eb)
++            msg = md[reduce_func.msg]
++        elif isinstance(message_func, _MsgFn):
++            msg = self.ndata[message_func.u][self.src]
++        else:
++            raise TypeError("unsupported message_func")
++
++        # 2) sum into destination nodes
++        out_field = reduce_func.out
++        feat = msg.shape[1:] if msg.dim() > 1 else ()
++        agg = torch.zeros((self._num_nodes, *feat), dtype=msg.dtype, device=msg.device)
++        index = self.dst
++        idx_exp = index.view(-1, *([1] * (msg.dim() - 1))).expand_as(msg)
++        agg.scatter_add_(0, idx_exp, msg)
++        self.ndata[out_field] = agg
++
++        # 3) apply (norm multiply etc.)
++        if apply_func is not None:
++            class _Nodes:
++                def __init__(s, data): s.data = data
++            res = apply_func(_Nodes(self.ndata))
++            for k, val in res.items():
++                self.ndata[k] = val
++
++
++def graph(data):
++    return Graph(data)
++
++
++def DGLGraph():
++    return Graph()
++
++
++def _install():
++    """Register fake dgl / dgl.function / dgl.nn modules into sys.modules."""
++    if isinstance(sys.modules.get("dgl"), types.ModuleType) and \
++       getattr(sys.modules.get("dgl"), "_IS_TORCH_SHIM", False):
++        return  # idempotent
++
++    dgl_mod = types.ModuleType("dgl")
++    dgl_mod._IS_TORCH_SHIM = True
++    dgl_mod.graph = graph
++    dgl_mod.DGLGraph = DGLGraph
++    dgl_mod.__version__ = "torch-shim-0.1"
++
++    fn_mod = types.ModuleType("dgl.function")
++    fn_mod.copy_u = _copy_u
++    fn_mod.copy_src = _copy_u  # old alias
++    fn_mod.sum = _sum
++    dgl_mod.function = fn_mod
++
++    # dgl.nn is imported by some repos but TiRGN's convgcn path doesn't use it;
++    # provide an empty module so `import dgl.nn` won't crash if hit.
++    nn_mod = types.ModuleType("dgl.nn")
++
++    # dgl.data.utils: knowledge_graph.py imports download/extract_archive/etc.
++    # compat_patch already guards _get_dgl_url; provide inert stubs.
++    data_mod = types.ModuleType("dgl.data")
++    data_utils = types.ModuleType("dgl.data.utils")
++    for name in ("download", "extract_archive", "get_download_dir", "_get_dgl_url"):
++        setattr(data_utils, name, (lambda *a, **k: None))
++    data_mod.utils = data_utils
++
++    sys.modules["dgl"] = dgl_mod
++    sys.modules["dgl.function"] = fn_mod
++    sys.modules["dgl.nn"] = nn_mod
++    sys.modules["dgl.data"] = data_mod
++    sys.modules["dgl.data.utils"] = data_utils
++
++
++_install()
+diff -ruN a/src/get_history_fast.py b/src/get_history_fast.py
+--- /dev/null
++++ b/src/get_history_fast.py
+@@ -0,0 +1,72 @@
++"""
++Vectorized drop-in replacement for TiRGN get_history.py.
++
++Byte-identical output to the stock loop (same tail_history_{t}.npz /
++rel_history_{t}.npz csr_matrices, same shapes), but avoids the O(T*N)
++pure-Python re-scan: facts are sorted by time once and the cumulative
++"all facts with time < tim" set is grown incrementally by appending each
++prior timestamp's facts. Dedup + inverse-relation are vectorized in numpy.
++
++Stock semantics reproduced exactly:
++  - cumulative = all (h,r,t) with time strictly < tim  (union train+valid+test)
++  - forward + inverse (r += raw_num_r) rows, then unique over (h,r',t)
++  - tail_seq: csr (num_e*num_r2, num_e) with row = h*num_r2 + r', col = t
++  - rel_seq : csr (num_e*num_e, num_r2) with row = h*num_e + t, col = r'
++  - first timestamp writes empty matrices
++  where num_r2 = 2*raw_num_r
++"""
++import os, argparse, numpy as np, scipy.sparse as sp
++from tqdm import tqdm
++
++ap = argparse.ArgumentParser()
++ap.add_argument("--dataset", required=True)
++args = ap.parse_args()
++
++DD = f"../data/{args.dataset}"
++def load(fn):
++    out=[]
++    with open(os.path.join(DD,fn)) as fr:
++        for line in fr:
++            s=line.split()
++            if len(s)>=4:
++                out.append((int(s[0]),int(s[1]),int(s[2]),int(s[3])))  # h,r,t,ts
++    return out
++def totals():
++    with open(os.path.join(DD,"stat.txt")) as fr:
++        a=fr.readline().split(); return int(a[0]),int(a[1])
++
++all_q = load("train.txt")+load("valid.txt")+load("test.txt")
++num_e, raw_num_r = totals()
++num_r2 = raw_num_r*2
++
++arr = np.asarray(all_q, dtype=np.int64)          # (N,4): h,r,t,ts
++times = np.unique(arr[:,3]); times.sort()
++order = np.argsort(arr[:,3], kind="stable")
++arr = arr[order]
++ts_sorted = arr[:,3]
++# for each timestamp, the slice of facts with ts < tim = arr[:lo] where lo=searchsorted(ts,tim,'left')
++save_dir = f"{DD}/history/"
++os.makedirs(save_dir, exist_ok=True)
++
++for tim in tqdm(times):
++    lo = np.searchsorted(ts_sorted, tim, side="left")   # facts strictly before tim
++    if tim != times[0] and lo > 0:
++        block = arr[:lo, :3]                      # (M,3) h,r,t forward
++        inv = block[:, [2,1,0]].copy()            # t, r, h
++        inv[:,1] += raw_num_r                     # inverse relation id
++        both = np.concatenate([block, inv], axis=0)   # (2M,3): h,r',t
++        # unique rows (sorted=False in stock; order irrelevant for csr build)
++        both = np.unique(both, axis=0)
++        h,rp,t = both[:,0], both[:,1], both[:,2]
++        # entity (tail) history: row=h*num_r2+r', col=t
++        row = h*num_r2 + rp; col = t
++        tail_seq = sp.csr_matrix((np.ones(len(row)), (row,col)), shape=(num_e*num_r2, num_e))
++        # relation history: row=h*num_e+t, col=r'
++        rrow = h*num_e + t; rcol = rp
++        rel_seq = sp.csr_matrix((np.ones(len(rrow)), (rrow,rcol)), shape=(num_e*num_e, num_r2))
++    else:
++        tail_seq = sp.csr_matrix(([],([],[])), shape=(num_e*num_r2, num_e))
++        rel_seq  = sp.csr_matrix(([],([],[])), shape=(num_e*num_e, num_r2))
++    sp.save_npz(f"{save_dir}tail_history_{tim}.npz", tail_seq)
++    sp.save_npz(f"{save_dir}rel_history_{tim}.npz", rel_seq)
++print(f"[get_history_fast] done: {len(times)} timestamps, num_e={num_e} num_r2={num_r2}")
+diff -ruN a/src/main.py b/src/main.py
+--- a/src/main.py
++++ b/src/main.py
+@@ -1,3 +1,4 @@
++import dgl_shim  # pure-torch DGL (injected)
+ import argparse
+ import itertools
+ import os
+@@ -29,14 +30,20 @@
+     if mode == "test":
+         # test mode: load parameter form file
+         if use_cuda:
+-            checkpoint = torch.load(model_name, map_location=torch.device(args.gpu))
++            checkpoint = torch.load(model_name, map_location=(torch.device('cuda:%d' % args.gpu) if args.gpu >= 0 else torch.device('cpu')), weights_only=False)
+         else:
+-            checkpoint = torch.load(model_name, map_location=torch.device('cpu'))
++            checkpoint = torch.load(model_name, map_location=torch.device('cpu'), weights_only=False)
+         print("Load Model name: {}. Using best epoch : {}".format(model_name, checkpoint['epoch']))  # use best stat checkpoint
+         print("\n"+"-"*10+"start testing"+"-"*10+"\n")
+         model.load_state_dict(checkpoint['state_dict'])
+ 
+     model.eval()
++    try:
++        import os as _os
++        if _os.environ.get("DUMP_SCORES") == "1":
++            import score_dump as _sd; _sd.init(_os.environ.get("DUMP_PATH", "/workspace/tirgn_scores.npz"))
++    except Exception as _e:
++        print("[score_dump] skipped:", _e)
+     # do not have inverse relation in test input
+     input_list = [snap for snap in history_list[-args.test_history_len:]]
+ 
+@@ -50,7 +57,7 @@
+     for time_idx, test_snap in enumerate(tqdm(test_list)):
+         history_glist = [build_sub_graph(num_nodes, num_rels, g, use_cuda, args.gpu) for g in input_list]
+         test_triples_input = torch.LongTensor(test_snap).cuda() if use_cuda else torch.LongTensor(test_snap)
+-        test_triples_input = test_triples_input.to(args.gpu)
++        test_triples_input = test_triples_input.to(args.gpu) if args.gpu >= 0 else test_triples_input
+ 
+         # get history
+         histroy_data = test_triples_input
+@@ -83,6 +90,12 @@
+             one_hot_rel_seq = one_hot_rel_seq.cuda()
+ 
+         test_triples, final_score, final_r_score = model.predict(history_glist, num_rels, static_graph, test_triples_input, one_hot_tail_seq, one_hot_rel_seq, use_cuda)
++        try:
++            import os as _os
++            if _os.environ.get("DUMP_SCORES") == "1":
++                import score_dump as _sd; _sd.record(test_triples, final_score)
++        except Exception as _e:
++            print("[score_dump] skipped:", _e)
+ 
+         mrr_filter_snap_r, mrr_snap_r, rank_raw_r, rank_filter_r = utils.get_total_rank(test_triples, final_r_score, all_ans_r_list[time_idx], eval_bz=1000, rel_predict=1)
+         mrr_filter_snap, mrr_snap, rank_raw, rank_filter = utils.get_total_rank(test_triples, final_score, all_ans_list[time_idx], eval_bz=1000, rel_predict=0)
+@@ -114,6 +127,12 @@
+             input_list.append(test_snap)
+         idx += 1
+     
++    try:
++        import os as _os
++        if _os.environ.get("DUMP_SCORES") == "1":
++            import score_dump as _sd; _sd.flush()
++    except Exception as _e:
++        print("[score_dump] skipped:", _e)
+     mrr_raw, hit_result_raw = utils.stat_ranks(ranks_raw, "raw_ent")
+     mrr_filter, hit_result_filter = utils.stat_ranks(ranks_filter, "filter_ent")
+     mrr_raw_r, hit_result_raw_r = utils.stat_ranks(ranks_raw_r, "raw_rel")
+@@ -235,6 +254,22 @@
+     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=1e-5)
+ 
+ 
++    import os as _os2
++    _dsplit = _os2.environ.get('DUMP_SPLIT')
++    if _dsplit in ('train', 'valid') and os.path.exists(model_state_file):
++        checkpoint = torch.load(model_state_file, map_location=torch.device(args.gpu) if use_cuda else 'cpu')
++        model.load_state_dict(checkpoint['state_dict'])
++        if _dsplit == 'valid':
++            _ = test(model, train_list, valid_list, num_rels, num_nodes, use_cuda,
++                     all_ans_list_valid, all_ans_list_r_valid, model_state_file,
++                     static_graph, valid_times, history_val_time_nogt, 'valid')
++        else:
++            _allA = utils.load_all_answers_for_time_filter(data.train, num_rels, num_nodes, False)
++            _allAr = utils.load_all_answers_for_time_filter(data.train, num_rels, num_nodes, True)
++            _ = test(model, train_list[:1], train_list[1:], num_rels, num_nodes, use_cuda,
++                     _allA[1:], _allAr[1:], model_state_file,
++                     static_graph, train_times[1:], train_times[0], 'train')
++        import sys as _sys2; _sys2.exit(0)
+     if args.test and os.path.exists(model_state_file):
+         mrr_raw, mrr_filter, mrr_raw_r, mrr_filter_r, hit_result_raw, hit_result_filter, hit_result_raw_r, hit_result_filter_r = test(model,
+                                                             train_list+valid_list, 
+diff -ruN a/src/rrgcn.py b/src/rrgcn.py
+--- a/src/rrgcn.py
++++ b/src/rrgcn.py
+@@ -85,7 +85,7 @@
+         self.relation_prediction = relation_prediction
+         self.entity_prediction = entity_prediction
+         self.emb_rel = None
+-        self.gpu = gpu
++        self.gpu = gpu if (isinstance(gpu, int) and gpu >= 0) else 'cpu'
+         self.sin = torch.sin
+         self.linear_0 = nn.Linear(num_times, 1)
+         self.linear_1 = nn.Linear(num_times, self.h_dim - 1)
+diff -ruN a/src/score_dump.py b/src/score_dump.py
+--- /dev/null
++++ b/src/score_dump.py
+@@ -0,0 +1,69 @@
++"""
++Per-query TiRGN score dump — the feed for the AbC candidate reranker.
++
++Called from INSIDE the repo's test() object-prediction path, so the scores
++dumped here are provably the same ones that produce the validated MRR (if the
++printed filtered-MRR matches the anchor, the dump is correct by construction).
++
++Per object-prediction query we record:
++  s, r, o                : the triple (o = gold object)
++  gold_score             : final_score[i, o]      (TiRGN log-prob of the gold)
++  gold_rank_raw          : 1 + (#entities scored strictly higher than gold)
++  topk_ids   [K]         : TiRGN's top-K entity ids   (K=200)
++  topk_scores[K]         : their log-prob scores
++
++gold_score + gold_rank_raw are kept for EVERY query regardless of K, so a cold
++gold ranked far below top-K still has its exact rank on record. Stratified
++cold/mid/head MRR is computed offline from (gold_rank_raw + object frequency).
++The AbC reranker's 4 backbone features (tirgn_logprob, tirgn_inv_rank,
++tirgn_top50, tirgn_only_prov) are all derivable from topk + gold arrays.
++
++All state module-level; init()/record()/flush() are each try/except-guarded at
++the call site so a dump failure can never break the eval.
++"""
++import numpy as np
++import torch
++
++K = 200
++_buf = None
++_out_path = None
++
++
++def init(out_path):
++    global _buf, _out_path
++    _out_path = out_path
++    _buf = {"sro": [], "gold_score": [], "gold_rank_raw": [],
++            "topk_ids": [], "topk_scores": []}
++    print("[score_dump] init ->", out_path, "(K=%d)" % K)
++
++
++def record(test_triples, final_score):
++    """test_triples: [n,3] LongTensor (s,r,o). final_score: [n, num_nodes]."""
++    if _buf is None:
++        return
++    trip = test_triples.detach().cpu().numpy().astype(np.int32)
++    n = trip.shape[0]
++    o = test_triples[:, 2].long()
++    fs = final_score.detach()
++    # gold score
++    gold = fs.gather(1, o.view(-1, 1)).view(-1)
++    # raw rank = 1 + count of entities strictly greater than gold
++    greater = (fs > gold.view(-1, 1)).sum(dim=1)
++    rank = (greater + 1).cpu().numpy().astype(np.int32)
++    k = min(K, fs.shape[1])
++    tks, tki = torch.topk(fs, k, dim=1)
++    _buf["sro"].append(trip)
++    _buf["gold_score"].append(gold.cpu().numpy().astype(np.float32))
++    _buf["gold_rank_raw"].append(rank)
++    _buf["topk_ids"].append(tki.cpu().numpy().astype(np.int32))
++    _buf["topk_scores"].append(tks.cpu().numpy().astype(np.float32))
++
++
++def flush():
++    if _buf is None or not _buf["sro"]:
++        print("[score_dump] nothing to flush")
++        return
++    out = {kk: np.concatenate(vv, axis=0) for kk, vv in _buf.items()}
++    np.savez_compressed(_out_path, **out)
++    print("[score_dump] wrote %s : %d queries, topk=%s" %
++          (_out_path, out["sro"].shape[0], out["topk_ids"].shape))

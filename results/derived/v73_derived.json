@@ -1,0 +1,71 @@
+{
+ "oracle_minus_recall_min": 0.0003,
+ "oracle_minus_recall_max": 0.0027,
+ "share_pct": [
+  46,
+  86,
+  47,
+  40
+ ],
+ "PT_recall": [
+  0.611,
+  0.761,
+  0.783,
+  0.678
+ ],
+ "RB_recall": [
+  0.59,
+  0.771,
+  0.782,
+  0.732
+ ],
+ "POOLSEL_recall": [
+  0.634,
+  0.794,
+  0.834,
+  0.787
+ ],
+ "T100_minus_T50": [
+  0.059,
+  0.024,
+  0.068,
+  0.111
+ ],
+ "realised": [
+  0.2824,
+  0.6584,
+  0.3709,
+  0.2693
+ ],
+ "c2": {
+  "tkgl-polecat|UTIL12 - CONF12": -0.00036,
+  "tkgl-polecat|UTIL12 - UTIL1": 0.00237,
+  "tkgl-polecat|UTIL12 - UTIL2": 0.00449,
+  "tkgl-smallpedia|UTIL12 - CONF12": 4e-05,
+  "tkgl-smallpedia|UTIL12 - UTIL1": 0.00039,
+  "tkgl-smallpedia|UTIL12 - UTIL2": 0.00108
+ },
+ "c2_min_over_pool_polecat": 0.043,
+ "c2_min_over_blend_smallpedia": 0.03,
+ "g1_icews_MRR": 0.3353,
+ "g1_icews_H10": 0.5014,
+ "g1_icews_H1": 0.249,
+ "g1_icews_H3": 0.3824,
+ "hrcov_minus_g1_icews": [
+  0.04,
+  0.0391
+ ],
+ "g1_icews_over_min": 0.0107,
+ "g1_icews_over_max": 0.0606,
+ "c3": {
+  "rn_base": 0.0344,
+  "rn_feat": 0.0094,
+  "gain_no_rn": 0.1006,
+  "gain_rn": 0.0756,
+  "rn_base_minus_blend": -0.0015,
+  "rn_minus_g1": 0.0494,
+  "shrink": 0.025,
+  "kept_pct": 75
+ },
+ "abstract_words": 249
+}

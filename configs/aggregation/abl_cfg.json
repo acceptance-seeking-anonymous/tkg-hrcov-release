@@ -1,0 +1,39 @@
+{
+ "rule": "ablation_rule.json (redacted-id)",
+ "bases": {
+  "polecat_tirgn": {
+   "dataset": "tkgl-polecat",
+   "base": "TiRGN",
+   "ranks": "$RESULTS_DIR/runs/ranks_test_polecat_tirgn.npz",
+   "evaluator": "exact fused rank = official statistic (validated; |dMRR| <= 1e-7 on HRCOV_PAT lists)",
+   "official_base": "$RESULTS_DIR/runs/official_test_polecat_tirgn.npz",
+   "official_full_prev": "$RESULTS_DIR/runs/official_test_polecat_tirgn_hcpat.npz"
+  },
+  "polecat_logcl": {
+   "dataset": "tkgl-polecat",
+   "base": "LogCL",
+   "ranks": "$RESULTS_DIR/runs/ranks_test_polecat_logcl.npz",
+   "evaluator": "exact fused rank = official statistic (validated; |dMRR| <= 1e-7 on HRCOV_PAT lists)",
+   "official_base": "$RESULTS_DIR/runs/official_test_polecat_logcl.npz",
+   "official_full_prev": "$RESULTS_DIR/runs/official_test_polecat_logcl_hcpat.npz"
+  },
+  "smallpedia_tirgn": {
+   "dataset": "tkgl-smallpedia",
+   "base": "TiRGN",
+   "ranks": "$RESULTS_DIR/runs/ranks_test_smallpedia_tirgn.npz",
+   "evaluator": "official py-tgb 2.3.0 Evaluator (CPU)",
+   "official": "$RESULTS_DIR/runs/official_test_smallpedia_abl_tirgn.npz",
+   "official_base": "$RESULTS_DIR/runs/official_test_smallpedia_tirgn.npz",
+   "official_full_prev": "$RESULTS_DIR/runs/official_test_smallpedia_tirgn_hcpat.npz"
+  },
+  "smallpedia_regcn_tgb": {
+   "dataset": "tkgl-smallpedia",
+   "base": "RE-GCN TGB-config (regcn_tgb)",
+   "ranks": "$RESULTS_DIR/runs/ranks_test_smallpedia_regcn_tgb.npz",
+   "evaluator": "official py-tgb 2.3.0 Evaluator (CPU)",
+   "official": "$RESULTS_DIR/runs/official_test_smallpedia_abl_regcn_tgb.npz",
+   "official_base": "$RESULTS_DIR/runs/official_test_smallpedia_regcn_tgb.npz",
+   "official_full_prev": "$RESULTS_DIR/runs/official_test_smallpedia_regcn_tgb_hcpat.npz"
+  }
+ }
+}

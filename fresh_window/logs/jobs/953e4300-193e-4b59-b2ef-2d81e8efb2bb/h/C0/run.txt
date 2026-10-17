@@ -1,0 +1,12 @@
+[C0] start 2026-10-16T14:57:37Z params: LEARN_WINDOW_SIZE=10 DATAPOINT_THRESHOLD_MULTI=0 RULE_UNSEEN_NEGATIVES=30 AGGREGATION_DECAY=0.8 NUM_TOP_RULES=10 RULE_TYPE_C=True F_UNSEEN_NEGATIVES=10 Z_RULES_FACTOR=0.1
+[C0] main rc=0 2026-10-16T16:19:03Z
+[C0] rankings val=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/files/rankings/tkgl-gdeltfw/tkgl-gdeltfw10-rankings_val_conf_0_corr_conf_0_noisyor_crules_frules_zrules_pvalue_30_num_top_rules_10_multi.txt test=none
+total 142032
+drwxrwxr-x 2 [REDACTED:~ANON] [REDACTED:~ANON]     4096 Oct 17 00:07 .
+drwxrwxr-x 7 [REDACTED:~ANON] [REDACTED:~ANON]     4096 Oct 16 22:57 ..
+-rw-rw-r-- 1 [REDACTED:~ANON] [REDACTED:~ANON] 60578192 Oct 17 00:07 tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+-rw-rw-r-- 1 [REDACTED:~ANON] [REDACTED:~ANON] 84842322 Oct 17 00:07 tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-strings.txt
+[C0] score rc=0 2026-10-16T16:19:13Z
+256bdb245f717c6205eff6be389b77d30face1467a2e433da16e8ae4aa79d766  /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+d4332b2978d6f373637e2934d7445d20d3c9caca8ddd11418bebb50076bccf8d  /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-strings.txt
+e1c8622a46046ecdff14eaf25ba65753140ee1d886cb9aedf522e0e0aad949e0  /home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/files/rankings/tkgl-gdeltfw/tkgl-gdeltfw10-rankings_val_conf_0_corr_conf_0_noisyor_crules_frules_zrules_pvalue_30_num_top_rules_10_multi.txt

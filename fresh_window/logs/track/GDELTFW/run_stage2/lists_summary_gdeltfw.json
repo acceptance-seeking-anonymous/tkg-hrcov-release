@@ -1,0 +1,22 @@
+{
+ "ds": "gdeltfw",
+ "pools": [
+  "SA25",
+  "SA50",
+  "SA75"
+ ],
+ "smoke": 0,
+ "test": {
+  "n": 457168,
+  "stored_block_check": {},
+  "first50_base_order": {},
+  "frac_has_pat": 1.0,
+  "mean_union": 102.60454799986,
+  "mean_block": {
+   "SA25": 24.99651987890666,
+   "SA50": 48.10682506212159,
+   "SA75": 57.41204327511987
+  },
+  "seconds": 108.0
+ }
+}

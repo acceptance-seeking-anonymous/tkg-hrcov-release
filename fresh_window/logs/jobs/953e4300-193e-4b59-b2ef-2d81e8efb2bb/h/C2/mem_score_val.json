@@ -1,0 +1,25 @@
+{
+ "cmd": [
+  "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/env/ct/bin/python",
+  "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code_ct/fw_ct_score.py",
+  "--dd",
+  "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW",
+  "--rankings",
+  "",
+  "--split",
+  "val",
+  "--out",
+  "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/dump_val",
+  "--workers",
+  "10"
+ ],
+ "returncode": 1,
+ "wall_s": 10.0,
+ "peak_pss_gb": 0.01,
+ "peak_rss_sum_gb": 0.01,
+ "min_host_avail_gb": 466.4,
+ "peak_nproc": 1,
+ "killed_for_memory": false,
+ "samples": 1,
+ "note": "peak_pss_gb = max over samples of summed PSS of the process tree (shared pages counted once); rss_sum double-counts fork-shared pages"
+}

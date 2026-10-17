@@ -1,0 +1,1248 @@
+{
+ "name": "freeze_manifest_remote",
+ "created_utc": "2026-10-16T16:32:23Z",
+ "host": "serverA",
+ "track_dir": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window",
+ "groups": {
+  "rule": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/freeze/fresh_window_implementation_note.json",
+    "sha256": "f677798b23240c81bc2312d83c51f96920848c48c2313086f756699517e5bf7d",
+    "bytes": 10376,
+    "mtime_utc": "2026-10-16T16:32:23Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/freeze/fresh_window_implementation_note_addendum_1.json",
+    "sha256": "5856d3bba6b7ba8d3f796964ba406158bbc7e54fa6857f137c3e66cf2f629d25",
+    "bytes": 1714,
+    "mtime_utc": "2026-10-16T16:32:23Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/freeze/fresh_window_uninspected_check.json",
+    "sha256": "bfd93379c66b3914085fd11a53ce43648bc8325652d96e7ef76669ba3f8b754e",
+    "bytes": 21591,
+    "mtime_utc": "2026-10-16T16:32:23Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/freeze/v79_fresh_window_rule.json",
+    "sha256": "14917cbaaef0306f4abb21516cf3941ae3b281a4b336dbdd2f9d43731d171929",
+    "bytes": 4064,
+    "mtime_utc": "2026-10-16T16:32:23Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/freeze/v79_fresh_window_rule_amendment_1.json",
+    "sha256": "2c69d03b316d9ff8ddcb5b2442f67ee036699869bf5c95424412ee832beaaf23",
+    "bytes": 3426,
+    "mtime_utc": "2026-10-16T16:32:23Z"
+   }
+  ],
+  "code": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fh_apply.py",
+    "sha256": "0ab8c6fcdca50e1f88142fe8fb3f4d1e0de72a65b6f2d9f89e095d2343b2a671",
+    "bytes": 4158,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fh_blend.py",
+    "sha256": "d8e9e82a337fbc7dcef1b2f912fe8789e0e571608a69b67fccdcb8998961ec1d",
+    "bytes": 27104,
+    "mtime_utc": "2026-10-16T15:01:48Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fh_common.py",
+    "sha256": "b6a0d3cb28691bf5efe30cbcf4f817b2d926233c197b2af0086205d40b49b9cd",
+    "bytes": 5189,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fh_features.py",
+    "sha256": "d1151f8c7a284f965de8af1a489b78ff0885f3f874f6d8b087336e3a7c40300b",
+    "bytes": 11510,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fh_freeze.py",
+    "sha256": "6f7192ef64122d66c23d4552744fe8a038113ecba8580b66851a35f6a9c29fad",
+    "bytes": 4360,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fh_gpu_wait.sh",
+    "sha256": "043b1ebbbc8d0c229f21fe8d44ae8ba320abb63e45cf2ea3bb4a98c028123246",
+    "bytes": 1444,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fh_lists.py",
+    "sha256": "f111d7ecab59385964393a7d608d1b8099caac38367ec00848e51b6b4acd5c2c",
+    "bytes": 8204,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fh_prep.py",
+    "sha256": "220156a6c7554bc47577992527f544429e2d1d68540c415fcee0987d0f48de10",
+    "bytes": 9223,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fh_recb.py",
+    "sha256": "ef33c99162056af806985373454a71a279f57f4c920a0960360ed177bd499ef5",
+    "bytes": 25508,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fh_tirgn_rows.py",
+    "sha256": "9e12b19a14828b600798978324327315043f80e16be216cde24b9b7d5fb92d5f",
+    "bytes": 5670,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fh_tirgn_train.py",
+    "sha256": "65a856ec9594a40249d56a2b53297f9ee4c3cd964c12a4f362525c7e8062a5bb",
+    "bytes": 1219,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fh_train.py",
+    "sha256": "dce0c092b22498911675739e5085d2f3558a8530e5e4adef5f7fb1f95948eda0",
+    "bytes": 8752,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fulltest_eval.py",
+    "sha256": "74849444912e3d8a52e422e16566f1a062bd1ea216feb762fc89311d66252031",
+    "bytes": 15134,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fw_agg.py",
+    "sha256": "d99eb9363e458c0d3a6391ddbb48a0dd201ef04c076dc62a6b9ac117eb25458e",
+    "bytes": 6151,
+    "mtime_utc": "2026-10-16T16:32:23Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fw_freeze.py",
+    "sha256": "e04c3cd162d91ff6bf449806eed74259ba305f1c0c2b58effd42cb67df701b95",
+    "bytes": 5680,
+    "mtime_utc": "2026-10-16T16:32:23Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fw_freeze_job.sh",
+    "sha256": "06c31414eeae5c9accaa620af4289993ebb25eb7544a7991c721e360d5cc0711",
+    "bytes": 1123,
+    "mtime_utc": "2026-10-16T16:32:23Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fw_gpu_wait.sh",
+    "sha256": "591c3d0626864eaa28d16c1e197acc8651e31e58911017708f31d408d4c13287",
+    "bytes": 1181,
+    "mtime_utc": "2026-10-16T14:50:41Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fw_latency.py",
+    "sha256": "dd11c774efcb63d496371c0ce59fcb42c39b7185c763854ec86dcbc9684f5333",
+    "bytes": 20423,
+    "mtime_utc": "2026-10-16T16:20:47Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fw_latency.sh",
+    "sha256": "e89d161a7be151ff2b3e0062e1f96bc29709f8e0d82b514b17c6518eb06ec266",
+    "bytes": 2534,
+    "mtime_utc": "2026-10-16T16:20:47Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fw_stage1a.sh",
+    "sha256": "482009f9489334896c93227519b8511a1b5ba7bf950774b20dd17f87df1279da",
+    "bytes": 3420,
+    "mtime_utc": "2026-10-16T14:50:41Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fw_stage1b.sh",
+    "sha256": "cc642dad92c8684af96c49cae23b2859866529bf87cf01d174faf98dba251ce8",
+    "bytes": 5286,
+    "mtime_utc": "2026-10-16T15:01:48Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fw_stage1b_sa.sh",
+    "sha256": "6c5308a0fe0c2aec7b35ca467e26c8b2d41ae730afeeb9523900288081cec9cf",
+    "bytes": 4398,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fw_stage1c_ext.sh",
+    "sha256": "b595f70d51b7747279ad1860894393434ca754678b25283f0c69aad505d428ad",
+    "bytes": 1622,
+    "mtime_utc": "2026-10-16T16:19:37Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/fw_stage2.sh",
+    "sha256": "3f05ceffd27cf8878a1f6cf4ae453242e2cc48972a53037a1e0c6cde470a6831",
+    "bytes": 9925,
+    "mtime_utc": "2026-10-16T16:32:23Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/g2_train.py",
+    "sha256": "3eeb7bed20a31c442c35f037c0570fba49b2e49d9343dc0b17ef17cbdef02ebe",
+    "bytes": 12634,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/g7_cluster_bootstrap.py",
+    "sha256": "f68f68dd0ec69ae3063d3ec08cf60a8087757ccddb13a561aaf3a8da64f45747",
+    "bytes": 8601,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/hd_agg.py",
+    "sha256": "d3d3924c3fbe29e499da8678c57d43231c0237f067522dec1f45d5965d9c69b2",
+    "bytes": 14722,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/hd_select.py",
+    "sha256": "4628caed6fbe340b006e930da248dc652a0c8b45a15007d61d0522f6cd36dc81",
+    "bytes": 1351,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/hd_tirgn.py",
+    "sha256": "6a885fc9d0911e7eb2a5aa1afbc374ce0dfee684f5a223adef40ec6f3e9a053d",
+    "bytes": 15376,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/hd_tirgn_replay.py",
+    "sha256": "fc93c472b966767710aafae675e105968d8d66660061e6c52dfb7d7b6cab837e",
+    "bytes": 4235,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/oih_common.py",
+    "sha256": "9de692d458a95dca400565e59c2a9ccbe69ab2ee1d2961fca9002074ac7bbcc3",
+    "bytes": 13312,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/patterns.py",
+    "sha256": "e1d91114e1f017bef21fb74081b32e83fbdf72fa2183a9bcb087272b5c9c3ba7",
+    "bytes": 6525,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/rs_features.py",
+    "sha256": "abd1c3bba38ae0fb674975137aeced128a0f993b0a275f0353dff6787d1248ed",
+    "bytes": 24681,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/rt_common.py",
+    "sha256": "94e82b2f44b9ff7462b4281898a9c316145d74d9b1a31caadd05894cd0d960c8",
+    "bytes": 11341,
+    "mtime_utc": "2026-10-16T14:50:02Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code/v7_common.py",
+    "sha256": "d726bf31063ad8d0ada80930f31f2570e7bbb01a564cb38e8d6aa4301ee66374",
+    "bytes": 5711,
+    "mtime_utc": "2026-10-16T16:32:23Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_ct/fw_ct_latency.py",
+    "sha256": "0f0b9109acdf7ff192855c448ed2784277fd0c2bad3e7fd198be5adf9c83ecb8",
+    "bytes": 5079,
+    "mtime_utc": "2026-10-16T16:20:47Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_ct/fw_ct_main.py",
+    "sha256": "5f86ed858bbf9ddb1f7c349ba7add34cc525a903baded4af2d3a87b45add1b67",
+    "bytes": 5604,
+    "mtime_utc": "2026-10-16T14:57:37Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_ct/fw_ct_score.py",
+    "sha256": "05a802f672d4c6217f9d5dd44f1599558ff396ce0ec1ef8c627b4f151e6fa901",
+    "bytes": 8921,
+    "mtime_utc": "2026-10-16T14:57:37Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_ct/fw_ct_stage1.sh",
+    "sha256": "844c70b6f2773419d733dc02c33814c4e1c5e83d69205bbf35c0bec67bedbfda",
+    "bytes": 3663,
+    "mtime_utc": "2026-10-16T14:57:37Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_ct/memmon.py",
+    "sha256": "ce0bb0ee7410180e419a85a0cb3c37f461ffcf640573f95391f06e49f67ba85e",
+    "bytes": 2369,
+    "mtime_utc": "2026-10-16T14:57:37Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/fw_ext.py",
+    "sha256": "85780673e543b1365764f7e60267105669ad4a0e7812e10482a4050418355e7e",
+    "bytes": 8977,
+    "mtime_utc": "2026-10-16T16:19:37Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/fw_pc_shim.py",
+    "sha256": "2d723fc2f0caf65bcab5970f9583f660584da7feb85bd3691a9247434e3e62bb",
+    "bytes": 478,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/fw_sa_official.py",
+    "sha256": "dd86b227e9a40a98f0c0dab63942f2e61dad268bcd9330c8c5e47a58a128c391",
+    "bytes": 5019,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/fw_sa_train.py",
+    "sha256": "c24ad73f0f5a08b1be85d72fcf8c6cbd748fe2f60f7d7e4fe2512cdd87bbf436",
+    "bytes": 8583,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/hd_blend.py",
+    "sha256": "41220518c01d563b8ae6f35a5f372c613eca3abbd9559019872e7e9fd251fcf8",
+    "bytes": 26049,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/hd_recb.py",
+    "sha256": "617064ae3dac5c9f539a0968856eb0b6d3d1ebe211b02133ce72a871e4760c09",
+    "bytes": 464,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/v76_recb_xf_select.py",
+    "sha256": "9b39b411e775964abc99f4f0beedb9487387652ac6f4dae27d8eb203a7875f27",
+    "bytes": 4860,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/v78_common.py",
+    "sha256": "bef0fa6ee373364ad9e5116f23c7b8483d311e9069ac05d05890d1ed68832f88",
+    "bytes": 4240,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/v78_hist.py",
+    "sha256": "f823083e3df5b8833d466d79fb10c3907dd93af23c6e8e720c89d498591f6dfe",
+    "bytes": 6748,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/v78_lists.py",
+    "sha256": "5cd9806fe84bd1bd78c4ed7401b4ce94392f9ef6b4d3a96a3fcc9aaeb8c4e29b",
+    "bytes": 13969,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/v78_official.py",
+    "sha256": "3c4bc5200333b414a5db73265c2c12c1e833f66ebee2ded7b7d74ff66b90e6a9",
+    "bytes": 6337,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/v78_pools.py",
+    "sha256": "bde1461c05f7b2d23a4ebd7fa5a53aefa3695b29537a72a2afa9b4326b8bcc58",
+    "bytes": 14625,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/code_sa/v78_train.py",
+    "sha256": "a4389aa153a490bf4c7b4a5470002ab965b52b6fe018db7c18a0d49e1965ebf4",
+    "bytes": 17197,
+    "mtime_utc": "2026-10-16T15:06:52Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/dgl_shim.py",
+    "sha256": "65ca4ec60558740e13913b87e0942a053e650bb91984a3805c18525f6ac9cc82",
+    "bytes": 9208,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/rgcn/knowledge_graph.py",
+    "sha256": "7617bacb9d87b748f69f397ae5e61a2e1fd5fb32a3bdde895871821dd8dc08e6",
+    "bytes": 18498,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/rgcn/layers.py",
+    "sha256": "aacafebf411650ccf2f1df34c5fcd721dca35e4d5b71c17365b7f4ac52819daf",
+    "bytes": 11980,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/rgcn/model.py",
+    "sha256": "49b50e6e3c69d5f62335507738b5a72f3aefe469d69eff8605e3f7f54ac2ced0",
+    "bytes": 1582,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/rgcn/utils.py",
+    "sha256": "c38375933a3129f3743520432b1a8a743f81138645aea747c67414c3bc230080",
+    "bytes": 13270,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/src/decoder.py",
+    "sha256": "d8af45f99e7c6a30c1d790f87c47c280fa738ee615b48587369bdbd21e9afd87",
+    "bytes": 5436,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/src/dgl_shim.py",
+    "sha256": "65ca4ec60558740e13913b87e0942a053e650bb91984a3805c18525f6ac9cc82",
+    "bytes": 9208,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/src/get_history.py",
+    "sha256": "9c014389a04c4d6e506b2dcf13b69806d859c73ebc419a3d261ac3a6fcedc4a2",
+    "bytes": 4699,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/src/hyperparameter_range.py",
+    "sha256": "9b8e61709f2c8511fa4aa8f68fb96733053f5f69cff0103eb9a72af744319eb6",
+    "bytes": 1006,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/src/main.py",
+    "sha256": "42c780619f7f7d0e11bb04862fcb1a39bdbf08c80f6673ed436c5e3bf3284bf6",
+    "bytes": 31564,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/src/model.py",
+    "sha256": "c6562807407d3d4fdfb2a16a07f03730ee2407ad5fb9d56f138e34af1a3355b4",
+    "bytes": 2168,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/src/rrgcn.py",
+    "sha256": "17a76f6e8b1b75517714b39ed82ce37ebdaefa177ea5c6f30c455d9371cfd6c7",
+    "bytes": 15770,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/stage/TiRGN/src/score_dump.py",
+    "sha256": "c9fd9924e1d13edf82f3e5281347458ce787dc7eef2eb73bccc40cb9f88496df",
+    "bytes": 1862,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   }
+  ],
+  "ct_code": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/aggregator.py",
+    "sha256": "d73a923402e7660b30125314c11b31a77deee322b528ab1a1b4866684028d86b",
+    "bytes": 6536,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/apply_dataset.py",
+    "sha256": "093efe3fe14c9bc5713030167e6dac7d5d278a074637f7fc5039e383d2b69974",
+    "bytes": 2646,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/confidence_params.py",
+    "sha256": "ecbc7f7115ebc128ce11f2f0dc931977f372215089626073ec0a9132594eb0ae",
+    "bytes": 7437,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/config-default.yaml",
+    "sha256": "c8049a950d69457bff7f83368bbc078f7ea39735b37eaa177a687c9c25d5d460",
+    "bytes": 8827,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/eval.py",
+    "sha256": "1849699b26b221cde7bd0871276a94c899f195315ffa5417152644dc31348e90",
+    "bytes": 7110,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/fw_ct_main.py",
+    "sha256": "5f86ed858bbf9ddb1f7c349ba7add34cc525a903baded4af2d3a87b45add1b67",
+    "bytes": 5604,
+    "mtime_utc": "2026-10-16T14:57:37Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/learn_input_creator.py",
+    "sha256": "c33bdb2668104f4b34fa58cca301fb94dfc4adb363d758464e78503c99ca3a3a",
+    "bytes": 33966,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/learner.py",
+    "sha256": "122c6e54a420f168b2881b5ef3e1855a3509c16cec4d14ef30b73cd118384c43",
+    "bytes": 24606,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/main.py",
+    "sha256": "9566acfe55121bebff2950beac6c958907e1ee761f256a274bb1dce838b2d41d",
+    "bytes": 7497,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/options.py",
+    "sha256": "d76e0553b20f18024145e1e7731b0b395c73c3980c68426bb702282875803198",
+    "bytes": 6160,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/predictor.py",
+    "sha256": "d771b5e130eb914b6d5ea87581ed42ed467281b62caab987e13e1600fb14ab82",
+    "bytes": 41653,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/rule_dataset.py",
+    "sha256": "11c91881c0ff0fcea1929cba00b64631822bbaaf52263958113d0f8f826de6e4",
+    "bytes": 28012,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/rule_utils.py",
+    "sha256": "5bdc1258f04abf520fa673da15c526d81dcb4311507505ae68be168b81d6a732",
+    "bytes": 45535,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/rules.py",
+    "sha256": "a5d644aeb997ba4b2d34a6c8e3209d2f8f133313d9ad07b76cc715794f9be5a2",
+    "bytes": 9552,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/rule_based/utils.py",
+    "sha256": "5ad90c595337ec2c756eeb905e647e0fca939255abbebb51b5a36a3663b52588",
+    "bytes": 13625,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/aggregator.py",
+    "sha256": "d73a923402e7660b30125314c11b31a77deee322b528ab1a1b4866684028d86b",
+    "bytes": 6536,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/apply_dataset.py",
+    "sha256": "093efe3fe14c9bc5713030167e6dac7d5d278a074637f7fc5039e383d2b69974",
+    "bytes": 2646,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/confidence_params.py",
+    "sha256": "ecbc7f7115ebc128ce11f2f0dc931977f372215089626073ec0a9132594eb0ae",
+    "bytes": 7437,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/config-default.yaml",
+    "sha256": "c8049a950d69457bff7f83368bbc078f7ea39735b37eaa177a687c9c25d5d460",
+    "bytes": 8827,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/eval.py",
+    "sha256": "1849699b26b221cde7bd0871276a94c899f195315ffa5417152644dc31348e90",
+    "bytes": 7110,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/fw_ct_main.py",
+    "sha256": "5f86ed858bbf9ddb1f7c349ba7add34cc525a903baded4af2d3a87b45add1b67",
+    "bytes": 5604,
+    "mtime_utc": "2026-10-16T14:58:37Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/learn_input_creator.py",
+    "sha256": "c33bdb2668104f4b34fa58cca301fb94dfc4adb363d758464e78503c99ca3a3a",
+    "bytes": 33966,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/learner.py",
+    "sha256": "122c6e54a420f168b2881b5ef3e1855a3509c16cec4d14ef30b73cd118384c43",
+    "bytes": 24606,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/main.py",
+    "sha256": "9566acfe55121bebff2950beac6c958907e1ee761f256a274bb1dce838b2d41d",
+    "bytes": 7497,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/options.py",
+    "sha256": "d76e0553b20f18024145e1e7731b0b395c73c3980c68426bb702282875803198",
+    "bytes": 6160,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/predictor.py",
+    "sha256": "d771b5e130eb914b6d5ea87581ed42ed467281b62caab987e13e1600fb14ab82",
+    "bytes": 41653,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/rule_dataset.py",
+    "sha256": "11c91881c0ff0fcea1929cba00b64631822bbaaf52263958113d0f8f826de6e4",
+    "bytes": 28012,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/rule_utils.py",
+    "sha256": "5bdc1258f04abf520fa673da15c526d81dcb4311507505ae68be168b81d6a732",
+    "bytes": 45535,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/rules.py",
+    "sha256": "a5d644aeb997ba4b2d34a6c8e3209d2f8f133313d9ad07b76cc715794f9be5a2",
+    "bytes": 9552,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/rule_based/utils.py",
+    "sha256": "5ad90c595337ec2c756eeb905e647e0fca939255abbebb51b5a36a3663b52588",
+    "bytes": 13625,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/aggregator.py",
+    "sha256": "d73a923402e7660b30125314c11b31a77deee322b528ab1a1b4866684028d86b",
+    "bytes": 6536,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/apply_dataset.py",
+    "sha256": "093efe3fe14c9bc5713030167e6dac7d5d278a074637f7fc5039e383d2b69974",
+    "bytes": 2646,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/confidence_params.py",
+    "sha256": "ecbc7f7115ebc128ce11f2f0dc931977f372215089626073ec0a9132594eb0ae",
+    "bytes": 7437,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/config-default.yaml",
+    "sha256": "c8049a950d69457bff7f83368bbc078f7ea39735b37eaa177a687c9c25d5d460",
+    "bytes": 8827,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/eval.py",
+    "sha256": "1849699b26b221cde7bd0871276a94c899f195315ffa5417152644dc31348e90",
+    "bytes": 7110,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/fw_ct_main.py",
+    "sha256": "5f86ed858bbf9ddb1f7c349ba7add34cc525a903baded4af2d3a87b45add1b67",
+    "bytes": 5604,
+    "mtime_utc": "2026-10-16T14:59:37Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/learn_input_creator.py",
+    "sha256": "c33bdb2668104f4b34fa58cca301fb94dfc4adb363d758464e78503c99ca3a3a",
+    "bytes": 33966,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/learner.py",
+    "sha256": "122c6e54a420f168b2881b5ef3e1855a3509c16cec4d14ef30b73cd118384c43",
+    "bytes": 24606,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/main.py",
+    "sha256": "9566acfe55121bebff2950beac6c958907e1ee761f256a274bb1dce838b2d41d",
+    "bytes": 7497,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/options.py",
+    "sha256": "d76e0553b20f18024145e1e7731b0b395c73c3980c68426bb702282875803198",
+    "bytes": 6160,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/predictor.py",
+    "sha256": "d771b5e130eb914b6d5ea87581ed42ed467281b62caab987e13e1600fb14ab82",
+    "bytes": 41653,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/rule_dataset.py",
+    "sha256": "11c91881c0ff0fcea1929cba00b64631822bbaaf52263958113d0f8f826de6e4",
+    "bytes": 28012,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/rule_utils.py",
+    "sha256": "5bdc1258f04abf520fa673da15c526d81dcb4311507505ae68be168b81d6a732",
+    "bytes": 45535,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/rules.py",
+    "sha256": "a5d644aeb997ba4b2d34a6c8e3209d2f8f133313d9ad07b76cc715794f9be5a2",
+    "bytes": 9552,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C2/repo/rule_based/utils.py",
+    "sha256": "5ad90c595337ec2c756eeb905e647e0fca939255abbebb51b5a36a3663b52588",
+    "bytes": 13625,
+    "mtime_utc": "2026-10-15T17:44:10Z"
+   }
+  ],
+  "data": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/entity2id.txt",
+    "sha256": "084c7789365015c5e7eb4f147ecf2f9a485cb0fb83c2756b368b5e386dd5051a",
+    "bytes": 24342,
+    "mtime_utc": "2026-10-16T14:45:38Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/missing_export_files.txt",
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1,
+    "mtime_utc": "2026-10-16T14:43:00Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/relation2id.txt",
+    "sha256": "b0ae8461e6a38f8b54ad43224a077ae6a126e498547ce66c09b154bb0ede6d3a",
+    "bytes": 8017,
+    "mtime_utc": "2026-10-16T14:45:38Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/stat.txt",
+    "sha256": "4165cbf7cec5cbac6aee9e97c869926bd71703aa4148f528da5197f1c46e5d09",
+    "bytes": 11,
+    "mtime_utc": "2026-10-16T14:45:38Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/test.txt",
+    "sha256": "5e4c99458c8f5a77307d7095d411092f60ecc4598bab910f18e2c306f8adefe0",
+    "bytes": 3518307,
+    "mtime_utc": "2026-10-16T14:45:38Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/timestamp2id.txt",
+    "sha256": "4f1d5cef201cb44d59c8023683254b1432889d5d735116db52a2995bd0065fec",
+    "bytes": 3439,
+    "mtime_utc": "2026-10-16T14:45:38Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/train.txt",
+    "sha256": "9ef5125917d5a7dd3ec92d03f883ba8b1f34948a517725f996ce4c9c9f42342d",
+    "bytes": 7502115,
+    "mtime_utc": "2026-10-16T14:45:38Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/data/GDELTFW/valid.txt",
+    "sha256": "67e253b5861109fdbc4e4b01d361387a159b7e2a0828dfe2bc7eb5b8f6750f03",
+    "bytes": 1167267,
+    "mtime_utc": "2026-10-16T14:45:38Z"
+   }
+  ],
+  "base_model": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/base_tirgn/tirgn_GDELTFW_seed42.pt",
+    "sha256": "c36f041b22829b4cebfd3e026ca202571198f70b296d7d2153ab230488f2cfa4",
+    "bytes": 38150516,
+    "mtime_utc": "2026-10-16T15:01:01Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/base_tirgn/tirgn_GDELTFW_epoch_log.json",
+    "sha256": "76d91ba4f2a54a00b7db507bc3c76e2ad48ca550ae417608c481371845ebda8c",
+    "bytes": 2721,
+    "mtime_utc": "2026-10-16T15:01:01Z"
+   }
+  ],
+  "valid_base_rows": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/fullrows/tirgn_GDELTFW_valid_scores_f32.bin",
+    "sha256": "0f9a2571026b12b97e66df2c3660777927b56b811a8fa336074deaf61d28c582",
+    "bytes": 736203624,
+    "mtime_utc": "2026-10-16T15:01:07Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/base_tirgn/tirgn_scores_GDELTFW_valid.npz",
+    "sha256": "d93d2933afb14b975d1c42e3662a122e2295ed7450f23fae8f7aecf05e206b65",
+    "bytes": 247991240,
+    "mtime_utc": "2026-10-16T15:01:08Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/base_tirgn/rows_valid_log.json",
+    "sha256": "07bf9e5b3c5cd07e17f84f87a49f45017cc613c963df984fea70e6e6634f62ed",
+    "bytes": 859,
+    "mtime_utc": "2026-10-16T15:01:08Z"
+   }
+  ],
+  "prep": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/valid_sample_idx.npy",
+    "sha256": "7ddb556edcc12e11c302282d7107a409452d3292323b828d73908e853eb86c65",
+    "bytes": 1218000,
+    "mtime_utc": "2026-10-16T14:50:43Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/te_GDELTFW.npz",
+    "sha256": "81b112fb60c2c0ac191cb3120ef1738b1541171924a3900365793721c09bb824",
+    "bytes": 1178014630,
+    "mtime_utc": "2026-10-16T14:52:25Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/strata_valid.npz",
+    "sha256": "6d8a6a56deaf017ca3bfdd3163b733aeeee3690d05aed230890463b4055c7e38",
+    "bytes": 8985000,
+    "mtime_utc": "2026-10-16T14:53:00Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/prep_summary_stage1.json",
+    "sha256": "891bf561ae5030b9834621b563c0ef48f7b9bc5c98cbe458e2898991514538cf",
+    "bytes": 1524,
+    "mtime_utc": "2026-10-16T14:53:00Z"
+   }
+  ],
+  "controls": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/recb/recb_selection_GDELTFW.json",
+    "sha256": "e84fa89945eb9d3e9d7b1855f3afac9c01e16d6072b8c8e95f3a00eec43dc243",
+    "bytes": 137135,
+    "mtime_utc": "2026-10-16T14:53:18Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/recb/recb_csr_valid_GDELTFW.npz",
+    "sha256": "68bfb780adb6ac73b5fe23cc5b45895642faa8fee3dd118ff6df131918789095",
+    "bytes": 162203864,
+    "mtime_utc": "2026-10-16T14:53:26Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/recb/recb_valid_ranks_clean_GDELTFW.npy",
+    "sha256": "1e72ab9695ce9616dad441bb971f3fe5e19a05e6352d085aa5509754c1711262",
+    "bytes": 110826480,
+    "mtime_utc": "2026-10-16T14:53:18Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/recb/recb_valid_ranks_faith_GDELTFW.npy",
+    "sha256": "a250feff3d16f10bae7faedbd64c3a05925b87e2036cd5d15154215586801fb6",
+    "bytes": 110826480,
+    "mtime_utc": "2026-10-16T14:53:18Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/controls/blend_valid_gdeltfw_tirgn.json",
+    "sha256": "b108e1a3de29ef1a63bf6a644b888b17f246dab17023c3dd48d5dc65e4a3adfe",
+    "bytes": 8637,
+    "mtime_utc": "2026-10-16T15:02:57Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/controls/blend_valid_gdeltfw_tirgn.npz",
+    "sha256": "b868f0e3ce4228eb262dcfd8516796b77b77d69a92d7ce3dc589d4df11af7bbb",
+    "bytes": 104128800,
+    "mtime_utc": "2026-10-16T15:02:57Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/controls/sel_gdeltfw.json",
+    "sha256": "2ab621d8c2666c5658ae4159521bfd8d2772cd9bb6b4c8a28f2876423058535d",
+    "bytes": 354,
+    "mtime_utc": "2026-10-16T15:02:58Z"
+   }
+  ],
+  "recb_xf": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/recb_xf/recb_selection_GDELTFW.json",
+    "sha256": "a49999826812eea353f1adae41f3999c39dcc1430128d97726f27a64fa8d9328",
+    "bytes": 128651,
+    "mtime_utc": "2026-10-16T15:06:53Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/recb_xf/recb_csr_valid_GDELTFW.npz",
+    "sha256": "f0f19ecb55501375b3aa67749bec685ddd1a62153da92e923612fdedca2c41cc",
+    "bytes": 162203864,
+    "mtime_utc": "2026-10-16T15:07:00Z"
+   }
+  ],
+  "features_valid": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/lists_tirgn/valid_CP.npy",
+    "sha256": "e75a5cb6f49c43111f03ae6f930bc48ea03d58b6396dc0f195213e8c5c3d5b29",
+    "bytes": 60893728,
+    "mtime_utc": "2026-10-16T15:02:20Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/lists_tirgn/valid_Lpat.npy",
+    "sha256": "58dd45689fb4c154c7efdfeb631ea9be4a0062b0b7aceeda37517cd7a0a05257",
+    "bytes": 182680928,
+    "mtime_utc": "2026-10-16T15:02:20Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/lists_tirgn/valid_Lpat_u.npy",
+    "sha256": "b90d19633ec299ef1350d50a7639322a0d80f4bff3c82ad59e209e0883f51463",
+    "bytes": 91340528,
+    "mtime_utc": "2026-10-16T15:02:20Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/lists_tirgn/valid_XPc.npy",
+    "sha256": "57c3e32ed8c6d0a28b6f108e1379a4d26817517547d2a4f917dda6ac66c63737",
+    "bytes": 182680928,
+    "mtime_utc": "2026-10-16T15:02:20Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/lists_tirgn/valid_q.npz",
+    "sha256": "8e9a20ff2c3d89151ccd4d83f44266bf911c56016e43e21e6502d86c224e53b6",
+    "bytes": 5177464,
+    "mtime_utc": "2026-10-16T15:02:20Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/feat_tirgn/valid_X.npy",
+    "sha256": "e3bc4ee7140cfac37d145a80250ac7ed10006a5dd578d6a00667c0c9d2cb2a63",
+    "bytes": 761170128,
+    "mtime_utc": "2026-10-16T15:02:34Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/feat_tirgn/valid_babove.npy",
+    "sha256": "e8a90c58cbd7646374dfd183525ce9dd59ceefba2a78de7dd97b8961b456721c",
+    "bytes": 15223528,
+    "mtime_utc": "2026-10-16T15:02:34Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/feat_tirgn/valid_cand.npy",
+    "sha256": "e75a5cb6f49c43111f03ae6f930bc48ea03d58b6396dc0f195213e8c5c3d5b29",
+    "bytes": 60893728,
+    "mtime_utc": "2026-10-16T15:02:34Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/feat_tirgn/valid_filt.npy",
+    "sha256": "af9ab1afb82783a40e1fcae621a5d987d68301ece5b39a68b8347647fac293d5",
+    "bytes": 15223528,
+    "mtime_utc": "2026-10-16T15:02:34Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/feat_tirgn/valid_logp.npy",
+    "sha256": "7120a5bc9a0b5b2f7650f966169586238aabfd250c07eca115674443040c38bb",
+    "bytes": 60893728,
+    "mtime_utc": "2026-10-16T15:02:34Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/feat_tirgn/valid_q.npz",
+    "sha256": "eba899104b267198c2cb132daa64404aa3b39efee26df3fbe09b604cf470abe5",
+    "bytes": 18122298,
+    "mtime_utc": "2026-10-16T15:02:34Z"
+   }
+  ],
+  "hrcov_reranker": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/train_tirgn/models/HRCOV_PAT_s0.pt",
+    "sha256": "7c20951d9692d0ea930f5e5d8dc3147ea3f0289a3eea56e5c73629a1a2344997",
+    "bytes": 27281,
+    "mtime_utc": "2026-10-16T15:04:46Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/train_tirgn/models/HRCOV_PAT_s0_fsel.npy",
+    "sha256": "0dcd3c6eda37eacd4d1ac24c52ff3628723e021f54777d4429aff4068fbdeeb7",
+    "bytes": 20076928,
+    "mtime_utc": "2026-10-16T15:04:46Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/train_tirgn/models/HRCOV_PAT_s1.pt",
+    "sha256": "13b8d398a93cf05418eec1adf8afb0a7b36fd219d591427a6c2ffbdabd199a57",
+    "bytes": 27281,
+    "mtime_utc": "2026-10-16T15:06:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/train_tirgn/models/HRCOV_PAT_s1_fsel.npy",
+    "sha256": "ce67e00c258ef5da1990c6674d31a349f218558d393aa85a2e9f1c18cf3adde9",
+    "bytes": 20076928,
+    "mtime_utc": "2026-10-16T15:06:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/train_tirgn/models/HRCOV_PAT_s2.pt",
+    "sha256": "7a48bb4e9990a23e9d7d919f9ca9f72f1b2ab35ea62bf93d342836bbcff39164",
+    "bytes": 27281,
+    "mtime_utc": "2026-10-16T15:07:06Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/train_tirgn/models/HRCOV_PAT_s2_fsel.npy",
+    "sha256": "7101aa3311cd37fe8412538958214a68d5283407a7a0fe8b8339e64e70894bd1",
+    "bytes": 20076928,
+    "mtime_utc": "2026-10-16T15:07:06Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/train_tirgn/ranks_select.npz",
+    "sha256": "898b17061ebe145b8df4edadaa7ab805d8bc8225e0e0e378492270ba6d3bedb3",
+    "bytes": 1205878,
+    "mtime_utc": "2026-10-16T15:07:06Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/train_tirgn/train_fh.json",
+    "sha256": "82f36d427f9eb43b2b1c6f316872bd68e82578dd146397c4f8a437c9d34df187",
+    "bytes": 7507,
+    "mtime_utc": "2026-10-16T15:07:06Z"
+   }
+  ],
+  "sa_valid": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/hist/valid_hist.npz",
+    "sha256": "b35b3b4ba10e91419aaf8f460cc8245cb899343f8cb31db559ac5c78a718351b",
+    "bytes": 255755300,
+    "mtime_utc": "2026-10-16T15:07:04Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/lists/valid_SA25_blk.npy",
+    "sha256": "b6c9fc0de42078a6cc4995c7cbc99f09565c081b47048e02d3df86581f706e41",
+    "bytes": 15223528,
+    "mtime_utc": "2026-10-16T15:07:40Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/lists/valid_SA25_patX.npy",
+    "sha256": "42665d2f7eb43fa90d10dba882daa6bee86b4869f04a956e0bd4f3ca0ecdc088",
+    "bytes": 76117128,
+    "mtime_utc": "2026-10-16T15:07:40Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/lists/valid_SA50_blk.npy",
+    "sha256": "42654a2c8e06414c93637cc1ed2e3f038c81b498c7da55b2735cc8d30e84ac19",
+    "bytes": 30446928,
+    "mtime_utc": "2026-10-16T15:07:40Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/lists/valid_SA50_patX.npy",
+    "sha256": "deceb943191df5b185c33276c5e5817429a6a2a3c58d26c062ced3428ffb033b",
+    "bytes": 152234128,
+    "mtime_utc": "2026-10-16T15:07:40Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/lists/valid_SA75_blk.npy",
+    "sha256": "772ecea2ab53bf8bd26abdc546bd82fa31c08c2b4ae62f04073ef2eb90201c80",
+    "bytes": 45670328,
+    "mtime_utc": "2026-10-16T15:07:40Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/lists/valid_SA75_patX.npy",
+    "sha256": "150d35cc0031c4d1750677eed9c62cd491e3e8d5169457ee4964beb6d85a5606",
+    "bytes": 228351128,
+    "mtime_utc": "2026-10-16T15:07:40Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/lists/valid_firstblocks.npz",
+    "sha256": "0e54ff7b264dc94a2b6042c034e5815f36a0cd2b97adbaea4be7558c212c1ad9",
+    "bytes": 49173340,
+    "mtime_utc": "2026-10-16T15:07:40Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/pools/SA50/valid_X.npy",
+    "sha256": "deea4c218450d04b6aa95a346e3dafc92d958f953d368ef786cee8e7e72fa6fd",
+    "bytes": 761170128,
+    "mtime_utc": "2026-10-16T15:08:03Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/pools/SA50/valid_bah.npy",
+    "sha256": "daec04a7a1fbea7d1736af45ede1411bbd11d3e18c8673f74130ada8a76d570b",
+    "bytes": 15223528,
+    "mtime_utc": "2026-10-16T15:08:03Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/pools/SA50/valid_cand.npy",
+    "sha256": "fc714f90c95dcbfcf4093c119d84fce6a86b13a8bcedb93b0b84a556171e4aea",
+    "bytes": 60893728,
+    "mtime_utc": "2026-10-16T15:08:03Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/pools/SA50/valid_filt.npy",
+    "sha256": "f56cf2a4a407056ef4e6a358ef3ccb50d6930c0b09cdecf6214242c938304a1d",
+    "bytes": 15223528,
+    "mtime_utc": "2026-10-16T15:08:03Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/pools/SA50/valid_logp.npy",
+    "sha256": "65227d90a66cb6c3b6252126dc7a53eb53a38dec7d2e2f3e53accf4d03fc817c",
+    "bytes": 60893728,
+    "mtime_utc": "2026-10-16T15:08:03Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/pools/SA50/valid_q.npz",
+    "sha256": "3df2bee41c29ea96781d1ed46e9f78fdfb07fd31469cd995d208fc533a424530",
+    "bytes": 8526338,
+    "mtime_utc": "2026-10-16T15:08:04Z"
+   }
+  ],
+  "sa_ranker": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/train/models/SA_W100_s0.pt",
+    "sha256": "ff782e1518757a3fd4fc8bfaa66e2743227acfd435cb75748e063a53a3a34122",
+    "bytes": 24825,
+    "mtime_utc": "2026-10-16T15:08:14Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/train/models/SA_W100_s1.pt",
+    "sha256": "8cda00f0c4dd9b40c1100914860ffeae343279c4d46b66ab228fbfa66b4eacae",
+    "bytes": 24825,
+    "mtime_utc": "2026-10-16T15:08:23Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/train/models/SA_W100_s2.pt",
+    "sha256": "7e01db7fec9fca4b5941e609f3958b4921dbbe055d4a8633472d326f3a7bd528",
+    "bytes": 24825,
+    "mtime_utc": "2026-10-16T15:08:38Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/train/ranks_select_SA_W100.npz",
+    "sha256": "d22785b9b256f8ef3e13d62c3ee94e4579e9e1e93108c2d530ce97bce8df7a0c",
+    "bytes": 1004858,
+    "mtime_utc": "2026-10-16T15:08:38Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/sa/train/train_fw_sa.json",
+    "sha256": "a8fe6da63e032330daf4c43208ceba1f37950b7c1e63da0bb34618339ed10479",
+    "bytes": 7906,
+    "mtime_utc": "2026-10-16T15:08:38Z"
+   }
+  ],
+  "ct_stage1": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/floor.npy",
+    "sha256": "bc87493f19a45f0007f7400263ad0d8b6abb92ad0281cc1ae26f271bef0a8ac9",
+    "bytes": 1218000,
+    "mtime_utc": "2026-10-16T16:19:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/gold.npy",
+    "sha256": "e0229823afab1f83b2acb2413160deae915f057453965d789a3ae814f33f0b5a",
+    "bytes": 609064,
+    "mtime_utc": "2026-10-16T16:19:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/gold_score.npy",
+    "sha256": "06de9445427a571df3d75ddf5fd96ed97b44bfc51824ec6dd38759bcfcdf0c27",
+    "bytes": 1218000,
+    "mtime_utc": "2026-10-16T16:19:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/keys_harness.npy",
+    "sha256": "115a2e744b03be8bae4a9002b5fa01a255324bef120ec289de1ef91e81097d6e",
+    "bytes": 4871616,
+    "mtime_utc": "2026-10-16T16:19:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/meta.json",
+    "sha256": "bc27f6eb229ef191736265485ab7c959fa3723dcbc58e2c048e561fbfa113c1d",
+    "bytes": 1017,
+    "mtime_utc": "2026-10-16T16:19:11Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/n_cand.npy",
+    "sha256": "aebd5bbfe7aad7589986b216491775595aac7f94a5f5a4ed7704fd0e15d22328",
+    "bytes": 609064,
+    "mtime_utc": "2026-10-16T16:19:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/n_filtered.npy",
+    "sha256": "9cf43101d0a029fbe6a86ab5e5af5508cc355b75ddbc5d880cdff495366b108b",
+    "bytes": 609064,
+    "mtime_utc": "2026-10-16T16:19:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/n_gt_floor.npy",
+    "sha256": "aebd5bbfe7aad7589986b216491775595aac7f94a5f5a4ed7704fd0e15d22328",
+    "bytes": 609064,
+    "mtime_utc": "2026-10-16T16:19:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/rank_harness_strict.npy",
+    "sha256": "408575db0719a924fd4f233a6119173b0e35003da09774ac96ddd6764fd0866d",
+    "bytes": 1218000,
+    "mtime_utc": "2026-10-16T16:19:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/rank_official.npy",
+    "sha256": "b92d3a9adf5a42360b0b7b6c6164bd218f32b69e761a3ac49084256e582d7a29",
+    "bytes": 1218000,
+    "mtime_utc": "2026-10-16T16:19:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/rr_official.npy",
+    "sha256": "2c814dbdec93343745b13d6f98ef626c4930f1cf2fe69eae9a582625ac196010",
+    "bytes": 1218000,
+    "mtime_utc": "2026-10-16T16:19:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/tail_min.npy",
+    "sha256": "bc87493f19a45f0007f7400263ad0d8b6abb92ad0281cc1ae26f271bef0a8ac9",
+    "bytes": 1218000,
+    "mtime_utc": "2026-10-16T16:19:10Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/top_ids.npy",
+    "sha256": "1d5de8dbbee7898eff89bcd40766f5e969f77e0aaa065385f92a035c3ee8031b",
+    "bytes": 608936128,
+    "mtime_utc": "2026-10-16T16:19:09Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/dump_val/top_scores.npy",
+    "sha256": "174339fa241ab340ca3c6aabac461e2062d0deb9c5c18f738ad3a761b4e202df",
+    "bytes": 1217872128,
+    "mtime_utc": "2026-10-16T16:19:09Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt",
+    "sha256": "256bdb245f717c6205eff6be389b77d30face1467a2e433da16e8ae4aa79d766",
+    "bytes": 60578192,
+    "mtime_utc": "2026-10-16T16:07:54Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo/files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-strings.txt",
+    "sha256": "d4332b2978d6f373637e2934d7445d20d3c9caca8ddd11418bebb50076bccf8d",
+    "bytes": 84842322,
+    "mtime_utc": "2026-10-16T16:07:55Z"
+   }
+  ],
+  "ext_selection": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/ext/ext_comparator.json",
+    "sha256": "0be739fb69d7962c1c50b747142f261f7a8cd8906a331ecc35c267010047f914",
+    "bytes": 912,
+    "mtime_utc": "2026-10-16T16:32:23Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/ext/ranks_ext_valid_gdeltfw.npz",
+    "sha256": "83afe0e831939a398e57304f27f94ce86511f259fed8492f8ad47fbe8338a985",
+    "bytes": 22098842,
+    "mtime_utc": "2026-10-16T16:19:42Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/ext/sel_ext_gdeltfw.json",
+    "sha256": "16e334d4dc9a12030606aa0bff5802368fe298b757608acf56eebfdd8b6b84f2",
+    "bytes": 3887,
+    "mtime_utc": "2026-10-16T16:19:42Z"
+   }
+  ],
+  "latency": [
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/latency/latency_ct.json",
+    "sha256": "c31ccbdb93f31d7b86f52075fd4d581998fd805d84c52ceb632037d4a5cbbd79",
+    "bytes": 1219,
+    "mtime_utc": "2026-10-16T16:31:16Z"
+   },
+   {
+    "path": "<SCRATCH>/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/latency/latency_systems.json",
+    "sha256": "ed08b41814a1804b7f8e67a6bc9c89604253d4b03a31834479015bf2704c7124",
+    "bytes": 8001,
+    "mtime_utc": "2026-10-16T16:21:55Z"
+   }
+  ]
+ },
+ "n_files": 201,
+ "n_missing": 0
+}

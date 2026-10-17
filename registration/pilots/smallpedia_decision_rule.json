@@ -1,0 +1,42 @@
+{
+ "pilot": "2 of 4 - static-KG fusion on TGB 2.0 tkgl-smallpedia ( Task 2)",
+ "registered": "2026-10-12, before any re-ranker / static-fusion system had been trained. Test numbers that existed at registration were frozen-BASE rows only: (i) the rows printed by the unmodified harness base_dump.py for RE-GCN/LogCL epoch budgets, and (ii) a TiRGN smoke run of sp_tirgn.py (1 epoch on 3 train snapshots, partial test of 59,616 rows: test MRR 0.41048). No HR / HRCOV / static-fusion test number existed; base rows do not enter this rule.",
+ "question": "Does fusing the shipped static Wikidata KG with the temporal graph reach and correctly rank golds that temporal history cannot (no-pair-history / first-seen), ON TOP OF the strongest history-based system (HRCOV)?",
+ "protocol": {
+  "data": "tkgl-smallpedia (TGB 2.0), 47,433 entities, 283 relations, 125 yearly snapshots, TGB 70/15/15 split; both query directions; ALL 163,172 test queries; time-aware filtered 1-vs-all ranking over all 47,433 temporal entities (= the py-tgb negative set, verified identical); ground-truth online history before t",
+  "static_kg": "tkgl-smallpedia_static_edgelist.csv as processed by py-tgb 2.3.0 (978,022 edges, 753 relation types, 262,361 static-only nodes), shared id space written by sp_verify.py",
+  "bases": "RE-GCN, LogCL (harness base_dump.py; epoch budget chosen from {3, 6, 12, 30, 60} by FULL-VALID filtered MRR) and TiRGN (authors' model via the pure-torch DGL shim; epoch with best full-valid filtered MRR, <= 30 epochs, patience 5). If TiRGN fails to train or dump, the rule is applied to the remaining bases.",
+  "selection": "every re-ranker hyper-parameter, epoch, calibration weight and the base epoch budget is chosen on VALID only (valid timestamps < 70% quantile = fit, rest = select); test is scored once",
+  "statistic": "per-query reciprocal rank averaged over 3 seeds (0, 1, 2); harness exact filtered rank (1 + #greater; verified against the official py-tgb Evaluator); one-sided paired Poisson(1) bootstrap over queries, B = 2000 (harness paired_bootstrap)",
+  "materiality": 0.001
+ },
+ "arms": {
+  "HR": "history re-ranker (6.2 arm B) over the base top-50, F_hist (19 features)",
+  "HRCOV": "REFERENCE: pilot-1 coverage stack, top-50 ++ pattern-prior block ++ stage-2 bridge block (W = 150), F_hist + F_cov (30)",
+  "HRCOV_ST": "PRIMARY: HRCOV ++ 50 static-KG candidates (first 50 of the static-path list L_st outside C_cov; paths S, SS, ST, TS over the static Wikidata graph and the temporal history before t), F_hist + F_cov + F_static (42)",
+  "HRCOV_DM": "density control: HRCOV ++ 50 degree-matched random candidates (one per static-block candidate, same train-degree bin), same 42 features, W = 200",
+  "HRCOV_STFEAT": "attribution: HRCOV candidates with the 12 static features (no static candidates)",
+  "HRCOV_PAT": "attribution: top-50 ++ pattern block only (pilot-1 recommendation)",
+  "HR_ST": "secondary: top-50 ++ 50 static candidates (layout B), F_hist + F_static",
+  "STONLY": "static-only-candidates control at HRCOV's set size: top-50 ++ 100 static candidates (W = 150), F_hist + F_static",
+  "6.5_gate": "static evidence through the 6.5 utility gate: NOT RUN unless cheap (expected to fail; pilot-1 gate AUC < 0.5)"
+ },
+ "primary_rule": {
+  "statement": "Static-KG fusion is 'useful on smallpedia' iff on >= 2 bases ALL of: (a) HRCOV_ST beats HRCOV on full-test MRR with one-sided p < 0.05 AND dMRR >= 0.001; (b) head-damage guardrail passes; (c) the no-pair-history stratum improves (HRCOV_ST - HRCOV > 0 on queries with no (s, o) event in either direction before t, one-sided p < 0.05, B = 2000).",
+  "comparator_note": "The plan's wording compared static fusion against HR; using HRCOV (the strongest history-based system, pilot-1 PASS) as the primary comparator is deliberately stricter.",
+  "head_guardrail": "head stratum = gold train frequency >= 500; DAMAGE iff the 95% CI of HRCOV_ST - HRCOV on head lies entirely below 0 AND |delta| >= 0.001",
+  "per_base_pass": "PASS_b = (a) and (b) and (c)",
+  "useful_on_smallpedia": "count(PASS_b) >= 2"
+ },
+ "secondary": [
+  "HR_ST vs HR (full test, same bootstrap)",
+  "HRCOV_ST vs HRCOV_DM (static candidates vs density-matched random candidates at matched W = 200)",
+  "STONLY vs HRCOV (static candidates vs history-aware pool widening at matched W = 150)",
+  "HRCOV_STFEAT vs HRCOV (static features alone)",
+  "first-seen-entity stratum (s or o has no event before t): HRCOV_ST - HRCOV",
+  "official py-tgb Evaluator rows for base, HR, HRCOV, HRCOV_ST (seed 0)"
+ ],
+ "attribution_post_hoc": "Which static relation types / path shapes carry any gain, density share, first-seen behaviour: labelled post-hoc, never enters the decision.",
+ "reach_analysis": "static-only / temporal-only / union 1-2-hop reach of test golds per stratum (no-pair, first-seen, cold, pool-absent), with |C|/N and uniform / degree-matched / popularity controls at matched |C| (descriptive; does not enter the decision).",
+ "provenance_amendment": "2026-10-12 (after registration, before any decision): the 'registered' statement was corrected to also list the TiRGN smoke-run base row (item ii); decision criteria, arms and statistic are byte-for-byte unchanged."
+}

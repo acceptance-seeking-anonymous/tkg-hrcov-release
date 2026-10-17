@@ -1,0 +1,50 @@
+{
+ "rule_id": "v78_framing_rule",
+ "question": "Does HRcov improve an existing forecaster beyond (a) a matched standalone history-and-pattern ranker that needs no base, and (b) the strongest existing learned-history methods (EdgeReMIND, CountTRuCoLa) run alone or combined with the same frozen base; and which manuscript framing follows?",
+ "trigger": "External pre-submission review of Manuscript A v7.7 (2026-10-15) and the PI-endorsed response plan (modified option 1).",
+ "configurations": {
+  "S1": "tkgl-smallpedia, TiRGN base (the headline base run and seed used for HRcov in v7.7)",
+  "S2": "tkgl-polecat, TiRGN base (headline run)",
+  "S3": "tkgl-polecat, CognTKE base (the single G8 run)"
+ },
+ "comparators": {
+  "HRcov": "Exactly the v7.7 HRcov system for that configuration (base top-50 + bounded one-/two-hop pattern block, total width cap 100, 25 features, 2x64 listwise MLP fitted on the validation fit part, selection on the validation selection part). No refit; existing per-query ranks are reused after a base-rank identity check.",
+  "SA": "Matched standalone ranker. Candidates: RecB top-50 (RecB parameters cross-fitted on the validation selection part, as for G1_xf) plus the same bounded pattern block generated from the subject's history with confidence-only ordering (no base probabilities); same total width cap and the same per-query selection budget as HRcov. Features: the HRcov features minus every base-derived feature (base score, base rank, base probability, fusion and any feature computed from base outputs); the exact retained list is written into an amendment of this rule before any SA test number. Tail order (entities outside the pool): RecB score descending, then train frequency of the entity descending, then entity id. Ranker, loss, supervision window (validation fit part), seeds and selection procedure identical to HRcov.",
+  "SA_ERM": "Secondary standalone variant: as SA but with EdgeReMIND top-50 replacing RecB top-50 (only if EdgeReMIND passes the reproduction gate). Tail order by EdgeReMIND score.",
+  "standalone_comparator": "Of SA and SA_ERM, the one with higher MRR on the validation selection part. Selection never uses test numbers.",
+  "ladder": "Descriptive decomposition from SA to HRcov, adding one base component at a time on the same ranker and budget: SA -> +C (base top-50 replaces RecB top-50, no base features, history tail) -> +S (add base-score features) -> +T (base tail order) = HRcov-equivalent; the last step must reproduce HRcov within 0.002 MRR or the discrepancy is reported.",
+  "width_sweep": "SA and HRcov at total width caps {50, 150} in addition to the existing budget; descriptive only.",
+  "EXT_alone": "EdgeReMIND and CountTRuCoLa, each trained with its released code and configuration (faithful protocol) on the same train split, scored with the official py-tgb evaluator on the same test split and history boundary as HRcov.",
+  "EXT_adapted": "Optional: each method refit with access to the validation fit part as additional training labels (the label access HRcov has), tuned on the validation selection part. Reported separately from the faithful run and labelled as an adaptation.",
+  "EXT_blend": "Validation-tuned log-linear combination of the frozen base with each method: log p_base * (1 - a) + a * log softmax(method score / tau) over all entities; a on the same grid as the v7.7 BLEND control and tau in {0.5, 1, 2, 4} after per-query standardisation; the exact grid is fixed in an amendment before any test number.",
+  "external_comparator": "For each method, the variant among {alone, blend, adapted, adapted blend} with the highest validation-selection-part MRR; then the method whose selected variant has the higher validation-selection-part MRR.",
+  "REL_LIN": "Diagnostic only: linear scorer on the HRcov pool and 25 features with relation-specific weights (global weights plus L2-shrunk per-relation offsets, shrinkage chosen on validation). Not decision-relevant."
+ },
+ "reproduction_gate": "Before any blended or polecat run of an external method, its faithful run must reproduce the authors' published tkgl-smallpedia test MRR within max(0.01, 2 x published seed SD). A failed gate is recorded with the discrepancy; the method is then reported as 'not reproduced' and enters the decision only with that flag.",
+ "statistic": {
+  "evaluator": "official py-tgb Evaluator with shipped negatives; harness exact ranks alongside; flag |difference| > 1e-4",
+  "bootstrap": "paired Poisson query bootstrap and timestamp-block bootstrap, B = 2000 each, one-sided 95% bounds",
+  "seeds": "learned components use the same seed(s) as the HRcov run they are compared with; S1 additionally 3 seeds (matching the existing 3-seed HRcov runs) if time allows, reported per seed",
+  "multiplicity": "Decisions are intersection-union statements across configurations (each component test at one-sided 5%), so no further correction is applied; this is declared here."
+ },
+ "criteria": {
+  "BEATS(X)": "HRcov - X: one-sided 95% lower bound > 0 under both bootstraps AND point estimate >= 0.005 MRR",
+  "MATCHES(X)": "an advantage of 0.005 MRR or more for HRcov over X is excluded: one-sided 95% upper bound of (HRcov - X) < 0.005 under both bootstraps",
+  "SMALL(X)": "neither BEATS nor MATCHES",
+  "not_assessed": "a configuration where a comparator could not be run (resources, failed reproduction) is 'not assessed' for that comparator and never counted as a match or a loss"
+ },
+ "outcome_labels_in_priority_order": {
+  "F3_EXTERNAL_MATCHES": "external_comparator MATCHES HRcov (and SA does not BEAT it) in at least 2 of the assessed configurations -> the current methodological contribution is weak; an empirical-study version needs a consequential finding about when and why methods differ; PI decides scope and venue.",
+  "F2_STANDALONE_MATCHES": "standalone_comparator MATCHES HRcov in at least 2 of 3 configurations -> centre the paper on standalone historical ranking; the plug-in pipeline becomes secondary.",
+  "F1_RETAIN_FROZEN_BASE": "HRcov BEATS both standalone_comparator and external_comparator in all assessed configurations -> keep the frozen-base contribution and explain from the ladder which information the base supplies.",
+  "F4_CONDITIONAL": "any other pattern -> the conditions under which HRcov helps (dataset, base strength) become the central result; general claims are narrowed."
+ },
+ "downstream_decisions": {
+  "icews_corrected_rebuild": "Run the full corrected tkgl-icews pipeline (canonical relation codes before fitting; retrained bases; rebuilt pools, features, RecB, blend, G1, SA, HRcov) only if the outcome is F1 or F4 AND the PI keeps large-scale robustness as a headline claim; otherwise keep original-code icews as qualified supporting evidence with the correction stated as unresolved.",
+  "fresh_data_confirmation": "Deferred until the method and controls are frozen after this rule's outcome; it is a strengthening step, not a submission requirement."
+ },
+ "selection_discipline": "All hyper-parameters, epochs, blend weights, temperatures, widths and variant choices are selected on validation only (fit part for fitting, selection part for choices). No change after any test number of this rule is read. Anything added later is labelled post-hoc and is not decision-relevant.",
+ "stop_rules": "If EdgeReMIND or CountTRuCoLa cannot run on tkgl-polecat within the hosts' memory (no swapping of co-tenants' jobs) or within 24 h wall time per seed, record 'not assessed (resources)' for S2/S3 and continue.",
+ "registered_utc": "2026-10-15T17:34:21Z",
+ "sha256": "8e05c67b7ce8f3a475ac391e813463b9d435f8add5af13e5c4d03f78483a5f2d"
+}

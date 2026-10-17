@@ -1,0 +1,15 @@
+job_id	host	purpose	ended_utc	state	exit_code
+6f3c1306-74ba-414c-ab05-e93115855078	serverC	uninspected scan (serverC)	2026-10-16T14:30:30Z	done	0
+7281237c-9381-4054-a66d-2109569cbc8e	serverB	uninspected scan (serverB)	2026-10-16T14:30:41Z	done	0
+24868d2a-00f2-4201-a925-29f33feb31d4	serverA	uninspected scan (serverA)	2026-10-16T14:30:44Z	done	0
+faac377d-9748-42af-9403-7352ff11995d	serverA	GDELTFW build	2026-10-16T14:45:40Z	done	0
+7a51145d-80e6-4474-9d1b-132197567505	serverA	CountTRuCoLa Stage 1, attempt 1 (failed at dataset construction)	2026-10-16T14:56:04Z	done	0
+c2ac489f-80cf-4350-bce1-72129f851218	serverA	Stage 1A: prep, RecB, TiRGN training, valid rows	2026-10-16T15:01:08Z	done	0
+dc39717c-1a99-4ff3-a9d1-5b5771f5dc65	serverA	Stage 1B: HRcov, BLEND (SA part failed)	2026-10-16T15:07:07Z	done	0
+9ccd0e7d-7bb9-47d1-8c34-6b0b173cb117	serverA	Stage 1B-SA rerun	2026-10-16T15:08:38Z	done	0
+eea61388-e905-4173-a895-612e7d3bd412	serverA	CountTRuCoLa memory watchdog	2026-10-16T16:19:09Z	done	0
+e7efbdf3-008e-443f-a884-76fc2e78cdac	serverA	CountTRuCoLa Stage 1 (C0/C1/C2)	2026-10-16T16:19:13Z	done	0
+953e4300-193e-4b59-b2ef-2d81e8efb2bb	serverA	Stage 1C: comparator selection	2026-10-16T16:19:43Z	failed	1
+c46772b5-49f4-49ba-bcd9-150ea7d41d98	serverA	latency protocol (validation slice)	2026-10-16T16:31:22Z	done	0
+117823f0-d9fc-4870-95e1-83bbedc15ba9	serverA	freeze (SHA-256 manifest)	2026-10-16T16:32:27Z	done	0
+7349980c-57f6-49ec-a9d5-65fb82f265fb	serverA	Stage 2 (single test pass)	2026-10-16T17:10:22Z	done	0

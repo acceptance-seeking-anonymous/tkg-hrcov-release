@@ -1,0 +1,13 @@
+--- a/phase2_forward_holdout/code/fh_tirgn_train.py
++++ b/code/fh_tirgn_train.py
+@@ -1,8 +1,8 @@
+ #!/usr/bin/env python3
+-"""phase2_forward_holdout / fh_tirgn_train.py -- runs the harness TiRGN trainer hd_tirgn.py (byte-identical copy in this
++"""phase2_fresh_window / fh_tirgn_train.py -- runs the harness TiRGN trainer hd_tirgn.py (byte-identical copy in this
+ code dir) as __main__ after capping this process's GPU memory (env FH_GPU_CAP_GB, default 30 GB; the lead's GPU-1 rule).
+ All arguments are passed through to hd_tirgn.py.  Stage 1 always passes --no_dump (no test rows are scored by training).
+-  python3 fh_tirgn_train.py --data_dir D --n_ent 1173 --n_rel 218 --tree T --ds GDELT25X --L 7 --hr 0.3 --lr 0.001 \
++  python3 fh_tirgn_train.py --data_dir D --n_ent 1209 --n_rel 215 --tree T --ds GDELTFW --L 7 --hr 0.3 --lr 0.001 \
+       --epochs 30 --patience 5 --max_train_hours 10 --seed 42 --no_dump --out OUT
+ """
+ import os, sys, runpy

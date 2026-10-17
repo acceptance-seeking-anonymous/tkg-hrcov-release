@@ -1,0 +1,98 @@
+{
+ "name": "fh_decision_rule",
+ "track": "phase2_forward_holdout (Manuscript A, ACM TOIS)",
+ "version": 1,
+ "question": "On a forward holdout period that no HRCOV design decision has seen (GDELT 2.0, Aug-Sep 2025), does HRCOV_PAT on a TiRGN base trained on the slice's own training window beat recurrency used well (TiRGN(+)RecB blend and RecB-POOL, valid-selected) by the G2 practical margin of 0.005 MRR?",
+ "motivation": "PI review of manuscript A v6, section 4 'Make registration claims comparison-specific': later time-stamped plans cannot turn previously inspected test data into unseen confirmation; a new forward holdout is requested. This rule is the registration for ONE comparison (HRCOV_PAT vs the G2 recurrency controls, TiRGN base, GDELT25X test window) and supports untouched-test language for that comparison only.",
+ "chronology": {
+  "design_fixed": "HRCOV_PAT (25 bridge-free features, W = 100, pilot-1 re-ranker recipe) was fixed in a_presub_rule.json (registered 2026-10-13T13:35:00Z) and evaluated on ICEWS18 / GDELT test in g2_verdict.json (2026-10-13). Those test sets were inspected (GDELT TiRGN: HRCOV_PAT 0.26933 vs TiRGN(+)RecB 0.25945, PRACTICAL_ADVANCE). Nothing in the HRCOV_PAT design, its features, candidate budgets or re-ranker hyper-parameters is changed for this holdout.",
+  "dataset_origin": "GDELT25X was built by the LLM interaction-status pilot (status_stage0_report; build job 29022264 on <HOST>) from GDELT 2.0 15-minute exports 2025-01-01..2025-09-30; this track copies its split files read-only (md5 train 9f11dc66beabd180b4a697327d00f71a, valid 6318e2c6136271615fdf478143600b58, test 77a06b0f38d0c5145e43b2ffc55e62e6, identical on both hosts).",
+  "prior_test_exposure": "Before this registration the status pilot had already scored the GDELT25X test window with its OWN systems: RE-GCN and LogCL bases (pilot-4 recipe, dumps with test metrics), pilot-4 19-feature HR re-rankers on those bases, RecB ranks and Stage-0 status statistics. None of these is a TiRGN, HRCOV_PAT or G2-control number on this window. While auditing what existed, the registering agent read one such number (the status pilot's RE-GCN base test MRR in regcn_GDELT25X_dump_log.json); it is not an input to any choice below, because every choice is fixed by the G2 recipe or made on the valid window by pre-specified procedures. No other GDELT25X test number was opened.",
+  "this_track_at_registration": "no TiRGN model on GDELT25X exists; no valid or test number of this track exists; the Stage-1/Stage-2 code is written (sha256 in freeze_manifest.json).",
+  "order": "rule (this file) -> Stage 1 (train base, fit controls and re-rankers on valid only, freeze) -> freeze_manifest.json (sha256 + UTC of every frozen file, this rule included) -> lead's go after the status pilot's own Stage-2 test -> Stage 2 (one test pass, fh_stage2_test.sh)"
+ },
+ "data": {
+  "dataset": "GDELT25X (post-cutoff GDELT 2.0 slice): 1,173 entities, 218 relations, 791,436 facts; daily snapshots, timestamp ids = ranks of the 256 days with data",
+  "train": "ids 0-164 = 2025-01-01..2025-06-14 (165 snapshots; June 2025 exports largely missing at the source), 514,299 facts",
+  "valid": "ids 165-194 = 2025-07-02..2025-07-31 (30 snapshots), 94,778 facts -> 189,556 queries (both directions). The split already has a chronological validation window, so none is carved from train.",
+  "test": "ids 195-255 = 2025-08-01..2025-09-30 (61 snapshots), 182,359 facts -> 364,718 queries (both directions); every test query is scored",
+  "reranker_fit_select": "valid timestamps < 70% quantile = fit (ids 165-185, 2025-07-02..07-22), the rest = select (ids 186-194, 07-23..07-31); g2_train rule unchanged",
+  "time_unit": "one snapshot (day); RecB timestamps in unit steps (--ts_step 1); recency features count snapshots (GDELT in G2: 15-minute snapshots)"
+ },
+ "base": {
+  "model": "TiRGN, authors' model code via the project's pure-torch DGL shim, trained by the harness trainer hd_tirgn.py (byte-identical copy) on the GDELT25X train window",
+  "hyper_parameters": "the GDELT configuration of the G2 GDELT TiRGN checkpoint (authors' README GDELT command, his7/angle10, no static graph): history length 7 (train and test), angle 10, history rate 0.3, lr 1e-3, Adam weight decay 1e-5, 2 layers, hidden 200, n_bases 100, dropouts 0.2 (input/hidden/feat/dropout), layer norm, self-loop, encoder convgcn, decoder timeconvtranse, weight 0.5, discount 1, grad-norm 1.0",
+  "training": "hd_tirgn.py objective (0.7 x entity NLL, both directions; no relation head), shuffled train snapshots per epoch, <= 30 epochs, per-epoch FULL-valid time-aware filtered MRR, patience 5, valid-best epoch kept, wall-clock cap 10 h, seed 42",
+  "rows": "full float32 log(hr p_hist + (1-hr) p_raw) rows replayed with ground-truth online history (hd_tirgn_replay.py), valid in Stage 1 and test in Stage 2 (fh_tirgn_rows.py); verification: full-row filtered gold rank equals the replay dump rank on >= 99.9% of rows"
+ },
+ "claim_system": "HRCOV_PAT exactly as a_presub_rule.json G2: C = base top-50 ++ first 50 pattern-prior candidates outside the top-50 (pc_lists pattern prior: 1-2-hop entity-anonymised path patterns, M1 = 64, M2 = 32, utility u = te_hier - log1p(mass_base(C_p)(e-1)), TE tables from the early 70% of train timestamps, 400,000 sampled early-train queries, rng 0); W = 100; 25 features = 8 base (from full rows) + 11 evidence (rs_features Hist / DyadReader, facts with ts < t) + 6 pattern coverage (pat_best_util, pat_best_te, pat_log_npat, pat_reach, pat_log_pos, is_cov_cand); no bridge block. Re-ranker: MLP d-64-64-1 (zero-init last layer), listwise CE over the candidate set, Adam lr 1e-3 wd 1e-5, batch 512, <= 30 epochs, early stopping on valid-select MRR patience 5, fit queries = fit-period queries with the gold in the candidate set (capped at 120,000, rng 0), final score alpha*log p + beta*f with (alpha, beta) = argmin valid-select listwise NLL (LBFGS); columns 51-100 promoted only above the minimum fused score of columns 1-50; seeds 0, 1, 2; per-query RR averaged over seeds.",
+ "controls": {
+  "BLEND": "TiRGN(+)RecB full-row score blend (42 configurations: MIX beta in 13 values and LOGLIN 4 weights x 2 eps, each with RecB default or trained), configuration = argmax valid MRR (first index on ties), hd_select.py",
+  "POOL": "RecB-POOL: base top-K union RecB top-K (K in 20/50/100) ranked by a blend, rest in base order (126 configurations), argmax valid MRR",
+  "RecB": "Gastinger et al. IJCAI 2024 recurrency baseline (hd_recb.py, TGB-faithful re-implementation): default (lambda 0.1, alpha 0.99) and trained (per-relation lambda_r then alpha_r on valid), clean and faithful variants; blends use the clean variant",
+  "HR": "pilot-1 history re-ranker in the same pipeline (W = 50 = base top-50, 19 features = 8 base + 11 evidence), seeds 0-2: the pool-widening contrast",
+  "best_control": "the better of BLEND and POOL by test MRR (G2 'better comparator'). HR and standalone RecB are reported with the same statistics but are not in the decision set, so that the rule is the G2 rule (with HR in the set, G2's own GDELT outcome would not have been PRACTICAL_ADVANCE: HRCOV_PAT - HR = +0.0033 there)."
+ },
+ "evaluator": "harness exact time-aware filtered rank (strict '>', other true answers of (s, r', t) removed, both directions) for base, BLEND, POOL and the lifted re-ranker lists (fh_blend.py, same tie convention for every arm); standalone RecB by the hd_recb formula (average ties). No TGB evaluator exists for this split.",
+ "statistic": {
+  "primary": "paired Poisson(1) bootstrap over TIMESTAMP BLOCKS: each of the 61 test days receives one Poisson(1) weight per draw (both directions of every fact of that day share it); delta* = sum_d w_d S_d / sum_d w_d M_d; B = 2000 (strata B = 1000), seed 0; percentile 95% CI; one-sided p = P*(delta* <= 0)",
+  "upper_bound_for_nulls": "U = one-sided 95% upper confidence bound of delta = 95th percentile of the same timestamp-block bootstrap distribution (L = 5th percentile also reported). For a null, U states the largest advance over the control that the holdout does not exclude.",
+  "alongside_not_decision": "query-level Poisson(1) bootstrap (G2's primary, hd_agg.boot, B = 2000) and the G7 multinomial timestamp-block bootstrap (g7_cluster_bootstrap.boot_cluster, B = 2000)",
+  "metrics": "MRR with Hits@1/3/10 for every arm; paired Hits@1/3/10 deltas vs each control with the primary bootstrap",
+  "seeds": "re-rankers: per-query RR averaged over seeds 0-2, per-seed MRR and sd reported; base, RecB, blends and pools deterministic (once). Base-seed variation is not estimated (one TiRGN seed).",
+  "multiplicity": "one registered contrast family (HRCOV_PAT vs BLEND and vs POOL, both required: intersection-union test, no correction needed); everything else is secondary"
+ },
+ "criteria": {
+  "C1": "for each control c in {BLEND, POOL}: delta_c = MRR(HRCOV_PAT) - MRR(c) >= 0.005 AND primary one-sided p_c < 0.05",
+  "C2": "G2's C2 (HRCOV_PAT vs the strongest blend over all bases) collapses to the BLEND part of C1 with a single base; recorded, not re-tested",
+  "C3_head_guardrail": "head stratum = gold train-window frequency >= 500 (share reported); DAMAGE iff the primary-bootstrap 95% CI of HRCOV_PAT - best control on the head stratum lies entirely below 0 AND |delta| >= 0.001",
+  "validity": {
+   "V1": "every Stage-1 frozen file (freeze_manifest_remote.json) matches its sha256 before Stage 2 starts (fh_freeze.py --verify; mismatch -> abort)",
+   "V2": "each frozen re-ranker reproduces its Stage-1 valid-select ranks on >= 99.99% of rows (fh_apply.py)",
+   "V3": "test full-row filtered gold rank equals the test dump rank on >= 99.9% of rows (fh_features.py verify)",
+   "V4": "all 364,718 test queries scored for every arm",
+   "V5": "identity: the W = 50 / W = 100 candidate lists scored by log p alone reproduce the base rank on every test row"
+  }
+ },
+ "outcome_labels": {
+  "PRACTICAL_ADVANCE": "C1 holds and no head DAMAGE (replicates the G2 GDELT outcome on the forward holdout)",
+  "HEAD_DAMAGE": "C1 holds but C3 shows DAMAGE",
+  "CONTROL_BETTER": "C1 fails and the 95% CI of HRCOV_PAT - best control lies entirely below 0",
+  "BELOW_MARGIN_BOUNDED": "C1 fails and U(HRCOV_PAT - best control) < 0.005: the holdout excludes a practical advance at one-sided 95% (G2 vocabulary: RECURRENCY_DONE_WELL)",
+  "INCONCLUSIVE": "C1 fails and U >= 0.005: the holdout neither shows nor excludes a practical advance",
+  "BLOCKED": "any of V1-V5 fails; numbers are diagnostics only"
+ },
+ "secondary_reported": [
+  "HRCOV_PAT - HR (pool widening), HR - best control, HRCOV_PAT - RecB trained (clean), BLEND - base, HRCOV_PAT - base: delta, primary CI, U, query-level CI",
+  "strata (B = 1000): head / mid / low-frequency (< 50) by gold train frequency, pair-history vs no pair history, first-seen subject or object, exact (s, r, o) recurrence before t, gold inside vs outside the base top-50",
+  "temporal stability: delta per 7-snapshot block of the test window and leave-one-block-out deltas",
+  "training selection: share of fit-period queries retained (gold in the candidate set) per arm; promoted coverage candidates per test query",
+  "valid-window metrics of every arm (Stage 1)"
+ ],
+ "selection_discipline": "every epoch, blend weight, pool size, RecB lambda/alpha, re-ranker epoch and calibration is chosen on the GDELT25X valid window only, by the pre-specified procedures above; Stage 2 fits and selects nothing; each test configuration is scored once; no code, hyper-parameter, feature or criterion changes after any test number of this track is read; any later analysis is labelled post-hoc and is not decision-relevant.",
+ "stop_rules": [
+  "if the TiRGN base cannot be trained within the GPU budget, or its valid rows fail the >= 99.9% rank-agreement check, Stage 1 stops and is reported BLOCKED (no substitute base without a new registration)",
+  "Stage 2 aborts on any V1 mismatch"
+ ],
+ "deviations_from_G2_declared_at_registration": [
+  "one base (TiRGN) instead of the two strongest of three bases: the label is single-base and comparison-specific; G2's cross-base C2 collapses into C1",
+  "the TiRGN base is trained here (G2 GDELT used the authors' released checkpoint) with the harness trainer's entity-only objective; the authors' GDELT command also trains a relation head (task weight 0.7) and selects the epoch on raw valid MRR over up to 500 epochs",
+  "decision statistic = timestamp-block Poisson bootstrap (61 blocks); G2 decided on the query-level Poisson bootstrap and reported the timestamp-block bootstrap alongside (both are reported here)",
+  "fit / select on the full valid window (189,556 queries; G2 GDELT used a 200,000-row sample of 477,530 valid rows; the same code takes all rows when fewer than 200,000 exist)",
+  "re-rankers are trained on CPU (G2: GPU); daily snapshots instead of 15-minute snapshots"
+ ],
+ "manuscript_consequence": {
+  "PRACTICAL_ADVANCE": "the paper may state that the TiRGN-base advance over recurrency used well replicated on a forward holdout registered before any of its test numbers existed, with delta, block CI and U",
+  "otherwise": "the forward-holdout result is reported as the primary out-of-time evidence with its label, delta, CI and U; the G2 GDELT result is described as an inspected-benchmark result"
+ },
+ "hosts_and_budget": "<HOST>. GPU (TiRGN training and row replay): GPU 1 only if > 35 GB free at dispatch, this process capped at 30 GB; GPU 0 only after nvidia-smi shows no G8 process on it; waits checked every 30 min in the stage script. CPU stages <= 8 workers in tkg-gpu:latest. Budget <= 24 GPU-hours; any reduction is declared.",
+ "files": {
+  "code_dir": "<SCRATCH>/open_ideas_harness/tracks/phase2_forward_holdout/code",
+  "stage1": "<SCRATCH>/open_ideas_harness/tracks/phase2_forward_holdout/code/fh_stage1_chain.sh",
+  "stage2_test": "<SCRATCH>/open_ideas_harness/tracks/phase2_forward_holdout/code/fh_stage2_test.sh",
+  "decision_code": "<SCRATCH>/open_ideas_harness/tracks/phase2_forward_holdout/code/fh_agg.py",
+  "manifest": "<SCRATCH>/open_ideas_harness/tracks/phase2_forward_holdout/freeze/freeze_manifest_remote.json"
+ },
+ "registered_utc": "2026-10-14T10:28:13Z",
+ "sha256": "2bb027715962a746214047b116c7ba56ff1b6bdb2adecc2af12155e06380508c"
+}

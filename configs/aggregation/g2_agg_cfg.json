@@ -1,0 +1,58 @@
+{
+ "ICEWS18": {
+  "name": "ICEWS18",
+  "dd": "$EXT_DIR/logcl_redun/data/ICEWS18",
+  "strata": "$WORK_DIR/tracks/hardening/presub_g2/ICEWS18/work/strata_test.npz",
+  "recb_ranks": "$WORK_DIR/tracks/hardening/presub_g2/recb/recb_test_ranks_ICEWS18.npz",
+  "recb_sel": "$WORK_DIR/tracks/hardening/presub_g2/recb/recb_selection_ICEWS18.json",
+  "residual_hr_tirgn": 0.3664,
+  "bases": {
+   "tirgn": {
+    "official": "$WORK_DIR/tracks/hardening/presub_g2/official_test_icews18_tirgn.npz",
+    "test_json": "$WORK_DIR/tracks/hardening/presub_g2/blend_test_icews18_tirgn.json",
+    "valid_json": "$WORK_DIR/tracks/hardening/presub_g2/blend_valid_icews18_tirgn.json",
+    "feat_summary": "$WORK_DIR/tracks/hardening/presub_g2/ICEWS18/work/feat_tirgn/feat_summary.json"
+   },
+   "regcn": {
+    "official": "$WORK_DIR/tracks/hardening/presub_g2/official_test_icews18_regcn.npz",
+    "test_json": "$WORK_DIR/tracks/hardening/presub_g2/blend_test_icews18_regcn.json",
+    "valid_json": "$WORK_DIR/tracks/hardening/presub_g2/blend_valid_icews18_regcn.json",
+    "feat_summary": "$WORK_DIR/tracks/hardening/presub_g2/ICEWS18/work/feat_regcn/feat_summary.json"
+   },
+   "logcl": {
+    "official": "$WORK_DIR/tracks/hardening/presub_g2/official_test_icews18_logcl.npz",
+    "test_json": "$WORK_DIR/tracks/hardening/presub_g2/blend_test_icews18_logcl.json",
+    "valid_json": "$WORK_DIR/tracks/hardening/presub_g2/blend_valid_icews18_logcl.json",
+    "feat_summary": "$WORK_DIR/tracks/hardening/presub_g2/ICEWS18/work/feat_logcl/feat_summary.json"
+   }
+  }
+ },
+ "GDELT": {
+  "name": "GDELT",
+  "dd": "$EXT_DIR/gdelt_armAD/data/GDELT",
+  "strata": "$WORK_DIR/tracks/hardening/presub_g2/GDELT/work/strata_test.npz",
+  "recb_ranks": "$WORK_DIR/tracks/hardening/presub_g2/recb/recb_test_ranks_GDELT.npz",
+  "recb_sel": "$WORK_DIR/tracks/hardening/presub_g2/recb/recb_selection_GDELT.json",
+  "residual_hr_tirgn": 0.2656,
+  "bases": {
+   "tirgn": {
+    "official": "$WORK_DIR/tracks/hardening/presub_g2/official_test_gdelt_tirgn.npz",
+    "test_json": "$WORK_DIR/tracks/hardening/presub_g2/blend_test_gdelt_tirgn.json",
+    "valid_json": "$WORK_DIR/tracks/hardening/presub_g2/blend_valid_gdelt_tirgn.json",
+    "feat_summary": "$WORK_DIR/tracks/hardening/presub_g2/GDELT/work/feat_tirgn/feat_summary.json"
+   },
+   "regcn": {
+    "official": "$WORK_DIR/tracks/hardening/presub_g2/official_test_gdelt_regcn.npz",
+    "test_json": "$WORK_DIR/tracks/hardening/presub_g2/blend_test_gdelt_regcn.json",
+    "valid_json": "$WORK_DIR/tracks/hardening/presub_g2/blend_valid_gdelt_regcn.json",
+    "feat_summary": "$WORK_DIR/tracks/hardening/presub_g2/GDELT/work/feat_regcn/feat_summary.json"
+   },
+   "logcl": {
+    "official": "$WORK_DIR/tracks/hardening/presub_g2/official_test_gdelt_logcl.npz",
+    "test_json": "$WORK_DIR/tracks/hardening/presub_g2/blend_test_gdelt_logcl.json",
+    "valid_json": "$WORK_DIR/tracks/hardening/presub_g2/blend_valid_gdelt_logcl.json",
+    "feat_summary": "$WORK_DIR/tracks/hardening/presub_g2/GDELT/work/feat_logcl/feat_summary.json"
+   }
+  }
+ }
+}

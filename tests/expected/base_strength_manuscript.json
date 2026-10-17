@@ -1,0 +1,167 @@
+{
+ "source": "data behind Figure fig:basestrength of Manuscript A v7.6.1 (as plotted)",
+ "base_strength": [
+  {
+   "dataset": "tkgl-polecat",
+   "base": "RE-GCN (pilot)",
+   "base_mrr": 0.16500882804393768,
+   "control_mrr": 0.20878003537654877,
+   "hrcov_mrr": 0.2717,
+   "margin": 0.06291996462345123,
+   "decision": false
+  },
+  {
+   "dataset": "tkgl-polecat",
+   "base": "LogCL (pilot)",
+   "base_mrr": 0.17846012115478516,
+   "control_mrr": 0.21307616859532755,
+   "hrcov_mrr": 0.2707990488772738,
+   "margin": 0.05772288028194625,
+   "decision": false
+  },
+  {
+   "dataset": "tkgl-polecat",
+   "base": "TiRGN",
+   "base_mrr": 0.22048833966255188,
+   "control_mrr": 0.23486163052651496,
+   "hrcov_mrr": 0.282377767408202,
+   "margin": 0.047516136881687016,
+   "decision": true
+  },
+  {
+   "dataset": "tkgl-polecat",
+   "base": "CognTKE",
+   "base_mrr": 0.29142099618911743,
+   "control_mrr": 0.29407864809036255,
+   "hrcov_mrr": 0.3039925992488861,
+   "margin": 0.00991395115852356,
+   "decision": true
+  },
+  {
+   "dataset": "tkgl-smallpedia",
+   "base": "RE-GCN (pilot)",
+   "base_mrr": 0.4217591881752014,
+   "control_mrr": 0.6096179485321045,
+   "hrcov_mrr": 0.6597,
+   "margin": 0.05008205146789546,
+   "decision": false
+  },
+  {
+   "dataset": "tkgl-smallpedia",
+   "base": "LogCL (pilot)",
+   "base_mrr": 0.4663582444190979,
+   "control_mrr": 0.6092811822891235,
+   "hrcov_mrr": 0.659,
+   "margin": 0.049718817710876495,
+   "decision": false
+  },
+  {
+   "dataset": "tkgl-smallpedia",
+   "base": "RE-GCN (re-tuned)",
+   "base_mrr": 0.48249298334121704,
+   "control_mrr": 0.6107927569379431,
+   "hrcov_mrr": 0.6582982866159516,
+   "margin": 0.047505529678008473,
+   "decision": false
+  },
+  {
+   "dataset": "tkgl-smallpedia",
+   "base": "RE-GCN (TGB config.)",
+   "base_mrr": 0.5906693935394287,
+   "control_mrr": 0.6249410412879526,
+   "hrcov_mrr": 0.6585639717539964,
+   "margin": 0.03362293046604381,
+   "decision": true
+  },
+  {
+   "dataset": "tkgl-smallpedia",
+   "base": "TiRGN",
+   "base_mrr": 0.6180580854415894,
+   "control_mrr": 0.627458889789745,
+   "hrcov_mrr": 0.6584181855634673,
+   "margin": 0.030959295773722362,
+   "decision": true
+  },
+  {
+   "dataset": "tkgl-icews",
+   "base": "RE-GCN (full train)",
+   "base_mrr": 0.27468528712296,
+   "control_mrr": 0.31059876414340304,
+   "hrcov_mrr": 0.3753133807455665,
+   "margin": 0.06471461660216349,
+   "decision": true
+  },
+  {
+   "dataset": "tkgl-icews",
+   "base": "LogCL (full train)",
+   "base_mrr": 0.3127062212721601,
+   "control_mrr": 0.32465174444766015,
+   "hrcov_mrr": 0.3744268047168157,
+   "margin": 0.04977506026915557,
+   "decision": true
+  },
+  {
+   "dataset": "ICEWS18",
+   "base": "RE-GCN",
+   "base_mrr": 0.28690555691719055,
+   "control_mrr": 0.32375678420066833,
+   "hrcov_mrr": 0.35922213395436603,
+   "margin": 0.035465349753697695,
+   "decision": true
+  },
+  {
+   "dataset": "ICEWS18",
+   "base": "LogCL",
+   "base_mrr": 0.28783902525901794,
+   "control_mrr": 0.31884223222732544,
+   "hrcov_mrr": 0.357673446337382,
+   "margin": 0.03883121411005658,
+   "decision": false
+  },
+  {
+   "dataset": "ICEWS18",
+   "base": "TiRGN",
+   "base_mrr": 0.3370080292224884,
+   "control_mrr": 0.3499107360839844,
+   "hrcov_mrr": 0.37087729573249817,
+   "margin": 0.020966559648513794,
+   "decision": true
+  },
+  {
+   "dataset": "GDELT",
+   "base": "RE-GCN",
+   "base_mrr": 0.19734574854373932,
+   "control_mrr": 0.2591632902622223,
+   "hrcov_mrr": 0.26389562090237934,
+   "margin": 0.004732330640157045,
+   "decision": false
+  },
+  {
+   "dataset": "GDELT",
+   "base": "LogCL",
+   "base_mrr": 0.21138924360275269,
+   "control_mrr": 0.2582160532474518,
+   "hrcov_mrr": 0.2658974329630534,
+   "margin": 0.007681379715601622,
+   "decision": true
+  },
+  {
+   "dataset": "GDELT",
+   "base": "TiRGN",
+   "base_mrr": 0.2167004644870758,
+   "control_mrr": 0.2594509720802307,
+   "hrcov_mrr": 0.2693309386571248,
+   "margin": 0.009879966576894106,
+   "decision": true
+  },
+  {
+   "dataset": "GDELT25X",
+   "base": "TiRGN",
+   "base_mrr": 0.39794076079825375,
+   "control_mrr": 0.41562046732953617,
+   "hrcov_mrr": 0.43049386143684387,
+   "margin": 0.014873394107307703,
+   "decision": true
+  }
+ ]
+}

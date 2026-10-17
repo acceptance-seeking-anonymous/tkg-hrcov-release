@@ -1,0 +1,163 @@
+{
+ "conventions_inherited_from_v7": {
+  "better_control": "per base, the one of BASE(+)RecB blend and RecB-POOL (valid-selected, hardening grids) with the higher official test MRR, as in v7",
+  "evaluator": "official py-tgb 2.3.0 Evaluator per-query RR / rank on the shipped *_test_ns.pkl negatives (polecat TiRGN: TiRGN replay; polecat CognTKE: g8_dump sparse store; smallpedia: stored float32 full rows; G1: RecB rows). Harness exact fused rank reported alongside; |dMRR| > 1e-4 flagged. If an arm cannot be scored officially within the budget it is scored with the exact fused rank (validated |dMRR| <= 1e-7) and labelled.",
+  "fit_select_split": "per dataset the stored valid rows of the v7 pipeline; cut = unique valid timestamps [int(0.7 * n_ts)] (tkgl-polecat: ts id 1423, 200,000-query valid sample, 139,236 fit-population / 60,764 select rows; tkgl-smallpedia: ts id 105, all 162,066 valid queries, 105,606 / 56,460). Fit rows = ts < cut with gold in the arm's pool, capped at 120,000 (seed 0); selection rows = ts >= cut (all of them).",
+  "fusion": "calibrated alpha/beta fusion with the base log-prob, s = alpha * log p_base + beta * f, alpha/beta by LBFGS (60 iterations) on the selection rows, exactly v7_btrain.calibrate_ab; 'fused' is the reported variant (= HRCOV_PAT), 'alone' secondary",
+  "learned_arms": "seeds 0, 1, 2; per-query RR averaged over seeds; per-seed MRR reported; H@k = mean over seeds of per-seed H@k",
+  "statistics": {
+   "MDE": "MDE_80 = 2.486 x SE_ts reported as sensitivity only",
+   "bar": "0.005 MRR (the project's practical margin)",
+   "intervals": "two-sided 95% percentile CI from both bootstraps; one-sided bounds L = 5th, U = 95th percentile",
+   "null_claim": "EXCLUDED (smaller than the bar) only if U of the signed delta < bar under the timestamp-block bootstrap; otherwise 'not excluded'",
+   "positive_claim": "present only if L > 0 under BOTH bootstraps (Holm-adjusted one-sided p < 0.05 when an item has several primary comparisons on one base)",
+   "query_bootstrap": "paired Poisson(1) bootstrap over test queries, B = 2000, seed 0",
+   "shared_draws": "within an item and dataset all contrasts use the same bootstrap draws (v7_common.summ_multi)",
+   "timestamp_block_bootstrap": "multinomial resampling of test timestamps (all queries of a timestamp, both directions), B = 2000, seed 0; statistic = resampled sum of per-query deltas / resampled number of queries"
+  }
+ },
+ "finiteness": "every new score / probability array (dumps, full rows, features, RecB rows, promoted lists, official outputs) is scanned for NaN / +inf / -inf before aggregation (finite_scan.py, neginf_masks.py); -inf only at padded candidate slots is reported as a mask; any NaN or +inf -> the affected item is BLOCKED and reported with counts, no dropping or imputation",
+ "hosts_budget": "<HOST> GPU 0 (GPU 1 belongs to others, not used) and <HOST> RTX 4090; <HOST> CPU <= 16 workers; target completion within ~4 days of registration; an item that will clearly take longer is reported with an estimate before the time is spent",
+ "items": {
+  "M2b_LambdaMART": {
+   "LMART_early_stopping_and_selection": "metric = MRR of the exact fused-rank statistic of the LMART score alone over ALL selection rows (identical to the MLP's epoch-selection criterion sel_MRR), evaluated after every boosting round; stop after 100 rounds without improvement; keep the best round. Grid point chosen by that selection MRR with seed 0; seeds 1 and 2 are fitted with the chosen grid point (the seed drives bagging, feature sampling and data order). No test number is read before all three seeds are fitted and the promoted lists written.",
+   "LMART_fixed_params": {
+    "bagging_fraction": 0.8,
+    "bagging_freq": 1,
+    "deterministic": true,
+    "feature_fraction": 0.8,
+    "label_gain": [
+     0,
+     1
+    ],
+    "lambda_l2": 1.0,
+    "lambdarank_truncation_level": 100,
+    "max_bin": 255,
+    "min_data_in_leaf": 200,
+    "num_threads": 16
+   },
+   "LMART_grid": {
+    "learning_rate": [
+     0.03,
+     0.1
+    ],
+    "n_estimators": "<= 3000 boosting rounds with early stopping",
+    "num_leaves": [
+     15,
+     31,
+     63
+    ]
+   },
+   "arms_same_run": {
+    "LIN_PAT": "linear scorer on the same 25 features (v7 B1 LIN), re-fit in the same run",
+    "LMART_PAT": "LightGBM (pip lightgbm==4.6.0, CPU) objective lambdarank; one group per fit query = its valid, unfiltered candidates (CA >= 0 and not another true answer: the analogue of the masked loss); label 1 for the gold, 0 otherwise; same fit rows (gold in pool, ts < cut, cap 120,000 seed 0)",
+    "MLP64_PAT": "2x64 MLP, the HRCOV_PAT ranker, re-fit in the same run (v7_btrain recipe: masked listwise loss, Adam 1e-3, wd 1e-5, bs 512, <= 30 epochs, patience 5 on selection MRR)"
+   },
+   "bases": {
+    "optional": {
+     "tkgl-polecat LogCL (pilot)": "only if the four required bases finish with budget left; same protocol; declared if skipped"
+    },
+    "required": {
+     "tkgl-polecat CognTKE (G8)": "pc layout, feat hardening/g8_cogntke/pc/work/feat_cogn, lists lists_cogn",
+     "tkgl-polecat TiRGN (seed 42, hardening checkpoint)": "pc layout, feat tracks/pc_tirgn/work/feat_tirgn, lists lists_tirgn",
+     "tkgl-smallpedia RE-GCN TGB configuration (regcn_tgb)": "sp layout, feat hardening/ablations_A/inputs/sp_regcn_tgb_feat (copy of the presub feature tensor)",
+     "tkgl-smallpedia TiRGN (pilot-2, valid-best epoch 20)": "sp layout, feat tracks/pilot_smallpedia/work/feat_tirgn"
+    }
+   },
+   "cost_reporting": "training wall time per seed (incl. early stopping; grid time reported separately) and inference latency to score the test candidate tensor: LMART on 16 CPU threads vs MLP on the same 16 CPU threads and MLP on GPU, ms per 1,000 queries, features precomputed (identical for both)",
+   "features": "the 25 HRCOV_PAT columns (0-23 and 29), raw values for LMART (trees are invariant to monotone scaling), standardised for MLP/LIN as in v7",
+   "interpretation": "MLP - LMART present positive -> the MLP is better than LambdaMART; present negative -> LambdaMART is better; excluded in both directions (|delta| below the bar by ts U) -> equivalent within 0.005; otherwise not resolved. Reported per base; no pooling across bases.",
+   "pool": "HRCOV_PAT candidate set (W = 100: stored base top-50 ++ <= 50 pattern candidates, bridge columns masked), exactly v7_btrain load_pt",
+   "primary_contrasts_per_base": [
+    "MLP64_PAT_fused - LMART_PAT_fused",
+    "LMART_PAT_fused - LIN_PAT_fused",
+    "LMART_PAT_fused - better control"
+   ],
+   "question": "Does a tree-based learning-to-rank model (LambdaMART) on the same 25 features, pool, rows and fusion match the 2x64 MLP ranker?",
+   "secondary": [
+    "alone variants of the same contrasts",
+    "MLP64_PAT re-fit - stored HRCOV_PAT (fidelity, polecat TiRGN / CognTKE / smallpedia TiRGN / regcn_tgb)",
+    "per-seed MRR, selected grid point and best round per base"
+   ]
+  },
+  "M3a_validation_trained_base": {
+   "base_recipe": "TiRGN exactly as pilot_smallpedia/code/sp_tirgn.py (convgcn + timeconvtranse, 2 layers, h 200, L = 10, hr 0.3, n_bases 100, dropouts 0.2, lr 1e-3, wd 1e-5, grad-norm 1, seed 42, <= 30 epochs, patience 5, global-history vocabulary online), with ONE change: training snapshots = all train snapshots plus every validation snapshot with ts < 105 (the validation-fit period; all its facts, a superset of the ranker's fit rows, which are its gold-in-pool queries). Snapshot shuffling, history (previous L ground-truth snapshots) and loss unchanged.",
+   "controls": "BASE(+)RecB blend and RecB-POOL on this base with the hardening grids (hd_blend valid, the same RecB trained rows), selected by MRR on the validation-select queries only (56,460 queries, ts >= 105); one official test pass for base, BLEND and POOL",
+   "dataset": "tkgl-smallpedia",
+   "dumps": "full log-prob rows for all validation and test queries + harness dump (sp_tirgn.py dump code), into a separate directory",
+   "feasibility_stop": "if the run cannot be done with the recipe unchanged (e.g. out of memory on <HOST> GPU 0, 96 GB), the item stops and is reported; the recipe is not changed",
+   "interpretation": "primary present and its ts-block L >= 0 with point >= 0.005 -> the supervision asymmetry (validation labels used only by HRCOV) does not explain the smallpedia margin; primary not present or excluded above the bar -> the margin is (partly) explained by validation supervision; report as such, no change to other claims",
+   "primary": "HRCOV_PAT on the ORIGINAL base (stored v7.4 bridge-free run, official, seeds 0-2) - better control on the validation-trained base (better = higher official test MRR of its BLEND / POOL)",
+   "question": "If the base itself is trained with the validation-fit labels the ranker uses, do the recurrence controls on that base close the margin of HRCOV_PAT?",
+   "secondary": [
+    "validation-trained base MRR / H@k, and minus the original base (paired)",
+    "better control on the validation-trained base - better control on the original base",
+    "HRCOV_PAT on the validation-trained base (full sp pipeline: lists, lookups, features, v7 MLP64_PAT recipe, selection rows ts >= 105) - better control on the validation-trained base, only if the pipeline fits the budget; declared secondary (its fit rows are in-sample for this base)"
+   ],
+   "selection": "epoch selection / early stopping on the time-aware filtered MRR (both directions) of the validation-select snapshots only (ts >= 105); validation-select facts are never a training target. They enter only as ground-truth history for later snapshots, as in every evaluation of the recipe."
+  },
+  "M4_crossfitted_RecB": {
+   "G1_xf": "presub g1_features.py + g1_train.py unchanged (RecB_xf top-W, W = 150, 19 features, K in {50, 150} selected on validation-select, 3 seeds), official scoring with RecB_xf rows (--source recb)",
+   "RecB_feature_arms": {
+    "arms_same_run": {
+     "HR19": "2x64 MLP on the base top-50 only (PT pool columns 50-99 masked), 19 features (0-18) = the HR configuration under the v7 recipe",
+     "HR19_RBtr": "19 + 3 RecB-tr",
+     "HR19_RBxf": "19 + 3 RecB_xf",
+     "PAT": "MLP64_PAT (25 features) re-fit",
+     "PAT_RBtr": "25 + 3 RecB-tr features",
+     "PAT_RBxf": "25 + 3 RecB_xf features"
+    },
+    "bases": [
+     "tkgl-polecat TiRGN",
+     "tkgl-smallpedia TiRGN"
+    ],
+    "features": "hd_rbfeat.py (rb_log_q, rb_log_psi, rb_log_xi) for every candidate of the HRCOV_PAT pool, from RecB trained (tr, the v7.4 parameters) and from RecB_xf",
+    "recipe": "v7_btrain MLP64 recipe, masked loss, same fit/selection rows, calibrated fusion, 3 seeds"
+   },
+   "RecB_xf_rows": "hd_recb.py --stage test with the xf selection (new directory recb_xf): test ranks of RecB_xf (reported) and the clean CSR files for valid and test",
+   "RecB_xf_selection": "clean variant, TGB train() procedure (per directed relation: lambda_r over LAMS with alpha = 1, then alpha_r over ALPHAS at lambda_r; strict '>' updates; TGB initial values), computed from the stored exact validation ranks of all 14 x 13 configurations (hardening/work/recb/recb_valid_ranks_clean_<ds>.npy) restricted to the validation-select queries (ts >= cut: polecat 1423, smallpedia 105). Relations without validation-select queries keep the TGB defaults (lambda 1.0001, alpha 0.99999).",
+   "datasets": [
+    "tkgl-polecat",
+    "tkgl-smallpedia"
+   ],
+   "interpretation": "G1_xf - G1 present positive -> G1 was understated and HRCOV - G1 (the 'base adds' range) overstated; restate the range with G1_xf. RecB-feature xf arm no longer below the same-run arm without RecB (|delta| excluded at 0.005 or positive) while the tr arm is -> the v7.4 symptom is attributable to label-informed RecB parameters; both below -> not attributable to the parameter selection.",
+   "primary": [
+    "G1_xf - G1 (per dataset)",
+    "HRCOV - G1_xf on each decision base with a stored official HRCOV run (polecat TiRGN, LogCL, CognTKE; smallpedia TiRGN, regcn_tgb), compared with HRCOV - G1",
+    "PAT_RBxf - PAT and HR19_RBxf - HR19 (polecat TiRGN, smallpedia TiRGN)"
+   ],
+   "question": "Are G1 and the RecB-as-feature arms affected by RecB's per-relation parameters having been selected on the queries the ranker is fitted on?",
+   "secondary": [
+    "PAT_RBtr - PAT and HR19_RBtr - HR19 (same-run replication of the v7.4 symptom on the bridge-free arm)",
+    "PAT_RBxf - PAT_RBtr, HR19_RBxf - HR19_RBtr",
+    "RecB_xf - RecB trained test MRR",
+    "comparison with the v7.4 values: G1 polecat 0.2482 / smallpedia 0.6511; HR_RB - HR -0.0269 and HRCOV+BR_RB - HRCOV+BR -0.0119 on smallpedia TiRGN (harness, bridge runs; different run, not paired)",
+    "G1 with default-mode RecB (lambda 0.1, alpha 0.99, no labels) as sensitivity, only if budget allows"
+   ],
+   "why_validation_select_not_training_tail": "(i) it separates RecB's selection labels from the ranker's fit labels exactly (fit rows ts < cut, RecB selection ts >= cut); (ii) it keeps RecB tuned on the period adjacent to test, so a change in G1 is attributable to the label separation rather than to tuning on an older period (smallpedia's training split spans decades, a training-tail selection would confound separation with drift); (iii) the selection split is already the split on which every selection decision of the protocol is made; (iv) exact ranks of every configuration are stored for every validation query, so the selection is recomputed exactly without new scoring. Limitation (reported): fewer queries per relation than full validation; the number of relations whose (lambda_r, alpha_r) changed and that fall back to the defaults are reported."
+  },
+  "M6_base_seeds_smallpedia": {
+   "bases": {
+    "RE-GCN TGB configuration": "the G3 recipe (presub g3_tgb_regcn.py), the existing G3 run counts as one if its recipe matches + two new seeds (43, 44; if the existing run used 43 or 44, the next unused integers)",
+    "TiRGN": "sp_tirgn.py recipe, seeds 42 (existing pilot-2 run, counts as one) + 43 + 44"
+   },
+   "per_seed_pipeline": "full-row dumps; HRCOV_PAT with the stored recipe of that base (sp lists / pattern block / features, hcpat_train.py, 3 re-ranker seeds); BLEND / POOL with the hardening grids selected on the full validation set (as the stored controls); one official test pass",
+   "priority": "LOWEST ('nice to have, not essential'); scheduled only on GPU time items M2b/M3a/M4 do not need (<HOST> RTX 4090 when items 1-3 do not use it; <HOST> GPU 0 only after their GPU stages); items 1-3 win any conflict",
+   "report": "per seed: base MRR, BLEND, POOL, HRCOV_PAT, margin = HRCOV_PAT - better control with both CIs; across the 3 base seeds: mean and SD (n - 1) of the margin and of the base MRR, min-max; descriptive only, no decision",
+   "stop_rule": "stops at the 4-day window (registration + 96 h); whatever is complete is reported as partial descriptive results; no extension without asking"
+  }
+ },
+ "label": "PRE-SPECIFIED LATER ANALYSES on previously inspected test sets (reviewer-requested; NOT untouched confirmation)",
+ "name": "v76_rule",
+ "outputs": "v76_report.md (per item: card, tables, contrasts with both CIs, caveats), v76_results.json, v76_manuscript_markers.csv (\\pend{V76-LMART}, \\pend{V76-VALBASE}, \\pend{V76-G1XF}, optional \\pend{V76-SEEDS}) with suggested wording",
+ "parent_rule": {
+  "file": "tois_v7_rule.json",
+  "registered_utc": "2026-10-14T10:13:36Z",
+  "sha256": "bfef91681490278623925e1494890719e9b4529d8ddbf9375dfa83ec2a954a8d",
+  "version_id": "c13ffdbb-0301-4d5d-82fa-1065c67125e6"
+ },
+ "registered_utc": "2026-10-15T12:07:43Z",
+ "requested_by": "PI decision 2026-10-15 via lead: simulated TOIS review actions M2b, M3a, M4 (tois_sim_review.md cee48807, actions a55e0800, triage ae765b1f); M6 added by the PI at lowest priority",
+ "selection_discipline": "every hyper-parameter, grid point, boosting round, epoch, calibration weight, blend/pool configuration and RecB parameter is chosen on validation rows only (fit / selection split above); no configuration changes after a v7.6 test number is read; any later addition is labelled post-hoc",
+ "status_of_test_data": "tkgl-polecat and tkgl-smallpedia test sets were inspected in earlier rounds. At registration no test number exists for any arm defined here: LMART (any base), the validation-trained TiRGN smallpedia base and its controls, cross-fitted RecB (RecB_xf), G1_xf, the RecB-feature arms of this rule, and the M6 seeds 43/44."
+}

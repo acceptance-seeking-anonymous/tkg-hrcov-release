@@ -1,0 +1,85 @@
+{
+ "name": "a_presub_rule",
+ "version": 1,
+ "registered_utc": "2026-10-13T13:35:00Z",
+ "registered_before_any_new_number": true,
+ "registration_note": "Written after the hardening study (hardening_report fc15d366, hardening_rule ba7d388b) and before any G1, G2 or G3 number (valid or test, any dataset) existed. G7 re-analyses the stored per-query reciprocal ranks of the hardening study (no new model output). Smoke tests of the G1-G3 code use at most 2,000 valid and 2,000 test queries, check only that code runs and that identity / reproduction assertions hold; their metric values are not reported and are not used for any choice.",
+ "scope": "Manuscript A (ACM TOIS) minimum pre-submission package, outline section (g) rows R3, R4, R5, R7: G1, G2, G3, G7.",
+ "common": {
+  "protocol": "single-step extrapolation, both query directions, time-aware filtered ranking, ground-truth online history before t, every test query of the dataset.",
+  "evaluators": {
+   "TGB 2.0 datasets (tkgl-polecat, tkgl-smallpedia, tkgl-icews)": "official py-tgb 2.3.0 Evaluator with the shipped negatives (per-query RR; promoted lists lifted above the generator's score row), harness exact filtered ranks alongside",
+   "ICEWS18, GDELT (RE-GCN split)": "harness exact time-aware filtered ranks (oih_common filter; no TGB evaluator exists for these splits)"
+  },
+  "reranker_recipe": "pilot-1 HR recipe unchanged: MLP d-64-64-1 (zero-initialised last layer), listwise CE over the arm's candidate set, Adam lr 1e-3, wd 1e-5, batch 512, <= 30 epochs, early stopping on valid-select MRR with patience 5, final score s = alpha*log p_gen + beta*f with (alpha, beta) = argmin valid-select listwise NLL (LBFGS); seeds 0, 1, 2; valid timestamps < 70% quantile = fit, rest = select.",
+  "seeds_statistic": "per-query RR averaged over seeds 0-2 for every re-ranker arm; deterministic arms (bases, RecB, blends, pools) once.",
+  "bootstrap": {
+   "primary": "query-level Poisson(1) paired bootstrap, B = 2000, seed 0 (harness convention, as in the hardening rule); one-sided p = fraction of bootstrap deltas <= 0",
+   "robustness (reported alongside every decision delta; G7 method)": "timestamp-block bootstrap: clusters = all test queries sharing a timestamp (both directions); clusters resampled with replacement (multinomial), B = 2000, seed 0; statistic = sum of resampled per-query deltas / number of resampled queries; percentile 95% CI; one-sided p = fraction <= 0",
+   "strata": "B = 1000"
+  },
+  "margin": 0.005,
+  "selection_discipline": "every pool size, blend weight, RecB lambda/alpha, re-ranker epoch and calibration is chosen on valid only; each test configuration is scored once; no configuration is changed after a test number is read; anything else is labelled post-hoc.",
+  "hosts": "GPU: <HOST> (RTX 4090) or <HOST> GPU 0 only if nvidia-smi shows it idle at dispatch (GPU 1 is never used). CPU: <HOST> <= 8 workers while Stage B runs, <HOST> or <HOST> otherwise. The host of every number is recorded."
+ },
+ "G7_cluster_bootstrap": {
+  "question": "Do the hardening decision deltas survive non-independence of queries (both directions of one fact, same-timestamp queries)?",
+  "inputs": "stored official-evaluator per-query RR arrays of the hardening study (official_test_<ds>_<base>.npz; re-rankers averaged over seeds 0-2) and the RecB per-query ranks; no model is re-run.",
+  "deltas": "every hardening decision delta: on each dataset's two strongest bases C1 (HRCOV - BASE(+)RecB, HRCOV - RecB-POOL), C2 (HRCOV - strongest blend of any base), C3 (head stratum HRCOV - better control); secondary HRCOV - HR, HR - better control, HRCOV - RecB trained; and HRCOV - better control on every other base.",
+  "clusters": [
+   "timestamp blocks (primary G7 statistic)",
+   "fact pairs (the two directions of one test fact)"
+  ],
+  "report": "delta, query-level Poisson CI / p (recomputed, must equal the verdict's to 1e-12 for the delta), cluster CIs / p, CI width ratio cluster/query, and whether any pre-registered C1/C2/C3 pass/fail would change if the cluster bootstrap replaced the query bootstrap (post-hoc robustness; the registered outcome is not altered)."
+ },
+ "G1_base_free_learned_recurrency": {
+  "question": "Does a learned re-ranker that sees no base model at all (candidates and generator features from RecB only, same evidence features and re-ranker recipe) reach HRCOV?",
+  "datasets": [
+   "tkgl-polecat",
+   "tkgl-smallpedia",
+   "tkgl-icews (only after Stage B finishes and only if the RecB CSR and evidence features can be built in <= 4 h CPU; same rule, reported as additional)"
+  ],
+  "generator": "RecB trained mode, clean variant (psi reset per query), per-relation lambda_r / alpha_r exactly as selected on valid in the hardening study (hd_recb.py): score(o) = 1000*alpha_r*psi(o) + 1000*(1-alpha_r)*xi(o) over ALL entities; q(o) = score(o) / sum_e score(e).",
+  "candidate_pool": "RecB top-K over all entities (ties broken by entity id), K in {50, 150}; no base candidates, no pattern or bridge candidates (both are base-dependent in HRCOV).",
+  "features": "19 per (q, c): the 8 HR 'base' features computed from q instead of the base probability (log q, log q - log q1, log RecB rank, in-top-50 flag, q1, entropy of the normalised top-50, margin12, log tail mass outside the RecB top-200) + the 11 HR evidence features (rs_features Hist / DyadReader, facts with ts < t), identical code.",
+  "arms": {
+   "G1_K50": "stand, W = 50 (analogue of HR)",
+   "G1_K150": "stand, W = 150; columns 51-150 promoted only above the minimum fused score of columns 1-50 (HRCOV promotion convention)"
+  },
+  "configuration_choice": "G1 = the arm (K) with the higher mean valid-select MRR over seeds 0-2; the other arm is reported as secondary. Fit / select rows identical to the hardening re-rankers (polecat: 200k valid sample rng 12345; smallpedia: full valid).",
+  "scoring": "official evaluator; score row = RecB q row with the G1 promoted list lifted above all other entities (pilot convention). Verification: the RecB row alone must reproduce the hardening clean-trained RecB test MRR (polecat 0.19923, smallpedia 0.60464) to 1e-4.",
+  "comparison": "on each dataset's two strongest bases b of the hardening study (polecat TiRGN, LogCL; smallpedia TiRGN, RE-GCN re-tuned): delta_b = MRR(HRCOV_b) - MRR(G1), paired per test query, both bootstraps; secondary: G1 - RecB trained, G1 - better recurrency control of b, HR_b - G1_K50.",
+  "decision_per_dataset": {
+   "BASE_CONTRIBUTES": "on BOTH strongest bases: delta_b >= 0.005 AND query-level one-sided p < 0.05 AND the timestamp-block 95% CI lower bound > 0",
+   "LEARNED_RECURRENCY": "on EITHER strongest base: delta_b < 0.005, or either bootstrap's 95% CI includes 0 (or lies below 0)"
+  },
+  "manuscript_consequence": {
+   "LEARNED_RECURRENCY on both TGB datasets": "the paper is reframed as 'learned recurrency': title, abstract and contributions must not claim that the frozen base contributes beyond candidates; HRCOV is presented as a learned recurrency model with base candidates as an optional input",
+   "LEARNED_RECURRENCY on exactly one": "the base-contribution claim is restricted to the dataset with BASE_CONTRIBUTES and the other is reported as a learned-recurrency regime; title/abstract must state the restriction",
+   "BASE_CONTRIBUTES on both": "the base contribution is demonstrated; report delta_b with both CIs"
+  }
+ },
+ "G2_hrcov_controls_icews18_gdelt": {
+  "question": "Does HRCOV (pattern-prior pool widening) beat recurrency used well on ICEWS18 and GDELT?",
+  "datasets": {
+   "ICEWS18": "RE-GCN split, n_test = 99,090 queries, valid = all 91,990 rows",
+   "GDELT": "RE-GCN split, n_test = 610,482 queries, valid = 200,000 rows uniform without replacement (rng 12345) of the 477,530 valid rows"
+  },
+  "bases": "TiRGN, RE-GCN, LogCL frozen checkpoints of the shared harness (the bases of the residual-track rows); full float32 log-softmax score rows from tracks/retriever/fullscores (valid + test). Verification before use: the full-row filtered gold rank equals the harness dump rank on >= 99.9% of rows and the base MRR reproduces the residual report (TiRGN 0.337006 / 0.216701, LogCL 0.287839 / 0.211389, RE-GCN 0.286905 / 0.197346).",
+  "claim_system": "HRCOV_PAT: C = base top-50 ++ first 50 pattern-prior candidates outside the top-50 (pilot-1 pc_lists pattern prior: 1-2-hop entity-anonymised path patterns, M1 = 64, M2 = 32, utility u = te_hier - log1p(mass_base(C_p)(e-1)), TE tables from the early 70% of train timestamps); W = 100; 25 features = 8 base (exact, from full rows) + 11 evidence + the 6 pattern coverage features (pat_best_util, pat_best_te, pat_log_npat, pat_reach, pat_log_pos, is_cov_cand); bridge block not used (bridge caches exist for TiRGN only; it added ~0 on polecat). Re-ranker recipe as common; HR (W = 50, 19 features) run in the same pipeline as reference and pool-widening contrast.",
+  "controls": "BASE(+)RecB (42 configs) and RecB-POOL (126 configs) exactly as in the hardening rule, RecB default and trained (hd_recb.py, per-relation lambda/alpha on valid; timestamps reformatted to unit steps), selected on valid (ICEWS18 full valid; GDELT the 200k valid sample), test scored once.",
+  "evaluator": "harness exact time-aware filtered ranks (primary), computed with the same tie convention for every arm (hd_blend.py harness ranks for bases, blends, pools and lifted re-ranker lists)",
+  "decision": "the hardening rule family per dataset: two strongest bases by valid MRR (full-row harness ranks on the valid rows above); C1 HRCOV_PAT_b - each of {b(+)RecB, RecB-POOL_b} >= 0.005 with one-sided p < 0.05; C2 HRCOV_PAT_b - max over all three bases b'(+)RecB > 0 with p < 0.05; C3 head stratum (gold train frequency >= 500) must not show DAMAGE (95% CI entirely below 0 and |delta| >= 0.001). Labels PRACTICAL_ADVANCE / RECURRENCY_DONE_WELL / HEAD_DAMAGE; timestamp-block bootstrap reported alongside.",
+  "secondary": "HRCOV_PAT - HR (pool widening), HR - better control, G1 analogue on ICEWS18/GDELT only if time permits (not in the decision); HR must reproduce residual arm B within 0.002 MRR (TiRGN 0.3664 / 0.2656) or the discrepancy is reported."
+ },
+ "G3_tgb_config_regcn_smallpedia": {
+  "question": "With RE-GCN in the TGB 2.0 configuration on tkgl-smallpedia (TGB row 0.594), do HRCOV and the controls change the smallpedia outcome?",
+  "base": "TGB repository examples/linkproppred/tkgl-smallpedia/regcn.py with modules.tkg_utils.get_args_regcn defaults (encoder uvrgcn, 2 layers, h 200, n_bases 100, layer norm, self-loop, history 3 train/test, decoder convtranse, dropouts 0.2, lr 1e-3, grad-norm 1, task weight 0.7 entity-only, n_epochs 10 with the script's valid-best checkpoint, seed 1, run 1); DGL replaced by the project's pure-torch DGL shim (the image has no DGL; recorded as a deviation).",
+  "acceptance": "official test MRR from the TGB script is reported; 'reproduced' iff within 0.02 of 0.594. The base is used either way (it is valid-selected); a non-reproduction is reported, not tuned toward.",
+  "dump": "the trained model replayed with ground-truth history in harness query order -> full float32 log-prob rows (valid + test) and a top-200 harness-schema dump; the replay must reproduce the TGB script's test MRR to 1e-3.",
+  "pipeline": "unchanged smallpedia pipeline (sp_lists, sp_features, sp_train arms HR, HRCOV, HRCOV_ST, 3 seeds) and hd_blend fullrows controls (42 + 126 configs, valid selection, official test pass), base label regcn_tgb.",
+  "decision": "the hardening rule is re-evaluated for tkgl-smallpedia with regcn_tgb added to the candidate pool (architecture selection by valid MRR among regcn, regcn_tuned, regcn_tgb; two strongest; C2 over all bases). The resulting outcome replaces the smallpedia outcome in the manuscript; if it differs from PRACTICAL_ADVANCE, that is reported as the primary result.",
+  "secondary": "HRCOV_regcn_tgb - HRCOV_TiRGN, base-relative gains, G1 - regcn_tgb controls."
+ },
+ "not_in_scope_this_round": "full G1/G2/G3 runs (queued after Stage B by the PI); G4, G5, G6, G8."
+}

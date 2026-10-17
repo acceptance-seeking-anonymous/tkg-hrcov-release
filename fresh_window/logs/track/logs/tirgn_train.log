@@ -1,0 +1,55 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+[fh] GPU memory cap 30.0 GiB of 95.0 GiB (NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition)
+[     0.2s] snapshots {'train': 184, 'valid': 28, 'test': 61} tint 1 num_times 273
+use layer :convgcn
+activate function: <function rrelu at 0x7266a67cf1a0>
+activate function: <function rrelu at 0x7266a67cf1a0>
+[     1.7s] ep 0 step 0 / 184 loss 5.1259 s/step 0.748 gpu_mem_GB 1.64
+[    41.9s] {'epoch': 0, 'loss': 2.93122, 'valid_filt_MRR': 0.332467, 'train_epoch_s': 39, 't_s': 42}
+[    42.2s] ep 1 step 0 / 184 loss 2.7147 s/step 0.215 gpu_mem_GB 3.68
+[    81.7s] {'epoch': 1, 'loss': 2.7229, 'valid_filt_MRR': 0.339644, 'train_epoch_s': 38, 't_s': 82}
+[    81.8s] ep 2 step 0 / 184 loss 2.904 s/step 0.049 gpu_mem_GB 3.68
+[   119.2s] {'epoch': 2, 'loss': 2.68215, 'valid_filt_MRR': 0.363866, 'train_epoch_s': 36, 't_s': 119}
+[   119.5s] ep 3 step 0 / 184 loss 2.6047 s/step 0.167 gpu_mem_GB 3.68
+[   159.7s] {'epoch': 3, 'loss': 2.64873, 'valid_filt_MRR': 0.369635, 'train_epoch_s': 38, 't_s': 160}
+[   159.9s] ep 4 step 0 / 184 loss 2.6039 s/step 0.186 gpu_mem_GB 3.68
+[   195.3s] {'epoch': 4, 'loss': 2.61928, 'valid_filt_MRR': 0.38005, 'train_epoch_s': 34, 't_s': 195}
+[   195.6s] ep 5 step 0 / 184 loss 2.6332 s/step 0.192 gpu_mem_GB 3.68
+[   230.5s] {'epoch': 5, 'loss': 2.59575, 'valid_filt_MRR': 0.38267, 'train_epoch_s': 33, 't_s': 231}
+[   230.8s] ep 6 step 0 / 184 loss 2.6096 s/step 0.176 gpu_mem_GB 3.68
+[   265.9s] {'epoch': 6, 'loss': 2.57627, 'valid_filt_MRR': 0.389367, 'train_epoch_s': 34, 't_s': 266}
+[   266.1s] ep 7 step 0 / 184 loss 2.6241 s/step 0.168 gpu_mem_GB 3.68
+[   301.3s] {'epoch': 7, 'loss': 2.55915, 'valid_filt_MRR': 0.392205, 'train_epoch_s': 34, 't_s': 301}
+[   301.6s] ep 8 step 0 / 184 loss 2.611 s/step 0.203 gpu_mem_GB 3.68
+[   336.1s] {'epoch': 8, 'loss': 2.54553, 'valid_filt_MRR': 0.38904, 'train_epoch_s': 33, 't_s': 336}
+[   336.3s] ep 9 step 0 / 184 loss 2.5181 s/step 0.181 gpu_mem_GB 3.68
+[   370.5s] {'epoch': 9, 'loss': 2.53107, 'valid_filt_MRR': 0.392685, 'train_epoch_s': 33, 't_s': 371}
+[   370.8s] ep 10 step 0 / 184 loss 2.459 s/step 0.2 gpu_mem_GB 3.68
+[   405.8s] {'epoch': 10, 'loss': 2.5184, 'valid_filt_MRR': 0.393368, 'train_epoch_s': 34, 't_s': 406}
+[   406.1s] ep 11 step 0 / 184 loss 2.4761 s/step 0.169 gpu_mem_GB 3.68
+[   440.8s] {'epoch': 11, 'loss': 2.50497, 'valid_filt_MRR': 0.39784, 'train_epoch_s': 33, 't_s': 441}
+[   441.0s] ep 12 step 0 / 184 loss 2.3781 s/step 0.146 gpu_mem_GB 3.68
+[   475.6s] {'epoch': 12, 'loss': 2.49264, 'valid_filt_MRR': 0.394943, 'train_epoch_s': 33, 't_s': 476}
+[   475.8s] ep 13 step 0 / 184 loss 2.4794 s/step 0.155 gpu_mem_GB 3.68
+[   511.0s] {'epoch': 13, 'loss': 2.48027, 'valid_filt_MRR': 0.39553, 'train_epoch_s': 34, 't_s': 511}
+[   511.1s] ep 14 step 0 / 184 loss 2.4732 s/step 0.182 gpu_mem_GB 3.68
+[   546.2s] {'epoch': 14, 'loss': 2.46784, 'valid_filt_MRR': 0.394119, 'train_epoch_s': 33, 't_s': 546}
+[   546.3s] ep 15 step 0 / 184 loss 2.4422 s/step 0.179 gpu_mem_GB 3.68
+[   581.6s] {'epoch': 15, 'loss': 2.4555, 'valid_filt_MRR': 0.393861, 'train_epoch_s': 34, 't_s': 582}
+[   581.8s] ep 16 step 0 / 184 loss 2.4092 s/step 0.186 gpu_mem_GB 3.68
+[   617.3s] {'epoch': 16, 'loss': 2.4435, 'valid_filt_MRR': 0.394104, 'train_epoch_s': 34, 't_s': 617}
+[   617.3s] no dump; done

@@ -1,0 +1,43 @@
+{
+ "name": "g6_protocol",
+ "label": "DESCRIPTIVE PROFILING (no decision rule)",
+ "requested_for": "Manuscript A (cost / latency section); PI-approved G6",
+ "registered_before_any_g6_number": true,
+ "systems": {
+  "bases": [
+   "tkgl-polecat TiRGN (hardening checkpoint, valid-best epoch; authors' model code via the project's pure-torch DGL shim)",
+   "tkgl-smallpedia TiRGN (pilot-2 checkpoint, valid-best epoch 20)"
+  ],
+  "optional": "tkgl-icews RE-GCN (Stage B) only if its frozen checkpoint and pipeline inputs are already on <HOST> and the extra cost is < 1 h; otherwise reported as not run",
+  "arms": {
+   "base": "frozen base alone (score row -> ranked answer list)",
+   "HR": "history re-ranker over base top-50 (19 features, W = 50)",
+   "HRCOV_PAT": "bridge-free HRCOV: base top-50 ++ first <= 50 pattern-prior candidates (W = 100), 25 features"
+  }
+ },
+ "stages": {
+  "S1_base_scoring": "frozen base produces the full log-prob row for the query (online ground-truth history < t); the per-snapshot history update / evolution that all queries of a timestamp share is timed separately and also reported amortised per query",
+  "S2_candidate_generation": "top-50 of the base row (HR, HRCOV_PAT) + the pattern-prior block (HRCOV_PAT only; 1-2-hop entity-anonymised path patterns over the online event index, pilot-1 setting)",
+  "S3_feature_extraction": "the re-ranker features of every candidate (8 base + 11 evidence for HR; + 6 pattern-coverage for HRCOV_PAT)",
+  "S4_rerank_fusion": "re-ranker MLP inference (seed-0 trained model) + fusion alpha*log p + beta*f + final ordering"
+ },
+ "sample": "fixed 10,000-query sample of the test split of each dataset (numpy default_rng(0) choice without replacement over test query indices in harness split order, then sorted by timestamp so history is processed online); identical sample for all arms",
+ "modes": {
+  "batch_1": "queries one at a time (per-query wall-clock, torch.cuda.synchronize around GPU stages)",
+  "batched": "all sample queries of one timestamp together (GPU stages chunked at 512); per-query latency = batch time / batch size"
+ },
+ "repeats": "3 timed repeats after 1 warm-up pass (warm cache: data loaded, indices built, CUDA kernels compiled); per-query latency statistics pooled over repeats",
+ "metrics": [
+  "per-query latency p50 / p95 / mean per stage and end-to-end, batch-1 and batched (ms)",
+  "throughput (queries / s) per arm and mode",
+  "peak GPU memory per stage (torch.cuda.max_memory_allocated, reset per stage) and process peak (nvidia-smi sampled)",
+  "peak host RSS per stage (resource / psutil)",
+  "amortised overhead vs base alone = (arm end-to-end time - base time) / base time, per mode",
+  "one-off setup costs reported separately (index build, model load), not included in per-query latency"
+ ],
+ "environment": "<HOST>, GPU 1 only (RTX PRO 6000 Blackwell 96 GB; GPU 0 is busy with G8 and is not touched), tkg-gpu:latest (torch 2.8.0+cu128); CPU stages single-process (no worker pool) with a fixed thread count; host / GPU / driver / CUDA / torch / numpy / scipy versions and concurrent load (other jobs on the host) recorded",
+ "caveats_to_report": "the host is shared (G8 training on GPU 0 and its CPU retrieval workers run concurrently), so absolute latencies are upper bounds for a dedicated machine; the pipeline code is research code (python loops), not an optimised serving implementation",
+ "outputs": "tracks/hardening/g6_latency/ on <HOST>: g6_latency.json, g6_latency_table.csv, logs",
+ "registered_utc": "2026-10-14T04:23:49Z",
+ "sha256": "0c0638d4002a9c1b08638d2c0df27d7ce26c7a3e15915d6a65a267c8c1612d75"
+}

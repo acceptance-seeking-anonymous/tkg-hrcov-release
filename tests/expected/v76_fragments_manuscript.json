@@ -1,0 +1,13 @@
+{
+ "source": "Manuscript A v7.6.1 LaTeX source: each string occurs verbatim in the main text or a table",
+ "fragments": {
+  "tab:mechanism MLP - LambdaMART": "2$\\times$64 MLP $-$ LambdaMART on the same features & $+$0.0006 [$+$0.0004, $+$0.0010] & $-$0.0010 [$-$0.0015, $-$0.0006] \\\\",
+  "tab:mechanism LambdaMART - linear": "LambdaMART $-$ linear scorer & $+$0.0115 [$+$0.0109, $+$0.0122] & $+$0.0163 [$+$0.0141, $+$0.0177] \\\\",
+  "text LambdaMART ranges": "MLP $-$ LambdaMART from $-$0.0015 to $+$0.0006, in both directions) and also exceeds the linear scorer ($+$0.0050 to $+$0.0222) and the better control ($+$0.0097 to $+$0.0468)",
+  "text validation-trained base": "raises the base by $+$0.0035 and the better control by $+$0.0045, and \\HRCOV{} on the original base still exceeds the retrained base's better control by $+$0.0264 [$+$0.0232, $+$0.0285] (against $+$0.0310): base supervision closes about 15\\% of the margin",
+  "tab:g1 G1xf polecat": "G1$_{\\mathrm{xf}}$ $-$ G1 (cross-fitted RecB; G1$_{\\mathrm{xf}}$ 0.2480)$^{\\dagger}$ & $-$0.0002 & [$-$0.0004, $-$0.0001] & [$-$0.0004, $-$0.0001] & within the bar \\\\",
+  "tab:g1 G1xf smallpedia": "G1$_{\\mathrm{xf}}$ $-$ G1 (cross-fitted RecB; G1$_{\\mathrm{xf}}$ 0.6521)$^{\\dagger}$ & $+$0.0010 & [$+$0.0006, $+$0.0013] & [$-$0.0004, $+$0.0037] & not present$^{\\ddagger}$ \\\\",
+  "text base seeds": "three training seeds give a margin of $+$0.0317 $\\pm$ 0.0022 for TiRGN (mean $\\pm$ SD; $+$0.0299 to $+$0.0342) and $+$0.0334 $\\pm$ 0.0003 for the TGB-configuration RE-GCN ($+$0.0330 to $+$0.0336)",
+  "tab:rules outcome": "LambdaMART within the bar of the MLP on all four bases; validation-trained base closes 15\\% of the margin; G1 changes by $-$0.0002 and $+$0.0010; base-seed margins $+$0.0317 $\\pm$ 0.0022 (TiRGN) and $+$0.0334 $\\pm$ 0.0003 (RE-GCN) \\\\"
+ }
+}

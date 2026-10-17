@@ -1,0 +1,19 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+use layer :convgcn
+activate function: <function rrelu at 0x74f225336660>
+activate function: <function rrelu at 0x74f225336660>
+[    11.1s] ALL DONE {"split": "test", "n": 457168, "valid_filt": null, "rowsum_prob_min": 0.9999998524166342, "rowsum_prob_max": 1.0000002125106977}

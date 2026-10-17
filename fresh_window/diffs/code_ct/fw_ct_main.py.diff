@@ -1,0 +1,128 @@
+--- a/v78_external/code/ct_adapted_main.py
++++ b/code_ct/fw_ct_main.py
+@@ -1,44 +1,86 @@
+ #!/usr/bin/env python3
+-"""v78_external / ct_adapted_main.py -- EXT_adapted for CountTRuCoLa (registered-optional run after the v78 verdict).
++"""phase2_fresh_window / fw_ct_main.py -- runs the RELEASED CountTRuCoLa rule_based/main.py (JuliaGast/counttrucola_submission
++@ 5d9aedf, code unchanged) on GDELTFW.  Run with cwd = a copy of the repository tree, this file placed in its rule_based/ dir (the released
++entry point's directory, so Ray workers see the same sys.path) and the repo's venv (env/ct).
++Two substitutions, nothing else (v79 implementation note):
++  (i)  rule_dataset.LinkPropPredDataset -> HarnessDataset: the attributes RuleDataset reads (name, root, edge_type,
++       full_data{sources,destinations,timestamps,edge_type}, train/val/test masks, num_rels, num_nodes), built from the
++       harness files: forward facts of train/valid/test in time order (stable), then their inverses exactly as the vendored
++       tgb.utils.utils.add_inverse_quadruples (u<->i, edge_type + #relations); timestamps = unix seconds of the UTC day of
++       the harness ts id; masks = the harness splits; node_mapping.csv / rel_mapping.csv in the vendored format.
++  (ii) main.evaluate -> no-op (GDELTFW has no TGB negative files); rankings files are scored by fw_ct_score.py.
++Extra CLI (removed before main() parses): --fw_dd <harness data dir> --fw_root <dir for mapping csvs>.  All other arguments
++(--params K=V ...) go to the released Options parser unchanged.
++"""
++import os, sys, time, calendar
++import numpy as np
+ 
+-Runs the RELEASED rule_based/main.py (JuliaGast/counttrucola_submission @ 5d9aedf, unchanged code and config) with one
+-in-memory change: validation facts with timestamp < cut (harness 70% cut of the validation timestamps, both query
+-directions) are moved from the TGB val mask to the train mask before RuleDataset indexes the data, so rule examples,
+-rules and confidence parameters are learned on train + validation fit window. The val split then contains only the
+-selection window. Nothing is copied (each fact stays in exactly one split), so the application history is unchanged.
+-Placed in rule_based/ of a COPY of the repository and run from its root (so ray workers resolve rule_based modules
+-exactly as for the released entry point):  python rule_based/ct_adapted_main.py --params DATASET_NAME=<ds> NUM_CPUS=<n>
+-env: V78_HARNESS_DD (harness_data/<ds>), V78_CUT_TS_ID (harness ts id of the cut), V78_SPLIT_LOG (json path)
+-"""
+-import os, sys, json
+-import numpy as np
+-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))   # rule_based/
+-import rule_dataset                                    # imports tgb.linkproppred.dataset.LinkPropPredDataset (vendored)
++def _pop(flag):
++    i = sys.argv.index(flag); v = sys.argv[i + 1]; del sys.argv[i:i + 2]; return v
+ 
+-DD = os.environ["V78_HARNESS_DD"]; CUT_ID = int(os.environ["V78_CUT_TS_ID"]); LOGP = os.environ["V78_SPLIT_LOG"]
+-id2raw = {}
+-for ln in open(f"{DD}/timestamp2id.txt"):
+-    k, v = ln.split(); id2raw[int(v)] = int(float(k))
+-CUT_RAW = id2raw[CUT_ID]
+-_Base = rule_dataset.LinkPropPredDataset
++DD = _pop("--fw_dd"); ROOT = _pop("--fw_root")
++REPO = os.getcwd(); sys.path.insert(0, os.path.join(REPO, "rule_based")); sys.path.insert(0, REPO)
++NAME = "tkgl-gdeltfw"
+ 
+-class AdaptedLinkPropPredDataset(_Base):
+-    def __init__(self, *a, **k):
+-        super().__init__(*a, **k)
+-        ts = np.asarray(self.full_data["timestamps"])
+-        tr, va, te = np.asarray(self.train_mask), np.asarray(self.val_mask), np.asarray(self.test_mask)
+-        fit = va & (ts < CUT_RAW)
+-        info = dict(dataset=self.name, cut_ts_id=CUT_ID, cut_raw=int(CUT_RAW), n_train_orig=int(tr.sum()), n_val_orig=int(va.sum()),
+-                    n_fit_moved=int(fit.sum()), n_val_selection=int((va & ~fit).sum()), n_test=int(te.sum()),
+-                    val_min_raw=int(ts[va].min()), val_max_raw=int(ts[va].max()), fit_max_raw=int(ts[fit].max()) if fit.any() else None,
+-                    selection_min_raw=int(ts[va & ~fit].min()))
+-        assert not (tr & va).any() and fit.any() and (va & ~fit).any()
+-        self._train_mask = tr | fit
+-        self._val_mask = va & ~fit
+-        assert int(self._train_mask.sum()) + int(self._val_mask.sum()) + int(te.sum()) == len(ts)
+-        json.dump(info, open(LOGP, "w"), indent=1)
+-        print("[v78 EXT_adapted] split moved:", json.dumps(info), flush=True)
+ 
+-rule_dataset.LinkPropPredDataset = AdaptedLinkPropPredDataset
+-import main as ct_main                                  # rule_based/main.py (released)
+-ct_main.main()
++class HarnessDataset:
++    def __init__(self, name, root="datasets", preprocess=True):
++        assert name == NAME, name
++        st = open(f"{DD}/stat.txt").read().split(); N, R = int(st[0]), int(st[1])
++        qs = {sp: np.loadtxt(f"{DD}/{sp}.txt", dtype=np.int64, usecols=(0, 1, 2, 3)).reshape(-1, 4) for sp in ("train", "valid", "test")}
++        fwd = np.concatenate([qs[sp][np.argsort(qs[sp][:, 3], kind="stable")] for sp in ("train", "valid", "test")])
++        spl = np.concatenate([np.full(len(qs[sp]), k, np.int8) for k, sp in enumerate(("train", "valid", "test"))])
++        assert (np.diff(fwd[:, 3]) >= 0).all(), "facts not in time order"
++        id2day = {}
++        for ln in open(f"{DD}/timestamp2id.txt"):
++            k, v = ln.split(); id2day[int(v)] = k
++        unix = np.array([calendar.timegm(time.strptime(id2day[t], "%Y%m%d")) for t in range(len(id2day))], np.int64)
++        ts = unix[fwd[:, 3]]
++        nrel_fwd = int(np.unique(fwd[:, 1]).shape[0]); assert nrel_fwd == R, (nrel_fwd, R)   # add_inverse_quadruples offset
++        self.name = name; self.root = ROOT
++        src = np.concatenate([fwd[:, 0], fwd[:, 2]]).astype(int); dst = np.concatenate([fwd[:, 2], fwd[:, 0]]).astype(int)
++        et = np.concatenate([fwd[:, 1], fwd[:, 1] + nrel_fwd]).astype(int); tt = np.concatenate([ts, ts]).astype(int)
++        sp2 = np.concatenate([spl, spl])
++        self.full_data = dict(sources=src, destinations=dst, timestamps=tt, edge_type=et,
++                              edge_idxs=np.arange(len(src)), w=np.ones(len(src)), edge_label=np.ones(len(src)))
++        self.edge_type = et
++        self.train_mask = sp2 == 0; self.val_mask = sp2 == 1; self.test_mask = sp2 == 2
++        self.num_rels = int(np.unique(et).shape[0]); assert self.num_rels == 2 * R
++        self.num_nodes = int(np.unique(np.concatenate([src, dst])).shape[0]); assert self.num_nodes == N
++        # CountTRuCoLa's own ts ids (rule_dataset.reformat_ts) must equal the harness ts ids: checked after RuleDataset init
++        os.makedirs(ROOT, exist_ok=True)
++        ents = [ln.rstrip("\n").split("\t") for ln in open(f"{DD}/entity2id.txt")]
++        rels = [ln.rstrip("\n").split("\t") for ln in open(f"{DD}/relation2id.txt")]
++        with open(f"{ROOT}/node_mapping.csv", "w") as f:
++            f.write("original_id;id;name\n")
++            for parts in ents:                                   # entity2id.txt: name <TAB> id
++                nm, i = parts[0], parts[-1]; f.write(f"{i};{i};{nm.replace(';', ',')}\n")
++        with open(f"{ROOT}/rel_mapping.csv", "w") as f:       # relation2id.txt: CAMEO code <TAB> id <TAB> name
++            f.write("original_id;name\n")
++            for parts in rels:
++                i = parts[1]; nm = (parts[0] + " " + parts[2]) if len(parts) == 3 else parts[0]
++                f.write(f"{i};{nm.replace(';', ',')}\n")
++        self._harness_ts = np.concatenate([fwd[:, 3], fwd[:, 3]])
++
++
++def _noeval(*a, **k):
++    print("[fw] CountTRuCoLa built-in evaluation disabled (no TGB negative files); rankings scored by fw_ct_score.py", flush=True)
++    return -1, -1, -1, -1, -1, {}, {}, {}, {}
++
++
++import rule_dataset                                   # noqa: E402
++rule_dataset.LinkPropPredDataset = HarnessDataset
++_orig_init = rule_dataset.RuleDataset.__init__
++def _checked_init(self, *a, **k):
++    _orig_init(self, *a, **k)
++    assert np.array_equal(np.asarray(self.timestamps), self.dataset._harness_ts), "CountTRuCoLa ts ids != harness ts ids"
++    print(f"[fw] ts ids equal harness ts ids; large_data_flag={self.large_data_flag} very_large={self.very_large_data_flag} "
++          f"quads={len(self.all_quads)} timesteps={len(self.timesteps_set)}", flush=True)
++rule_dataset.RuleDataset.__init__ = _checked_init
++import main as ctmain                                 # noqa: E402
++ctmain.evaluate = _noeval
++
++if __name__ == "__main__":
++    t0 = time.time()
++    ctmain.main()
++    print(f"[fw] main() wall {time.time() - t0:.1f}s", flush=True)

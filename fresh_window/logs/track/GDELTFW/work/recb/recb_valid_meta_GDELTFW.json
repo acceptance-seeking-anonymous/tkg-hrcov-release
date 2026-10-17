@@ -1,0 +1,55 @@
+{
+ "name": "GDELTFW",
+ "N": 1209,
+ "R": 215,
+ "ts": {
+  "ts_step": 1,
+  "dmin": 1,
+  "dmax": 1,
+  "all_multiples": true,
+  "n_ts": 273,
+  "identity": false
+ },
+ "P_emulated": 16,
+ "LAMS": [
+  0,
+  0.0001,
+  0.0005,
+  0.001,
+  0.005,
+  0.01,
+  0.02,
+  0.04,
+  0.06,
+  0.08,
+  0.1,
+  0.5,
+  0.9,
+  1.0001
+ ],
+ "ALPHAS": [
+  0,
+  1e-05,
+  0.0001,
+  0.001,
+  0.01,
+  0.1,
+  0.5,
+  0.9,
+  0.99,
+  0.999,
+  0.9999,
+  0.99999,
+  1
+ ],
+ "workers": 8,
+ "n_queries": {
+  "valid": 152234,
+  "test": 457168
+ },
+ "host": "serverA_(CPU)",
+ "valid_seconds": 16.6,
+ "valid_scored": 152234,
+ "elapsed_s": 17.3,
+ "only_valid": false
+}

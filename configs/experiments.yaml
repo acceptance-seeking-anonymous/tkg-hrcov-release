@@ -1,0 +1,114 @@
+# configs/experiments.yaml -- registry of the experiments: entry point, decision rule, code, result files (results/...).
+# Hyper-parameters are those in the registered rule files and in the code defaults (e.g. src/pilot_polecat/pc_common.py: LP_LEN 300,
+# LB_LEN 200, D_GRID, SEEDS 0-2; re-rankers 30 epochs, patience 5, batch 512, lr 1e-3, fit_max 120000; margin 0.005).
+experiments:
+  pilot_polecat:
+    entry: "scripts/run_pilot_polecat.sh"
+    rule: "registration/pilots/polecat_decision_rule.json"
+    code: ["src/pilot_polecat/"]
+    results: ["reports/polecat_pilot_report.md"]
+  pilot_smallpedia:
+    entry: "scripts/run_pilot_smallpedia.sh"
+    rule: "registration/pilots/smallpedia_decision_rule.json"
+    code: ["src/pilot_smallpedia/"]
+    results: ["reports/smallpedia_pilot_report.md"]
+  pilot_icews_stageA:
+    entry: "scripts/run_pilot_icews.sh A"
+    rule: "registration/stageA_decision_rule.json"
+    code: ["src/pilot_icews/"]
+    results: ["reports/icews_stageA_report.md"]
+  pilot_icews_stageB:
+    entry: "scripts/run_pilot_icews.sh B"
+    rule: "registration/stageB_rule.json"
+    code: ["src/pilot_icews/pi_chainB2.sh", "src/pilot_icews/pi_aggB.py"]
+    results: ["icews/icews_stageB_verdict.json"]
+  main_test:
+    entry: "scripts/run_hardening.sh"
+    rule: "registration/hardening_decision_rule.json"
+    code: ["src/hardening/"]
+    results: ["hardening/hardening_verdict.json", "reports/hardening_report.md"]
+  hrcov_pat_definitional:
+    entry: "scripts/run_presub.sh hcpat"
+    rule: "registration/a_presub_rule.json"
+    code: ["src/presub/hcpat_*.sh", "src/presub/hcpat2.sh", "src/hardening/hcpat_train.py", "src/hardening/hcpat_agg.py"]
+    results: ["hardening/hcpat_definitional.json", "hardening/hcpat_all_decision_bases.json"]
+  g1_base_free_control:
+    entry: "scripts/run_presub.sh g1"
+    rule: "registration/a_presub_rule.json"
+    code: ["src/presub/g1_*.py", "src/presub/g1_run.sh"]
+    results: ["presub/g1_verdict.json", "presub/g1_hcpat_secondary.json"]
+  g2_icews18_gdelt:
+    entry: "scripts/run_presub.sh g2"
+    rule: "registration/a_presub_rule.json"
+    code: ["src/presub/g2_*.py", "src/presub/g2_run.sh", "src/presub/fulldump_regcn_logcl.py"]
+    results: ["presub/g2_verdict.json", "presub/g2_table.csv"]
+  g3_tgb_regcn:
+    entry: "scripts/run_presub.sh g3"
+    rule: "registration/a_presub_rule.json"
+    code: ["src/presub/g3_*.py", "src/presub/g3_run.sh"]
+    results: ["presub/g3_verdict.json", "hardening/g3_verdict_hardening_smallpedia.json"]
+  g7_cluster_bootstrap:
+    entry: "scripts/run_presub.sh g7"
+    rule: "registration/a_presub_rule.json"
+    code: ["src/presub/g7_cluster_bootstrap.py"]
+    results: ["presub/g7_cluster_bootstrap.json", "presub/g7_cluster_bootstrap_table.csv"]
+  ablation_feature_groups:
+    entry: "scripts/run_ablations.sh"
+    rule: "registration/ablation_rule.json"
+    code: ["src/ablations/"]
+    results: ["ablations/ablations_A.json", "ablations/ablations_A_table.csv"]
+  g6_latency:
+    entry: "scripts/run_latency_g6.sh"
+    rule: "registration/g6_protocol.json"
+    code: ["src/latency_g6/"]
+    results: ["latency_g6/g6_latency.json", "latency_g6/g6_latency_table.csv"]
+  g8_cogntke:
+    entry: "scripts/run_g8_cogntke.sh"
+    rule: "registration/g8_rule.json + registration/g8_deviation_B.json"
+    code: ["src/g8_cogntke/"]
+    results: ["g8/g8_verdict.json", "g8/g8_report.md"]
+  v7_later_analyses:
+    entry: "scripts/run_v7.sh"
+    rule: "registration/tois_v7_rule.json"
+    code: ["src/v7/"]
+    results: ["v7/*.json", "v7/tois_v7_experiments.md"]
+  c4_second_seed:
+    entry: "scripts/run_c4.sh"
+    rule: "registration/c4_protocol.json"
+    code: ["src/c4/"]
+    results: ["c4/c4_results.json", "c4/c4_report.md"]
+  forward_holdout_gdelt25x:
+    entry: "scripts/run_forward_holdout.sh"
+    rule: "registration/fh_decision_rule.json"
+    code: ["data/build_gdelt25x.py", "src/forward_holdout/"]
+    results: ["forward_holdout/fh_verdict.json", "forward_holdout/fh_stage2_report.md"]
+  v76_reviewer_analyses:
+    entry: "scripts/run_v76.sh"
+    rule: "registration/v76_rule.json + registration/v76_rule_amendment_1.json"
+    code: ["src/v76/"]
+    results: ["v76/v76_results.json", "v76/v76_report.md"]
+  finiteness:
+    entry: "scripts/run_finiteness.sh"
+    rule: "(sec. 5.4 check, no rule)"
+    code: ["src/common/"]
+    results: ["finiteness/finite_scan.json"]
+  v78_standalone_ladder:
+    entry: "scripts/run_v78.sh"
+    rule: "registration/v78_framing_rule.json + registration/v78_rule_amendment_1.json (+ v78_external_protocol_note.json)"
+    code: ["src/v78/", "src/v78_external/"]
+    results: ["v78/v78_results.json", "v78/v78_verdict.json", "v78/v78_report.md", "v78_external/ext_repro_report.md"]
+  v78_ext_adapted:
+    entry: "scripts/run_v78.sh adapted | aggregate"
+    rule: "registration/v78_rule_amendment_1.json (field EXT.EXT_adapted) + registration/v78_external_protocol_note_2_ext_adapted.json; post-verdict"
+    code: ["src/v78/v78_adapted_*", "src/v78_external/ct_adapted_main.py", "src/v78_external/ct_score_adapted.py"]
+    results: ["v78/v78_adapted_check.json", "v78/v78_adapted_check.md"]
+  fitpop_audit:
+    entry: "scripts/run_fitpop.sh"
+    rule: "(post-verdict sensitivity analysis of the v7.8 ladder, no rule)"
+    code: ["src/fitpop/"]
+    results: ["fitpop/fitpop_audit.json", "fitpop/fitpop_audit.md", "fitpop/fitpop_counts.json"]
+  fresh_window_gdeltfw:
+    entry: "scripts/run_fresh_window.sh; fresh_window/FILES.md (order of commands)"
+    rule: "registration/v79_fresh_window_rule.json + v79_fresh_window_rule_amendment_1.json + fresh_window_implementation_note.json + fresh_window_implementation_note_addendum_1.json"
+    code: ["fresh_window/"]
+    results: ["fresh_window/fresh_window_results.json", "fresh_window/fresh_window_latency_table.csv", "../registration/fresh_window_verdict.json"]

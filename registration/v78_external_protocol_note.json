@@ -1,0 +1,48 @@
+{
+ "note_id": "v78_external_protocol_note",
+ "parent_rule": {
+  "rule_id": "v78_framing_rule",
+  "sha256": "8e05c67b7ce8f3a475ac391e813463b9d435f8add5af13e5c4d03f78483a5f2d",
+  "registered_utc": "2026-10-15T17:34:21Z"
+ },
+ "written_before_any_reproduction_number": true,
+ "repos": {
+  "EdgeReMIND": {
+   "url": "https://github.com/BryantPollard/EdgeReMIND",
+   "commit": "41c0db2df31bf4ab60e6e4fec8176932314e3ec8"
+  },
+  "CountTRuCoLa": {
+   "url": "https://github.com/JuliaGast/counttrucola_submission",
+   "commit": "5d9aedf4106926d13befa141e0855d684f3f5f9d",
+   "why": "arXiv:2509.09474v4 (latest, 26 Aug 2026) cites counttrucola_submission as the code repository; JuliaGast/counttrucola also exists (HEAD 9523726, 2026-10-15) and is NOT used"
+  }
+ },
+ "published_targets": {
+  "EdgeReMIND_tkgl-smallpedia": {
+   "test_MRR_mean": 0.6136,
+   "test_MRR_sd": 0.0017,
+   "valid_MRR_mean": 0.6554,
+   "valid_MRR_sd": 0.0009,
+   "n_seeds": 5,
+   "seeds": "1337-1341",
+   "source": "arXiv:2609.17916 Table 2 (mean +/- unbiased SD over five seeds); seed-1337 trained test MRR 0.6130 in Fig. 5",
+   "tolerance": "max(0.01, 2*0.0017) = 0.01"
+  },
+  "CountTRuCoLa_tkgl-smallpedia": {
+   "test_MRR": 0.644,
+   "H1": 0.595,
+   "H3": 0.687,
+   "H10": 0.717,
+   "seed_sd": "not published for smallpedia (5-run variance given only for WIKI, ICEWS14: < 0.002 in percent^2)",
+   "source": "arXiv:2509.09474v4 Table 1 and Table 15",
+   "tolerance": "0.01 (the max() floor; no smallpedia SD available)"
+  }
+ },
+ "gate_definition": "Gate number = test MRR of the faithful run (released code + released configuration) scored with the official py-tgb 2.3.0 Evaluator on the shipped test negatives. EdgeReMIND: the authors' own evaluate_parallel number (same formula as Evaluator) and the per-query Evaluator.eval re-score with the authors' cutoffs must agree; CountTRuCoLa: official Evaluator over its rankings (ties averaged); the authors' own EVAL_TYPE=random number is reported alongside, not used for the gate.",
+ "history_boundary_for_dumps": "EXT_alone requires the HRcov history boundary (facts with t' < t). EdgeReMIND's released evaluation uses position cutoffs over 200-event batches (earlier same-timestamp batches visible). The dumps therefore re-score every query with the trained (unchanged) theta and the strict cutoff t' < t; the faithful-cutoff per-query numbers are recorded alongside for documentation. Training is not changed.",
+ "countTRuCoLa_config_caveat": "The released config-default.yaml DATASET_OVERRIDES for tkgl-smallpedia do not set C_X_COUNT; main.py then sets C_X_COUNT=20 when large_data_flag (> 1M quads incl. inverses) whereas paper Table 6 lists Cx-count=3. The gate run uses the released config unchanged; the effective options are recorded from the run log. No re-run with other values is used for the gate; if the gate fails, at most one diagnostic run with the Table 6 values may be reported, labelled 'paper-table-6 config (diagnostic, not the gate)'.",
+ "resources": "CPU only on <HOST>, 16 workers per method, host MemAvailable guard 80 GB (process tree killed below it); polecat runs only if the measured requirement fits without that guard tripping and <= 24 h wall per seed.",
+ "dump_format": "per split: top_ids [Q,1000] int32, top_scores [Q,1000], floor [Q], tail_min [Q], n_gt_floor [Q], gold [Q], gold_score [Q], rr_official [Q], rank_official [Q], keys_harness [Q,4] (s, r, o, ts_id); harness split_queries order; ties broken by entity id ascending",
+ "created_utc": "2026-10-15T17:52:22Z",
+ "sha256": "52a12ef8bd3c1e54fffa2dd755e298d698df33f7112c77ba4f9d1418cf0cc352"
+}

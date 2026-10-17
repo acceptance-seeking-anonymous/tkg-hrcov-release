@@ -1,0 +1,25 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+[     1.2s] hist + dyad
+[     5.1s] valid 23194 / 152234
+[     7.5s] valid 41518 / 152234
+[    10.5s] valid 65114 / 152234
+[    12.9s] valid 84056 / 152234
+[    15.1s] valid 102042 / 152234
+[    17.4s] valid 120160 / 152234
+[    20.3s] valid 142446 / 152234
+[    22.5s] valid pools {"ds": "gdeltfw", "checks": {"htop_equal": 152234, "n": 152234, "evid_maxabs_vs_stored": {}, "base_feat_maxabs_vs_stored": {}, "htop_equal_frac": 1.0}, "smoke": 0, "SA25": {"valid": {"recall": 0.8280673174192362, "mean_size": 49.99564486251429}}, "SA50": {"valid": {"recall": 0.9017170934219688, "mean_size": 99.1811684643378}}, "SA75": {"valid": {"recall": 0.929785724608169, "mean_size": 138.34190128355033}}, "elapsed_s": 22.5}
+[    22.5s] ALL DONE

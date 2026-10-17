@@ -1,0 +1,389 @@
+{
+ "root": "$WORK_DIR/tracks/v78_external/dumps",
+ "entries": [
+  {
+   "method": "counttrucola",
+   "dataset": "tkgl-polecat",
+   "split": "test",
+   "path": "$WORK_DIR/tracks/v78_external/dumps/counttrucola/tkgl-polecat/test",
+   "checks": {
+    "rows": 532636,
+    "K": 1000,
+    "top_ids_dtype": "int32",
+    "top_scores_dtype": "float64",
+    "gold_eq_recomputed_harness": true,
+    "gold_eq_harness_csr_sro": true,
+    "keys_eq_harness_csr_sro": true,
+    "n_gold_mismatch": 0,
+    "rows_in_learning_data_excluded": 0,
+    "learning_rows_all_nan": null,
+    "rows_not_sorted_desc": 0,
+    "rows_with_duplicate_ids": 0,
+    "rows_floor_above_last_top": 0,
+    "gold_in_topk": 350578,
+    "rows_official_rank_above_list_bound": 0,
+    "rows_gold_score_mismatch": 0,
+    "recomputed": {
+     "MRR": 0.25571348671342947,
+     "H1": 0.1784539535442591,
+     "H3": 0.29107120059477765,
+     "H10": 0.4082225009199528
+    },
+    "meta_match": true,
+    "PASS": true
+   }
+  },
+  {
+   "method": "counttrucola",
+   "dataset": "tkgl-polecat",
+   "split": "val",
+   "path": "$WORK_DIR/tracks/v78_external/dumps/counttrucola/tkgl-polecat/val",
+   "checks": {
+    "rows": 533472,
+    "K": 1000,
+    "top_ids_dtype": "int32",
+    "top_scores_dtype": "float64",
+    "gold_eq_recomputed_harness": true,
+    "gold_eq_harness_csr_sro": true,
+    "keys_eq_harness_csr_sro": true,
+    "n_gold_mismatch": 0,
+    "rows_in_learning_data_excluded": 0,
+    "learning_rows_all_nan": null,
+    "rows_not_sorted_desc": 0,
+    "rows_with_duplicate_ids": 0,
+    "rows_floor_above_last_top": 0,
+    "gold_in_topk": 352604,
+    "rows_official_rank_above_list_bound": 0,
+    "rows_gold_score_mismatch": 0,
+    "recomputed": {
+     "MRR": 0.2624851163311234,
+     "H1": 0.18663959870433688,
+     "H3": 0.29812623717833364,
+     "H10": 0.4100627586827425
+    },
+    "meta_match": true,
+    "PASS": true
+   }
+  },
+  {
+   "method": "counttrucola",
+   "dataset": "tkgl-smallpedia",
+   "split": "test",
+   "path": "$WORK_DIR/tracks/v78_external/dumps/counttrucola/tkgl-smallpedia/test",
+   "checks": {
+    "rows": 163172,
+    "K": 1000,
+    "top_ids_dtype": "int32",
+    "top_scores_dtype": "float64",
+    "gold_eq_recomputed_harness": true,
+    "gold_eq_harness_csr_sro": true,
+    "keys_eq_harness_csr_sro": true,
+    "n_gold_mismatch": 0,
+    "rows_in_learning_data_excluded": 0,
+    "learning_rows_all_nan": null,
+    "rows_not_sorted_desc": 0,
+    "rows_with_duplicate_ids": 0,
+    "rows_floor_above_last_top": 0,
+    "gold_in_topk": 117606,
+    "rows_official_rank_above_list_bound": 0,
+    "rows_gold_score_mismatch": 0,
+    "recomputed": {
+     "MRR": 0.6365796681465823,
+     "H1": 0.5747983722697522,
+     "H3": 0.6812749736474395,
+     "H10": 0.710244404677273
+    },
+    "meta_match": true,
+    "PASS": true
+   }
+  },
+  {
+   "method": "counttrucola",
+   "dataset": "tkgl-smallpedia",
+   "split": "val",
+   "path": "$WORK_DIR/tracks/v78_external/dumps/counttrucola/tkgl-smallpedia/val",
+   "checks": {
+    "rows": 162066,
+    "K": 1000,
+    "top_ids_dtype": "int32",
+    "top_scores_dtype": "float64",
+    "gold_eq_recomputed_harness": true,
+    "gold_eq_harness_csr_sro": true,
+    "keys_eq_harness_csr_sro": true,
+    "n_gold_mismatch": 0,
+    "rows_in_learning_data_excluded": 0,
+    "learning_rows_all_nan": null,
+    "rows_not_sorted_desc": 0,
+    "rows_with_duplicate_ids": 0,
+    "rows_floor_above_last_top": 0,
+    "gold_in_topk": 117387,
+    "rows_official_rank_above_list_bound": 0,
+    "rows_gold_score_mismatch": 0,
+    "recomputed": {
+     "MRR": 0.6610113172001189,
+     "H1": 0.6134537780904076,
+     "H3": 0.6950748460503745,
+     "H10": 0.7214838399170708
+    },
+    "meta_match": true,
+    "PASS": true
+   }
+  },
+  {
+   "method": "counttrucola_adapted",
+   "dataset": "tkgl-polecat",
+   "split": "test",
+   "path": "$WORK_DIR/tracks/v78_external/dumps/counttrucola_adapted/tkgl-polecat/test",
+   "checks": {
+    "rows": 532636,
+    "K": 1000,
+    "top_ids_dtype": "int32",
+    "top_scores_dtype": "float64",
+    "gold_eq_recomputed_harness": true,
+    "gold_eq_harness_csr_sro": true,
+    "keys_eq_harness_csr_sro": true,
+    "n_gold_mismatch": 0,
+    "rows_in_learning_data_excluded": 0,
+    "learning_rows_all_nan": null,
+    "rows_not_sorted_desc": 0,
+    "rows_with_duplicate_ids": 0,
+    "rows_floor_above_last_top": 0,
+    "gold_in_topk": 350597,
+    "rows_official_rank_above_list_bound": 0,
+    "rows_gold_score_mismatch": 0,
+    "recomputed": {
+     "MRR": 0.255850307445234,
+     "H1": 0.1786341892023821,
+     "H3": 0.29109748496158727,
+     "H10": 0.4082844569274326
+    },
+    "meta_match": true,
+    "PASS": true
+   }
+  },
+  {
+   "method": "counttrucola_adapted",
+   "dataset": "tkgl-polecat",
+   "split": "val",
+   "path": "$WORK_DIR/tracks/v78_external/dumps/counttrucola_adapted/tkgl-polecat/val",
+   "checks": {
+    "rows": 533472,
+    "K": 1000,
+    "top_ids_dtype": "int32",
+    "top_scores_dtype": "float64",
+    "gold_eq_recomputed_harness": true,
+    "gold_eq_harness_csr_sro": true,
+    "keys_eq_harness_csr_sro": true,
+    "n_gold_mismatch": 0,
+    "rows_in_learning_data_excluded": 372024,
+    "learning_rows_all_nan": true,
+    "rows_not_sorted_desc": 0,
+    "rows_with_duplicate_ids": 0,
+    "rows_floor_above_last_top": 0,
+    "gold_in_topk": 108236,
+    "rows_official_rank_above_list_bound": 0,
+    "rows_gold_score_mismatch": 0,
+    "recomputed": {
+     "MRR": 0.2654786335029637,
+     "H1": 0.18752787275159805,
+     "H3": 0.3011434022099995,
+     "H10": 0.4180355284673703
+    },
+    "meta_match": true,
+    "PASS": true
+   }
+  },
+  {
+   "method": "counttrucola_adapted",
+   "dataset": "tkgl-smallpedia",
+   "split": "test",
+   "path": "$WORK_DIR/tracks/v78_external/dumps/counttrucola_adapted/tkgl-smallpedia/test",
+   "checks": {
+    "rows": 163172,
+    "K": 1000,
+    "top_ids_dtype": "int32",
+    "top_scores_dtype": "float64",
+    "gold_eq_recomputed_harness": true,
+    "gold_eq_harness_csr_sro": true,
+    "keys_eq_harness_csr_sro": true,
+    "n_gold_mismatch": 0,
+    "rows_in_learning_data_excluded": 0,
+    "learning_rows_all_nan": null,
+    "rows_not_sorted_desc": 0,
+    "rows_with_duplicate_ids": 0,
+    "rows_floor_above_last_top": 0,
+    "gold_in_topk": 117752,
+    "rows_official_rank_above_list_bound": 0,
+    "rows_gold_score_mismatch": 0,
+    "recomputed": {
+     "MRR": 0.6373245590405933,
+     "H1": 0.5763366263819772,
+     "H3": 0.6816671978035447,
+     "H10": 0.710924668448018
+    },
+    "meta_match": true,
+    "PASS": true
+   }
+  },
+  {
+   "method": "counttrucola_adapted",
+   "dataset": "tkgl-smallpedia",
+   "split": "val",
+   "path": "$WORK_DIR/tracks/v78_external/dumps/counttrucola_adapted/tkgl-smallpedia/val",
+   "checks": {
+    "rows": 162066,
+    "K": 1000,
+    "top_ids_dtype": "int32",
+    "top_scores_dtype": "float64",
+    "gold_eq_recomputed_harness": true,
+    "gold_eq_harness_csr_sro": true,
+    "keys_eq_harness_csr_sro": true,
+    "n_gold_mismatch": 0,
+    "rows_in_learning_data_excluded": 105606,
+    "learning_rows_all_nan": true,
+    "rows_not_sorted_desc": 0,
+    "rows_with_duplicate_ids": 0,
+    "rows_floor_above_last_top": 0,
+    "gold_in_topk": 40231,
+    "rows_official_rank_above_list_bound": 0,
+    "rows_gold_score_mismatch": 0,
+    "recomputed": {
+     "MRR": 0.63849643573397,
+     "H1": 0.5842366277010272,
+     "H3": 0.6784980517180305,
+     "H10": 0.7096174282678002
+    },
+    "meta_match": true,
+    "PASS": true
+   }
+  },
+  {
+   "method": "edgeremind_s1337",
+   "dataset": "tkgl-polecat",
+   "split": "test",
+   "path": "$WORK_DIR/tracks/v78_external/dumps/edgeremind_s1337/tkgl-polecat/test",
+   "checks": {
+    "rows": 532636,
+    "K": 1000,
+    "top_ids_dtype": "int32",
+    "top_scores_dtype": "float32",
+    "gold_eq_recomputed_harness": true,
+    "gold_eq_harness_csr_sro": true,
+    "keys_eq_harness_csr_sro": true,
+    "n_gold_mismatch": 0,
+    "rows_in_learning_data_excluded": 0,
+    "learning_rows_all_nan": null,
+    "rows_not_sorted_desc": 0,
+    "rows_with_duplicate_ids": 0,
+    "rows_floor_above_last_top": 0,
+    "gold_in_topk": 363309,
+    "rows_official_rank_above_list_bound": 0,
+    "rows_gold_score_mismatch": 0,
+    "recomputed": {
+     "MRR": 0.16545457632319716,
+     "H1": 0.10013968263504532,
+     "H3": 0.18477909867151301,
+     "H10": 0.2960971470197283
+    },
+    "meta_match": true,
+    "PASS": true
+   }
+  },
+  {
+   "method": "edgeremind_s1337",
+   "dataset": "tkgl-polecat",
+   "split": "val",
+   "path": "$WORK_DIR/tracks/v78_external/dumps/edgeremind_s1337/tkgl-polecat/val",
+   "checks": {
+    "rows": 533472,
+    "K": 1000,
+    "top_ids_dtype": "int32",
+    "top_scores_dtype": "float32",
+    "gold_eq_recomputed_harness": true,
+    "gold_eq_harness_csr_sro": true,
+    "keys_eq_harness_csr_sro": true,
+    "n_gold_mismatch": 0,
+    "rows_in_learning_data_excluded": 0,
+    "learning_rows_all_nan": null,
+    "rows_not_sorted_desc": 0,
+    "rows_with_duplicate_ids": 0,
+    "rows_floor_above_last_top": 0,
+    "gold_in_topk": 359292,
+    "rows_official_rank_above_list_bound": 0,
+    "rows_gold_score_mismatch": 0,
+    "recomputed": {
+     "MRR": 0.17046385847040624,
+     "H1": 0.1085230340111571,
+     "H3": 0.18743626657069162,
+     "H10": 0.29725833783216365
+    },
+    "meta_match": true,
+    "PASS": true
+   }
+  },
+  {
+   "method": "edgeremind_s1337",
+   "dataset": "tkgl-smallpedia",
+   "split": "test",
+   "path": "$WORK_DIR/tracks/v78_external/dumps/edgeremind_s1337/tkgl-smallpedia/test",
+   "checks": {
+    "rows": 163172,
+    "K": 1000,
+    "top_ids_dtype": "int32",
+    "top_scores_dtype": "float32",
+    "gold_eq_recomputed_harness": true,
+    "gold_eq_harness_csr_sro": true,
+    "keys_eq_harness_csr_sro": true,
+    "n_gold_mismatch": 0,
+    "rows_in_learning_data_excluded": 0,
+    "learning_rows_all_nan": null,
+    "rows_not_sorted_desc": 0,
+    "rows_with_duplicate_ids": 0,
+    "rows_floor_above_last_top": 0,
+    "gold_in_topk": 135851,
+    "rows_official_rank_above_list_bound": 0,
+    "rows_gold_score_mismatch": 0,
+    "recomputed": {
+     "MRR": 0.613084203920718,
+     "H1": 0.5387198784105116,
+     "H3": 0.6810911185742652,
+     "H10": 0.7190449341798838
+    },
+    "meta_match": true,
+    "PASS": true
+   }
+  },
+  {
+   "method": "edgeremind_s1337",
+   "dataset": "tkgl-smallpedia",
+   "split": "val",
+   "path": "$WORK_DIR/tracks/v78_external/dumps/edgeremind_s1337/tkgl-smallpedia/val",
+   "checks": {
+    "rows": 162066,
+    "K": 1000,
+    "top_ids_dtype": "int32",
+    "top_scores_dtype": "float32",
+    "gold_eq_recomputed_harness": true,
+    "gold_eq_harness_csr_sro": true,
+    "keys_eq_harness_csr_sro": true,
+    "n_gold_mismatch": 0,
+    "rows_in_learning_data_excluded": 0,
+    "learning_rows_all_nan": null,
+    "rows_not_sorted_desc": 0,
+    "rows_with_duplicate_ids": 0,
+    "rows_floor_above_last_top": 0,
+    "gold_in_topk": 137281,
+    "rows_official_rank_above_list_bound": 0,
+    "rows_gold_score_mismatch": 0,
+    "recomputed": {
+     "MRR": 0.6539636214719627,
+     "H1": 0.5972628435328816,
+     "H3": 0.7017017758197278,
+     "H10": 0.7319548825787026
+    },
+    "meta_match": true,
+    "PASS": true
+   }
+  }
+ ]
+}

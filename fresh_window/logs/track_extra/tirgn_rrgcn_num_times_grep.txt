@@ -1,0 +1,4 @@
+57:    def __init__(self, decoder_name, encoder_name, num_ents, num_rels, num_static_rels, num_words, num_times, time_interval, h_dim, opn, history_rate, sequence_len, num_bases=-1, num_basis=-1,
+72:        self.num_times = num_times
+90:        self.linear_0 = nn.Linear(num_times, 1)
+91:        self.linear_1 = nn.Linear(num_times, self.h_dim - 1)

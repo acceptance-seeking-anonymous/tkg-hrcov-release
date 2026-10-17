@@ -1,0 +1,15 @@
+% rebuilt by make_fresh_window_table.py from fresh_window_results.json / fresh_window_verdict.json / fresh_window_latency_table.csv
+(a) System & MRR & H@1 & H@10 & batch size 1 & batched \\
+\midrule
+Frozen base (TiRGN) & 0.4115 & 0.2848 & 0.6686 & 0.537 & 0.018 \\
+BASE$\oplus$RecB (reference) & 0.4380 & 0.3115 & 0.6912 & 0.984 & 0.109 \\
+\HRCOV{} & 0.4501 & 0.3236 & 0.7044 & 2.321 & 0.629 \\
+SA (matched standalone, no base) & 0.4462 & 0.3195 & 0.7027 & 2.108 & 0.702 \\
+CountTRuCoLa, default configuration, $+$ base (blend)$^{\dagger}$ & 0.4142 & 0.2824 & 0.6772 & 35.077 & 10.057 \\
+
+(b) Contrast & $\Delta$MRR & Query bootstrap [$L$, $U$] & Timestamp-block [$L$, $U$] & Call \\
+\midrule
+\HRCOV{} $-$ SA & $+$0.0039 & [$+$0.0036, $+$0.0042] & [$+$0.0027, $+$0.0053] & SMALL \\
+\HRCOV{} $-$ CountTRuCoLa comparator$^{\dagger}$ & $+$0.0359 & [$+$0.0354, $+$0.0364] & [$+$0.0343, $+$0.0375] & BEATS \\
+\HRCOV{} $-$ BASE$\oplus$RecB & $+$0.0121 & [$+$0.0118, $+$0.0124] & [$+$0.0117, $+$0.0126] & (reference) \\
+\HRCOV{} $-$ frozen base & $+$0.0387 & [$+$0.0382, $+$0.0391] & [$+$0.0368, $+$0.0403] & -- \\

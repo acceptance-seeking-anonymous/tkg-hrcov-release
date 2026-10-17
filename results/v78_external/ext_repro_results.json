@@ -1,0 +1,965 @@
+{
+ "rule_id": "v78_framing_rule",
+ "rule_sha256": "8e05c67b7ce8f3a475ac391e813463b9d435f8add5af13e5c4d03f78483a5f2d",
+ "protocol_note_version_id": "redacted-id",
+ "generated_utc": "2026-10-16T07:08:28Z",
+ "host": "serverA (CPU only)",
+ "py_tgb": "2.3.0",
+ "repos": {
+  "EdgeReMIND": {
+   "url": "https://github.com/BryantPollard/EdgeReMIND",
+   "commit": "41c0db2df31bf4ab60e6e4fec8176932314e3ec8"
+  },
+  "CountTRuCoLa": {
+   "url": "https://github.com/JuliaGast/counttrucola_submission",
+   "commit": "5d9aedf4106926d13befa141e0855d684f3f5f9d",
+   "choice": "repository cited in arXiv:2509.09474v4 (26 Aug 2026, latest); JuliaGast/counttrucola (HEAD 9523726, 2026-10-15) not used"
+  }
+ },
+ "published": {
+  "edgeremind": {
+   "tkgl-smallpedia": {
+    "test": 0.6136,
+    "test_sd": 0.0017,
+    "val": 0.6554,
+    "val_sd": 0.0009,
+    "seed1337_test": 0.613,
+    "n_seeds": 5,
+    "src": "arXiv:2609.17916 Table 2 (mean +/- unbiased SD, seeds 1337-1341); seed-1337 trained test MRR 0.6130 in Fig. 5",
+    "wall": "~14 min",
+    "ram": "13.6 GB"
+   },
+   "tkgl-polecat": {
+    "test": 0.1707,
+    "test_sd": 0.0046,
+    "val": 0.1769,
+    "val_sd": 0.0049,
+    "seed1337_test": 0.1698,
+    "n_seeds": 5,
+    "src": "arXiv:2609.17916 Table 2; seed-1337 trained 0.1698 in Fig. 5",
+    "wall": "1.1-2.4 h",
+    "ram": "69.6 GB"
+   }
+  },
+  "counttrucola": {
+   "tkgl-smallpedia": {
+    "test": 0.644,
+    "H1": 0.595,
+    "H3": 0.687,
+    "H10": 0.717,
+    "test_sd": null,
+    "src": "arXiv:2509.09474v4 Table 1 / Table 15 (single run; 5-run variance only for WIKI, ICEWS14)",
+    "wall": "280 s (Table 9)"
+   },
+   "tkgl-polecat": {
+    "test": 0.256,
+    "H1": 0.178,
+    "H3": 0.291,
+    "H10": 0.408,
+    "test_sd": null,
+    "src": "arXiv:2509.09474v4 Table 1 / Table 15",
+    "wall": "13,681 s (Table 9)"
+   }
+  }
+ },
+ "methods": {
+  "edgeremind": {
+   "tkgl-smallpedia": {
+    "seed": 1337,
+    "gate_test_official": 0.6147570167182864,
+    "gate_val": 0.655401778591851,
+    "gate_run": {
+     "script": "examples/linkproppred/tkgl/edgeremind.py (unmodified)",
+     "workers": 16,
+     "wall_s": 680.1,
+     "peak_pss_gb": 9.5,
+     "peak_rss_sum_gb": 32.34
+    },
+    "retrain_identical": true,
+    "best_epoch": "e22",
+    "faithful_cutoff_official": {
+     "val": {
+      "n": 162066,
+      "MRR": 0.6554017789687957,
+      "H1": 0.5984969086668395,
+      "H3": 0.703275208865524,
+      "H10": 0.7342317327508546
+     },
+     "test": {
+      "n": 163172,
+      "MRR": 0.6147570172742278,
+      "H1": 0.5412754639276346,
+      "H3": 0.6823535900767288,
+      "H10": 0.7198538965018508
+     }
+    },
+    "strict_cutoff_official_DUMPED": {
+     "val": {
+      "n": 162066,
+      "MRR": 0.6539636214719627,
+      "H1": 0.5972628435328816,
+      "H3": 0.7017017758197278,
+      "H10": 0.7319548825787026
+     },
+     "test": {
+      "n": 163172,
+      "MRR": 0.613084203920718,
+      "H1": 0.5387198784105116,
+      "H3": 0.6810911185742652,
+      "H10": 0.7190449341798838
+     }
+    },
+    "dump_checks": {
+     "val": {
+      "gold_in_topk_frac": 0.8470684782742833,
+      "tail_exact_frac": 0.0006787358236767737,
+      "median_n_gt_floor": 835.0,
+      "evaluator_vs_formula_max_abs_dev": 1.9868214962137642e-08,
+      "alignment": {
+       "rows": 162066,
+       "gold_equals_harness_gold": true,
+       "keys_equal_harness_keys": true,
+       "harness_split_queries_equals_v76_recb_csr_sro": true,
+       "tgb_stream_order_is_harness_order": true,
+       "harness_R": 283
+      },
+      "cutoff_stats": {
+       "frac_strict_lt_faithful": 0.9941998938703985,
+       "frac_strict_gt_faithful": 0.00456604099564375,
+       "frac_equal": 0.0012340651339577703
+      }
+     },
+     "test": {
+      "gold_in_topk_frac": 0.8325631848601476,
+      "tail_exact_frac": 0.0015688966244208566,
+      "median_n_gt_floor": 828.0,
+      "evaluator_vs_formula_max_abs_dev": 1.9868214962137642e-08,
+      "alignment": {
+       "rows": 163172,
+       "gold_equals_harness_gold": true,
+       "keys_equal_harness_keys": true,
+       "harness_split_queries_equals_v76_recb_csr_sro": true,
+       "tgb_stream_order_is_harness_order": true,
+       "harness_R": 283
+      },
+      "cutoff_stats": {
+       "frac_strict_lt_faithful": 0.9872894859412154,
+       "frac_strict_gt_faithful": 0.011484813570955802,
+       "frac_equal": 0.0012257004878287942
+      }
+     }
+    },
+    "dump_run": {
+     "workers": 12,
+     "wall_s": 1128.9,
+     "peak_pss_gb": 10.73
+    },
+    "dump_dir": "v78_external/dumps/edgeremind_s1337/tkgl-smallpedia/{val,test}",
+    "seed1337_strict_vs_faithful_test_delta": -0.0016728133535097722,
+    "extra_seeds_gate_only": {
+     "1337": {
+      "val": 0.655401778591851,
+      "test": 0.6147570167182864,
+      "wall_s": 680.1,
+      "peak_pss_gb": 9.5
+     },
+     "1338": {
+      "val": 0.6554751236915506,
+      "test": 0.6159046213971029,
+      "wall_s": 640.7,
+      "peak_pss_gb": 11.08,
+      "rc": 0
+     },
+     "1339": {
+      "val": 0.6550563843959911,
+      "test": 0.6117374460507023,
+      "wall_s": 714.6,
+      "peak_pss_gb": 9.18,
+      "rc": 0
+     },
+     "1340": {
+      "val": 0.6557763628643656,
+      "test": 0.614341382541949,
+      "wall_s": 737.3,
+      "peak_pss_gb": 10.08,
+      "rc": 0
+     },
+     "1341": {
+      "val": 0.6554523931298137,
+      "test": 0.6124973323567939,
+      "wall_s": 717.1,
+      "peak_pss_gb": 10.13,
+      "rc": 0
+     }
+    },
+    "five_seed_summary": {
+     "test_mean": 0.613847559812967,
+     "test_sd": 0.0017013354595965466,
+     "val_mean": 0.6554324085347144,
+     "val_sd": 0.0002563498078081086,
+     "n": 5,
+     "seeds": [
+      1337,
+      1338,
+      1339,
+      1340,
+      1341
+     ]
+    },
+    "gate": {
+     "published_test_MRR": 0.6136,
+     "reproduced_test_MRR": 0.6147570167182864,
+     "diff": 0.0011570167182863855,
+     "tolerance": 0.01,
+     "outcome": "PASS"
+    }
+   },
+   "tkgl-polecat": {
+    "seed": 1337,
+    "status": "complete",
+    "val_authors": 0.1757372767282212,
+    "test_authors_official": 0.16981425545587692,
+    "best_epoch": "e6",
+    "strict_cutoff_official_DUMPED": {
+     "val": {
+      "n": 533472,
+      "MRR": 0.17046385847040624,
+      "H1": 0.1085230340111571,
+      "H3": 0.18743626657069162,
+      "H10": 0.29725833783216365
+     },
+     "test": {
+      "n": 532636,
+      "MRR": 0.16545457632319716,
+      "H1": 0.10013968263504532,
+      "H3": 0.18477909867151301,
+      "H10": 0.2960971470197283
+     }
+    },
+    "dump_checks": {
+     "val": {
+      "gold_in_topk_frac": 0.6734973906784236,
+      "tail_exact_frac": 0.0,
+      "median_n_gt_floor": 978.0,
+      "evaluator_vs_formula_max_abs_dev": 1.9868214962137642e-08,
+      "alignment": {
+       "rows": 533472,
+       "gold_equals_harness_gold": true,
+       "keys_equal_harness_keys": true,
+       "harness_split_queries_equals_v76_recb_csr_sro": true,
+       "tgb_stream_order_is_harness_order": true,
+       "harness_R": 16
+      },
+      "cutoff_stats": {
+       "frac_strict_lt_faithful": 0.9371513406514306,
+       "frac_strict_gt_faithful": 0.06247375682322596,
+       "frac_equal": 0.00037490252534341074
+      }
+     },
+     "test": {
+      "gold_in_topk_frac": 0.6820962158021613,
+      "tail_exact_frac": 0.0,
+      "median_n_gt_floor": 989.0,
+      "evaluator_vs_formula_max_abs_dev": 1.9868214962137642e-08,
+      "alignment": {
+       "rows": 532636,
+       "gold_equals_harness_gold": true,
+       "keys_equal_harness_keys": true,
+       "harness_split_queries_equals_v76_recb_csr_sro": true,
+       "tgb_stream_order_is_harness_order": true,
+       "harness_R": 16
+      },
+      "cutoff_stats": {
+       "frac_strict_lt_faithful": 0.9445625154890018,
+       "frac_strict_gt_faithful": 0.054311011647729404,
+       "frac_equal": 0.0011264728632687238
+      }
+     }
+    },
+    "run": {
+     "script": "er_run.py (verbatim example training/selection + authors' evaluate_parallel + strict per-query scoring)",
+     "workers": 16,
+     "wall_s": 14170.8,
+     "phase_s": {
+      "train_select": 4412.9,
+      "authors_test_eval": 3370.5,
+      "strict_val": 3196.4,
+      "strict_test": 3161.9
+     },
+     "peak_pss_gb": 42.77,
+     "peak_rss_sum_gb": 118.91,
+     "min_host_avail_gb": 347.7,
+     "killed_for_memory": false
+    },
+    "feasibility": "feasible: < 24 h wall (3.9 h incl. per-query dumps) and memory guard never triggered",
+    "dump_dir": "v78_external/dumps/edgeremind_s1337/tkgl-polecat/{val,test}",
+    "table_lines": [
+     "| EdgeReMIND reproduced, authors' cutoff | test | 0.1698 | — | — | — |",
+     "| EdgeReMIND reproduced, authors' cutoff | val | 0.1757 | — | — | — |",
+     "| EdgeReMIND, HRcov boundary t′ < t (**dumped, EXT_alone**) | test | 0.1655 | 0.1001 | 0.1848 | 0.2961 |",
+     "| EdgeReMIND, HRcov boundary t′ < t (**dumped, EXT_alone**) | val | 0.1705 | 0.1085 | 0.1874 | 0.2973 |"
+    ]
+   }
+  },
+  "counttrucola": {
+   "tkgl-smallpedia": {
+    "gate_test_official": 0.6365796681465823,
+    "authors_own_eval_random_ties": {
+     "test": {
+      "MRR": 0.6440501423955559,
+      "H1": 0.5949427597872184,
+      "H3": 0.6873667050719486,
+      "H10": 0.7174024955261932
+     },
+     "val": {
+      "MRR": 0.6666123634918757,
+      "H1": 0.6270778571693014,
+      "H3": 0.7015413473523132,
+      "H10": 0.7241247393037404
+     }
+    },
+    "official": {
+     "val": {
+      "n": 162066,
+      "MRR": 0.6610113172001189,
+      "H1": 0.6134537780904076,
+      "H3": 0.6950748460503745,
+      "H10": 0.7214838399170708
+     },
+     "test": {
+      "n": 163172,
+      "MRR": 0.6365796681465823,
+      "H1": 0.5747983722697522,
+      "H3": 0.6812749736474395,
+      "H10": 0.710244404677273
+     }
+    },
+    "effective_config": {
+     "dataset_name": "tkgl-smallpedia",
+     "learn_option": "learn",
+     "multiflag": "True",
+     "eval_type": "random",
+     "large_data_flag": "True",
+     "very_large_data_flag": "False",
+     "rr_offset": "-99",
+     "aggregation_type": "noisyor",
+     "aggregation_decay": "0.4",
+     "aggregation_numtoprules": "5",
+     "threshold_conf": "0",
+     "threshold_corr_pred": "0",
+     "pvalue": "3",
+     "data_threshold_multi": "10",
+     "lmbda_reg": "0",
+     "learn_window_size": "3",
+     "apply_window_size": "-1",
+     "f_active": "True",
+     "f_min_support": "0",
+     "f_unseen_negatives": "30",
+     "f_min_confidence": "0",
+     "z_active": "True",
+     "z_factor": "0",
+     "z_min_support": "0",
+     "z_min_confidence": "0",
+     "z_unseen_negatives": "10",
+     "c_active": "True",
+     "c_conf": "0.001",
+     "c_x_count": "20",
+     "c_recurrency_active": "True"
+    },
+    "n_rules": 1223,
+    "run": {
+     "num_cpus": 16,
+     "wall_s": 1179.1,
+     "peak_pss_gb": 8.5,
+     "phase_times_s": {
+      "time_totaltime": 1170.6481556820218,
+      "time_evaltime": 73.41501847299514,
+      "time_applytime": 1079.0260477659758,
+      "time_learntime": 1.5538782570511103,
+      "time_learndatatime": 6.6669432819471695
+     }
+    },
+    "dump_checks": {
+     "val": {
+      "gold_in_topk_frac": 0.7243160193995039,
+      "tail_exact_frac": 1.0,
+      "queries_without_ranking_line": 0,
+      "ranking_lines_unmatched": 0,
+      "n_cand_max": 200,
+      "n_cand_median": 200.0,
+      "evaluator_vs_formula_max_abs_dev": 1.9868214962137642e-08,
+      "alignment": {
+       "rows": 162066,
+       "gold_equals_harness_gold": true,
+       "harness_split_queries_equals_v76_recb_csr_sro": true,
+       "harness_R": 283,
+       "note": "rows are built directly from the harness split_queries order; gold.npy == harness gold by construction; each row's ranking line is looked up by (s, r, CountTRuCoLa ts id)"
+      }
+     },
+     "test": {
+      "gold_in_topk_frac": 0.7207486578579658,
+      "tail_exact_frac": 1.0,
+      "queries_without_ranking_line": 0,
+      "ranking_lines_unmatched": 0,
+      "n_cand_max": 200,
+      "n_cand_median": 200.0,
+      "evaluator_vs_formula_max_abs_dev": 1.9868214962137642e-08,
+      "alignment": {
+       "rows": 163172,
+       "gold_equals_harness_gold": true,
+       "harness_split_queries_equals_v76_recb_csr_sro": true,
+       "harness_R": 283,
+       "note": "rows are built directly from the harness split_queries order; gold.npy == harness gold by construction; each row's ranking line is looked up by (s, r, CountTRuCoLa ts id)"
+      }
+     }
+    },
+    "dump_dir": "v78_external/dumps/counttrucola/tkgl-smallpedia/{val,test}",
+    "gate": {
+     "published_test_MRR": 0.644,
+     "reproduced_test_MRR": 0.6365796681465823,
+     "diff": -0.007420331853417728,
+     "tolerance": 0.01,
+     "outcome": "PASS"
+    }
+   },
+   "tkgl-polecat": {
+    "status": "complete",
+    "authors_own_eval_random_ties": {
+     "test": {
+      "MRR": 0.25572345369430155,
+      "H1": 0.17848399282061295,
+      "H3": 0.2910956075068152,
+      "H10": 0.40823752055812973
+     },
+     "val": {
+      "MRR": 0.2624931055657208,
+      "H1": 0.18666771639373764,
+      "H3": 0.29814310779197406,
+      "H10": 0.4100646331953692
+     }
+    },
+    "official": {
+     "val": {
+      "n": 533472,
+      "MRR": 0.2624851163311234,
+      "H1": 0.18663959870433688,
+      "H3": 0.29812623717833364,
+      "H10": 0.4100627586827425
+     },
+     "test": {
+      "n": 532636,
+      "MRR": 0.25571348671342947,
+      "H1": 0.1784539535442591,
+      "H3": 0.29107120059477765,
+      "H10": 0.4082225009199528
+     }
+    },
+    "effective_config": {
+     "dataset_name": "tkgl-polecat",
+     "learn_option": "learn",
+     "multiflag": "True",
+     "eval_type": "random",
+     "large_data_flag": "True",
+     "very_large_data_flag": "False",
+     "rr_offset": "-99",
+     "aggregation_type": "noisyor",
+     "aggregation_decay": "0.8",
+     "aggregation_numtoprules": "10",
+     "threshold_conf": "0",
+     "threshold_corr_pred": "0",
+     "pvalue": "30",
+     "data_threshold_multi": "0",
+     "lmbda_reg": "0",
+     "learn_window_size": "150",
+     "apply_window_size": "-1",
+     "f_active": "True",
+     "f_min_support": "0",
+     "f_unseen_negatives": "10",
+     "f_min_confidence": "0",
+     "z_active": "True",
+     "z_factor": "0.1",
+     "z_min_support": "0",
+     "z_min_confidence": "0",
+     "z_unseen_negatives": "10",
+     "c_active": "False"
+    },
+    "n_rules": 1024,
+    "run": {
+     "num_cpus": 12,
+     "wall_s": 20944.4,
+     "peak_pss_gb": 103.14,
+     "peak_rss_sum_gb": 113.4,
+     "min_host_avail_gb": 348.0,
+     "phase_times_s": {
+      "time_totaltime": 20911.866952778015,
+      "time_evaltime": 490.31917996902484,
+      "time_applytime": 16814.86797100003,
+      "time_learntime": 1204.657667750027,
+      "time_learndatatime": 2323.214697882009
+     },
+     "score_wall_s": 200.7,
+     "score_peak_pss_gb": 11.1,
+     "killed_for_memory": false
+    },
+    "dump_checks": {
+     "val": {
+      "gold_in_topk_frac": 0.66096065023094,
+      "tail_exact_frac": 1.0,
+      "queries_without_ranking_line": 0,
+      "ranking_lines_unmatched": 0,
+      "n_cand_max": 200,
+      "n_cand_median": 200.0,
+      "evaluator_vs_formula_max_abs_dev": 1.9868214962137642e-08,
+      "alignment": {
+       "rows": 533472,
+       "gold_equals_harness_gold": true,
+       "harness_split_queries_equals_v76_recb_csr_sro": true,
+       "harness_R": 16,
+       "note": "rows are built directly from the harness split_queries order; gold.npy == harness gold by construction; each row's ranking line is looked up by (s, r, CountTRuCoLa ts id)"
+      }
+     },
+     "test": {
+      "gold_in_topk_frac": 0.6581943390983711,
+      "tail_exact_frac": 1.0,
+      "queries_without_ranking_line": 0,
+      "ranking_lines_unmatched": 0,
+      "n_cand_max": 200,
+      "n_cand_median": 200.0,
+      "evaluator_vs_formula_max_abs_dev": 1.9868214962137642e-08,
+      "alignment": {
+       "rows": 532636,
+       "gold_equals_harness_gold": true,
+       "harness_split_queries_equals_v76_recb_csr_sro": true,
+       "harness_R": 16,
+       "note": "rows are built directly from the harness split_queries order; gold.npy == harness gold by construction; each row's ranking line is looked up by (s, r, CountTRuCoLa ts id)"
+      }
+     }
+    },
+    "feasibility": "feasible: 5.8 h wall, peak 103 GB PSS, memory guard never triggered",
+    "dump_dir": "v78_external/dumps/counttrucola/tkgl-polecat/{val,test}",
+    "table_lines": [
+     "| CountTRuCoLa reproduced, authors' evaluator (random ties) | test | 0.2557 | 0.1785 | 0.2911 | 0.4082 |",
+     "| CountTRuCoLa reproduced, authors' evaluator (random ties) | val | 0.2625 | 0.1867 | 0.2981 | 0.4101 |",
+     "| CountTRuCoLa reproduced, official evaluator (**dumped, EXT_alone**) | test | 0.2557 | 0.1785 | 0.2911 | 0.4082 |",
+     "| CountTRuCoLa reproduced, official evaluator (**dumped, EXT_alone**) | val | 0.2625 | 0.1866 | 0.2981 | 0.4101 |"
+    ]
+   }
+  }
+ },
+ "deviations": [
+  "Seeds: per-query dumps exist for EdgeReMIND seed 1337 only. The gate number is seed 1337; seeds 1338-1341 were added as unmodified-script runs only (no dumps), giving a 5-seed test MRR of 0.6138 ± 0.0017 (paper: 0.6136 ± 0.0017). EdgeReMIND polecat: seed 1337 only (paper: 5 seeds). CountTRuCoLa: one run per dataset; the method takes no seed argument and the paper also reports one run.",
+  "BLAS/OpenMP threads were pinned to 1 per process (OMP/OPENBLAS/MKL_NUM_THREADS=1) for every run. The first EdgeReMIND smallpedia attempt used the library defaults: 48 threads in each of 16 workers, host load about 500. I killed it after about 15 min and used none of its numbers. This is a resource setting only; the re-trained theta reproduced the gate run's val/test MRR bit for bit.",
+  "Worker counts are resource settings, not hyper-parameters, and they differ from the protocol note's '16 workers per method'. EdgeReMIND used --num-workers 16 for the gate runs and polecat, and 12 for the smallpedia dump re-score, which overlapped other runs. CountTRuCoLa used NUM_CPUS=16 on smallpedia and 12 on polecat, to keep cores free for co-tenants, instead of the config default of 1 (the paper used up to 20 threads). The 26 h run_timeout set on the polecat jobs was only a scheduler backstop; the pre-registered stop rule (<= 24 h wall per seed) was evaluated on measured wall time: 3.9 h (EdgeReMIND) and 5.8 h (CountTRuCoLa).",
+  "py-tgb 2.3.0 was used (required by the EdgeReMIND repo and used by our harness), not the py-tgb 2.2.0 named in the EdgeReMIND paper. CountTRuCoLa's own run uses its vendored tgb copy; our official re-score uses py-tgb 2.3.0.",
+  "EdgeReMIND history boundary in the DUMPS (EXT_alone): every query was re-scored with the trained, unchanged theta and the strict cutoff t' < t (the HRcov boundary). The released code instead cuts history at the start of each 200-event batch: earlier batches of the same timestamp are visible and the current batch is hidden. Effect on test MRR: smallpedia 0.6148 -> 0.6131, polecat 0.1698 -> 0.1655. The gate uses the authors' cutoff. Per-query arrays for the authors' cutoff were dumped for smallpedia only (polecat: aggregate MRR only).",
+  "EdgeReMIND tkgl-polecat: the unmodified example script was not run separately. er_run.py runs the verbatim training/selection code and the authors' evaluate_parallel; on smallpedia the two paths gave bit-identical val and test MRR.",
+  "CountTRuCoLa gate number = official py-tgb Evaluator over its rankings with ties averaged, as pre-declared. The authors' own evaluation breaks ties randomly (EVAL_TYPE=random): smallpedia test 0.6441 vs 0.6366 official; polecat 0.2557 under both. Both are reported; the dumps carry the official per-query rr. The gold shares its non-zero score with at least one other listed candidate in 17.0% of smallpedia test queries (2.0% on polecat), which accounts for the gap.",
+  "The CountTRuCoLa released config differs from paper Table 6 for smallpedia: the code sets C_X_COUNT=20 (large_data_flag: > 1M quads incl. inverses), while Table 6 lists Cx-count 3. I used the released config unchanged, as pre-declared. A Table-6 run was not needed because the gate passed.",
+  "CountTRuCoLa dumps: the released code stores at most 200 non-zero candidates per query (large_data_flag, both datasets). Each top-1000 list therefore holds <= 200 scored entities, followed by ties at the floor 0 ordered by entity id (n_gt_floor and n_cand give the split).",
+  "EdgeReMIND dump floor = highest score outside the top-1000, an upper bound of the tail. The tail is constant in only 0.16% of smallpedia test queries and 0% on polecat, because scores are linear in history features and can be negative. The exact per-query official rr/rank and the exact gold score are stored separately and do not depend on the truncation.",
+  "Validation dumps cover all harness valid rows. The harness's polecat HRcov fitting used a valid subsample (pilot_polecat/work/valid_sample_idx.npy), which the consumer must index.",
+  "Script bugs were fixed during the run, with no effect on numbers. (a) The first CountTRuCoLa smallpedia val re-score matched the test rankings file ('pvalue' contains 'val') and was re-run. (b) The EdgeReMIND smallpedia dump needed two restarts from the saved theta: one for a wrong assertion that the strict cutoff is never later than the authors' cutoff (it is later for 0.5-6% of queries, when a batch straddles a timestamp boundary), one for a dict-cleanup bug. The history boundary of the dumps was not changed by fix (b): every dumped score uses the pre-registered strict cutoff (index position of the first event at t, verified per row by asserting ALL_T[cut-1] < t and ALL_T[cut] == t). Only an incorrect consistency assertion comparing it with the authors' batch cutoff was dropped; that comparison is logged as cutoff_stats in meta.json.",
+  "The CountTRuCoLa smallpedia wall time (1179 s vs 280 s in the paper) is inflated: the run overlapped the oversubscribed first EdgeReMIND attempt.",
+  "Only serverA was used; serverB was not needed. A VPN outage (about 2026-10-15T21:35Z to 2026-10-16T06:15Z) cut SSH to both hosts. Both polecat jobs ran detached, finished during the outage (EdgeReMIND 22:40Z, CountTRuCoLa 00:07Z) and were harvested intact afterwards. No job died and nothing was restarted from a checkpoint.",
+  "Not in scope / not done: EXT_adapted, EXT_blend, SA_ERM, any HRcov comparison or bootstrap."
+ ],
+ "dump_root": "$WORK_DIR/tracks/v78_external/dumps",
+ "manifest": {
+  "path": "$WORK_DIR/tracks/v78_external/MANIFEST.json",
+  "all_pass": true,
+  "entries": [
+   {
+    "method": "counttrucola",
+    "dataset": "tkgl-polecat",
+    "split": "test",
+    "PASS": true,
+    "rows": 532636,
+    "n_gold_mismatch": 0
+   },
+   {
+    "method": "counttrucola",
+    "dataset": "tkgl-polecat",
+    "split": "val",
+    "PASS": true,
+    "rows": 533472,
+    "n_gold_mismatch": 0
+   },
+   {
+    "method": "counttrucola",
+    "dataset": "tkgl-smallpedia",
+    "split": "test",
+    "PASS": true,
+    "rows": 163172,
+    "n_gold_mismatch": 0
+   },
+   {
+    "method": "counttrucola",
+    "dataset": "tkgl-smallpedia",
+    "split": "val",
+    "PASS": true,
+    "rows": 162066,
+    "n_gold_mismatch": 0
+   },
+   {
+    "method": "edgeremind_s1337",
+    "dataset": "tkgl-polecat",
+    "split": "test",
+    "PASS": true,
+    "rows": 532636,
+    "n_gold_mismatch": 0
+   },
+   {
+    "method": "edgeremind_s1337",
+    "dataset": "tkgl-polecat",
+    "split": "val",
+    "PASS": true,
+    "rows": 533472,
+    "n_gold_mismatch": 0
+   },
+   {
+    "method": "edgeremind_s1337",
+    "dataset": "tkgl-smallpedia",
+    "split": "test",
+    "PASS": true,
+    "rows": 163172,
+    "n_gold_mismatch": 0
+   },
+   {
+    "method": "edgeremind_s1337",
+    "dataset": "tkgl-smallpedia",
+    "split": "val",
+    "PASS": true,
+    "rows": 162066,
+    "n_gold_mismatch": 0
+   }
+  ]
+ },
+ "edgeremind_smallpedia_five_seed_gate_only": {
+  "test_mean": 0.613847559812967,
+  "test_sd": 0.0017013354595965466,
+  "val_mean": 0.6554324085347144,
+  "val_sd": 0.0002563498078081086,
+  "n": 5,
+  "seeds": [
+   1337,
+   1338,
+   1339,
+   1340,
+   1341
+  ]
+ },
+ "summary_lines": [
+  "* **EdgeReMIND reproduced** on tkgl-smallpedia. The unmodified script with seed 1337 gives test MRR 0.6148 and val 0.6554 (published 0.6136 ± 0.0017 / 0.6554 ± 0.0009; the paper's seed-1337 value is 0.6130). Seeds 1337-1341 give 0.6138 ± 0.0017 test and 0.6554 ± 0.0003 val. A second, independent re-training inside `er_run.py` gave bit-identical val/test MRR, and the per-query `Evaluator.eval` re-score with the authors' cutoff matches the authors' aggregate to within 1e-9.",
+  "* **CountTRuCoLa reproduced** on tkgl-smallpedia. The official evaluator gives test MRR 0.6366 (Δ -0.0074 vs 64.4). The authors' own evaluator (random tie-breaking) gives 0.6441, with H@1/3/10 0.5949/0.6874/0.7174; this matches Table 15 (59.5/68.7/71.7) to the reported precision. The 0.0075 gap between the two evaluators comes from the tie convention: in 17% of test queries the gold shares its non-zero score with another candidate, and random tie-breaking gives E[1/rank] > 1/E[rank].",
+  "* **tkgl-polecat was assessed for both methods** (stop rule not triggered). EdgeReMIND took 3.9 h, CountTRuCoLa 5.8 h; peak memory was 43 / 103 GB summed PSS and host MemAvailable never fell below 348 GB. With the authors' own protocol, both again agree with the published numbers: EdgeReMIND test 0.1698 vs 0.1707 ± 0.0046 (paper's seed-1337 value 0.1698); CountTRuCoLa 0.2557 official / 0.2557 own vs 25.6.",
+  "* EXT_alone numbers for the later decision are the **official, HRcov-boundary** rows marked 'dumped' below. For EdgeReMIND they are lower than the authors'-cutoff numbers (test −0.0017 smallpedia, −0.0044 polecat), because the released evaluation lets a query see earlier 200-event batches of its own timestamp. CountTRuCoLa already respects t′ < t.",
+  "* All 8 dumps (2 methods × 2 datasets × {val, test}) pass the independent alignment and consistency check (`MANIFEST.json`): gold equals the harness gold on every row, with 0 mismatches."
+ ],
+ "polecat_lines": [
+  "The EdgeReMIND rows with the authors' cutoff on polecat have no H@k: the released `evaluate_parallel` returns MRR only, and per-query scoring with the authors' cutoff was run for smallpedia only. The papers do not report H@k for EdgeReMIND.",
+  "",
+  "### EdgeReMIND tkgl-smallpedia seed spread (unmodified script, gate statistics only; no dumps for seeds ≠ 1337)",
+  "",
+  "| seed | test MRR | val MRR |",
+  "|---|---|---|",
+  "| 1337 | 0.6148 | 0.6554 |",
+  "| 1338 | 0.6159 | 0.6555 |",
+  "| 1339 | 0.6117 | 0.6551 |",
+  "| 1340 | 0.6143 | 0.6558 |",
+  "| 1341 | 0.6125 | 0.6555 |",
+  "| mean ± SD (n = 5) | 0.6138 ± 0.0017 | 0.6554 ± 0.0003 |",
+  "| published (n = 5, same seeds) | 0.6136 ± 0.0017 | 0.6554 ± 0.0009 |"
+ ],
+ "resource_lines": [
+  "| EdgeReMIND smallpedia gate, seed 1337 (unmodified script) | 16 | 11.3 min | 9.5 GB (RSS-sum 32.3 GB) |",
+  "| EdgeReMIND smallpedia seeds 1338-1341 (unmodified script) | 16 | 10.7, 11.9, 12.3, 12.0 min | 11.1, 9.2, 10.1, 10.1 GB |",
+  "| EdgeReMIND smallpedia dump re-score (val+test, both cutoffs) | 12 | 18.8 min | 10.7 GB |",
+  "| EdgeReMIND polecat (train/select 1.23 h, authors' test eval 0.94 h, strict dumps val+test 1.77 h) | 16 | 3.94 h | 42.8 GB (RSS-sum 118.9 GB; paper 69.6 GB) |",
+  "| CountTRuCoLa smallpedia main.py (examples + learn + apply + own eval) | 16 | 19.7 min | 8.5 GB |",
+  "| CountTRuCoLa smallpedia official re-score (val+test) | 16 | 0.5 min | 2.1 GB |",
+  "| CountTRuCoLa polecat main.py | 12 | 5.82 h (paper 3.8 h with 20 threads) | 103.1 GB |",
+  "| CountTRuCoLa polecat official re-score (val+test) | 12 | 3.3 min | 11.1 GB |"
+ ],
+ "dump_lines": [
+  "Root: `$WORK_DIR/tracks/v78_external/dumps/<method>/<dataset>/{val,test}/` (symlinks into `v78_external/runs/...`). The format is described in `v78_external/README.md`; the checks are in `v78_external/MANIFEST.json`. Total size about 27 GB of dumps plus 6.7 GB of CountTRuCoLa rankings files in `repos/counttrucola_submission/files/rankings/`.",
+  "",
+  "| dump | rows (val / test) | top-K | gold in top-K (test) | tail constant (test) |",
+  "|---|---|---|---|---|",
+  "| edgeremind_s1337/tkgl-smallpedia | 162,066 / 163,172 | 1000 | 0.833 | 0.0016 |",
+  "| edgeremind_s1337/tkgl-polecat | 533,472 / 532,636 | 1000 | 0.682 | 0.0000 |",
+  "| counttrucola/tkgl-smallpedia | 162,066 / 163,172 | 1000 (≤ 200 scored) | 0.721 | 1.0000 |",
+  "| counttrucola/tkgl-polecat | 533,472 / 532,636 | 1000 (≤ 200 scored) | 0.658 | 1.0000 |",
+  "",
+  "Each split directory holds `gold.npy` [Q] int32, `keys_harness.npy` [Q,4] (s, r, o, ts_id), `top_ids.npy` [Q,1000] int32 (score descending, ties by id), `top_scores.npy` [Q,1000] (float32 for EdgeReMIND, float64 for CountTRuCoLa, the native dtypes), `floor.npy` (score used for every entity outside the list), `tail_min.npy`, `n_gt_floor.npy`, `gold_score.npy`, `rr_official.npy` and `rank_official.npy` (official evaluator on the full score vector; use these for EXT_alone). A `meta.json` per method/dataset records commit, config, metrics, timings and alignment. Full row: `s = full(N, floor); s[top_ids] = top_scores`. This is exact for CountTRuCoLa and an upper-bound approximation of the tail for EdgeReMIND."
+ ],
+ "alignment_lines": [
+  "* Harness order: `split_queries` of `hardening/v76/code/hd_blend.py` (stable sort by ts id; per timestamp the forward block in file order, then the inverse block (o, r+R, s, t)). Entity, relation and TGB ids are identical (harness assertion, re-checked here: py-tgb 2.3.0 codes the inverse relation as r + 283 / r + 16 = r + R).",
+  "* EdgeReMIND: per-query outputs were produced in the TGM/TGB event order and mapped to harness rows by the (s, r, o, raw t) key. On both datasets the two multisets are identical, and the mapping is the identity permutation: the TGM stream is already in harness order.",
+  "* CountTRuCoLa: rows are generated directly in harness order. Each row's rankings line is looked up by (s, r, CountTRuCoLa ts id), using the timestamp-id rule copied from `RuleDataset.reformat_ts`. On all four splits there are 0 rankings lines without a harness query and 0 harness queries without a line.",
+  "* Independent check (`code/verify_dumps.py` → `MANIFEST.json`), all 8 dumps PASS. gold.npy equals the harness gold recomputed from `harness_data/<ds>/<split>.txt` and equals column 2 of the harness's stored query list `hardening/v76/recb_xf/recb_csr_<split>_<ds>.npz['sro']` (0 mismatches on 162,066 / 163,172 / 533,472 / 532,636 rows). keys_harness equals that stored list. The lists are sorted and duplicate-free, with floor ≤ last listed score. The official rank never exceeds the bound implied by the listed scores, and MRR/H@k recomputed from `rr_official`/`rank_official` equal meta.json."
+ ],
+ "consumer_notes": [
+  "EXT_alone per-query rr: dumps/<method>/<ds>/test/rr_official.npy (harness test order).",
+  "Blending: rebuild a row as full(N, floor) with top_ids/top_scores; EdgeReMIND scores are raw linear scores (not probabilities), CountTRuCoLa scores are noisy-or confidences in [0,1] with floor 0.",
+  "Polecat valid: the dumps cover all 533,472 rows; index with pilot_polecat/work/valid_sample_idx.npy if the HRcov fit/selection parts refer to the subsample."
+ ],
+ "ext_adapted_counttrucola": {
+  "label": "registered-optional comparator run (EXT_adapted, CountTRuCoLa), executed AFTER the v78 framing verdict was read",
+  "amendment": {
+   "name": "v78_rule_amendment_1",
+   "sha256": "8fffffcaad75b066fe0fb35127e101c5bbe11f65de7ff4654068f5170962d84e",
+   "field": "EXT.EXT_adapted"
+  },
+  "protocol_note_version_id": "redacted-id",
+  "code": {
+   "repo_copy": "v78_external/repos/counttrucola_adapted (diff -r vs pinned clone 5d9aedf, excluding run outputs: identical)",
+   "entry": "rule_based/ct_adapted_main.py",
+   "entry_sha256": "cef81235ea71c4d515eedcd1ebd68cc7e0a1ddb7ac9fdd70e16ab75227d5929b",
+   "scorer": "code/ct_score_adapted.py",
+   "scorer_sha256": "e05285ccb4688fc2943ae7a42d2fa1e3e00f8c9a44cfd18067919587d0341c0b"
+  },
+  "split": {
+   "rule": "cut = uts[int(0.7*len(uts))] over the ts of the harness validation rows (hcpat_train.py / v78_train.py); fit = ts < cut, selection = ts >= cut",
+   "smallpedia": {
+    "file": "hardening/v78/smallpedia/hist/valid_hist.npz",
+    "sha256": "f4b4910d15f7651cdab7a07f62ffc56fba07c33109f034cdb5e90299d343cc86",
+    "cut_ts_id": 105,
+    "cut_raw": 2005,
+    "harness_fit_rows": 105606,
+    "harness_selection_rows": 56460
+   },
+   "polecat": {
+    "files": {
+     "pc_tirgn/work/valid_sample_idx.npy": "604f241d533a59c8e64eedb7cd1d97c1bbd1fad5266d4e8cd9d68af2c794fb97",
+     "hardening/v78/polecat/hist/valid_hist.npz": "363f10c9b5bf9653dd6978fcf77609c985dd284414d97f65043de3ba89411c46"
+    },
+    "cut_ts_id": 1423,
+    "cut_raw": 1637730000,
+    "harness_sample_fit_rows": 139236,
+    "harness_selection_rows": 60764,
+    "all_valid_rows_ts_ge_cut": 161448
+   }
+  },
+  "datasets": {
+   "tkgl-smallpedia": {
+    "split_moved": {
+     "dataset": "tkgl-smallpedia",
+     "cut_ts_id": 105,
+     "cut_raw": 2005,
+     "n_train_orig": 775514,
+     "n_val_orig": 162066,
+     "n_fit_moved": 105606,
+     "n_val_selection": 56460,
+     "n_test": 163172,
+     "val_min_raw": 1998,
+     "val_max_raw": 2007,
+     "fit_max_raw": 2004,
+     "selection_min_raw": 2005
+    },
+    "n_rules": 1577,
+    "official": {
+     "test": {
+      "n": 163172,
+      "MRR": 0.6373245590405933,
+      "H1": 0.5763366263819772,
+      "H3": 0.6816671978035447,
+      "H10": 0.710924668448018
+     },
+     "selection_harness_rows": {
+      "n": 56460,
+      "MRR": 0.63849643573397,
+      "H1": 0.5842366277010272,
+      "H3": 0.6784980517180305,
+      "H10": 0.7096174282678002
+     },
+     "selection_all_rows_ts_ge_cut": {
+      "n": 56460,
+      "MRR": 0.63849643573397,
+      "H1": 0.5842366277010272,
+      "H3": 0.6784980517180305,
+      "H10": 0.7096174282678002
+     }
+    },
+    "authors_own_eval_random_ties": {
+     "test": {
+      "MRR": 0.6444068145764096,
+      "H1": 0.5955372245238154,
+      "H3": 0.6877037727061015,
+      "H10": 0.7176415071213198
+     },
+     "selection_all_rows": {
+      "MRR": 0.6438840564168813,
+      "H1": 0.598919589089621,
+      "H3": 0.6834396032589444,
+      "H10": 0.7094757350336521
+     }
+    },
+    "faithful_same_rows_official": {
+     "selection_harness_rows": {
+      "n": 56460,
+      "MRR": 0.6374095685514727,
+      "H1": 0.5825008855827134,
+      "H3": 0.6774176408076514,
+      "H10": 0.7088204038257173
+     },
+     "selection_all_rows": {
+      "n": 56460,
+      "MRR": 0.6374095685514727,
+      "H1": 0.5825008855827134,
+      "H3": 0.6774176408076514,
+      "H10": 0.7088204038257173
+     },
+     "test": {
+      "n": 163172,
+      "MRR": 0.6365796681465823,
+      "H1": 0.5747983722697522,
+      "H3": 0.6812749736474395,
+      "H10": 0.710244404677273
+     }
+    },
+    "run": {
+     "num_cpus": 12,
+     "wall_s": 213.1,
+     "peak_pss_gb": 6.9,
+     "peak_rss_sum_gb": 8.14,
+     "min_host_avail_gb": 466.9,
+     "killed_for_memory": false,
+     "phase_times_s": {
+      "time_totaltime": 208.59460370696615,
+      "time_evaltime": 43.160221394035034,
+      "time_applytime": 147.53767467004946,
+      "time_learntime": 1.5353024509968236,
+      "time_learndatatime": 7.387636595987715
+     },
+     "score_wall_s": 30.1,
+     "score_peak_pss_gb": 3.2
+    },
+    "dump_checks": {
+     "n": 162066,
+     "n_scored": 56460,
+     "n_in_learning_data": 105606,
+     "ranking_lines_unmatched": 0,
+     "n_cand_max": 200,
+     "gold_in_topk_frac": 0.7125575628763726,
+     "tail_exact_frac": 1.0
+    },
+    "dump_dir": "v78_external/dumps/counttrucola_adapted/tkgl-smallpedia/{val,test}"
+   },
+   "tkgl-polecat": {
+    "split_moved": {
+     "dataset": "tkgl-polecat",
+     "cut_ts_id": 1423,
+     "cut_raw": 1637730000,
+     "n_train_orig": 2493112,
+     "n_val_orig": 533472,
+     "n_fit_moved": 372024,
+     "n_val_selection": 161448,
+     "n_test": 532636,
+     "val_min_raw": 1617854400,
+     "val_max_raw": 1646197200,
+     "fit_max_raw": 1637643600,
+     "selection_min_raw": 1637730000
+    },
+    "n_rules": 1024,
+    "official": {
+     "test": {
+      "n": 532636,
+      "MRR": 0.255850307445234,
+      "H1": 0.1786341892023821,
+      "H3": 0.29109748496158727,
+      "H10": 0.4082844569274326
+     },
+     "selection_harness_rows": {
+      "n": 60764,
+      "MRR": 0.26486417335469603,
+      "H1": 0.18723257191758277,
+      "H3": 0.3009512211177671,
+      "H10": 0.4160358106773748
+     },
+     "selection_all_rows_ts_ge_cut": {
+      "n": 161448,
+      "MRR": 0.2654786335029637,
+      "H1": 0.18752787275159805,
+      "H3": 0.3011434022099995,
+      "H10": 0.4180355284673703
+     }
+    },
+    "authors_own_eval_random_ties": {
+     "test": {
+      "MRR": 0.2558577382234456,
+      "H1": 0.17865859611441962,
+      "H3": 0.29112940169271323,
+      "H10": 0.4082919667465211
+     },
+     "selection_all_rows": {
+      "MRR": 0.2654806707764402,
+      "H1": 0.18754645458599672,
+      "H3": 0.3011619840443982,
+      "H10": 0.41804172241216986
+     }
+    },
+    "faithful_same_rows_official": {
+     "selection_harness_rows": {
+      "n": 60764,
+      "MRR": 0.26467404720124305,
+      "H1": 0.18719965769205452,
+      "H3": 0.3007208215390692,
+      "H10": 0.41567375419656377
+     },
+     "selection_all_rows": {
+      "n": 161448,
+      "MRR": 0.265305425851231,
+      "H1": 0.1874783211932015,
+      "H3": 0.3012486992715921,
+      "H10": 0.4176515038897973
+     },
+     "test": {
+      "n": 532636,
+      "MRR": 0.25571348671342947,
+      "H1": 0.1784539535442591,
+      "H3": 0.29107120059477765,
+      "H10": 0.4082225009199528
+     }
+    },
+    "run": {
+     "num_cpus": 12,
+     "wall_s": 9588.1,
+     "peak_pss_gb": 105.01,
+     "peak_rss_sum_gb": 111.81,
+     "min_host_avail_gb": 387.3,
+     "killed_for_memory": false,
+     "phase_times_s": {
+      "time_totaltime": 9562.462505110016,
+      "time_evaltime": 298.81965329201194,
+      "time_applytime": 7038.319941780006,
+      "time_learntime": 559.3869186330121,
+      "time_learndatatime": 1616.3965958089684
+     },
+     "score_wall_s": 137.0,
+     "score_peak_pss_gb": 10.56
+    },
+    "dump_checks": {
+     "n": 533472,
+     "n_scored": 161448,
+     "n_in_learning_data": 372024,
+     "ranking_lines_unmatched": 0,
+     "n_cand_max": 200,
+     "gold_in_topk_frac": 0.6704078093256033,
+     "tail_exact_frac": 1.0
+    },
+    "dump_dir": "v78_external/dumps/counttrucola_adapted/tkgl-polecat/{val,test}"
+   }
+  },
+  "manifest_all_pass": true,
+  "manifest_entries": 12,
+  "deviations": [
+   "Timing/label: run after the v78 framing verdict was read; registered-optional comparator (amendment field EXT.EXT_adapted). Not part of the registered verdict computation unless the hardening track applies the rule's external_comparator selection to it.",
+   "tkgl-polecat fit part: all 372,024 validation facts with ts id < 1423 were moved into the learning data, not only the 139,236 fit rows of the 200,000-row HRcov sample. The cut is the harness's (identical over the sample and over all valid rows). Reason, recorded before the run: CountTRuCoLa's learning counts every head fact absent from its train index as a negative, so moving only sampled facts would make about 62% of the true fit-window facts negatives. Consequence: CountTRuCoLa has more fit-window label access than the HRcov ranker (<= 120,000 fit queries). tkgl-smallpedia: both readings coincide (105,606 rows).",
+   "Implementation: one in-memory change (TGB val/train masks) in a wrapper around the released main.py, on a code-identical repo copy. The first attempt for both datasets placed the wrapper at the repo root, so ray workers could not import rule_based modules (ModuleNotFoundError: apply_dataset). The polecat attempt was killed after about 2 min. The smallpedia attempt ended without usable rankings, and its run directory was overwritten by the re-run. No number from either attempt was read or used. The wrapper was moved to rule_based/ (as the released entry point) and both runs were restarted from scratch.",
+   "Validation dumps: rows with ts id < cut were learning data. No ranking exists for them; they are flagged in_learning_data=True with NaN scores/rr/rank (top_ids = 0..999, n_cand = n_gt_floor = -1). Only selection-window rows are scored.",
+   "No hyper-parameter or variant choice was made (released settings), so the selection part was used only for reporting. CPU count 12 for both datasets (faithful smallpedia run: 16); resource setting only. BLAS/OpenMP threads pinned to 1.",
+   "z-/f-rule statistics follow the released code on the modified splits. In val-mode application the train-split counts now include the fit window, which lies entirely before every selection query. In test-mode application train+val totals are unchanged, so test predictions change only through the re-learned rules and confidence parameters.",
+   "Out of scope / not done: EdgeReMIND adapted, adapted blend, any HRcov comparison or bootstrap."
+  ]
+ }
+}

@@ -1,0 +1,48 @@
+{
+ "addendum_to": "smallpedia_decision_rule.json (v2, version redacted-id)",
+ "pilot": "2 of 4 - static-KG fusion on TGB 2.0 tkgl-smallpedia: direct-static-edge leakage control",
+ "registered": "2026-10-12 (UTC), BEFORE any HRCOV_ST_NODIRECT or HRCOV_ST_NODIRECT_STRICT candidate list, feature file, model or valid/test number exists. Test numbers that existed at registration: all pilot-2 rows in smallpedia_pilot_verdict.json v2 (base, HR, HRCOV, HRCOV_ST, controls) and the post-hoc attribution that direct s-o static-edge queries (4.1% of test) carry ~+0.0040 of the +0.0077-0.0080 HRCOV_ST gain; that attribution motivated this control and is the reason it is registered as a separate addendum.",
+ "motivation": "A direct static Wikidata edge between the query subject s and a candidate c (any property, either direction) is time-less background knowledge whose snapshot date post-dates (or is undated relative to) the forecast timestamp; when the static property restates or implies the forecast temporal relation (e.g. P39 position held, P463 member of, P131 located in), ranking c up is closer to answer lookup than to forecasting. The control asks whether the PASS survives when this evidence is removed and only multi-hop static structure (shared attributes, static-then-temporal, temporal-then-static paths) is used.",
+ "arms": {
+  "HRCOV": "REFERENCE, unchanged: the pilot-2 HRCOV per-query ranks (3 seeds) are reused. Valid by construction because C_cov (layout A cols 0-149) and its 30 features do not use the static KG; the no-direct lists are asserted to reproduce C_cov candidate ids and F_cov values exactly (bridge rankers loaded from the pilot-2 lists directory, not retrained).",
+  "HRCOV_ST": "pilot-2 PRIMARY, unchanged (reported for the cost of removing direct edges).",
+  "HRCOV_ST_NODIRECT": "PRIMARY OF THIS ADDENDUM. Identical to HRCOV_ST (layout A cols 0-199 = C_cov ++ 50 static candidates, 42 features, same re-ranker, 30 epochs / patience 5, seeds 0/1/2, fit/select split of VALID only) except that every static path of shape S (s -p-> c or c -p-> s, any of the 753 properties) is removed before candidate ranking and feature computation: L_st and the static block are built from SS / ST / TS paths only; features st_1hop and st_log_n_S are identically 0; all other static features are computed from the remaining paths. A candidate with a direct edge to s can still enter through a 2-hop path (e.g. shared attribute). Path-type precision tables (ste_SMALLPEDIA.npz, fitted on early-train) are reused: per-type precision of SS/ST/TS types does not depend on S paths (types are estimated independently), and S entries are never consulted.",
+  "HRCOV_ST_NODIRECT_STRICT": "SENSITIVITY. As HRCOV_ST_NODIRECT, and additionally every candidate c with a direct static edge to s is removed from the static path set entirely (cannot enter L_st or the static block via any path) and receives the 'no static evidence' feature values (counts 0, best precision = fill, st_in 0, list position = beyond list); its static degree feature is computed with the s-c edges removed. The re-ranker therefore cannot distinguish a direct-edge candidate from a candidate without static evidence. (Direct-edge candidates may still appear in C_cov through history; that is not static evidence.)"
+ },
+ "primary_rule": {
+  "statement": "'PASS survives without direct static edges' iff on >= 2 of the 3 bases (RE-GCN, LogCL, TiRGN; same frozen bases as pilot 2) ALL of: (a) HRCOV_ST_NODIRECT - HRCOV on full-test MRR >= 0.001 with one-sided p < 0.05; (b) head-damage guardrail passes (DAMAGE iff the 95% CI of HRCOV_ST_NODIRECT - HRCOV on head [gold train freq >= 500] lies entirely below 0 AND |delta| >= 0.001); (c) the no-pair-history stratum improves (delta > 0, one-sided p < 0.05).",
+  "statistic": "unchanged from the pilot-2 rule: per-query reciprocal rank averaged over seeds 0/1/2, harness exact time-aware filtered rank over all 47,433 entities (verified = official py-tgb), one-sided paired Poisson(1) bootstrap over the 163,172 test queries, B = 2000, bootstrap seed 0.",
+  "per_base_pass": "PASS_nd_b = (a) and (b) and (c)",
+  "survives": "count(PASS_nd_b) >= 2"
+ },
+ "reported_not_decisive": [
+  "first-seen-object stratum (o has no event before t) and first-seen-entity stratum: HRCOV_ST_NODIRECT - HRCOV, CI, p",
+  "HRCOV_ST_NODIRECT - HRCOV_ST (full test and strata): the part of the pilot-2 gain that required direct edges",
+  "direct-edge stratum (test queries whose (s, o) is a direct static edge) vs. no-direct-edge stratum, for HRCOV_ST and HRCOV_ST_NODIRECT",
+  "HRCOV_ST_NODIRECT_STRICT under the same three conditions (sensitivity), and STRICT - NODIRECT",
+  "official py-tgb Evaluator rows for HRCOV_ST_NODIRECT seed 0 and HRCOV_ST_NODIRECT_STRICT seed 0"
+ ],
+ "pre_stated_interpretation": {
+  "survives_and_strict_survives": "multi-hop static structure carries a forecasting-relevant gain independent of direct s-o background facts",
+  "survives_strict_fails": "the surviving gain depends partly on 2-hop re-discovery of candidates that are directly linked to s; report as 'not separable from direct-edge background knowledge'",
+  "fails": "the pilot-2 PASS is attributed to time-less direct background knowledge (possible future leakage), not to forecasting gain; pilot-2 static fusion is reported as NOT useful for forecasting on smallpedia",
+  "framing": "whatever the outcome, the direct-edge component of HRCOV_ST is reported as 'time-less background knowledge, possible future leakage', not as forecasting gain"
+ },
+ "leakage_audit_spec": {
+  "population": "test queries whose (s, o) pair is a direct static edge (either direction, any property)",
+  "unit": "(static property with direction relative to the query, forecast temporal relation in canonical direction) pairs; inverse queries (r >= 283) are mapped to the forward relation with s and o swapped",
+  "classes": {
+   "same": "static property identical to the temporal relation, same direction",
+   "inverse": "same property reversed, or a Wikidata inverse-property pair (e.g. P527 has part / P361 part of; P150 / P131)",
+   "implies": "static property entails or restates the temporal relation (hierarchical containment, membership, holder of a position, etc.)",
+   "related": "topically related but neither same nor implied",
+   "unrelated": "no semantic relation"
+  },
+  "labels": "English labels/descriptions of the Wikidata properties fetched from wikidata.org (wbgetentities); classification of non-identical pairs by an LLM judge given labels and descriptions, with the top-20 pairs (by query count) listed for human check",
+  "outputs": "fraction of direct-edge test queries in each class (query-level class = strongest class over its static edges, order same > inverse > implies > related > unrelated); per relation-pair counts (top 20); HRCOV_ST - HRCOV contribution by class (post-hoc)"
+ },
+ "notes": [
+  "Base-relative deltas: the RE-GCN base here (test MRR 0.4218, 3 valid-selected epochs) is ~0.17 below the TGB 2.0 RE-GCN row (0.594); deltas measured against the base overstate what a tuned base would leave to re-ranking. HRCOV / HRCOV_ST / NODIRECT absolute numbers stand as measured.",
+  "Compute: serverA, docker tkg-gpu:latest, same code as pilot 2 plus an SP_STATIC_MODE switch (full / nodirect / nodirect_strict); mode 'full' reproduces pilot 2 unchanged."
+ ]
+}

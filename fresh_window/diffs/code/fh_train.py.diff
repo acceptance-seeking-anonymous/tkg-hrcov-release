@@ -1,0 +1,9 @@
+--- a/phase2_forward_holdout/code/fh_train.py
++++ b/code/fh_train.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""phase2_forward_holdout / fh_train.py -- STAGE 1 (fit + freeze, no test split) of the G2 re-ranker recipe on GDELT25X.
++"""phase2_fresh_window / fh_train.py -- STAGE 1 (fit + freeze, no test split) of the G2 re-ranker recipe on GDELTFW.
+ 
+ The training loop below is presub/g2_train.py main() with every test-split statement removed; all helpers (Net, view,
+ ranks_of, predict, calibrate_ab, prom_lists, ARMS, COLS, metrics) are imported from the byte-identical copy of g2_train.py

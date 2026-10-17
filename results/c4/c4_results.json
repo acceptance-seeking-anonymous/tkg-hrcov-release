@@ -1,0 +1,851 @@
+{
+ "name": "c4_results",
+ "label": "pre-specified later analysis (C4)",
+ "protocol": "c4_protocol.json (file version redacted-id; registered 2026-10-14T18:54:49Z; sha256 171774ea...)",
+ "parent_rule": "tois_v7_rule.json (redacted-id)",
+ "dataset": "tkgl-polecat",
+ "base": "TiRGN",
+ "seeds": [
+  42,
+  43
+ ],
+ "n_test": 532636,
+ "evaluator": "official py-tgb Evaluator per-query RR; re-ranker arms averaged over re-ranker seeds 0-2 per query",
+ "seed42_sources": {
+  "ctrl": "v7/data/f_serverB/off_polecat_tirgn_ctrl.npz",
+  "hcpat": "v7/data/f_serverB/off_polecat_tirgn_hcpat.npz",
+  "full": "$RESULTS_DIR/runs/v7/data/off/official_test_polecat_v7_polecat_tirgn_00.npz",
+  "ev": "$RESULTS_DIR/runs/v7/data/off/official_test_polecat_v7_polecat_tirgn_01.npz"
+ },
+ "seed43_source": "official_test_polecat_tirgn2.npz",
+ "systems": {
+  "HRCOV_PAT (= FULL)": "MLP64_PAT_fused_s0-2 (v7 MLP64_PAT arm)",
+  "EV_NF_PT": "EV_PT_alone_s0-2 (v7 EV_PT arm)",
+  "BLEND/POOL": "valid-selected on each seed's own valid grid"
+ },
+ "mrr": {
+  "seed43": {
+   "base": 0.22178909690458926,
+   "BLEND": 0.23593414897759699,
+   "POOL": 0.23600050996788047,
+   "HRCOV_PAT": 0.2814115834212164,
+   "EV_NF_PT": 0.27272936681900056
+  },
+  "seed42": {
+   "base": 0.22048834792788033,
+   "BLEND": 0.23480663405665148,
+   "POOL": 0.23486163052651496,
+   "HRCOV_PAT": 0.2823239826123354,
+   "EV_NF_PT": 0.27369439172032506
+  },
+  "seed42_HRCOV_PAT_stored": 0.282377767408202
+ },
+ "hits": {
+  "seed43": {
+   "base": {
+    "1": 0.1444119436162783,
+    "3": 0.25153763545836183,
+    "10": 0.3758288962818886
+   },
+   "BLEND": {
+    "1": 0.15879136971590355,
+    "3": 0.2667224896552242,
+    "10": 0.38863313782770975
+   },
+   "POOL": {
+    "1": 0.15879136971590355,
+    "3": 0.2667224896552242,
+    "10": 0.38863313782770975
+   },
+   "HRCOV_PAT": {
+    "1": 0.19572027926513916,
+    "3": 0.32074186999501847,
+    "10": 0.45168557889440447
+   },
+   "EV_NF_PT": {
+    "1": 0.1891009995569207,
+    "3": 0.30991083341468967,
+    "10": 0.43716033714081154
+   }
+  },
+  "seed42": {
+   "base": {
+    "1": 0.1428630434292838,
+    "3": 0.24982351925142124,
+    "10": 0.37497840927012066
+   },
+   "BLEND": {
+    "1": 0.15757290156880122,
+    "3": 0.26491637816445,
+    "10": 0.3879084402856735
+   },
+   "POOL": {
+    "1": 0.15757290156880122,
+    "3": 0.26491637816445,
+    "10": 0.3879084402856735
+   },
+   "HRCOV_PAT": {
+    "1": 0.19661958010098204,
+    "3": 0.32138708861836857,
+    "10": 0.4526843848331694
+   },
+   "EV_NF_PT": {
+    "1": 0.1900165716674552,
+    "3": 0.31074442333350855,
+    "10": 0.43822860890614485
+   }
+  }
+ },
+ "per_seed": {
+  "s43_MLP64_PAT_fused": [
+   0.2814071774482727,
+   0.2817789316177368,
+   0.28104865550994873
+  ],
+  "s43_EV_PT_alone": [
+   0.27266839146614075,
+   0.27274051308631897,
+   0.2727791965007782
+  ],
+  "s42_MLP64_PAT_fused": [
+   0.2820252478122711,
+   0.28253090381622314,
+   0.28241580724716187
+  ],
+  "s42_EV_PT_alone": [
+   0.27384379506111145,
+   0.2735350728034973,
+   0.27370429039001465
+  ],
+  "s42_HRCOV_PAT_stored": [
+   0.2824961543083191,
+   0.28233644366264343,
+   0.2823007106781006
+  ]
+ },
+ "better_control": {
+  "seed43": "POOL",
+  "seed42": "POOL"
+ },
+ "base_seed_variation": {
+  "MRR_s43": 0.22178909690458926,
+  "MRR_s42": 0.22048834792788033,
+  "abs_diff": 0.0013007489767089264,
+  "frac_queries_base_rr_differs": 0.8107112549658678,
+  "pearson_rr": 0.8735451749854726,
+  "frac_gold_hit1_indicator_agree": 0.9385377631252864
+ },
+ "seed42_base_identity_across_files": {
+  "full": {
+   "frac_base_rr_differs": 0.00010701492201052877,
+   "mean_abs": 6.285636686565792e-09,
+   "max_abs": 0.0021505430340766907
+  },
+  "ev": {
+   "frac_base_rr_differs": 9.575019337784153e-05,
+   "mean_abs": 1.628839650100282e-08,
+   "max_abs": 0.00476190447807312
+  },
+  "hcpat": {
+   "frac_base_rr_differs": 8.260800997303975e-05,
+   "mean_abs": 4.461394134744633e-09,
+   "max_abs": 0.001424502581357956
+  }
+ },
+ "contrasts": {
+  "s43: HRCOV_PAT - better control": {
+   "delta": 0.045411073453335934,
+   "query": {
+    "CI95": [
+     0.0448729870700175,
+     0.045946531841493436
+    ],
+    "L": 0.04496756099267029,
+    "U": 0.0458768123164691,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.00027681665962030064
+   },
+   "ts": {
+    "CI95": [
+     0.044306566820403216,
+     0.046594664247204494
+    ],
+    "L": 0.04444259434387539,
+    "U": 0.046399788758115346,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0005824640204610662
+   },
+   "MDE80_ts": 0.0014480055548662107,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": false,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "s43: HRCOV_PAT - BLEND": {
+   "delta": 0.0454774344436194,
+   "query": {
+    "CI95": [
+     0.04493817686471743,
+     0.046012982164917685
+    ],
+    "L": 0.04503238423325995,
+    "U": 0.04594443014521016,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0002768673496550075
+   },
+   "ts": {
+    "CI95": [
+     0.04437376562762415,
+     0.046659766781715836
+    ],
+    "L": 0.04450915986675362,
+    "U": 0.04646330646316996,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.000582132839785799
+   },
+   "MDE80_ts": 0.0014471822397074965,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": false,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "s43: HRCOV_PAT - POOL": {
+   "delta": 0.045411073453335934,
+   "query": {
+    "CI95": [
+     0.0448729870700175,
+     0.045946531841493436
+    ],
+    "L": 0.04496756099267029,
+    "U": 0.0458768123164691,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.00027681665962030064
+   },
+   "ts": {
+    "CI95": [
+     0.044306566820403216,
+     0.046594664247204494
+    ],
+    "L": 0.04444259434387539,
+    "U": 0.046399788758115346,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0005824640204610662
+   },
+   "MDE80_ts": 0.0014480055548662107,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": false,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "s43: FULL - EV_NF_PT [B3 base contribution, common PT pool]": {
+   "delta": 0.008682216602215851,
+   "query": {
+    "CI95": [
+     0.008333858050829515,
+     0.00903396900035321
+    ],
+    "L": 0.00838623011648538,
+    "U": 0.008965278806415065,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0001778246596428521
+   },
+   "ts": {
+    "CI95": [
+     0.008022881907233133,
+     0.009383452900357296
+    ],
+    "L": 0.008119625854230981,
+    "U": 0.00927263751426963,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.000348417135453785
+   },
+   "MDE80_ts": 0.0008661649987381097,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": false,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "s43: HRCOV_PAT - base": {
+   "delta": 0.059622486516627146,
+   "query": {
+    "CI95": [
+     0.05899941929512853,
+     0.060220755461311455
+    ],
+    "L": 0.05909921299736767,
+    "U": 0.06015018933550959,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.00031327001723614186
+   },
+   "ts": {
+    "CI95": [
+     0.05832755789195494,
+     0.06100117816566903
+    ],
+    "L": 0.05853728559163885,
+    "U": 0.06076849803347609,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0006728791124067858
+   },
+   "MDE80_ts": 0.0016727774734432697,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": false,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "s42: HRCOV_PAT - better control": {
+   "delta": 0.04746235208582045,
+   "query": {
+    "CI95": [
+     0.046914564377437414,
+     0.0480233338274168
+    ],
+    "L": 0.0470055720844945,
+    "U": 0.0479425145906849,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0002863736025849347
+   },
+   "ts": {
+    "CI95": [
+     0.04632289906949042,
+     0.048671515985126375
+    ],
+    "L": 0.04651241872270887,
+    "U": 0.04845943433221716,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0005971560971794082
+   },
+   "MDE80_ts": 0.001484530057588009,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": false,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "s42: HRCOV_PAT - BLEND": {
+   "delta": 0.04751734855568395,
+   "query": {
+    "CI95": [
+     0.046970798021444236,
+     0.04807895493291566
+    ],
+    "L": 0.047059926689521754,
+    "U": 0.04799594727926916,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0002863599439754045
+   },
+   "ts": {
+    "CI95": [
+     0.046374427960910965,
+     0.04872805166994902
+    ],
+    "L": 0.04656811563231683,
+    "U": 0.04851695442661421,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0005970580627182479
+   },
+   "MDE80_ts": 0.0014842863439175646,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": false,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "s42: HRCOV_PAT - POOL": {
+   "delta": 0.04746235208582045,
+   "query": {
+    "CI95": [
+     0.046914564377437414,
+     0.0480233338274168
+    ],
+    "L": 0.0470055720844945,
+    "U": 0.0479425145906849,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0002863736025849347
+   },
+   "ts": {
+    "CI95": [
+     0.04632289906949042,
+     0.048671515985126375
+    ],
+    "L": 0.04651241872270887,
+    "U": 0.04845943433221716,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0005971560971794082
+   },
+   "MDE80_ts": 0.001484530057588009,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": false,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "s42: FULL - EV_NF_PT [B3 base contribution, common PT pool]": {
+   "delta": 0.008629590892010338,
+   "query": {
+    "CI95": [
+     0.008294961606710121,
+     0.008962386448199796
+    ],
+    "L": 0.008343738132687049,
+    "U": 0.008918920171673063,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.00017108979757302631
+   },
+   "ts": {
+    "CI95": [
+     0.007980835259038581,
+     0.00933423846990369
+    ],
+    "L": 0.008081059494151496,
+    "U": 0.00923989569626848,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0003472587058247009
+   },
+   "MDE80_ts": 0.0008632851426802065,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": false,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "s42: HRCOV_PAT - base": {
+   "delta": 0.06183563468445507,
+   "query": {
+    "CI95": [
+     0.06122522046835534,
+     0.06244474273105284
+    ],
+    "L": 0.06134588805693868,
+    "U": 0.06234226010333982,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0003092714391739212
+   },
+   "ts": {
+    "CI95": [
+     0.06046195629466304,
+     0.06328223034039179
+    ],
+    "L": 0.060691754174343714,
+    "U": 0.06301211272037287,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0007105366590508994
+   },
+   "MDE80_ts": 0.001766394134400536,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": false,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "seed43-seed42: base MRR": {
+   "delta": 0.0013007489767089138,
+   "query": {
+    "CI95": [
+     0.0008249666179991983,
+     0.0017891357197096778
+    ],
+    "L": 0.0008999704820203254,
+    "U": 0.0017077414664353515,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.0002422097758042208
+   },
+   "ts": {
+    "CI95": [
+     0.00044606630390968264,
+     0.002149027908142294
+    ],
+    "L": 0.000611042639649627,
+    "U": 0.0019995010031578094,
+    "p_one_sided_le0": 0.001,
+    "SE": 0.00043225704837815713
+   },
+   "MDE80_ts": 0.0010745910222680988,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": true,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "seed43-seed42: BLEND MRR": {
+   "delta": 0.001127514920945528,
+   "query": {
+    "CI95": [
+     0.0006871822735998925,
+     0.0015449832571222668
+    ],
+    "L": 0.0007590227785690863,
+    "U": 0.001474456485384181,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.00021794120405715692
+   },
+   "ts": {
+    "CI95": [
+     0.0004371128771817025,
+     0.0018212401331822422
+    ],
+    "L": 0.0005437375941505265,
+    "U": 0.001706429154466803,
+    "p_one_sided_le0": 0.001,
+    "SE": 0.00035852127962575635
+   },
+   "MDE80_ts": 0.0008912839011496304,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": true,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "seed43-seed42: POOL MRR": {
+   "delta": 0.0011388794413654917,
+   "query": {
+    "CI95": [
+     0.0006993546306319383,
+     0.0015555798891581487
+    ],
+    "L": 0.0007697786787700335,
+    "U": 0.001486338392519617,
+    "p_one_sided_le0": 0.0,
+    "SE": 0.00021789098677266135
+   },
+   "ts": {
+    "CI95": [
+     0.0004482550087622081,
+     0.0018320597278942807
+    ],
+    "L": 0.000555282569270992,
+    "U": 0.0017176906095352175,
+    "p_one_sided_le0": 0.001,
+    "SE": 0.00035840235786800125
+   },
+   "MDE80_ts": 0.0008909882616598512,
+   "present_pos": true,
+   "present_neg": false,
+   "excluded_gain_ge_bar": true,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "seed43-seed42: HRCOV_PAT MRR": {
+   "delta": -0.0009123991911190105,
+   "query": {
+    "CI95": [
+     -0.0011646744289243477,
+     -0.0006439658484225307
+    ],
+    "L": -0.0011270121221164237,
+    "U": -0.0006863119938213048,
+    "p_one_sided_le0": 1.0,
+    "SE": 0.00013510841425932915
+   },
+   "ts": {
+    "CI95": [
+     -0.0013685448667963658,
+     -0.00045968759656377144
+    ],
+    "L": -0.00130046031089037,
+    "U": -0.000546453427358773,
+    "p_one_sided_le0": 1.0,
+    "SE": 0.0002308093033674179
+   },
+   "MDE80_ts": 0.0005737919281714009,
+   "present_pos": false,
+   "present_neg": true,
+   "excluded_gain_ge_bar": true,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "seed43-seed42: (HRCOV_PAT - BLEND)": {
+   "delta": -0.0020399141120645385,
+   "query": {
+    "CI95": [
+     -0.0024340415473808764,
+     -0.001613893638423968
+    ],
+    "L": -0.0023760331192934055,
+    "U": -0.0016911311593177654,
+    "p_one_sided_le0": 1.0,
+    "SE": 0.00020958952861721317
+   },
+   "ts": {
+    "CI95": [
+     -0.002641952764296967,
+     -0.0014399711014524933
+    ],
+    "L": -0.002541066454614819,
+    "U": -0.0015458679066375563,
+    "p_one_sided_le0": 1.0,
+    "SE": 0.00030532046219705546
+   },
+   "MDE80_ts": 0.00075902666902188,
+   "present_pos": false,
+   "present_neg": true,
+   "excluded_gain_ge_bar": true,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "seed43-seed42: (HRCOV_PAT - POOL)": {
+   "delta": -0.002051278632484502,
+   "query": {
+    "CI95": [
+     -0.002443330868347622,
+     -0.0016260099904204439
+    ],
+    "L": -0.002387720421958419,
+    "U": -0.0017015102984336023,
+    "p_one_sided_le0": 1.0,
+    "SE": 0.00020958213327166965
+   },
+   "ts": {
+    "CI95": [
+     -0.0026554921209956573,
+     -0.001449182396435963
+    ],
+    "L": -0.002552880246581424,
+    "U": -0.0015579429727989127,
+    "p_one_sided_le0": 1.0,
+    "SE": 0.00030528017627046123
+   },
+   "MDE80_ts": 0.0007589265182083667,
+   "present_pos": false,
+   "present_neg": true,
+   "excluded_gain_ge_bar": true,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "seed43-seed42: (FULL - EV_NF_PT)": {
+   "delta": 5.262571020551356e-05,
+   "query": {
+    "CI95": [
+     -0.00021869079506544136,
+     0.00033356042505536466
+    ],
+    "L": -0.00017428008310349895,
+    "U": 0.00028318289766290363,
+    "p_one_sided_le0": 0.354,
+    "SE": 0.0001399693710686859
+   },
+   "ts": {
+    "CI95": [
+     -0.00032694051704185503,
+     0.000439034392347589
+    ],
+    "L": -0.00026868466221847975,
+    "U": 0.00038089690679726464,
+    "p_one_sided_le0": 0.3945,
+    "SE": 0.0001974837154410563
+   },
+   "MDE80_ts": 0.000490944516586466,
+   "present_pos": false,
+   "present_neg": false,
+   "excluded_gain_ge_bar": true,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "sens seed43-seed42(stored HRCOV_PAT): HRCOV_PAT MRR": {
+   "delta": -0.000966183986985562,
+   "query": {
+    "CI95": [
+     -0.0012342190648010724,
+     -0.0007056496209031997
+    ],
+    "L": -0.0011980453893157398,
+    "U": -0.0007408780019846862,
+    "p_one_sided_le0": 1.0,
+    "SE": 0.00013544936372912096
+   },
+   "ts": {
+    "CI95": [
+     -0.001422663966863973,
+     -0.0005272960819066983
+    ],
+    "L": -0.0013439247016854739,
+    "U": -0.0006017288085189157,
+    "p_one_sided_le0": 1.0,
+    "SE": 0.00022688777872160383
+   },
+   "MDE80_ts": 0.0005640430179019071,
+   "present_pos": false,
+   "present_neg": true,
+   "excluded_gain_ge_bar": true,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  },
+  "sens seed43-seed42(stored HRCOV_PAT): (HRCOV_PAT - BLEND)": {
+   "delta": -0.00209369890793109,
+   "query": {
+    "CI95": [
+     -0.002495698744835597,
+     -0.0016750804388935418
+    ],
+    "L": -0.0024378591898634645,
+    "U": -0.001751103193871733,
+    "p_one_sided_le0": 1.0,
+    "SE": 0.00020942833511697356
+   },
+   "ts": {
+    "CI95": [
+     -0.0026690181814598736,
+     -0.0015354191684743984
+    ],
+    "L": -0.0025791305113481095,
+    "U": -0.0016123659573275841,
+    "p_one_sided_le0": 1.0,
+    "SE": 0.00029621959499911467
+   },
+   "MDE80_ts": 0.0007364019131677991,
+   "present_pos": false,
+   "present_neg": true,
+   "excluded_gain_ge_bar": true,
+   "excluded_loss_ge_bar": true,
+   "n": 532636
+  }
+ },
+ "selection": {
+  "tirgn2": {
+   "blend_idx": 27,
+   "blend_cfg": [
+    "def",
+    "LOGLIN",
+    "(0.25, 0.001)"
+   ],
+   "valid_MRR_blend": 0.25412880622627704,
+   "pool_idx": 111,
+   "pool_cfg": [
+    100,
+    [
+     "def",
+     "LOGLIN",
+     "(0.25, 0.001)"
+    ]
+   ],
+   "valid_MRR_pool": 0.2541533093841737,
+   "valid_MRR_base": 0.24235731149515435,
+   "n_valid": 200000,
+   "host": "<HOST>_GPU0_RTX_PRO_6000"
+  }
+ },
+ "official_meta": {
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition",
+  "selected": {
+   "blend": [
+    "def",
+    "LOGLIN",
+    "(0.25, 0.001)"
+   ],
+   "pool": [
+    100,
+    [
+     "def",
+     "LOGLIN",
+     "(0.25, 0.001)"
+    ]
+   ]
+  },
+  "py_tgb": "2.3.0",
+  "elapsed_s": 2122.9,
+  "official_vs_formula_max_batch_dev": 0.0
+ },
+ "base_training": {
+  "model": "tirgn",
+  "dataset": "POLECAT",
+  "config": {
+   "data_dir": "$WORK_DIR/tracks/datasets/harness_data/tkgl-polecat",
+   "n_ent": 150931,
+   "n_rel": 16,
+   "tree": "$WORK_DIR/tracks/pilot_smallpedia/stage/TiRGN",
+   "ds": "POLECAT",
+   "out": "$WORK_DIR/tracks/hardening/c4/tirgn",
+   "epochs": 12,
+   "patience": 3,
+   "max_train_hours": 7.0,
+   "L": 10,
+   "hr": 0.3,
+   "lr": 0.001,
+   "seed": 43,
+   "topk": 200,
+   "smoke": 0,
+   "no_dump": false,
+   "resume_ckpt": "",
+   "dec_chunk": 4096
+  },
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition",
+  "epoch_log": [
+   {
+    "epoch": 0,
+    "loss": 5.46979,
+    "valid_filt_MRR": 0.194909,
+    "train_epoch_s": 607,
+    "t_s": 698
+   },
+   {
+    "epoch": 1,
+    "loss": 4.98361,
+    "valid_filt_MRR": 0.222225,
+    "train_epoch_s": 590,
+    "t_s": 1371
+   },
+   {
+    "epoch": 2,
+    "loss": 4.62315,
+    "valid_filt_MRR": 0.234086,
+    "train_epoch_s": 593,
+    "t_s": 2047
+   },
+   {
+    "epoch": 3,
+    "loss": 4.27147,
+    "valid_filt_MRR": 0.238466,
+    "train_epoch_s": 594,
+    "t_s": 2725
+   },
+   {
+    "epoch": 4,
+    "loss": 3.90712,
+    "valid_filt_MRR": 0.237329,
+    "train_epoch_s": 598,
+    "t_s": 3408
+   },
+   {
+    "epoch": 5,
+    "loss": 3.64416,
+    "valid_filt_MRR": 0.241751,
+    "train_epoch_s": 599,
+    "t_s": 4090
+   },
+   {
+    "epoch": 6,
+    "loss": 3.45467,
+    "valid_filt_MRR": 0.233696,
+    "train_epoch_s": 590,
+    "t_s": 4762
+   },
+   {
+    "epoch": 7,
+    "loss": 3.30242,
+    "valid_filt_MRR": 0.23247,
+    "train_epoch_s": 590,
+    "t_s": 5434
+   },
+   {
+    "epoch": 8,
+    "loss": 3.17675,
+    "valid_filt_MRR": 0.220812,
+    "train_epoch_s": 590,
+    "t_s": 6107
+   }
+  ],
+  "best_epoch": 5,
+  "best_valid_filt_MRR": 0.24175091296429116,
+  "train_s": 6107,
+  "stop_reason": "patience"
+ },
+ "notes": [
+  "seed-42 HRCOV_PAT here is the v7 re-fit (MLP64_PAT_fused, same code path as seed 43); the stored claim-system HRCOV_PAT is a sensitivity row",
+  "present iff one-sided L > 0 under both query and ts-block bootstraps; excluded_gain_ge_bar iff ts U < 0.005"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "ds": "gdeltfw",
+ "KMAX": 200,
+ "device": "cuda",
+ "host": "serverA_(GPU0_RTX_PRO_6000)",
+ "smoke": 0,
+ "valid": {
+  "n": 152234,
+  "HIST_MRR": 0.38930349145423043,
+  "gold_in_top50": 0.8509531379323936,
+  "median_npos": 545.0,
+  "frac_ssum0": 0.0007094341605685983,
+  "cut": 203,
+  "HIST_MRR_fit": 0.3827272266137991,
+  "HIST_MRR_select": 0.40267325589572117
+ },
+ "elapsed_s": 1.8
+}

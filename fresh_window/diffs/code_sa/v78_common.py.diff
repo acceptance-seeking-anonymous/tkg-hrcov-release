@@ -1,0 +1,23 @@
+--- a/hardening/v78/code/v78_common.py
++++ b/code_sa/v78_common.py
+@@ -6,7 +6,7 @@
+ 
+ O = os.environ.get("V78_WORK", "/home/anon/cs_scratch/open_ideas_harness")
+ T = f"{O}/tracks"; H = f"{T}/hardening"; V = f"{H}/v78"
+-RECB_XF = f"{H}/v76/recb_xf"
++RECB_XF = os.environ.get("V78_RECB_XF", f"{H}/v76/recb_xf")   # phase2_fresh_window: GDELTFW RecB_xf dir via env
+ KMAX = 200            # history top list kept per query (first blocks need <= 75; generator tail mass needs 200)
+ LP_LEN, PAT_FILL, E1 = 300, -6.0, np.e - 1.0
+ SA_K = (25, 50, 75)   # first-block sizes of SA_W50 / SA_W100 / SA_W150
+@@ -26,6 +26,11 @@
+                        bases={"tirgn": dict(feat=f"{T}/pilot_smallpedia/work/feat_tirgn", lists=None, mass="exact",
+                                             rows={"valid": f"{T}/pilot_smallpedia/dumps/tirgn_valid_logp.f32",
+                                                   "test": f"{T}/pilot_smallpedia/dumps/tirgn_test_logp.f32"})}),
++    # phase2_fresh_window (v79): GDELTFW, base-free SA pools only (no PC/HU pools); common = fw_pc_shim (fh_common + RS_CODE)
++    "gdeltfw": dict(name="GDELTFW", dd=f"{T}/phase2_fresh_window/data/GDELTFW", N=1209, R=215, layout="pc",
++                    code=f"{T}/phase2_fresh_window/code", common="fw_pc_shim", P=f"{T}/phase2_fresh_window/GDELTFW",
++                    te=f"{T}/phase2_fresh_window/GDELTFW/work/te_GDELTFW.npz",
++                    valid_rows=f"{T}/phase2_fresh_window/GDELTFW/work/valid_sample_idx.npy", bases={}),
+ }
+ 
+ 

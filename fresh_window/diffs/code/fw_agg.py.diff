@@ -1,0 +1,234 @@
+--- a/phase2_forward_holdout/code/fh_agg.py
++++ b/code/fw_agg.py
+@@ -1,165 +1,83 @@
+ #!/usr/bin/env python3
+-"""phase2_forward_holdout / fh_agg.py -- STAGE 2 decision of fh_decision_rule.json (GDELT25X forward holdout of HRCOV_PAT).
+-
+-Written and hashed BEFORE any test number of this track existed (see freeze_manifest.json).  Implements the rule exactly:
+-  arms (harness exact time-aware filtered rank, strict '>', both directions, every test query; fh_blend.py --stage test):
+-      base (TiRGN, GDELT25X-trained), BLEND = TiRGN(+)RecB and POOL = RecB-POOL (valid-selected), HR, HRCOV_PAT
+-      (per-query RR averaged over seeds 0-2); RecB default / trained standalone (fh_recb.py formula, average ties)
+-  primary statistic: paired Poisson(1) bootstrap over TIMESTAMP BLOCKS (all queries of one test day share one weight),
+-      B = 2000, seed 0; delta* = sum_d w_d S_d / sum_d w_d M_d; percentile CI95, one-sided p = P*(delta* <= 0),
+-      one-sided 95% upper bound U = 95th percentile (strata: B = 1000)
+-  alongside (not decision): query-level Poisson(1) bootstrap (G2 primary, hd_agg.boot) and the G7 multinomial
+-      timestamp-block bootstrap (g7_cluster_bootstrap.boot_cluster)
+-  C1: for each control c in {BLEND, POOL}: delta_c = MRR(HRCOV_PAT) - MRR(c) >= 0.005 and block p_c < 0.05
+-  C2: (G2: vs the strongest blend over all bases) -- one base, so C2 == the BLEND part of C1 (recorded, not re-tested)
+-  C3: head stratum (gold train-window frequency >= 500): DAMAGE iff block CI95 of HRCOV_PAT - better control lies
+-      entirely below 0 and |delta| >= 0.001
+-  labels: PRACTICAL_ADVANCE | HEAD_DAMAGE | CONTROL_BETTER | BELOW_MARGIN_BOUNDED (U < 0.005) | INCONCLUSIVE (U >= 0.005)
+-  validity checks V1-V5 (any failure -> outcome BLOCKED, numbers reported as diagnostics only)
+-  python3 fh_agg.py --cfg fh_agg_cfg.json --rule fh_decision_rule.json --out fh_verdict.json
++"""phase2_fresh_window / fw_agg.py -- v79 decision (v79_fresh_window_rule + amendment_1 + implementation note), run once on the
++Stage-2 rank files.  Primary metric: all-entity time-aware filtered MRR with ties averaged; harness strict ranks alongside.
++HRcov and SA per-query RR = mean over seeds 0-2.  Paired per-query RR differences; query bootstrap (Poisson(1)) and
++timestamp-block bootstrap (multinomial over the 61 test days), B = 2000, seed 0, draws shared across comparisons
++(v7_common.summ_multi); one-sided 95% bounds = 5th / 95th percentiles.
++  BEATS(X): L > 0 under both AND point >= 0.005;  MATCHES(X): U < 0.005 under both;  SMALL otherwise.
++Outcome: R1_BEATS_BOTH | R2_SA_MATCHES | R3_EXTERNAL_MATCHES | R4_OTHER.
++  python3 fw_agg.py --tirgn official_test_gdeltfw_tirgn.npz --sa official_test_gdeltfw_sa.npz --ext official_test_gdeltfw_ext.npz \
++                    --ts2id timestamp2id.txt --comparator ext_comparator.json --out fresh_window_verdict.json --results fresh_window_results.json
+ """
+-import os, sys, json, argparse
++import os, sys, json, argparse, datetime
+ import numpy as np
+ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+-from hd_agg import boot, mets, load_quads, split_queries, system_block   # noqa: E402
+-from g7_cluster_bootstrap import boot_cluster                              # noqa: E402
++import v7_common as V
+ 
+-CLAIM = "HRCOV_PAT"
+-MARGIN = 0.005
+-CONTROLS = ("BLEND", "POOL")
++BAR = 0.005
+ 
+ 
+-def boot_block_poisson(d, cid, B=2000, seed=0, chunk=100):
+-    """paired Poisson(1) bootstrap over clusters (timestamp blocks): each block gets one Poisson(1) weight per draw."""
+-    d = np.asarray(d, np.float64)
+-    u, inv = np.unique(cid, return_inverse=True); nC = len(u)
+-    S = np.bincount(inv, weights=d, minlength=nC); M = np.bincount(inv, minlength=nC).astype(np.float64)
+-    rng = np.random.default_rng(seed); bs = np.empty(B)
+-    for b0 in range(0, B, chunk):
+-        bb = min(chunk, B - b0)
+-        w = rng.poisson(1.0, size=(bb, nC)).astype(np.float64)
+-        den = w @ M
+-        bs[b0:b0 + bb] = np.where(den > 0, (w @ S) / np.maximum(den, 1.0), 0.0)
+-    lo, hi = np.percentile(bs, [2.5, 97.5]); L5, U95 = np.percentile(bs, [5, 95])
+-    return dict(delta=float(d.mean()), CI95=[float(lo), float(hi)], p_one_sided=float((bs <= 0).mean()),
+-                p_le_margin=float((bs <= MARGIN).mean()), U_one_sided_95=float(U95), L_one_sided_95=float(L5),
+-                B=B, n=int(len(d)), n_blocks=int(nC), method="paired Poisson(1) bootstrap over timestamp blocks")
++def mets(rank_list, rr_list):
++    per = [dict(MRR=float(np.mean(rr)), H1=float(np.mean(rk <= 1)), H3=float(np.mean(rk <= 3)), H10=float(np.mean(rk <= 10))) for rk, rr in zip(rank_list, rr_list)]
++    out = {k: float(np.mean([p[k] for p in per])) for k in ("MRR", "H1", "H3", "H10")}
++    if len(per) > 1: out["per_seed_MRR"] = [p["MRR"] for p in per]
++    return out
+ 
+ 
+-def stats(d, ts, B=2000):
+-    return dict(block_poisson=boot_block_poisson(d, ts, B=B), query_poisson=boot(d, B=B), block_multinomial=boot_cluster(d, ts, B=B))
+-
+-
+-def hk(rank, k):
+-    return (np.asarray(rank, np.float64) <= k).astype(np.float64)
++def call(s):
++    q, t = s["query"], s["ts"]
++    if q["L"] > 0 and t["L"] > 0 and s["delta"] >= BAR: return "BEATS"
++    if q["U"] < BAR and t["U"] < BAR: return "MATCHES"
++    return "SMALL"
+ 
+ 
+ def main():
+     ap = argparse.ArgumentParser()
+-    ap.add_argument("--cfg", required=True); ap.add_argument("--rule", required=True); ap.add_argument("--out", required=True)
++    for k in ("tirgn", "sa", "ext", "ts2id", "comparator", "out", "results"): ap.add_argument(f"--{k}", required=True)
+     a = ap.parse_args()
+-    C = json.load(open(a.cfg)); rule = json.load(open(a.rule))
+-    Q = {sp: load_quads(f"{C['dd']}/{sp}.txt") for sp in ("train", "test")}
+-    st_ = open(f"{C['dd']}/stat.txt").read().split(); N, R = int(st_[0]), int(st_[1])
+-    sro = split_queries(Q["test"], R); n = len(sro); ts = sro[:, 3]
+-    freq = np.bincount(Q["train"][:, 0], minlength=N) + np.bincount(Q["train"][:, 2], minlength=N)
+-    S = np.load(C["strata"]); assert (S["sro"] == sro).all(), "strata row order"
+-    gf = freq[sro[:, 2]]
+-    V = dict(name="fh_verdict", rule_file=os.path.basename(a.rule), rule_registered_utc=rule["registered_utc"],
+-             rule_sha256_expected=C.get("rule_sha256"), claim_system=CLAIM, dataset="GDELT25X", base="tirgn",
+-             evaluator="harness exact time-aware filtered rank (all arms); RecB standalone: hd_recb formula (average ties)",
+-             n_test=int(n), n_timestamps=int(len(np.unique(ts))))
+-    # ---------------- validity checks
+-    Z = {k: v for k, v in np.load(C["official"]).items()}
+-    ap_ = json.load(open(C["apply_json"])); fs = json.load(open(C["feat_summary_test"]))
+-    vchk = dict(V1_hashes=C.get("hash_check_passed"),
+-                V2_frozen_models_reproduce_select=all(r["select_rank_agreement"] >= 0.9999 for arm in ap_["arms"].values() for r in arm.values()),
+-                V3_fullrow_vs_dump_test=bool(fs["verify"]["test"]["rank_agree_ok"]),
+-                V4_all_test_queries_scored=bool(len(Z["rr_base"]) == n and (Z["rows"] == np.arange(n)).all() and all((Z[k] > 0).all() for k in Z if k.startswith("rank_"))),
+-                V5_identity=all(abs(x - 1.0) < 1e-12 for x in ap_["identity_test"].values()))
+-    V["validity"] = vchk
+-    valid_ok = all(bool(x) for x in vchk.values())
+-    # ---------------- arms
+-    arms = {}; rr = {}; rk = {}
+-    for arm in ("base", "BLEND", "POOL"):
+-        rr[arm] = Z[f"rr_{arm}"].astype(np.float64); rk[arm] = Z[f"rank_{arm}"].astype(np.float64)
+-        arms[arm] = mets(rr[arm], rk[arm])
+-    for pre in ("HR", CLAIM):
+-        sb = system_block(Z, pre)
+-        names = [f"{pre}_s{s}" for s in (0, 1, 2) if f"rr_{pre}_s{s}" in Z]
+-        assert len(names) == 3, (pre, names)
+-        arms[pre] = dict(sb[0]["official"], sd=sb[0]["official_sd"], per_seed_MRR=sb[0]["per_seed_official_MRR"], seeds=3)
+-        rr[pre] = sb[1]
+-        rk[pre] = None
+-        for k in (1, 3, 10):
+-            rr[f"{pre}_H{k}"] = np.mean([hk(Z[f"rank_{nm}"], k) for nm in names], 0)
+-    RB = np.load(C["recb_ranks"])
+-    for k_, lab in (("clean_tr", "RecB_trained_clean"), ("clean_def", "RecB_default_clean"), ("faith_tr", "RecB_trained_faithful"), ("faith_def", "RecB_default_faithful")):
+-        r_ = RB[k_].astype(np.float64); rr[lab] = 1.0 / r_; rk[lab] = r_
+-        arms[lab] = mets(rr[lab], r_)
+-    V["arms"] = arms
+-    tj = json.load(open(C["blend_test_json"])); V["selected_controls"] = tj.get("selected")
+-    # ---------------- decision
+-    better = "BLEND" if rr["BLEND"].mean() >= rr["POOL"].mean() else "POOL"
+-    c1 = {c: stats(rr[CLAIM] - rr[c], ts) for c in CONTROLS}
+-    c1_pass = all(c1[c]["block_poisson"]["delta"] >= MARGIN and c1[c]["block_poisson"]["p_one_sided"] < 0.05 for c in CONTROLS)
+-    hm = gf >= 500
+-    if hm.sum() > 0:
+-        c3 = dict(block_poisson=boot_block_poisson((rr[CLAIM] - rr[better])[hm], ts[hm], B=1000), query_poisson=boot((rr[CLAIM] - rr[better])[hm], B=1000),
+-                  share=float(hm.mean()), n=int(hm.sum()))
+-        damage = (c3["block_poisson"]["CI95"][1] < 0) and (abs(c3["block_poisson"]["delta"]) >= 0.001)
+-    else:                                          # no head query: guardrail not applicable (reported)
+-        c3 = dict(share=0.0, n=0, not_applicable=True); damage = False
+-    pb = c1[better]["block_poisson"]
+-    if not valid_ok:
+-        outcome = "BLOCKED"
+-    elif c1_pass and not damage:
+-        outcome = "PRACTICAL_ADVANCE"
+-    elif c1_pass and damage:
+-        outcome = "HEAD_DAMAGE"
+-    elif pb["CI95"][1] < 0:
+-        outcome = "CONTROL_BETTER"
+-    elif pb["U_one_sided_95"] < MARGIN:
+-        outcome = "BELOW_MARGIN_BOUNDED"
+-    else:
+-        outcome = "INCONCLUSIVE"
+-    g2_map = {"PRACTICAL_ADVANCE": "PRACTICAL_ADVANCE", "HEAD_DAMAGE": "HEAD_DAMAGE"}.get(outcome, "RECURRENCY_DONE_WELL" if outcome != "BLOCKED" else "BLOCKED")
+-    hits = {}
+-    for k in (1, 3, 10):
+-        hits[f"H{k}"] = {c: boot_block_poisson(rr[f"{CLAIM}_H{k}"] - hk(rk[c], k), ts) for c in CONTROLS}
+-    V["decision"] = dict(better_control=better, C1=c1, C1_pass=bool(c1_pass), C2="identical to the BLEND component of C1 (single base)",
+-                         C3_head=c3, C3_damage=bool(damage), outcome=outcome, outcome_in_G2_vocabulary=g2_map,
+-                         U_vs_better_control=pb["U_one_sided_95"], hits_deltas_vs_controls=hits,
+-                         reading=("the forward holdout excludes an advance >= 0.005 over the better control at one-sided 95%"
+-                                  if outcome == "BELOW_MARGIN_BOUNDED" else None))
+-    # ---------------- secondary (reported, not decision)
+-    sec = {f"{CLAIM}_minus_HR (pool widening)": stats(rr[CLAIM] - rr["HR"], ts),
+-           f"HR_minus_{better}": stats(rr["HR"] - rr[better], ts),
+-           f"{CLAIM}_minus_RecB_trained_clean": stats(rr[CLAIM] - rr["RecB_trained_clean"], ts),
+-           "BLEND_minus_base": stats(rr["BLEND"] - rr["base"], ts),
+-           f"{CLAIM}_minus_base": stats(rr[CLAIM] - rr["base"], ts)}
+-    V["secondary"] = sec
+-    # ---------------- strata (B = 1000)
+-    strata = {"head (gold train freq >= 500)": hm, "mid (50-499)": (gf >= 50) & (gf < 500), "low-frequency (< 50)": gf < 50,
+-              "no-pair-history": ~S["dyad"], "pair-history": S["dyad"], "first-seen (s or o)": S["first_seen"],
+-              "exact recurrence (s,r,o) before t": S["trip"], "gold outside base top-50": Z["hrank_base"] > 50,
+-              "gold in base top-50": Z["hrank_base"] <= 50}
+-    srows = {}
+-    for nm, m in strata.items():
+-        m = np.asarray(m, bool)
+-        if m.sum() == 0: continue
+-        bs = boot_block_poisson((rr[CLAIM] - rr[better])[m], ts[m], B=1000)
+-        srows[nm] = dict(share=float(m.mean()), n=int(m.sum()), **{f"MRR_{k}": float(rr[k][m].mean()) for k in ("base", "BLEND", "POOL", "HR", CLAIM, "RecB_trained_clean")},
+-                         delta_claim_minus_better=bs["delta"], CI95=bs["CI95"], U=bs["U_one_sided_95"])
+-    V["strata"] = srows
+-    # ---------------- temporal stability (reported): 7-day blocks of consecutive test timestamps
+-    uts = np.unique(ts); wk = np.searchsorted(uts, ts) // 7
+-    d = rr[CLAIM] - rr[better]
+-    V["temporal"] = dict(per_week={int(w): dict(n=int((wk == w).sum()), delta=float(d[wk == w].mean())) for w in np.unique(wk)},
+-                         leave_one_week_out={int(w): float(d[wk != w].mean()) for w in np.unique(wk)})
+-    V["deviations"] = C.get("deviations", [])
+-    json.dump(V, open(a.out, "w"), indent=1)
+-    print(json.dumps(dict(outcome=outcome, better=better, delta=pb["delta"], CI95=pb["CI95"], U=pb["U_one_sided_95"], validity=vchk)))
++    T = np.load(a.tirgn); S = np.load(a.sa); E = np.load(a.ext); comp = json.load(open(a.comparator))
++    n = len(T["rr_base"]); assert len(S["rr_HIST"]) == n and len(E["rr_EXT"]) == n
++    assert (T["rows"] == np.arange(n)).all() and (S["rows"] == np.arange(n)).all() and (E["rows"] == np.arange(n)).all()
++    ts = S["ts"].astype(np.int64); assert (E["ts"] == ts).all()
++    chk = dict(base_rr_equal_tirgn_vs_ext=float(np.abs(T["rr_base"] - E["rr_base"]).max()), n_test_queries=int(n), n_test_days=int(len(np.unique(ts))))
++    seedsH = [k[3:] for k in T.files if k.startswith("rr_HRCOV_PAT_s")]; seedsS = [k[3:] for k in S.files if k.startswith("rr_SA_W100_s")]
++    assert len(seedsH) == 3 and len(seedsS) == 3, (seedsH, seedsS)
++    sysd = {"base": (T, ["base"]), "BLEND": (T, ["BLEND"]), "HRcov": (T, seedsH), "SA": (S, seedsS), "external_comparator": (E, ["EXT"])}
++    metrics, rr_mean = {}, {}
++    for nm, (Z, keys) in sysd.items():
++        rr = [Z[f"rr_{k}"].astype(np.float64) for k in keys]; rk = [Z[f"rank_{k}"].astype(np.float64) for k in keys]
++        hk = [Z[f"hrank_{k}"].astype(np.float64) for k in keys]
++        metrics[nm] = dict(official_ties_averaged=mets(rk, rr), harness_strict=mets(hk, [1.0 / h for h in hk]), n_seeds=len(keys))
++        rr_mean[nm] = np.mean(rr, 0); rr_mean[nm + "__strict"] = np.mean([1.0 / h for h in hk], 0)
++    cols = {"HRcov-SA": rr_mean["HRcov"] - rr_mean["SA"], "HRcov-external_comparator": rr_mean["HRcov"] - rr_mean["external_comparator"],
++            "HRcov-BLEND": rr_mean["HRcov"] - rr_mean["BLEND"], "HRcov-base": rr_mean["HRcov"] - rr_mean["base"],
++            "SA-external_comparator": rr_mean["SA"] - rr_mean["external_comparator"], "BLEND-base": rr_mean["BLEND"] - rr_mean["base"]}
++    summ = V.summ_multi(cols, ts, bar=BAR)
++    cols_s = {"HRcov-SA": rr_mean["HRcov__strict"] - rr_mean["SA__strict"], "HRcov-external_comparator": rr_mean["HRcov__strict"] - rr_mean["external_comparator__strict"]}
++    summ_strict = V.summ_multi(cols_s, ts, bar=BAR)
++    calls = {"SA": call(summ["HRcov-SA"]), "external_comparator": call(summ["HRcov-external_comparator"])}
++    if calls["SA"] == "BEATS" and calls["external_comparator"] == "BEATS": outcome = "R1_BEATS_BOTH"
++    elif calls["SA"] == "MATCHES": outcome = "R2_SA_MATCHES"
++    elif calls["external_comparator"] == "MATCHES": outcome = "R3_EXTERNAL_MATCHES"
++    else: outcome = "R4_OTHER"
++    id2day = {}
++    for ln in open(a.ts2id):
++        k, v = ln.split(); id2day[int(v)] = k
++    days = np.array([id2day[int(x)] for x in ts]); wk = np.array([datetime.date(int(d[:4]), int(d[4:6]), int(d[6:])).isocalendar()[1] for d in days])
++    weekly = {}
++    for w in np.unique(wk):
++        m = wk == w
++        weekly[str(int(w))] = dict(n=int(m.sum()), days=f"{min(days[m])}..{max(days[m])}", **{k: float(cols[k][m].mean()) for k in ("HRcov-SA", "HRcov-external_comparator", "HRcov-BLEND")})
++    verdict = dict(rule="v79_fresh_window_rule.json (sha256 209bb1b5...) + amendment_1 (sha256 207689b8...) + fresh_window_implementation_note.json",
++                   dataset="GDELTFW", base="TiRGN", test_window="2026-03-01..2026-04-30", n_test_queries=int(n), bar=BAR, bootstrap=dict(B=V.B, seed=0, shared_draws=True),
++                   comparator=comp, calls=calls, outcome=outcome,
++                   margins={k: dict(point=summ[k]["delta"], query=dict(L=summ[k]["query"]["L"], U=summ[k]["query"]["U"], CI95=summ[k]["query"]["CI95"]),
++                                    ts_block=dict(L=summ[k]["ts"]["L"], U=summ[k]["ts"]["U"], CI95=summ[k]["ts"]["CI95"])) for k in ("HRcov-SA", "HRcov-external_comparator", "HRcov-BLEND", "HRcov-base")},
++                   metrics_official={k: v["official_ties_averaged"] for k, v in metrics.items()}, checks=chk,
++                   decided_utc=datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
++    results = dict(metrics=metrics, deltas_official=summ, deltas_harness_strict=summ_strict, weekly_deltas=weekly, checks=chk, calls=calls, outcome=outcome)
++    json.dump(verdict, open(a.out, "w"), indent=1); json.dump(results, open(a.results, "w"), indent=1)
++    print(json.dumps(dict(outcome=outcome, calls=calls), indent=1))
+ 
+ 
+ if __name__ == "__main__":

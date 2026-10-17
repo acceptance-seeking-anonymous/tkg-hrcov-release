@@ -1,0 +1,726 @@
+{
+ "name": "fh_verdict",
+ "rule_file": "fh_decision_rule.json",
+ "rule_registered_utc": "2026-10-14T10:28:13Z",
+ "rule_sha256_expected": "07b9c2caa65463c1e3ef6b4078a6101e3e4f5178606ddd5f549cfa6894db2702",
+ "claim_system": "HRCOV_PAT",
+ "dataset": "GDELT25X",
+ "base": "tirgn",
+ "evaluator": "harness exact time-aware filtered rank (all arms); RecB standalone: hd_recb formula (average ties)",
+ "n_test": 364718,
+ "n_timestamps": 61,
+ "validity": {
+  "V1_hashes": true,
+  "V2_frozen_models_reproduce_select": true,
+  "V3_fullrow_vs_dump_test": true,
+  "V4_all_test_queries_scored": true,
+  "V5_identity": true
+ },
+ "arms": {
+  "base": {
+   "MRR": 0.39794076079825375,
+   "H1": 0.277885928306253,
+   "H3": 0.44156855433513015,
+   "H10": 0.6491782692381511
+  },
+  "BLEND": {
+   "MRR": 0.41562046732953617,
+   "H1": 0.29372830515631254,
+   "H3": 0.4631770299244896,
+   "H10": 0.6687797147385103
+  },
+  "POOL": {
+   "MRR": 0.41561369694832495,
+   "H1": 0.29372830515631254,
+   "H3": 0.4631770299244896,
+   "H10": 0.6687797147385103
+  },
+  "HR": {
+   "MRR": 0.4294948975245158,
+   "H1": 0.3082756175090527,
+   "H3": 0.4778568647557839,
+   "H10": 0.6836788971205151,
+   "sd": {
+    "MRR": 0.00017877869043453817,
+    "H1": 0.00033598876269123066,
+    "H3": 0.00028887123072763866,
+    "H10": 0.00023003731239146593
+   },
+   "per_seed_MRR": [
+    0.42952707409858704,
+    0.4293022155761719,
+    0.42965540289878845
+   ],
+   "seeds": 3
+  },
+  "HRCOV_PAT": {
+   "MRR": 0.43049386143684387,
+   "H1": 0.30904881762530684,
+   "H3": 0.47883021951206145,
+   "H10": 0.6845837057671954,
+   "sd": {
+    "MRR": 0.00021857650444270904,
+    "H1": 0.0004481580781065307,
+    "H3": 0.000161768818648933,
+    "H10": 4.579783034696269e-05
+   },
+   "per_seed_MRR": [
+    0.43044978380203247,
+    0.4307311177253723,
+    0.43030068278312683
+   ],
+   "seeds": 3
+  },
+  "RecB_trained_clean": {
+   "MRR": 0.40112426650841093,
+   "H1": 0.28531632658656825,
+   "H3": 0.4442473362981811,
+   "H10": 0.6410870864613208
+  },
+  "RecB_default_clean": {
+   "MRR": 0.3918010225273105,
+   "H1": 0.2759748627706886,
+   "H3": 0.43494151645929185,
+   "H10": 0.6298811684644027
+  },
+  "RecB_trained_faithful": {
+   "MRR": 0.39996141382072353,
+   "H1": 0.2838192795529697,
+   "H3": 0.44333978580711675,
+   "H10": 0.6407306466914163
+  },
+  "RecB_default_faithful": {
+   "MRR": 0.39011019849958295,
+   "H1": 0.27392670501593014,
+   "H3": 0.4336665588207876,
+   "H10": 0.6285157299612303
+  }
+ },
+ "selected_controls": {
+  "blend": [
+   "def",
+   "MIX",
+   "0.3"
+  ],
+  "pool": [
+   100,
+   [
+    "def",
+    "MIX",
+    "0.3"
+   ]
+  ]
+ },
+ "decision": {
+  "better_control": "BLEND",
+  "C1": {
+   "BLEND": {
+    "block_poisson": {
+     "delta": 0.014873391525623468,
+     "CI95": [
+      0.014023417017988815,
+      0.01573146416010071
+     ],
+     "p_one_sided": 0.0,
+     "p_le_margin": 0.0,
+     "U_one_sided_95": 0.015593718881645971,
+     "L_one_sided_95": 0.014159590384598759,
+     "B": 2000,
+     "n": 364718,
+     "n_blocks": 61,
+     "method": "paired Poisson(1) bootstrap over timestamp blocks"
+    },
+    "query_poisson": {
+     "delta": 0.014873391525623468,
+     "CI95": [
+      0.014416754556845763,
+      0.015351670242043435
+     ],
+     "p_one_sided": 0.0,
+     "p_le_margin": 0.0,
+     "B": 2000,
+     "n": 364718,
+     "n_changed": 238342
+    },
+    "block_multinomial": {
+     "delta": 0.014873391525623468,
+     "CI95": [
+      0.014017223180261119,
+      0.015715119814355038
+     ],
+     "p_one_sided": 0.0,
+     "p_le_margin": 0.0,
+     "n_clusters": 61,
+     "mean_cluster_size": 5978.983606557377,
+     "max_cluster_size": 8388
+    }
+   },
+   "POOL": {
+    "block_poisson": {
+     "delta": 0.01488016190683472,
+     "CI95": [
+      0.014030298868334318,
+      0.015738221984942406
+     ],
+     "p_one_sided": 0.0,
+     "p_le_margin": 0.0,
+     "U_one_sided_95": 0.015600051114817288,
+     "L_one_sided_95": 0.014166376641064057,
+     "B": 2000,
+     "n": 364718,
+     "n_blocks": 61,
+     "method": "paired Poisson(1) bootstrap over timestamp blocks"
+    },
+    "query_poisson": {
+     "delta": 0.01488016190683472,
+     "CI95": [
+      0.01442823665109557,
+      0.01538246445747157
+     ],
+     "p_one_sided": 0.0,
+     "p_le_margin": 0.0,
+     "B": 2000,
+     "n": 364718,
+     "n_changed": 237536
+    },
+    "block_multinomial": {
+     "delta": 0.01488016190683472,
+     "CI95": [
+      0.014023801257106843,
+      0.01572201116859929
+     ],
+     "p_one_sided": 0.0,
+     "p_le_margin": 0.0,
+     "n_clusters": 61,
+     "mean_cluster_size": 5978.983606557377,
+     "max_cluster_size": 8388
+    }
+   }
+  },
+  "C1_pass": true,
+  "C2": "identical to the BLEND component of C1 (single base)",
+  "C3_head": {
+   "block_poisson": {
+    "delta": 0.015656317139122425,
+    "CI95": [
+     0.014660479180119396,
+     0.016619556441213334
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "U_one_sided_95": 0.016415391190410168,
+    "L_one_sided_95": 0.014853190283035639,
+    "B": 1000,
+    "n": 337065,
+    "n_blocks": 61,
+    "method": "paired Poisson(1) bootstrap over timestamp blocks"
+   },
+   "query_poisson": {
+    "delta": 0.015656317139122425,
+    "CI95": [
+     0.015122691031461265,
+     0.016180918737666646
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "B": 1000,
+    "n": 337065,
+    "n_changed": 212256
+   },
+   "share": 0.9241797772525623,
+   "n": 337065
+  },
+  "C3_damage": false,
+  "outcome": "PRACTICAL_ADVANCE",
+  "outcome_in_G2_vocabulary": "PRACTICAL_ADVANCE",
+  "U_vs_better_control": 0.015593718881645971,
+  "hits_deltas_vs_controls": {
+   "H1": {
+    "BLEND": {
+     "delta": 0.015320512468994305,
+     "CI95": [
+      0.014344868480267135,
+      0.016329114220620857
+     ],
+     "p_one_sided": 0.0,
+     "p_le_margin": 0.0,
+     "U_one_sided_95": 0.01616820250325719,
+     "L_one_sided_95": 0.014513517859979076,
+     "B": 2000,
+     "n": 364718,
+     "n_blocks": 61,
+     "method": "paired Poisson(1) bootstrap over timestamp blocks"
+    },
+    "POOL": {
+     "delta": 0.015320512468994305,
+     "CI95": [
+      0.014344868480267135,
+      0.016329114220620857
+     ],
+     "p_one_sided": 0.0,
+     "p_le_margin": 0.0,
+     "U_one_sided_95": 0.01616820250325719,
+     "L_one_sided_95": 0.014513517859979076,
+     "B": 2000,
+     "n": 364718,
+     "n_blocks": 61,
+     "method": "paired Poisson(1) bootstrap over timestamp blocks"
+    }
+   },
+   "H3": {
+    "BLEND": {
+     "delta": 0.015653189587571767,
+     "CI95": [
+      0.01428600744581297,
+      0.017091676783188535
+     ],
+     "p_one_sided": 0.0,
+     "p_le_margin": 0.0,
+     "U_one_sided_95": 0.0168915560917523,
+     "L_one_sided_95": 0.014475097617498623,
+     "B": 2000,
+     "n": 364718,
+     "n_blocks": 61,
+     "method": "paired Poisson(1) bootstrap over timestamp blocks"
+    },
+    "POOL": {
+     "delta": 0.015653189587571767,
+     "CI95": [
+      0.01428600744581297,
+      0.017091676783188535
+     ],
+     "p_one_sided": 0.0,
+     "p_le_margin": 0.0,
+     "U_one_sided_95": 0.0168915560917523,
+     "L_one_sided_95": 0.014475097617498623,
+     "B": 2000,
+     "n": 364718,
+     "n_blocks": 61,
+     "method": "paired Poisson(1) bootstrap over timestamp blocks"
+    }
+   },
+   "H10": {
+    "BLEND": {
+     "delta": 0.015803991028685172,
+     "CI95": [
+      0.014536261159560561,
+      0.01716672228126015
+     ],
+     "p_one_sided": 0.0,
+     "p_le_margin": 0.0,
+     "U_one_sided_95": 0.01693610012499531,
+     "L_one_sided_95": 0.014737361735776633,
+     "B": 2000,
+     "n": 364718,
+     "n_blocks": 61,
+     "method": "paired Poisson(1) bootstrap over timestamp blocks"
+    },
+    "POOL": {
+     "delta": 0.015803991028685172,
+     "CI95": [
+      0.014536261159560561,
+      0.01716672228126015
+     ],
+     "p_one_sided": 0.0,
+     "p_le_margin": 0.0,
+     "U_one_sided_95": 0.01693610012499531,
+     "L_one_sided_95": 0.014737361735776633,
+     "B": 2000,
+     "n": 364718,
+     "n_blocks": 61,
+     "method": "paired Poisson(1) bootstrap over timestamp blocks"
+    }
+   }
+  },
+  "reading": null
+ },
+ "secondary": {
+  "HRCOV_PAT_minus_HR (pool widening)": {
+   "block_poisson": {
+    "delta": 0.0009989759575655605,
+    "CI95": [
+     0.0006356003585723149,
+     0.0013404547595702002
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 1.0,
+    "U_one_sided_95": 0.0012913478794526199,
+    "L_one_sided_95": 0.0006922847598784604,
+    "B": 2000,
+    "n": 364718,
+    "n_blocks": 61,
+    "method": "paired Poisson(1) bootstrap over timestamp blocks"
+   },
+   "query_poisson": {
+    "delta": 0.0009989759575655605,
+    "CI95": [
+     0.0007631790753624406,
+     0.001235584946551297
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 1.0,
+    "B": 2000,
+    "n": 364718,
+    "n_changed": 198283
+   },
+   "block_multinomial": {
+    "delta": 0.0009989759575655605,
+    "CI95": [
+     0.0006447720888367391,
+     0.0013395454776653098
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 1.0,
+    "n_clusters": 61,
+    "mean_cluster_size": 5978.983606557377,
+    "max_cluster_size": 8388
+   }
+  },
+  "HR_minus_BLEND": {
+   "block_poisson": {
+    "delta": 0.01387441556805791,
+    "CI95": [
+     0.013077712741833157,
+     0.014718255258376422
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "U_one_sided_95": 0.014569638855133635,
+    "L_one_sided_95": 0.013193125925875935,
+    "B": 2000,
+    "n": 364718,
+    "n_blocks": 61,
+    "method": "paired Poisson(1) bootstrap over timestamp blocks"
+   },
+   "query_poisson": {
+    "delta": 0.01387441556805791,
+    "CI95": [
+     0.013395514535944552,
+     0.014360462930690222
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "B": 2000,
+    "n": 364718,
+    "n_changed": 234952
+   },
+   "block_multinomial": {
+    "delta": 0.01387441556805791,
+    "CI95": [
+     0.013029193227689232,
+     0.014677798508402786
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "n_clusters": 61,
+    "mean_cluster_size": 5978.983606557377,
+    "max_cluster_size": 8388
+   }
+  },
+  "HRCOV_PAT_minus_RecB_trained_clean": {
+   "block_poisson": {
+    "delta": 0.02936959234674867,
+    "CI95": [
+     0.028175023555774014,
+     0.030576303334901734
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "U_one_sided_95": 0.030376780445923006,
+    "L_one_sided_95": 0.028378533510633165,
+    "B": 2000,
+    "n": 364718,
+    "n_blocks": 61,
+    "method": "paired Poisson(1) bootstrap over timestamp blocks"
+   },
+   "query_poisson": {
+    "delta": 0.02936959234674867,
+    "CI95": [
+     0.028721969828353133,
+     0.0299939430228128
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "B": 2000,
+    "n": 364718,
+    "n_changed": 259651
+   },
+   "block_multinomial": {
+    "delta": 0.02936959234674867,
+    "CI95": [
+     0.02823953123571938,
+     0.030508311589962124
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "n_clusters": 61,
+    "mean_cluster_size": 5978.983606557377,
+    "max_cluster_size": 8388
+   }
+  },
+  "BLEND_minus_base": {
+   "block_poisson": {
+    "delta": 0.01767970653128245,
+    "CI95": [
+     0.01681528486031558,
+     0.01857360197963649
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "U_one_sided_95": 0.018442199839974117,
+    "L_one_sided_95": 0.01692080159478797,
+    "B": 2000,
+    "n": 364718,
+    "n_blocks": 61,
+    "method": "paired Poisson(1) bootstrap over timestamp blocks"
+   },
+   "query_poisson": {
+    "delta": 0.01767970653128245,
+    "CI95": [
+     0.01717283134863385,
+     0.018212378673963737
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "B": 2000,
+    "n": 364718,
+    "n_changed": 216123
+   },
+   "block_multinomial": {
+    "delta": 0.01767970653128245,
+    "CI95": [
+     0.016749591226392597,
+     0.018689640248627938
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "n_clusters": 61,
+    "mean_cluster_size": 5978.983606557377,
+    "max_cluster_size": 8388
+   }
+  },
+  "HRCOV_PAT_minus_base": {
+   "block_poisson": {
+    "delta": 0.03255309805690591,
+    "CI95": [
+     0.03132561267712294,
+     0.033753250577648115
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "U_one_sided_95": 0.03353562245620072,
+    "L_one_sided_95": 0.03151906334795061,
+    "B": 2000,
+    "n": 364718,
+    "n_blocks": 61,
+    "method": "paired Poisson(1) bootstrap over timestamp blocks"
+   },
+   "query_poisson": {
+    "delta": 0.03255309805690591,
+    "CI95": [
+     0.031951332589985865,
+     0.03316580347637006
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "B": 2000,
+    "n": 364718,
+    "n_changed": 239380
+   },
+   "block_multinomial": {
+    "delta": 0.03255309805690591,
+    "CI95": [
+     0.031369975033142886,
+     0.033834425602302806
+    ],
+    "p_one_sided": 0.0,
+    "p_le_margin": 0.0,
+    "n_clusters": 61,
+    "mean_cluster_size": 5978.983606557377,
+    "max_cluster_size": 8388
+   }
+  }
+ },
+ "strata": {
+  "head (gold train freq >= 500)": {
+   "share": 0.9241797772525623,
+   "n": 337065,
+   "MRR_base": 0.42840152873803344,
+   "MRR_BLEND": 0.4462846210831131,
+   "MRR_POOL": 0.44628348443180016,
+   "MRR_HR": 0.46122523956166916,
+   "MRR_HRCOV_PAT": 0.4619409382222356,
+   "MRR_RecB_trained_clean": 0.4310745435887517,
+   "delta_claim_minus_better": 0.015656317139122425,
+   "CI95": [
+    0.014660479180119396,
+    0.016619556441213334
+   ],
+   "U": 0.016415391190410168
+  },
+  "mid (50-499)": {
+   "share": 0.06186971852225555,
+   "n": 22565,
+   "MRR_base": 0.029169826464670874,
+   "MRR_BLEND": 0.04399896709631178,
+   "MRR_POOL": 0.04391306594248443,
+   "MRR_HR": 0.045379815431112,
+   "MRR_HRCOV_PAT": 0.04982666902515065,
+   "MRR_RecB_trained_clean": 0.037767895342051605,
+   "delta_claim_minus_better": 0.005827701928838867,
+   "CI95": [
+    0.004171838845591565,
+    0.007548579516868988
+   ],
+   "U": 0.007299147752737879
+  },
+  "low-frequency (< 50)": {
+   "share": 0.013950504225182195,
+   "n": 5088,
+   "MRR_base": 0.015483486351604943,
+   "MRR_BLEND": 0.0323315852173717,
+   "MRR_POOL": 0.032302537461141555,
+   "MRR_HR": 0.030981484392227386,
+   "MRR_HRCOV_PAT": 0.03545559856638743,
+   "MRR_RecB_trained_clean": 0.028472216839361016,
+   "delta_claim_minus_better": 0.003124013349015723,
+   "CI95": [
+    8.22647862414439e-05,
+    0.006257824400379506
+   ],
+   "U": 0.005693095608290745
+  },
+  "no-pair-history": {
+   "share": 0.017811021117685445,
+   "n": 6496,
+   "MRR_base": 0.03729372055288523,
+   "MRR_BLEND": 0.03882327942278047,
+   "MRR_POOL": 0.038790795407675174,
+   "MRR_HR": 0.03122644057801718,
+   "MRR_HRCOV_PAT": 0.0308406867098996,
+   "MRR_RecB_trained_clean": 0.038658658159062005,
+   "delta_claim_minus_better": -0.007982592712880869,
+   "CI95": [
+    -0.00931354365061457,
+    -0.006674352665488015
+   ],
+   "U": -0.006893487026042964
+  },
+  "pair-history": {
+   "share": 0.9821889788823146,
+   "n": 358222,
+   "MRR_base": 0.4044807364933085,
+   "MRR_BLEND": 0.4224533099038122,
+   "MRR_POOL": 0.4224470058137996,
+   "MRR_HR": 0.4367170853343734,
+   "MRR_HRCOV_PAT": 0.43774117199130314,
+   "MRR_RecB_trained_clean": 0.407697220128896,
+   "delta_claim_minus_better": 0.01528786208749104,
+   "CI95": [
+    0.01436580875316408,
+    0.016187575872256218
+   ],
+   "U": 0.01603475097314941
+  },
+  "exact recurrence (s,r,o) before t": {
+   "share": 0.8374305627909783,
+   "n": 305426,
+   "MRR_base": 0.44684407418534605,
+   "MRR_BLEND": 0.4689978338217063,
+   "MRR_POOL": 0.4689958524060355,
+   "MRR_HR": 0.4800472038289447,
+   "MRR_HRCOV_PAT": 0.48113107011823086,
+   "MRR_RecB_trained_clean": 0.45646339562887067,
+   "delta_claim_minus_better": 0.01213323629652462,
+   "CI95": [
+    0.01119034460063726,
+    0.01317493017418701
+   ],
+   "U": 0.013000845019209492
+  },
+  "gold outside base top-50": {
+   "share": 0.1209208210178823,
+   "n": 44102,
+   "MRR_base": 0.01009621082807399,
+   "MRR_BLEND": 0.013973197008007737,
+   "MRR_POOL": 0.013917010623896877,
+   "MRR_HR": 0.01009621082807399,
+   "MRR_HRCOV_PAT": 0.014484642038287702,
+   "MRR_RecB_trained_clean": 0.01601901776766529,
+   "delta_claim_minus_better": 0.0005114450302799643,
+   "CI95": [
+    0.00019587062532074316,
+    0.0008211284225754452
+   ],
+   "U": 0.0007670407366575036
+  },
+  "gold in base top-50": {
+   "share": 0.8790791789821177,
+   "n": 320616,
+   "MRR_base": 0.4512903139795824,
+   "MRR_BLEND": 0.47086863933505074,
+   "MRR_POOL": 0.470868666320658,
+   "MRR_HR": 0.4871848304847699,
+   "MRR_HRCOV_PAT": 0.48771757345473576,
+   "MRR_RecB_trained_clean": 0.4540970179617519,
+   "delta_claim_minus_better": 0.016848934119685025,
+   "CI95": [
+    0.01589008225788714,
+    0.01784591921551501
+   ],
+   "U": 0.01764999772587841
+  }
+ },
+ "temporal": {
+  "per_week": {
+   "0": {
+    "n": 41538,
+    "delta": 0.01595385259446256
+   },
+   "1": {
+    "n": 40130,
+    "delta": 0.013607433019423017
+   },
+   "2": {
+    "n": 37350,
+    "delta": 0.014520756712197694
+   },
+   "3": {
+    "n": 41532,
+    "delta": 0.014300532073985898
+   },
+   "4": {
+    "n": 37970,
+    "delta": 0.01250990909028922
+   },
+   "5": {
+    "n": 44092,
+    "delta": 0.016867048402145746
+   },
+   "6": {
+    "n": 43962,
+    "delta": 0.01570196251282207
+   },
+   "7": {
+    "n": 46728,
+    "delta": 0.015912899444724595
+   },
+   "8": {
+    "n": 31416,
+    "delta": 0.013591337072169477
+   }
+  },
+  "leave_one_week_out": {
+   "0": 0.014734520952328594,
+   "1": 0.015029906599667563,
+   "2": 0.01491362426150924,
+   "3": 0.014947008571985042,
+   "4": 0.015148041800666139,
+   "5": 0.01459922686337019,
+   "6": 0.014759829697507316,
+   "7": 0.014720637898013303,
+   "8": 0.01499423395294077
+  }
+ },
+ "deviations": []
+}

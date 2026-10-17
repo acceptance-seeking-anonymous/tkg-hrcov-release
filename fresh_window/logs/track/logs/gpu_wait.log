@@ -1,0 +1,16 @@
+[gpu-wait] 2026-10-16T14:50:42Z gpu0_free=94165MiB gpu0_util=0% gpu0_procs=[1273455,3074MiB ] load=1.17 1.44 1.13
+[gpu-wait] 2026-10-16T14:50:42Z -> physical GPU 0 (cap 30 GB)
+[gpu-wait] 2026-10-16T15:01:50Z gpu0_free=93133MiB gpu0_util=8% gpu0_procs=[1275270,4106MiB ] load=4.82 4.59 3.31
+[gpu-wait] 2026-10-16T15:01:50Z -> physical GPU 0 (cap 30 GB)
+[gpu-wait] 2026-10-16T15:07:01Z gpu0_free=93133MiB gpu0_util=3% gpu0_procs=[1275270,4106MiB ] load=11.48 8.83 5.53
+[gpu-wait] 2026-10-16T15:07:01Z -> physical GPU 0 (cap 30 GB)
+[gpu-wait] 2026-10-16T16:19:38Z gpu0_free=87191MiB gpu0_util=5% gpu0_procs=[1280769,10048MiB ] load=2.44 6.10 6.19
+[gpu-wait] 2026-10-16T16:19:38Z -> physical GPU 0 (cap 30 GB)
+[gpu-wait] 2026-10-16T16:20:47Z gpu0_free=87181MiB gpu0_util=14% gpu0_procs=[1280769,10058MiB ] load=1.47 5.04 5.82
+[gpu-wait] 2026-10-16T16:20:47Z -> physical GPU 0 (cap 30 GB)
+[gpu-wait] 2026-10-16T16:34:01Z gpu0_free=93133MiB gpu0_util=3% gpu0_procs=[1287385,4106MiB ] load=1.32 2.37 3.77
+[gpu-wait] 2026-10-16T16:34:01Z -> physical GPU 0 (cap 30 GB)
+[gpu-wait] 2026-10-16T16:36:45Z gpu0_free=93133MiB gpu0_util=5% gpu0_procs=[1287385,4106MiB ] load=16.41 8.08 5.69
+[gpu-wait] 2026-10-16T16:36:45Z -> physical GPU 0 (cap 30 GB)
+[gpu-wait] 2026-10-16T17:10:14Z gpu0_free=93407MiB gpu0_util=5% gpu0_procs=[1293704,3832MiB ] load=3.08 6.69 8.72
+[gpu-wait] 2026-10-16T17:10:14Z -> physical GPU 0 (cap 30 GB)

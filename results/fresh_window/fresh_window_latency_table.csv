@@ -1,0 +1,11 @@
+system,setting,base_inference_s_per_1k,candidates_features_s_per_1k,ranker_or_blend_s_per_1k,end_to_end_s_per_1k,stages
+TiRGN base,batch size 1,0.5373,0.0000,0.0000,0.5373,"TiRGN encoder (once per timestamp, amortised) + decoder"
+BLEND (TiRGN + RecB),batch size 1,0.5373,0.1812,0.2660,0.9845,RecB psi/xi; MIX 0.3 blend + ordering
+HRcov,batch size 1,0.5373,1.5503,0.2337,2.3213,pattern lists + 25 features; 2x64 MLP + fusion + promoted list
+SA,batch size 1,0.0000,1.9169,0.1913,2.1083,RecB_xf psi/xi + strict history order + conf_hist lists + 16 features; 2x64 MLP + promoted list
+CountTRuCoLa comparator (C0 blend),batch size 1,0.5373,34.3594,0.1807,35.0773,rule application (frozen rules; split statistics amortised) ; z-softmax blend with TiRGN + ordering
+TiRGN base,batched (production),0.0184,0.0000,0.0000,0.0184,"TiRGN encoder (once per timestamp, amortised) + decoder"
+BLEND (TiRGN + RecB),batched (production),0.0184,0.0895,0.0008,0.1087,RecB psi/xi; MIX 0.3 blend + ordering
+HRcov,batched (production),0.0184,0.6108,0.0003,0.6295,pattern lists + 25 features; 2x64 MLP + fusion + promoted list
+SA,batched (production),0.0000,0.7017,0.0002,0.7019,RecB_xf psi/xi + strict history order + conf_hist lists + 16 features; 2x64 MLP + promoted list
+CountTRuCoLa comparator (C0 blend),batched (production),0.0184,10.0356,0.0034,10.0574,rule application (frozen rules; split statistics amortised) ; z-softmax blend with TiRGN + ordering

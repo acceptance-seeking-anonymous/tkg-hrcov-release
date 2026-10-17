@@ -1,0 +1,28 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+[     1.8s] valid 500 / 152234
+[     6.5s] valid 25500 / 152234
+[    11.2s] valid 50500 / 152234
+[    16.2s] valid 75500 / 152234
+[    21.3s] valid 100500 / 152234
+[    26.2s] valid 125500 / 152234
+[    30.9s] valid 150500 / 152234
+[    31.2s] valid {"n": 152234, "seconds": 30.2, "has_pat": 1.0, "gold_in_union": 0.8424793410144908, "gold_in_Lpat300": 0.8424793410144908, "median_union": 116.0, "mean_pat_block": 49.29771273171565}
+[    31.2s] ALL DONE

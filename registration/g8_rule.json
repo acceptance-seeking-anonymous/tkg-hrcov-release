@@ -1,0 +1,105 @@
+{
+ "name": "g8_cogntke_polecat_rule",
+ "version": 1,
+ "registered_before_any_cogntke_number": true,
+ "registration_note": "Written before CognTKE has been installed, trained or evaluated in this project: no CognTKE number on tkgl-polecat (valid or test, any arm) exists here. Known beforehand: published CognTKE polecat test MRR 0.287 / H@10 0.455 (run by the CountTRuCoLa authors, arXiv:2509.09474 Table 1, NVIDIA RTX A6000, total train+valid 417,600 s, test 7,548 s per Supplementary Table 11); all TiRGN/LogCL/RE-GCN polecat numbers of the hardening and pre-submission rounds (HRCOV_PAT TiRGN 0.28238, HRCOV TiRGN 0.28238, TiRGN better control POOL 0.23486).",
+ "question": "On tkgl-polecat, does HRCOV (bridge-free coverage stack) improve the strongest published polecat model, CognTKE, beyond recurrency used well on that same base (BASE(+)RecB blend, RecB-POOL)?",
+ "dataset": "tkgl-polecat (TGB 2.0, as shipped; N=150,931 entities, R=16 relations, test 532,636 queries over 304 timestamps)",
+ "protocol": "TGB 2.0 single-step extrapolation, both query directions (inverse relation r+R), time-aware filtered 1-vs-all ranking, ground-truth online history before t; all 532,636 test queries; official py-tgb evaluator (ties 0.5).",
+ "base": {
+  "model": "CognTKE (Chen et al., AAAI 2025)",
+  "code": {
+   "repo": "https://github.com/WeiChen3690/CognTKE",
+   "commit": "4f30966ec2c4775bad0a9addee6e22bdd1118452",
+   "model_class": "models/TRED_GNN.py TRED_GNN20 (as selected by --model_name TRED_GNN in the released main.py)",
+   "train_mode": "half (HalfTrainer, mixed precision, as in the README command)",
+   "allowed_changes": [
+    "data loader reads the converted polecat files (entity2id/relation2id/train/valid/test in the released format)",
+    "torch_scatter replaced by a numerically equivalent pure-torch scatter shim only if the wheel cannot be installed for torch 2.8/cu128 (equivalence checked on random inputs before training)",
+    "per-epoch TEST evaluation disabled (selection uses valid only; the released code's best_weight logic keys on valid MRR, so selection is unchanged)",
+    "evaluation wrapped in torch.no_grad() (the released HalfTrainer writes `with torch.no_grad() and torch.cuda.amp.autocast()`, which applies autocast only; scores are unchanged, memory is reduced)",
+    "per-epoch checkpoint for resumability; score-row dump script added (reads the trained model, does not modify it)"
+   ]
+  },
+  "training_data": "train split only; history for valid/test queries = all facts with timestamp < t (train + earlier valid/test, ground-truth online), as in the released code",
+  "epoch_selection": "epoch = argmax of full-valid MRR computed by the released code's own evaluation after every epoch (all valid queries, both directions, time-aware filter). No early stop beyond the released code's fixed epoch budget; no test number is read during training.",
+  "hyperparameters": {
+   "source": "CognTKE paper Appendix B.2 implementation details (the CountTRuCoLa supplement does not list CognTKE settings for TGB 2.0 datasets; it states only that the authors' code was run). Settings not stated in the paper take the released code's argparse defaults.",
+   "from_paper_B2": {
+    "hidden_dim": 64,
+    "time_dim": 32,
+    "lr": 0.001,
+    "batch_size": 128,
+    "window_size_local_m": 15,
+    "n_layer_TR_GAT": 4,
+    "n_epoch": 20,
+    "mixed_precision": true
+   },
+   "from_code_defaults": {
+    "attention_dim": 5,
+    "dropout": 0.25,
+    "lamb_weight_decay": 0.00012,
+    "max_global_window_size": 5000,
+    "act": "idd"
+   },
+   "recorded_conflicts": "README command uses --n_layer 3; code defaults lr 0.005, time_dim 16. The paper values (n_layer 4, lr 0.001, time_dim 32) are used; if n_layer 4 does not fit 96 GB at batch 128 in the smoke, n_layer 3 (README) is used and recorded as a deviation BEFORE training. No hyper-parameter is tuned toward valid or test beyond this.",
+   "budget_contingency": "If the smoke projection exceeds 36 h on one RTX PRO 6000, the run is stopped and options (fewer epochs, reduced inference batch, valid evaluation cadence) are reported to the lead; any reduced budget is fixed from the cost projection alone, before any CognTKE valid/test MRR is read, and recorded as a deviation."
+  },
+  "score_row_convention": {
+   "primary": "authors' row as produced: TRED_GNN20.forward fills reached entities with W_final(hidden) and leaves unreached entities at logit 0; the model is trained with softmax cross-entropy over this full row, so log p = log_softmax(row) over all 150,931 entities (fp16 autocast forward, cast to fp32 before log_softmax). Exact storage: reached ids + logits + per-query log-sum-exp (unreached share the logit 0).",
+   "reported_diagnostics": [
+    "share of test queries whose gold entity is unreached (logit exactly 0, not in the reasoning subgraph)",
+    "mean/median number of reached entities per query"
+   ],
+   "sensitivity_not_in_decision": "base-only official MRR with unreached entities at -inf (ties 0.5 among unreached under the official evaluator)"
+  },
+  "fidelity_check": {
+   "published": {
+    "MRR": 0.287,
+    "H@10": 0.455,
+    "source": "CountTRuCoLa (arXiv:2509.09474) Table 1"
+   },
+   "rule": "|official test MRR(CognTKE, ours) - 0.287| <= 0.010 -> BASE_FIDELITY_OK, else BASE_FIDELITY_LOW (flag only; the experiment still runs on our model; no tuning toward test)."
+  }
+ },
+ "claim_system": {
+  "HRCOV": "bridge-free coverage stack = HRCOV_PAT definition of the pre-submission round: pilot-1 recipe with base top-50 ++ first <= 50 pattern-prior candidates (pattern block B = pilot-1 setting as used for TiRGN polecat, pc_lists.py), W = 100, 25 features (8 base + 11 evidence + 6 pattern coverage; the 5 bridge features are not built), MLP 64-64 listwise CE, alpha*log p + beta*f calibrated on valid-select, seeds 0/1/2, early stopping on valid-select MRR; valid rows = pilot-1 200k valid sample (rng 12345) as for TiRGN polecat.",
+  "HR": "history re-ranker over base top-50 (pc_train.py arm HR, W = 50), seeds 0/1/2, same training discipline",
+  "base_inputs": "the base top-200 dump (BaseDump format) and exact base log-probs for every listed candidate are produced from the stored CognTKE rows; no other change to the pilot-1 pipeline."
+ },
+ "comparators": {
+  "BASE(+)RecB": "as in hardening rule (ba7d388b): MIX beta in 13 values + LOGLIN w in {0.25,0.5,1,2} x eps in {1e-5,1e-3}, RecB variant {default, trained} (clean) = 42 configs; selected by valid MRR on the 200k valid sample; test scored once.",
+  "RecB-POOL": "as in hardening rule: base top-K UNION RecB top-K, K in {20,50,100} x the 42 blend configs = 126 configs, ranked by the blended score, rest in base order; selected on valid; test scored once.",
+  "reference_rows_not_in_decision": [
+   "RecB-lite",
+   "RecB trained (clean) and default (clean/faithful) - existing hardening rows",
+   "CognTKE alone",
+   "published CognTKE 0.287, CountTRuCoLa 0.256"
+  ]
+ },
+ "statistic": {
+  "evaluator": "official py-tgb Evaluator per test query (negatives from the shipped tkgl-polecat_test_ns.pkl), system row = base row with the promoted list lifted above all other entities in fused order (pilot convention); harness exact ranks alongside (flag if MRR disagreement > 1e-4)",
+  "seeds": "re-ranker per-query RR averaged over seeds 0,1,2",
+  "bootstrap": "paired Poisson(1) bootstrap over test queries, B = 2000, one-sided p = fraction of deltas <= 0; head stratum B = 1000"
+ },
+ "criteria": {
+  "C1_margin": "MRR(HRCOV_CognTKE) - MRR(C) >= 0.005 with one-sided p < 0.05 for C = CognTKE(+)RecB AND C = RecB-POOL_CognTKE (i.e. against each control).",
+  "C2_head_guardrail": "HRCOV_CognTKE vs the better of the two controls on the head stratum (gold train frequency >= 500): DAMAGE iff 95% CI entirely below 0 and |delta| >= 0.001. Must not DAMAGE.",
+  "outcome_labels": {
+   "PRACTICAL_ADVANCE_ON_COGNTKE": "C1 and C2 hold",
+   "HEAD_DAMAGE": "C1 holds, C2 fails",
+   "RECURRENCY_DONE_WELL": "C1 fails against at least one control"
+  }
+ },
+ "secondary_reported_not_in_decision": [
+  "HRCOV_CognTKE - CognTKE alone (paired query bootstrap)",
+  "HRCOV_CognTKE - HRCOV_TiRGN (bridge-free HRCOV_PAT TiRGN polecat, official 0.28238; also vs HRCOV with bridge 0.28238), paired per query",
+  "HR_CognTKE vs controls and vs base",
+  "timestamp-block cluster bootstrap (304 test timestamps, B = 2000) for every decision delta (sensitivity; G7 convention)",
+  "base-only -inf-for-unreached convention; gold-unreached share; per-stratum deltas (pool-absent, R_rec_out, head/mid/cold)"
+ ],
+ "selection_discipline": "All blend weights, pool sizes, RecB variants, CognTKE epoch and re-ranker epochs/calibrations are chosen on VALID only. No test number is read before the full configuration (including the CognTKE checkpoint) is fixed; no configuration changes after a test number is read; post-hoc analyses are labelled post-hoc.",
+ "hosts": "CognTKE train/inference: <HOST> GPU 0 only (GPU 1 never touched); CPU pipeline on <HOST> with <= 8 workers while Stage B/G2 run, or <HOST>. Work directory <SCRATCH>/open_ideas_harness/tracks/hardening/g8_cogntke/. Host of every number recorded.",
+ "registered_utc": "2026-10-13T18:28:20Z",
+ "sha256": "273be7b98b2ba2e7d6231bc79daee3fdb63ff6d3bb39b3722988390645e397c3"
+}

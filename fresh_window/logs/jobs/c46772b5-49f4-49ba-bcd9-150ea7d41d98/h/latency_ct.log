@@ -1,0 +1,183 @@
+Namespace(params=['DATASET_NAME=tkgl-gdeltfw', 'NUM_CPUS=10', 'LEARN_WINDOW_SIZE=10', 'DATAPOINT_THRESHOLD_MULTI=0', 'RULE_UNSEEN_NEGATIVES=30', 'AGGREGATION_DECAY=0.8', 'NUM_TOP_RULES=10', 'RULE_TYPE_C=True', 'F_UNSEEN_NEGATIVES=10', 'Z_RULES_FACTOR=0.1'])
+---------------------
+Parsing command line options:
+Parsed option: DATASET_NAME = tkgl-gdeltfw
+Parsed option: NUM_CPUS = 10
+Parsed option: LEARN_WINDOW_SIZE = 10
+Parsed option: DATAPOINT_THRESHOLD_MULTI = 0
+Parsed option: RULE_UNSEEN_NEGATIVES = 30
+Parsed option: AGGREGATION_DECAY = 0.8
+Parsed option: NUM_TOP_RULES = 10
+Parsed option: RULE_TYPE_C = True
+Parsed option: F_UNSEEN_NEGATIVES = 10
+Parsed option: Z_RULES_FACTOR = 0.1
+parsed_options_dict:  {'DATASET_NAME': 'tkgl-gdeltfw', 'NUM_CPUS': 10, 'LEARN_WINDOW_SIZE': 10, 'DATAPOINT_THRESHOLD_MULTI': 0, 'RULE_UNSEEN_NEGATIVES': 30, 'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'F_UNSEEN_NEGATIVES': 10, 'Z_RULES_FACTOR': 0.1}
+Using dataset name from base options: tkgl-gdeltfw
+dataset_name:  tkgl-gdeltfw
+DATASET_OVERRIDES:  {'tkgl-icews14': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 0, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 50, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-yago': {'AGGREGATION_DECAY': 0.7, 'NUM_TOP_RULES': 5, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 50, 'F_UNSEEN_NEGATIVES': 30, 'LEARN_WINDOW_SIZE': 30, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-wikiold': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 50, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 3, 'RULE_UNSEEN_NEGATIVES': 1, 'Z_RULES_FACTOR': 0.1}, 'tkgl-smallpedia': {'AGGREGATION_DECAY': 0.4, 'NUM_TOP_RULES': 5, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 10, 'F_UNSEEN_NEGATIVES': 30, 'LEARN_WINDOW_SIZE': 3, 'RULE_UNSEEN_NEGATIVES': 3, 'Z_RULES_FACTOR': 0}, 'tkgl-polecat': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': False, 'DATAPOINT_THRESHOLD_MULTI': 0, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 150, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-icews18': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 50, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 50, 'RULE_UNSEEN_NEGATIVES': 100, 'Z_RULES_FACTOR': 0.1}, 'tkgl-gdelt': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': False, 'DATAPOINT_THRESHOLD_MULTI': 0, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 200, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-wikidata': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 0, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 10, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-icews': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'DATAPOINT_THRESHOLD_MULTI': 50, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 50, 'RULE_UNSEEN_NEGATIVES': 100, 'Z_RULES_FACTOR': 0.1}}
+overwriting options from config file and command line call with parsed options
+Overwriting DATASET_NAME with tkgl-gdeltfw from command line
+Overwriting NUM_CPUS with 10 from command line
+Overwriting LEARN_WINDOW_SIZE with 10 from command line
+Overwriting DATAPOINT_THRESHOLD_MULTI with 0 from command line
+Overwriting RULE_UNSEEN_NEGATIVES with 30 from command line
+Overwriting AGGREGATION_DECAY with 0.8 from command line
+Overwriting NUM_TOP_RULES with 10 from command line
+Overwriting RULE_TYPE_C with True from command line
+Overwriting F_UNSEEN_NEGATIVES with 10 from command line
+Overwriting Z_RULES_FACTOR with 0.1 from command line
+num_rels:  215
+>>> loading and indexing of dataset 12.557 seconds
+>>> average number of time steps for a triple: 4.040
+>>> checked order of time steps, everything is fine
+[fw] ts ids equal harness ts ids; large_data_flag=True very_large=False quads=1628836 timesteps=273
+gathering z-rule statistics ...
+... done with gathering z-rule statistics
+gather f-rule statistics ...
+
+MEM at beginning of f-rule aquisition: 1629
+  0%|          | 0/430 [00:00<?, ?it/s]  1%|          | 3/430 [00:00<00:19, 21.60it/s]  1%|▏         | 6/430 [00:00<00:16, 25.22it/s]  3%|▎         | 12/430 [00:00<00:11, 37.80it/s]  4%|▍         | 18/430 [00:00<00:09, 45.21it/s]  5%|▌         | 23/430 [00:00<00:09, 42.97it/s]  8%|▊         | 35/430 [00:00<00:06, 63.42it/s] 10%|▉         | 42/430 [00:00<00:06, 62.52it/s] 12%|█▏        | 52/430 [00:00<00:05, 72.27it/s] 18%|█▊        | 78/430 [00:01<00:02, 123.79it/s] 24%|██▎       | 102/430 [00:01<00:02, 157.02it/s] 50%|█████     | 216/430 [00:01<00:00, 425.35it/s] 60%|██████    | 258/430 [00:02<00:01, 137.10it/s] 67%|██████▋   | 289/430 [00:02<00:00, 144.86it/s] 73%|███████▎  | 316/430 [00:02<00:00, 155.70it/s] 92%|█████████▏| 394/430 [00:02<00:00, 251.92it/s]100%|██████████| 430/430 [00:02<00:00, 172.73it/s]
+... done with gathering f-rule statistics, found 325836 f-rules.
+MEM after f-rule aquisition: 2072
+gathering z-rule statistics ...
+... done with gathering z-rule statistics
+gather f-rule statistics ...
+
+MEM at beginning of f-rule aquisition: 2076
+  0%|          | 0/430 [00:00<?, ?it/s]  1%|          | 3/430 [00:00<00:19, 21.70it/s]  1%|▏         | 6/430 [00:00<00:16, 25.35it/s]  3%|▎         | 12/430 [00:00<00:11, 37.82it/s]  4%|▍         | 18/430 [00:00<00:09, 45.20it/s]  5%|▌         | 23/430 [00:00<00:09, 42.84it/s]  8%|▊         | 35/430 [00:00<00:06, 63.27it/s] 10%|▉         | 42/430 [00:00<00:06, 62.23it/s] 12%|█▏        | 52/430 [00:00<00:05, 72.65it/s] 16%|█▌        | 69/430 [00:02<00:14, 24.58it/s] 20%|██        | 87/430 [00:02<00:08, 38.70it/s] 31%|███       | 133/430 [00:02<00:03, 87.11it/s] 50%|█████     | 217/430 [00:02<00:01, 187.08it/s] 59%|█████▊    | 252/430 [00:03<00:01, 110.66it/s] 65%|██████▍   | 278/430 [00:03<00:01, 110.29it/s] 70%|██████▉   | 300/430 [00:03<00:01, 123.10it/s] 80%|████████  | 345/430 [00:03<00:00, 169.88it/s]100%|██████████| 430/430 [00:03<00:00, 119.96it/s]
+... done with gathering f-rule statistics, found 325836 f-rules.
+MEM after f-rule aquisition: 2538
+gathering z-rule statistics ...
+... done with gathering z-rule statistics
+gather f-rule statistics ...
+
+MEM at beginning of f-rule aquisition: 2531
+  0%|          | 0/430 [00:00<?, ?it/s]  1%|          | 3/430 [00:00<00:18, 23.21it/s]  2%|▏         | 8/430 [00:00<00:14, 29.71it/s]  3%|▎         | 13/430 [00:00<00:11, 37.01it/s]  4%|▍         | 19/430 [00:00<00:09, 43.79it/s]  7%|▋         | 28/430 [00:00<00:06, 58.63it/s]  8%|▊         | 36/430 [00:00<00:06, 64.35it/s] 10%|█         | 45/430 [00:00<00:05, 70.47it/s] 15%|█▍        | 63/430 [00:00<00:03, 101.66it/s] 20%|██        | 87/430 [00:01<00:02, 142.62it/s] 33%|███▎      | 142/430 [00:01<00:01, 262.93it/s] 50%|█████     | 217/430 [00:01<00:00, 398.59it/s] 60%|█████▉    | 257/430 [00:01<00:01, 141.14it/s] 67%|██████▋   | 287/430 [00:02<00:00, 149.47it/s] 73%|███████▎  | 314/430 [00:02<00:00, 163.06it/s] 97%|█████████▋| 419/430 [00:02<00:00, 312.73it/s]100%|██████████| 430/430 [00:02<00:00, 185.30it/s]
+... done with gathering f-rule statistics, found 325836 f-rules.
+MEM after f-rule aquisition: 2538
+[    22.3s] precompute [0.11781644797883928, 0.11854619899531826, 0.11707384797045961] [2.490218103979714, 3.68072539701825, 2.410013316955883]
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM at beginning of apply 2876
+apply rules to the val set
+  0%|          | 0/173 [00:00<?, ?it/s] 50%|████▉     | 86/173 [00:25<00:25,  3.35it/s] 99%|█████████▉| 172/173 [01:03<00:00,  2.63it/s]174it [01:03,  2.75it/s]                         
+MEM at end of apply after deleting stuff 2913
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM at beginning of apply 2876
+apply rules to the val set
+  0%|          | 0/173 [00:00<?, ?it/s] 50%|████▉     | 86/173 [00:26<00:26,  3.29it/s] 99%|█████████▉| 172/173 [01:04<00:00,  2.57it/s]174it [01:04,  2.68it/s]                         
+MEM at end of apply after deleting stuff 2913
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM at beginning of apply 2876
+apply rules to the val set
+  0%|          | 0/173 [00:00<?, ?it/s] 50%|████▉     | 86/173 [00:26<00:26,  3.24it/s] 99%|█████████▉| 172/173 [01:05<00:00,  2.54it/s]174it [01:05,  2.65it/s]                         
+MEM at end of apply after deleting stuff 2915
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM at beginning of apply 2876
+apply rules to the val set
+  0%|          | 0/173 [00:00<?, ?it/s] 50%|████▉     | 86/173 [00:26<00:27,  3.20it/s] 99%|█████████▉| 172/173 [01:05<00:00,  2.56it/s]174it [01:05,  2.67it/s]                         
+MEM at end of apply after deleting stuff 2914
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM at beginning of apply 2876
+apply rules to the val set
+  0%|          | 0/173 [00:00<?, ?it/s] 50%|████▉     | 86/173 [00:26<00:26,  3.31it/s] 99%|█████████▉| 172/173 [01:04<00:00,  2.60it/s]174it [01:04,  2.71it/s]                         
+MEM at end of apply after deleting stuff 2914
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM at beginning of apply 2876
+apply rules to the val set
+  0%|          | 0/173 [00:00<?, ?it/s] 50%|████▉     | 86/173 [00:26<00:26,  3.28it/s] 99%|█████████▉| 172/173 [01:03<00:00,  2.62it/s]174it [01:03,  2.73it/s]                         
+MEM at end of apply after deleting stuff 2913
+[   433.3s] batch1 {'num_cpus': 1, 'raw_s': [68.68448004202219, 69.62504879903281, 69.06340584595455, 68.02256512397435, 67.44502603303408], 'median_s': 68.68448004202219, 's_per_1000': 34.342240021011094, 'ranking_lines': 963}
+2026-10-17 00:29:14,717	WARNING authentication_token_setup.py:85 -- Token authentication is enabled for this Ray cluster. Set RAY_AUTH_MODE=disabled to opt out. For more information, see https://docs.ray.io/en/latest/ray-security/token-auth.html
+2026-10-17 00:29:17,269	INFO worker.py:2033 -- Started a local Ray instance.
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM before ray init2876
+{'memory': 364785007821.0, 'object_store_memory': 156336431923.0, 'node:serverA': 1.0, 'node:__internal_head__': 1.0, 'CPU': 10.0, 'accelerator_type:RTX-PRO-6000': 1.0, 'GPU': 2.0}
+apply rules to the val set
+MEM before ray starts 2916
+quads_per_task:  67
+MEM after ray.put 2973
+MEM after appending all ray tasks 2981
+starting the parallel ray tasks 
+  0%|          | 0/15 [00:00<?, ?it/s]  7%|▋         | 1/15 [00:06<01:33,  6.67s/it] 47%|████▋     | 7/15 [00:06<00:05,  1.40it/s] 73%|███████▎  | 11/15 [00:15<00:05,  1.34s/it]100%|██████████| 15/15 [00:15<00:00,  1.01s/it]
+finished all tasks, now closing the file
+MEM after finising all ray tasks 3006
+MEM at end of apply after deleting stuff 2993
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM before ray init2981
+{'memory': 364785007821.0, 'object_store_memory': 156336431923.0, 'node:serverA': 1.0, 'node:__internal_head__': 1.0, 'GPU': 2.0, 'accelerator_type:RTX-PRO-6000': 1.0, 'CPU': 10.0}
+apply rules to the val set
+MEM before ray starts 2990
+quads_per_task:  67
+MEM after ray.put 2990
+MEM after appending all ray tasks 2991
+starting the parallel ray tasks 
+  0%|          | 0/15 [00:00<?, ?it/s]  7%|▋         | 1/15 [00:06<01:29,  6.42s/it] 47%|████▋     | 7/15 [00:06<00:05,  1.46it/s] 73%|███████▎  | 11/15 [00:14<00:05,  1.32s/it]100%|██████████| 15/15 [00:14<00:00,  1.01it/s]
+finished all tasks, now closing the file
+MEM after finising all ray tasks 3006
+MEM at end of apply after deleting stuff 2994
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM before ray init2981
+{'memory': 364785007821.0, 'accelerator_type:RTX-PRO-6000': 1.0, 'node:serverA': 1.0, 'GPU': 2.0, 'node:__internal_head__': 1.0, 'object_store_memory': 156336431923.0, 'CPU': 10.0}
+apply rules to the val set
+MEM before ray starts 2990
+quads_per_task:  67
+MEM after ray.put 2991
+MEM after appending all ray tasks 2991
+starting the parallel ray tasks 
+  0%|          | 0/15 [00:00<?, ?it/s]  7%|▋         | 1/15 [00:06<01:28,  6.29s/it] 47%|████▋     | 7/15 [00:06<00:05,  1.49it/s] 73%|███████▎  | 11/15 [00:14<00:05,  1.34s/it]100%|██████████| 15/15 [00:14<00:00,  1.00it/s]
+finished all tasks, now closing the file
+MEM after finising all ray tasks 3006
+MEM at end of apply after deleting stuff 2994
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM before ray init2981
+{'memory': 364785007821.0, 'node:__internal_head__': 1.0, 'node:serverA': 1.0, 'accelerator_type:RTX-PRO-6000': 1.0, 'GPU': 2.0, 'object_store_memory': 156336431923.0, 'CPU': 10.0}
+apply rules to the val set
+MEM before ray starts 2990
+quads_per_task:  67
+MEM after ray.put 2991
+MEM after appending all ray tasks 2991
+starting the parallel ray tasks 
+  0%|          | 0/15 [00:00<?, ?it/s]  7%|▋         | 1/15 [00:06<01:28,  6.30s/it] 47%|████▋     | 7/15 [00:06<00:05,  1.48it/s] 73%|███████▎  | 11/15 [00:14<00:05,  1.32s/it] 93%|█████████▎| 14/15 [00:14<00:00,  1.12it/s]100%|██████████| 15/15 [00:14<00:00,  1.01it/s]
+finished all tasks, now closing the file
+MEM after finising all ray tasks 3006
+MEM at end of apply after deleting stuff 2994
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM before ray init2982
+{'memory': 364785007821.0, 'GPU': 2.0, 'node:serverA': 1.0, 'accelerator_type:RTX-PRO-6000': 1.0, 'object_store_memory': 156336431923.0, 'node:__internal_head__': 1.0, 'CPU': 10.0}
+apply rules to the val set
+MEM before ray starts 2990
+quads_per_task:  67
+MEM after ray.put 2991
+MEM after appending all ray tasks 2991
+starting the parallel ray tasks 
+  0%|          | 0/15 [00:00<?, ?it/s]  7%|▋         | 1/15 [00:06<01:29,  6.38s/it] 47%|████▋     | 7/15 [00:06<00:05,  1.47it/s] 73%|███████▎  | 11/15 [00:14<00:05,  1.31s/it]100%|██████████| 15/15 [00:14<00:00,  1.02it/s]
+finished all tasks, now closing the file
+MEM after finising all ray tasks 3006
+MEM at end of apply after deleting stuff 2995
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM before ray init2982
+{'memory': 364785007821.0, 'object_store_memory': 156336431923.0, 'node:serverA': 1.0, 'node:__internal_head__': 1.0, 'CPU': 10.0, 'accelerator_type:RTX-PRO-6000': 1.0, 'GPU': 2.0}
+apply rules to the val set
+MEM before ray starts 2991
+quads_per_task:  67
+MEM after ray.put 2991
+MEM after appending all ray tasks 2991
+starting the parallel ray tasks 
+  0%|          | 0/15 [00:00<?, ?it/s]  7%|▋         | 1/15 [00:06<01:28,  6.35s/it] 47%|████▋     | 7/15 [00:06<00:05,  1.47it/s] 73%|███████▎  | 11/15 [00:14<00:05,  1.31s/it]100%|██████████| 15/15 [00:14<00:00,  1.02it/s]
+finished all tasks, now closing the file
+MEM after finising all ray tasks 3007
+MEM at end of apply after deleting stuff 2995
+[   557.0s] batched {'num_cpus': 10, 'raw_s': [20.13616546196863, 20.204401098948438, 20.036844646034297, 19.907035565003753, 19.909930730005726], 'median_s': 20.036844646034297, 's_per_1000': 10.018422323017148, 'ranking_lines': 963}
+[   557.0s] DONE

@@ -1,0 +1,28 @@
+{
+ "split": "valid",
+ "n": 152234,
+ "ckpt": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/base_tirgn/tirgn_GDELTFW_seed42.pt",
+ "L": 7,
+ "hr": 0.3,
+ "device": "cuda",
+ "gpu": "NVIDIA RTX PRO 6000 Blackwell Max-Q Workstation Edition",
+ "fullrows": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/fullrows/tirgn_GDELTFW_valid_scores_f32.bin",
+ "dump": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/GDELTFW/work/base_tirgn/tirgn_scores_GDELTFW_valid.npz",
+ "rowsum_prob_min": 0.9999997893165434,
+ "rowsum_prob_max": 1.0000002506404055,
+ "seconds": 5.1,
+ "valid_filt": {
+  "MRR": 0.39784,
+  "n": 152234,
+  "H1": 0.270334,
+  "H3": 0.448757,
+  "H10": 0.660733
+ },
+ "valid_raw": {
+  "MRR": 0.332316,
+  "n": 152234,
+  "H1": 0.196283,
+  "H3": 0.381413,
+  "H10": 0.618285
+ }
+}

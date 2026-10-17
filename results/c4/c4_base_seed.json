@@ -1,0 +1,21 @@
+{
+ "rule": {
+  "file": "tois_v7_rule.json",
+  "version_id": "redacted-id",
+  "registered_utc": "2026-10-14T10:13:36Z",
+  "sha256": "bfef91681490278623925e1494890719e9b4529d8ddbf9375dfa83ec2a954a8d"
+ },
+ "label": "declared cut (not run)",
+ "item": "C4_base_seed",
+ "definition": {
+  "if_feasible": "second TiRGN seed on polecat (train under the same recipe), then HRCOV_PAT - better control on it",
+  "feasibility": "TiRGN polecat training peaked at 51.5 GB allocated; GPU 1 is capped at ~30 GB and GPU 0 is G8's -> infeasible unless memory can be reduced without changing the recipe; declared as a cut if so"
+ },
+ "status": "CUT",
+ "reason": "A second TiRGN polecat seed under the same recipe needs ~51.5 GB GPU memory (peak allocated in the original run: L = 10, 8 epochs with patience, 9,126 s training + 1,186 s top-200 dump on a 96 GB card). GPU 1 of serverA is shared with two other tracks (45-51 GB in use by others during v7), so the v7 cap of ~30 GB on GPU 1 cannot hold it; GPU 0 is reserved for G8 (CognTKE training, ETA ~04:00-04:30Z 15 Oct). Reducing memory would change the recipe (batch / history length), which the rule forbids.",
+ "what_it_would_take": "After G8 releases GPU 0: TiRGN polecat seed-2 training + dump (~3 h), the HRCOV_PAT feature pipeline on the new base (pattern lists reused; exact base lookups + features ~2-3 h CPU/GPU), HRCOV_PAT fits (3 seeds, < 1 h), valid-selected BLEND/POOL controls and official scoring (~2 h): roughly 8-9 h wall, ~5 GPU-h, on GPU 0 only.",
+ "stand_in_evidence": [
+  "seed variation of the re-ranker (3 seeds) is already in every learned-arm row (per-seed MRR in each item JSON)",
+  "base-architecture variation: HRCOV_PAT margin over the better control is reproduced on a second polecat base (LogCL; A3) and on tkgl-icews Stage B with RE-GCN and LogCL (B4 context rows)"
+ ]
+}

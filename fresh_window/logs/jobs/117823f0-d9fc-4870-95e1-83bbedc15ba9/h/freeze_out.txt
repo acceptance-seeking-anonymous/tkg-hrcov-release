@@ -1,0 +1,8 @@
+{"n_files": 201, "n_missing": 0, "created_utc": "2026-10-16T16:32:23Z"}
+freeze rc=0
+total 228
+drwxrwxr-x 2 [REDACTED:~ANON] [REDACTED:~ANON]   4096 Oct 17 00:32 .
+drwxrwxr-x 4 [REDACTED:~ANON] [REDACTED:~ANON]   4096 Oct 17 00:32 ..
+-rw-rw-r-- 1 [REDACTED:~ANON] [REDACTED:~ANON]  54818 Oct 17 00:32 freeze_manifest_remote.json
+-rw-rw-r-- 1 [REDACTED:~ANON] [REDACTED:~ANON]     84 Oct 17 00:32 freeze_out.txt
+-rw-rw-r-- 1 [REDACTED:~ANON] [REDACTED:~ANON] 163736 Oct 17 00:32 fw_code_frozen.tgz

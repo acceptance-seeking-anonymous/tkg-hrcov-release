@@ -1,0 +1,20 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+[     1.1s] valid 53550 / 152234
+[     1.3s] valid 102042 / 152234
+[     1.5s] valid 152234 / 152234
+[     1.8s] valid {"n": 152234, "HIST_MRR": 0.38930349145423043, "gold_in_top50": 0.8509531379323936, "median_npos": 545.0, "frac_ssum0": 0.0007094341605685983, "cut": 203, "HIST_MRR_fit": 0.3827272266137991, "HIST_MRR_select": 0.40267325589572117}
+[     1.8s] ALL DONE

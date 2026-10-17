@@ -1,0 +1,532 @@
+{
+ "title": "v7.8 post-verdict check: external_comparator re-applied with the label-adapted CountTRuCoLa run (EXT_adapted)",
+ "label": "registered-optional comparator run (amendment v78_rule_amendment_1, field EXT.EXT_adapted), executed and evaluated AFTER the v7.8 framing verdict was read; the registered verdict stays as recorded",
+ "created_utc": "2026-10-16T13:39:37Z",
+ "rule": {
+  "rule_id": "v78_framing_rule",
+  "sha256": "8e05c67b7ce8f3a475ac391e813463b9d435f8add5af13e5c4d03f78483a5f2d",
+  "amendment": "v78_rule_amendment_1",
+  "amendment_sha256": "8fffffcaad75b066fe0fb35127e101c5bbe11f65de7ff4654068f5170962d84e"
+ },
+ "protocol_note": {
+  "file": "v78_external_protocol_note_2_ext_adapted.json",
+  "version_id": "redacted-id",
+  "sha256": "ce9ef0ebc845dafd70fbf5ecee0911a7357295b4408032c7dcc423b1d48e7d6b",
+  "created_utc": "2026-10-16T08:20:08Z"
+ },
+ "registered_verdict": {
+  "label": "F4_CONDITIONAL",
+  "external_calls": {
+   "S1": "MATCHES",
+   "S2": "BEATS",
+   "S3": "BEATS"
+  },
+  "standalone_calls": {
+   "S1": "SMALL",
+   "S2": "BEATS",
+   "S3": "BEATS"
+  },
+  "results_version_id": "redacted-id"
+ },
+ "method": {
+  "EXT_adapted": "CountTRuCoLa released code/config with the validation facts below the harness 70% timestamp cut moved into its learning data (sibling run; dumps tracks/v78_external/dumps/counttrucola_adapted/<dataset>/{val,test}); EXT_adapted alone = its scores, floor = minimum listed score (amendment)",
+  "EXT_adapted_blend": "a * z(frozen-base log-prob) + (1 - a) * z(EXT_adapted score / tau), z over the top-1000 list, same 52-configuration grid as EXT_blend (a in {0.02,0.05,0.1,0.2,...,0.9,0.95,0.98} x tau in {0.5,1,2,4}), selected on the validation selection part only",
+  "selection": "external_comparator re-applied per the rule: per method the variant with the highest selection-part MRR (harness, ties averaged), then the method with the highest selected MRR; CountTRuCoLa variants {alone, blend, adapted, adapted_blend}, EdgeReMIND variants {alone, blend}",
+  "selection_part": {
+   "S1": "56,460 validation rows with ts id >= 105",
+   "S2": "60,764 rows of the 200,000-row validation sample with ts id >= 1423",
+   "S3": "same rows as S2"
+  },
+  "test": "official py-tgb 2.3.0 Evaluator (ties averaged) on all test queries; HRcov and SA seed-mean (seeds 0-2); paired bootstraps B = 2000 (query Poisson and timestamp block, shared draws, seed 0), one-sided 95% bounds; BEATS / MATCHES / SMALL as registered (bar 0.005)",
+  "validation_rows_inside_learning_data": "NaN in the adapted validation dumps; never requested (asserted: no requested row has in_learning_data = True, all requested scores finite)"
+ },
+ "deviation_disclosed": "tkgl-polecat: CountTRuCoLa learned on ALL 372,024 validation facts with ts id < 1423 (not only the 139,236 fit rows of the 200,000-row sample), because its learning treats facts absent from its train index as negatives; this gives EXT_adapted more fit-window label access than the HRcov ranker (capped at 120,000 fit queries). Declared in protocol note 2 before any adapted number. tkgl-smallpedia: both readings coincide.",
+ "consistency_checks": {
+  "adapted_alone_selection_rr_vs_sibling_official_max_abs": {
+   "S1": 1.9868214962137642e-08,
+   "S2": 1.9868214962137642e-08,
+   "S3": 1.9868214962137642e-08
+  },
+  "adapted_alone_selection_MRR": {
+   "S1": 0.6384964349427008,
+   "S2": 0.2648641725129549,
+   "S3": 0.2648641725129549
+  },
+  "sibling_reported_selection_MRR_official": {
+   "tkgl-smallpedia": 0.6385,
+   "tkgl-polecat": 0.2649
+  },
+  "adapted_alone_test_MRR": {
+   "S1": 0.6372799697714724,
+   "S2": 0.2558501655986761,
+   "S3": 0.2558501655986761
+  },
+  "sibling_reported_test_MRR_official": {
+   "tkgl-smallpedia": 0.6373,
+   "tkgl-polecat": 0.2559
+  },
+  "base_identity_adapted_npz_vs_v78_base_mean_abs_rr": {
+   "S1": 0.0,
+   "S2": 2.0732511145676244e-08,
+   "S3": 0.0
+  },
+  "registered_comparisons_reproduced_exactly": {
+   "S1": "30 of 30 pairs, all systems' MRR identical (max |diff| 0.0)",
+   "S2": "30 of 30 pairs, all systems' MRR identical (max |diff| 0.0)",
+   "S3": "30 of 30 pairs, all systems' MRR identical (max |diff| 0.0)"
+  },
+  "harness_minus_official_EXT_adapted_alone": {
+   "S1": 0.1317609809405359,
+   "S2": 0.0018445292457623386,
+   "S3": 0.0018445292457623386
+  },
+  "note_harness_gap": "EXT_adapted alone has the same large harness-vs-official gap on tkgl-smallpedia as EXT_alone (0.132 vs 0.133; tie blocks among listed candidates); all decisions use the official tie-averaged ranks"
+ },
+ "configs": {
+  "S1": {
+   "config": "tkgl-smallpedia, TiRGN",
+   "n_test_queries": 163172,
+   "selection_candidates": {
+    "edgeremind": {
+     "alone": 0.6286750369974852,
+     "blend": 0.6422842598382487
+    },
+    "counttrucola": {
+     "alone": 0.6374095677241608,
+     "blend": 0.6570237950128089,
+     "adapted": 0.6384964349427008,
+     "adapted_blend": 0.6574516700120374
+    }
+   },
+   "selected_grid_point_adapted_blend": {
+    "a": 0.6,
+    "tau": 0.5
+   },
+   "selected_grid_point_registered_blend": {
+    "a": 0.6,
+    "tau": 0.5
+   },
+   "external_comparator_registered": "EXT_blend_counttrucola",
+   "external_comparator_reapplied": "EXT_adapted_blend_counttrucola",
+   "selection_margin_reapplied_minus_registered": 0.0004278749992284725,
+   "test": {
+    "HRcov": {
+     "MRR": 0.6584181855634673,
+     "H1": 0.6079637846362529,
+     "H3": 0.6998627215453632,
+     "H10": 0.7318228617654989
+    },
+    "SA": {
+     "MRR": 0.6544241484317181,
+     "H1": 0.6059965353532877,
+     "H3": 0.696722885462375,
+     "H10": 0.7243113606092548
+    },
+    "EXT_alone_counttrucola": {
+     "MRR": 0.6365238253126817,
+     "H1": 0.5746758022209693,
+     "H3": 0.6811524035986566,
+     "H10": 0.7101831196528816
+    },
+    "EXT_blend_counttrucola": {
+     "MRR": 0.6547012085298802,
+     "H1": 0.6032897801093324,
+     "H3": 0.697687103179467,
+     "H10": 0.7288321525751967
+    },
+    "EXT_adapted_counttrucola": {
+     "MRR": 0.6372799697714724,
+     "H1": 0.5762140563331944,
+     "H3": 0.6816181697840316,
+     "H10": 0.7108511264187484
+    },
+    "EXT_adapted_blend_counttrucola": {
+     "MRR": 0.6552322015401432,
+     "H1": 0.6040619714166646,
+     "H3": 0.6979383717794719,
+     "H10": 0.729016007648371
+    }
+   },
+   "comparisons": {
+    "HRcov - EXT_adapted_blend_counttrucola": {
+     "delta": 0.0031859840233241237,
+     "query": [
+      0.002733701713769681,
+      0.0036481416909598025
+     ],
+     "ts": [
+      0.0022503122718800436,
+      0.0040312646357989574
+     ]
+    },
+    "SA - EXT_adapted_blend_counttrucola": {
+     "delta": -0.0008080531084250813,
+     "query": [
+      -0.0013767480710461224,
+      -0.0002205608431119245
+     ],
+     "ts": [
+      -0.002620286209707782,
+      0.0017137891398705633
+     ]
+    },
+    "HRcov - EXT_blend_counttrucola": {
+     "delta": 0.00371697703358712,
+     "query": [
+      0.0032647847482185632,
+      0.004161546741043645
+     ],
+     "ts": [
+      0.0028516012245184998,
+      0.0044660654340723934
+     ]
+    },
+    "SA - EXT_blend_counttrucola": {
+     "delta": -0.0002770600981620853,
+     "query": [
+      -0.000851310921224251,
+      0.00032112601414588377
+     ],
+     "ts": [
+      -0.00205031245011198,
+      0.0021952136529027272
+     ]
+    },
+    "HRcov - EXT_adapted_counttrucola": {
+     "delta": 0.021138215791994906,
+     "query": [
+      0.020518615769978613,
+      0.021762392719758543
+     ],
+     "ts": [
+      0.018998863760889467,
+      0.02268996464050911
+     ]
+    }
+   },
+   "external_call_registered": "MATCHES",
+   "external_call_reapplied": "MATCHES",
+   "standalone_beats_external_registered": false,
+   "standalone_beats_external_reapplied": false,
+   "standalone_call": "SMALL"
+  },
+  "S2": {
+   "config": "tkgl-polecat, TiRGN",
+   "n_test_queries": 532636,
+   "selection_candidates": {
+    "edgeremind": {
+     "alone": 0.17545263440877176,
+     "blend": 0.2438108063983197
+    },
+    "counttrucola": {
+     "alone": 0.2646740463644261,
+     "blend": 0.2757123870761665,
+     "adapted": 0.2648641725129549,
+     "adapted_blend": 0.2759499956081957
+    }
+   },
+   "selected_grid_point_adapted_blend": {
+    "a": 0.6,
+    "tau": 2.0
+   },
+   "selected_grid_point_registered_blend": {
+    "a": 0.6,
+    "tau": 2.0
+   },
+   "external_comparator_registered": "EXT_blend_counttrucola",
+   "external_comparator_reapplied": "EXT_adapted_blend_counttrucola",
+   "selection_margin_reapplied_minus_registered": 0.00023760853202919874,
+   "test": {
+    "HRcov": {
+     "MRR": 0.282377767408202,
+     "H1": 0.19677040230100856,
+     "H3": 0.32119308495858334,
+     "H10": 0.45285585903568915
+    },
+    "SA": {
+     "MRR": 0.27521241267815366,
+     "H1": 0.1921956708396228,
+     "H3": 0.3136557298668008,
+     "H10": 0.4399032985628709
+    },
+    "EXT_alone_counttrucola": {
+     "MRR": 0.25571336996480637,
+     "H1": 0.1784539535442591,
+     "H3": 0.29106932314000555,
+     "H10": 0.4082225009199528
+    },
+    "EXT_blend_counttrucola": {
+     "MRR": 0.26549934178894835,
+     "H1": 0.18311567374341953,
+     "H3": 0.3016506582356431,
+     "H10": 0.42773864327608346
+    },
+    "EXT_adapted_counttrucola": {
+     "MRR": 0.2558501655986761,
+     "H1": 0.1786341892023821,
+     "H3": 0.2910956075068152,
+     "H10": 0.4082844569274326
+    },
+    "EXT_adapted_blend_counttrucola": {
+     "MRR": 0.2655989120273323,
+     "H1": 0.183254605396556,
+     "H3": 0.3017407760647046,
+     "H10": 0.42773864327608346
+    }
+   },
+   "comparisons": {
+    "HRcov - EXT_adapted_blend_counttrucola": {
+     "delta": 0.016778855380869647,
+     "query": [
+      0.01640275814720335,
+      0.01715831869756429
+     ],
+     "ts": [
+      0.016100514658072596,
+      0.01747655419668126
+     ]
+    },
+    "SA - EXT_adapted_blend_counttrucola": {
+     "delta": 0.00961350065082133,
+     "query": [
+      0.009180400847466668,
+      0.010040546936596798
+     ],
+     "ts": [
+      0.008866263313056984,
+      0.010436487121310803
+     ]
+    },
+    "HRcov - EXT_blend_counttrucola": {
+     "delta": 0.0168784256192536,
+     "query": [
+      0.01650228332706337,
+      0.01725908839920588
+     ],
+     "ts": [
+      0.016199672994936232,
+      0.017579457106035548
+     ]
+    },
+    "SA - EXT_blend_counttrucola": {
+     "delta": 0.009713070889205281,
+     "query": [
+      0.00927492406829439,
+      0.010141331132475492
+     ],
+     "ts": [
+      0.008958352764076317,
+      0.010530323696537386
+     ]
+    },
+    "HRcov - EXT_adapted_counttrucola": {
+     "delta": 0.026527601809525826,
+     "query": [
+      0.026108157216259035,
+      0.026964011183171488
+     ],
+     "ts": [
+      0.02576098415760693,
+      0.027334369852779712
+     ]
+    }
+   },
+   "external_call_registered": "BEATS",
+   "external_call_reapplied": "BEATS",
+   "standalone_beats_external_registered": true,
+   "standalone_beats_external_reapplied": true,
+   "standalone_call": "BEATS"
+  },
+  "S3": {
+   "config": "tkgl-polecat, CognTKE",
+   "n_test_queries": 532636,
+   "selection_candidates": {
+    "edgeremind": {
+     "alone": 0.17545263440877176,
+     "blend": 0.3045173741069471
+    },
+    "counttrucola": {
+     "alone": 0.2646740463644261,
+     "blend": 0.3072796875654702,
+     "adapted": 0.2648641725129549,
+     "adapted_blend": 0.3073948569978588
+    }
+   },
+   "selected_grid_point_adapted_blend": {
+    "a": 0.05,
+    "tau": 0.5
+   },
+   "selected_grid_point_registered_blend": {
+    "a": 0.3,
+    "tau": 4.0
+   },
+   "external_comparator_registered": "EXT_blend_counttrucola",
+   "external_comparator_reapplied": "EXT_adapted_blend_counttrucola",
+   "selection_margin_reapplied_minus_registered": 0.00011516943238859545,
+   "test": {
+    "HRcov": {
+     "MRR": 0.30399261141646794,
+     "H1": 0.21782355429724362,
+     "H3": 0.3438139116895341,
+     "H10": 0.474085491780503
+    },
+    "SA": {
+     "MRR": 0.27521241267815366,
+     "H1": 0.1921956708396228,
+     "H3": 0.3136557298668008,
+     "H10": 0.4399032985628709
+    },
+    "EXT_alone_counttrucola": {
+     "MRR": 0.25571336996480637,
+     "H1": 0.1784539535442591,
+     "H3": 0.29106932314000555,
+     "H10": 0.4082225009199528
+    },
+    "EXT_blend_counttrucola": {
+     "MRR": 0.2966133075755614,
+     "H1": 0.21129626987285877,
+     "H3": 0.3347201465916686,
+     "H10": 0.4652652092611089
+    },
+    "EXT_adapted_counttrucola": {
+     "MRR": 0.2558501655986761,
+     "H1": 0.1786341892023821,
+     "H3": 0.2910956075068152,
+     "H10": 0.4082844569274326
+    },
+    "EXT_adapted_blend_counttrucola": {
+     "MRR": 0.29667827280238607,
+     "H1": 0.21138826515669237,
+     "H3": 0.3346976171344032,
+     "H10": 0.4652783514445137
+    }
+   },
+   "comparisons": {
+    "HRcov - EXT_adapted_blend_counttrucola": {
+     "delta": 0.007314338614081912,
+     "query": [
+      0.007063053671959779,
+      0.0075637271753590815
+     ],
+     "ts": [
+      0.0069182518531959005,
+      0.007712064368347289
+     ]
+    },
+    "SA - EXT_adapted_blend_counttrucola": {
+     "delta": -0.02146586012423238,
+     "query": [
+      -0.02198724536776293,
+      -0.020942886951544983
+     ],
+     "ts": [
+      -0.022490113164008937,
+      -0.020474174199530116
+     ]
+    },
+    "HRcov - EXT_blend_counttrucola": {
+     "delta": 0.0073793038409064645,
+     "query": [
+      0.00712711553866067,
+      0.007632473219452025
+     ],
+     "ts": [
+      0.006979295575197973,
+      0.007776546888286883
+     ]
+    },
+    "SA - EXT_blend_counttrucola": {
+     "delta": -0.02140089489740783,
+     "query": [
+      -0.02191734109703979,
+      -0.020884951574177697
+     ],
+     "ts": [
+      -0.02242589621531538,
+      -0.020398186700545974
+     ]
+    },
+    "HRcov - EXT_adapted_counttrucola": {
+     "delta": 0.048142445817791805,
+     "query": [
+      0.04763984989256201,
+      0.04863265059181026
+     ],
+     "ts": [
+      0.0471829183954068,
+      0.049074016291083496
+     ]
+    }
+   },
+   "external_call_registered": "BEATS",
+   "external_call_reapplied": "BEATS",
+   "standalone_beats_external_registered": false,
+   "standalone_beats_external_reapplied": false,
+   "standalone_call": "BEATS"
+  }
+ },
+ "outcome_reapplied": {
+  "label": "F4_CONDITIONAL",
+  "standalone_calls": {
+   "S1": "SMALL",
+   "S2": "BEATS",
+   "S3": "BEATS"
+  },
+  "external_calls": {
+   "S1": "MATCHES",
+   "S2": "BEATS",
+   "S3": "BEATS"
+  },
+  "external_assessed": [
+   "S1",
+   "S2",
+   "S3"
+  ],
+  "F3": false,
+  "F2": false,
+  "F1": false,
+  "note": ""
+ },
+ "outcome_sensitivity_reapplied": {
+  "label": "F4_CONDITIONAL",
+  "standalone_calls": {
+   "S1": "SMALL",
+   "S2": "BEATS",
+   "S3": "BEATS"
+  },
+  "external_calls": {
+   "S1": "MATCHES",
+   "S2": "BEATS",
+   "S3": "BEATS"
+  },
+  "external_assessed": [
+   "S1",
+   "S2",
+   "S3"
+  ],
+  "F3": false,
+  "F2": false,
+  "F1": false,
+  "note": ""
+ },
+ "changes": {
+  "external_comparator_changed": {
+   "S1": true,
+   "S2": true,
+   "S3": true
+  },
+  "external_call_changed": {
+   "S1": false,
+   "S2": false,
+   "S3": false
+  },
+  "standalone_beats_external_changed": {
+   "S1": false,
+   "S2": false,
+   "S3": false
+  },
+  "outcome_label_changed": false,
+  "outcome_sensitivity_label_changed": false
+ },
+ "sha256": "14a04ecc3883958aab2935626d24f900242bdcb93f264ab0ba6e9834b6c8fa33"
+}

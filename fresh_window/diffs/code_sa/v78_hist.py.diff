@@ -1,0 +1,54 @@
+--- a/hardening/v78/code/v78_hist.py
++++ b/code_sa/v78_hist.py
+@@ -18,7 +18,8 @@
+     ap = argparse.ArgumentParser()
+     ap.add_argument("--ds", required=True, choices=list(C.DS)); ap.add_argument("--out", required=True)
+     ap.add_argument("--bs", type=int, default=512); ap.add_argument("--smoke", type=int, default=0)
+-    a = ap.parse_args(); t0 = time.time(); log = C.log_fn(t0)
++    ap.add_argument("--splits", default="valid,test", help="fw: Stage 1 valid, Stage 2 test")
++    a = ap.parse_args(); t0 = time.time(); log = C.log_fn(t0); SPL = tuple(a.splits.split(","))
+     cfg = C.DS[a.ds]; hcfg = HB.DSCFG[a.ds]; N, R = cfg["N"], cfg["R"]
+     dev = "cuda" if torch.cuda.is_available() else "cpu"
+     Q = {sp: HB.load_quads(f"{cfg['dd']}/{sp}.txt") for sp in ("train", "valid", "test")}
+@@ -37,11 +38,11 @@
+         rows_req = {sp: rows_req[sp][fidx[sp]] for sp in rows_req}
+     else:
+         fidx = {sp: np.arange(len(v)) for sp, v in rows_req.items()}
+-    csr = {sp: HB.RecbCSR(f"{C.RECB_XF}/recb_csr_{sp}_{cfg['name']}.npz") for sp in ("valid", "test")}
+-    for sp in ("valid", "test"): assert (csr[sp].sro == sro_full[sp]).all(), "RecB CSR row order != split order"
++    csr = {sp: HB.RecbCSR(f"{C.RECB_XF}/recb_csr_{sp}_{cfg['name']}.npz") for sp in SPL}
++    for sp in SPL: assert (csr[sp].sro == sro_full[sp]).all(), "RecB CSR row order != split order"
+     os.makedirs(a.out, exist_ok=True)
+     O = {}
+-    for sp in ("valid", "test"):
++    for sp in SPL:
+         n = len(rows_req[sp])
+         O[sp] = dict(htop=np.full((n, C.KMAX), -1, np.int32), hq=np.zeros((n, C.KMAX), np.float32), r_hist=np.zeros(n, np.int64),
+                      gpos=np.zeros(n, np.int64), npos=np.zeros(n, np.int64), ssum=np.zeros(n, np.float64))
+@@ -50,7 +51,7 @@
+     for sp in ("valid", "test"): req[sp][rows_req[sp]] = True; slot[sp][rows_req[sp]] = np.arange(len(rows_req[sp]))
+     xi = HB.XiCounts(N, R, dev); pos_ = {"valid": 0, "test": 0}; done = {"valid": 0, "test": 0}
+     with torch.no_grad():
+-        for sp, ts, sro, _, trip, _ in HB.recb_source(hcfg, ("valid", "test")):
++        for sp, ts, sro, _, trip, _ in HB.recb_source(hcfg, SPL):
+             if sro is not None:
+                 p0 = pos_[sp]; nq = len(sro); pos_[sp] += nq
+                 idx_all = np.arange(p0, p0 + nq); loc = np.flatnonzero(req[sp][idx_all])
+@@ -77,7 +78,7 @@
+                 if len(loc) and (done[sp] // 50000) != ((done[sp] - len(loc)) // 50000): log(sp, done[sp], "/", len(rows_req[sp]))
+             xi.add(trip)
+     summ = dict(ds=a.ds, KMAX=C.KMAX, device=dev, host=os.environ.get("HD_HOST", ""), smoke=a.smoke)
+-    for sp in ("valid", "test"):
++    for sp in SPL:
+         n = len(rows_req[sp]); o = O[sp]; assert done[sp] == n, (sp, done[sp], n)
+         sr = sro_full[sp][rows_req[sp]]
+         np.savez(f"{a.out}/{sp}_hist.npz", rows=rows_req[sp], fidx=fidx[sp], sro=sr, **o)
+@@ -90,7 +91,7 @@
+         summ[sp] = d
+         if sp == "valid": log(sp, json.dumps(d))          # test summaries are written, not printed (selection discipline)
+     summ["elapsed_s"] = round(time.time() - t0, 1)
+-    C.jdump(summ, f"{a.out}/hist_summary.json"); C.jdump(summ, f"hist_summary_{a.ds}{'_smoke' if a.smoke else ''}.json")
++    C.jdump(summ, f"{a.out}/hist_summary_{'_'.join(SPL)}.json"); C.jdump(summ, f"hist_summary_{a.ds}{'_smoke' if a.smoke else ''}.json")
+     os.system(f"chmod -R a+rX {a.out}")
+     log("ALL DONE")
+ 

@@ -1,0 +1,23 @@
+{
+ "split": "test",
+ "n": 457168,
+ "N": 1209,
+ "R": 215,
+ "topk": 1000,
+ "rankings": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo_stage2/files/rankings/tkgl-gdeltfw/tkgl-gdeltfw10-rankings_test_conf_0_corr_conf_0_noisyor_crules_frules_zrules_pvalue_30_num_top_rules_10_multi.txt",
+ "rankings_size": 980105664,
+ "evaluator": "all-entity time-aware filtered rank, ties averaged (py-tgb formula); harness strict alongside",
+ "gold_in_topk_frac": 0.9945818604976726,
+ "gold_outside_topk_score_le_floor": true,
+ "tail_exact_frac": 1.0,
+ "queries_without_ranking_line": 0,
+ "ranking_lines_unmatched": 0,
+ "n_cand_max": 200,
+ "n_cand_median": 200.0,
+ "evaluator_check": {
+  "n": 2000,
+  "max_abs_dev_vs_vendored_tgb_Evaluator": 9.934107481068821e-09,
+  "evaluator_instance": "tgb.linkproppred.evaluate.Evaluator(name='tkgl-polecat') used only for its MRR formula"
+ },
+ "elapsed_s": 21.7
+}

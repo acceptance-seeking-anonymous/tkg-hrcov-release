@@ -1,0 +1,58 @@
+{
+ "name": "v76_deviations",
+ "rule": "v76_rule.json",
+ "entries": [
+  {
+   "id": "D1",
+   "item": "M2b",
+   "type": "amendment (registered at 12:49:21Z, after the discarded first LMART run had printed round-1 test MRRs; no test number of the amended statistic existed)",
+   "record": "v76_rule_amendment_1.json (redacted-id)",
+   "text": "LMART selection statistic and exact ranks resolve ties as the promoted list does (the evaluator's statistic for tied scores). The first LMART run (<HOST> job, round-1 selection at every grid point) is discarded, including the round-1 test MRRs its log printed and the LMART rows of that run's official files. Detection: every grid point of the first run stopped at round 1 on the validation-select statistic; the cause (the v7 statistic counts tied tree scores optimistically) was diagnosed on validation rows. The round-1 test MRRs printed by that run's log were seen before the amendment was written; they were not used to choose anything. Verification of the tie-exact rank (disclosure of the full check history): (i) identity with the v7 statistic on untied scores, max |difference| 0.0; (ii) a first tie check agreed with the list-position rank for 205 of 240 queries because its synthetic candidate rows drew entity ids with replacement (duplicate ids within a row make the id-based reference ambiguous; real candidate rows have unique ids); (iii) after redrawing the synthetic rows with unique ids (permutations), agreement was 360/360 (ties at scale 2) and 353/353 (scale 0.5). The registered amendment lists only (i) and (iii)."
+  },
+  {
+   "id": "D2",
+   "item": "M2b (RE-GCN TGB base, official scoring only)",
+   "type": "clarification, no effect on any result",
+   "text": "v76_p2_serverA.sh line 23 and v76_p2b_serverA.sh line 21 passed the RE-GCN test full-row file in both slots of --fullrows. The validation slot is never opened in --stage test: hd_blend.py line 280 sets sp_need = ('test',), line 333 opens only the test path, and fullrow_source (lines 229-241) memory-maps only the needed split, yielding facts only for validation snapshots. Every RTROWS call was --stage test --no_controls (v76_p2_serverA.sh:79, v76_p2b_serverA.sh:26). No selection or early stopping used these files; the RE-GCN controls are the stored G3 controls, selected on <HOST> with regcn_valid_logp.f32. Identity: rr_base of both RE-GCN official files of the run is byte-identical to the stored G3 base (sha256 of the float32 array 79b9b324cd7f6140...; MRR 0.590669). Fix: the slot now reads /nonexistent/UNUSED_IN_TEST_STAGE (fails loudly if read); the three RE-GCN official passes (g1, g2, lm2) were re-run with it in <HOST> job (all rc = 0, so the slot was never opened).",
+   "recheck": "all 48 per-query arrays of the three re-run official files are byte-identical to the original files (g1 19/19, g2 16/16, lm2 13/13; rr_base sha256 79b9b324cd7f6140... in all three, equal to the stored G3 base)",
+   "recheck_record": {
+    "g1": {
+     "n_arrays": 19,
+     "all_identical": true,
+     "differing": [],
+     "sha_rr_base": "79b9b324cd7f61400f5de817aa16a68e58b59de402a1069b54802ed56d5bac29"
+    },
+    "g2": {
+     "n_arrays": 16,
+     "all_identical": true,
+     "differing": [],
+     "sha_rr_base": "79b9b324cd7f61400f5de817aa16a68e58b59de402a1069b54802ed56d5bac29"
+    },
+    "lm2": {
+     "n_arrays": 13,
+     "all_identical": true,
+     "differing": [],
+     "sha_rr_base": "79b9b324cd7f61400f5de817aa16a68e58b59de402a1069b54802ed56d5bac29"
+    }
+   }
+  },
+  {
+   "id": "D3",
+   "item": "infrastructure",
+   "type": "no protocol change",
+   "text": "phase-2 job was cancelled after (i) the LMART tie issue (D1), (ii) CUDA out-of-memory of G1_xf features and the LMART latency step while the M3a TiRGN training filled GPU 0, and (iii) a wrong TiRGN tree path for the polecat replay. Those steps were re-run unchanged in job; M3a training, M3a controls, the v76_btrain arm fits and the smallpedia TiRGN / CognTKE / RE-GCN official passes of the MLP/LIN/M4 arms from 69f852c5 completed normally and are used. Cancelling 69f852c5 did not stop four of its docker containers (CognTKE and RE-GCN official passes g1/g2). They kept running on GPU 0 while phase 2b started, and they finished; their outputs are the ones used (the RE-GCN g1/g2 files were reproduced byte for byte in the D2 re-check). Phase 2b reached ALLDONE, and all of its outputs are in the finiteness scan."
+  },
+  {
+   "id": "D4",
+   "item": "M4",
+   "type": "note",
+   "text": "hd_recb.py --stage test for RecB_xf used P = 8 for polecat and 16 for smallpedia; P only affects the 'faithful' variant (not used by G1 or the RecB features, which use the clean variant). The stored runs report P_emulated = 8."
+  },
+  {
+   "id": "D5",
+   "item": "rule files",
+   "type": "provenance clarification, no protocol change",
+   "text": "The sha256 recorded for v76_rule.json (edcfca14...) is the registration hash produced by write_prereg, not the sha256 of the saved file (4daf8b0f...). write_prereg adds registered_utc, hashes json.dumps(body, indent=1, sort_keys=True, default=str) (keys sorted, no sha256 field), then adds the sha256 field and writes json.dump(body, indent=1) in insertion order. The saved file therefore differs from the hashed bytes in key order and by the embedded sha256 field; its content is unchanged. The rule file has a single version (saved 12:07:47Z, file sha256 4daf8b0f...), and amendment 1 is a separate single-version file (registered 12:49:21Z; registered sha256 bc8cd8f8..., file sha256 f02c5f6b...) that cites edcfca14... It was not appended to the rule file. The exact hashed bytes are now stored as v76_rule_registered.json (aec1141a / 2efa22b5; file sha256 = edcfca14...) and v76_rule_amendment_1_registered.json (a0b4fbae / c9800bf3; = bc8cd8f8...); v76_rule_hash_check.py (5340c102 / 689306e0) re-derives both registered hashes from the saved files and checks the amendment's citation (ALL OK)."
+  }
+ ]
+}

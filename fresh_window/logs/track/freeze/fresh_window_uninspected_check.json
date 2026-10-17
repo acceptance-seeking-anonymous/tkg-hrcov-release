@@ -1,0 +1,620 @@
+{
+ "check": "v79 fresh-window uninspected check (rule: no fact dated >= 2025-10-01 used by any earlier experiment), recorded BEFORE any fitting",
+ "rule_refs": {
+  "v79_fresh_window_rule": "e10ab60d-9569-49b6-bd1e-6cf415138a78",
+  "amendment_1": "6debf06f-fc19-49ac-be4e-44b87bbb47da"
+ },
+ "cut_date": "2025-10-01",
+ "fresh_window": {
+  "train": "2025-08-01..2026-01-31 (with the GDELT25X min-count filters applied on train)",
+  "valid": "2026-02-01..2026-02-28",
+  "test": "2026-03-01..2026-04-30"
+ },
+ "recorded_utc": "2026-10-16T14:46:47Z",
+ "scanner": {
+  "code": "fw_uninspected_scan.py",
+  "sha256": "5ae1edbd7e7b369c205e780ddd27eb030a0c446effa24407a03c0d8b03aaa750",
+  "what": "(a) every GDELT 2.0 export/mentions/gkg file name under the roots, stamp >= 20251001; (b) every timestamp2id.txt (dates parsed as yyyymmdd/unix/year), max date >= 2025-10-01; (c) every *build*summary*.json 'source' date range; (d) CC-NEWS WARC day references in the status-pilot tree"
+ },
+ "hosts": {
+  "serverA": {
+   "job_id": "24868d2a-00f2-4201-a925-29f33feb31d4",
+   "scanned_utc": "2026-10-16T14:30:28Z",
+   "mode": "mode=docker-root-readonly",
+   "roots": [
+    "/home/[REDACTED:~ANON]"
+   ],
+   "gdelt_files": {
+    "n_total": 34775,
+    "n_stamp_ge_20251001": 0,
+    "max_stamp": 20250531234500,
+    "dirs": {
+     "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/post/raw/gdelt": 17465,
+     "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/pre/raw/gdelt": 17310
+    }
+   },
+   "timestamp2id": [
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_forward_holdout/data/GDELT25X/timestamp2id.txt",
+     "n": 256,
+     "first": "20250101",
+     "last": "20250930",
+     "max_date": 20250930,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/pilot_icews/stage/tkgl-icews-relnorm/timestamp2id.txt",
+     "n": 10224,
+     "first": "788936400",
+     "last": "1672462800",
+     "max_date": 20221231,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/pre/data_pass1/GDELT23M/timestamp2id.txt",
+     "n": 182,
+     "first": "20221201",
+     "last": "20230531",
+     "max_date": 20230531,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/pre/data/GDELT23M/timestamp2id.txt",
+     "n": 182,
+     "first": "20221201",
+     "last": "20230531",
+     "max_date": 20230531,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/out/pre/data/timestamp2id.txt",
+     "n": 182,
+     "first": "20221201",
+     "last": "20230531",
+     "max_date": 20230531,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/out/post/data/timestamp2id.txt",
+     "n": 182,
+     "first": "20241201",
+     "last": "20250531",
+     "max_date": 20250531,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/post/data_pass1/GDELT25M/timestamp2id.txt",
+     "n": 182,
+     "first": "20241201",
+     "last": "20250531",
+     "max_date": 20250531,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/post/data/GDELT25M/timestamp2id.txt",
+     "n": 182,
+     "first": "20241201",
+     "last": "20250531",
+     "max_date": 20250531,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/datasets/harness_data/tkgl-polecat-noself/timestamp2id.txt",
+     "n": 1826,
+     "first": "1514782800",
+     "last": "1672462800",
+     "max_date": 20221231,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/datasets/harness_data/tkgl-polecat/timestamp2id.txt",
+     "n": 1826,
+     "first": "1514782800",
+     "last": "1672462800",
+     "max_date": 20221231,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/datasets/harness_data/tkgl-smallpedia/timestamp2id.txt",
+     "n": 125,
+     "first": "1900",
+     "last": "2024",
+     "max_date": 20240101,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/datasets/harness_data/tkgl-icews/timestamp2id.txt",
+     "n": 10224,
+     "first": "788936400",
+     "last": "1672462800",
+     "max_date": 20221231,
+     "any_ge_cut": false
+    }
+   ],
+   "gdelt_build_summaries": [
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/pre/build_gdelt_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 20221201..20230601 (end exclusive), valid from 20230401, test from 20230501"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/pre/corpus/build_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 20221201..20230601 (end exclusive), valid from 20230401, test from 20230501"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/pre/corpus_pass1/build_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 20221201..20230601 (end exclusive), valid from 20230401, test from 20230501"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/out/build_summary_pass1_post.json",
+     "source": "GDELT 2.0 event exports (15-min), 20241201..20250601 (end exclusive), valid from 20250401, test from 20250501"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/out/build_summary_pass1_pre.json",
+     "source": "GDELT 2.0 event exports (15-min), 20221201..20230601 (end exclusive), valid from 20230401, test from 20230501"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/out/build_summary_pre.json",
+     "source": "GDELT 2.0 event exports (15-min), 20221201..20230601 (end exclusive), valid from 20230401, test from 20230501"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/out/build_summary_post.json",
+     "source": "GDELT 2.0 event exports (15-min), 20241201..20250601 (end exclusive), valid from 20250401, test from 20250501"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/post/build_gdelt_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 20241201..20250601 (end exclusive), valid from 20250401, test from 20250501"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/post/corpus/build_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 20241201..20250601 (end exclusive), valid from 20250401, test from 20250501"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_memtest/post/corpus_pass1/build_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 20241201..20250601 (end exclusive), valid from 20250401, test from 20250501"
+    }
+   ],
+   "n_other_build_summaries_without_gdelt_source": 18,
+   "ccnews": {
+    "n_refs": 3974,
+    "max_day": 20250930,
+    "n_ge_cut": 0,
+    "files_with_ge_cut": []
+   },
+   "n_timestamp2id_ge_cut": 0,
+   "scan_errors": [
+    "/home/[REDACTED:~ANON]/cs_scratch/jobs/b8ba6be7-59ee-4187-b65c-5a0f2d9771fd/copyright3921_fixed/._payload_build_summary.json: 'utf-8' codec can't decode byte 0xa3 in position 45: invalid start byt"
+   ]
+  },
+  "serverB": {
+   "job_id": "7281237c-9381-4054-a66d-2109569cbc8e",
+   "scanned_utc": "2026-10-16T14:30:29Z",
+   "mode": "mode=docker-root-readonly",
+   "roots": [
+    "/home/[REDACTED:~ANON]"
+   ],
+   "gdelt_files": {
+    "n_total": 24527,
+    "n_stamp_ge_20251001": 0,
+    "max_stamp": 20250930234500,
+    "dirs": {
+     "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/pilot_story/gdelt25/raw/gdelt": 24527
+    }
+   },
+   "timestamp2id": [
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/code_release_verify/work/tracks/datasets/harness_data/tkgl-polecat/timestamp2id.txt",
+     "n": 1826,
+     "first": "1514782800",
+     "last": "1672462800",
+     "max_date": 20221231,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/pilot_story/gdelt25x/data/GDELT25X/timestamp2id.txt",
+     "n": 256,
+     "first": "20250101",
+     "last": "20250930",
+     "max_date": 20250930,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/pilot_story/data/MIDEAST/timestamp2id.txt",
+     "n": 2584,
+     "first": "20150219",
+     "last": "20220317",
+     "max_date": 20220317,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/pilot_story/gdelt25/data/GDELT25/timestamp2id.txt",
+     "n": 165,
+     "first": "20250101",
+     "last": "20250614",
+     "max_date": 20250614,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/hardening/stage/tkgl-polecat/timestamp2id.txt",
+     "n": 1826,
+     "first": "1514782800",
+     "last": "1672462800",
+     "max_date": 20221231,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/hardening/mirror/oih/tracks/datasets/harness_data/tkgl-smallpedia/timestamp2id.txt",
+     "n": 125,
+     "first": "1900",
+     "last": "2024",
+     "max_date": 20240101,
+     "any_ge_cut": false
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/hardening/mirror/oih/tracks/datasets/harness_data/tkgl-polecat/timestamp2id.txt",
+     "n": 1826,
+     "first": "1514782800",
+     "last": "1672462800",
+     "max_date": 20221231,
+     "any_ge_cut": false
+    }
+   ],
+   "gdelt_build_summaries": [
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/jobs/c12b33bb-3c8e-4fb1-9cea-662662859322/g25x/build_gdelt25x_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 20250101..20251001 (end exclusive), valid from 20250701, test from 20250801"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/jobs/29022264-e7a3-4158-b06d-7a21cc907ee9/build_gdelt_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 20250101..20251001 (end exclusive), valid from 20250701, test from 20250801"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/jobs/29022264-e7a3-4158-b06d-7a21cc907ee9/build_gdelt25x_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 20250101..20251001 (end exclusive), valid from 20250701, test from 20250801"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/jobs/4fd33619-111c-43ea-a6f4-d9fd9c903a7a/build_gdelt_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 2025-01-01..2025-06-30"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/jobs/400e9be8-b28e-4276-bbf1-0c72af4c3e74/gbundle/build_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 2025-01-01..2025-06-30"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/pilot_story/gdelt25x/corpus/build_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 20250101..20251001 (end exclusive), valid from 20250701, test from 20250801"
+    },
+    {
+     "path": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/pilot_story/gdelt25/corpus/build_summary.json",
+     "source": "GDELT 2.0 event exports (15-min), 2025-01-01..2025-06-30"
+    }
+   ],
+   "n_other_build_summaries_without_gdelt_source": 13,
+   "ccnews": {
+    "n_refs": 15493,
+    "max_day": 20250930,
+    "n_ge_cut": 0,
+    "files_with_ge_cut": []
+   },
+   "n_timestamp2id_ge_cut": 0,
+   "scan_errors": []
+  },
+  "serverC": {
+   "job_id": "6f3c1306-74ba-414c-ab05-e93115855078",
+   "scanned_utc": "2026-10-16T14:30:30Z",
+   "mode": "mode=host-user",
+   "roots": [
+    "/home/[REDACTED:~ANON]"
+   ],
+   "gdelt_files": {
+    "n_total": 0,
+    "n_stamp_ge_20251001": 0,
+    "max_stamp": null,
+    "dirs": {}
+   },
+   "timestamp2id": [],
+   "gdelt_build_summaries": [],
+   "n_other_build_summaries_without_gdelt_source": 0,
+   "ccnews": {
+    "n_refs": 0,
+    "max_day": null,
+    "n_ge_cut": 0,
+    "files_with_ge_cut": []
+   },
+   "n_timestamp2id_ge_cut": 0,
+   "scan_errors": []
+  }
+ },
+ "artifact_store_check": {
+  "method": "content substring search over all artifacts of project <id> for 2025-10..2026-04 date strings (yyyymm and yyyy-mm- forms); every TKG-related hit opened and classified",
+  "n_project_artifacts_with_any_hit": 98,
+  "classification": {
+   "a66_size_review.md": {
+    "version_id": "d485225f-81ef-4872-91b9-3ca42f2e44f0",
+    "values": [
+     "20251015"
+    ]
+   },
+   "feasibility.py": {
+    "version_id": "f4d0d773-6fe8-4735-9864-5c0be9143975",
+    "values": [
+     "20251016"
+    ]
+   },
+   "A6_6_draw_sealed.json": {
+    "version_id": "2131ccfc-4d8b-450a-85cd-5bedf2507cf0",
+    "values": [
+     "20251015"
+    ]
+   },
+   "gs117_reserve.py": {
+    "version_id": "ef85809f-4972-4b95-a25c-35b7d12ec3b5",
+    "values": [
+     "20251013"
+    ]
+   },
+   "gs117_reserve_result.json": {
+    "version_id": "f344fc48-5255-491b-a175-283d50898ebb",
+    "values": []
+   },
+   "A6_4_prereg.json": {
+    "version_id": "c545243d-1109-45bc-94dd-65b532d07e22",
+    "values": [
+     "20251013"
+    ]
+   },
+   "ps_calib_sample.py": {
+    "version_id": "fcb97fdd-2520-41ae-878e-227649bfb5b7",
+    "values": [
+     "20251015"
+    ]
+   },
+   "ps_timing_docs.py": {
+    "version_id": "9b8e5a8e-6669-4f6f-9609-c653faedc2d8",
+    "values": [
+     "20251014"
+    ]
+   },
+   "ps_job_regold.sh": {
+    "version_id": "6bc0c2a4-d028-499a-87f0-6ee30f87fc79",
+    "values": [
+     "20251013"
+    ]
+   },
+   "ps_gold_sample.py": {
+    "version_id": "a6e47184-6345-40a8-b5c4-13dcbd134b63",
+    "values": [
+     "20251013"
+    ]
+   },
+   "ccnews_match_report.md": {
+    "version_id": "a87d0b51-4ecf-4348-8648-fd653fd994f7",
+    "values": [
+     "20251014"
+    ]
+   },
+   "sample_manifest.json": {
+    "version_id": "3ba69074-1b4b-4a6b-a0e1-4317747551b1",
+    "values": [
+     "20251013",
+     "20251014"
+    ]
+   },
+   "status_stage0.json": {
+    "version_id": "f45555ae-91bc-46f4-a8df-a48d49a9d44d",
+    "values": [
+     "20251001"
+    ]
+   },
+   "leakage_audit.json": {
+    "version_id": "b807b1e7-b662-4cf8-8a3e-663bdd371bab",
+    "values": [
+     "20251001"
+    ]
+   },
+   "leakage_pair_judgements.json": {
+    "version_id": "5961b4ae-fbd0-4556-8a67-37dd21f499ca",
+    "values": [
+     "20251001"
+    ]
+   },
+   "smallpedia_pilot_verdict.json": {
+    "version_id": "998d58c5-6694-4e8d-85cf-e58352ffa338",
+    "values": [
+     "20251001"
+    ]
+   },
+   "error_cases.md": {
+    "version_id": "6ab2201c-d938-4052-adf8-a2f3bbac41ad",
+    "values": [
+     "20251001"
+    ]
+   },
+   "error_taxonomy.json": {
+    "version_id": "dd82f0f7-bfce-43af-a5f0-12df1e0bbb43",
+    "values": [
+     "20251001"
+    ]
+   },
+   "hardening_verdict.json": {
+    "version_id": "2bc8fa07-bf52-4100-9dbf-8b14d8d9cd06",
+    "values": [
+     "20251126"
+    ]
+   },
+   "v78_results.json": {
+    "version_id": "ff0dcaea-3bcc-491d-8b75-022abec47f83",
+    "values": [
+     "20260262"
+    ]
+   },
+   "parse_completion_full.json": {
+    "version_id": "b86b77b6-ba49-4de9-9302-65353e46347d",
+    "values": [
+     "2025-10-03",
+     "2025-10-21"
+    ]
+   },
+   "nan_and_dating_note.md": {
+    "version_id": "328c9f79-3647-403a-b280-00b297ebad52",
+    "values": [
+     "2025-10-05"
+    ]
+   },
+   "tgb_nan_search_log.json": {
+    "version_id": "3ef2f4f0-36c9-4e28-b88b-3866d707c28c",
+    "values": [
+     "2025-10-02",
+     "2025-10-05",
+     "2026-01-08"
+    ]
+   },
+   "wikidata_statement_evidence.jsonl": {
+    "version_id": "dcfef114-d3c0-4815-a63b-ffef66c9b55d",
+    "values": [
+     "2025-10-17",
+     "2025-11-05"
+    ]
+   },
+   "examples_master.csv": {
+    "version_id": "4fdec534-924a-4a39-b103-c3d9ae2449ea",
+    "values": [
+     "2025-10-17",
+     "2025-11-05"
+    ]
+   },
+   "annotation_sheet_A.csv": {
+    "version_id": "e79761d6-68c5-4a68-b04b-e3491a9a142e",
+    "values": [
+     "2025-10-17",
+     "2025-11-05"
+    ]
+   },
+   "extracted_09.json": {
+    "version_id": "76dce32a-1fc7-44f6-bc6e-b43ee21ec4df",
+    "values": [
+     "2025-10-03",
+     "2025-10-21"
+    ]
+   },
+   "jobs_09.json": {
+    "version_id": "0078acde-6686-4091-aefa-bca22d0f51d3",
+    "values": [
+     "2025-10-03",
+     "2025-10-21"
+    ]
+   },
+   "evidence.json": {
+    "version_id": "0f739bc1-b151-4503-9e02-c05f0171b929",
+    "values": [
+     "2025-11-02",
+     "2025-12-13",
+     "2026-03-19",
+     "2026-04-01",
+     "2026-04-08"
+    ]
+   },
+   "provenance_audit_edges.csv": {
+    "version_id": "b377dfca-95b8-4707-988f-d2de3820bfbe",
+    "values": [
+     "2025-11-02",
+     "2026-03-19",
+     "2026-04-01"
+    ]
+   },
+   "exploration_findings.md": {
+    "version_id": "ede07428-6f15-4789-90f3-f23d95c09de0",
+    "values": [
+     "2026-04-23"
+    ]
+   }
+  },
+  "verdict": "no hit is a GDELT event date: hits are RNG seeds (20251013..20251016), model identifiers (<LLM model id>, <LLM model id>), Wikidata retrieval dates / Wikipedia revision timestamps (smallpedia / extraction work), PTAB decision dates (other sub-project), numeric substrings in metric values, git dates, and the v79 rule itself"
+ },
+ "findings": {
+  "max_gdelt_export_stamp_any_host": 20250930234500,
+  "max_timestamp2id_date_any_host": 20250930,
+  "max_gdelt_build_end_exclusive": "20251001 (GDELT25X; status pilot and forward holdout)",
+  "max_ccnews_day": 20250930,
+  "n_files_or_datasets_ge_cut": 0
+ },
+ "conclusion": "PASS: no GDELT export file, built dataset, build summary or CC-NEWS reference dated on or after 2025-10-01 exists on the three project compute hosts, and no project artifact contains GDELT facts in that range. The fresh-window test period (2026-03-01..2026-04-30) and its validation/train months after 2025-09-30 are uninspected by earlier experiments.",
+ "caveats": [
+  "serverC was scanned as the host user (no docker root), so directories not readable by that user were not covered; the project's GDELT work ran on serverB and serverA, both scanned with read-only root access.",
+  "Scan roots = the user's home directory on each host; storage outside it and the lead's local machine are covered only through the artifact-store search.",
+  "The serverA scan (14:30:28Z) preceded this experiment's own downloads into tracks/phase2_fresh_window/raw/gdelt (count of files with stamp >= 20251001 = 0 at scan time); those downloads are the fresh window itself and are excluded by definition.",
+  "The train period of the fresh window overlaps GDELT25X's valid/test months 2025-08-01..2025-09-30 (by design of the +7-month shift); the rule's 'uninspected' requirement concerns facts dated >= 2025-10-01, which cover all of valid and test."
+ ],
+ "build": {
+  "job_id": "faac377d-9748-42af-9403-7352ff11995d",
+  "host": "serverA",
+  "dataset": "GDELTFW",
+  "path": "tracks/phase2_fresh_window/data/GDELTFW",
+  "builder": "manuscriptA_code_release/data/build_gdelt25x.py (release builder; logic of the GDELT25X builder), run with --start 20250801 --end 20260501 --valid 20260201 --test 20260301 (GDELT25X dates + 7 months), no skip list",
+  "builder_sha256": {
+   "build_gdelt25x.py": "3bf22cc72e28ad7bda413d69c69e55761cf469d463f899dd71ee7bf1e9865fbb",
+   "gdelt25x_relation_names.tsv": "650390e4d8c38bf92bd204cda3e061acc648463afefa3952d956fd8b995d47ff",
+   "GDELT25X.sha256": "7344f3c7fb05bfbbd171febf15c3ca581922bc13d3e2ad4d0f4ea668d03cdbe6"
+  },
+  "summary": {
+   "source": "GDELT 2.0 event exports (15-min), 20250801..20260501 (end exclusive), valid from 20260201, test from 20260301",
+   "n_files": 26208,
+   "n_files_requested": 26208,
+   "n_skipped_by_list": 0,
+   "n_event_rows": 1539261,
+   "n_unique_quads": 814418,
+   "n_entities": 1209,
+   "n_relations": 215,
+   "n_days": 273,
+   "splits": {
+    "train": {
+     "n_facts": 509717,
+     "t_range": [
+      0,
+      183
+     ]
+    },
+    "valid": {
+     "n_facts": 76117,
+     "t_range": [
+      184,
+      211
+     ]
+    },
+    "test": {
+     "n_facts": 228584,
+     "t_range": [
+      212,
+      272
+     ]
+    }
+   },
+   "filters": "root events; >=1 actor country in ME; URL first-seen day only; entity >=10 / relation >=5 train events",
+   "elapsed_s": 829.7
+  },
+  "data_sha256": {
+   "entity2id.txt": "084c7789365015c5e7eb4f147ecf2f9a485cb0fb83c2756b368b5e386dd5051a",
+   "missing_export_files.txt": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+   "relation2id.txt": "b0ae8461e6a38f8b54ad43224a077ae6a126e498547ce66c09b154bb0ede6d3a",
+   "stat.txt": "4165cbf7cec5cbac6aee9e97c869926bd71703aa4148f528da5197f1c46e5d09",
+   "test.txt": "5e4c99458c8f5a77307d7095d411092f60ecc4598bab910f18e2c306f8adefe0",
+   "timestamp2id.txt": "4f1d5cef201cb44d59c8023683254b1432889d5d735116db52a2995bd0065fec",
+   "train.txt": "9ef5125917d5a7dd3ec92d03f883ba8b1f34948a517725f996ce4c9c9f42342d",
+   "valid.txt": "67e253b5861109fdbc4e4b01d361387a159b7e2a0828dfe2bc7eb5b8f6750f03"
+  },
+  "timestamp_range": {
+   "first": "20250801 (id 0)",
+   "train_last": "20260131 (id 183)",
+   "valid": "20260201..20260228 (ids 184..211)",
+   "test": "20260301..20260430 (ids 212..272)",
+   "n_days": 273,
+   "gaps": 0
+  },
+  "sanity": {
+   "missing_export_files": 0,
+   "entities_in_train": 1209,
+   "relations_in_train": 215,
+   "self_loops": 0
+  }
+ },
+ "build_check": "Builder output checked once: every fact of the GDELTFW valid (2026-02) and test (2026-03..04) splits and the train months 2025-10..2026-01 lies on or after 2025-10-01, i.e. in the range no earlier project experiment has used (scan above). Check recorded before any model is fitted."
+}

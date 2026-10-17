@@ -1,0 +1,14 @@
+# Python 3.12 (tested with 3.12.3).  torch 2.8.0 from PyPI is the CUDA 12.8 build (needed for NVIDIA Blackwell GPUs, sm_120).
+torch==2.8.0
+numpy==2.5.1
+scipy==1.18.0
+pandas==3.0.3
+scikit-learn==1.9.0
+networkx==3.6.1
+tqdm==4.68.4
+requests==2.34.2
+PyYAML==6.0.3
+pyarrow==25.0.0
+py-tgb==2.3.0
+lightgbm==4.6.0
+matplotlib==3.11.0

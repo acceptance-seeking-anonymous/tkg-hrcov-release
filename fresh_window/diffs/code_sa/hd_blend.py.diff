@@ -1,0 +1,12 @@
+--- a/hardening/v78/code/hd_blend.py
++++ b/code_sa/hd_blend.py
+@@ -37,6 +37,9 @@
+     "smallpedia": dict(name="tkgl-smallpedia", dd=f"{TR}/datasets/harness_data/tkgl-smallpedia", N=47433, R=283,
+                        valid_rows=None, ns=f"{TR}/pilot_smallpedia/work/tgb_ns/tkgl-smallpedia_test_ns.pkl",
+                        zip=f"{TR}/datasets/raw/tkgl-smallpedia.zip", stage=f"{TR}/pilot_smallpedia/stage"),
++    # phase2_fresh_window (v79): GDELTFW -- no shipped negatives; all-entity time-aware filtered ranks (fw scorers)
++    "gdeltfw": dict(name="GDELTFW", dd=f"{TR}/phase2_fresh_window/data/GDELTFW", N=1209, R=215,
++                    valid_rows=f"{TR}/phase2_fresh_window/GDELTFW/work/valid_sample_idx.npy", ns=None, zip=None, stage=None, official=False),
+ }
+ BETAS = [0.02, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.98]
+ LOGW = [(w, e) for w in (0.25, 0.5, 1.0, 2.0) for e in (1e-5, 1e-3)]

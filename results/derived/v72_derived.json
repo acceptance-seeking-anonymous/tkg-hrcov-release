@@ -1,0 +1,35 @@
+{
+ "pattern_features_common_pool": {
+  "tkgl-polecat": 0.006799105466391564,
+  "tkgl-smallpedia": 0.003079624674988679
+ },
+ "pt_feature_gain_pc": 0.006313119080671337,
+ "rb_feature_gain_pc": -6.047517909929523e-05,
+ "recall": {
+  "pc_pt": 0.6107,
+  "pc_rb": 0.5899,
+  "sp_pt": 0.7614,
+  "sp_rb": 0.7714
+ },
+ "mlp16_share": {
+  "tkgl-polecat": 0.7709302059481445,
+  "tkgl-smallpedia": 0.5308678710614266
+ },
+ "qblend_vs_blend": {
+  "tkgl-polecat": [
+   0.2302250690293913,
+   0.23480663405665148
+  ],
+  "tkgl-smallpedia": [
+   0.6275967258161324,
+   0.627458889789745
+  ]
+ },
+ "n_params": {
+  "LIN": 26,
+  "MLP16": 433,
+  "MLP64x2 (FULL, re-fit)": 5889,
+  "QBLEND": 129
+ },
+ "a5_other_true_fit_pct": "20.0"
+}

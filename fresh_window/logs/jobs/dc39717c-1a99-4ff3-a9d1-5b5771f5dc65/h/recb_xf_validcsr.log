@@ -1,0 +1,31 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+[     0.1s] N 1209 R 215 ts reformat {'ts_step': 1, 'dmin': 1, 'dmax': 1, 'all_multiples': True, 'n_ts': 273, 'identity': False}
+[     1.8s] valid task 0 / 410 elapsed 1
+[     5.9s] valid task 50 / 410 elapsed 5
+[     6.2s] valid task 100 / 410 elapsed 6
+[     6.3s] valid task 150 / 410 elapsed 6
+[     6.4s] valid task 200 / 410 elapsed 6
+[     6.4s] valid task 250 / 410 elapsed 6
+[     6.5s] valid task 300 / 410 elapsed 6
+[     6.5s] valid task 350 / 410 elapsed 6
+[     6.5s] valid task 400 / 410 elapsed 6
+[     6.9s] valid metrics {"clean_def": {"MRR": 0.3815057337036598, "H1": 0.26297673318706727, "H3": 0.4264093435106481, "H10": 0.6252151293403576, "n": 152234}, "clean_tr": {"MRR": 0.38883710165557306, "H1": 0.26927624577952364, "H3": 0.4346203870357476, "H10": 0.6354822181641421, "n": 152234}, "faith_def": {"MRR": 0.38075989256150183, "H1": 0.26214905999973726, "H3": 0.425824717211661, "H10": 0.6241575469343248, "n": 152234}, "faith_tr": {"MRR": 0.38869478084612447, "H1": 0.26886240918585863, "H3": 0.4350604989686929, "H10": 0.6353377037981003, "n": 152234}}
+[     6.9s] ALL DONE

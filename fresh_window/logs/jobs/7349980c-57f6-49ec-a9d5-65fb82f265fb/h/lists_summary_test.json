@@ -1,0 +1,36 @@
+{
+ "ds": "GDELTFW",
+ "base": "tirgn",
+ "host": "serverA_(CPU)",
+ "workers": 8,
+ "layout": "[top50 | <=50 pattern-prior]",
+ "W": 100,
+ "test": {
+  "n": 457168,
+  "seconds": 97.1,
+  "has_pat": 1.0,
+  "gold_in_union": 0.8035426801525916,
+  "gold_in_Lpat300": 0.8035426801525916,
+  "median_union": 106.0,
+  "mean_pat_block": 48.61743385363805
+ },
+ "elapsed_s": 98.2,
+ "modules": {
+  "oih_common": {
+   "file": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/oih_common.py",
+   "in_track_code_dir": true
+  },
+  "fulltest_eval": {
+   "file": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/fulltest_eval.py",
+   "in_track_code_dir": true
+  },
+  "patterns": {
+   "file": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/patterns.py",
+   "in_track_code_dir": true
+  },
+  "rt_common": {
+   "file": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/rt_common.py",
+   "in_track_code_dir": true
+  }
+ }
+}

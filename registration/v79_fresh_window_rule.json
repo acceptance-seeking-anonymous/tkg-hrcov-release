@@ -1,0 +1,32 @@
+{
+ "rule_id": "v79_fresh_window_rule",
+ "question": "Does the polecat result of v78 (HRcov BEATS both the matched standalone ranker SA and the best external learned-history comparator built from CountTRuCoLa) replicate on a genuinely uninspected event-graph window?",
+ "trigger": "Updated external review of Manuscript A v7.8 (2026-10-16), item 1; PI chose a new uninspected window.",
+ "data": {
+  "source": "GDELT 2.0 event data processed with the GDELT25X builder (same filters, entity/relation coding, split logic and deduplication as GDELT25X; code on serverA, build summary artifact build_gdelt25x_summary.json).",
+  "window": "Every date of the GDELT25X recipe shifted forward by exactly 7 calendar months. GDELT25X test = 2025-08-01..2025-09-30, so the new test window is 2026-03-01..2026-04-30 (61 days); validation and training windows shift by the same offset.",
+  "uninspected": "No fact dated on or after 2025-10-01 has been used by any project experiment; the builder output for the new window is checked once for this and the check recorded before any model is fitted."
+ },
+ "bases": {
+  "primary": "TiRGN trained with the GDELT25X forward-holdout recipe (same hyper-parameters; epoch chosen on validation).",
+  "secondary": "CognTKE, only if one training run fits within 48 GPU-hours on serverA GPU 0; the decision to run it is recorded before any test number. If run, it is a second configuration under the same criteria."
+ },
+ "systems_frozen": {
+  "HRcov": "v7.7 configuration exactly (base top-50 + bounded pattern block, W=100, 25 features, 2x64 listwise MLP on the validation fit part, selection part for choices, 3 seeds).",
+  "SA": "v78_rule_amendment_1 definition exactly (16 base-free features, RecB_xf top-50 + confidence-only pattern block, history tail).",
+  "controls": "v7.7 RecB default/trained, RecB-lite, BLEND and RecB-POOL with the same validation tuning (reference rows).",
+  "external": "CountTRuCoLa faithful and label-adapted (protocol note 2 definition), each alone and blended with the base on the v78 amendment grid (52 configurations), selected on the validation selection part; external_comparator = best by selection-part MRR. EdgeReMIND alone/blend optional, reported but not a comparator unless it wins on selection MRR.",
+  "evaluator": "official py-tgb Evaluator logic with the harness's shipped-negative-free exact filtered ranks as in the GDELT25X forward holdout (time-aware filtered MRR over all entities, ties averaged); harness exact ranks alongside."
+ },
+ "criteria": "Identical to v78: BEATS(X) = one-sided 95% lower bound of HRcov - X > 0 under both the query and the timestamp-block bootstrap (B=2000) AND point estimate >= 0.005; MATCHES(X) = one-sided 95% upper bound < 0.005 under both; SMALL otherwise.",
+ "outcome_labels": {
+  "R1_REPLICATES": "HRcov BEATS both SA and external_comparator for every assessed base -> the polecat condition is reported as replicated on a second, uninspected event-graph window.",
+  "R2_NOT_REPLICATED": "SA or external_comparator MATCHES HRcov for the primary base -> the polecat advantage is reported as not replicated on this window; the paper's conditional claim is narrowed to polecat.",
+  "R3_MIXED": "any other pattern -> reported as mixed, with the per-comparator calls."
+ },
+ "scoring_discipline": "All fitting, selection and blend tuning use train/validation only. The test split is scored once per system after all choices are frozen; reruns only for crash recovery with identical inputs, recorded. No test-split statistic of any kind (including smoke tests on test rows) before the final scoring.",
+ "manuscript_wording": "Each outcome label is reported with its per-comparator numbers and both intervals; R2 and R3 are reported in the main text, not only the supplement.",
+ "cost_profile": "On this window also record wall time per 1,000 queries for base, HRcov, SA and the selected external comparator (same hardware), descriptive.",
+ "registered_utc": "2026-10-16T14:24:12Z",
+ "sha256": "209bb1b57495aefb0509b55f69b3e5eaf88a349be2362a24cd1890583ed9bc80"
+}

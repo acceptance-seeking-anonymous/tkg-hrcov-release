@@ -1,0 +1,48 @@
+{
+ "ds": "GDELTFW",
+ "step": 1,
+ "stage": 2,
+ "host": "serverA_(CPU)",
+ "workers": 8,
+ "n_rows": {
+  "train": 1011792,
+  "valid": 152234,
+  "test": 457168
+ },
+ "strata_test": {
+  "n": 457168,
+  "seconds": 105.0,
+  "shares": {
+   "dyad": 0.9841283729394883,
+   "trip": 0.8308324292163931,
+   "pat_any": 0.8035426801525916,
+   "pat_hop1": 0.528873411962342,
+   "two_hop": 0.9998950057746824,
+   "self_loop": 0.0,
+   "first_seen": 0.0
+  },
+  "no_pair_and_2hop": 0.015836628985405804,
+  "no_pair_and_unreach": 3.4998075105869175e-05,
+  "median_n_pat": 1210.0,
+  "median_n_union": 106.0
+ },
+ "elapsed_s": 105.8,
+ "modules": {
+  "oih_common": {
+   "file": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/oih_common.py",
+   "in_track_code_dir": true
+  },
+  "fulltest_eval": {
+   "file": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/fulltest_eval.py",
+   "in_track_code_dir": true
+  },
+  "patterns": {
+   "file": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/patterns.py",
+   "in_track_code_dir": true
+  },
+  "rt_common": {
+   "file": "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/code/rt_common.py",
+   "in_track_code_dir": true
+  }
+ }
+}

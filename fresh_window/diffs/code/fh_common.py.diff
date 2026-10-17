@@ -1,0 +1,57 @@
+--- a/phase2_forward_holdout/code/fh_common.py
++++ b/code/fh_common.py
+@@ -1,14 +1,14 @@
+-"""phase2_forward_holdout / fh_common.py -- shared constants + helpers for the GDELT25X forward holdout of HRCOV_PAT.
++"""phase2_fresh_window / fh_common.py -- shared constants + helpers for the GDELTFW forward holdout of HRCOV_PAT.
+ 
+ Derived from presub_g2/code/g2_common.py (G2 of a_presub_rule.json) with the following changes ONLY:
+-  * dataset GDELT25X (post-cutoff GDELT 2.0 slice of the status pilot: train 2025-01..06, valid 2025-07, test 2025-08..09,
++  * dataset GDELTFW (post-cutoff GDELT 2.0 slice of the status pilot: train 2025-01..06, valid 2025-07, test 2025-08..09,
+     daily snapshots, ts ids 0..255, step_unit 1) is registered into oih_common.DATASETS at import time from THIS track's
+     copy of the data; the shared harness and the status pilot's files are never modified.
+-  * one base (tirgn, trained on the GDELT25X train window by hd_tirgn.py); full float32 log-prob rows written by
++  * one base (tirgn, trained on the GDELTFW train window by hd_tirgn.py); full float32 log-prob rows written by
+     fh_tirgn_rows.py into this track (work/fullrows).
+   * every module this pipeline imports is a byte-identical copy in this code dir (oih_common, fulltest_eval, patterns,
+     rt_common, rs_features); module_provenance() records the file each one was loaded from.
+-Track dir P = $PC_P (default tracks/phase2_forward_holdout/GDELT25X).
++Track dir P = $PC_P (default tracks/phase2_fresh_window/GDELTFW).
+ """
+ import os, sys, json, time
+ import numpy as np
+@@ -17,20 +17,20 @@
+ if CODE not in sys.path:
+     sys.path.insert(0, CODE)
+ H = os.environ.get("PC_HARNESS", "/home/anon/cs_scratch/open_ideas_harness")
+-FH = os.environ.get("FH_DIR", f"{H}/tracks/phase2_forward_holdout")
+-DS = os.environ.get("G2_DS", "GDELT25X")
+-assert DS == "GDELT25X", DS
++FH = os.environ.get("FH_DIR", f"{H}/tracks/phase2_fresh_window")
++DS = os.environ.get("G2_DS", "GDELTFW")
++assert DS == "GDELTFW", DS
+ P = os.environ.get("PC_P", f"{FH}/{DS}")
+-DD = os.environ.get("FH_DD", f"{FH}/data/GDELT25X")
++DD = os.environ.get("FH_DD", f"{FH}/data/GDELTFW")
+ WORK = f"{P}/work"
+ FS_DIR = os.environ.get("G2_FULLSCORES", f"{WORK}/fullrows")
+ BASES = ("tirgn",)
+ # harness-schema dumps written by fh_tirgn_rows.py, one per split (g2_features.dump_ranks uses "<base>_valid" for valid)
+-TIRGN_DUMPS = {"tirgn_valid": f"{WORK}/base_tirgn/tirgn_scores_GDELT25X_valid.npz", "tirgn": f"{WORK}/base_tirgn/tirgn_scores_GDELT25X_test.npz"}
++TIRGN_DUMPS = {"tirgn_valid": f"{WORK}/base_tirgn/tirgn_scores_GDELTFW_valid.npz", "tirgn": f"{WORK}/base_tirgn/tirgn_scores_GDELTFW_test.npz"}
+ 
+ import oih_common                                    # noqa: E402  (this dir's copy)
+ import fulltest_eval                                 # noqa: E402,F401  (pre-load this dir's copy before rs_features inserts H)
+-oih_common.DATASETS["GDELT25X"] = dict(dd=DD, n_ent=1173, n_rel=218, step_unit=1, dumps=dict(TIRGN_DUMPS),
++oih_common.DATASETS["GDELTFW"] = dict(dd=DD, n_ent=1209, n_rel=215, step_unit=1, dumps=dict(TIRGN_DUMPS),
+                                        ref={}, lm_ckpt=None, lm_vocab=None)
+ from oih_common import Splits, BaseDump, metrics_from_ranks, paired_bootstrap, jdump, filter_lookup  # noqa: E402,F401
+ 
+@@ -44,7 +44,7 @@
+ W_PAT = KC + BP    # 100: [top50 | <=50 pattern-prior]
+ LP_LEN = 300       # pattern-prior list kept per query
+ KREF = 200
+-VALID_N = 200000   # > #valid rows of GDELT25X (189,556) -> full valid (g2_prep logic unchanged)
++VALID_N = 200000   # > #valid rows of GDELTFW (189,556) -> full valid (g2_prep logic unchanged)
+ SEEDS = [0, 1, 2]
+ COV6 = ["pat_best_util", "pat_best_te", "pat_log_npat", "pat_reach", "pat_log_pos", "is_cov_cand"]
+ 

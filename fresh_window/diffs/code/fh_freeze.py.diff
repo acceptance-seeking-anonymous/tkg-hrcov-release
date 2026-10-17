@@ -1,0 +1,41 @@
+--- a/phase2_forward_holdout/code/fh_freeze.py
++++ b/code/fh_freeze.py
+@@ -1,8 +1,8 @@
+ #!/usr/bin/env python3
+-"""phase2_forward_holdout / fh_freeze.py -- sha256 manifest of every Stage-1 frozen file (stdlib only; host python3).
++"""phase2_fresh_window / fh_freeze.py -- sha256 manifest of every Stage-1 frozen file (stdlib only; host python3).
+   python3 fh_freeze.py --fh <track dir> --out <manifest.json>              # write
+   python3 fh_freeze.py --fh <track dir> --verify <manifest.json>           # Stage 2: exit 3 on any mismatch / missing file
+-Groups: rule, code (feature / training / scoring / decision code incl. the TiRGN model tree), data (GDELT25X splits),
++Groups: rule, code (feature / training / scoring / decision code incl. the TiRGN model tree), data (GDELTFW splits),
+ base_model (TiRGN checkpoint + epoch log), valid_base_rows, prep (valid sample, TE tables, valid strata),
+ controls (RecB selection + valid CSR, blend/pool valid grids, selection), features_valid, reranker (6 frozen models,
+ their select scores and ranks, training json).  Times are UTC (file mtime and manifest creation).
+@@ -25,19 +25,19 @@
+ 
+ 
+ def groups(FH):
+-    W = f"{FH}/GDELT25X/work"
++    W = f"{FH}/GDELTFW/work"
+     g = {
+         "rule": [f"{FH}/freeze/fh_decision_rule.json"],
+         "code": sorted(glob.glob(f"{FH}/code/*.py") + glob.glob(f"{FH}/code/*.sh")) +
+                 sorted(p for p in glob.glob(f"{FH}/stage/TiRGN/**/*.py", recursive=True) if "__pycache__" not in p),
+-        "data": sorted(glob.glob(f"{FH}/data/GDELT25X/*.txt")),
+-        "base_model": [f"{W}/base_tirgn/tirgn_GDELT25X_seed42.pt", f"{W}/base_tirgn/tirgn_GDELT25X_epoch_log.json"],
+-        "valid_base_rows": [f"{W}/fullrows/tirgn_GDELT25X_valid_scores_f32.bin", f"{W}/base_tirgn/tirgn_scores_GDELT25X_valid.npz",
++        "data": sorted(glob.glob(f"{FH}/data/GDELTFW/*.txt")),
++        "base_model": [f"{W}/base_tirgn/tirgn_GDELTFW_seed42.pt", f"{W}/base_tirgn/tirgn_GDELTFW_epoch_log.json"],
++        "valid_base_rows": [f"{W}/fullrows/tirgn_GDELTFW_valid_scores_f32.bin", f"{W}/base_tirgn/tirgn_scores_GDELTFW_valid.npz",
+                             f"{W}/base_tirgn/rows_valid_log.json"],
+-        "prep": [f"{W}/valid_sample_idx.npy", f"{W}/te_GDELT25X.npz", f"{W}/strata_valid.npz", f"{W}/prep_summary_stage1.json"],
+-        "controls": [f"{W}/recb/recb_selection_GDELT25X.json", f"{W}/recb/recb_csr_valid_GDELT25X.npz",
+-                     f"{W}/controls/blend_valid_gdelt25x_tirgn.json", f"{W}/controls/blend_valid_gdelt25x_tirgn.npz",
+-                     f"{W}/controls/sel_gdelt25x.json"],
++        "prep": [f"{W}/valid_sample_idx.npy", f"{W}/te_GDELTFW.npz", f"{W}/strata_valid.npz", f"{W}/prep_summary_stage1.json"],
++        "controls": [f"{W}/recb/recb_selection_GDELTFW.json", f"{W}/recb/recb_csr_valid_GDELTFW.npz",
++                     f"{W}/controls/blend_valid_gdeltfw_tirgn.json", f"{W}/controls/blend_valid_gdeltfw_tirgn.npz",
++                     f"{W}/controls/sel_gdeltfw.json"],
+         "features_valid": sorted(glob.glob(f"{W}/lists_tirgn/valid_*")) + sorted(glob.glob(f"{W}/feat_tirgn/valid_*")) +
+                           [f"{W}/feat_tirgn/meta.json"],
+         "reranker": sorted(glob.glob(f"{W}/train_tirgn/models/*")) + [f"{W}/train_tirgn/ranks_select.npz", f"{W}/train_tirgn/train_fh.json"],

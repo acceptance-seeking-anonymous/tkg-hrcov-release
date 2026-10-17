@@ -1,0 +1,5 @@
+[C1] start 2026-10-16T14:54:44Z params: LEARN_WINDOW_SIZE=50 DATAPOINT_THRESHOLD_MULTI=0 RULE_UNSEEN_NEGATIVES=30 AGGREGATION_DECAY=0.8 NUM_TOP_RULES=10 RULE_TYPE_C=True F_UNSEEN_NEGATIVES=10 Z_RULES_FACTOR=0.1
+[C1] main rc=1 2026-10-16T14:54:54Z
+[C1] rankings val= test=none
+ls: cannot access '/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C1/repo/files/rules': No such file or directory
+[C1] score rc=1 2026-10-16T14:55:04Z

@@ -1,0 +1,46 @@
+{
+ "title": "Pilot 1 of 4 -- coverage stack on TGB 2.0 tkgl-polecat: pre-registered decision rule",
+ "registered": "2026-10-12, before any polecat base dump, feature, re-ranker or test number existed (base training jobs / 9f1a9898 were running; no test score had been read)",
+ "question": "Do the coverage / cold-entity mechanisms (GraphBridge typed bridge + stage-2 ranker, 6.1 pattern-reachable evidence, 6.5 gated augmentation) add measurable full-test MRR ON TOP OF the history re-ranker on a benchmark where no-pair-history and first-seen mass is large?",
+ "dataset": {
+  "name": "tkgl-polecat (TGB 2.0), TGB split 70/15/15 by timestamp quantile",
+  "harness_dir": "$WORK_DIR/tracks/datasets/harness_data/tkgl-polecat",
+  "variant": "official (self-loops kept). The self-loop-free variant is NOT re-trained; instead a self-loop stratum (s == o) of the official run is reported.",
+  "protocol": "time-aware filtered, both directions (inverse relation r+16), 1-vs-all over 150,931 entities, ground-truth online history before t; exact filtered ranks from full base score rows"
+ },
+ "bases": {
+  "regcn": "harness base_dump.py native-torch RE-GCN v6, h 200, 2 layers, history 10, 12 epochs, seed 42",
+  "logcl": "harness base_dump.py LogCL, same config, cl_weight 0.1",
+  "tirgn": "optional; only if the pure-torch shim fits ~4 h (expected not to: per-timestamp history cache over 1,826 days x 151k entities)"
+ },
+ "systems": {
+  "HR": "history re-ranker = residual-track arm B: MLP d->64->64->1 (zero-init last layer) trained standalone with listwise CE over C_hr = base top-50, features F_hist; final score alpha*log p_base + beta*f with (alpha,beta) = argmin valid-select NLL (LBFGS). 3 seeds.",
+  "HR_R": "secondary: residual arm R0 over C_hr with F_hist (s = log p_base + f, residual-in-loss). 3 seeds.",
+  "HRCOV": "history re-ranker + coverage = the same arm-B recipe over C_cov = base top-50 UNION first 50 pattern-prior candidates outside the top-50 UNION first 50 stage-2-bridge candidates outside both, features F_hist + F_cov. 3 seeds.",
+  "HRCOV_R": "secondary: R0 over C_cov with F_hist + F_cov. 3 seeds.",
+  "HRCOVFEAT": "diagnostic: arm B over C_hr with F_hist + F_cov (coverage features without coverage candidates). 3 seeds.",
+  "promotion_rule": "a candidate outside the top-50 is promoted iff its fused score exceeds the lowest fused score inside the top-50 (gold-free); final list = promoted set sorted by fused score ++ base remainder in base order (residual-track fused_ranks_np). Base log-probs of coverage candidates come from an exact full-row lookup, so every fused rank is exact.",
+  "F_hist": "8 base features (log p, log p - log p1, log base rank, in-top-50 flag, p1, top-50 entropy, margin12, log tail mass) + 11 online evidence features (exact-triple count, dyad count, their recencies, triple count in last 30 snapshots, (r',c) popularity + recency, entity frequency, BridgeMem dyadic LR, query recurrence, subject frequency), all from facts with ts < t. The 6 u_pred features of the residual track are DROPPED (no event-LM vocabulary for polecat).",
+  "F_cov": "pattern features (best pattern-prior utility of any pattern containing c, best hierarchical TE confidence, log #patterns containing c, pattern-reachable flag, log position in the pattern-prior list) + bridge features (in-bridge flag, stage-2 ensemble score, log position in the bridge list, log1p path multiplicity from subject, log1p #intermediates) + coverage-candidate flag"
+ },
+ "coverage_only_references": {
+  "BR_CS": "stage-2 bridge ranker (G12 arm5 features without the event-LM column: X16 + cascade, 3-seed ensemble, trained on 8,000 coverage-hard TRAIN queries (gold outside base top-50, reached by the bridge; both directions)) used as a backfill through the harness ConfidenceSwitch(q in {.05,.10,.20,.30}, M in {0,1,3,10,K}, B in {10,50,200}); config by valid-sample MRR",
+  "PAT_BUMP": "6.1 non-learned pattern prior (hierarchical target-encoded pattern confidence fitted on early-70% train timestamps, M1=64/M2=32 caps): s' = log p + delta*1[c in top-B of the pattern-prior list], B in {10,30,100,300}, delta in {0.25,0.5,1,2,4,8}; (B,delta) by valid-sample MRR",
+  "AUG": "6.5 utility-gated augmentation. Oracle first: inject only the gold quad (m=1 and m=3) when the structural pool (bridge top-20 UNION pattern-prior top-20) proposes it, on a uniform 20k test sample, frozen base rescored (harness rescore_lib mechanism). STOP RULE: the gated arms (utility gate vs random / triadic-closure / uncertainty gates at matched budget) are run only for a base whose oracle-gate (m=3) full-test-extrapolated dMRR >= 0.002; otherwise they are reported as not run (ceiling below materiality x2). LLM generator not run (TGB slice 2018-2022 is pre-cutoff; 6.5 measured a contamination signature)."
+ },
+ "primary_rule": {
+  "statement": "The coverage stack is 'useful on polecat' iff, on BOTH bases (RE-GCN and LogCL), HRCOV beats HR on full-test MRR with one-sided paired-bootstrap p < 0.05 AND dMRR >= 0.001, AND the head-damage guardrail passes for HRCOV vs HR.",
+  "statistic": "per-query reciprocal ranks averaged over the 3 seeds of each system; paired Poisson(1) bootstrap over queries, B = 2000 (oih_common.paired_bootstrap); one-sided p = P_boot(delta <= 0)",
+  "guardrail": "head stratum (gold train frequency >= 500): DAMAGE iff the 95% CI of dMRR lies entirely below 0 AND |dMRR| >= 0.001; DAMAGE fails the rule",
+  "selection": "every hyperparameter, epoch, calibration weight, bump/backfill config and gate threshold is chosen on VALID only (valid timestamps < 70% quantile = fit, rest = select). Test is scored once per system.",
+  "n_test": "all test queries, both directions (expected 532,636)"
+ },
+ "reported_regardless": [
+  "full-test table (MRR, H@1/3/10) for RecB-lite, both bases, HR, HR_R, HRCOV, HRCOV_R, HRCOVFEAT, BR_CS, PAT_BUMP, AUG oracle (+ gated arms if run)",
+  "per-stratum dMRR (HRCOV - HR and each system - base): no-pair-history (no (s,o) event before t), first-seen entity (subject or gold without any event before t), pool-absent (gold outside base top-50), cold/mid/head, the 9-category error taxonomy (E, R_in/out, D_in/out, P_in/out, U_in/out on the base top-50 pool), no-pair & 2-hop-reachable vs no-pair & unreachable, self-loop queries",
+  "oracle ceilings: gold-in-pool@1, pattern reach (any / 1-hop / 2-hop-only) and pattern-list reach at B in {10,50,300}, bridge reach (natural set and stage-2 list at B in {10,50,200}) with a random-candidate control at matched set size, C_cov@1, augmentation oracle",
+  "official py-tgb Evaluator rows for the bases (and the final systems if the full-row pass is run), plus published TGB leaderboard rows with protocol differences stated"
+ ],
+ "secondary_reading": "HRCOV_R vs HR_R reported with the same statistic; not decisive. If HRCOV passes on one base only the verdict is 'not useful (base-dependent)'.",
+ "materiality": 0.001
+}

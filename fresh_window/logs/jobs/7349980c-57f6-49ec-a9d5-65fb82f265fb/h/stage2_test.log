@@ -1,0 +1,66 @@
+[stage2] start 2026-10-16T16:33:56Z host [REDACTED:HOST]
+ 00:33:56 up 5 days, 57 min,  8 users,  load average: 1.26, 2.38, 3.78
+Sat Oct 17 00:33:56 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.178.04             Driver Version: 580.178.04     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA RTX PRO 6000 Blac...    Off |   00000000:C1:00.0 Off |                  Off |
+| 37%   66C    P1             85W /  300W |    4116MiB /  97887MiB |      5%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA RTX PRO 6000 Blac...    Off |   00000000:E1:00.0 Off |                  Off |
+| 30%   41C    P8             13W /  300W |       2MiB /  97887MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  [GPU process rows removed for the release: the table does not show their owner]        |
++-----------------------------------------------------------------------------------------+
+[stage-time] verify_freeze rc=0 5s 2026-10-16T16:34:01Z
+[stage2] comparator {
+ "config": "C0",
+ "variant": "blend",
+ "a": 0.1,
+ "tau": 0.5,
+ "selection_MRR": 0.4077166244352452,
+ "alone_selection_MRR": 0.3684073815105022,
+ "best_blend_selection_MRR": 0.4077166244352452,
+ "base_selection_MRR": 0.4040776992600792,
+ "n_selection_queries": 50192,
+ "cut_ts": 203,
+ "candidates": "EXT_alone(C0) + 52 EXT_blend(C0) (a in 13 BLEND betas x tau in {0.5,1,2,4})",
+ "rule": "external_comparator = argmax selection-part MRR (ties averaged) over the CountTRuCoLa alone and blend candidates (v79 amendment 1; implementation note + addendum 1)",
+ "ct_params": "LEARN_WINDOW_SIZE=10 DATAPOINT_THRESHOLD_MULTI=0 RULE_UNSEEN_NEGATIVES=30 AGGREGATION_DECAY=0.8 NUM_TOP_RULES=10 RULE_TYPE_C=True F_UNSEEN_NEGATIVES=10 Z_RULES_FACTOR=0.1",
+ "ct_release": "JuliaGast/counttrucola_submission @ 5d9aedf4106926d13befa141e0855d684f3f5f9d (config-default.yaml top level)",
+ "selected_utc": "2026-10-16T16:20:19Z"
+}
+[stage-time] tirgn_rows_test rc=0 19s 2026-10-16T16:34:15Z
+[gpu] stage2 TiRGN GPU wall seconds 14 on gpu 0
+[stage-time] prep_stage2 rc=0 111s 2026-10-16T16:35:47Z
+[stage-time] recb_test rc=0 140s 2026-10-16T16:36:16Z
+[stage-time] recb_xf_test rc=0 168s 2026-10-16T16:36:44Z
+recb valid CSR arrays identical to frozen: True
+recb_xf valid CSR arrays identical to frozen: True
+[stage-time] sa_hist_test rc=0 174s 2026-10-16T16:36:50Z
+[stage-time] lists_test rc=0 267s 2026-10-16T16:38:23Z
+[stage-time] sa_lists_test rc=0 283s 2026-10-16T16:38:39Z
+[stage-time] features_test rc=0 309s 2026-10-16T16:39:05Z
+[stage-time] sa_pools_test rc=0 349s 2026-10-16T16:39:45Z
+[stage-time] apply_hrcov_test rc=0 355s 2026-10-16T16:39:51Z
+[stage-time] sa_apply_test rc=0 365s 2026-10-16T16:40:01Z
+[stage-time] sa_official_test rc=0 373s 2026-10-16T16:40:09Z
+[stage-time] blend_test rc=0 390s 2026-10-16T16:40:26Z
+[ct-stage2] main rc=1 2026-10-16T17:09:43Z
+[ct-stage2] rankings test=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo_stage2/files/rankings/tkgl-gdeltfw/tkgl-gdeltfw10-rankings_test_conf_0_corr_conf_0_noisyor_crules_frules_zrules_pvalue_30_num_top_rules_10_multi.txt val=/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo_stage2/files/rankings/tkgl-gdeltfw/tkgl-gdeltfw10-rankings_val_conf_0_corr_conf_0_noisyor_crules_frules_zrules_pvalue_30_num_top_rules_10_multi.txt
+[ct-stage2] validation re-application reproduces Stage-1 validation ranks: max_abs_rr_dev 0.0 n 152234
+[stage-time] ct_test rc=0 2178s 2026-10-16T17:10:14Z
+[stage-time] ext_test rc=0 2186s 2026-10-16T17:10:22Z
+[stage2] end 2026-10-16T17:10:22Z

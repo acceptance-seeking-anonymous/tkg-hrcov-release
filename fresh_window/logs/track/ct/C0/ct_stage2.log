@@ -1,0 +1,139 @@
+starting at:  435442.610032685
+Namespace(params=['DATASET_NAME=tkgl-gdeltfw', 'NUM_CPUS=10', 'LOAD_PARAMS_FLAG=True', 'CREATE_LEARN_DATA_FLAG=False', 'EVAL_TESTSET_FLAG=True', 'EVAL_VALSET_FLAG=True', 'LEARN_WINDOW_SIZE=10', 'DATAPOINT_THRESHOLD_MULTI=0', 'RULE_UNSEEN_NEGATIVES=30', 'AGGREGATION_DECAY=0.8', 'NUM_TOP_RULES=10', 'RULE_TYPE_C=True', 'F_UNSEEN_NEGATIVES=10', 'Z_RULES_FACTOR=0.1'])
+---------------------
+Parsing command line options:
+Parsed option: DATASET_NAME = tkgl-gdeltfw
+Parsed option: NUM_CPUS = 10
+Parsed option: LOAD_PARAMS_FLAG = True
+Parsed option: CREATE_LEARN_DATA_FLAG = False
+Parsed option: EVAL_TESTSET_FLAG = True
+Parsed option: EVAL_VALSET_FLAG = True
+Parsed option: LEARN_WINDOW_SIZE = 10
+Parsed option: DATAPOINT_THRESHOLD_MULTI = 0
+Parsed option: RULE_UNSEEN_NEGATIVES = 30
+Parsed option: AGGREGATION_DECAY = 0.8
+Parsed option: NUM_TOP_RULES = 10
+Parsed option: RULE_TYPE_C = True
+Parsed option: F_UNSEEN_NEGATIVES = 10
+Parsed option: Z_RULES_FACTOR = 0.1
+parsed_options_dict:  {'DATASET_NAME': 'tkgl-gdeltfw', 'NUM_CPUS': 10, 'LOAD_PARAMS_FLAG': True, 'CREATE_LEARN_DATA_FLAG': False, 'EVAL_TESTSET_FLAG': True, 'EVAL_VALSET_FLAG': True, 'LEARN_WINDOW_SIZE': 10, 'DATAPOINT_THRESHOLD_MULTI': 0, 'RULE_UNSEEN_NEGATIVES': 30, 'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'F_UNSEEN_NEGATIVES': 10, 'Z_RULES_FACTOR': 0.1}
+Using dataset name from base options: tkgl-gdeltfw
+dataset_name:  tkgl-gdeltfw
+DATASET_OVERRIDES:  {'tkgl-icews14': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 0, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 50, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-yago': {'AGGREGATION_DECAY': 0.7, 'NUM_TOP_RULES': 5, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 50, 'F_UNSEEN_NEGATIVES': 30, 'LEARN_WINDOW_SIZE': 30, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-wikiold': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 50, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 3, 'RULE_UNSEEN_NEGATIVES': 1, 'Z_RULES_FACTOR': 0.1}, 'tkgl-smallpedia': {'AGGREGATION_DECAY': 0.4, 'NUM_TOP_RULES': 5, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 10, 'F_UNSEEN_NEGATIVES': 30, 'LEARN_WINDOW_SIZE': 3, 'RULE_UNSEEN_NEGATIVES': 3, 'Z_RULES_FACTOR': 0}, 'tkgl-polecat': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': False, 'DATAPOINT_THRESHOLD_MULTI': 0, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 150, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-icews18': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 50, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 50, 'RULE_UNSEEN_NEGATIVES': 100, 'Z_RULES_FACTOR': 0.1}, 'tkgl-gdelt': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': False, 'DATAPOINT_THRESHOLD_MULTI': 0, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 200, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-wikidata': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_C': True, 'DATAPOINT_THRESHOLD_MULTI': 0, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 10, 'RULE_UNSEEN_NEGATIVES': 30, 'Z_RULES_FACTOR': 0.1}, 'tkgl-icews': {'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'DATAPOINT_THRESHOLD_MULTI': 50, 'F_UNSEEN_NEGATIVES': 10, 'LEARN_WINDOW_SIZE': 50, 'RULE_UNSEEN_NEGATIVES': 100, 'Z_RULES_FACTOR': 0.1}}
+overwriting options from config file and command line call with parsed options
+Overwriting DATASET_NAME with tkgl-gdeltfw from command line
+Overwriting NUM_CPUS with 10 from command line
+Overwriting LOAD_PARAMS_FLAG with True from command line
+Overwriting CREATE_LEARN_DATA_FLAG with False from command line
+Overwriting EVAL_TESTSET_FLAG with True from command line
+Overwriting EVAL_VALSET_FLAG with True from command line
+Overwriting LEARN_WINDOW_SIZE with 10 from command line
+Overwriting DATAPOINT_THRESHOLD_MULTI with 0 from command line
+Overwriting RULE_UNSEEN_NEGATIVES with 30 from command line
+Overwriting AGGREGATION_DECAY with 0.8 from command line
+Overwriting NUM_TOP_RULES with 10 from command line
+Overwriting RULE_TYPE_C with True from command line
+Overwriting F_UNSEEN_NEGATIVES with 10 from command line
+Overwriting Z_RULES_FACTOR with 0.1 from command line
+options:  {'DATASET_NAME': 'tkgl-gdeltfw', 'RANKINGS_PATH': 'default', 'LEARN_DATA_PATH': 'default', 'CREATE_LEARN_DATA_FLAG': False, 'LEARN_PARAMS_OPTION': 'learn', 'LOAD_PARAMS_FLAG': True, 'APPLY_RULES_FLAG': True, 'EVAL_VALSET_FLAG': True, 'EVAL_TESTSET_FLAG': True, 'NUM_CPUS': 10, 'DELETE_RANKINGS_FLAG': False, 'PLOT_FLAG': False, 'RULE_TYPE_C': True, 'RULE_UNSEEN_NEGATIVES': 30, 'LEARN_WINDOW_SIZE': 10, 'DATAPOINT_THRESHOLD_MULTI': 0, 'Z_RULES_FACTOR': 0.1, 'F_UNSEEN_NEGATIVES': 10, 'AGGREGATION_FUNCTION': 'noisyor', 'AGGREGATION_DECAY': 0.8, 'NUM_TOP_RULES': 10, 'RULE_TYPE_Z': True, 'RULE_TYPE_F': True, 'RULE_TYPE_CYC1_REC': True, 'RULE_TYPE_CYC1_NON_REC': True, 'EVAL_TYPE': 'random', 'MULTI_FLAG': True, 'SINGLE_FLAG': True, 'THRESHOLD_CORRECT_PREDICTIONS': 0, 'THRESHOLD_CONFIDENCE': 0, 'THRESHOLD_APPLY_CONFIDENCE': 0, 'C_THRESHOLD_CONFIDENCE': 0.001, 'C_RULE_RECURRENCY_ACTIVE': True, 'LARGE_DATA_HARDCODE_FLAG': None, 'VERY_LARGE_DATA_HARDCODE_FLAG': None, 'APPLY_WINDOW_SIZE': -1, 'Z_MIN_SUPPORT': 0, 'Z_MIN_CONFIDENCE': 0, 'Z_UNSEEN_NEGATIVES': 10, 'F_MIN_SUPPORT': 0, 'F_MIN_CONFIDENCE': 0, 'LMBDA_REG': 0, 'RR_OFFSET': -99}
+num_rels:  215
+>>> loading and indexing of dataset 14.506 seconds
+>>> average number of time steps for a triple: 4.040
+>>> checked order of time steps, everything is fine
+[fw] ts ids equal harness ts ids; large_data_flag=True very_large=False quads=1628836 timesteps=273
+2026-10-17 00:34:58,100	WARNING authentication_token_setup.py:85 -- Token authentication is enabled for this Ray cluster. Set RAY_AUTH_MODE=disabled to opt out. For more information, see https://docs.ray.io/en/latest/ray-security/token-auth.html
+2026-10-17 00:35:05,080	INFO worker.py:2033 -- Started a local Ray instance.
+-----------------do not create the learn data - load it from file
+>>> load the examples required as input to learn confidence functions from  files/learn_data/tkgl-gdeltfw-multi-learn_data10_-99_.pkl
+-----------------fetch or learn params for config functions, option:  learn
+load the parameters for the confidence functions from file:  files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+-----------------apply the rules to the dataset
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM before ray init20480
+{'object_store_memory': 150914928230.0, 'accelerator_type:RTX-PRO-6000': 1.0, 'memory': 352134832538.0, 'CPU': 10.0, 'node:__internal_head__': 1.0, 'node:serverA': 1.0, 'GPU': 2.0}
+gathering z-rule statistics ...
+... done with gathering z-rule statistics
+gather f-rule statistics ...
+
+MEM at beginning of f-rule aquisition: 20533
+  0%|          | 0/430 [00:00<?, ?it/s]  0%|          | 2/430 [00:01<05:26,  1.31it/s]  1%|          | 3/430 [00:01<03:40,  1.94it/s]  1%|          | 4/430 [00:01<02:38,  2.69it/s]  1%|▏         | 6/430 [00:02<01:35,  4.43it/s]  2%|▏         | 8/430 [00:02<01:08,  6.14it/s]  3%|▎         | 12/430 [00:02<00:39, 10.46it/s]  3%|▎         | 14/430 [00:02<00:38, 10.75it/s]  4%|▍         | 18/430 [00:02<00:27, 15.23it/s]  5%|▍         | 20/430 [00:02<00:32, 12.74it/s]  5%|▌         | 23/430 [00:02<00:26, 15.36it/s]  6%|▌         | 26/430 [00:03<00:22, 18.17it/s]  7%|▋         | 30/430 [00:03<00:18, 21.69it/s]  8%|▊         | 35/430 [00:03<00:14, 27.07it/s]  9%|▉         | 39/430 [00:03<00:14, 27.80it/s] 10%|▉         | 42/430 [00:03<00:16, 23.35it/s] 11%|█         | 46/430 [00:03<00:14, 26.69it/s] 12%|█▏        | 50/430 [00:03<00:13, 29.05it/s] 13%|█▎        | 54/430 [00:03<00:11, 31.60it/s] 14%|█▍        | 61/430 [00:04<00:09, 40.67it/s] 17%|█▋        | 72/430 [00:04<00:06, 58.83it/s] 19%|█▊        | 80/430 [00:04<00:05, 60.19it/s] 20%|██        | 87/430 [00:04<00:05, 58.20it/s] 23%|██▎       | 97/430 [00:04<00:04, 68.38it/s] 26%|██▌       | 112/430 [00:04<00:03, 90.10it/s] 31%|███       | 132/430 [00:04<00:02, 119.98it/s] 38%|███▊      | 165/430 [00:04<00:01, 179.36it/s] 50%|█████     | 216/430 [00:04<00:00, 270.74it/s] 57%|█████▋    | 244/430 [00:06<00:04, 44.57it/s]  61%|██████▏   | 264/430 [00:07<00:04, 40.43it/s] 65%|██████▍   | 279/430 [00:07<00:03, 41.03it/s] 68%|██████▊   | 291/430 [00:07<00:02, 46.47it/s] 70%|███████   | 303/430 [00:08<00:02, 47.35it/s] 73%|███████▎  | 313/430 [00:08<00:02, 51.63it/s] 77%|███████▋  | 330/430 [00:08<00:01, 66.64it/s] 80%|███████▉  | 342/430 [00:08<00:01, 52.10it/s] 86%|████████▌ | 369/430 [00:08<00:00, 80.63it/s]100%|██████████| 430/430 [00:08<00:00, 48.06it/s]
+... done with gathering f-rule statistics, found 403174 f-rules.
+MEM after f-rule aquisition: 21885
+apply rules to the test set
+MEM before ray starts 21885
+quads_per_task:  2000
+MEM after ray.put 21952
+MEM after appending all ray tasks 22071
+starting the parallel ray tasks 
+  0%|          | 0/103 [00:00<?, ?it/s]  1%|          | 1/103 [01:24<2:24:15, 84.86s/it]  2%|▏         | 2/103 [01:25<59:25, 35.30s/it]    3%|▎         | 3/103 [01:26<32:32, 19.53s/it]  4%|▍         | 4/103 [01:27<20:01, 12.14s/it]  5%|▍         | 5/103 [01:27<13:09,  8.06s/it]  6%|▌         | 6/103 [01:28<09:00,  5.57s/it]  7%|▋         | 7/103 [01:30<06:47,  4.25s/it]  8%|▊         | 8/103 [01:31<05:01,  3.18s/it]  9%|▊         | 9/103 [01:31<03:52,  2.47s/it] 10%|▉         | 10/103 [01:32<03:02,  1.97s/it] 11%|█         | 11/103 [03:02<44:21, 28.93s/it] 12%|█▏        | 12/103 [03:04<31:04, 20.49s/it] 13%|█▎        | 13/103 [03:05<22:17, 14.86s/it] 14%|█▎        | 14/103 [03:06<15:46, 10.63s/it] 15%|█▍        | 15/103 [03:07<11:17,  7.70s/it] 16%|█▌        | 16/103 [03:08<08:12,  5.67s/it] 17%|█▋        | 17/103 [03:09<06:04,  4.24s/it] 17%|█▋        | 18/103 [03:10<04:36,  3.25s/it] 18%|█▊        | 19/103 [03:12<03:54,  2.80s/it] 19%|█▉        | 20/103 [03:13<03:04,  2.22s/it] 20%|██        | 21/103 [05:45<1:04:34, 47.25s/it] 21%|██▏       | 22/103 [05:46<45:04, 33.39s/it]   22%|██▏       | 23/103 [05:47<31:34, 23.68s/it] 23%|██▎       | 24/103 [05:48<22:13, 16.89s/it] 24%|██▍       | 25/103 [05:50<16:05, 12.38s/it] 25%|██▌       | 26/103 [05:51<11:32,  8.99s/it] 26%|██▌       | 27/103 [05:52<08:19,  6.57s/it] 27%|██▋       | 28/103 [05:53<06:06,  4.89s/it] 28%|██▊       | 29/103 [05:54<04:33,  3.70s/it] 29%|██▉       | 30/103 [05:55<03:30,  2.88s/it] 30%|███       | 31/103 [09:51<1:27:31, 72.94s/it] 31%|███       | 32/103 [09:52<1:00:47, 51.38s/it] 32%|███▏      | 33/103 [09:53<42:20, 36.29s/it]   33%|███▎      | 34/103 [09:54<29:35, 25.73s/it] 34%|███▍      | 35/103 [09:55<20:46, 18.33s/it] 35%|███▍      | 36/103 [09:57<14:41, 13.15s/it] 36%|███▌      | 37/103 [09:58<10:42,  9.73s/it] 37%|███▋      | 38/103 [09:59<07:41,  7.10s/it] 38%|███▊      | 39/103 [10:00<05:38,  5.29s/it] 39%|███▉      | 40/103 [10:01<04:13,  4.02s/it] 40%|███▉      | 41/103 [11:40<33:38, 32.55s/it] 41%|████      | 42/103 [11:41<23:27, 23.08s/it] 42%|████▏     | 43/103 [11:43<16:41, 16.69s/it] 43%|████▎     | 44/103 [11:44<11:47, 12.00s/it] 44%|████▎     | 45/103 [11:45<08:24,  8.70s/it] 45%|████▍     | 46/103 [11:46<06:04,  6.39s/it] 46%|████▌     | 47/103 [11:47<04:24,  4.73s/it] 47%|████▋     | 48/103 [11:48<03:17,  3.58s/it] 48%|████▊     | 49/103 [11:50<02:41,  3.00s/it] 49%|████▊     | 50/103 [11:51<02:05,  2.38s/it] 50%|████▉     | 51/103 [13:44<30:57, 35.72s/it] 50%|█████     | 52/103 [13:45<21:32, 25.34s/it] 51%|█████▏    | 53/103 [13:46<15:03, 18.06s/it] 52%|█████▏    | 54/103 [13:47<10:34, 12.95s/it] 53%|█████▎    | 55/103 [13:49<07:41,  9.61s/it] 54%|█████▍    | 56/103 [13:50<05:29,  7.02s/it] 55%|█████▌    | 57/103 [13:51<03:59,  5.21s/it] 56%|█████▋    | 58/103 [13:52<02:57,  3.94s/it] 57%|█████▋    | 59/103 [13:53<02:14,  3.05s/it] 58%|█████▊    | 60/103 [13:54<01:44,  2.42s/it] 59%|█████▉    | 61/103 [16:05<28:45, 41.09s/it] 60%|██████    | 62/103 [16:06<19:52, 29.09s/it] 61%|██████    | 63/103 [16:07<13:46, 20.66s/it] 62%|██████▏   | 64/103 [16:08<09:34, 14.72s/it] 63%|██████▎   | 65/103 [16:09<06:42, 10.60s/it] 64%|██████▍   | 66/103 [16:10<04:45,  7.70s/it] 65%|██████▌   | 67/103 [16:12<03:32,  5.92s/it] 66%|██████▌   | 68/103 [16:15<02:52,  4.94s/it] 67%|██████▋   | 69/103 [16:16<02:06,  3.72s/it] 68%|██████▊   | 70/103 [16:16<01:34,  2.86s/it] 69%|██████▉   | 71/103 [19:46<34:38, 64.96s/it] 70%|██████▉   | 72/103 [19:47<23:39, 45.78s/it] 71%|███████   | 73/103 [19:48<16:10, 32.34s/it] 72%|███████▏  | 74/103 [19:50<11:10, 23.10s/it] 73%|███████▎  | 75/103 [19:51<07:40, 16.45s/it] 74%|███████▍  | 76/103 [19:52<05:19, 11.82s/it] 75%|███████▍  | 77/103 [19:53<03:43,  8.58s/it] 76%|███████▌  | 78/103 [19:54<02:36,  6.26s/it] 77%|███████▋  | 79/103 [19:55<01:52,  4.67s/it] 78%|███████▊  | 80/103 [19:56<01:24,  3.68s/it] 79%|███████▊  | 81/103 [21:15<09:35, 26.18s/it] 80%|███████▉  | 82/103 [21:16<06:31, 18.62s/it] 81%|████████  | 83/103 [21:17<04:26, 13.32s/it] 82%|████████▏ | 84/103 [21:18<03:02,  9.62s/it] 83%|████████▎ | 85/103 [21:19<02:06,  7.04s/it] 83%|████████▎ | 86/103 [21:20<01:31,  5.37s/it] 84%|████████▍ | 87/103 [21:21<01:04,  4.02s/it] 85%|████████▌ | 88/103 [21:22<00:46,  3.07s/it] 86%|████████▋ | 89/103 [21:23<00:33,  2.39s/it] 87%|████████▋ | 90/103 [21:23<00:24,  1.92s/it] 88%|████████▊ | 91/103 [22:14<03:18, 16.57s/it] 89%|████████▉ | 92/103 [22:16<02:12, 12.07s/it] 90%|█████████ | 93/103 [22:17<01:27,  8.70s/it] 91%|█████████▏| 94/103 [22:18<00:58,  6.46s/it] 92%|█████████▏| 95/103 [22:19<00:38,  4.76s/it] 93%|█████████▎| 96/103 [22:19<00:25,  3.59s/it] 94%|█████████▍| 97/103 [22:20<00:16,  2.74s/it] 95%|█████████▌| 98/103 [22:21<00:11,  2.31s/it] 96%|█████████▌| 99/103 [22:22<00:07,  1.85s/it] 98%|█████████▊| 101/103 [23:21<00:28, 14.44s/it] 99%|█████████▉| 102/103 [23:21<00:11, 11.08s/it]100%|██████████| 103/103 [23:22<00:00,  8.41s/it]100%|██████████| 103/103 [23:22<00:00, 13.62s/it]
+finished all tasks, now closing the file
+MEM after finising all ray tasks 24654
+MEM at end of apply after deleting stuff 23866
+read rules and params from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+read 426124 rules from file files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt
+MEM before ray init23842
+{'GPU': 2.0, 'CPU': 10.0, 'memory': 352134832538.0, 'node:__internal_head__': 1.0, 'object_store_memory': 150914928230.0, 'node:serverA': 1.0, 'accelerator_type:RTX-PRO-6000': 1.0}
+gathering z-rule statistics ...
+... done with gathering z-rule statistics
+gather f-rule statistics ...
+
+MEM at beginning of f-rule aquisition: 23853
+  0%|          | 0/430 [00:00<?, ?it/s]  1%|          | 3/430 [00:00<00:18, 23.35it/s]  2%|▏         | 8/430 [00:00<00:14, 29.84it/s]  3%|▎         | 13/430 [00:00<00:11, 37.24it/s]  4%|▍         | 19/430 [00:00<00:09, 44.00it/s]  7%|▋         | 28/430 [00:00<00:06, 58.69it/s]  9%|▉         | 39/430 [00:00<00:05, 72.96it/s] 11%|█         | 48/430 [00:00<00:04, 77.51it/s] 16%|█▌        | 67/430 [00:00<00:03, 110.33it/s] 21%|██        | 89/430 [00:01<00:02, 141.97it/s] 33%|███▎      | 142/430 [00:01<00:01, 256.30it/s] 50%|█████     | 217/430 [00:01<00:00, 390.79it/s] 60%|█████▉    | 256/430 [00:03<00:02, 61.71it/s]  66%|██████▌   | 284/430 [00:03<00:02, 71.54it/s] 72%|███████▏  | 308/430 [00:03<00:01, 84.38it/s] 89%|████████▉ | 383/430 [00:03<00:00, 150.44it/s]100%|██████████| 430/430 [00:03<00:00, 121.33it/s]
+... done with gathering f-rule statistics, found 325836 f-rules.
+MEM after f-rule aquisition: 23911
+apply rules to the val set
+MEM before ray starts 23911
+quads_per_task:  2000
+MEM after ray.put 23915
+MEM after appending all ray tasks 23915
+starting the parallel ray tasks 
+  0%|          | 0/37 [00:00<?, ?it/s]  3%|▎         | 1/37 [03:07<1:52:46, 187.95s/it]  5%|▌         | 2/37 [03:10<45:57, 78.80s/it]     8%|▊         | 3/37 [03:11<24:26, 43.12s/it] 11%|█         | 4/37 [03:11<14:31, 26.42s/it] 14%|█▎        | 5/37 [03:12<09:10, 17.20s/it] 16%|█▌        | 6/37 [03:13<06:00, 11.64s/it] 19%|█▉        | 7/37 [03:14<04:04,  8.15s/it] 22%|██▏       | 8/37 [03:16<02:57,  6.13s/it] 24%|██▍       | 9/37 [03:17<02:06,  4.51s/it] 27%|██▋       | 10/37 [03:18<01:32,  3.43s/it] 30%|██▉       | 11/37 [06:02<22:51, 52.76s/it] 32%|███▏      | 12/37 [06:03<15:25, 37.03s/it] 35%|███▌      | 13/37 [06:04<10:26, 26.11s/it] 38%|███▊      | 14/37 [06:06<07:11, 18.78s/it] 41%|████      | 15/37 [06:07<04:55, 13.41s/it] 43%|████▎     | 16/37 [06:08<03:23,  9.67s/it] 46%|████▌     | 17/37 [06:09<02:21,  7.06s/it] 49%|████▊     | 18/37 [06:10<01:39,  5.22s/it] 51%|█████▏    | 19/37 [06:11<01:10,  3.93s/it] 54%|█████▍    | 20/37 [06:13<00:55,  3.26s/it] 57%|█████▋    | 21/37 [07:32<06:54, 25.93s/it] 59%|█████▉    | 22/37 [07:32<04:36, 18.44s/it] 62%|██████▏   | 23/37 [07:33<03:04, 13.21s/it] 65%|██████▍   | 24/37 [07:34<02:04,  9.54s/it] 68%|██████▊   | 25/37 [07:35<01:23,  6.98s/it] 70%|███████   | 26/37 [07:37<00:59,  5.39s/it] 73%|███████▎  | 27/37 [07:38<00:40,  4.03s/it] 76%|███████▌  | 28/37 [07:39<00:27,  3.08s/it] 78%|███████▊  | 29/37 [07:40<00:19,  2.41s/it] 81%|████████  | 30/37 [07:40<00:12,  1.79s/it] 84%|████████▍ | 31/37 [10:26<05:07, 51.17s/it] 86%|████████▋ | 32/37 [10:27<03:00, 36.09s/it] 89%|████████▉ | 33/37 [10:29<01:42, 25.64s/it] 92%|█████████▏| 34/37 [10:30<00:54, 18.22s/it] 95%|█████████▍| 35/37 [10:30<00:26, 13.04s/it] 97%|█████████▋| 36/37 [10:31<00:09,  9.36s/it]100%|██████████| 37/37 [10:32<00:00,  6.78s/it]100%|██████████| 37/37 [10:32<00:00, 17.10s/it]
+finished all tasks, now closing the file
+MEM after finising all ray tasks 24423
+MEM at end of apply after deleting stuff 23862
+time to apply the rules:  2067.999104994
+-----------------compute the test MRR, using path rankings from  files/rankings/tkgl-gdeltfw/tkgl-gdeltfw10-rankings_test_conf_0_corr_conf_0_noisyor_crules_frules_zrules_pvalue_30_num_top_rules_10_multi.txt
+[fw] CountTRuCoLa built-in evaluation disabled (no TGB negative files); rankings scored by fw_ct_score.py
+-----------------compute the val MRR, using path rankings from  files/rankings/tkgl-gdeltfw/tkgl-gdeltfw10-rankings_val_conf_0_corr_conf_0_noisyor_crules_frules_zrules_pvalue_30_num_top_rules_10_multi.txt
+[fw] CountTRuCoLa built-in evaluation disabled (no TGB negative files); rankings scored by fw_ct_score.py
+eval time:  0.00014247704530134797
+-----------------done! It took  2119.8759901510202  seconds
+Traceback (most recent call last):
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/env/ct/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 1175, in putmask
+    casted = np_can_hold_element(values.dtype, new)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/env/ct/lib/python3.12/site-packages/pandas/core/dtypes/cast.py", line 1792, in np_can_hold_element
+    raise LossySetitemError
+pandas.errors.LossySetitemError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo_stage2/rule_based/fw_ct_main.py", line 85, in <module>
+    ctmain.main()
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo_stage2/rule_based/main.py", line 117, in main
+    utils.write_config_and_results(results_path, options, dataset_name, path_rankings_test, testmrr, testhits100, testhits10, testhits3, testhits1, 
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo_stage2/rule_based/utils.py", line 238, in write_config_and_results
+    write_results_csv(params, csv_filename=results_path)
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/phase2_fresh_window/ct/C0/repo_stage2/rule_based/utils.py", line 259, in write_results_csv
+    df.fillna('N/A', inplace=True)
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/env/ct/lib/python3.12/site-packages/pandas/core/generic.py", line 7147, in fillna
+    new_data = self._mgr.fillna(value=value, limit=limit, inplace=inplace)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/env/ct/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 461, in fillna
+    return self.apply(
+           ^^^^^^^^^^^
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/env/ct/lib/python3.12/site-packages/pandas/core/internals/managers.py", line 445, in apply
+    applied = getattr(b, f)(**kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/env/ct/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 1342, in fillna
+    nbs = self.putmask(mask.T, value)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/env/ct/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 1188, in putmask
+    return self.coerce_to_target_dtype(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/[REDACTED:~ANON]/cs_scratch/open_ideas_harness/tracks/v78_external/env/ct/lib/python3.12/site-packages/pandas/core/internals/blocks.py", line 468, in coerce_to_target_dtype
+    raise TypeError(f"Invalid value '{other}' for dtype '{self.values.dtype}'")
+TypeError: Invalid value 'N/A' for dtype 'float64'

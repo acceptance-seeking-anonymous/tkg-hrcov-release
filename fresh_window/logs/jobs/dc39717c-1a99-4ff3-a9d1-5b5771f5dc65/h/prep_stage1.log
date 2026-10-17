@@ -1,0 +1,23 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+[     0.7s] rows {'train': 1011792, 'valid': 152234, 'test': 457168} valid sample 152234
+[   103.4s] te {"n_queries": 400000, "n_early_rows": 748618, "train_ts_cut": 129, "prior_hit_rate_by_hop": [0.13492056960889146, 0.052638215005769755], "n_keys": {"full": 36398755, "rr": 11484724, "r2": 257472, "p": 942860}, "seconds": 102.6}
+[   138.3s] valid {"n": 152234, "seconds": 34.9, "shares": {"dyad": 0.9779549903438128, "trip": 0.8134319534400988, "pat_any": 0.8424793410144908, "pat_hop1": 0.5726513131100806, "two_hop": 0.9999343116517992, "self_loop": 0.0, "first_seen": 0.0}, "no_pair_and_2hop": 0.022005596647266708, "no_pair_and_unreach": 3.941300892047769e-05, "median_n_pat": 1184.0, "median_n_union": 116.0}
+[   138.3s] ALL DONE

@@ -1,0 +1,19 @@
+--- a/phase2_forward_holdout/code/fh_tirgn_rows.py
++++ b/code/fh_tirgn_rows.py
+@@ -1,11 +1,11 @@
+ #!/usr/bin/env python3
+-"""phase2_forward_holdout / fh_tirgn_rows.py -- full float32 log-prob rows + harness-schema dump of ONE split for the
+-GDELT25X TiRGN checkpoint (hd_tirgn.py), by replaying it with ground-truth online history (hd_tirgn_replay.source,
++"""phase2_fresh_window / fh_tirgn_rows.py -- full float32 log-prob rows + harness-schema dump of ONE split for the
++GDELTFW TiRGN checkpoint (hd_tirgn.py), by replaying it with ground-truth online history (hd_tirgn_replay.source,
+ unchanged).  Row order = split_queries (per timestamp: forward block, inverse block), asserted.
+-  Stage 1:  python3 fh_tirgn_rows.py --ckpt <tirgn_GDELT25X_seed42.pt> --split valid
++  Stage 1:  python3 fh_tirgn_rows.py --ckpt <tirgn_GDELTFW_seed42.pt> --split valid
+   Stage 2:  python3 fh_tirgn_rows.py --ckpt <same, hash-checked> --split test
+-Outputs (work dir): fullrows/tirgn_GDELT25X_<split>_scores_f32.bin (log(hr*p_hist + (1-hr)*p_raw), [n, N] float32) and
+-base_tirgn/tirgn_scores_GDELT25X_<split>.npz (sro, gold_score, gold_rank_raw, gold_rank_filt (exact, time-aware filter of
++Outputs (work dir): fullrows/tirgn_GDELTFW_<split>_scores_f32.bin (log(hr*p_hist + (1-hr)*p_raw), [n, N] float32) and
++base_tirgn/tirgn_scores_GDELTFW_<split>.npz (sro, gold_score, gold_rank_raw, gold_rank_filt (exact, time-aware filter of
+ all splits, strict '>'), topk_ids/topk_scores K=200, split code, split_bounds) + base_tirgn/rows_<split>_log.json.
+ GPU memory is capped with torch.cuda.set_per_process_memory_fraction (env FH_GPU_CAP_GB, default 30).
+ """

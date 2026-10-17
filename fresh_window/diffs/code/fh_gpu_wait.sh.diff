@@ -1,0 +1,8 @@
+--- a/phase2_forward_holdout/code/fh_gpu_wait.sh
++++ b/code/fh_gpu_wait.sh
+@@ -1,4 +1,4 @@
+-# phase2_forward_holdout / fh_gpu_wait.sh -- sourced by the stage scripts.  Sets FH_GPU (physical card index) once a card is
++# phase2_fresh_window / fh_gpu_wait.sh -- sourced by the stage scripts.  Sets FH_GPU (physical card index) once a card is
+ # allowed under the lead's rule (2026-10-14):
+ #   GPU 1 (shared by other tracks): only if > 35 GB free at dispatch; this track's process is capped at 30 GB.
+ #   GPU 0: only once nvidia-smi shows NO G8 process (cmdline containing g8_ / cogntke) on it (and > 35 GB free).

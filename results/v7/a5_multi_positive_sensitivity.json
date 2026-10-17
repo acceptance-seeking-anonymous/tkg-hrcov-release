@@ -1,0 +1,540 @@
+{
+ "rule": {
+  "file": "tois_v7_rule.json",
+  "version_id": "redacted-id",
+  "registered_utc": "2026-10-14T10:13:36Z",
+  "sha256": "bfef91681490278623925e1494890719e9b4529d8ddbf9375dfa83ec2a954a8d"
+ },
+ "label": "pre-specified later analysis (test numbers read after the v7 rule was registered)",
+ "item": "A5_multi_positive_sensitivity",
+ "definition": {
+  "type": "code reading + pre-specified sensitivity",
+  "question": "Are other true same-timestamp answers treated as negatives in Eq. (4)?",
+  "rule": "if they are NOT masked: fit a masked-denominator variant on polecat TiRGN. If they ARE masked (filt excluded from the softmax), report this and fit two sensitivity variants on polecat TiRGN, CPU: UNMASKED (other true answers kept as negatives) and MULTIPOS (loss = -log sum_{true answers in pool} softmax over the unmasked pool). Comparison vs HRCOV_PAT re-fit in the same run; descriptive deltas with both CIs; no claim beyond the bounds."
+ },
+ "evaluator": "official py-tgb evaluator (hd_blend --no_controls over the promoted lists; TiRGN replay for polecat, stored float32 full rows for smallpedia); seed-mean per-query RR over seeds 0-2; H@k = mean over seeds",
+ "statistics": {
+  "query_bootstrap": "paired Poisson(1) bootstrap over test queries, B = 2000, seed 0 (hd_agg.boot)",
+  "timestamp_block_bootstrap": "multinomial resampling of test timestamps (all queries of a timestamp, both directions), B = 2000, seed 0 (g7_cluster_bootstrap.boot_cluster); statistic = resampled sum of per-query deltas / resampled number of queries",
+  "intervals": "two-sided 95% percentile CI from both bootstraps; one-sided 95% bounds L = 5th and U = 95th percentile",
+  "positive_claim": "a difference is called present only if the one-sided lower bound L > 0 under BOTH bootstraps (Holm-adjusted one-sided p < 0.05 within an item when an item has several primary comparisons)",
+  "null_claim": "an effect is called EXCLUDED (smaller than the bar) only if the one-sided upper bound U of the relevant signed delta < bar under the timestamp-block bootstrap (the more conservative); otherwise 'not excluded'. bar = 0.005 MRR unless stated",
+  "MDE": "reported only as sensitivity: MDE_80 = (z_0.95 + z_0.80) x SE_ts = 2.486 x SE of the timestamp-block bootstrap; never used to support a null",
+  "practical_margin": "0.005 MRR = the project's operational criterion (not a significance threshold)"
+ },
+ "interpretation": "Other true answers are already masked in Eq. (4) (code reading, A5); the two pre-specified sensitivity variants on polecat TiRGN change MRR by +0.00002 (UNMASKED) and -0.00034 (MULTIPOS); |delta| >= 0.005 is excluded for both, so the masking choice does not drive the result.",
+ "notes": [
+  "Fused arms: official = exact harness rank to <= 1e-7 MRR (hrank stored alongside rank).",
+  "Score-alone arms (B_NF, NB_NF, EV_NF_*): official scoring orders the promoted list by the ranker score and breaks exact ties by list position (base top-50 order, then the generator block); the preliminary exact ranks used strict-greater (optimistic) ties. Difference official vs preliminary: polecat EV_NF_PT -0.00012, NB_NF -0.00006; smallpedia EV_NF_PT -0.00183, EV_NF_RB -0.00192, NB_NF -0.00011 (all other arms 0). The registered numbers are the official ones.",
+  "Base replay: per-query base RR identical to the stored control/HRCOV_PAT files except near-tie blocks (polecat 0.011-0.012% of queries, mean |dRR| < 1e-8; smallpedia exactly identical).",
+  "FULL re-fit vs stored HRCOV_PAT: smallpedia identical (deterministic CPU fit); polecat -0.00005, ts CI [-0.00017, +0.00006] (GPU fit).",
+  "Run on polecat TiRGN only, as pre-specified. UNMASKED: other true same-timestamp answers kept as negatives in the listwise softmax; MULTIPOS: loss = -log sum over true answers in the pool of the softmax. Fit queries with >= 1 other true answer in top-50: polecat 20.0% (A5 code reading)."
+ ],
+ "expansion_check": null,
+ "datasets": {
+  "tkgl-polecat": {
+   "base": "TiRGN",
+   "n_queries": 532636,
+   "n_timestamps": 304,
+   "arms": {
+    "MLP64x2 (FULL, re-fit)": {
+     "MRR": 0.2823239826123354,
+     "H1": 0.19661958010098202,
+     "H3": 0.32138708861836845,
+     "H10": 0.45268438483316936,
+     "per_seed_MRR": [
+      0.2820252478122711,
+      0.28253090381622314,
+      0.28241580724716187
+     ],
+     "n_seeds": 3,
+     "harness_MRR": 0.2823239853182435
+    },
+    "UNMASKED": {
+     "MRR": 0.28234592199412895,
+     "H1": 0.19670719465701403,
+     "H3": 0.32137519807147846,
+     "H10": 0.4526142931883438,
+     "per_seed_MRR": [
+      0.2827507257461548,
+      0.28217020630836487,
+      0.2821168005466461
+     ],
+     "n_seeds": 3,
+     "harness_MRR": 0.28234592467696684
+    },
+    "MULTIPOS": {
+     "MRR": 0.28198558274592483,
+     "H1": 0.19624158587352963,
+     "H3": 0.3209890682066802,
+     "H10": 0.4523883727974326,
+     "per_seed_MRR": [
+      0.2811656594276428,
+      0.2821790277957916,
+      0.28261205554008484
+     ],
+     "n_seeds": 3,
+     "harness_MRR": 0.28198558545867985
+    },
+    "HRCOV_PAT (stored)": {
+     "MRR": 0.282377767408202,
+     "H1": 0.19677040230100856,
+     "H3": 0.32119308495858334,
+     "H10": 0.45285585903568915,
+     "per_seed_MRR": [
+      0.2824961543083191,
+      0.28233644366264343,
+      0.2823007106781006
+     ],
+     "n_seeds": 3,
+     "harness_MRR": 0.28237777007142856
+    }
+   },
+   "comparisons": [
+    {
+     "comparison": "UNMASKED - FULL",
+     "role": "secondary",
+     "a": "UNMASKED",
+     "b": "MLP64x2 (FULL, re-fit)",
+     "MRR": {
+      "delta": 2.1939381793601052e-05,
+      "query": {
+       "CI95": [
+        -9.487454586286655e-05,
+        0.00013059242533464447
+       ],
+       "L": -7.622917479699481e-05,
+       "U": 0.00011281125481094876,
+       "p_one_sided_le0": 0.346,
+       "SE": 5.682491006037591e-05
+      },
+      "ts": {
+       "CI95": [
+        -0.00010630685091767051,
+        0.00014593805029243403
+       ],
+       "L": -8.553979297329228e-05,
+       "U": 0.000128387862924353,
+       "p_one_sided_le0": 0.376,
+       "SE": 6.49105325165788e-05
+      },
+      "MDE80_ts": 0.00016136758383621493,
+      "present_pos": false,
+      "present_neg": false,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 532636
+     },
+     "H1": {
+      "delta": 8.761455603201187e-05,
+      "query": {
+       "CI95": [
+        -0.00011531395440217394,
+        0.0002780243824677435
+       ],
+       "L": -8.311922141509969e-05,
+       "U": 0.0002507942678252076,
+       "p_one_sided_le0": 0.2035,
+       "SE": 0.00010227912275815214
+      },
+      "ts": {
+       "CI95": [
+        -0.00014610194627699073,
+        0.0003084111167944944
+       ],
+       "L": -0.00010403542621037543,
+       "U": 0.0002747456242027888,
+       "p_one_sided_le0": 0.234,
+       "SE": 0.00011477649827364111
+      },
+      "MDE80_ts": 0.00028533437470827183,
+      "present_pos": false,
+      "present_neg": false,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 532636
+     },
+     "H3": {
+      "delta": -1.1890546890058795e-05,
+      "query": {
+       "CI95": [
+        -0.00021271972264982347,
+        0.0001758078236777621
+       ],
+       "L": -0.00017959764001485454,
+       "U": 0.00014124947233630042,
+       "p_one_sided_le0": 0.5545,
+       "SE": 9.890241351718224e-05
+      },
+      "ts": {
+       "CI95": [
+        -0.00022969877931583574,
+        0.00020789651993317063
+       ],
+       "L": -0.00019445644781304353,
+       "U": 0.00017152329290263336,
+       "p_one_sided_le0": 0.551,
+       "SE": 0.00011156134353842743
+      },
+      "MDE80_ts": 0.0002773415000365306,
+      "present_pos": false,
+      "present_neg": false,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 532636
+     },
+     "H10": {
+      "delta": -7.009164482560952e-05,
+      "query": {
+       "CI95": [
+        -0.00023734464525885019,
+        9.555213687705034e-05
+       ],
+       "L": -0.00021516812280506458,
+       "U": 6.74023159175087e-05,
+       "p_one_sided_le0": 0.801,
+       "SE": 8.59156636945225e-05
+      },
+      "ts": {
+       "CI95": [
+        -0.00026233309146421534,
+        0.0001254328898171061
+       ],
+       "L": -0.00023157883352601606,
+       "U": 9.269639266005936e-05,
+       "p_one_sided_le0": 0.76,
+       "SE": 9.974537204109734e-05
+      },
+      "MDE80_ts": 0.000247966994894168,
+      "present_pos": false,
+      "present_neg": false,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 532636
+     },
+     "call": "not established; |Δ| ≥ 0.005 excluded"
+    },
+    {
+     "comparison": "MULTIPOS - FULL",
+     "role": "secondary",
+     "a": "MULTIPOS",
+     "b": "MLP64x2 (FULL, re-fit)",
+     "MRR": {
+      "delta": -0.0003383998664105641,
+      "query": {
+       "CI95": [
+        -0.0004523570401303043,
+        -0.00022422714556009143
+       ],
+       "L": -0.00043535162975816163,
+       "U": -0.0002409256374948707,
+       "p_one_sided_le0": 1.0,
+       "SE": 5.982178844131118e-05
+      },
+      "ts": {
+       "CI95": [
+        -0.0004849165756647031,
+        -0.00019294290105532997
+       ],
+       "L": -0.0004578613008907092,
+       "U": -0.0002185648663385175,
+       "p_one_sided_le0": 1.0,
+       "SE": 7.38443038717808e-05
+      },
+      "MDE80_ts": 0.00018357693942524708,
+      "present_pos": false,
+      "present_neg": true,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 532636
+     },
+     "H1": {
+      "delta": -0.00037799422745239415,
+      "query": {
+       "CI95": [
+        -0.0005823079473049769,
+        -0.00017541369359160464
+       ],
+       "L": -0.000551468732680006,
+       "U": -0.00020554471570291614,
+       "p_one_sided_le0": 0.9995,
+       "SE": 0.00010512448791684586
+      },
+      "ts": {
+       "CI95": [
+        -0.0006106949255307943,
+        -0.0001419371265612305
+       ],
+       "L": -0.0005721886904945464,
+       "U": -0.00018323054134558424,
+       "p_one_sided_le0": 0.999,
+       "SE": 0.00011938046686559767
+      },
+      "MDE80_ts": 0.00029677984062787585,
+      "present_pos": false,
+      "present_neg": true,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 532636
+     },
+     "H3": {
+      "delta": -0.0003980204116882826,
+      "query": {
+       "CI95": [
+        -0.0006038713207678597,
+        -0.00018709025427210435
+       ],
+       "L": -0.0005720253376090447,
+       "U": -0.0002212202557433727,
+       "p_one_sided_le0": 1.0,
+       "SE": 0.00010503900737361002
+      },
+      "ts": {
+       "CI95": [
+        -0.0006390081113492289,
+        -0.00016047556056982592
+       ],
+       "L": -0.0005985957338566948,
+       "U": -0.00019433306709002932,
+       "p_one_sided_le0": 0.9995,
+       "SE": 0.000123230514302846
+      },
+      "MDE80_ts": 0.0003063510585568752,
+      "present_pos": false,
+      "present_neg": true,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 532636
+     },
+     "H10": {
+      "delta": -0.0002960120357367259,
+      "query": {
+       "CI95": [
+        -0.0004754897296480553,
+        -0.00010752199412553889
+       ],
+       "L": -0.00044861729910313343,
+       "U": -0.0001377415806851798,
+       "p_one_sided_le0": 0.999,
+       "SE": 9.370386457837902e-05
+      },
+      "ts": {
+       "CI95": [
+        -0.0004928167857512341,
+        -9.68151790749066e-05
+       ],
+       "L": -0.00045686774883619424,
+       "U": -0.00012259178100893625,
+       "p_one_sided_le0": 0.9965,
+       "SE": 0.00010351233342828193
+      },
+      "MDE80_ts": 0.0002573316609027089,
+      "present_pos": false,
+      "present_neg": true,
+      "excluded_gain_ge_bar": true,
+      "excluded_loss_ge_bar": true,
+      "n": 532636
+     },
+     "call": "present (-); |Δ| ≥ 0.005 excluded"
+    }
+   ],
+   "training": {
+    "MLP64x2 (FULL, re-fit)": {
+     "pool": "PT",
+     "n_features": 25,
+     "n_fit_retained": 86236,
+     "n_params": 5889,
+     "model": "mlp64",
+     "loss": "masked",
+     "cols": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      29
+     ],
+     "best_epochs": [
+      11,
+      15,
+      12
+     ],
+     "cal_alpha": [
+      -0.04555804123763085,
+      -0.008262858044880673,
+      -0.011737563725510634
+     ],
+     "cal_beta": [
+      1.0154238026767715,
+      1.017781228953189,
+      1.0347402842511564
+     ]
+    },
+    "UNMASKED": {
+     "pool": "PT",
+     "n_features": 25,
+     "n_fit_retained": 86236,
+     "n_params": 5889,
+     "model": "mlp64",
+     "loss": "unmasked",
+     "cols": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      29
+     ],
+     "best_epochs": [
+      22,
+      16,
+      15
+     ],
+     "cal_alpha": [
+      -0.010987473668394988,
+      -0.04258633334106617,
+      -0.03758189254346571
+     ],
+     "cal_beta": [
+      1.044553487775449,
+      1.048974020263126,
+      1.0612569246906531
+     ]
+    },
+    "MULTIPOS": {
+     "pool": "PT",
+     "n_features": 25,
+     "n_fit_retained": 86236,
+     "n_params": 5889,
+     "model": "mlp64",
+     "loss": "multipos",
+     "cols": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      29
+     ],
+     "best_epochs": [
+      7,
+      15,
+      27
+     ],
+     "cal_alpha": [
+      0.0001030030210678875,
+      0.01579654080135906,
+      -0.011703907562287992
+     ],
+     "cal_beta": [
+      0.9542599964339301,
+      0.9486414907254694,
+      0.9406079924964078
+     ]
+    }
+   },
+   "fit_population": {
+    "n_fit_population": 139236,
+    "n_select": 60764,
+    "n_test": 532636,
+    "valid_cut_ts": 1423
+   },
+   "refit_vs_stored_HRCOV_PAT": {
+    "delta": -5.3784795866551365e-05,
+    "query": {
+     "CI95": [
+      -0.00016310207850202745,
+      4.590055264679509e-05
+     ],
+     "L": -0.0001450528410164865,
+     "U": 3.117807026455554e-05,
+     "p_one_sided_le0": 0.8495,
+     "SE": 5.336974199440274e-05
+    },
+    "ts": {
+     "CI95": [
+      -0.00016853659193408023,
+      5.832145292702598e-05
+     ],
+     "L": -0.00014946463005095954,
+     "U": 4.0470348869319945e-05,
+     "p_one_sided_le0": 0.8315,
+     "SE": 5.71298068660103e-05
+    },
+    "MDE80_ts": 0.0001420246998689016,
+    "present_pos": false,
+    "present_neg": false,
+    "excluded_gain_ge_bar": true,
+    "excluded_loss_ge_bar": true,
+    "n": 532636
+   },
+   "base_replay_identity": {
+    "ctrl": {
+     "frac_base_rr_differs": 0.00010701492201052877,
+     "mean_abs": 6.285636686565792e-09
+    },
+    "hcpat": {
+     "frac_base_rr_differs": 0.00012015710541533054,
+     "mean_abs": 8.389571694903697e-09
+    }
+   }
+  }
+ }
+}

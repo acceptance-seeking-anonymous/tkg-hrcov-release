@@ -1,0 +1,748 @@
+{
+ "name": "freeze_manifest",
+ "track": "phase2_forward_holdout (Manuscript A, ACM TOIS)",
+ "created_utc": "2026-10-14T13:52:11Z",
+ "status": "Stage 2 run once (job); outcome PRACTICAL_ADVANCE (fh_verdict.json); frozen groups below unchanged and verified 87/87 at 2026-10-14T14:02:44Z",
+ "rule": {
+  "remote_path": "$WORK_DIR/tracks/phase2_forward_holdout/freeze/fh_decision_rule.json",
+  "file_sha256": "07b9c2caa65463c1e3ef6b4078a6101e3e4f5178606ddd5f549cfa6894db2702",
+  "content_sha256_write_prereg": "2bb027715962a746214047b116c7ba56ff1b6bdb2adecc2af12155e06380508c",
+  "registered_utc": "2026-10-14T10:28:13Z",
+  "artifact_id": "redacted-id",
+  "artifact_version_id": "redacted-id",
+  "artifact_created_utc": "2026-10-14T10:28:19.848Z",
+  "remote_copy_sha256_matches": true
+ },
+ "chronology_utc": [
+  {
+   "utc": "2026-10-14T10:28:13Z",
+   "event": "decision rule written (write_prereg) and saved as file fh_decision_rule.json; no number of this track existed"
+  },
+  {
+   "utc": "2026-10-14T10:33:49Z",
+   "event": "Stage 1 starts on <HOST> (job)"
+  },
+  {
+   "utc": "2026-10-14T10:33:50Z",
+   "event": "GPU check: GPU 0 has 1 G8 process (not used); GPU 1 68,254 MiB free > 35 GB -> TiRGN training on GPU 1, process capped at 30 GB"
+  },
+  {
+   "utc": "2026-10-14T10:36:26Z",
+   "event": "valid sample (all 189,556 valid queries), TE tables (early 70% of train), valid strata"
+  },
+  {
+   "utc": "2026-10-14T10:36:56Z",
+   "event": "RecB per-relation selection on valid; valid blend CSR"
+  },
+  {
+   "utc": "2026-10-14T11:17:53Z",
+   "event": "TiRGN trained: 22 epochs, patience stop, valid-best epoch 16 (valid filtered MRR 0.401408)"
+  },
+  {
+   "utc": "2026-10-14T11:18:17Z",
+   "event": "TiRGN valid full rows + valid dump"
+  },
+  {
+   "utc": "2026-10-14T11:19:42Z",
+   "event": "valid lists, 25 features, 42 blend + 126 pool configurations on valid, selection"
+  },
+  {
+   "utc": "2026-10-14T11:34:28Z",
+   "event": "HR and HRCOV_PAT fitted on valid-fit, early-stopped and calibrated on valid-select, 3 seeds; models frozen"
+  },
+  {
+   "utc": "2026-10-14T11:34:28Z",
+   "event": "remote sha256 manifest of 87 frozen files written (0 missing)"
+  },
+  {
+   "utc": "2026-10-14T13:51:32Z",
+   "event": "valid-window comparison table computed from frozen valid files (reporting only, job)"
+  },
+  {
+   "utc": "2026-10-14T13:52:11Z",
+   "event": "this manifest written; test-split files of this track: none (find -iname '*test*' in the work dir returned nothing)"
+  },
+  {
+   "utc": "2026-10-14T14:00Z (approx.)",
+   "event": "release: the investigators approved Stage 2. By the investigators' decision the test ran BEFORE the status pilot's own Stage-2 test (rule's stated order changed by the investigators; no status-pilot Stage-2 result existed)"
+  },
+  {
+   "utc": "2026-10-14T14:02:38Z",
+   "event": "Stage-2 job submitted: bash fh_stage2_test.sh wrapped in a GPU-1-only wait (no frozen file modified)"
+  },
+  {
+   "utc": "2026-10-14T14:02:41Z",
+   "event": "job start; GPU 1 free 38,150 MiB > 35 GB -> frozen script launched"
+  },
+  {
+   "utc": "2026-10-14T14:02:44Z",
+   "event": "fh_freeze.py --verify: 87 files checked, 0 problems"
+  },
+  {
+   "utc": "2026-10-14T14:02:45Z",
+   "event": "frozen GPU check -> physical GPU 1 (G8 on GPU 0), cap 30 GB; TiRGN test rows done 14:03:20Z (35 s GPU)"
+  },
+  {
+   "utc": "2026-10-14T14:08:10Z",
+   "event": "every arm scored once on the 364,718 test queries"
+  },
+  {
+   "utc": "2026-10-14T14:10:00Z",
+   "event": "fh_verdict.json written (fh_agg.py, frozen); job end rc 0; harvest 14:10:11Z"
+  }
+ ],
+ "test_split_status": "no test-split row, feature, list, stratum, rank or metric of this track exists; Stage-1 code paths are restricted to valid (--splits valid / --stage 1 / --only_valid / --no_dump)",
+ "frozen_selections": {
+  "tirgn": {
+   "best_epoch": 16,
+   "epochs_run": 22,
+   "stop_reason": "patience",
+   "best_valid_filt_MRR": 0.4014075359084123,
+   "train_s": 2641,
+   "seed": 42,
+   "L": 7,
+   "hr": 0.3,
+   "lr": 0.001
+  },
+  "recb": {
+   "clean_valid_MRR_default": 0.38802700940412443,
+   "clean_valid_MRR_trained": 0.40046258230837695,
+   "n_relations_with_valid_queries": 416
+  },
+  "BLEND": {
+   "cfg": [
+    "def",
+    "MIX",
+    "0.3"
+   ],
+   "idx": 4,
+   "valid_MRR": 0.41473734592124173
+  },
+  "POOL": {
+   "cfg": [
+    100,
+    [
+     "def",
+     "MIX",
+     "0.3"
+    ]
+   ],
+   "idx": 88,
+   "valid_MRR": 0.4147287644628711
+  },
+  "rerankers": {
+   "HR": {
+    "0": {
+     "best_epoch": 23,
+     "cal_alpha": 0.05602565669017404,
+     "cal_beta": 0.9308068197646495
+    },
+    "1": {
+     "best_epoch": 27,
+     "cal_alpha": 0.05505772568150427,
+     "cal_beta": 0.9553886621642905
+    },
+    "2": {
+     "best_epoch": 29,
+     "cal_alpha": 0.008950757548044263,
+     "cal_beta": 0.9482596280141288
+    }
+   },
+   "HRCOV_PAT": {
+    "0": {
+     "best_epoch": 29,
+     "cal_alpha": 0.01478557277179369,
+     "cal_beta": 0.9763672155275991
+    },
+    "1": {
+     "best_epoch": 29,
+     "cal_alpha": 0.03528536688099316,
+     "cal_beta": 1.011468684409255
+    },
+    "2": {
+     "best_epoch": 24,
+     "cal_alpha": 0.0008616491387240561,
+     "cal_beta": 0.9887121047352057
+    }
+   }
+  }
+ },
+ "gpu_usage": {
+  "stage1_gpu_wall_s": 2667,
+  "gpu": "physical GPU 1 (RTX PRO 6000 Blackwell, shared with other tracks)",
+  "process_cap_GB": 30,
+  "peak_allocated_GB": 3.63,
+  "gpu_hours": 0.74,
+  "budget_gpu_hours": 24,
+  "stage2_gpu_wall_s": 35
+ },
+ "remote_manifest": {
+  "path": "$WORK_DIR/tracks/phase2_forward_holdout/freeze/freeze_manifest_remote.json",
+  "created_utc": "2026-10-14T11:34:28Z",
+  "n_files": 87,
+  "n_missing": 0
+ },
+ "groups": {
+  "rule": [
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/freeze/fh_decision_rule.json",
+    "sha256": "07b9c2caa65463c1e3ef6b4078a6101e3e4f5178606ddd5f549cfa6894db2702",
+    "bytes": 14398,
+    "mtime_utc": "2026-10-14T10:28:13Z"
+   }
+  ],
+  "code": [
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_agg.py",
+    "sha256": "ca1ea354dbe2f7ba0604e393519ef96e8e5e254f69638a61c60c89e9c5bb2fd7",
+    "bytes": 10735,
+    "mtime_utc": "2026-10-14T10:21:49Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_apply.py",
+    "sha256": "68e7aef8597cb92be944c55518c616d54eb527f053f69b1343a948c6b0e824bf",
+    "bytes": 4161,
+    "mtime_utc": "2026-10-14T10:18:23Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_blend.py",
+    "sha256": "c3b0352ac517b347c68d004d07bd0a195026311098b578ebb5657ebe44321027",
+    "bytes": 25834,
+    "mtime_utc": "2026-10-14T10:17:00Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_common.py",
+    "sha256": "5200271c61570e2d48066050eb83b1c121c34a5721ae13a95f4f30f3970ca8ca",
+    "bytes": 5209,
+    "mtime_utc": "2026-10-14T10:16:12Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_features.py",
+    "sha256": "f18315cf7a7230d37f8a80f725df932a711af2cd3bc3780aa4aafc886ce90060",
+    "bytes": 11514,
+    "mtime_utc": "2026-10-14T10:15:12Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_freeze.py",
+    "sha256": "b5100dd95300298d76110b5fa392773cebce8a1e38011a6651fb436fc48f0424",
+    "bytes": 4376,
+    "mtime_utc": "2026-10-14T10:23:41Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_gpu_wait.sh",
+    "sha256": "25d2786902645ba2706a6147a706502a2884d0b6ccd45fcb2f51bfafa4dd0c17",
+    "bytes": 1447,
+    "mtime_utc": "2026-10-14T10:23:14Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_lists.py",
+    "sha256": "97b38202a5e15fd3fde6bada71e86359aa36d5d1513d16c08ac3ffa39b0e7b89",
+    "bytes": 8207,
+    "mtime_utc": "2026-10-14T10:14:54Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_prep.py",
+    "sha256": "5a87a0569dfb8aec2e2c62252691fec3e93f7f9076e4233d6c97fe8cc927aef4",
+    "bytes": 9227,
+    "mtime_utc": "2026-10-14T10:14:37Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_recb.py",
+    "sha256": "bcf753229d0c57947b7da185f4fdaaa87597711ec19f9e7fb731812d11c0e4e5",
+    "bytes": 25511,
+    "mtime_utc": "2026-10-14T10:17:00Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_stage1_chain.sh",
+    "sha256": "a1add802de335e4e0bde438ee7a2d34c2c460f01ec9ab8275221edbeeeb6a5fd",
+    "bytes": 5619,
+    "mtime_utc": "2026-10-14T10:23:15Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_stage2_test.sh",
+    "sha256": "135e5aa1032e13c4e6d69811f3c2b7c4f4515eafe03b408e7b02099f202bdfc7",
+    "bytes": 5619,
+    "mtime_utc": "2026-10-14T10:24:24Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_tirgn_rows.py",
+    "sha256": "b3b958053e1b578e63cc4c672a27dbd2c214134dc69a8953e8ad78ba6ea478c7",
+    "bytes": 5677,
+    "mtime_utc": "2026-10-14T10:16:12Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_tirgn_train.py",
+    "sha256": "6fc7d3bd6b4b73a33098ce78338ea9f3cf2b1e9e7eaa3bcbb561358f79690067",
+    "bytes": 1223,
+    "mtime_utc": "2026-10-14T10:16:27Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_train.py",
+    "sha256": "5e60b350ce644082138fe7247d2498727447f19abeb90a41227e9acd69492f12",
+    "bytes": 8756,
+    "mtime_utc": "2026-10-14T10:25:59Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/fulltest_eval.py",
+    "sha256": "74849444912e3d8a52e422e16566f1a062bd1ea216feb762fc89311d66252031",
+    "bytes": 15134,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/g2_train.py",
+    "sha256": "3eeb7bed20a31c442c35f037c0570fba49b2e49d9343dc0b17ef17cbdef02ebe",
+    "bytes": 12634,
+    "mtime_utc": "2026-10-14T10:17:24Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/g7_cluster_bootstrap.py",
+    "sha256": "f68f68dd0ec69ae3063d3ec08cf60a8087757ccddb13a561aaf3a8da64f45747",
+    "bytes": 8601,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/hd_agg.py",
+    "sha256": "d3d3924c3fbe29e499da8678c57d43231c0237f067522dec1f45d5965d9c69b2",
+    "bytes": 14722,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/hd_select.py",
+    "sha256": "4628caed6fbe340b006e930da248dc652a0c8b45a15007d61d0522f6cd36dc81",
+    "bytes": 1351,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/hd_tirgn.py",
+    "sha256": "6a885fc9d0911e7eb2a5aa1afbc374ce0dfee684f5a223adef40ec6f3e9a053d",
+    "bytes": 15376,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/hd_tirgn_replay.py",
+    "sha256": "fc93c472b966767710aafae675e105968d8d66660061e6c52dfb7d7b6cab837e",
+    "bytes": 4235,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/oih_common.py",
+    "sha256": "9de692d458a95dca400565e59c2a9ccbe69ab2ee1d2961fca9002074ac7bbcc3",
+    "bytes": 13312,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/patterns.py",
+    "sha256": "e1d91114e1f017bef21fb74081b32e83fbdf72fa2183a9bcb087272b5c9c3ba7",
+    "bytes": 6525,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/rs_features.py",
+    "sha256": "abd1c3bba38ae0fb674975137aeced128a0f993b0a275f0353dff6787d1248ed",
+    "bytes": 24681,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/code/rt_common.py",
+    "sha256": "94e82b2f44b9ff7462b4281898a9c316145d74d9b1a31caadd05894cd0d960c8",
+    "bytes": 11341,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/dgl_shim.py",
+    "sha256": "65ca4ec60558740e13913b87e0942a053e650bb91984a3805c18525f6ac9cc82",
+    "bytes": 9208,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/rgcn/knowledge_graph.py",
+    "sha256": "7617bacb9d87b748f69f397ae5e61a2e1fd5fb32a3bdde895871821dd8dc08e6",
+    "bytes": 18498,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/rgcn/layers.py",
+    "sha256": "aacafebf411650ccf2f1df34c5fcd721dca35e4d5b71c17365b7f4ac52819daf",
+    "bytes": 11980,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/rgcn/model.py",
+    "sha256": "49b50e6e3c69d5f62335507738b5a72f3aefe469d69eff8605e3f7f54ac2ced0",
+    "bytes": 1582,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/rgcn/utils.py",
+    "sha256": "c38375933a3129f3743520432b1a8a743f81138645aea747c67414c3bc230080",
+    "bytes": 13270,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/src/decoder.py",
+    "sha256": "d8af45f99e7c6a30c1d790f87c47c280fa738ee615b48587369bdbd21e9afd87",
+    "bytes": 5436,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/src/dgl_shim.py",
+    "sha256": "65ca4ec60558740e13913b87e0942a053e650bb91984a3805c18525f6ac9cc82",
+    "bytes": 9208,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/src/get_history.py",
+    "sha256": "9c014389a04c4d6e506b2dcf13b69806d859c73ebc419a3d261ac3a6fcedc4a2",
+    "bytes": 4699,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/src/hyperparameter_range.py",
+    "sha256": "9b8e61709f2c8511fa4aa8f68fb96733053f5f69cff0103eb9a72af744319eb6",
+    "bytes": 1006,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/src/main.py",
+    "sha256": "42c780619f7f7d0e11bb04862fcb1a39bdbf08c80f6673ed436c5e3bf3284bf6",
+    "bytes": 31564,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/src/model.py",
+    "sha256": "c6562807407d3d4fdfb2a16a07f03730ee2407ad5fb9d56f138e34af1a3355b4",
+    "bytes": 2168,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/src/rrgcn.py",
+    "sha256": "17a76f6e8b1b75517714b39ed82ce37ebdaefa177ea5c6f30c455d9371cfd6c7",
+    "bytes": 15770,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/stage/TiRGN/src/score_dump.py",
+    "sha256": "c9fd9924e1d13edf82f3e5281347458ce787dc7eef2eb73bccc40cb9f88496df",
+    "bytes": 1862,
+    "mtime_utc": "2026-10-12T10:40:22Z"
+   }
+  ],
+  "data": [
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/data/GDELT25X/entity2id.txt",
+    "sha256": "50a7fcb3dcdea2f1f7c2f2d95e2eb37445e9d073156fe41b1d00d5dcb2bee13a",
+    "bytes": 23505,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/data/GDELT25X/relation2id.txt",
+    "sha256": "650390e4d8c38bf92bd204cda3e061acc648463afefa3952d956fd8b995d47ff",
+    "bytes": 8113,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/data/GDELT25X/stat.txt",
+    "sha256": "be8aa7859f87ea811a0ad04b4ece1be648a4f50162f5748d56a5705a7d8ba3b6",
+    "bytes": 11,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/data/GDELT25X/test.txt",
+    "sha256": "8ba50b10d95312b01c502d318a10e50fb968668adf24bf74d14609bbf1a4d0ab",
+    "bytes": 2794100,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/data/GDELT25X/timestamp2id.txt",
+    "sha256": "097cb11e4419ada61cf230050b02d8eed2c8e77b48a222756d73815c5a23bef8",
+    "bytes": 3218,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/data/GDELT25X/train.txt",
+    "sha256": "9470dc2e34e671342873ef33149bcc8bb02bbb40247a8c79bfe7ff84d071fdc5",
+    "bytes": 7564117,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/data/GDELT25X/valid.txt",
+    "sha256": "621a43a95947c84562a07c236fa02f074b8cc187f28246ee530b228b772a5add",
+    "bytes": 1456718,
+    "mtime_utc": "2026-10-14T10:13:22Z"
+   }
+  ],
+  "base_model": [
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/base_tirgn/tirgn_GDELT25X_seed42.pt",
+    "sha256": "93c5dd9717e2f0db78380267e77f7a1405ad1ce08ecd150026228d557394273a",
+    "bytes": 38117839,
+    "mtime_utc": "2026-10-14T11:17:52Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/base_tirgn/tirgn_GDELT25X_epoch_log.json",
+    "sha256": "b3533b811918026e5915140d710a7772cda90ff9d01b97e4300187b7eb8a80a5",
+    "bytes": 3342,
+    "mtime_utc": "2026-10-14T11:17:52Z"
+   }
+  ],
+  "valid_base_rows": [
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/fullrows/tirgn_GDELT25X_valid_scores_f32.bin",
+    "sha256": "594bccb216665796caf23fe523e7684f6b22d83475b0b51cdb85a73720e06da4",
+    "bytes": 889396752,
+    "mtime_utc": "2026-10-14T11:18:15Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/base_tirgn/tirgn_scores_GDELT25X_valid.npz",
+    "sha256": "36bfa29d48ebab939a0af29083f6ad9400d612ed01af20908af2efb798975f78",
+    "bytes": 308788778,
+    "mtime_utc": "2026-10-14T11:18:16Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/base_tirgn/rows_valid_log.json",
+    "sha256": "bd59073ebdec74c2fffedaea1733652bea26a7290fd29efa1c8b827ec45943f5",
+    "bytes": 875,
+    "mtime_utc": "2026-10-14T11:18:16Z"
+   }
+  ],
+  "prep": [
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/valid_sample_idx.npy",
+    "sha256": "82145e9b49f5c8afb89b305ed4f39a3496a78231e8534cb00e7324cb6601fe81",
+    "bytes": 1516576,
+    "mtime_utc": "2026-10-14T10:33:50Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/te_GDELT25X.npz",
+    "sha256": "46b7ad125a438c89f7325978f47fa7292882862c3242c23d575f017edef9918a",
+    "bytes": 1139914438,
+    "mtime_utc": "2026-10-14T10:35:39Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/strata_valid.npz",
+    "sha256": "585126767bd4c3ec4be1f6ed3f9852f0b0644e500c5a27c4855b9fcc41ed2fd9",
+    "bytes": 11186998,
+    "mtime_utc": "2026-10-14T10:36:26Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/prep_summary_stage1.json",
+    "sha256": "604b73f19d8d4086a2c65b33fa6f50aed28abeaf8d6331c0b70cafb15b5c4ca5",
+    "bytes": 1536,
+    "mtime_utc": "2026-10-14T10:36:26Z"
+   }
+  ],
+  "controls": [
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/recb/recb_selection_GDELT25X.json",
+    "sha256": "eff943605c876d3649de16a5f89f6f2dd5fd8ea6e1a69a09214085394aa07d94",
+    "bytes": 141626,
+    "mtime_utc": "2026-10-14T10:36:45Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/recb/recb_csr_valid_GDELT25X.npz",
+    "sha256": "031d2ec68524a91dd01cd90a008893c1b07044f8a9b47a9a02577be8b4c06a33",
+    "bytes": 198057520,
+    "mtime_utc": "2026-10-14T10:36:55Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/controls/blend_valid_gdelt25x_tirgn.json",
+    "sha256": "903886c4fceb0c717eef55ca17e7f6fc6e0be685383f96985c7d322f6df11104",
+    "bytes": 8625,
+    "mtime_utc": "2026-10-14T11:19:41Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/controls/blend_valid_gdelt25x_tirgn.npz",
+    "sha256": "1f178f909bbe0c17f698ad9a6edec1469565962e581cd989cf65fa087a149084",
+    "bytes": 129657048,
+    "mtime_utc": "2026-10-14T11:19:41Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/controls/sel_gdelt25x.json",
+    "sha256": "01cc7efd40f36a351d9440dadd069e3615b4ab2d8a926330ef33c09fb0e7c22c",
+    "bytes": 356,
+    "mtime_utc": "2026-10-14T11:19:42Z"
+   }
+  ],
+  "features_valid": [
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/lists_tirgn/valid_CP.npy",
+    "sha256": "a92bd8fdc98b7858bb892236c5e5e783040b534bc7d615727eec8eeeaef1ee9e",
+    "bytes": 75822528,
+    "mtime_utc": "2026-10-14T11:18:55Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/lists_tirgn/valid_Lpat.npy",
+    "sha256": "2d57a5dd20c0303c5b9921c9a759bad2a64166018c7a00603562972be8602447",
+    "bytes": 227467328,
+    "mtime_utc": "2026-10-14T11:18:55Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/lists_tirgn/valid_Lpat_u.npy",
+    "sha256": "46a3903da7c7e306fd01af074e4ae8d20f4e212bfa2bc54b785b00fb4c43b9a7",
+    "bytes": 113733728,
+    "mtime_utc": "2026-10-14T11:18:55Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/lists_tirgn/valid_XPc.npy",
+    "sha256": "7d229fc68ac7f366c9653717a05354cd40f49a870c1f452d2d5a7919a3c8da20",
+    "bytes": 227467328,
+    "mtime_utc": "2026-10-14T11:18:55Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/lists_tirgn/valid_q.npz",
+    "sha256": "5d6e6852c1b23cfb8d71925a69c013cca46a059cd1cf064e5ee10ef1059e457c",
+    "bytes": 6446412,
+    "mtime_utc": "2026-10-14T11:18:55Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/feat_tirgn/valid_X.npy",
+    "sha256": "603bb45353b1d1608b46db88642a05ea2695b2a8ec4eab2c4bd42da1b60b571f",
+    "bytes": 947780128,
+    "mtime_utc": "2026-10-14T11:19:12Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/feat_tirgn/valid_babove.npy",
+    "sha256": "2bd85274b921817a2bb2b0fee623885ba8ea94ea2852663a0ed9bc24f8b7e0b3",
+    "bytes": 18955728,
+    "mtime_utc": "2026-10-14T11:19:12Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/feat_tirgn/valid_cand.npy",
+    "sha256": "a92bd8fdc98b7858bb892236c5e5e783040b534bc7d615727eec8eeeaef1ee9e",
+    "bytes": 75822528,
+    "mtime_utc": "2026-10-14T11:19:12Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/feat_tirgn/valid_filt.npy",
+    "sha256": "5e3a9142ea5da46fe84d30e580550fc22d6df89620c9a68c059a0d79eed1cdad",
+    "bytes": 18955728,
+    "mtime_utc": "2026-10-14T11:19:12Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/feat_tirgn/valid_logp.npy",
+    "sha256": "0092dd211022b44461dcfcbb733aed6fec784c7b596793f4a1bf1d61e87ae271",
+    "bytes": 75822528,
+    "mtime_utc": "2026-10-14T11:19:12Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/feat_tirgn/valid_q.npz",
+    "sha256": "9f2b70976314b309f0bd6fed4d6a252854f7e3654628587d3c3445accd2cab9a",
+    "bytes": 22563616,
+    "mtime_utc": "2026-10-14T11:19:13Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/feat_tirgn/meta.json",
+    "sha256": "75ec7a98f16e43f8a2dc0aed24e97d2b472a3f34bd8cb2a2bd0c456e6d3192c2",
+    "bytes": 749,
+    "mtime_utc": "2026-10-14T11:19:13Z"
+   }
+  ],
+  "reranker": [
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/models/HRCOV_PAT_s0.pt",
+    "sha256": "8c605c19713854cee60a91d00aa8f2a0e5b48304c2a97b724e1f057d961b7baf",
+    "bytes": 27281,
+    "mtime_utc": "2026-10-14T11:27:46Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/models/HRCOV_PAT_s0_fsel.npy",
+    "sha256": "3c848bf3985cd282fdf826b6c486ab9007cd6068695fc4d8b7b5c0e5284f5a58",
+    "bytes": 23684128,
+    "mtime_utc": "2026-10-14T11:27:46Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/models/HRCOV_PAT_s1.pt",
+    "sha256": "1f331e628d5a484cb9a1386b4b0645f150f650b8e2d221b729f053c1d7d9194a",
+    "bytes": 27281,
+    "mtime_utc": "2026-10-14T11:31:08Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/models/HRCOV_PAT_s1_fsel.npy",
+    "sha256": "29f939180b40e8bfcf2e40ebd9d9f0da5951a7d5e4b49cc2f33d2c85ff91f1e1",
+    "bytes": 23684128,
+    "mtime_utc": "2026-10-14T11:31:08Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/models/HRCOV_PAT_s2.pt",
+    "sha256": "59404750bb3ab509b44012b891eb10851af96e417bca9727c3239c14f2dedc43",
+    "bytes": 27281,
+    "mtime_utc": "2026-10-14T11:34:27Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/models/HRCOV_PAT_s2_fsel.npy",
+    "sha256": "42e88b4e0a236e00ce23b4654ea16f3f0c97cd9e706c3d213b72c38b3cc40f5d",
+    "bytes": 23684128,
+    "mtime_utc": "2026-10-14T11:34:27Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/models/HR_s0.pt",
+    "sha256": "ed2a20aadb18671fac5b77fa8bd376cc2c7b6d5c77b7f1ca27c7b37cdb8a5c4d",
+    "bytes": 25277,
+    "mtime_utc": "2026-10-14T11:21:14Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/models/HR_s0_fsel.npy",
+    "sha256": "b17a8607ec807f89ca3e44a6199217c94558c1ced8279db33e58a3766c7cc37c",
+    "bytes": 11842128,
+    "mtime_utc": "2026-10-14T11:21:14Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/models/HR_s1.pt",
+    "sha256": "3ecb2904026764ac746d833f22032e86240ca346c583f53d8de9b60d0684cdbd",
+    "bytes": 25277,
+    "mtime_utc": "2026-10-14T11:22:42Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/models/HR_s1_fsel.npy",
+    "sha256": "d6d9b9026745a1eb32e9ef09133614555f0899633f0f979237b701f475995ea3",
+    "bytes": 11842128,
+    "mtime_utc": "2026-10-14T11:22:42Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/models/HR_s2.pt",
+    "sha256": "d2e46db9519f80152bebb34b28ed7b87537e5efb30bb74d24a103a045a1e15df",
+    "bytes": 25277,
+    "mtime_utc": "2026-10-14T11:24:12Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/models/HR_s2_fsel.npy",
+    "sha256": "a2a40dace5dd5b27f1e7533238e63696c654064a7c0341370529a9cc41892a63",
+    "bytes": 11842128,
+    "mtime_utc": "2026-10-14T11:24:12Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/ranks_select.npz",
+    "sha256": "a4be2e3d1fa517c326afb3ef79d283b141911d79c5d680ad3bf408e2c0a4eb14",
+    "bytes": 2133556,
+    "mtime_utc": "2026-10-14T11:34:27Z"
+   },
+   {
+    "path": "$WORK_DIR/tracks/phase2_forward_holdout/GDELT25X/work/train_tirgn/train_fh.json",
+    "sha256": "ccde7ea26134b6b0a188bc9d2e7ff5c9224bedbc335421822b8852f1064c7afc",
+    "bytes": 21858,
+    "mtime_utc": "2026-10-14T11:34:27Z"
+   }
+  ]
+ },
+ "stage2": {
+  "script": "$WORK_DIR/tracks/phase2_forward_holdout/code/fh_stage2_test.sh",
+  "script_sha256": "135e5aa1032e13c4e6d69811f3c2b7c4f4515eafe03b408e7b02099f202bdfc7",
+  "decision_code_sha256": "ca1ea354dbe2f7ba0604e393519ef96e8e5e254f69638a61c60c89e9c5bb2fd7",
+  "command": "bash $WORK_DIR/tracks/phase2_forward_holdout/code/fh_stage2_test.sh (one batch job on serverA, 36 h time limit; outputs h/*)",
+  "what_it_does": "verifies all 87 frozen sha256 (abort on mismatch) -> test strata, RecB test ranks -> TiRGN test rows (GPU, same GPU rule) -> test lists/features -> frozen re-rankers applied (select-rank reproduction check first) -> every arm scored once -> fh_agg.py -> fh_verdict.json",
+  "expected_cost": "~45 s GPU (row replay) + ~20 min CPU, plus any GPU wait"
+ },
+ "stage2_result": {
+  "job": "redacted-id",
+  "outcome": "PRACTICAL_ADVANCE",
+  "verdict_artifact_version": "redacted-id",
+  "delta_vs_BLEND": 0.014873391525623468,
+  "block_CI95": [
+   0.014023417017988815,
+   0.01573146416010071
+  ],
+  "U": 0.015593718881645971,
+  "gpu_seconds": 35,
+  "gpu": "physical GPU 1"
+ }
+}

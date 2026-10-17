@@ -1,0 +1,24 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+[     2.1s] hist + dyad reader 6154948
+[     2.4s] valid 4000/152234
+[    10.0s] valid 104000/152234
+[    14.0s] valid {"n": 152234, "seconds": 11.9, "base": {"MRR": 0.39784, "n": 152234, "H1": 0.270334, "H3": 0.448757, "H10": 0.660733}, "dump": "tirgn_valid gold_rank_filt", "dump_exact_share": 1.0, "rank_agree_fullrow_vs_dump": 1.0, "rank_agree_all_rows": 1.0, "max_abs_rank_diff_exact_rows": 0, "base_dump": {"MRR": 0.39784, "n": 152234, "H1": 0.270334, "H3": 0.448757, "H10": 0.660733}, "identity_f0": 1.0, "gold_in_W100": 0.9080560190233457, "gold_in_top50": 0.8854592272422718}
+[    14.0s] ALL DONE {"valid": {"dump": "tirgn_valid gold_rank_filt", "dump_exact_share": 1.0, "rank_agree": 1.0, "rank_agree_ok": true}, "smoke": false}

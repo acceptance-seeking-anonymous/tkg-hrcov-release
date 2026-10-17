@@ -1,0 +1,682 @@
+{
+ "name": "hcpat_definitional_rerun",
+ "label": "definitional re-run, not part of the hardening decision",
+ "definition": "HRCOV_PAT = HRCOV recipe without the bridge block: base top-50 ++ first <= 50 pattern-prior candidates (W 100); 25 features (8 base + 11 evidence + 6 pattern coverage; the 5 bridge features dropped); 3 seeds; official py-tgb evaluator",
+ "datasets": {
+  "polecat": {
+   "per_base": {
+    "tirgn": {
+     "HRCOV_MRR": 0.28237537939111534,
+     "HRCOV_per_seed": [
+      0.2826287921184196,
+      0.28227552152512303,
+      0.2822218245298035
+     ],
+     "better_control": "POOL",
+     "better_control_MRR": 0.23486163052651496,
+     "BLEND_MRR": 0.23480663405665148,
+     "POOL_MRR": 0.23486163052651496,
+     "HRCOV_PAT_MRR": 0.282377767408202,
+     "HRCOV_PAT_per_seed": [
+      0.28249617761507145,
+      0.28233641657509945,
+      0.28230070803443497
+     ],
+     "base_row_max_abs_rr_dev_vs_round1": 0.001424502581357956,
+     "HRCOV_PAT_minus_HRCOV": {
+      "query": {
+       "delta": 2.3880170865924803e-06,
+       "CI95": [
+        -0.0001779421035171967,
+        0.0001897976643152393
+       ],
+       "p_one_sided": 0.5025,
+       "p_le_margin": 1.0,
+       "B": 2000,
+       "n": 532636,
+       "n_changed": 345027
+      },
+      "ts_block": {
+       "delta": 2.3880170865924803e-06,
+       "CI95": [
+        -0.00026653935394158285,
+        0.0002650535229002291
+       ],
+       "p_one_sided": 0.49,
+       "p_le_margin": 1.0,
+       "n_clusters": 304,
+       "mean_cluster_size": 1752.092105263158,
+       "max_cluster_size": 3134
+      }
+     },
+     "HRCOV_PAT_minus_better_control": {
+      "query": {
+       "delta": 0.04751613688168699,
+       "CI95": [
+        0.04693254810423779,
+        0.0481128293962878
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "B": 2000,
+       "n": 532636,
+       "n_changed": 438829
+      },
+      "ts_block": {
+       "delta": 0.04751613688168699,
+       "CI95": [
+        0.046401665033511154,
+        0.04871722589998147
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 304,
+       "mean_cluster_size": 1752.092105263158,
+       "max_cluster_size": 3134
+      }
+     },
+     "HRCOV_minus_better_control_round1": {
+      "query": {
+       "delta": 0.0475137488646004,
+       "CI95": [
+        0.046943779757299464,
+        0.048091634866940465
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "B": 2000,
+       "n": 532636,
+       "n_changed": 436358
+      },
+      "ts_block": {
+       "delta": 0.0475137488646004,
+       "CI95": [
+        0.04640751358129775,
+        0.04866405977022547
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 304,
+       "mean_cluster_size": 1752.092105263158,
+       "max_cluster_size": 3134
+      }
+     }
+    },
+    "logcl": {
+     "HRCOV_MRR": 0.2720573455693462,
+     "HRCOV_per_seed": [
+      0.2716725918892902,
+      0.27229884034121565,
+      0.2722006044775326
+     ],
+     "better_control": "POOL",
+     "better_control_MRR": 0.21307616859532755,
+     "BLEND_MRR": 0.21303280585621673,
+     "POOL_MRR": 0.21307616859532755
+    }
+   },
+   "rule_with_HRCOV_PAT": {
+    "two_strongest": [
+     "tirgn",
+     "logcl"
+    ],
+    "per_base": {
+     "tirgn": {
+      "system": "HRCOV_PAT",
+      "C1": {
+       "BLEND": {
+        "delta": 0.04757113335155049,
+        "CI95": [
+         0.04699589500045967,
+         0.04817099275332301
+        ],
+        "p_one_sided": 0.0
+       },
+       "POOL": {
+        "delta": 0.04751613688168699,
+        "CI95": [
+         0.04693254810423779,
+         0.0481128293962878
+        ],
+        "p_one_sided": 0.0
+       }
+      },
+      "C1_pass": true,
+      "C2_vs": "tirgn(+)RecB",
+      "C2": {
+       "delta": 0.04757113335155049,
+       "CI95": [
+        0.04699589500045967,
+        0.04817099275332301
+       ],
+       "p_one_sided": 0.0
+      },
+      "C2_pass": true,
+      "C3_head": {
+       "delta": 0.05058682146850014,
+       "CI95": [
+        0.049625937694390436,
+        0.051565720548351936
+       ]
+      },
+      "C3_damage": false,
+      "PASS": true,
+      "ts_block": {
+       "BLEND": [
+        0.04645896119975416,
+        0.04876528406069762
+       ],
+       "POOL": [
+        0.046401665033511154,
+        0.04871722589998147
+       ]
+      }
+     },
+     "logcl": {
+      "system": "HRCOV",
+      "C1": {
+       "BLEND": {
+        "delta": 0.05902453971312944,
+        "CI95": [
+         0.05838584767143841,
+         0.05965273581009931
+        ],
+        "p_one_sided": 0.0
+       },
+       "POOL": {
+        "delta": 0.058981176974018605,
+        "CI95": [
+         0.058339275239666616,
+         0.05961569968650466
+        ],
+        "p_one_sided": 0.0
+       }
+      },
+      "C1_pass": true,
+      "C2_vs": "tirgn(+)RecB",
+      "C2": {
+       "delta": 0.0372507115126947,
+       "CI95": [
+        0.03658030784208333,
+        0.03791617298429357
+       ],
+       "p_one_sided": 0.0
+      },
+      "C2_pass": true,
+      "C3_head": {
+       "delta": 0.04897232245138421,
+       "CI95": [
+        0.04796972464230638,
+        0.049937827600517494
+       ]
+      },
+      "C3_damage": false,
+      "PASS": true,
+      "ts_block": {
+       "BLEND": [
+        0.057629828442157825,
+        0.06041875967174823
+       ],
+       "POOL": [
+        0.05758546445783888,
+        0.06037886318609346
+       ]
+      }
+     }
+    },
+    "outcome": "PRACTICAL_ADVANCE",
+    "note": "polecat LogCL keeps HRCOV (not re-run; bridge contribution isolated, <= +0.0011)"
+   }
+  },
+  "smallpedia_hardening_pool": {
+   "per_base": {
+    "tirgn": {
+     "HRCOV_MRR": 0.6601232772589116,
+     "HRCOV_per_seed": [
+      0.6598686325373433,
+      0.6603060644030851,
+      0.6601951348363064
+     ],
+     "better_control": "BLEND",
+     "better_control_MRR": 0.627458889789745,
+     "BLEND_MRR": 0.627458889789745,
+     "POOL_MRR": 0.6274025053547009
+    },
+    "regcn_tuned": {
+     "HRCOV_MRR": 0.6587454371206725,
+     "HRCOV_per_seed": [
+      0.6590836080677894,
+      0.6587074089106297,
+      0.658445294383598
+     ],
+     "better_control": "BLEND",
+     "better_control_MRR": 0.6107927569379431,
+     "BLEND_MRR": 0.6107927569379431,
+     "POOL_MRR": 0.6107261437939014,
+     "HRCOV_PAT_MRR": 0.6582982866159516,
+     "HRCOV_PAT_per_seed": [
+      0.658296454616116,
+      0.6583737957880162,
+      0.6582246094437225
+     ],
+     "base_row_max_abs_rr_dev_vs_round1": 0.0,
+     "HRCOV_PAT_minus_HRCOV": {
+      "query": {
+       "delta": -0.0004471505047208095,
+       "CI95": [
+        -0.0007391238870738512,
+        -0.000142674681056973
+       ],
+       "p_one_sided": 0.9965,
+       "p_le_margin": 1.0,
+       "B": 2000,
+       "n": 163172,
+       "n_changed": 35640
+      },
+      "ts_block": {
+       "delta": -0.0004471505047208095,
+       "CI95": [
+        -0.000921993862920779,
+        -6.71613034871934e-05
+       ],
+       "p_one_sided": 0.9915,
+       "p_le_margin": 1.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      }
+     },
+     "HRCOV_PAT_minus_better_control": {
+      "query": {
+       "delta": 0.04750552967800838,
+       "CI95": [
+        0.04634285503165737,
+        0.048632065571889496
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "B": 2000,
+       "n": 163172,
+       "n_changed": 76684
+      },
+      "ts_block": {
+       "delta": 0.04750552967800838,
+       "CI95": [
+        0.04194655619777753,
+        0.050615048358535385
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      }
+     },
+     "HRCOV_minus_better_control_round1": {
+      "query": {
+       "delta": 0.0479526801827292,
+       "CI95": [
+        0.046771431974399987,
+        0.04916045889641428
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "B": 2000,
+       "n": 163172,
+       "n_changed": 78216
+      },
+      "ts_block": {
+       "delta": 0.0479526801827292,
+       "CI95": [
+        0.04271500337398278,
+        0.05089941438889088
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      }
+     }
+    }
+   },
+   "rule_with_HRCOV_PAT": {
+    "two_strongest": [
+     "tirgn",
+     "regcn_tuned"
+    ],
+    "per_base": {
+     "tirgn": {
+      "system": "HRCOV",
+      "C1": {
+       "BLEND": {
+        "delta": 0.032664387469166674,
+        "CI95": [
+         0.031776217239296606,
+         0.03360508773725909
+        ],
+        "p_one_sided": 0.0
+       },
+       "POOL": {
+        "delta": 0.0327207719042107,
+        "CI95": [
+         0.031828771027687754,
+         0.033626419948408766
+        ],
+        "p_one_sided": 0.0
+       }
+      },
+      "C1_pass": true,
+      "C2_vs": "tirgn(+)RecB",
+      "C2": {
+       "delta": 0.032664387469166674,
+       "CI95": [
+        0.031776217239296606,
+        0.03360508773725909
+       ],
+       "p_one_sided": 0.0
+      },
+      "C2_pass": true,
+      "C3_head": {
+       "delta": 0.01944310048169589,
+       "CI95": [
+        0.01598753420400616,
+        0.022865935711273766
+       ]
+      },
+      "C3_damage": false,
+      "PASS": true,
+      "ts_block": {
+       "BLEND": [
+        0.02883992475364485,
+        0.0350402763585553
+       ],
+       "POOL": [
+        0.028888657275151972,
+        0.035102514350522813
+       ]
+      }
+     },
+     "regcn_tuned": {
+      "system": "HRCOV_PAT",
+      "C1": {
+       "BLEND": {
+        "delta": 0.04750552967800838,
+        "CI95": [
+         0.04634285503165737,
+         0.048632065571889496
+        ],
+        "p_one_sided": 0.0
+       },
+       "POOL": {
+        "delta": 0.04757214282205021,
+        "CI95": [
+         0.04644084437327854,
+         0.0487089198921517
+        ],
+        "p_one_sided": 0.0
+       }
+      },
+      "C1_pass": true,
+      "C2_vs": "tirgn(+)RecB",
+      "C2": {
+       "delta": 0.03083939682620663,
+       "CI95": [
+        0.02988575915445235,
+        0.03188365302383119
+       ],
+       "p_one_sided": 0.0
+      },
+      "C2_pass": true,
+      "C3_head": {
+       "delta": 0.007219396285399044,
+       "CI95": [
+        0.003728463054638732,
+        0.010594665509040833
+       ]
+      },
+      "C3_damage": false,
+      "PASS": true,
+      "ts_block": {
+       "BLEND": [
+        0.04194655619777753,
+        0.050615048358535385
+       ],
+       "POOL": [
+        0.041991390362137,
+        0.05068434484731288
+       ]
+      }
+     }
+    },
+    "outcome": "PRACTICAL_ADVANCE",
+    "note": "round-1 decision pool; smallpedia TiRGN keeps HRCOV (not re-run; bridge contribution isolated, <= +0.0011)"
+   }
+  },
+  "smallpedia_G3_pool": {
+   "per_base": {
+    "tirgn": {
+     "HRCOV_MRR": 0.6601232772589116,
+     "HRCOV_per_seed": [
+      0.6598686325373433,
+      0.6603060644030851,
+      0.6601951348363064
+     ],
+     "better_control": "BLEND",
+     "better_control_MRR": 0.627458889789745,
+     "BLEND_MRR": 0.627458889789745,
+     "POOL_MRR": 0.6274025053547009
+    },
+    "regcn_tgb": {
+     "HRCOV_MRR": 0.6599804472310058,
+     "HRCOV_per_seed": [
+      0.6600154148164508,
+      0.660627156889458,
+      0.6592987699871089
+     ],
+     "better_control": "BLEND",
+     "better_control_MRR": 0.6249410412879526,
+     "BLEND_MRR": 0.6249410412879526,
+     "POOL_MRR": 0.6249070066799596,
+     "HRCOV_PAT_MRR": 0.6585639717539964,
+     "HRCOV_PAT_per_seed": [
+      0.6581630377381327,
+      0.6588165453219808,
+      0.6587123322018759
+     ],
+     "base_row_max_abs_rr_dev_vs_round1": 0.0,
+     "HRCOV_PAT_minus_HRCOV": {
+      "query": {
+       "delta": -0.0014164754770093983,
+       "CI95": [
+        -0.001711781156041405,
+        -0.00113801660262848
+       ],
+       "p_one_sided": 1.0,
+       "p_le_margin": 1.0,
+       "B": 2000,
+       "n": 163172,
+       "n_changed": 39921
+      },
+      "ts_block": {
+       "delta": -0.0014164754770093983,
+       "CI95": [
+        -0.001808217129045352,
+        -0.0010348647849161123
+       ],
+       "p_one_sided": 1.0,
+       "p_le_margin": 1.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      }
+     },
+     "HRCOV_PAT_minus_better_control": {
+      "query": {
+       "delta": 0.03362293046604389,
+       "CI95": [
+        0.03260572252252579,
+        0.0345717246423905
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "B": 2000,
+       "n": 163172,
+       "n_changed": 70523
+      },
+      "ts_block": {
+       "delta": 0.03362293046604389,
+       "CI95": [
+        0.029019486858789214,
+        0.036383357704484184
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      }
+     },
+     "HRCOV_minus_better_control_round1": {
+      "query": {
+       "delta": 0.0350394059430533,
+       "CI95": [
+        0.03400675530527947,
+        0.03604243960855201
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "B": 2000,
+       "n": 163172,
+       "n_changed": 72958
+      },
+      "ts_block": {
+       "delta": 0.0350394059430533,
+       "CI95": [
+        0.030324007271971883,
+        0.03778845472708472
+       ],
+       "p_one_sided": 0.0,
+       "p_le_margin": 0.0,
+       "n_clusters": 17,
+       "mean_cluster_size": 9598.35294117647,
+       "max_cluster_size": 20112
+      }
+     }
+    }
+   },
+   "rule_with_HRCOV_PAT": {
+    "two_strongest": [
+     "tirgn",
+     "regcn_tgb"
+    ],
+    "per_base": {
+     "tirgn": {
+      "system": "HRCOV",
+      "C1": {
+       "BLEND": {
+        "delta": 0.032664387469166674,
+        "CI95": [
+         0.031776217239296606,
+         0.03360508773725909
+        ],
+        "p_one_sided": 0.0
+       },
+       "POOL": {
+        "delta": 0.0327207719042107,
+        "CI95": [
+         0.031828771027687754,
+         0.033626419948408766
+        ],
+        "p_one_sided": 0.0
+       }
+      },
+      "C1_pass": true,
+      "C2_vs": "tirgn(+)RecB",
+      "C2": {
+       "delta": 0.032664387469166674,
+       "CI95": [
+        0.031776217239296606,
+        0.03360508773725909
+       ],
+       "p_one_sided": 0.0
+      },
+      "C2_pass": true,
+      "C3_head": {
+       "delta": 0.01944310048169589,
+       "CI95": [
+        0.01598753420400616,
+        0.022865935711273766
+       ]
+      },
+      "C3_damage": false,
+      "PASS": true,
+      "ts_block": {
+       "BLEND": [
+        0.02883992475364485,
+        0.0350402763585553
+       ],
+       "POOL": [
+        0.028888657275151972,
+        0.035102514350522813
+       ]
+      }
+     },
+     "regcn_tgb": {
+      "system": "HRCOV_PAT",
+      "C1": {
+       "BLEND": {
+        "delta": 0.03362293046604389,
+        "CI95": [
+         0.03260572252252579,
+         0.0345717246423905
+        ],
+        "p_one_sided": 0.0
+       },
+       "POOL": {
+        "delta": 0.033656965074036864,
+        "CI95": [
+         0.03270471184428092,
+         0.03466122691202077
+        ],
+        "p_one_sided": 0.0
+       }
+      },
+      "C1_pass": true,
+      "C2_vs": "tirgn(+)RecB",
+      "C2": {
+       "delta": 0.03110508196425147,
+       "CI95": [
+        0.030063310369375394,
+        0.03207259131315378
+       ],
+       "p_one_sided": 0.0
+      },
+      "C2_pass": true,
+      "C3_head": {
+       "delta": 0.008545764345820838,
+       "CI95": [
+        0.005964028781314581,
+        0.011071018963542416
+       ]
+      },
+      "C3_damage": false,
+      "PASS": true,
+      "ts_block": {
+       "BLEND": [
+        0.029019486858789214,
+        0.036383357704484184
+       ],
+       "POOL": [
+        0.02905007241780745,
+        0.03641757172611559
+       ]
+      }
+     }
+    },
+    "outcome": "PRACTICAL_ADVANCE",
+    "note": "G3 decision pool (regcn_tgb replaces regcn_tuned by valid MRR); smallpedia TiRGN keeps HRCOV"
+   }
+  }
+ }
+}

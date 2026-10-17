@@ -1,0 +1,240 @@
+{
+ "S1": {
+  "dataset": "tkgl-smallpedia",
+  "base": "tirgn",
+  "valid_rows": 162066,
+  "cut_ts": 105,
+  "common_start_fit_population": 105606,
+  "per_arm": {
+   "SA": {
+    "pool": "SA50 (history top-100)",
+    "gold_in_pool_retained": 79357,
+    "used": 79357,
+    "frac_of_start": 0.7514440467397686,
+    "capped": false
+   },
+   "+C": {
+    "pool": "PC_tirgn (base top-50 + 50 history candidates)",
+    "gold_in_pool_retained": 82138,
+    "used": 82138,
+    "frac_of_start": 0.7777777777777778,
+    "capped": false
+   },
+   "+S": {
+    "pool": "PC_tirgn (base top-50 + 50 history candidates)",
+    "gold_in_pool_retained": 82138,
+    "used": 82138,
+    "frac_of_start": 0.7777777777777778,
+    "capped": false
+   },
+   "+T": {
+    "pool": "PC_tirgn (base top-50 + 50 history candidates)",
+    "gold_in_pool_retained": 82138,
+    "used": 82138,
+    "frac_of_start": 0.7777777777777778,
+    "capped": false
+   },
+   "HRcov": {
+    "pool": "HRcov pool (base top-50 + <= 50 pattern candidates; stored HRCOV_PAT features)",
+    "gold_in_pool_retained": 81874,
+    "used": 81874,
+    "frac_of_start": 0.775277919815162,
+    "capped": false
+   }
+  },
+  "identical_identities": {
+   "+C = +S = +T": true,
+   "SA = +C": false,
+   "+C = HRcov": false,
+   "SA = HRcov": false
+  },
+  "pairwise": {
+   "SA vs +C": {
+    "intersection": 78295,
+    "union": 83200,
+    "jaccard": 0.9410456730769231,
+    "only_first": 1062,
+    "only_second": 3843
+   },
+   "SA vs HRcov": {
+    "intersection": 78047,
+    "union": 83184,
+    "jaccard": 0.9382453356414695,
+    "only_first": 1310,
+    "only_second": 3827
+   },
+   "+C vs HRcov": {
+    "intersection": 81866,
+    "union": 82146,
+    "jaccard": 0.996591434762496,
+    "only_first": 272,
+    "only_second": 8
+   }
+  },
+  "intersection_all_arms": 78047,
+  "intersection_frac_of_start": 0.7390394485161828,
+  "hrcov_stored_training_n_fit_queries": 81874,
+  "hrcov_count_matches_stored": true,
+  "row_id_note": {}
+ },
+ "S2": {
+  "dataset": "tkgl-polecat",
+  "base": "tirgn",
+  "valid_rows": 200000,
+  "cut_ts": 1423,
+  "common_start_fit_population": 139236,
+  "per_arm": {
+   "SA": {
+    "pool": "SA50 (history top-100)",
+    "gold_in_pool_retained": 81715,
+    "used": 81715,
+    "frac_of_start": 0.5868812663391652,
+    "capped": false
+   },
+   "+C": {
+    "pool": "PC_tirgn (base top-50 + 50 history candidates)",
+    "gold_in_pool_retained": 86847,
+    "used": 86847,
+    "frac_of_start": 0.6237395501163492,
+    "capped": false
+   },
+   "+S": {
+    "pool": "PC_tirgn (base top-50 + 50 history candidates)",
+    "gold_in_pool_retained": 86847,
+    "used": 86847,
+    "frac_of_start": 0.6237395501163492,
+    "capped": false
+   },
+   "+T": {
+    "pool": "PC_tirgn (base top-50 + 50 history candidates)",
+    "gold_in_pool_retained": 86847,
+    "used": 86847,
+    "frac_of_start": 0.6237395501163492,
+    "capped": false
+   },
+   "HRcov": {
+    "pool": "HRcov pool (base top-50 + <= 50 pattern candidates; stored HRCOV_PAT features)",
+    "gold_in_pool_retained": 86236,
+    "used": 86236,
+    "frac_of_start": 0.6193513171880836,
+    "capped": false
+   }
+  },
+  "identical_identities": {
+   "+C = +S = +T": true,
+   "SA = +C": false,
+   "+C = HRcov": false,
+   "SA = HRcov": false
+  },
+  "pairwise": {
+   "SA vs +C": {
+    "intersection": 78168,
+    "union": 90394,
+    "jaccard": 0.8647476602429365,
+    "only_first": 3547,
+    "only_second": 8679
+   },
+   "SA vs HRcov": {
+    "intersection": 77131,
+    "union": 90820,
+    "jaccard": 0.8492732878220656,
+    "only_first": 4584,
+    "only_second": 9105
+   },
+   "+C vs HRcov": {
+    "intersection": 85655,
+    "union": 87428,
+    "jaccard": 0.9797204556892529,
+    "only_first": 1192,
+    "only_second": 581
+   }
+  },
+  "intersection_all_arms": 77065,
+  "intersection_frac_of_start": 0.5534847309603839,
+  "hrcov_stored_training_n_fit_queries": 86236,
+  "hrcov_count_matches_stored": true,
+  "row_id_note": {
+   "HRcov": "row ids = validation-split row ids + 2492170 (global quad index); same queries, same order (sro equal row by row)"
+  }
+ },
+ "S3": {
+  "dataset": "tkgl-polecat",
+  "base": "cogn",
+  "valid_rows": 200000,
+  "cut_ts": 1423,
+  "common_start_fit_population": 139236,
+  "per_arm": {
+   "SA": {
+    "pool": "SA50 (history top-100)",
+    "gold_in_pool_retained": 81715,
+    "used": 81715,
+    "frac_of_start": 0.5868812663391652,
+    "capped": false
+   },
+   "+C": {
+    "pool": "PC_cogn (base top-50 + 50 history candidates)",
+    "gold_in_pool_retained": 88652,
+    "used": 88652,
+    "frac_of_start": 0.6367031514838116,
+    "capped": false
+   },
+   "+S": {
+    "pool": "PC_cogn (base top-50 + 50 history candidates)",
+    "gold_in_pool_retained": 88652,
+    "used": 88652,
+    "frac_of_start": 0.6367031514838116,
+    "capped": false
+   },
+   "+T": {
+    "pool": "PC_cogn (base top-50 + 50 history candidates)",
+    "gold_in_pool_retained": 88652,
+    "used": 88652,
+    "frac_of_start": 0.6367031514838116,
+    "capped": false
+   },
+   "HRcov": {
+    "pool": "HRcov pool (base top-50 + <= 50 pattern candidates; stored HRCOV_PAT features)",
+    "gold_in_pool_retained": 88299,
+    "used": 88299,
+    "frac_of_start": 0.6341678876152719,
+    "capped": false
+   }
+  },
+  "identical_identities": {
+   "+C = +S = +T": true,
+   "SA = +C": false,
+   "+C = HRcov": false,
+   "SA = HRcov": false
+  },
+  "pairwise": {
+   "SA vs +C": {
+    "intersection": 78169,
+    "union": 92198,
+    "jaccard": 0.8478383479034253,
+    "only_first": 3546,
+    "only_second": 10483
+   },
+   "SA vs HRcov": {
+    "intersection": 77516,
+    "union": 92498,
+    "jaccard": 0.838028930355251,
+    "only_first": 4199,
+    "only_second": 10783
+   },
+   "+C vs HRcov": {
+    "intersection": 87776,
+    "union": 89175,
+    "jaccard": 0.9843117465657415,
+    "only_first": 876,
+    "only_second": 523
+   }
+  },
+  "intersection_all_arms": 77481,
+  "intersection_frac_of_start": 0.5564724640179264,
+  "hrcov_stored_training_n_fit_queries": 88299,
+  "hrcov_count_matches_stored": true,
+  "row_id_note": {
+   "HRcov": "row ids = validation-split row ids + 2492170 (global quad index); same queries, same order (sro equal row by row)"
+  }
+ }
+}

@@ -1,0 +1,66 @@
+{
+ "ff23bc26819cc382083e44af0e2647a57226ee85": {
+  "date": "2025-06-24T15:04:35Z",
+  "author_date": "2025-06-24T15:04:35Z",
+  "msg": "bugfix: modify apply baselines and init the scores to all zeros for each new query",
+  "files": [
+   [
+    "src/utils/apply_baselines.py",
+    2,
+    0
+   ]
+  ],
+  "patch": {
+   "src/utils/apply_baselines.py": "@@ -132,6 +132,8 @@ def apply_baselines(i, num_queries, test_data, all_data, window, basis_dict, sco\n         predictions_psi=torch.zeros(num_nodes)\n \n         for j in test_queries_idx:       \n+            predictions_xi=torch.zeros(num_nodes) \n+            predictions_psi=torch.zeros(num_nodes)\n             test_query = test_data[j]\n             cands_dict = dict() \n             cands_dict_psi = dict() "
+  }
+ },
+ "b6f34ab7651adb589381b0b6dabe621be5a3c216": {
+  "date": "2024-10-14T13:55:54Z",
+  "author_date": "2024-10-14T13:55:54Z",
+  "msg": "change datatype to float64 to be able to log very small scores. remove the random noise because it was too high and affected scores for icews14 and lambda=1",
+  "files": [
+   [
+    "src/utils/logging_utils.py",
+    2,
+    2
+   ],
+   [
+    "src/utils/utils.py",
+    4,
+    2
+   ]
+  ],
+  "patch": {
+   "src/utils/logging_utils.py": "@@ -42,7 +42,7 @@ def create_scores_tensor(predictions_dict, num_nodes, device=None):\n \n     :returns: predictions  tensor with predicted scores, one per node; e.g. tensor([ 5.3042,  6....='cuda:0') torch.Size([23033])\n     \"\"\"\n-    predictions = torch.zeros(num_nodes, device=device)\n-    predictions.scatter_(0, torch.tensor(list(predictions_dict.keys())).long(), torch.tensor(list(predictions_dict.values())).float())\n+    predictions = torch.zeros(num_nodes, device=device, dtype=torch.float64)\n+    predictions.scatter_(0, torch.tensor(list(predictions_dict.keys())).long(), torch.tensor(list(predictions_dict.values()), dtype=torch.float64))\n     return predictions\n ",
+   "src/utils/utils.py": "@@ -270,9 +270,10 @@ def filter_score(test_triples, score, all_ans):\n def sort_and_rank(score, target): # in case of ties: random rank selection\n     # taken or modified from https://github.com/Lee-zix/RE-GCN\n     score = score*np.max([10000, 10000*score.max()])\n-    random_values = torch.rand_like(score)\n-    score = score + random_values   # to add some randomness in case of ties. the random values are significantly \n+    # random_values = torch.rand_like(score)\n+    # score = score + random_values   # to add some randomness in case of ties. the random values are significantly \n                                     # smaller to ensure that we only permute for ties\n+                                    # update: do not add random values, because we want to have stable results and the random values might be too large and affect the ranking\n     _, indices = torch.sort(score, dim=1, descending=True) # with default: stable=False; pytorch docu: \n             #\"If stable is True then the sorting routine becomes stable, preserving the order of equivalent elements.\"\n     target = torch.tensor(target)\n@@ -281,6 +282,7 @@ def sort_and_rank(score, target): # in case of ties: random rank selection\n     return indices\n \n \n+\n def stat_ranks(rank_list, method, mode, mrr_snapshot_list):\n     # taken or modified from https://github.com/Lee-zix/RE-GCN\n     hits = [1, 3, 10]"
+  }
+ },
+ "086d010526b054ded98d39886a7e30657ba7324d": {
+  "date": "2024-10-14T14:21:18Z",
+  "author_date": "2024-10-14T14:21:18Z",
+  "msg": "also remove the too-large random noise in test_utils to ensure consistency",
+  "files": [
+   [
+    "src/evaluation/test_utils.py",
+    2,
+    2
+   ]
+  ],
+  "patch": {
+   "src/evaluation/test_utils.py": "@@ -262,8 +262,8 @@ def filter_score_r(test_triples, score, all_ans):\n \n def sort_and_rank(score, target): # in case of ties: random rank selection\n     score = score*np.max([10000, 10000*score.max()])\n-    random_values = torch.rand_like(score)\n-    score = score + random_values   # to add some randomness in case of ties. the random values are significantly \n+    # random_values = torch.rand_like(score)\n+    # score = score + random_values   # to add some randomness in case of ties. the random values are significantly \n                                     # smaller to ensure that we only permute for ties\n     _, indices = torch.sort(score, dim=1, descending=True) # with default: stable=False; pytorch docu: \n             #\"If stable is True then the sorting routine becomes stable, preserving the order of equivalent elements.\""
+  }
+ },
+ "5f196393cf1bd7b8faa13a81ceaf1e7957319785": {
+  "date": "2025-06-24T15:20:48Z",
+  "author_date": "2025-06-24T15:20:48Z",
+  "msg": "update readme with new results and change description",
+  "files": [
+   [
+    "README.md",
+    92,
+    0
+   ]
+  ],
+  "patch": {}
+ }
+}

@@ -1,0 +1,8 @@
+# Keep every file byte-identical on checkout (SHA256SUMS, FILES_RELEASE.tsv and ADDITIONS.tsv record exact bytes).
+* text=auto eol=lf
+*.npy binary
+*.npz binary
+# written with CRLF line ends by the csv module; must not be normalised
+fresh_window/reproduce/fresh_window_table_check.csv -text
+# run logs are records (some contain carriage returns from progress bars); never normalise
+fresh_window/logs/** -text

@@ -1,0 +1,26 @@
+[build] start 2026-10-16T14:31:48Z
+ 22:31:48 up 4 days, 22:55,  8 users,  load average: 0.21, 0.22, 0.12
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+[   671.1s] downloaded 26208 / 26208 (skipped by list: 0 )
+[   805.4s] ME root events 1552574
+[   829.7s] {"source": "GDELT 2.0 event exports (15-min), 20250801..20260501 (end exclusive), valid from 20260201, test from 20260301", "n_files": 26208, "n_files_requested": 26208, "n_skipped_by_list": 0, "n_event_rows": 1539261, "n_unique_quads": 814418, "n_entities": 1209, "n_relations": 215, "n_days": 273, "splits": {"train": {"n_facts": 509717, "t_range": [0, 183]}, "valid": {"n_facts": 76117, "t_range": [184, 211]}, "test": {"n_facts": 228584, "t_range": [212, 272]}}, "filters": "root events; >=1 actor country in ME; URL first-seen day only; entity >=10 / relation >=5 train events", "elapsed_s": 829.7}
+[build] exit 0 2026-10-16T14:45:39Z
+26208

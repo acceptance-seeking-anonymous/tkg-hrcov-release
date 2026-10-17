@@ -1,0 +1,389 @@
+item,dataset,base,comparison,role,metric,delta,query_lo,query_hi,ts_lo,ts_hi,L_query,L_ts,U_ts,MDE80_ts,present_pos,present_neg,gain_ge_bar_excluded,loss_ge_bar_excluded,call
+B1,polecat,TiRGN,MLP64x2 - LIN,primary,MRR,0.012173,0.011799,0.012541,0.011577,0.01278,0.01186,0.011666,0.012691,0.00077,True,False,False,True,present (+)
+B1,polecat,TiRGN,MLP64x2 - LIN,primary,H1,0.012272,0.011668,0.012865,0.011399,0.013187,0.01177,0.011547,0.013038,0.001142,True,False,False,True,
+B1,polecat,TiRGN,MLP64x2 - LIN,primary,H3,0.012586,0.012047,0.013147,0.011798,0.013387,0.012133,0.011919,0.013259,0.001031,True,False,False,True,
+B1,polecat,TiRGN,MLP64x2 - LIN,primary,H10,0.013108,0.012604,0.01358,0.012389,0.013813,0.012705,0.012499,0.01371,0.000908,True,False,False,True,
+B1,polecat,TiRGN,MLP64x2 - QBLEND,primary,MRR,0.052099,0.051536,0.052677,0.050787,0.05347,0.051626,0.051013,0.053196,0.001685,True,False,False,True,present (+)
+B1,polecat,TiRGN,MLP64x2 - QBLEND,primary,H1,0.043195,0.042423,0.043945,0.041713,0.04474,0.042563,0.041962,0.044532,0.001923,True,False,False,True,
+B1,polecat,TiRGN,MLP64x2 - QBLEND,primary,H3,0.062079,0.061237,0.062968,0.060418,0.063813,0.061381,0.060674,0.06357,0.002199,True,False,False,True,
+B1,polecat,TiRGN,MLP64x2 - QBLEND,primary,H10,0.070246,0.069388,0.071125,0.068645,0.071952,0.069547,0.068909,0.071647,0.00212,True,False,False,True,
+B1,polecat,TiRGN,MLP16 - LIN,secondary,MRR,0.009385,0.00907,0.009707,0.008854,0.009893,0.009124,0.008952,0.009822,0.000648,True,False,False,True,present (+)
+B1,polecat,TiRGN,MLP16 - LIN,secondary,H1,0.009261,0.008751,0.009776,0.008514,0.010032,0.00884,0.008639,0.00992,0.000959,True,False,False,True,
+B1,polecat,TiRGN,MLP16 - LIN,secondary,H3,0.009605,0.009136,0.010088,0.008932,0.010286,0.009202,0.00903,0.010171,0.000873,True,False,False,True,
+B1,polecat,TiRGN,MLP16 - LIN,secondary,H10,0.010859,0.010424,0.011293,0.010191,0.011525,0.010495,0.010306,0.011417,0.000845,True,False,False,True,
+B1,polecat,TiRGN,MLP64x2 - MLP16,secondary,MRR,0.002788,0.002609,0.002976,0.002532,0.00305,0.002636,0.002569,0.003006,0.000331,True,False,True,True,present (+); gain ≥ 0.005 excluded
+B1,polecat,TiRGN,MLP64x2 - MLP16,secondary,H1,0.003011,0.002708,0.003313,0.002608,0.003421,0.002766,0.002673,0.00336,0.000518,True,False,True,True,
+B1,polecat,TiRGN,MLP64x2 - MLP16,secondary,H3,0.002981,0.002664,0.003298,0.00259,0.003367,0.002717,0.002665,0.003305,0.000489,True,False,True,True,
+B1,polecat,TiRGN,MLP64x2 - MLP16,secondary,H10,0.002249,0.001987,0.002515,0.00194,0.00254,0.002027,0.001989,0.002493,0.000384,True,False,True,True,
+B1,smallpedia,TiRGN,MLP64x2 - LIN,primary,MRR,0.015222,0.014505,0.015925,0.013134,0.016534,0.014618,0.013539,0.016335,0.002116,True,False,False,True,present (+)
+B1,smallpedia,TiRGN,MLP64x2 - LIN,primary,H1,0.024457,0.023219,0.025652,0.021036,0.026704,0.023425,0.021679,0.026349,0.003515,True,False,False,True,
+B1,smallpedia,TiRGN,MLP64x2 - LIN,primary,H3,0.005969,0.005244,0.006669,0.004841,0.006919,0.005369,0.005045,0.006809,0.001326,True,False,False,True,
+B1,smallpedia,TiRGN,MLP64x2 - LIN,primary,H10,0.002551,0.002184,0.00293,0.001973,0.002946,0.002239,0.002084,0.002897,0.000623,True,False,True,True,
+B1,smallpedia,TiRGN,MLP64x2 - QBLEND,primary,MRR,0.030821,0.029953,0.031698,0.026771,0.033268,0.030077,0.027623,0.032977,0.00408,True,False,False,True,present (+)
+B1,smallpedia,TiRGN,MLP64x2 - QBLEND,primary,H1,0.04701,0.045594,0.048418,0.040938,0.050685,0.045809,0.042156,0.05025,0.006152,True,False,False,True,
+B1,smallpedia,TiRGN,MLP64x2 - QBLEND,primary,H3,0.016823,0.015921,0.017744,0.014211,0.018583,0.016094,0.014753,0.018307,0.002666,True,False,False,True,
+B1,smallpedia,TiRGN,MLP64x2 - QBLEND,primary,H10,0.003934,0.003512,0.004383,0.003362,0.004416,0.003589,0.003447,0.004349,0.000685,True,False,True,True,
+B1,smallpedia,TiRGN,MLP16 - LIN,secondary,MRR,0.008081,0.007551,0.008614,0.006585,0.009069,0.007634,0.006866,0.008932,0.001555,True,False,False,True,present (+)
+B1,smallpedia,TiRGN,MLP16 - LIN,secondary,H1,0.013162,0.012236,0.014149,0.010682,0.0149,0.012398,0.011101,0.014696,0.002693,True,False,False,True,
+B1,smallpedia,TiRGN,MLP16 - LIN,secondary,H3,0.003105,0.002537,0.00367,0.002032,0.004018,0.002628,0.002266,0.003863,0.001239,True,False,True,True,
+B1,smallpedia,TiRGN,MLP16 - LIN,secondary,H10,0.001124,0.00082,0.001435,0.000576,0.001462,0.000859,0.000691,0.001405,0.000547,True,False,True,True,
+B1,smallpedia,TiRGN,MLP64x2 - MLP16,secondary,MRR,0.007141,0.006619,0.007678,0.00628,0.007794,0.006702,0.006463,0.0077,0.000926,True,False,False,True,present (+)
+B1,smallpedia,TiRGN,MLP64x2 - MLP16,secondary,H1,0.011295,0.010383,0.012217,0.00986,0.012463,0.010506,0.010141,0.012279,0.001619,True,False,False,True,
+B1,smallpedia,TiRGN,MLP64x2 - MLP16,secondary,H3,0.002864,0.002353,0.003371,0.002419,0.003278,0.002424,0.002484,0.003231,0.000549,True,False,True,True,
+B1,smallpedia,TiRGN,MLP64x2 - MLP16,secondary,H10,0.001428,0.001166,0.001674,0.001142,0.001721,0.001207,0.001193,0.001671,0.00037,True,False,True,True,
+B2,polecat,TiRGN,PT_common - RB_common,primary,MRR,0.003407,0.003191,0.003641,0.003063,0.00376,0.003227,0.003122,0.003704,0.000435,True,False,True,True,present (+); gain ≥ 0.005 excluded
+B2,polecat,TiRGN,PT_common - RB_common,primary,H1,0.000817,0.000546,0.00109,0.00047,0.001145,0.000592,0.000533,0.001101,0.000432,True,False,True,True,
+B2,polecat,TiRGN,PT_common - RB_common,primary,H3,0.003652,0.00334,0.003983,0.003203,0.004101,0.003385,0.003271,0.004034,0.000566,True,False,True,True,
+B2,polecat,TiRGN,PT_common - RB_common,primary,H10,0.009396,0.008974,0.009831,0.008666,0.01013,0.009043,0.008799,0.009999,0.000919,True,False,False,True,
+B2,polecat,TiRGN,PT_gen - RB_gen,secondary,MRR,0.00978,0.009467,0.010112,0.00917,0.010394,0.009513,0.009271,0.010316,0.000794,True,False,False,True,present (+)
+B2,polecat,TiRGN,PT_gen - RB_gen,secondary,H1,0.006144,0.005688,0.006602,0.005414,0.00688,0.00577,0.005536,0.006756,0.000939,True,False,False,True,
+B2,polecat,TiRGN,PT_gen - RB_gen,secondary,H3,0.011152,0.010665,0.011679,0.010367,0.012014,0.010722,0.010478,0.011852,0.001044,True,False,False,True,
+B2,polecat,TiRGN,PT_gen - RB_gen,secondary,H10,0.018428,0.017891,0.018992,0.017486,0.019373,0.01797,0.017641,0.01923,0.001221,True,False,False,True,
+B2,smallpedia,TiRGN,PT_common - RB_common,primary,MRR,7e-05,-0.000198,0.000357,-0.000184,0.000372,-0.000163,-0.000137,0.000319,0.000349,False,False,True,True,not established; bounded within ±0.005
+B2,smallpedia,TiRGN,PT_common - RB_common,primary,H1,0.000135,-0.000328,0.000614,-0.000245,0.000689,-0.000259,-0.000184,0.000569,0.00058,False,False,True,True,
+B2,smallpedia,TiRGN,PT_common - RB_common,primary,H3,-3.5e-05,-0.000368,0.000299,-0.00064,0.000547,-0.000325,-0.000523,0.000491,0.000762,False,False,True,True,
+B2,smallpedia,TiRGN,PT_common - RB_common,primary,H10,-8e-05,-0.000382,0.000215,-0.000415,0.000348,-0.000326,-0.000377,0.000278,0.000495,False,False,True,True,
+B2,smallpedia,TiRGN,PT_gen - RB_gen,secondary,MRR,0.00015,-0.000163,0.000468,-0.000192,0.000607,-0.000115,-0.000126,0.000523,0.000489,False,False,True,True,not established; bounded within ±0.005
+B2,smallpedia,TiRGN,PT_gen - RB_gen,secondary,H1,0.000331,-0.00018,0.000855,-0.000151,0.001097,-0.000111,-9.4e-05,0.000933,0.000783,False,False,True,True,
+B2,smallpedia,TiRGN,PT_gen - RB_gen,secondary,H3,-0.000223,-0.000647,0.000206,-0.001297,0.000625,-0.000578,-0.001127,0.000531,0.001254,False,False,True,True,
+B2,smallpedia,TiRGN,PT_gen - RB_gen,secondary,H10,-5.5e-05,-0.00045,0.000338,-0.000775,0.000615,-0.000385,-0.00062,0.000502,0.00088,False,False,True,True,
+B3,polecat,TiRGN,FULL - NB_NF,primary,MRR,0.00183,0.001617,0.002051,0.001467,0.002188,0.001647,0.00153,0.002138,0.000459,True,False,True,True,present (+); gain ≥ 0.005 excluded
+B3,polecat,TiRGN,FULL - NB_NF,primary,H1,0.001483,0.001135,0.001849,0.000956,0.002006,0.001177,0.00105,0.001926,0.000665,True,False,True,True,
+B3,polecat,TiRGN,FULL - NB_NF,primary,H3,0.001906,0.001533,0.00229,0.00138,0.00246,0.001576,0.001468,0.002372,0.000687,True,False,True,True,
+B3,polecat,TiRGN,FULL - NB_NF,primary,H10,0.003192,0.002846,0.003537,0.002728,0.003666,0.002906,0.002807,0.003581,0.000595,True,False,True,True,
+B3,polecat,TiRGN,FULL - NB_F,secondary,MRR,0.001937,0.001734,0.002152,0.001595,0.002268,0.001761,0.001653,0.002216,0.000431,True,False,True,True,present (+); gain ≥ 0.005 excluded
+B3,polecat,TiRGN,FULL - NB_F,secondary,H1,0.001689,0.001338,0.002039,0.001209,0.002164,0.001412,0.001283,0.002107,0.000627,True,False,True,True,
+B3,polecat,TiRGN,FULL - NB_F,secondary,H3,0.002162,0.001791,0.002531,0.00166,0.002678,0.001849,0.001736,0.002608,0.000646,True,False,True,True,
+B3,polecat,TiRGN,FULL - NB_F,secondary,H10,0.002939,0.002614,0.003258,0.0025,0.003359,0.002663,0.002576,0.003287,0.000544,True,False,True,True,
+B3,polecat,TiRGN,FULL - B_NF,secondary,MRR,0.000192,0.000148,0.000237,0.000134,0.000249,0.000158,0.000145,0.00024,7.2e-05,True,False,True,True,present (+); gain ≥ 0.005 excluded
+B3,polecat,TiRGN,FULL - B_NF,secondary,H1,0.000166,8.7e-05,0.00025,7.2e-05,0.00026,9.9e-05,8.9e-05,0.000245,0.000119,True,False,True,True,
+B3,polecat,TiRGN,FULL - B_NF,secondary,H3,0.00022,0.000132,0.00031,0.00012,0.000322,0.000146,0.000135,0.000306,0.000132,True,False,True,True,
+B3,polecat,TiRGN,FULL - B_NF,secondary,H10,0.000235,0.000149,0.00032,0.000138,0.000325,0.000163,0.000152,0.000313,0.000121,True,False,True,True,
+B3,polecat,TiRGN,"FULL - EV_NF_PT [base contribution, common pool]",secondary,MRR,0.00863,0.008295,0.008962,0.007981,0.009334,0.008344,0.008081,0.00924,0.000863,True,False,False,True,present (+)
+B3,polecat,TiRGN,"FULL - EV_NF_PT [base contribution, common pool]",secondary,H1,0.006603,0.006076,0.007113,0.005717,0.00752,0.006164,0.005861,0.007402,0.00115,True,False,False,True,
+B3,polecat,TiRGN,"FULL - EV_NF_PT [base contribution, common pool]",secondary,H3,0.010643,0.010116,0.01119,0.009734,0.011571,0.010179,0.00989,0.011435,0.001184,True,False,False,True,
+B3,polecat,TiRGN,"FULL - EV_NF_PT [base contribution, common pool]",secondary,H10,0.014456,0.01394,0.014971,0.013616,0.015278,0.014016,0.013742,0.015169,0.001094,True,False,False,True,
+B3,polecat,TiRGN,"EV_NF_PT - EV_NF_RB [candidate source, common inputs]",secondary,MRR,0.004376,0.004176,0.004587,0.004038,0.004729,0.004207,0.004094,0.004663,0.000435,True,False,True,True,present (+); gain ≥ 0.005 excluded
+B3,polecat,TiRGN,"EV_NF_PT - EV_NF_RB [candidate source, common inputs]",secondary,H1,0.001834,0.001577,0.002099,0.001503,0.002164,0.001613,0.001555,0.002111,0.00042,True,False,True,True,
+B3,polecat,TiRGN,"EV_NF_PT - EV_NF_RB [candidate source, common inputs]",secondary,H3,0.004805,0.004491,0.005124,0.004351,0.005245,0.004549,0.004429,0.00517,0.000561,True,False,False,True,
+B3,polecat,TiRGN,"EV_NF_PT - EV_NF_RB [candidate source, common inputs]",secondary,H10,0.010327,0.009898,0.010777,0.009611,0.01107,0.009963,0.009716,0.010945,0.00092,True,False,False,True,
+B3,polecat,TiRGN,"EV_NF_RB - G1 [pool width, generator features, tail order]",secondary,MRR,0.021077,0.020662,0.021493,0.020278,0.021915,0.020715,0.020401,0.021778,0.001041,True,False,False,True,present (+)
+B3,polecat,TiRGN,"EV_NF_RB - G1 [pool width, generator features, tail order]",secondary,H1,0.010227,0.009777,0.010691,0.009579,0.010925,0.009832,0.00967,0.010798,0.000859,True,False,False,True,
+B3,polecat,TiRGN,"EV_NF_RB - G1 [pool width, generator features, tail order]",secondary,H3,0.022973,0.022408,0.023536,0.021942,0.02403,0.022497,0.022134,0.023872,0.001317,True,False,False,True,
+B3,polecat,TiRGN,"EV_NF_RB - G1 [pool width, generator features, tail order]",secondary,H10,0.043176,0.0425,0.043889,0.041672,0.044738,0.042597,0.041955,0.044457,0.001914,True,False,False,True,
+B3,polecat,TiRGN,HRCOV_PAT(stored) - G1 [total],secondary,MRR,0.034136,0.033627,0.034678,0.032925,0.035361,0.033708,0.033133,0.035172,0.001544,True,False,False,True,present (+)
+B3,polecat,TiRGN,HRCOV_PAT(stored) - G1 [total],secondary,H1,0.018815,0.018155,0.019452,0.017689,0.019949,0.018287,0.017834,0.019811,0.00146,True,False,False,True,
+B3,polecat,TiRGN,HRCOV_PAT(stored) - G1 [total],secondary,H3,0.038226,0.037521,0.038982,0.036839,0.039741,0.037632,0.037024,0.039487,0.001866,True,False,False,True,
+B3,polecat,TiRGN,HRCOV_PAT(stored) - G1 [total],secondary,H10,0.06813,0.067294,0.068988,0.066178,0.070162,0.067422,0.066476,0.069845,0.002548,True,False,False,True,
+B3,polecat,TiRGN,"FULL - G1 [total, re-fit]",secondary,MRR,0.034083,0.033552,0.034617,0.032876,0.035338,0.033663,0.033074,0.035131,0.001567,True,False,False,True,present (+)
+B3,polecat,TiRGN,"FULL - G1 [total, re-fit]",secondary,H1,0.018664,0.01802,0.019301,0.017512,0.019835,0.018138,0.017701,0.019643,0.001476,True,False,False,True,
+B3,polecat,TiRGN,"FULL - G1 [total, re-fit]",secondary,H3,0.03842,0.037698,0.039161,0.036999,0.040007,0.037813,0.037204,0.039711,0.001912,True,False,False,True,
+B3,polecat,TiRGN,"FULL - G1 [total, re-fit]",secondary,H10,0.067959,0.067123,0.068825,0.065967,0.070042,0.06725,0.06629,0.069656,0.002571,True,False,False,True,
+B3,smallpedia,TiRGN,FULL - NB_NF,primary,MRR,0.00217,0.001784,0.002551,0.001485,0.002922,0.001846,0.001584,0.002785,0.000922,True,False,True,True,present (+); gain ≥ 0.005 excluded
+B3,smallpedia,TiRGN,FULL - NB_NF,primary,H1,0.00218,0.001553,0.00284,0.000785,0.003706,0.001655,0.000979,0.00344,0.001841,True,False,True,True,
+B3,smallpedia,TiRGN,FULL - NB_NF,primary,H3,0.002165,0.001665,0.002632,0.001546,0.002785,0.001752,0.001627,0.002697,0.000795,True,False,True,True,
+B3,smallpedia,TiRGN,FULL - NB_NF,primary,H10,0.003117,0.002617,0.003628,0.002338,0.003834,0.002684,0.002469,0.003719,0.000952,True,False,True,True,
+B3,smallpedia,TiRGN,FULL - NB_F,secondary,MRR,0.000533,0.000222,0.000854,0.00011,0.000964,0.000279,0.000182,0.000901,0.000539,True,False,True,True,present (+); gain ≥ 0.005 excluded
+B3,smallpedia,TiRGN,FULL - NB_F,secondary,H1,0.000883,0.000347,0.00147,0.000192,0.001559,0.000439,0.00031,0.00147,0.000883,True,False,True,True,
+B3,smallpedia,TiRGN,FULL - NB_F,secondary,H3,-5.3e-05,-0.000413,0.000277,-0.000587,0.000501,-0.000356,-0.000498,0.000394,0.000678,False,False,True,True,
+B3,smallpedia,TiRGN,FULL - NB_F,secondary,H10,0.000407,0.00012,0.000706,-1.6e-05,0.000874,0.000167,5.6e-05,0.000784,0.000552,True,False,True,True,
+B3,smallpedia,TiRGN,FULL - B_NF,secondary,MRR,-3e-05,-0.000103,4.2e-05,-9.6e-05,3.5e-05,-8.9e-05,-8.4e-05,2.6e-05,8.4e-05,False,False,True,True,not established; bounded within ±0.005
+B3,smallpedia,TiRGN,FULL - B_NF,secondary,H1,-9.8e-05,-0.000235,3.7e-05,-0.000222,1.4e-05,-0.000214,-0.000198,-2e-06,0.000148,False,False,True,True,
+B3,smallpedia,TiRGN,FULL - B_NF,secondary,H3,5.1e-05,-3.9e-05,0.000143,-4.1e-05,0.000123,-2.7e-05,-2.2e-05,0.000113,0.000103,False,False,True,True,
+B3,smallpedia,TiRGN,FULL - B_NF,secondary,H10,2.2e-05,-5.5e-05,9.6e-05,-7.3e-05,0.000114,-4.1e-05,-5.7e-05,0.000101,0.000119,False,False,True,True,
+B3,smallpedia,TiRGN,"FULL - EV_NF_PT [base contribution, common pool]",secondary,MRR,0.005249,0.004756,0.005759,0.004413,0.006149,0.004839,0.004543,0.005999,0.001095,True,False,False,True,present (+)
+B3,smallpedia,TiRGN,"FULL - EV_NF_PT [base contribution, common pool]",secondary,H1,0.006508,0.005679,0.007373,0.005037,0.008124,0.005812,0.005259,0.007853,0.001965,True,False,False,True,
+B3,smallpedia,TiRGN,"FULL - EV_NF_PT [base contribution, common pool]",secondary,H3,0.003877,0.003302,0.004483,0.003055,0.004744,0.003378,0.003167,0.004615,0.001086,True,False,True,True,
+B3,smallpedia,TiRGN,"FULL - EV_NF_PT [base contribution, common pool]",secondary,H10,0.005266,0.004719,0.005835,0.004689,0.005843,0.004805,0.004784,0.005744,0.000739,True,False,False,True,
+B3,smallpedia,TiRGN,"EV_NF_PT - EV_NF_RB [candidate source, common inputs]",secondary,MRR,-0.000105,-0.000386,0.000158,-0.000397,0.000241,-0.000339,-0.000354,0.000183,0.00041,False,False,True,True,not established; bounded within ±0.005
+B3,smallpedia,TiRGN,"EV_NF_PT - EV_NF_RB [candidate source, common inputs]",secondary,H1,2e-06,-0.000478,0.000467,-0.000556,0.000552,-0.000408,-0.000442,0.000465,0.000675,False,False,True,True,
+B3,smallpedia,TiRGN,"EV_NF_PT - EV_NF_RB [candidate source, common inputs]",secondary,H3,-0.000462,-0.000786,-0.000153,-0.000958,1.5e-05,-0.000733,-0.000899,-4.4e-05,0.00064,False,True,True,True,
+B3,smallpedia,TiRGN,"EV_NF_PT - EV_NF_RB [candidate source, common inputs]",secondary,H10,-9e-05,-0.000352,0.000168,-0.000383,0.000201,-0.000311,-0.00033,0.000152,0.000368,False,False,True,True,
+B3,smallpedia,TiRGN,"EV_NF_RB - G1 [pool width, generator features, tail order]",secondary,MRR,0.002179,0.001745,0.002642,0.001363,0.002921,0.001813,0.00151,0.002801,0.000974,True,False,True,True,present (+); gain ≥ 0.005 excluded
+B3,smallpedia,TiRGN,"EV_NF_RB - G1 [pool width, generator features, tail order]",secondary,H1,-0.001303,-0.001935,-0.000636,-0.002291,-0.000218,-0.001844,-0.002117,-0.000418,0.001307,False,True,True,True,
+B3,smallpedia,TiRGN,"EV_NF_RB - G1 [pool width, generator features, tail order]",secondary,H3,0.002713,0.002188,0.003239,0.001588,0.003688,0.002269,0.00178,0.003548,0.001336,True,False,True,True,
+B3,smallpedia,TiRGN,"EV_NF_RB - G1 [pool width, generator features, tail order]",secondary,H10,0.006527,0.005946,0.007128,0.005134,0.007659,0.006044,0.005381,0.00747,0.001609,True,False,False,True,
+B3,smallpedia,TiRGN,HRCOV_PAT(stored) - G1 [total],secondary,MRR,0.007323,0.006803,0.007857,0.006166,0.008503,0.00688,0.006368,0.008276,0.001468,True,False,False,True,present (+)
+B3,smallpedia,TiRGN,HRCOV_PAT(stored) - G1 [total],secondary,H1,0.005207,0.004406,0.006011,0.003597,0.006931,0.004539,0.003849,0.006608,0.002103,True,False,False,True,
+B3,smallpedia,TiRGN,HRCOV_PAT(stored) - G1 [total],secondary,H3,0.006129,0.005517,0.006753,0.005102,0.007008,0.005619,0.005298,0.006863,0.001214,True,False,False,True,
+B3,smallpedia,TiRGN,HRCOV_PAT(stored) - G1 [total],secondary,H10,0.011703,0.011017,0.012406,0.010463,0.012515,0.01112,0.010655,0.012415,0.001309,True,False,False,True,
+B3,smallpedia,TiRGN,"FULL - G1 [total, re-fit]",secondary,MRR,0.007323,0.006803,0.007857,0.006166,0.008503,0.00688,0.006368,0.008276,0.001468,True,False,False,True,present (+)
+B3,smallpedia,TiRGN,"FULL - G1 [total, re-fit]",secondary,H1,0.005207,0.004406,0.006011,0.003597,0.006931,0.004539,0.003849,0.006608,0.002103,True,False,False,True,
+B3,smallpedia,TiRGN,"FULL - G1 [total, re-fit]",secondary,H3,0.006129,0.005517,0.006753,0.005102,0.007008,0.005619,0.005298,0.006863,0.001214,True,False,False,True,
+B3,smallpedia,TiRGN,"FULL - G1 [total, re-fit]",secondary,H10,0.011703,0.011017,0.012406,0.010463,0.012515,0.01112,0.010655,0.012415,0.001309,True,False,False,True,
+C1,polecat,TiRGN,FULL - noDyadLR,primary,MRR,0.000146,1.6e-05,0.000279,-9e-06,0.000301,3.9e-05,2.1e-05,0.000278,0.000193,True,False,True,True,present (+); gain ≥ 0.005 excluded
+C1,polecat,TiRGN,FULL - noDyadLR,primary,H1,0.000111,-0.000108,0.000343,-0.000128,0.000355,-7.2e-05,-8.3e-05,0.000315,0.000303,False,False,True,True,
+C1,polecat,TiRGN,FULL - noDyadLR,primary,H3,0.000176,-6.1e-05,0.000403,-8.9e-05,0.000456,-2.4e-05,-5.3e-05,0.000409,0.000347,False,False,True,True,
+C1,polecat,TiRGN,FULL - noDyadLR,primary,H10,9.9e-05,-0.000103,0.00031,-0.000136,0.000312,-7.4e-05,-0.000103,0.00028,0.000287,False,False,True,True,
+C1,smallpedia,TiRGN,FULL - noDyadLR,primary,MRR,-6.3e-05,-0.000264,0.00013,-0.000363,0.000229,-0.000241,-0.000305,0.000193,0.000379,False,False,True,True,not established; bounded within ±0.005
+C1,smallpedia,TiRGN,FULL - noDyadLR,primary,H1,-0.000208,-0.000574,0.000131,-0.000737,0.000341,-0.00052,-0.000659,0.000255,0.000696,False,False,True,True,
+C1,smallpedia,TiRGN,FULL - noDyadLR,primary,H3,0.000182,-5.7e-05,0.000414,-9.4e-05,0.000526,-1.4e-05,-6.4e-05,0.000468,0.000402,False,False,True,True,
+C1,smallpedia,TiRGN,FULL - noDyadLR,primary,H10,0.000143,-4.1e-05,0.000321,-0.0001,0.000425,-1.4e-05,-6.5e-05,0.000374,0.000328,False,False,True,True,
+A5,polecat,TiRGN,UNMASKED - FULL,secondary,MRR,2.2e-05,-9.5e-05,0.000131,-0.000106,0.000146,-7.6e-05,-8.6e-05,0.000128,0.000161,False,False,True,True,not established; bounded within ±0.005
+A5,polecat,TiRGN,UNMASKED - FULL,secondary,H1,8.8e-05,-0.000115,0.000278,-0.000146,0.000308,-8.3e-05,-0.000104,0.000275,0.000285,False,False,True,True,
+A5,polecat,TiRGN,UNMASKED - FULL,secondary,H3,-1.2e-05,-0.000213,0.000176,-0.00023,0.000208,-0.00018,-0.000194,0.000172,0.000277,False,False,True,True,
+A5,polecat,TiRGN,UNMASKED - FULL,secondary,H10,-7e-05,-0.000237,9.6e-05,-0.000262,0.000125,-0.000215,-0.000232,9.3e-05,0.000248,False,False,True,True,
+A5,polecat,TiRGN,MULTIPOS - FULL,secondary,MRR,-0.000338,-0.000452,-0.000224,-0.000485,-0.000193,-0.000435,-0.000458,-0.000219,0.000184,False,True,True,True,present (−); loss ≥ 0.005 excluded
+A5,polecat,TiRGN,MULTIPOS - FULL,secondary,H1,-0.000378,-0.000582,-0.000175,-0.000611,-0.000142,-0.000551,-0.000572,-0.000183,0.000297,False,True,True,True,
+A5,polecat,TiRGN,MULTIPOS - FULL,secondary,H3,-0.000398,-0.000604,-0.000187,-0.000639,-0.00016,-0.000572,-0.000599,-0.000194,0.000306,False,True,True,True,
+A5,polecat,TiRGN,MULTIPOS - FULL,secondary,H10,-0.000296,-0.000475,-0.000108,-0.000493,-9.7e-05,-0.000449,-0.000457,-0.000123,0.000257,False,True,True,True,
+C2,polecat,TiRGN,UTIL12 - CONF12,primary,MRR,-0.000364,-0.0005,-0.000227,-0.000518,-0.000207,-0.000481,-0.000496,-0.000239,0.000194,False,True,True,True,present (−); loss ≥ 0.005 excluded
+C2,polecat,TiRGN,UTIL12 - CONF12,primary,H1,-0.000262,-0.000495,-2.9e-05,-0.000514,-1e-05,-0.000463,-0.000469,-6.3e-05,0.000308,False,True,True,True,
+C2,polecat,TiRGN,UTIL12 - CONF12,primary,H3,-0.000141,-0.000374,8.5e-05,-0.000399,0.000122,-0.000334,-0.000359,8.6e-05,0.000331,False,False,True,True,
+C2,polecat,TiRGN,UTIL12 - CONF12,primary,H10,-0.000511,-0.000721,-0.000282,-0.000762,-0.000261,-0.000697,-0.000719,-0.000301,0.000317,False,True,True,True,
+C2,polecat,TiRGN,UTIL12 - UTIL1,primary,MRR,0.002367,0.002144,0.002593,0.002012,0.002715,0.002183,0.002067,0.002659,0.000449,True,False,True,True,present (+); gain ≥ 0.005 excluded
+C2,polecat,TiRGN,UTIL12 - UTIL1,primary,H1,-0.000101,-0.000453,0.000261,-0.000604,0.000349,-0.000383,-0.000524,0.000274,0.0006,False,False,True,True,
+C2,polecat,TiRGN,UTIL12 - UTIL1,primary,H3,0.003118,0.002731,0.003513,0.002565,0.003634,0.002785,0.002675,0.003553,0.000683,True,False,True,True,
+C2,polecat,TiRGN,UTIL12 - UTIL1,primary,H10,0.0083,0.007869,0.008739,0.007641,0.008969,0.007926,0.007756,0.008862,0.000839,True,False,False,True,
+C2,polecat,TiRGN,UTIL12 - UTIL2,secondary,MRR,0.004494,0.004229,0.004749,0.004048,0.004935,0.004277,0.004124,0.00487,0.000563,True,False,True,True,present (+); gain ≥ 0.005 excluded
+C2,polecat,TiRGN,UTIL12 - UTIL2,secondary,H1,0.003755,0.003348,0.004153,0.003167,0.004353,0.003416,0.003259,0.00424,0.000737,True,False,True,True,
+C2,polecat,TiRGN,UTIL12 - UTIL2,secondary,H3,0.004629,0.00423,0.005016,0.004002,0.005261,0.004293,0.004095,0.005148,0.000785,True,False,False,True,
+C2,polecat,TiRGN,UTIL12 - UTIL2,secondary,H10,0.006006,0.005646,0.006368,0.005476,0.006572,0.005707,0.005547,0.006484,0.000702,True,False,False,True,
+C2,polecat,TiRGN,"UTIL12 - FULL (same candidates, recomputed features, RB-style column layout)",fidelity,MRR,-8e-06,-0.000126,0.000104,-0.000136,0.000117,-0.00011,-0.000113,9.8e-05,0.000161,False,False,True,True,not established; bounded within ±0.005
+C2,polecat,TiRGN,"UTIL12 - FULL (same candidates, recomputed features, RB-style column layout)",fidelity,H1,8.9e-05,-0.00012,0.000285,-0.000138,0.000302,-8.3e-05,-9.9e-05,0.00027,0.000278,False,False,True,True,
+C2,polecat,TiRGN,"UTIL12 - FULL (same candidates, recomputed features, RB-style column layout)",fidelity,H3,-5.9e-05,-0.000273,0.000147,-0.000277,0.00016,-0.000239,-0.000249,0.000127,0.000285,False,False,True,True,
+C2,polecat,TiRGN,"UTIL12 - FULL (same candidates, recomputed features, RB-style column layout)",fidelity,H10,-0.000138,-0.000325,3.5e-05,-0.000322,5.1e-05,-0.000293,-0.000298,2.6e-05,0.000241,False,False,True,True,
+C2,polecat,TiRGN,UTIL12 - POOL,context,MRR,0.047454,0.046897,0.048016,0.0463,0.048688,0.046992,0.0465,0.048446,0.001483,True,False,False,True,present (+)
+C2,polecat,TiRGN,UTIL12 - POOL,context,H1,0.039136,0.038382,0.039915,0.037822,0.040493,0.038498,0.038061,0.040276,0.001668,True,False,False,True,
+C2,polecat,TiRGN,UTIL12 - POOL,context,H3,0.056412,0.055597,0.057271,0.054837,0.058054,0.055728,0.055067,0.057826,0.002063,True,False,False,True,
+C2,polecat,TiRGN,UTIL12 - POOL,context,H10,0.064638,0.063839,0.065483,0.063036,0.066355,0.063968,0.063339,0.066023,0.002075,True,False,False,True,
+C2,polecat,TiRGN,CONF12 - POOL,context,MRR,0.047818,0.047256,0.048376,0.04667,0.049036,0.047362,0.046853,0.048808,0.0015,True,False,False,True,present (+)
+C2,polecat,TiRGN,CONF12 - POOL,context,H1,0.039398,0.038608,0.040163,0.038107,0.040741,0.038776,0.038342,0.040521,0.001674,True,False,False,True,
+C2,polecat,TiRGN,CONF12 - POOL,context,H3,0.056553,0.055705,0.057396,0.054945,0.05821,0.055875,0.055167,0.057959,0.002076,True,False,False,True,
+C2,polecat,TiRGN,CONF12 - POOL,context,H10,0.065149,0.064361,0.065983,0.063516,0.066899,0.0645,0.063798,0.066572,0.00212,True,False,False,True,
+C2,polecat,TiRGN,UTIL1 - POOL,context,MRR,0.045087,0.044521,0.045668,0.043962,0.046268,0.044613,0.044158,0.046062,0.00145,True,False,False,True,present (+)
+C2,polecat,TiRGN,UTIL1 - POOL,context,H1,0.039238,0.038466,0.039979,0.037961,0.040535,0.038587,0.038187,0.040331,0.001638,True,False,False,True,
+C2,polecat,TiRGN,UTIL1 - POOL,context,H3,0.053294,0.052488,0.054137,0.051708,0.054923,0.052624,0.051928,0.05464,0.002036,True,False,False,True,
+C2,polecat,TiRGN,UTIL1 - POOL,context,H10,0.056339,0.055561,0.057144,0.054838,0.057911,0.055709,0.055097,0.057661,0.001961,True,False,False,True,
+C2,polecat,TiRGN,UTIL2 - POOL,context,MRR,0.042959,0.042437,0.043525,0.041969,0.043979,0.042532,0.042133,0.043786,0.001262,True,False,False,True,present (+)
+C2,polecat,TiRGN,UTIL2 - POOL,context,H1,0.035381,0.034655,0.036115,0.034291,0.036519,0.034777,0.034423,0.036313,0.00142,True,False,False,True,
+C2,polecat,TiRGN,UTIL2 - POOL,context,H3,0.051783,0.05104,0.052614,0.050351,0.053234,0.051158,0.050585,0.053047,0.001844,True,False,False,True,
+C2,polecat,TiRGN,UTIL2 - POOL,context,H10,0.058632,0.057839,0.0594,0.057177,0.060143,0.057971,0.057437,0.059938,0.001897,True,False,False,True,
+C2,smallpedia,TiRGN,UTIL12 - CONF12,primary,MRR,4.4e-05,-0.00017,0.000262,-0.000251,0.000355,-0.000136,-0.000205,0.0003,0.000381,False,False,True,True,not established; bounded within ±0.005
+C2,smallpedia,TiRGN,UTIL12 - CONF12,primary,H1,9e-05,-0.000285,0.000489,-0.000362,0.000562,-0.000231,-0.000281,0.000476,0.000581,False,False,True,True,
+C2,smallpedia,TiRGN,UTIL12 - CONF12,primary,H3,4.5e-05,-0.000198,0.000274,-0.000259,0.000342,-0.000161,-0.00021,0.000293,0.000381,False,False,True,True,
+C2,smallpedia,TiRGN,UTIL12 - CONF12,primary,H10,-0.000223,-0.000502,4.1e-05,-0.000628,0.000147,-0.000454,-0.00057,9.8e-05,0.000491,False,False,True,True,
+C2,smallpedia,TiRGN,UTIL12 - UTIL1,primary,MRR,0.000391,0.000162,0.000628,-1.5e-05,0.00082,0.000198,4.9e-05,0.000757,0.000535,True,False,True,True,not established; bounded within ±0.005
+C2,smallpedia,TiRGN,UTIL12 - UTIL1,primary,H1,0.000507,9.2e-05,0.000934,-0.000125,0.001115,0.000161,-7e-06,0.001013,0.000773,False,False,True,True,
+C2,smallpedia,TiRGN,UTIL12 - UTIL1,primary,H3,-4.5e-05,-0.000302,0.000224,-0.000337,0.000368,-0.000265,-0.000297,0.000296,0.000448,False,False,True,True,
+C2,smallpedia,TiRGN,UTIL12 - UTIL1,primary,H10,0.000343,5.7e-05,0.000619,-8.2e-05,0.000802,0.000102,-2.1e-05,0.000715,0.000563,False,False,True,True,
+C2,smallpedia,TiRGN,UTIL12 - UTIL2,secondary,MRR,0.00108,0.000736,0.001402,0.000789,0.001474,0.000793,0.000833,0.001393,0.00044,True,False,True,True,present (+); gain ≥ 0.005 excluded
+C2,smallpedia,TiRGN,UTIL12 - UTIL2,secondary,H1,0.001205,0.000669,0.001727,0.000659,0.001846,0.000759,0.000729,0.001738,0.000774,True,False,True,True,
+C2,smallpedia,TiRGN,UTIL12 - UTIL2,secondary,H3,0.000607,0.000198,0.001024,-0.000456,0.001632,0.000259,-0.000256,0.001474,0.001304,False,False,True,True,
+C2,smallpedia,TiRGN,UTIL12 - UTIL2,secondary,H10,0.001612,0.001315,0.001913,0.000942,0.002237,0.001364,0.001053,0.002146,0.000832,True,False,True,True,
+C2,smallpedia,TiRGN,"UTIL12 - FULL (same candidates, recomputed features, RB-style column layout)",fidelity,MRR,0.000232,1.5e-05,0.000449,-5.3e-05,0.000461,4.9e-05,-7e-06,0.000429,0.000336,False,False,True,True,not established; bounded within ±0.005
+C2,smallpedia,TiRGN,"UTIL12 - FULL (same candidates, recomputed features, RB-style column layout)",fidelity,H1,0.000321,-9e-05,0.000719,-0.000253,0.000783,-2.1e-05,-0.000157,0.00071,0.000671,False,False,True,True,
+C2,smallpedia,TiRGN,"UTIL12 - FULL (same candidates, recomputed features, RB-style column layout)",fidelity,H3,6.9e-05,-0.000143,0.000291,-0.0002,0.00034,-0.000112,-0.00016,0.000296,0.000342,False,False,True,True,
+C2,smallpedia,TiRGN,"UTIL12 - FULL (same candidates, recomputed features, RB-style column layout)",fidelity,H10,5.9e-05,-9.6e-05,0.000215,-9.3e-05,0.000225,-7.2e-05,-7.3e-05,0.000201,0.000203,False,False,True,True,
+C2,smallpedia,TiRGN,UTIL12 - BLEND,context,MRR,0.031191,0.030329,0.032051,0.027182,0.033635,0.03045,0.028094,0.033345,0.004018,True,False,False,True,present (+)
+C2,smallpedia,TiRGN,UTIL12 - BLEND,context,H1,0.046999,0.045576,0.048436,0.041101,0.050685,0.045765,0.042398,0.050231,0.005916,True,False,False,True,
+C2,smallpedia,TiRGN,UTIL12 - BLEND,context,H3,0.018001,0.017105,0.018919,0.015083,0.020089,0.017259,0.015687,0.019748,0.003045,True,False,False,True,
+C2,smallpedia,TiRGN,UTIL12 - BLEND,context,H10,0.004312,0.003865,0.004752,0.003657,0.004799,0.003925,0.003789,0.004734,0.000717,True,False,True,True,
+C2,smallpedia,TiRGN,CONF12 - BLEND,context,MRR,0.031147,0.030292,0.031997,0.027179,0.033551,0.030418,0.028065,0.033265,0.004001,True,False,False,True,present (+)
+C2,smallpedia,TiRGN,CONF12 - BLEND,context,H1,0.04691,0.045488,0.048269,0.040908,0.050541,0.04569,0.042425,0.050035,0.005887,True,False,False,True,
+C2,smallpedia,TiRGN,CONF12 - BLEND,context,H3,0.017957,0.017053,0.018885,0.015219,0.019918,0.01721,0.015775,0.019574,0.00288,True,False,False,True,
+C2,smallpedia,TiRGN,CONF12 - BLEND,context,H10,0.004535,0.004042,0.005021,0.003931,0.005056,0.004117,0.004025,0.004963,0.000717,True,False,True,True,
+C2,smallpedia,TiRGN,UTIL1 - BLEND,context,MRR,0.0308,0.029949,0.031673,0.026822,0.033169,0.030061,0.027741,0.032857,0.003931,True,False,False,True,present (+)
+C2,smallpedia,TiRGN,UTIL1 - BLEND,context,H1,0.046493,0.045051,0.047892,0.040673,0.049959,0.045261,0.042016,0.049479,0.005722,True,False,False,True,
+C2,smallpedia,TiRGN,UTIL1 - BLEND,context,H3,0.018046,0.017158,0.018962,0.015147,0.020049,0.017297,0.015746,0.019761,0.003037,True,False,False,True,
+C2,smallpedia,TiRGN,UTIL1 - BLEND,context,H10,0.003969,0.003478,0.004458,0.003365,0.004489,0.003557,0.00346,0.004392,0.000718,True,False,True,True,
+C2,smallpedia,TiRGN,UTIL2 - BLEND,context,MRR,0.030111,0.029205,0.030978,0.025823,0.032715,0.02935,0.026828,0.032408,0.004279,True,False,False,True,present (+)
+C2,smallpedia,TiRGN,UTIL2 - BLEND,context,H1,0.045794,0.044322,0.047242,0.039533,0.049718,0.044545,0.040944,0.049232,0.006356,True,False,False,True,
+C2,smallpedia,TiRGN,UTIL2 - BLEND,context,H3,0.017395,0.016527,0.018273,0.01457,0.019117,0.016655,0.015128,0.018882,0.002838,True,False,False,True,
+C2,smallpedia,TiRGN,UTIL2 - BLEND,context,H10,0.002701,0.002279,0.003098,0.002057,0.003102,0.002344,0.002169,0.003044,0.000687,True,False,True,True,
+B4,tkgl-icews,Stage B,HRCOV200 (RE-GCN) - G1,primary,MRR,0.040011,0.039809,0.040212,0.039252,0.04075,0.039844,0.039397,0.040623,0.000948,True,False,False,True,present (+)
+B4,tkgl-icews,Stage B,HRCOV200 (RE-GCN) - G1,primary,H1,0.019261,0.019029,0.019491,0.018744,0.01975,0.019072,0.018842,0.019685,0.000639,True,False,False,True,
+B4,tkgl-icews,Stage B,HRCOV200 (RE-GCN) - G1,primary,H3,0.042965,0.042689,0.043228,0.042067,0.043831,0.042736,0.042237,0.043699,0.00112,True,False,False,True,
+B4,tkgl-icews,Stage B,HRCOV200 (RE-GCN) - G1,primary,H10,0.085643,0.08531,0.085947,0.084174,0.087155,0.085365,0.084408,0.086856,0.001866,True,False,False,True,
+B4,tkgl-icews,Stage B,HRCOV150 (LogCL) - G1,primary,MRR,0.039124,0.038927,0.03932,0.038437,0.039816,0.038961,0.038545,0.039691,0.000879,True,False,False,True,present (+)
+B4,tkgl-icews,Stage B,HRCOV150 (LogCL) - G1,primary,H1,0.017866,0.017638,0.018101,0.017408,0.018305,0.017673,0.017483,0.018242,0.000575,True,False,False,True,
+B4,tkgl-icews,Stage B,HRCOV150 (LogCL) - G1,primary,H3,0.041976,0.041709,0.042235,0.041122,0.042806,0.041748,0.041291,0.04266,0.001059,True,False,False,True,
+B4,tkgl-icews,Stage B,HRCOV150 (LogCL) - G1,primary,H10,0.086041,0.085714,0.086358,0.084604,0.087537,0.085769,0.084837,0.08722,0.001834,True,False,False,True,
+B4,tkgl-icews,Stage B,G1 - RE-GCN base,secondary,MRR,0.060617,0.060327,0.060914,0.059862,0.061381,0.060371,0.059975,0.061251,0.000963,True,False,False,True,present (+)
+B4,tkgl-icews,Stage B,G1 - RE-GCN base,secondary,H1,0.072289,0.071933,0.072643,0.071392,0.073252,0.072003,0.071542,0.073059,0.001154,True,False,False,True,
+B4,tkgl-icews,Stage B,G1 - RE-GCN base,secondary,H3,0.073187,0.072794,0.073573,0.072322,0.07408,0.072854,0.072433,0.073934,0.001123,True,False,False,True,
+B4,tkgl-icews,Stage B,G1 - RE-GCN base,secondary,H10,0.029384,0.028963,0.029817,0.028236,0.030548,0.029033,0.0284,0.030325,0.00146,True,False,False,True,
+B4,tkgl-icews,Stage B,G1 - LogCL base,secondary,MRR,0.022596,0.022333,0.022863,0.022012,0.023131,0.022375,0.022114,0.023053,0.000708,True,False,False,True,present (+)
+B4,tkgl-icews,Stage B,G1 - LogCL base,secondary,H1,0.036397,0.036078,0.036728,0.035838,0.036925,0.036119,0.03594,0.036832,0.000685,True,False,False,True,
+B4,tkgl-icews,Stage B,G1 - LogCL base,secondary,H3,0.028681,0.028327,0.02902,0.027994,0.029324,0.028384,0.028122,0.029215,0.000833,True,False,False,True,
+B4,tkgl-icews,Stage B,G1 - LogCL base,secondary,H10,-0.009614,-0.009974,-0.009234,-0.010686,-0.008533,-0.009915,-0.010493,-0.0087,0.001358,False,True,True,False,
+B4,tkgl-icews,Stage B,G1 - RE-GCN BLEND,secondary,MRR,0.024704,0.024459,0.024956,0.023944,0.025473,0.024498,0.024078,0.025355,0.000952,True,False,False,True,present (+)
+B4,tkgl-icews,Stage B,G1 - RE-GCN BLEND,secondary,H1,0.037951,0.037641,0.03826,0.037034,0.038883,0.037693,0.037195,0.038707,0.00114,True,False,False,True,
+B4,tkgl-icews,Stage B,G1 - RE-GCN BLEND,secondary,H3,0.032102,0.031758,0.032455,0.031269,0.03298,0.031825,0.031379,0.032826,0.001091,True,False,False,True,
+B4,tkgl-icews,Stage B,G1 - RE-GCN BLEND,secondary,H10,-0.004965,-0.005334,-0.004598,-0.005892,-0.004087,-0.005269,-0.00573,-0.00421,0.001154,False,True,True,False,
+B4,tkgl-icews,Stage B,G1 - LogCL BLEND,secondary,MRR,0.010651,0.010415,0.010887,0.010127,0.011191,0.010452,0.010198,0.011098,0.000669,True,False,False,True,present (+)
+B4,tkgl-icews,Stage B,G1 - LogCL BLEND,secondary,H1,0.024063,0.023774,0.02435,0.023424,0.024723,0.023817,0.023517,0.024608,0.00083,True,False,False,True,
+B4,tkgl-icews,Stage B,G1 - LogCL BLEND,secondary,H3,0.016261,0.015946,0.016585,0.015626,0.016901,0.015994,0.015723,0.016795,0.000814,True,False,False,True,
+B4,tkgl-icews,Stage B,G1 - LogCL BLEND,secondary,H10,-0.019822,-0.020155,-0.019477,-0.020567,-0.019116,-0.0201,-0.02043,-0.019238,0.000905,False,True,True,False,
+B4,tkgl-icews,Stage B,HRCOV200 (RE-GCN) - RE-GCN BLEND,context,MRR,0.064715,0.064492,0.064942,0.063529,0.065936,0.064525,0.06371,0.065693,0.001513,True,False,False,True,present (+)
+B4,tkgl-icews,Stage B,HRCOV200 (RE-GCN) - RE-GCN BLEND,context,H1,0.057212,0.056925,0.057511,0.056033,0.05843,0.056973,0.056222,0.058182,0.001483,True,False,False,True,
+B4,tkgl-icews,Stage B,HRCOV200 (RE-GCN) - RE-GCN BLEND,context,H3,0.075067,0.074758,0.075376,0.073712,0.07648,0.074801,0.073908,0.076219,0.001758,True,False,False,True,
+B4,tkgl-icews,Stage B,HRCOV200 (RE-GCN) - RE-GCN BLEND,context,H10,0.080679,0.080374,0.08099,0.079326,0.082051,0.080421,0.079565,0.081817,0.001705,True,False,False,True,
+B4,tkgl-icews,Stage B,HRCOV150 (LogCL) - LogCL BLEND,context,MRR,0.049775,0.049583,0.049962,0.048881,0.050706,0.049616,0.049019,0.050541,0.001152,True,False,False,True,present (+)
+B4,tkgl-icews,Stage B,HRCOV150 (LogCL) - LogCL BLEND,context,H1,0.04193,0.04168,0.04219,0.041122,0.042776,0.041715,0.041233,0.042628,0.001053,True,False,False,True,
+B4,tkgl-icews,Stage B,HRCOV150 (LogCL) - LogCL BLEND,context,H3,0.058237,0.057962,0.058528,0.057154,0.059375,0.057998,0.057285,0.059163,0.00142,True,False,False,True,
+B4,tkgl-icews,Stage B,HRCOV150 (LogCL) - LogCL BLEND,context,H10,0.066219,0.065941,0.066502,0.065086,0.067405,0.065991,0.065256,0.067177,0.001458,True,False,False,True,
+C3,tkgl-icews,Stage B,RE-GCN-RN base - RE-GCN base [RN effect on the base],primary-partial,MRR,0.034375,0.034192,0.03456,0.032998,0.03585,0.034222,0.033213,0.035547,0.001788,True,False,False,True,present (+)
+C3,tkgl-icews,Stage B,RE-GCN-RN base - RE-GCN base [RN effect on the base],primary-partial,H1,0.032978,0.032725,0.033244,0.031651,0.034397,0.032764,0.031825,0.034138,0.001737,True,False,False,True,
+C3,tkgl-icews,Stage B,RE-GCN-RN base - RE-GCN base [RN effect on the base],primary-partial,H3,0.039077,0.038786,0.039349,0.037509,0.040743,0.038832,0.037752,0.040426,0.002021,True,False,False,True,
+C3,tkgl-icews,Stage B,RE-GCN-RN base - RE-GCN base [RN effect on the base],primary-partial,H10,0.03418,0.033918,0.034429,0.032763,0.035669,0.033955,0.032948,0.035435,0.001883,True,False,False,True,
+C3,tkgl-icews,Stage B,"HRCOV200_RN - HRCOV200 [RN effect on the re-ranker features, harness]",primary-partial,MRR,0.009384,0.00928,0.00949,0.008937,0.009859,0.009298,0.008995,0.009783,0.000594,True,False,False,True,present (+)
+C3,tkgl-icews,Stage B,"HRCOV200_RN - HRCOV200 [RN effect on the re-ranker features, harness]",primary-partial,H1,0.008054,0.007906,0.008209,0.007641,0.008495,0.007925,0.007702,0.008416,0.000549,True,False,False,True,
+C3,tkgl-icews,Stage B,"HRCOV200_RN - HRCOV200 [RN effect on the re-ranker features, harness]",primary-partial,H3,0.010282,0.010125,0.010436,0.009745,0.010839,0.010152,0.009837,0.010757,0.000696,True,False,False,True,
+C3,tkgl-icews,Stage B,"HRCOV200_RN - HRCOV200 [RN effect on the re-ranker features, harness]",primary-partial,H10,0.01133,0.011181,0.011482,0.010755,0.011941,0.011208,0.010855,0.011861,0.000753,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200 - RE-GCN base [gain without RN],primary-partial,MRR,0.100628,0.100377,0.100903,0.099522,0.101787,0.10042,0.099693,0.101563,0.001423,True,False,False,True,present (+)
+C3,tkgl-icews,Stage B,HRCOV200 - RE-GCN base [gain without RN],primary-partial,H1,0.091551,0.091233,0.091898,0.090405,0.092721,0.091273,0.090584,0.092525,0.001464,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200 - RE-GCN base [gain without RN],primary-partial,H3,0.116153,0.115815,0.116504,0.114834,0.117501,0.115864,0.115058,0.117247,0.001663,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200 - RE-GCN base [gain without RN],primary-partial,H10,0.115028,0.114692,0.115374,0.113909,0.116172,0.114745,0.114066,0.115963,0.001449,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200_RN - RE-GCN-RN base [HRCOV with RN features vs the RN base],primary-partial,MRR,0.075637,0.075394,0.075893,0.075131,0.076121,0.075436,0.075204,0.076051,0.000639,True,False,False,True,present (+)
+C3,tkgl-icews,Stage B,HRCOV200_RN - RE-GCN-RN base [HRCOV with RN features vs the RN base],primary-partial,H1,0.066626,0.0663,0.06695,0.066043,0.067179,0.066359,0.066141,0.067089,0.000716,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200_RN - RE-GCN-RN base [HRCOV with RN features vs the RN base],primary-partial,H3,0.087358,0.087005,0.087706,0.086727,0.087986,0.087067,0.086841,0.087878,0.00079,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200_RN - RE-GCN-RN base [HRCOV with RN features vs the RN base],primary-partial,H10,0.092178,0.091845,0.09251,0.091577,0.092791,0.091902,0.091665,0.0927,0.000778,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200_RN - RE-GCN base,secondary,MRR,0.110012,0.109755,0.110271,0.108609,0.11152,0.1098,0.108841,0.111256,0.001821,True,False,False,True,present (+)
+C3,tkgl-icews,Stage B,HRCOV200_RN - RE-GCN base,secondary,H1,0.099604,0.099273,0.099941,0.098198,0.101094,0.099324,0.098421,0.100856,0.001815,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200_RN - RE-GCN base,secondary,H3,0.126435,0.126075,0.126792,0.12484,0.12819,0.126136,0.125086,0.127866,0.002074,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200_RN - RE-GCN base,secondary,H10,0.126358,0.126009,0.126716,0.124936,0.127863,0.126071,0.125133,0.127604,0.001855,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200_RN - G1,secondary,MRR,0.049395,0.049188,0.049593,0.048323,0.050489,0.049221,0.048487,0.050296,0.001385,True,False,False,True,present (+)
+C3,tkgl-icews,Stage B,HRCOV200_RN - G1,secondary,H1,0.027315,0.027088,0.027549,0.026542,0.028073,0.027123,0.026666,0.027963,0.000985,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200_RN - G1,secondary,H3,0.053248,0.052963,0.053527,0.05202,0.054511,0.053016,0.052205,0.054304,0.001593,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200_RN - G1,secondary,H10,0.096974,0.096635,0.097291,0.095103,0.098864,0.096696,0.09541,0.098556,0.002389,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200_RN - RE-GCN BLEND,secondary,MRR,0.074099,0.073879,0.074323,0.072599,0.075673,0.07391,0.072831,0.075391,0.001916,True,False,False,True,present (+)
+C3,tkgl-icews,Stage B,HRCOV200_RN - RE-GCN BLEND,secondary,H1,0.065266,0.064968,0.065561,0.063859,0.066757,0.065013,0.064046,0.066452,0.001828,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200_RN - RE-GCN BLEND,secondary,H3,0.08535,0.085027,0.085677,0.08364,0.087145,0.085085,0.083913,0.086815,0.002186,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200_RN - RE-GCN BLEND,secondary,H10,0.092009,0.091677,0.092321,0.090311,0.093763,0.091734,0.090612,0.09348,0.002171,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200 - RE-GCN BLEND [without RN],secondary,MRR,0.064715,0.064492,0.064942,0.063529,0.065936,0.064525,0.06371,0.065693,0.001513,True,False,False,True,present (+)
+C3,tkgl-icews,Stage B,HRCOV200 - RE-GCN BLEND [without RN],secondary,H1,0.057212,0.056925,0.057511,0.056033,0.05843,0.056973,0.056222,0.058182,0.001483,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200 - RE-GCN BLEND [without RN],secondary,H3,0.075067,0.074758,0.075376,0.073712,0.07648,0.074801,0.073908,0.076219,0.001758,True,False,False,True,
+C3,tkgl-icews,Stage B,HRCOV200 - RE-GCN BLEND [without RN],secondary,H10,0.080679,0.080374,0.08099,0.079326,0.082051,0.080421,0.079565,0.081817,0.001705,True,False,False,True,
+C3,tkgl-icews,Stage B,RE-GCN-RN base - RE-GCN BLEND,secondary,MRR,-0.001538,-0.001758,-0.001316,-0.003079,1e-06,-0.00173,-0.002826,-0.000237,0.001948,False,True,True,True,present (−); loss ≥ 0.005 excluded
+C3,tkgl-icews,Stage B,RE-GCN-RN base - RE-GCN BLEND,secondary,H1,-0.00136,-0.001665,-0.001056,-0.002781,0.000107,-0.001613,-0.002568,-0.000167,0.001824,False,True,True,True,
+C3,tkgl-icews,Stage B,RE-GCN-RN base - RE-GCN BLEND,secondary,H3,-0.002008,-0.002324,-0.001674,-0.003727,-0.000248,-0.002279,-0.003501,-0.000533,0.002214,False,True,True,True,
+C3,tkgl-icews,Stage B,RE-GCN-RN base - RE-GCN BLEND,secondary,H10,-0.000169,-0.000508,0.000164,-0.001972,0.001642,-0.00045,-0.001709,0.001371,0.002299,False,False,True,True,
+A3,polecat,TiRGN,HRCOV_PAT - BLEND,descriptive,MRR,0.047571,0.046996,0.048171,0.046459,0.048765,0.047107,0.046631,0.048572,0.00147,True,False,False,True,present (+)
+A3,polecat,TiRGN,HRCOV_PAT - BLEND,descriptive,H1,0.039198,0.038432,0.039996,0.037918,0.040496,0.03855,0.038159,0.040306,0.001647,True,False,False,True,
+A3,polecat,TiRGN,HRCOV_PAT - BLEND,descriptive,H3,0.056277,0.055437,0.057082,0.054681,0.057928,0.055577,0.054954,0.057676,0.002052,True,False,False,True,
+A3,polecat,TiRGN,HRCOV_PAT - BLEND,descriptive,H10,0.064947,0.06402,0.065812,0.063382,0.066648,0.064199,0.063645,0.066309,0.002062,True,False,False,True,
+A3,polecat,TiRGN,HRCOV_PAT - POOL,descriptive,MRR,0.047516,0.046933,0.048113,0.046402,0.048717,0.047039,0.046574,0.048513,0.001471,True,False,False,True,present (+)
+A3,polecat,TiRGN,HRCOV_PAT - POOL,descriptive,H1,0.039198,0.038432,0.039996,0.037918,0.040496,0.03855,0.038159,0.040306,0.001647,True,False,False,True,
+A3,polecat,TiRGN,HRCOV_PAT - POOL,descriptive,H3,0.056277,0.055437,0.057082,0.054681,0.057928,0.055577,0.054954,0.057676,0.002052,True,False,False,True,
+A3,polecat,TiRGN,HRCOV_PAT - POOL,descriptive,H10,0.064947,0.06402,0.065812,0.063382,0.066648,0.064199,0.063645,0.066309,0.002062,True,False,False,True,
+A3,polecat,TiRGN,HRCOV_PAT - base,descriptive,MRR,0.061889,0.061263,0.062527,0.060562,0.063322,0.06135,0.060739,0.063066,0.001751,True,False,False,True,present (+)
+A3,polecat,TiRGN,HRCOV_PAT - base,descriptive,H1,0.053907,0.053033,0.054767,0.052359,0.055535,0.053166,0.052575,0.055313,0.002065,True,False,False,True,
+A3,polecat,TiRGN,HRCOV_PAT - base,descriptive,H3,0.07137,0.070444,0.072231,0.069631,0.073164,0.070608,0.069918,0.072863,0.002254,True,False,False,True,
+A3,polecat,TiRGN,HRCOV_PAT - base,descriptive,H10,0.077877,0.076903,0.078807,0.076137,0.079743,0.077083,0.076396,0.079423,0.002305,True,False,False,True,
+A3,polecat,TiRGN,HRCOV_PAT - HR,descriptive,MRR,0.01295,0.01262,0.013283,0.012353,0.013585,0.012659,0.012441,0.013486,0.000779,True,False,False,True,present (+)
+A3,polecat,TiRGN,HRCOV_PAT - HR,descriptive,H1,0.007233,0.006781,0.007701,0.006554,0.007908,0.006861,0.006652,0.007809,0.000871,True,False,False,True,
+A3,polecat,TiRGN,HRCOV_PAT - HR,descriptive,H3,0.013597,0.013089,0.014065,0.01281,0.01445,0.013165,0.012932,0.014311,0.001042,True,False,False,True,
+A3,polecat,TiRGN,HRCOV_PAT - HR,descriptive,H10,0.025945,0.025372,0.026502,0.024944,0.02695,0.02545,0.025106,0.026778,0.00128,True,False,False,True,
+A3,polecat,LogCL,HRCOV_PAT - BLEND,descriptive,MRR,0.057766,0.057157,0.058409,0.056384,0.059166,0.057243,0.056603,0.058936,0.001754,True,False,False,True,present (+)
+A3,polecat,LogCL,HRCOV_PAT - BLEND,descriptive,H1,0.044437,0.043641,0.045263,0.043061,0.045888,0.043782,0.043215,0.045651,0.001862,True,False,False,True,
+A3,polecat,LogCL,HRCOV_PAT - BLEND,descriptive,H3,0.068945,0.068056,0.069858,0.067167,0.070799,0.068195,0.06748,0.070502,0.002297,True,False,False,True,
+A3,polecat,LogCL,HRCOV_PAT - BLEND,descriptive,H10,0.086361,0.085415,0.087293,0.084442,0.088353,0.085554,0.084755,0.088011,0.002473,True,False,False,True,
+A3,polecat,LogCL,HRCOV_PAT - POOL,descriptive,MRR,0.057723,0.057082,0.058389,0.05634,0.059124,0.057184,0.056564,0.058892,0.001754,True,False,False,True,present (+)
+A3,polecat,LogCL,HRCOV_PAT - POOL,descriptive,H1,0.044437,0.043641,0.045263,0.043061,0.045888,0.043782,0.043215,0.045651,0.001862,True,False,False,True,
+A3,polecat,LogCL,HRCOV_PAT - POOL,descriptive,H3,0.068943,0.068033,0.069844,0.067165,0.070797,0.068199,0.06748,0.070506,0.002297,True,False,False,True,
+A3,polecat,LogCL,HRCOV_PAT - POOL,descriptive,H10,0.086378,0.085458,0.087349,0.08446,0.088369,0.085589,0.084776,0.088026,0.002475,True,False,False,True,
+A3,polecat,LogCL,HRCOV_PAT - base,descriptive,MRR,0.092339,0.091614,0.093031,0.090653,0.094104,0.09172,0.090895,0.09387,0.002246,True,False,False,True,present (+)
+A3,polecat,LogCL,HRCOV_PAT - base,descriptive,H1,0.072303,0.071413,0.073217,0.070393,0.074258,0.071539,0.070693,0.073918,0.002467,True,False,False,True,
+A3,polecat,LogCL,HRCOV_PAT - base,descriptive,H3,0.107628,0.106633,0.108591,0.105633,0.109806,0.106784,0.105936,0.109461,0.002687,True,False,False,True,
+A3,polecat,LogCL,HRCOV_PAT - base,descriptive,H10,0.133887,0.132837,0.134956,0.131534,0.136255,0.133001,0.131889,0.135896,0.003056,True,False,False,True,
+A3,polecat,LogCL,HRCOV_PAT - HR,descriptive,MRR,0.034698,0.034217,0.035181,0.033637,0.03575,0.034293,0.033797,0.035588,0.001348,True,False,False,True,present (+)
+A3,polecat,LogCL,HRCOV_PAT - HR,descriptive,H1,0.019541,0.018988,0.02014,0.018597,0.020522,0.019076,0.018756,0.020339,0.001194,True,False,False,True,
+A3,polecat,LogCL,HRCOV_PAT - HR,descriptive,H3,0.038323,0.037692,0.039022,0.03697,0.039649,0.037802,0.037233,0.039433,0.001692,True,False,False,True,
+A3,polecat,LogCL,HRCOV_PAT - HR,descriptive,H10,0.067901,0.067074,0.068724,0.065962,0.069839,0.067251,0.066205,0.069546,0.00255,True,False,False,True,
+A3,smallpedia,TiRGN,HRCOV_PAT - BLEND,descriptive,MRR,0.030959,0.030041,0.03189,0.027031,0.033334,0.030177,0.027926,0.033052,0.003938,True,False,False,True,present (+)
+A3,smallpedia,TiRGN,HRCOV_PAT - BLEND,descriptive,H1,0.046679,0.045181,0.048109,0.040991,0.050208,0.045438,0.042269,0.04971,0.005693,True,False,False,True,
+A3,smallpedia,TiRGN,HRCOV_PAT - BLEND,descriptive,H3,0.017932,0.016966,0.018827,0.015107,0.019921,0.017133,0.015647,0.01958,0.002959,True,False,False,True,
+A3,smallpedia,TiRGN,HRCOV_PAT - BLEND,descriptive,H10,0.004253,0.00381,0.004735,0.003594,0.004743,0.003885,0.003717,0.004667,0.000721,True,False,True,True,
+A3,smallpedia,TiRGN,HRCOV_PAT - POOL,descriptive,MRR,0.031016,0.030127,0.03194,0.027079,0.033397,0.030271,0.027978,0.033111,0.003947,True,False,False,True,present (+)
+A3,smallpedia,TiRGN,HRCOV_PAT - POOL,descriptive,H1,0.046679,0.045181,0.048109,0.040991,0.050208,0.045438,0.042269,0.04971,0.005693,True,False,False,True,
+A3,smallpedia,TiRGN,HRCOV_PAT - POOL,descriptive,H3,0.017932,0.016966,0.018827,0.015107,0.019921,0.017133,0.015647,0.01958,0.002959,True,False,False,True,
+A3,smallpedia,TiRGN,HRCOV_PAT - POOL,descriptive,H10,0.004167,0.00371,0.004617,0.003487,0.004697,0.003789,0.003632,0.004616,0.000758,True,False,True,True,
+A3,smallpedia,TiRGN,HRCOV_PAT - base,descriptive,MRR,0.04036,0.039396,0.041303,0.035827,0.04307,0.03954,0.036735,0.042731,0.004597,True,False,False,True,present (+)
+A3,smallpedia,TiRGN,HRCOV_PAT - base,descriptive,H1,0.055657,0.054057,0.057116,0.049602,0.059207,0.054333,0.050893,0.058801,0.006058,True,False,False,True,
+A3,smallpedia,TiRGN,HRCOV_PAT - base,descriptive,H3,0.030747,0.029686,0.031754,0.026539,0.033447,0.02985,0.027332,0.033097,0.004308,True,False,False,True,
+A3,smallpedia,TiRGN,HRCOV_PAT - base,descriptive,H10,0.0079,0.007344,0.008453,0.006989,0.008568,0.007409,0.00713,0.008481,0.001029,True,False,False,True,
+A3,smallpedia,TiRGN,HRCOV_PAT - HR,descriptive,MRR,0.001173,0.000808,0.00154,0.000706,0.001642,0.000858,0.000781,0.001575,0.000598,True,False,True,True,present (+); gain ≥ 0.005 excluded
+A3,smallpedia,TiRGN,HRCOV_PAT - HR,descriptive,H1,0.00122,0.000639,0.001824,0.000384,0.001998,0.000731,0.000527,0.001892,0.001037,True,False,True,True,
+A3,smallpedia,TiRGN,HRCOV_PAT - HR,descriptive,H3,0.000944,0.00049,0.001412,0.000113,0.001805,0.000558,0.000265,0.001675,0.001053,True,False,True,True,
+A3,smallpedia,TiRGN,HRCOV_PAT - HR,descriptive,H10,0.001726,0.001399,0.002045,0.001044,0.002309,0.001465,0.001205,0.002231,0.000791,True,False,True,True,
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - BLEND,descriptive,MRR,0.033623,0.032606,0.034572,0.029019,0.036383,0.032761,0.029962,0.036016,0.004642,True,False,False,True,present (+)
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - BLEND,descriptive,H1,0.053549,0.051898,0.055185,0.046583,0.057626,0.052121,0.048027,0.057108,0.006952,True,False,False,True,
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - BLEND,descriptive,H3,0.016688,0.015787,0.017599,0.013563,0.019018,0.015952,0.01414,0.018643,0.003418,True,False,False,True,
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - BLEND,descriptive,H10,0.002188,0.001724,0.002678,0.001411,0.002874,0.0018,0.001552,0.002772,0.000937,True,False,True,True,
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - POOL,descriptive,MRR,0.033657,0.032705,0.034661,0.02905,0.036418,0.032871,0.029994,0.036061,0.004646,True,False,False,True,present (+)
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - POOL,descriptive,H1,0.053549,0.051898,0.055185,0.046583,0.057626,0.052121,0.048027,0.057108,0.006952,True,False,False,True,
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - POOL,descriptive,H3,0.016688,0.015787,0.017599,0.013563,0.019018,0.015952,0.01414,0.018643,0.003418,True,False,False,True,
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - POOL,descriptive,H10,0.002206,0.001718,0.00268,0.001366,0.002982,0.001802,0.001479,0.002885,0.001044,True,False,True,True,
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - base,descriptive,MRR,0.067895,0.066627,0.069147,0.059355,0.07285,0.066839,0.06098,0.072128,0.00854,True,False,False,True,present (+)
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - base,descriptive,H1,0.072063,0.070322,0.073744,0.063668,0.077047,0.070547,0.065503,0.076291,0.008371,True,False,False,True,
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - base,descriptive,H3,0.072788,0.071264,0.07422,0.061997,0.078732,0.071542,0.064393,0.077997,0.010433,True,False,False,True,
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - base,descriptive,H10,0.050713,0.049559,0.051812,0.042873,0.055207,0.049739,0.044432,0.054648,0.007779,True,False,False,True,
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - HR,descriptive,MRR,0.016429,0.015661,0.017186,0.014008,0.017911,0.015777,0.014398,0.017712,0.00251,True,False,False,True,present (+)
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - HR,descriptive,H1,0.012476,0.011615,0.013366,0.010539,0.01379,0.011744,0.010892,0.013606,0.002029,True,False,False,True,
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - HR,descriptive,H3,0.019977,0.019151,0.020833,0.01676,0.02188,0.019276,0.01737,0.021602,0.003237,True,False,False,True,
+A3,smallpedia,RE-GCN (TGB config),HRCOV_PAT - HR,descriptive,H10,0.02355,0.022773,0.024328,0.019687,0.025852,0.02289,0.020371,0.025572,0.003907,True,False,False,True,
+A3,ICEWS18,TiRGN,HRCOV_PAT - BLEND,descriptive,MRR,0.020967,0.019992,0.021987,0.019735,0.02224,0.020143,0.019922,0.022009,0.001568,True,False,False,True,present (+)
+A3,ICEWS18,TiRGN,HRCOV_PAT - BLEND,descriptive,H1,0.01981,0.018249,0.021358,0.018142,0.021516,0.018515,0.018423,0.021254,0.002187,True,False,False,True,
+A3,ICEWS18,TiRGN,HRCOV_PAT - BLEND,descriptive,H3,0.023612,0.02204,0.025213,0.021928,0.025272,0.022336,0.02226,0.024979,0.002075,True,False,False,True,
+A3,ICEWS18,TiRGN,HRCOV_PAT - BLEND,descriptive,H10,0.023416,0.02194,0.024728,0.021208,0.025889,0.022165,0.021525,0.025416,0.002941,True,False,False,True,
+A3,ICEWS18,TiRGN,HRCOV_PAT - POOL,descriptive,MRR,0.021019,0.020053,0.022006,0.019789,0.022289,0.02019,0.019982,0.022059,0.001567,True,False,False,True,present (+)
+A3,ICEWS18,TiRGN,HRCOV_PAT - POOL,descriptive,H1,0.01981,0.018249,0.021358,0.018142,0.021516,0.018515,0.018423,0.021254,0.002187,True,False,False,True,
+A3,ICEWS18,TiRGN,HRCOV_PAT - POOL,descriptive,H3,0.023612,0.02204,0.025213,0.021928,0.025272,0.022336,0.02226,0.024979,0.002075,True,False,False,True,
+A3,ICEWS18,TiRGN,HRCOV_PAT - POOL,descriptive,H10,0.023416,0.02194,0.024728,0.021208,0.025889,0.022165,0.021525,0.025416,0.002941,True,False,False,True,
+A3,ICEWS18,TiRGN,HRCOV_PAT - base,descriptive,MRR,0.033869,0.032653,0.035094,0.03238,0.035423,0.032878,0.032624,0.035191,0.001897,True,False,False,True,present (+)
+A3,ICEWS18,TiRGN,HRCOV_PAT - base,descriptive,H1,0.033727,0.031954,0.035527,0.031997,0.035553,0.032196,0.032207,0.035268,0.0023,True,False,False,True,
+A3,ICEWS18,TiRGN,HRCOV_PAT - base,descriptive,H3,0.037185,0.035268,0.038901,0.035004,0.03945,0.035641,0.035376,0.039101,0.002837,True,False,False,True,
+A3,ICEWS18,TiRGN,HRCOV_PAT - base,descriptive,H10,0.033821,0.032209,0.035436,0.03145,0.036517,0.032489,0.031724,0.035992,0.003283,True,False,False,True,
+A3,ICEWS18,TiRGN,HRCOV_PAT - HR,descriptive,MRR,0.003873,0.003311,0.004432,0.003105,0.00463,0.003385,0.003221,0.004506,0.000958,True,False,True,True,present (+); gain ≥ 0.005 excluded
+A3,ICEWS18,TiRGN,HRCOV_PAT - HR,descriptive,H1,0.002745,0.001854,0.003687,0.001513,0.003923,0.001978,0.001728,0.003726,0.001499,True,False,True,True,
+A3,ICEWS18,TiRGN,HRCOV_PAT - HR,descriptive,H3,0.004191,0.003236,0.00513,0.003042,0.005321,0.003397,0.003208,0.005153,0.001459,True,False,False,True,
+A3,ICEWS18,TiRGN,HRCOV_PAT - HR,descriptive,H10,0.006129,0.005197,0.007088,0.004684,0.007658,0.005359,0.004898,0.007409,0.001902,True,False,False,True,
+A3,ICEWS18,RE-GCN,HRCOV_PAT - BLEND,descriptive,MRR,0.035465,0.03427,0.036698,0.033937,0.03705,0.034429,0.034151,0.036805,0.002027,True,False,False,True,present (+)
+A3,ICEWS18,RE-GCN,HRCOV_PAT - BLEND,descriptive,H1,0.030286,0.028587,0.031938,0.028163,0.032407,0.028795,0.028552,0.03208,0.002713,True,False,False,True,
+A3,ICEWS18,RE-GCN,HRCOV_PAT - BLEND,descriptive,H3,0.040825,0.039005,0.042537,0.038876,0.042874,0.039328,0.039155,0.042515,0.002523,True,False,False,True,
+A3,ICEWS18,RE-GCN,HRCOV_PAT - BLEND,descriptive,H10,0.048041,0.046167,0.049833,0.045633,0.05076,0.046493,0.046,0.050348,0.003264,True,False,False,True,
+A3,ICEWS18,RE-GCN,HRCOV_PAT - POOL,descriptive,MRR,0.035487,0.034296,0.036695,0.033961,0.037072,0.0345,0.034177,0.036825,0.002023,True,False,False,True,present (+)
+A3,ICEWS18,RE-GCN,HRCOV_PAT - POOL,descriptive,H1,0.030286,0.028587,0.031938,0.028163,0.032407,0.028795,0.028552,0.03208,0.002713,True,False,False,True,
+A3,ICEWS18,RE-GCN,HRCOV_PAT - POOL,descriptive,H3,0.040825,0.039005,0.042537,0.038876,0.042874,0.039328,0.039155,0.042515,0.002523,True,False,False,True,
+A3,ICEWS18,RE-GCN,HRCOV_PAT - POOL,descriptive,H10,0.048041,0.046167,0.049833,0.045633,0.05076,0.046493,0.046,0.050348,0.003264,True,False,False,True,
+A3,ICEWS18,RE-GCN,HRCOV_PAT - base,descriptive,MRR,0.072317,0.070712,0.073857,0.069755,0.075031,0.070991,0.070119,0.074561,0.003352,True,False,False,True,present (+)
+A3,ICEWS18,RE-GCN,HRCOV_PAT - base,descriptive,H1,0.063579,0.061398,0.065587,0.060571,0.066529,0.061731,0.060987,0.066074,0.003805,True,False,False,True,
+A3,ICEWS18,RE-GCN,HRCOV_PAT - base,descriptive,H3,0.085138,0.082911,0.087308,0.08238,0.088181,0.083217,0.0827,0.087615,0.003675,True,False,False,True,
+A3,ICEWS18,RE-GCN,HRCOV_PAT - base,descriptive,H10,0.087409,0.085212,0.089636,0.083426,0.091323,0.085585,0.084159,0.09067,0.004972,True,False,False,True,
+A3,ICEWS18,RE-GCN,HRCOV_PAT - HR,descriptive,MRR,0.017391,0.016483,0.018292,0.015798,0.018894,0.016626,0.016089,0.018722,0.001966,True,False,False,True,present (+)
+A3,ICEWS18,RE-GCN,HRCOV_PAT - HR,descriptive,H1,0.011373,0.010243,0.012554,0.009618,0.013079,0.010405,0.009916,0.012845,0.002148,True,False,False,True,
+A3,ICEWS18,RE-GCN,HRCOV_PAT - HR,descriptive,H3,0.020086,0.018784,0.021385,0.018555,0.021653,0.019,0.018781,0.021408,0.001977,True,False,False,True,
+A3,ICEWS18,RE-GCN,HRCOV_PAT - HR,descriptive,H10,0.030272,0.028815,0.031685,0.027896,0.032831,0.029027,0.028273,0.032428,0.003192,True,False,False,True,
+A3,GDELT,TiRGN,HRCOV_PAT - BLEND,descriptive,MRR,0.00988,0.009497,0.010262,0.009226,0.010557,0.009559,0.009352,0.010463,0.000843,True,False,False,True,present (+)
+A3,GDELT,TiRGN,HRCOV_PAT - BLEND,descriptive,H1,0.00898,0.008438,0.009566,0.008187,0.009805,0.008515,0.008319,0.00968,0.001029,True,False,False,True,
+A3,GDELT,TiRGN,HRCOV_PAT - BLEND,descriptive,H3,0.011412,0.010772,0.012034,0.010469,0.012334,0.010904,0.010626,0.012166,0.001151,True,False,False,True,
+A3,GDELT,TiRGN,HRCOV_PAT - BLEND,descriptive,H10,0.01308,0.012413,0.013731,0.011905,0.014269,0.012512,0.012097,0.014083,0.0015,True,False,False,True,
+A3,GDELT,TiRGN,HRCOV_PAT - POOL,descriptive,MRR,0.009882,0.009493,0.010272,0.009229,0.01056,0.009558,0.009355,0.010466,0.000843,True,False,False,True,present (+)
+A3,GDELT,TiRGN,HRCOV_PAT - POOL,descriptive,H1,0.00898,0.008438,0.009566,0.008187,0.009805,0.008515,0.008319,0.00968,0.001029,True,False,False,True,
+A3,GDELT,TiRGN,HRCOV_PAT - POOL,descriptive,H3,0.011412,0.010772,0.012034,0.010469,0.012334,0.010904,0.010626,0.012166,0.001151,True,False,False,True,
+A3,GDELT,TiRGN,HRCOV_PAT - POOL,descriptive,H10,0.01308,0.012413,0.013731,0.011905,0.014269,0.012512,0.012097,0.014083,0.0015,True,False,False,True,
+A3,GDELT,TiRGN,HRCOV_PAT - base,descriptive,MRR,0.05263,0.052075,0.053224,0.049685,0.055902,0.052155,0.050195,0.055309,0.003904,True,False,False,True,present (+)
+A3,GDELT,TiRGN,HRCOV_PAT - base,descriptive,H1,0.04533,0.044584,0.04607,0.042371,0.04858,0.044702,0.042945,0.048005,0.003865,True,False,False,True,
+A3,GDELT,TiRGN,HRCOV_PAT - base,descriptive,H3,0.064968,0.064096,0.065806,0.06143,0.068908,0.064249,0.061988,0.068132,0.004719,True,False,False,True,
+A3,GDELT,TiRGN,HRCOV_PAT - base,descriptive,H10,0.065735,0.064908,0.066591,0.062878,0.06898,0.065049,0.063302,0.068334,0.003832,True,False,False,True,
+A3,GDELT,TiRGN,HRCOV_PAT - HR,descriptive,MRR,0.003309,0.003124,0.003503,0.003,0.003676,0.003156,0.003056,0.003611,0.000419,True,False,True,True,present (+); gain ≥ 0.005 excluded
+A3,GDELT,TiRGN,HRCOV_PAT - HR,descriptive,H1,0.001694,0.001437,0.001938,0.001374,0.002057,0.001477,0.001418,0.001995,0.000431,True,False,True,True,
+A3,GDELT,TiRGN,HRCOV_PAT - HR,descriptive,H3,0.003377,0.003054,0.003689,0.002956,0.00381,0.003104,0.003017,0.003737,0.000554,True,False,True,True,
+A3,GDELT,TiRGN,HRCOV_PAT - HR,descriptive,H10,0.007495,0.007131,0.007887,0.006865,0.008204,0.007184,0.006954,0.008064,0.000852,True,False,False,True,
+A3,GDELT,LogCL,HRCOV_PAT - BLEND,descriptive,MRR,0.007681,0.00726,0.008051,0.007009,0.008423,0.007333,0.007119,0.008321,0.000904,True,False,False,True,present (+)
+A3,GDELT,LogCL,HRCOV_PAT - BLEND,descriptive,H1,0.008556,0.007993,0.009149,0.007747,0.009444,0.008104,0.007873,0.009305,0.001102,True,False,False,True,
+A3,GDELT,LogCL,HRCOV_PAT - BLEND,descriptive,H3,0.008426,0.007793,0.00907,0.007418,0.009442,0.007895,0.007585,0.009261,0.001271,True,False,False,True,
+A3,GDELT,LogCL,HRCOV_PAT - BLEND,descriptive,H10,0.006939,0.006225,0.007645,0.005706,0.008153,0.006337,0.005936,0.007958,0.001545,True,False,False,True,
+A3,GDELT,LogCL,HRCOV_PAT - POOL,descriptive,MRR,0.007686,0.007287,0.00809,0.007013,0.008426,0.007343,0.007122,0.008325,0.000904,True,False,False,True,present (+)
+A3,GDELT,LogCL,HRCOV_PAT - POOL,descriptive,H1,0.008556,0.007993,0.009149,0.007747,0.009444,0.008104,0.007873,0.009305,0.001102,True,False,False,True,
+A3,GDELT,LogCL,HRCOV_PAT - POOL,descriptive,H3,0.008426,0.007793,0.00907,0.007418,0.009442,0.007895,0.007585,0.009261,0.001271,True,False,False,True,
+A3,GDELT,LogCL,HRCOV_PAT - POOL,descriptive,H10,0.006939,0.006225,0.007645,0.005706,0.008153,0.006337,0.005936,0.007958,0.001545,True,False,False,True,
+A3,GDELT,LogCL,HRCOV_PAT - base,descriptive,MRR,0.054508,0.053873,0.055139,0.051393,0.057934,0.053976,0.051957,0.057377,0.004159,True,False,False,True,present (+)
+A3,GDELT,LogCL,HRCOV_PAT - base,descriptive,H1,0.045761,0.045024,0.046488,0.042829,0.049065,0.045151,0.043325,0.048504,0.003976,True,False,False,True,
+A3,GDELT,LogCL,HRCOV_PAT - base,descriptive,H3,0.066673,0.065804,0.067541,0.063011,0.070731,0.065958,0.063638,0.070065,0.004958,True,False,False,True,
+A3,GDELT,LogCL,HRCOV_PAT - base,descriptive,H10,0.072022,0.071128,0.072889,0.068779,0.075595,0.071291,0.069274,0.075019,0.00432,True,False,False,True,
+A3,GDELT,LogCL,HRCOV_PAT - HR,descriptive,MRR,0.012299,0.011999,0.012625,0.011392,0.013309,0.012038,0.011544,0.013156,0.00119,True,False,False,True,present (+)
+A3,GDELT,LogCL,HRCOV_PAT - HR,descriptive,H1,0.008182,0.007799,0.00854,0.007409,0.009029,0.007887,0.007563,0.008877,0.000979,True,False,False,True,
+A3,GDELT,LogCL,HRCOV_PAT - HR,descriptive,H3,0.014523,0.014077,0.014961,0.013411,0.015714,0.014149,0.01363,0.015531,0.001447,True,False,False,True,
+A3,GDELT,LogCL,HRCOV_PAT - HR,descriptive,H10,0.021482,0.020995,0.021983,0.020119,0.022999,0.021078,0.020338,0.02274,0.001808,True,False,False,True,

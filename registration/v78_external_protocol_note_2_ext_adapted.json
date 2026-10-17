@@ -1,0 +1,45 @@
+{
+ "note_id": "v78_external_protocol_note_2_ext_adapted",
+ "label": "registered-optional comparator run (EXT_adapted, CountTRuCoLa) executed AFTER the v78 framing verdict was read",
+ "parent_rule": {
+  "rule_id": "v78_framing_rule",
+  "sha256": "8e05c67b7ce8f3a475ac391e813463b9d435f8add5af13e5c4d03f78483a5f2d"
+ },
+ "amendment": {
+  "name": "v78_rule_amendment_1",
+  "sha256": "8fffffcaad75b066fe0fb35127e101c5bbe11f65de7ff4654068f5170962d84e",
+  "version_id": "9fd966c1",
+  "field": "EXT.EXT_adapted"
+ },
+ "written_before_any_adapted_number": true,
+ "split": {
+  "definition": "amendment 'common.data': fit part = validation timestamps below the 70% timestamp cut, selection part = the rest (hcpat_train.py / v78_train.py: uts = unique(ts of the validation rows); cut = uts[int(0.7*len(uts))])",
+  "tkgl-smallpedia": {
+   "validation_rows": "all 162,066 harness valid rows",
+   "split_file": "hardening/v78/smallpedia/hist/valid_hist.npz",
+   "sha256": "f4b4910d15f7651cdab7a07f62ffc56fba07c33109f034cdb5e90299d343cc86",
+   "cut_ts_id": 105,
+   "n_fit_rows": 105606,
+   "n_selection_rows": 56460
+  },
+  "tkgl-polecat": {
+   "validation_rows": "200,000-row HRcov sample",
+   "split_files": {
+    "pc_tirgn/work/valid_sample_idx.npy": "604f241d533a59c8e64eedb7cd1d97c1bbd1fad5266d4e8cd9d68af2c794fb97",
+    "hardening/v78/polecat/hist/valid_hist.npz": "363f10c9b5bf9653dd6978fcf77609c985dd284414d97f65043de3ba89411c46"
+   },
+   "note": "valid_hist.npz['rows'] == valid_sample_idx.npy (checked); cut identical over the sample and over all 533,472 valid rows (329 unique ts)",
+   "cut_ts_id": 1423,
+   "n_fit_rows_sample": 139236,
+   "n_selection_rows_sample": 60764,
+   "n_all_valid_rows_ts_ge_cut": 161448
+  }
+ },
+ "adaptation": "CountTRuCoLa released code and released config unchanged (same repo commit 5d9aedf, same DATASET_OVERRIDES, NUM_CPUS as before). A wrapper moves the validation facts with timestamp < cut (both directions, as CountTRuCoLa's dataset contains inverse quads) from the TGB val mask to the train mask in memory before RuleDataset indexes them; the val split then holds only the selection window. Rule examples, rule set and confidence-function parameters are therefore learned on train + validation fit window. Application history (union of all splits, t' < t) is unchanged; z-/f-rule statistics follow the released code on the modified splits.",
+ "interpretation_polecat": "For tkgl-polecat the fit part is applied as ALL validation facts with ts < 1423 (372,024 rows), not only the 139,236 fit rows of the 200,000-row sample: CountTRuCoLa's learning treats every head fact absent from its train index as a negative example (closed world inside the train split), so adding only sampled facts would turn 62% of the true fit-window facts into false negatives. The cut (the split) is exactly the harness's. This gives CountTRuCoLa more fit-window label access than the HRcov ranker's capped 120,000 fit queries; declared as a deviation. For tkgl-smallpedia both readings coincide.",
+ "choices": "No hyper-parameter or variant choice is made: settings are as released, so there is nothing to select on the selection part. Selection-part MRR/H@k are reported (harness selection rows: smallpedia 56,460; polecat 60,764 sample rows, plus all 161,448 polecat rows with ts >= cut, descriptive).",
+ "dumps": "tracks/v78_external/dumps/counttrucola_adapted/<dataset>/{val,test}/, same format and harness query order as counttrucola; validation rows inside the learning data (ts < cut) carry in_learning_data=True and NaN scores/rr (no ranking is produced for them).",
+ "not_done": "No HRcov comparison, no blend, no EdgeReMIND adapted.",
+ "created_utc": "2026-10-16T08:20:08Z",
+ "sha256": "ce9ef0ebc845dafd70fbf5ecee0911a7357295b4408032c7dcc423b1d48e7d6b"
+}

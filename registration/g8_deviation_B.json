@@ -1,0 +1,43 @@
+{
+ "name": "g8_deviation_B",
+ "amends": "g8_rule.json (version e5462691-c374-4ff8-a1da-73357795c50f, sha256 273be7b9...97c3)",
+ "registered_before_any_cogntke_mrr": true,
+ "decision": "PI decision 'go B' (relayed by the lead) after the smoke cost estimate g8_smoke_cost.json (6352b1ea-762c-4fc6-adc8-0e53c1e4c89f). The choice was made on cost alone: no trained CognTKE exists and no CognTKE valid or test MRR has been computed.",
+ "reason": "Projected 20-epoch wall time on one RTX PRO 6000: paper B.2 config (n_layer 4) 80.7 h, README config (n_layer 3) 40.5 h, both above the 36 h cap. Our cost model reproduces CountTRuCoLa's reported CognTKE polecat total (417,600 s) within +5% for the README config and +37% for the paper config, so the README command is the most plausible configuration behind the published 0.287.",
+ "hyperparameters_used": {
+  "source": "authors' README command (python main.py --n_layer 3 --window_size 15 --batch_size 128 --train_mode half --model_name TRED_GNN) + released argparse defaults for everything the README does not set",
+  "n_layer": 3,
+  "window_size": 15,
+  "batch_size": 128,
+  "train_mode": "half",
+  "epochs": 20,
+  "lr": 0.005,
+  "time_dim": 16,
+  "hidden_dim": 64,
+  "attention_dim": 5,
+  "dropout": 0.25,
+  "lamb": 0.00012,
+  "max_global_window_size": 5000,
+  "act": "idd",
+  "gpu": "0 (README says 1; device index only)"
+ },
+ "replaces": "paper B.2 values in g8_rule.json (n_layer 4, lr 0.001, time_dim 32)",
+ "engineering_changes_no_model_change": [
+  "subgraph retrieval prefetch: the CPU part of Dataloader.get_neighbors_in_period (sparse snapshot products, numpy) for batch i+1 runs in forked worker processes while the GPU runs batch i; the GPU part (torch.unique, index bookkeeping) is the released code verbatim. Condition: tail_nodes, sampled_edges and old_nodes_new_idx identical (torch.equal) to the released function on sample batches from train, valid and test before training.",
+  "per-epoch valid evaluation with a GPU implementation of the released utils.cal_ranks (fp16 shift scores - min + 1e-6, ordinal ties by entity index, time-aware filter). Condition: identical per-query ranks to the released CPU ranker on a valid slice before training. Valid evaluation batch 512 (batch-size invariance shown in the smoke).",
+  "per-epoch test evaluation disabled; selection by full-valid MRR of the released metric (best epoch = argmax, as the released best_weight logic).",
+  "checkpoints saved as state_dict (+ optimizer, GradScaler, RNG state, history) every epoch for resumability; the released torch.save(model) would pickle the whole Dataloader.",
+  "evaluation under torch.no_grad() + autocast (the released `with torch.no_grad() and autocast()` applies autocast only; values unchanged).",
+  "model loader bound to TRED_GNN20 (the README name TRED_GNN is not defined in the released module)."
+ ],
+ "fallback": "If either identity check fails: option A = README config, 16 epochs, released (unmodified) retrieval; the reason is recorded.",
+ "unchanged": [
+  "logit-0 convention for unreached entities exactly as in the released forward (scores_all zeros, reached entities filled); log p = log_softmax of that row in fp32",
+  "fidelity check |official test MRR - 0.287| <= 0.010 else BASE_FIDELITY_LOW",
+  "claim system, controls, criteria C1/C2 and secondary analyses of g8_rule.json",
+  "GPU: <HOST> GPU 0 only"
+ ],
+ "added_secondary": "share of test golds unreached by CognTKE's subgraph (logit exactly 0) and HRCOV - better control / HRCOV - CognTKE on that stratum (paired query bootstrap, B = 1000), reported, not in the decision.",
+ "registered_utc": "2026-10-13T18:43:00Z",
+ "sha256": "24d818f604e0f8824f8c8102d57ce3de70e950a42925627db35dfa0483e7d02e"
+}

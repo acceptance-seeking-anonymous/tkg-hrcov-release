@@ -1,0 +1,40 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+[     1.8s] test 500 / 457168
+[     5.9s] test 25500 / 457168
+[    10.8s] test 50500 / 457168
+[    16.0s] test 75500 / 457168
+[    21.2s] test 100500 / 457168
+[    26.5s] test 125500 / 457168
+[    31.8s] test 150500 / 457168
+[    37.3s] test 175500 / 457168
+[    42.4s] test 200500 / 457168
+[    47.8s] test 225500 / 457168
+[    53.3s] test 250500 / 457168
+[    58.7s] test 275500 / 457168
+[    64.3s] test 300500 / 457168
+[    69.8s] test 325500 / 457168
+[    75.1s] test 350500 / 457168
+[    80.5s] test 375500 / 457168
+[    85.6s] test 400500 / 457168
+[    90.9s] test 425500 / 457168
+[    96.5s] test 450500 / 457168
+[    98.2s] test {"n": 457168, "seconds": 97.1, "has_pat": 1.0, "gold_in_union": 0.8035426801525916, "gold_in_Lpat300": 0.8035426801525916, "median_union": 106.0, "mean_pat_block": 48.61743385363805}
+[    98.2s] ALL DONE

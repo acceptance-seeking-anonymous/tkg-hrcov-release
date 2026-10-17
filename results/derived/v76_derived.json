@@ -1,0 +1,179 @@
+{
+ "rule": {
+  "file": "v76_rule.json",
+  "version_id": "redacted-id",
+  "registered_utc": "2026-10-15T12:07:43Z",
+  "sha256": "edcfca14128e22f6aaec415eca54da083d2678354bd4cdc95f475638863e0a04",
+  "sha256_kind": "registered (content) hash, as recorded inside the file",
+  "file_sha256": "4daf8b0f99271ff8f3018762dd12f03695a406e89c3837af44d4aa7370b8471d",
+  "registered_bytes": {
+   "file": "v76_rule_registered.json",
+   "artifact_id": "redacted-id",
+   "version_id": "redacted-id",
+   "sha256": "edcfca14128e22f6aaec415eca54da083d2678354bd4cdc95f475638863e0a04"
+  }
+ },
+ "amendment": {
+  "file": "v76_rule_amendment_1.json",
+  "version_id": "redacted-id",
+  "registered_utc": "2026-10-15T12:49:21Z",
+  "sha256": "bc8cd8f87192ee980dc0fdde8a3a8e8bd3770bdf01339bb133be16df260697ff",
+  "sha256_kind": "registered (content) hash, as recorded inside the file",
+  "file_sha256": "f02c5f6b85dc726be51392a9ef54ba28722ceb73321532f7aab01527b3b458d1",
+  "amends_sha256": "edcfca14128e22f6aaec415eca54da083d2678354bd4cdc95f475638863e0a04",
+  "registered_bytes": {
+   "file": "v76_rule_amendment_1_registered.json",
+   "artifact_id": "redacted-id",
+   "version_id": "redacted-id",
+   "sha256": "bc8cd8f87192ee980dc0fdde8a3a8e8bd3770bdf01339bb133be16df260697ff"
+  }
+ },
+ "lmart": {
+  "mlp_minus_lmart": [
+   -0.0014527701188366128,
+   0.000648222739933686
+  ],
+  "lmart_minus_lin": [
+   0.005026062277946855,
+   0.02216636938710856
+  ],
+  "lmart_minus_ctl": [
+   0.0096669173524007,
+   0.04681412974287772
+  ],
+  "per_base": {
+   "polecat_tirgn": {
+    "lmart": 0.28167576026939267,
+    "mlp_minus_lmart": 0.000648222739933686,
+    "mlp_minus_lmart_ts": [
+     0.00035325000443226656,
+     0.0009565199389875257
+    ],
+    "lmart_minus_lin": 0.011524898153197499,
+    "lmart_minus_lin_ts": [
+     0.010879885806744373,
+     0.012159107997607445
+    ],
+    "lmart_minus_ctl": 0.04681412974287772
+   },
+   "polecat_cogn": {
+    "lmart": 0.3037455678534079,
+    "mlp_minus_lmart": 0.0002470435630600198,
+    "mlp_minus_lmart_ts": [
+     -3.4537948584678036e-05,
+     0.0005276149041485135
+    ],
+    "lmart_minus_lin": 0.005026062277946855,
+    "lmart_minus_lin_ts": [
+     0.004628282143400368,
+     0.005428456423779224
+    ],
+    "lmart_minus_ctl": 0.0096669173524007
+   },
+   "smallpedia_tirgn": {
+    "lmart": 0.6594615752684276,
+    "mlp_minus_lmart": -0.0010433897049603458,
+    "mlp_minus_lmart_ts": [
+     -0.0015111878327234455,
+     -0.0006219268292184222
+    ],
+    "lmart_minus_lin": 0.016265832436451796,
+    "lmart_minus_lin_ts": [
+     0.014113658206182815,
+     0.01774100739633665
+    ],
+    "lmart_minus_ctl": 0.03200268547868267
+   },
+   "smallpedia_regcn_tgb": {
+    "lmart": 0.6600752106400957,
+    "mlp_minus_lmart": -0.0014527701188366128,
+    "mlp_minus_lmart_ts": [
+     -0.0021833524414629117,
+     -0.0006467107484123787
+    ],
+    "lmart_minus_lin": 0.02216636938710856,
+    "lmart_minus_lin_ts": [
+     0.018847968527506087,
+     0.024201021460742263
+    ],
+    "lmart_minus_ctl": 0.03513416935214304
+   }
+  },
+  "mlp_cpu_ms": [
+   16.32668752341341,
+   18.095264077864282
+  ],
+  "lmart_over_mlp_cpu": {
+   "polecat_tirgn": 9.497318655762918,
+   "polecat_cogn": 6.436432775900456,
+   "smallpedia_tirgn": 2.1761547564311026,
+   "smallpedia_regcn_tgb": 0.44573446104465736
+  },
+  "trees": [
+   67,
+   600
+  ]
+ },
+ "valbase": {
+  "primary": 0.026423906261674342,
+  "primary_ts": [
+   0.023205033206343477,
+   0.028524271013251706
+  ],
+  "base_gain": 0.003477897879746501,
+  "control_gain": 0.0045353895120479795,
+  "orig_margin": 0.030959295773722324,
+  "share_closed": 0.14649524153251367
+ },
+ "g1xf": {
+  "polecat": -0.0002479810495944344,
+  "polecat_ts": [
+   -0.00038981696776265107,
+   -0.00011561560588185492
+  ],
+  "smallpedia": 0.0009595297895415389,
+  "smallpedia_ts": [
+   -0.0004385569254267858,
+   0.003716559742033373
+  ],
+  "hrcov_minus_g1xf": {
+   "TiRGN": 0.034384355022925125,
+   "CognTKE": 0.055999199031191105,
+   "LogCL": 0.022805636491996982,
+   "sp_TiRGN": 0.00636333248726356,
+   "sp_REGCN": 0.006509118677792706
+  },
+  "range": [
+   0.00636333248726356,
+   0.055999199031191105
+  ],
+  "sp5_range": [
+   0.006243433539747878,
+   0.007645146923796253
+  ],
+  "recb_feature_xf": {
+   "HR19": -0.026639208900451943,
+   "HRCOV": -0.006509431805991072
+  }
+ },
+ "seeds": {
+  "regcn_tgb_smallpedia": {
+   "n_seeds": 3,
+   "margin_mean": 0.033380270201372755,
+   "margin_sd": 0.00030815893759541466,
+   "margin_min": 0.03303355389425658,
+   "margin_max": 0.03362293046604389,
+   "base_mean": 0.5901090304056803,
+   "base_sd": 0.0010285119497953675
+  },
+  "tirgn_smallpedia": {
+   "n_seeds": 3,
+   "margin_mean": 0.031711829513884904,
+   "margin_sd": 0.002242188793691411,
+   "margin_min": 0.029942710564587076,
+   "margin_max": 0.03423348220334532,
+   "base_mean": 0.6155220866203308,
+   "base_sd": 0.0023179250854507677
+  }
+ }
+}

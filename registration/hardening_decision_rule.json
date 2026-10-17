@@ -1,0 +1,101 @@
+{
+ "name": "hardening_decision_rule",
+ "version": 1,
+ "registered_utc": "2026-10-12T18:43:20Z",
+ "registered_before_any_new_test_number": true,
+ "registration_note": "Written after reading the pilot-1/pilot-2 reports (which already contain test numbers for base, HR, HRCOV seeds 0-2 harness, official seed 0, RecB-lite and official RecB default on polecat). No number for any control defined here (BASE(+)RecB, RecB-POOL, trained-mode RecB, re-tuned/new bases, official evaluator seeds 1-2) existed when this file was saved.",
+ "question": "Is HRCOV (pilot-1 coverage stack = history re-ranker over base top-50 + 50 pattern-prior + 50 stage-2 bridge candidates) a practical advance over existing work, or 'recurrency done well'?",
+ "datasets": [
+  "tkgl-polecat",
+  "tkgl-smallpedia"
+ ],
+ "protocol": "TGB 2.0 single-step extrapolation, both query directions, time-aware filtered 1-vs-all ranking, ground-truth online history before t; all test queries (polecat 532,636; smallpedia 163,172).",
+ "claim_system": {
+  "HRCOV": "pilot-1 recipe unchanged (pc_train.py / sp_train.py arm HRCOV, W=150, 30 features, MLP 64-64 listwise CE, alpha*log p + beta*f calibrated on valid-select, 3 seeds 0/1/2, early stopping on valid-select MRR)",
+  "secondary": [
+   "HR",
+   "HRCOV_ST (smallpedia)",
+   "HRCOV_ST_NODIRECT (smallpedia)",
+   "HR_RB / HRCOV_RB (HR / HRCOV + RecB score features)"
+  ]
+ },
+ "bases": {
+  "candidate_pool": {
+   "tkgl-polecat": [
+    "regcn (pilot-1 ckpt)",
+    "logcl (pilot-1 ckpt)",
+    "tirgn (new, authors' model code via pure-torch DGL shim, valid-best epoch)"
+   ],
+   "tkgl-smallpedia": [
+    "regcn / logcl (pilot-2 ckpts, 3-epoch budget)",
+    "regcn / logcl re-tuned (new grid, per-epoch valid evaluation, valid-best epoch)",
+    "tirgn (pilot-2 ckpt, valid-best epoch 20)"
+   ]
+  },
+  "retune_grid_smallpedia": "RE-GCN and LogCL: history length {3, 10} x learning rate {1e-3, 3e-4} x snapshot order {time-ordered, shuffled per epoch (TGB regcn.py)}; epochs 1..12 with full-valid evaluation after every epoch, patience 3; checkpoint = valid-best epoch (lower epochs 1, 2 covered).",
+  "per_architecture_selection": "per architecture, the configuration (incl. epoch) with the highest valid MRR (harness exact filtered; polecat: the pilots' 200k valid sample rng 12345 for re-ranker work, full valid for base selection where available; smallpedia: full valid) is that architecture's base.",
+  "two_strongest": "the two architectures with the highest valid MRR on the dataset among bases for which HRCOV (3 seeds) can be completed in this study. If a stronger base is trained but HRCOV cannot be completed on it, the decision is reported with the strongest completed bases and flagged PROVISIONAL.",
+  "selected_epoch_recorded": true
+ },
+ "recb": {
+  "definition": "Gastinger et al. (IJCAI 2024) combined recurrency baseline psi_Delta xi, exactly as TGB modules/recurrencybaseline_predictor.py: score(o) = 1000*alpha_r*psi(o) + 1000*(1-alpha_r)*xi(o); psi(o) = sum_{(s,r,o,k), k<t} 2^{lambda_r (k-t)} / sum_{i=min_ts_r}^{max_ts_r-1} 2^{lambda_r (i-t)}; xi(o) = |{(s',k): (s',r,o,k), k<t}| / |{(s',o',k): (s',r,o',k), k<t}|; window 0 (all facts before t), inverse relations as separate relations.",
+  "modes": {
+   "default": "lambda=0.1, alpha=0.99 for every relation (TGB script defaults)",
+   "trained": "per relation: lambda_r from [0,1e-4,5e-4,1e-3,5e-3,0.01,0.02,0.04,0.06,0.08,0.1,0.5,0.9,1.0001] with alpha=1, then alpha_r from [0,1e-5,1e-4,1e-3,0.01,0.1,0.5,0.9,0.99,0.999,0.9999,0.99999,1] with the best lambda_r, both by valid MRR of that relation's valid queries (TGB train()); relations without valid queries keep lambda 1.0001, alpha 0.99999 (TGB defaults)."
+  },
+  "implementation": "vectorised re-implementation (hd_recb.py). Verification: (i) default-mode valid/test MRR vs the official TGB script run of pilot 1 (polecat test 0.16709, valid 0.16986) and per-query where the official per-relation CSV exists; (ii) official TGB script in train mode is run in the background on <HOST> CPU only if projected <= 6 h.",
+  "official_carryover_quirk": "the official script does not reset predictions_psi between queries, so a query without strict-recurrency candidates inherits the previous query's psi row. Standalone RecB is reported both 'faithful' (quirk reproduced, chunking as the official run) and 'clean' (psi reset per query). All blends and RecB-POOL use the CLEAN variant (a quirk that injects another subject's history is not a property of the method).",
+  "evaluation": "official py-tgb Evaluator per query (tie = 0.5) - RecB has massive ties at score 0, so harness strict ranks are NOT used for RecB-only rows."
+ },
+ "comparators": {
+  "BASE(+)RecB": {
+   "definition": "per base b: full-row score blend of the base's probabilities p_b (softmax of the base logits as in the dumps) with q = RecB / sum_e RecB(e) (per query; q = 0 if the query has no RecB support). All entities ranked.",
+   "family": {
+    "MIX": "s = (1-beta)*p_b + beta*q, beta in [0.02,0.05,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,0.95,0.98]",
+    "LOGLIN": "s = log p_b + w*log(q + eps), w in [0.25,0.5,1,2], eps in [1e-5,1e-3]",
+    "recb_variant": [
+     "default",
+     "trained"
+    ]
+   },
+   "selection": "the (form, weight, variant) with the highest valid MRR (harness exact filtered on the valid rows used by the pilots: polecat 200k sample rng 12345, smallpedia full valid); test scored once with that configuration only."
+  },
+  "RecB-POOL": {
+   "definition": "per base b: pool = base top-K UNION RecB top-K (entities with RecB > 0, by RecB score), ranked by the blended score s (family above); entities outside the pool follow in base order (pilot promotion convention: lifted list, then base row). No learned re-ranker.",
+   "grid": "K in [20, 50, 100] x the BASE(+)RecB family",
+   "selection": "(K, form, weight, variant) by valid MRR as above; test scored once."
+  },
+  "reference_rows_not_in_decision": [
+   "RecB default (faithful & clean)",
+   "RecB trained (faithful & clean)",
+   "base alone",
+   "TGB 2.0 leaderboard rows (polecat: CountTRuCoLa 0.256, RecB 0.198, CEN 0.184, RE-GCN 0.175; smallpedia: CountTRuCoLa 0.644, CEN 0.612, RecB 0.604, RE-GCN 0.594)"
+  ]
+ },
+ "statistic": {
+  "evaluator": "official py-tgb (2.3.0) tgb.linkproppred.evaluate.Evaluator.eval per test query, negatives from TKGNegativeEdgeSampler.query_batch on the shipped <dataset>_test_ns.pkl; system score row = base row with the system's promoted candidate list lifted above all other entities in final fused order (pilot convention); blends: the blended score row. Harness exact filtered ranks reported alongside; MRR disagreement > 1e-4 between the two evaluators is flagged.",
+  "seeds": "HRCOV / HR / secondary re-rankers: per-query reciprocal rank averaged over seeds 0, 1, 2 (each seed scored by the official evaluator). Blends, RecB-POOL, RecB, bases: deterministic.",
+  "bootstrap": "harness paired_bootstrap: Poisson(1) paired bootstrap over test queries, B = 2000; one-sided p = fraction of bootstrap deltas <= 0; strata B = 1000.",
+  "sensitivity_reported": "p(delta <= 0.005) from the same bootstrap"
+ },
+ "criteria_per_dataset": {
+  "C1_margin": "on EACH of the two strongest bases b: MRR(HRCOV_b) - MRR(C) >= 0.005 with one-sided p < 0.05, for C = b(+)RecB AND for C = RecB-POOL_b (i.e. against the better of the two on test).",
+  "C2_overall_blend": "on EACH of the two strongest bases b: MRR(HRCOV_b) - max_{b' in all trained bases of the dataset} MRR(b'(+)RecB) > 0 with one-sided p < 0.05.",
+  "C3_head_guardrail": "on EACH of the two strongest bases: HRCOV_b vs the better of {b(+)RecB, RecB-POOL_b} on the head stratum (gold train frequency >= 500): DAMAGE iff the 95% CI lies entirely below 0 and |delta| >= 0.001. Must not DAMAGE.",
+  "PASS": "C1 and C2 and C3 on both of the two strongest bases.",
+  "outcome_labels": {
+   "PRACTICAL_ADVANCE": "PASS",
+   "RECURRENCY_DONE_WELL": "C1 or C2 fails on at least one of the two strongest bases (HRCOV within 0.005 of, or below, a recurrency blend / pool)",
+   "HEAD_DAMAGE": "C1 and C2 hold but C3 fails"
+  }
+ },
+ "overall": "The practical-advance claim survives on a dataset iff that dataset is PRACTICAL_ADVANCE; it survives overall iff both datasets are; 'partially' if exactly one.",
+ "secondary_reported_not_in_decision": [
+  "HRCOV_ST and HRCOV_ST_NODIRECT (smallpedia) vs the same comparators",
+  "HR vs comparators; HR_RB / HRCOV_RB vs HR / HRCOV",
+  "per-stratum delta HRCOV - better comparator with 95% CI (B=1000): R_rec_out (exact (s,r,o) recurrence before t and gold outside base top-50), R_rec_in, pool-absent (gold outside base top-50), no-pair-history (no (s,o) event before t), first-seen (s or o without any event before t), head/mid/cold gold train frequency",
+  "evaluator agreement official vs harness per arm"
+ ],
+ "selection_discipline": "All blend weights, RecB lambda/alpha, pool sizes K, base epochs / learning rates / history lengths, re-ranker epochs and calibrations are chosen on VALID only. The test pass of the blend replay computes only the valid-selected configurations. No configuration is changed after a test number has been read; any post-hoc analysis is labelled post-hoc.",
+ "hosts": "CPU: <HOST> (<= 16 workers). GPU: <HOST> (RTX 4090) or a <HOST> card only when nvidia-smi shows it idle at dispatch. The host of every number is recorded."
+}

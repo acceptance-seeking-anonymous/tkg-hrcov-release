@@ -1,0 +1,56 @@
+{
+ "pilot": "Pilot 3 of 4 - TGB 2.0 tkgl-icews - STAGE A (pilot of the pilot; lead redesign 2026-10-12)",
+ "registered_utc": "2026-10-12T14:54:56Z",
+ "registered_before_any_test_number": true,
+ "status_at_registration": "no base trained, no dump, no list, no feature, no model; no tkgl-icews test number of any system computed in this track",
+ "question": "Does the history re-ranker (HR) or its history-aware pool widening (HRCOV) beat BOTH a window-trained frozen base AND the full-history recurrency rule RecB-lite on a uniform 10% tkgl-icews test sample, on both bases?",
+ "design": {
+  "data": "TGB 2.0 tkgl-icews (TGB-official split 70/15/15 by timestamp quantile, relation ids as shipped); harness data dir tracks/datasets/harness_data/tkgl-icews (87,856 entities, 391 relations, 10,224 days; 10,861,600 / 2,326,157 / 2,325,689 facts)",
+  "protocol": "time-aware filtered, both directions (inverse relation r+391), 1-vs-all over all 87,856 entities, ground-truth online history before t",
+  "base_training_window": {
+   "rule": "contiguous recent window = last 20% of TRAIN timestamps (train days 0..7186)",
+   "first_day_index": 5749,
+   "last_day_index": 7186,
+   "n_days": 1438,
+   "n_facts": 2266194,
+   "history": "only gradient steps are windowed; RE-GCN history (10 snapshots) and LogCL global copy-history reach back before the window (LogCL history pre-rolled over all earlier train facts)"
+  },
+  "base_models": "harness native-torch RE-GCN and LogCL (h 200, 2 layers, history 10, dropout 0.2, Adam 1e-3, wd 1e-5, seed 42, LogCL cl_weight 0.1)",
+  "base_epoch_selection": "argmax FULL-valid filtered MRR over epoch grid [1,2,3,4,6,8,10,12]; stop after two consecutive grid points below the running best; if 12 is the best, extend over [14,16,18,20] while the latest point is the best",
+  "valid_sample": "uniform 200,000 of the 4,652,314 valid queries (numpy default_rng(12345).choice, sorted) for re-ranker training and every re-ranker selection; valid days < 70% quantile of the sample's days = fit, rest = select",
+  "test_sample": "uniform 10% of the 4,651,378 test queries in harness split order (numpy default_rng(31415).choice(n, round(0.1 n), replace=False), sorted) = 465,138 queries, both directions; identical for every arm",
+  "features": "FULL history (all facts with ts < t, train+valid+test online) for every history feature, pattern list and RecB-lite; only base training is windowed",
+  "arms": {
+   "base": "window-trained frozen base (RE-GCN, LogCL)",
+   "HR": "history re-ranker (6.2 arm B, pilot-1 recipe): candidates = base top-50; features = 8 base + 11 online-evidence (residual-track Hist / DyadReader)",
+   "HRCOV_B": "pilot-1 history-aware pool widening: base top-50 ++ first B pattern-prior (6.1 non-learned prior, M1=64, M2=32, base mass from dump top-200) candidates outside the top-50; features = HR features + 6 pattern coverage features; B in {50,100,150} selected on valid-select MRR (3-seed mean); the pilot-1 stage-2 bridge block is NOT used (pilots 1-2: bridge block adds ~0, HRCOV_PAT ~ HRCOV)",
+   "A_star": "valid-chosen arm per base = argmax 3-seed-mean valid-select MRR over {HR, HRCOV_B*}",
+   "A_star_RN": "RELNORM variant of A_star: same columns / block size, every history feature, pattern list and pattern target encoding computed on relation-normalised ids (117 zero-stripped post-2020 CAMEO codes merged into their zero-padded originals; mapping + evidence in relnorm_mapping.csv); base unchanged; evaluation always with the ORIGINAL TGB relation ids / conflict sets",
+   "RecB_lite": "full-history recurrency rule (datasets-track profiler): score = sum lambda^(t-k) over earlier (s, r', c, k), seen above unseen, ties by static train answer frequency, exact ties 1/2; lambda selected on full valid from {0.01,0.5,0.9,0.99,1.0}",
+   "RecB_official_default": "TGB repo RecurrencyBaseline predictor (unmodified modules/recurrencybaseline_predictor.py) default mode lambda 0.1, alpha 0.99, window 100, run on the same test sample; reported, not part of GO"
+  },
+  "reranker_recipe": "pilot-1/2 'B standalone, calibrated': MLP d-64-64-1 (zero-init last layer), listwise CE over the arm's candidates, Adam 1e-3, batch 512, <= 30 epochs, early stopping on valid-select MRR (patience 5), fit rows capped at 120,000 queries with the gold in the candidate set; then s = alpha*log p_base + beta*f with (alpha, beta) by LBFGS on valid-select listwise NLL; exact fused ranks with the pilot-1 promotion rule; seeds 0,1,2"
+ },
+ "statistic": {
+  "primary_evaluator": "harness exact filtered rank (1 + #non-filter entities scored strictly above the gold), per-query reciprocal rank averaged over seeds 0,1,2 for re-rankers",
+  "bootstrap": "harness oih_common.paired_bootstrap: Poisson(1) paired bootstrap over test-sample queries, B = 2000, seed 0; one-sided p = 1 - p_delta_gt0 (share of replicates <= 0)",
+  "official_evaluator_check": "py-tgb 2.3.0 Evaluator on the same sample (negatives = all entities minus the TGB time-filtered conflict set) for the bases, RecB-lite and seed-0 systems; must reproduce the harness MRR within 1e-4; if it does not, the decision is recomputed with official-evaluator per-query ranks (seed 0) and both are reported"
+ },
+ "GO_rule": {
+  "GO_iff": "on BOTH bases (RE-GCN and LogCL) all of (a), (b), (c) hold for A_star",
+  "a_vs_base": "MRR(A_star) - MRR(window-trained base) >= 0.005 AND one-sided paired bootstrap p < 0.05",
+  "b_vs_recb_lite": "MRR(A_star) - MRR(full-history RecB-lite) >= 0.005 AND one-sided paired bootstrap p < 0.05",
+  "c_head_guardrail": "head stratum (gold full-train frequency >= 500): A_star is not DAMAGE vs the base and not DAMAGE vs RecB-lite, where DAMAGE iff the 95% bootstrap CI upper bound < 0 AND |delta| >= 0.001 (B = 1000 for strata)",
+  "otherwise": "NO-GO"
+ },
+ "secondary_preregistered_not_in_GO": {
+  "relnorm": "MRR(A_star_RN) - MRR(A_star) overall and on the relation-unseen-in-train stratum (query's TGB relation id never occurs in train facts), paired bootstrap CI; the same split shown for bases and RecB-lite",
+  "strata": "exact recurrence (s, r', o) before t; pair history (any (s,o) event before t); pool-absent (gold outside base top-50); relation-unseen-in-train; gold full-train frequency cold <50 / mid / head >=500; first-seen entity; harness hist=no",
+  "other": "HR vs HRCOV_B* contrast; official RecB default-mode row; ceilings (gold in top-50 / in candidate set)"
+ },
+ "interpretation_notes": [
+  "Stage A numbers are NOT leaderboard-comparable (window-trained bases, 10% test sample).",
+  "Base-relative gains are inflated by window training; the RecB-lite comparison is the meaningful one.",
+  "Stage B (full 10.9M-fact base training) only after the lead reviews Stage A."
+ ]
+}

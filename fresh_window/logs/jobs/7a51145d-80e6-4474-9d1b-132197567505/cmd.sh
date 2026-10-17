@@ -1,0 +1,1 @@
+bash fw_ct_stage1.sh 10

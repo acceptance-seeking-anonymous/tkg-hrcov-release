@@ -1,0 +1,27 @@
+{
+ "rule_id": "v79_fresh_window_rule_amendment_1",
+ "amends": {
+  "file": "v79_fresh_window_rule.json",
+  "registered_utc": "2026-10-16T14:24:12Z",
+  "sha256": "209bb1b57495aefb0509b55f69b3e5eaf88a349be2362a24cd1890583ed9bc80",
+  "version_id": "e10ab60d-9569-49b6-bd1e-6cf415138a78"
+ },
+ "status_at_registration": "No data for the new window has been downloaded or built; no model has been fitted; no number of any kind exists.",
+ "reason": "PI instruction 2026-10-16: keep the experiment focused; it is valuable whatever the outcome.",
+ "scope_changes": {
+  "bases": "TiRGN only (the GDELT25X forward-holdout recipe). The CognTKE secondary configuration is removed.",
+  "systems": "Exactly four systems are fitted and scored: the frozen base, HRcov (v7.7 configuration), SA (v78 amendment 1 definition) and CountTRuCoLa combined with the same base (faithful CountTRuCoLa alone and its validation-tuned log-linear blend with TiRGN on the v78 amendment grid; the external comparator is the better of the two by selection-part MRR). The recurrence blend BLEND (v7.7 definition, validation-tuned) is retained as a reference row. EdgeReMIND and label-adapted CountTRuCoLa are not run.",
+  "frozen_before_test": "Window and preprocessing (as registered), base architecture and training recipe, candidate budgets (HRcov and SA: K=50 first block + <=50 pattern block, W=100), feature sets, ranker, seeds (0-2), selection procedures and the blend grids are as registered here and in the referenced definitions; nothing is chosen after a test number exists."
+ },
+ "interpretation_replaces_outcome_labels": {
+  "principle": "The experiment is informative under every outcome; HRcov is not required to win.",
+  "R1_BEATS_BOTH": "HRcov BEATS SA and the CountTRuCoLa comparator -> substantially strengthens the positive contribution: the polecat advantage replicates on a second, uninspected event-graph window.",
+  "R2_SA_MATCHES": "SA MATCHES HRcov -> strengthens the conditional finding: on this window the frozen base adds little beyond learned historical ranking, which places the window with smallpedia in the conditions analysis.",
+  "R3_EXTERNAL_MATCHES": "The CountTRuCoLa comparator MATCHES HRcov (and SA does not) -> also strengthens the conditional finding: an existing rule learner combined with the base suffices on this window.",
+  "R4_OTHER": "Any other pattern (SMALL calls, or comparators beating HRcov) -> reported as mixed with all calls and intervals; the conditions analysis is updated accordingly.",
+  "reporting": "Whatever the label, the result is reported in the main text with per-comparator numbers, both intervals and the BLEND reference row."
+ },
+ "latency_protocol": "During the same experiment, on serverA with the same hardware and batch settings for every system: wall time per 1,000 test queries at batch size 1 (median over 5 repeats of a fixed 2,000-query slice) and in the batched production setting, separately for base inference, candidate/feature construction, ranker or blend scoring, and end to end; for base, BLEND, HRcov, SA and the CountTRuCoLa comparator (including CountTRuCoLa rule application). The timed slice is drawn from validation rows, so no test statistic is computed before final scoring. Reported descriptively next to MRR as a quality-latency comparison.",
+ "registered_utc": "2026-10-16T14:24:46Z",
+ "sha256": "207689b83c46d7c873a8dde6a192acdcbdee3f237f601880db5b4c956407b8c8"
+}

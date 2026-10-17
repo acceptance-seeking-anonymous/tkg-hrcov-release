@@ -1,0 +1,40 @@
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.8.1
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+[     1.2s] hist + dyad
+[     5.5s] test 23498 / 457168
+[     8.7s] test 47990 / 457168
+[    11.4s] test 69448 / 457168
+[    13.4s] test 84690 / 457168
+[    15.8s] test 103568 / 457168
+[    18.1s] test 121974 / 457168
+[    20.8s] test 142852 / 457168
+[    23.2s] test 160488 / 457168
+[    27.4s] test 187364 / 457168
+[    29.7s] test 204458 / 457168
+[    32.8s] test 227268 / 457168
+[    34.4s] test 240022 / 457168
+[    37.4s] test 262942 / 457168
+[    40.1s] test 283152 / 457168
+[    43.4s] test 307566 / 457168
+[    45.6s] test 325546 / 457168
+[    48.0s] test 343388 / 457168
+[    50.8s] test 364776 / 457168
+[    53.4s] test 384638 / 457168
+[    55.9s] test 403770 / 457168
+[    59.6s] test 423562 / 457168
+[    62.4s] test 444738 / 457168
+[    64.4s] valid pools {"ds": "gdeltfw", "checks": {"htop_equal": 457168, "n": 457168, "evid_maxabs_vs_stored": {}, "base_feat_maxabs_vs_stored": {}, "htop_equal_frac": 1.0}, "smoke": 0, "SA25": {"test": {"n": 457168}}, "SA50": {"test": {"n": 457168}}, "SA75": {"test": {"n": 457168}}, "elapsed_s": 64.4}
+[    64.4s] ALL DONE

@@ -1,0 +1,260 @@
+{
+ "feat_dir": "pilot_smallpedia/work/feat_tirgn",
+ "seeds": {
+  "0": {
+   "alpha": 0.03431848886146338,
+   "beta": 1.0014360407546277,
+   "q": {
+    "80139": {
+     "rank_recomputed": 1.0,
+     "rank_official": 1.0,
+     "cands": {
+      "12285": {
+       "col": 4,
+       "fused": 5.176033973693848,
+       "f_ranker": 5.278327941894531,
+       "logp": -3.2015950679779053,
+       "filtered_position": 1,
+       "filt": false,
+       "promoted": true
+      },
+      "29883": {
+       "col": 0,
+       "fused": -2.6179604530334473,
+       "f_ranker": -2.5371341705322266,
+       "logp": -2.249023199081421,
+       "filtered_position": 48,
+       "filt": false,
+       "promoted": true
+      }
+     }
+    },
+    "24954": {
+     "rank_recomputed": 1.0,
+     "rank_official": 1.0,
+     "cands": {
+      "7004": {
+       "col": 50,
+       "fused": 4.663356781005859,
+       "f_ranker": 4.87574577331543,
+       "logp": -6.3927812576293945,
+       "filtered_position": 1,
+       "filt": false,
+       "promoted": true
+      },
+      "19521": {
+       "col": 1,
+       "fused": -1.5159168243408203,
+       "f_ranker": -1.4335463047027588,
+       "logp": -2.340198278427124,
+       "filtered_position": 6,
+       "filt": false,
+       "promoted": true
+      }
+     }
+    },
+    "67287": {
+     "rank_recomputed": 24.0,
+     "rank_official": 24.0,
+     "cands": {
+      "19498": {
+       "col": 2,
+       "fused": -3.9755287170410156,
+       "f_ranker": -3.801539897918701,
+       "logp": -4.910759925842285,
+       "filtered_position": 24,
+       "filt": false,
+       "promoted": true
+      },
+      "6844": {
+       "col": 1,
+       "fused": -3.4920520782470703,
+       "f_ranker": -3.3260996341705322,
+       "logp": -4.696481704711914,
+       "filtered_position": 7,
+       "filt": false,
+       "promoted": true
+      }
+     }
+    }
+   }
+  },
+  "1": {
+   "alpha": 0.06984995833218176,
+   "beta": 1.0037876730074013,
+   "q": {
+    "80139": {
+     "rank_recomputed": 2.0,
+     "rank_official": 2.0,
+     "cands": {
+      "12285": {
+       "col": 4,
+       "fused": 1.8663755655288696,
+       "f_ranker": 2.082120418548584,
+       "logp": -3.2015950679779053,
+       "filtered_position": 2,
+       "filt": false,
+       "promoted": true
+      },
+      "29883": {
+       "col": 0,
+       "fused": -4.163508892059326,
+       "f_ranker": -3.9912972450256348,
+       "logp": -2.249023199081421,
+       "filtered_position": 49,
+       "filt": false,
+       "promoted": true
+      }
+     }
+    },
+    "24954": {
+     "rank_recomputed": 1.0,
+     "rank_official": 1.0,
+     "cands": {
+      "7004": {
+       "col": 50,
+       "fused": 1.900646686553955,
+       "f_ranker": 2.3383255004882812,
+       "logp": -6.3927812576293945,
+       "filtered_position": 1,
+       "filt": false,
+       "promoted": true
+      },
+      "19521": {
+       "col": 1,
+       "fused": -3.444125175476074,
+       "f_ranker": -3.2682833671569824,
+       "logp": -2.340198278427124,
+       "filtered_position": 5,
+       "filt": false,
+       "promoted": true
+      }
+     }
+    },
+    "67287": {
+     "rank_recomputed": 23.0,
+     "rank_official": 23.0,
+     "cands": {
+      "19498": {
+       "col": 2,
+       "fused": -5.081096649169922,
+       "f_ranker": -4.72020149230957,
+       "logp": -4.910759925842285,
+       "filtered_position": 23,
+       "filt": false,
+       "promoted": true
+      },
+      "6844": {
+       "col": 1,
+       "fused": -4.570191860198975,
+       "f_ranker": -4.226135730743408,
+       "logp": -4.696481704711914,
+       "filtered_position": 5,
+       "filt": false,
+       "promoted": true
+      }
+     }
+    }
+   }
+  },
+  "2": {
+   "alpha": 0.07301198301217093,
+   "beta": 0.908897697372054,
+   "q": {
+    "80139": {
+     "rank_recomputed": 1.0,
+     "rank_official": 1.0,
+     "cands": {
+      "12285": {
+       "col": 4,
+       "fused": 4.877183437347412,
+       "f_ranker": 5.623227119445801,
+       "logp": -3.2015950679779053,
+       "filtered_position": 1,
+       "filt": false,
+       "promoted": true
+      },
+      "29883": {
+       "col": 0,
+       "fused": -2.022160053253174,
+       "f_ranker": -2.044184446334839,
+       "logp": -2.249023199081421,
+       "filtered_position": 49,
+       "filt": false,
+       "promoted": true
+      }
+     }
+    },
+    "24954": {
+     "rank_recomputed": 1.0,
+     "rank_official": 1.0,
+     "cands": {
+      "7004": {
+       "col": 50,
+       "fused": 4.673006534576416,
+       "f_ranker": 5.654933929443359,
+       "logp": -6.3927812576293945,
+       "filtered_position": 1,
+       "filt": false,
+       "promoted": true
+      },
+      "19521": {
+       "col": 1,
+       "fused": 1.2676843404769897,
+       "f_ranker": 1.582737922668457,
+       "logp": -2.340198278427124,
+       "filtered_position": 2,
+       "filt": false,
+       "promoted": true
+      }
+     }
+    },
+    "67287": {
+     "rank_recomputed": 32.0,
+     "rank_official": 32.0,
+     "cands": {
+      "19498": {
+       "col": 2,
+       "fused": -3.108722448348999,
+       "f_ranker": -3.02583909034729,
+       "logp": -4.910759925842285,
+       "filtered_position": 32,
+       "filt": false,
+       "promoted": true
+      },
+      "6844": {
+       "col": 1,
+       "fused": -2.565824508666992,
+       "f_ranker": -2.445737600326538,
+       "logp": -4.696481704711914,
+       "filtered_position": 13,
+       "filt": false,
+       "promoted": true
+      }
+     }
+    }
+   }
+  }
+ },
+ "_provenance": {
+  "created": "2026-10-14",
+  "what": "HRCOV (bridge-free decision run, HRCOV_PAT) fused scores s = alpha*log p_b + beta*f(x) of the gold and of the base's top unfiltered competitor for case queries S1-S3 (tkgl-smallpedia, TiRGN)",
+  "how": "read-only CPU inference on <HOST> with the stored models tracks/hardening/presub_hcpat2/train_smallpedia_tirgn/models/HRCOV_PAT_s{0,1,2}.pt, calibration (cal_alpha, cal_beta) from train_hcpat.json, and the stored test features; code = presub_hcpat2/code/hcpat_train.py (load_split, view, predict, ranks_of)",
+  "check": "recomputed gold ranks equal the official ranks rank_HRCOV_PAT_s{0,1,2} of official_test_smallpedia_tirgn_hcpat.npz for all 9 query-seed pairs",
+  "entities": {
+   "80139": {
+    "gold": 12285,
+    "competitor": 29883
+   },
+   "24954": {
+    "gold": 7004,
+    "competitor": 19521
+   },
+   "67287": {
+    "gold": 19498,
+    "competitor": 6844
+   }
+  },
+  "competitor_definition": "the highest-ranked base candidate that is not filtered (other true answers of the query removed)"
+ }
+}

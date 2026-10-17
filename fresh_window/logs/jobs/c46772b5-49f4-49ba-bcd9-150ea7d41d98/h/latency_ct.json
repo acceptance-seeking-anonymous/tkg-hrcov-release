@@ -1,0 +1,57 @@
+{
+ "n": 2000,
+ "slice_ts": 203,
+ "slice_first_row": 102042,
+ "n_countrucola_queries": 963,
+ "rules": "files/rules/tkgl-gdeltfw-learn-cyc1nonrec-cyc1rec-crules-multi-window10-0-0-ruleset-ids.txt",
+ "precompute": {
+  "z_rule_stats_s": [
+   0.11781644797883928,
+   0.11854619899531826,
+   0.11707384797045961
+  ],
+  "f_rule_stats_s": [
+   2.490218103979714,
+   3.68072539701825,
+   2.410013316955883
+  ],
+  "median_total_s": 2.6080345519585535,
+  "amortised_s_per_1000_valid_queries": 0.017131748176876085
+ },
+ "apply": {
+  "batch1": {
+   "num_cpus": 1,
+   "raw_s": [
+    68.68448004202219,
+    69.62504879903281,
+    69.06340584595455,
+    68.02256512397435,
+    67.44502603303408
+   ],
+   "median_s": 68.68448004202219,
+   "s_per_1000": 34.342240021011094,
+   "ranking_lines": 963
+  },
+  "batched": {
+   "num_cpus": 10,
+   "raw_s": [
+    20.13616546196863,
+    20.204401098948438,
+    20.036844646034297,
+    19.907035565003753,
+    19.909930730005726
+   ],
+   "median_s": 20.036844646034297,
+   "s_per_1000": 10.018422323017148,
+   "ranking_lines": 963
+  }
+ },
+ "options": {
+  "LEARN_WINDOW_SIZE": 10,
+  "RULE_TYPE_C": true,
+  "AGGREGATION_DECAY": 0.8,
+  "NUM_TOP_RULES": 10,
+  "C_X_COUNT": 20
+ },
+ "elapsed_s": 557.0
+}

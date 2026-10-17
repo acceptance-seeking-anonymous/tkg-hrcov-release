@@ -1,0 +1,170 @@
+--- a/phase2_forward_holdout/code/fh_stage2_test.sh
++++ b/code/fw_stage2.sh
+@@ -1,71 +1,121 @@
+ #!/bin/bash
+-# phase2_forward_holdout / fh_stage2_test.sh -- STAGE 2 (the ONE test pass of fh_decision_rule.json).  Run only after the lead's
+-# go (the status pilot's own Stage-2 test must be complete).  Nothing is fitted or selected here.
+-#   0. verify every Stage-1 frozen file against freeze_manifest (abort, exit 3, on any mismatch)
+-#   1. test strata (fh_prep --stage 2); RecB test ranks + valid/test blend CSR into recb_stage2/ (frozen selection copied
+-#      in; the recomputed valid CSR must equal the frozen one byte-for-byte)
+-#   2. GPU: TiRGN test full rows + test dump with the frozen checkpoint (fh_tirgn_rows --split test)
+-#   3. test lists + features; frozen re-rankers applied (fh_apply: select-rank reproduction check first)
+-#   4. every arm scored once (fh_blend --stage test, harness exact filtered ranks); decision (fh_agg -> fh_verdict.json)
+-# Usage (job cwd = harvest dir):  bash fh_stage2_test.sh
++# phase2_fresh_window / fw_stage2.sh -- STAGE 2 of v79: the ONE test pass per system after the Stage-1 freeze.  Nothing is
++# fitted or selected here.  serverA GPU 0 only.
++#   0. verify every Stage-1 frozen file against freeze/freeze_manifest_remote.json (abort, exit 3, on any mismatch)
++#   1. (CPU) test strata; RecB and RecB_xf test CSR into *_stage2/ (frozen selections copied in; recomputed valid CSR must equal
++#      the frozen one); (GPU 0) TiRGN test rows with the frozen checkpoint; (host venv) CountTRuCoLa comparator config: frozen
++#      Stage-1 rules applied to test AND validation in a copy of its tree (validation must reproduce the Stage-1 rankings)
++#   2. HRcov test lists / features / frozen re-ranker (fh_apply --arms HRCOV_PAT); SA test history / lists / pools / frozen
++#      ranker (fw_sa_train --stage apply) + SA scorer (fw_sa_official)
++#   3. scoring: fh_blend --stage test (base, BLEND, HRcov seeds; all-entity ties-averaged + strict) and fw_ext --stage test
++#      (base, comparator)
++# Usage (job cwd = harvest dir):  bash fw_stage2.sh
+ set +e
+ J=$PWD
+ H=/home/anon/cs_scratch/open_ideas_harness
+-FH=$H/tracks/phase2_forward_holdout
+-P=$FH/GDELT25X; W=$P/work; C=$FH/code; L=$FH/logs; RUN=$P/run_stage2; DD=$FH/data/GDELT25X
+-mkdir -p $RUN $W/recb_stage2 $W/test_out $J/h
++FW=$H/tracks/phase2_fresh_window
++P=$FW/GDELTFW; W=$P/work; C=$FW/code; CS=$FW/code_sa; CC=$FW/code_ct; L=$FW/logs; RUN=$P/run_stage2; DD=$FW/data/GDELTFW
++mkdir -p $RUN $W/recb_stage2 $W/recb_xf_stage2 $W/test_out $J/h
+ WORKERS=${WORKERS:-8}
+ export FH_GPU_CAP_GB=${FH_GPU_CAP_GB:-30}
+-source $C/fh_gpu_wait.sh
++source $C/fw_gpu_wait.sh
+ T0=$(date +%s); tm() { echo "[stage-time] $1 rc=$2 $(( $(date +%s) - T0 ))s $(date -u +%FT%TZ)" >> $L/stage2_test.log; }
+-echo "[stage2] start $(date -u +%FT%TZ)" >> $L/stage2_test.log
+-python3 $C/fh_freeze.py --fh $FH --verify $FH/freeze/freeze_manifest_remote.json > $L/stage2_verify.json 2>&1
++echo "[stage2] start $(date -u +%FT%TZ) host $(hostname)" >> $L/stage2_test.log; uptime >> $L/stage2_test.log; nvidia-smi >> $L/stage2_test.log
++python3 $C/fw_freeze.py --fh $FW --verify $FW/freeze/freeze_manifest_remote.json > $L/stage2_verify.json 2>&1
+ VRC=$?; tm verify_freeze $VRC
+ if [ $VRC -ne 0 ]; then echo "[stage2] ABORT: frozen files changed or missing (see stage2_verify.json)" >> $L/stage2_test.log; cp $L/stage2_* $J/h/; exit 3; fi
+-ENVS="-e PC_HARNESS=$H -e FH_DIR=$FH -e PC_P=$P -e FH_DD=$DD -e G2_VALID_ROWS=$W/valid_sample_idx.npy -e PYTHONDONTWRITEBYTECODE=1 -e HD_HOST=serverA_(CPU)"
++COMP=$W/ext/ext_comparator.json
++CFGC=$(python3 -c "import json; print(json.load(open('$COMP'))['config'])")
++CTPAR=$(python3 -c "import json; print(json.load(open('$COMP'))['ct_params'])")
++echo "[stage2] comparator $(cat $COMP)" >> $L/stage2_test.log
++ENVS="-e PC_HARNESS=$H -e FH_DIR=$FW -e PC_P=$P -e FH_DD=$DD -e G2_VALID_ROWS=$W/valid_sample_idx.npy -e PYTHONDONTWRITEBYTECODE=1 -e FW_CODE=$C -e HD_HOST=serverA_(CPU)"
+ MNT="-v /home/anon/cs_scratch:/home/anon/cs_scratch -w $RUN"
+ CPU="docker run --rm --cpus $WORKERS -e OMP_NUM_THREADS=1 -e G2_THREADS=$WORKERS $ENVS $MNT tkg-gpu:latest"
+ CPUT="docker run --rm --cpus $WORKERS -e OMP_NUM_THREADS=$WORKERS -e G2_THREADS=$WORKERS $ENVS $MNT tkg-gpu:latest"
+-# ---- 1. CPU (test strata, RecB test)
++# ---- 1A. CPU: strata, RecB / RecB_xf test CSR
+ (
+   $CPU python3 -u $C/fh_prep.py --workers $WORKERS --stage 2 > $L/prep_stage2.log 2>&1; tm prep_stage2 $?
+-  cp $W/recb/recb_selection_GDELT25X.json $W/recb_stage2/
+-  $CPU python3 -u $C/fh_recb.py --data_dir $DD --name GDELT25X --ts_step 1 --stage test --workers $WORKERS --P 16 --out $W/recb_stage2 > $L/recb_test.log 2>&1; tm recb_test $?
+-  $CPU python3 -c "import numpy as np; a=np.load('$W/recb/recb_csr_valid_GDELT25X.npz'); b=np.load('$W/recb_stage2/recb_csr_valid_GDELT25X.npz'); \
+-ok=all(np.array_equal(a[k], b[k]) for k in a.files); print('valid CSR arrays identical to frozen:', ok)" >> $L/stage2_test.log 2>&1
++  cp $W/recb/recb_selection_GDELTFW.json $W/recb_stage2/; cp $W/recb_xf/recb_selection_GDELTFW.json $W/recb_xf_stage2/
++  $CPU python3 -u $C/fh_recb.py --data_dir $DD --name GDELTFW --ts_step 1 --stage test --workers $WORKERS --P 16 --out $W/recb_stage2 > $L/recb_test.log 2>&1; tm recb_test $?
++  $CPU python3 -u $C/fh_recb.py --data_dir $DD --name GDELTFW --ts_step 1 --stage test --workers $WORKERS --P 16 --out $W/recb_xf_stage2 > $L/recb_xf_test.log 2>&1; tm recb_xf_test $?
++  for d in recb recb_xf; do
++    $CPU python3 -c "import numpy as np; a=np.load('$W/$d/recb_csr_valid_GDELTFW.npz'); b=np.load('$W/${d}_stage2/recb_csr_valid_GDELTFW.npz'); \
++ok=all(np.array_equal(a[k], b[k]) for k in a.files); print('$d valid CSR arrays identical to frozen:', ok)" 2>/dev/null | tail -1 >> $L/stage2_test.log
++  done
+ ) &
+ PA=$!
+-# ---- 2. GPU (TiRGN test rows, frozen checkpoint)
++# ---- 1B. GPU 0: TiRGN test rows
+ (
+   fh_gpu_wait
+-  GPUR="docker run --rm --name fh_tirgn_s2_$$ --gpus device=$FH_GPU -e CUDA_VISIBLE_DEVICES=0 -e FH_GPU_CAP_GB=$FH_GPU_CAP_GB --cpus 8 -e OMP_NUM_THREADS=8 $ENVS $MNT tkg-gpu:latest"
++  GPUR="docker run --rm --name fw_tirgn_s2_$$ --gpus device=$FH_GPU -e CUDA_VISIBLE_DEVICES=0 -e FH_GPU_CAP_GB=$FH_GPU_CAP_GB --cpus 8 -e OMP_NUM_THREADS=8 $ENVS $MNT tkg-gpu:latest"
+   G0=$(date +%s)
+-  $GPUR python3 -u $C/fh_tirgn_rows.py --ckpt $W/base_tirgn/tirgn_GDELT25X_seed42.pt --split test --tree $FH/stage/TiRGN \
++  $GPUR python3 -u $C/fh_tirgn_rows.py --ckpt $W/base_tirgn/tirgn_GDELTFW_seed42.pt --split test --tree $FW/stage/TiRGN \
+       --L 7 --hr 0.3 --dec_chunk 4096 > $L/tirgn_rows_test.log 2>&1; tm tirgn_rows_test $?
+-  echo "[gpu] stage2 GPU wall seconds $(( $(date +%s) - G0 )) on gpu $FH_GPU" >> $L/stage2_test.log
++  echo "[gpu] stage2 TiRGN GPU wall seconds $(( $(date +%s) - G0 )) on gpu $FH_GPU" >> $L/stage2_test.log
+ ) &
+ PB=$!
++# ---- 1C. host venv: CountTRuCoLa comparator config, frozen rules -> test (+ validation reproduction)
++(
++  B=$H/tracks/v78_external; PY=$B/env/ct/bin/python; RD=$FW/ct/$CFGC
++  export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1
++  rm -rf $RD/repo_stage2; cp -a $RD/repo $RD/repo_stage2; mkdir -p $RD/dump_test $RD/dump_val_stage2
++  cd $RD/repo_stage2; touch $RD/.stage2_marker
++  PYTHONPATH=$RD/repo_stage2/rule_based:$RD/repo_stage2 $PY $CC/memmon.py --out $RD/mem_ct_stage2.json -- \
++     $PY rule_based/fw_ct_main.py --fw_dd $DD --fw_root $RD/root --params DATASET_NAME=tkgl-gdeltfw NUM_CPUS=10 \
++     LOAD_PARAMS_FLAG=True CREATE_LEARN_DATA_FLAG=False EVAL_TESTSET_FLAG=True EVAL_VALSET_FLAG=True $CTPAR < /dev/null > $RD/ct_stage2.log 2>&1
++  echo "[ct-stage2] main rc=$? $(date -u +%FT%TZ)" >> $L/stage2_test.log
++  RT=$(find $RD/repo_stage2/files/rankings -type f -newer $RD/.stage2_marker -name "*rankings_test*" | head -1)
++  RV=$(find $RD/repo_stage2/files/rankings -type f -newer $RD/.stage2_marker -name "*rankings_val*" | head -1)
++  echo "[ct-stage2] rankings test=$RT val=$RV" >> $L/stage2_test.log
++  PYTHONPATH=$RD/repo_stage2 $PY $CC/fw_ct_score.py --dd $DD --rankings "$RV" --split val --out $RD/dump_val_stage2 --workers 10 > $L/ct_score_val_stage2.log 2>&1
++  PYTHONPATH=$RD/repo_stage2 $PY $CC/fw_ct_score.py --dd $DD --rankings "$RT" --split test --out $RD/dump_test --workers 10 > $L/ct_score_test.log 2>&1
++  $PY -c "import numpy as np; a=np.load('$RD/dump_val/rr_official.npy'); b=np.load('$RD/dump_val_stage2/rr_official.npy'); \
++print('[ct-stage2] validation re-application reproduces Stage-1 validation ranks: max_abs_rr_dev', float(np.abs(a-b).max()), 'n', len(a))" >> $L/stage2_test.log 2>&1
++  tm ct_test $?
++) &
++PC=$!
+ wait $PA; wait $PB
+-# ---- 3. test lists / features / frozen re-rankers
+-$CPU python3 -u $C/fh_lists.py --base tirgn --workers $WORKERS --splits test > $L/lists_test.log 2>&1; tm lists_test $?
+-$CPU python3 -u $C/fh_features.py --base tirgn --splits test > $L/features_test.log 2>&1; tm features_test $?
+-$CPUT python3 -u $C/fh_apply.py --feat $W/feat_tirgn --train $W/train_tirgn > $L/apply_test.log 2>&1; tm apply_test $?
+-# ---- 4. score every arm once + decision
+-FR=$W/fullrows/tirgn_GDELT25X_valid_scores_f32.bin,$W/fullrows/tirgn_GDELT25X_test_scores_f32.bin
++# ---- 2. HRcov + SA test application
++(
++  $CPU python3 -u $C/fh_lists.py --base tirgn --workers $WORKERS --splits test > $L/lists_test.log 2>&1; tm lists_test $?
++  $CPU python3 -u $C/fh_features.py --base tirgn --splits test > $L/features_test.log 2>&1; tm features_test $?
++  $CPUT python3 -u $C/fh_apply.py --feat $W/feat_tirgn --train $W/train_tirgn --arms HRCOV_PAT > $L/apply_test.log 2>&1; tm apply_hrcov_test $?
++) &
++PH=$!
++(
++  fh_gpu_wait
++  ENVG="$ENVS -e V78_RECB_XF=$W/recb_xf_stage2"
++  GPUR="docker run --rm --gpus device=$FH_GPU -e CUDA_VISIBLE_DEVICES=0 --cpus $WORKERS -e OMP_NUM_THREADS=$WORKERS -e V7_THREADS=$WORKERS $ENVG $MNT tkg-gpu:latest"
++  CPUS="docker run --rm --cpus $WORKERS -e OMP_NUM_THREADS=1 $ENVG $MNT tkg-gpu:latest"
++  $GPUR python3 -u $CS/v78_hist.py --ds gdeltfw --out $W/sa/hist --splits test > $L/sa_hist_test.log 2>&1; tm sa_hist_test $?
++  $CPUS python3 -u $CS/v78_lists.py --ds gdeltfw --hist $W/sa/hist --out $W/sa/lists --workers $WORKERS --splits test > $L/sa_lists_test.log 2>&1; tm sa_lists_test $?
++  $GPUR python3 -u $CS/v78_pools.py --ds gdeltfw --hist $W/sa/hist --lists $W/sa/lists --lookup none=none --out $W/sa/pools --splits test > $L/sa_pools_test.log 2>&1; tm sa_pools_test $?
++  $GPUR python3 -u $CS/fw_sa_train.py --stage apply --ds gdeltfw --pools $W/sa/pools --arms SA_W100 --out $W/sa/train > $L/sa_apply.log 2>&1; tm sa_apply_test $?
++  SD=$W/sa/train; SYS="SA_W100_s0=$SD/promlist_SA_W100_s0.npy,SA_W100_s1=$SD/promlist_SA_W100_s1.npy,SA_W100_s2=$SD/promlist_SA_W100_s2.npy"
++  $GPUR python3 -u $CS/fw_sa_official.py --ds gdeltfw --label sa --systems $SYS --out $W/test_out > $L/sa_official_test.log 2>&1; tm sa_official_test $?
++) &
++PS=$!
++wait $PH; wait $PS
++# ---- 3. scoring: base, BLEND, HRcov (fh_blend) ; comparator (fw_ext, after the CountTRuCoLa test dump)
++FR=$W/fullrows/tirgn_GDELTFW_valid_scores_f32.bin,$W/fullrows/tirgn_GDELTFW_test_scores_f32.bin
+ TD=$W/train_tirgn; SYS=""
+-for arm in HR HRCOV_PAT; do for s in 0 1 2; do SYS="$SYS,${arm}_s$s=$TD/promlist_${arm}_s$s.npy"; done; done; SYS=${SYS#,}
+-$CPUT python3 -u $C/fh_blend.py --ds gdelt25x --base tirgn --stage test --source fullrows --fullrows $FR --recb_dir $W/recb_stage2 \
+-    --sel $W/controls/sel_gdelt25x.json --systems $SYS --threads $WORKERS --out $W/test_out > $L/blend_test.log 2>&1; tm blend_test $?
+-RSHA=$(sha256sum $FH/freeze/fh_decision_rule.json | cut -d' ' -f1)
+-cat > $W/test_out/fh_agg_cfg.json <<EOF
+-{"dd": "$DD", "strata": "$W/strata_test.npz", "official": "$W/test_out/official_test_gdelt25x_tirgn.npz",
+- "blend_test_json": "$W/test_out/blend_test_gdelt25x_tirgn.json", "recb_ranks": "$W/recb_stage2/recb_test_ranks_GDELT25X.npz",
+- "apply_json": "$W/train_tirgn/apply_fh.json", "feat_summary_test": "$W/feat_tirgn/feat_summary_test.json",
+- "hash_check_passed": true, "rule_sha256": "$RSHA", "deviations": []}
+-EOF
+-$CPU python3 -u $C/fh_agg.py --cfg $W/test_out/fh_agg_cfg.json --rule $FH/freeze/fh_decision_rule.json --out $W/test_out/fh_verdict.json > $L/agg.log 2>&1; tm agg $?
+-for f in $W/test_out/fh_verdict.json $W/test_out/fh_agg_cfg.json $W/test_out/blend_test_gdelt25x_tirgn.json $W/train_tirgn/apply_fh.json \
+-         $W/feat_tirgn/feat_summary_test.json $W/lists_tirgn/lists_summary_test.json $W/prep_summary_stage2.json $W/base_tirgn/rows_test_log.json \
+-         $W/recb_stage2/recb_test_meta_GDELT25X.json; do [ -f $f ] && cp $f $J/h/; done
+-cp $L/*.log $L/stage2_verify.json $J/h/ 2>/dev/null
++for s in 0 1 2; do SYS="$SYS,HRCOV_PAT_s$s=$TD/promlist_HRCOV_PAT_s$s.npy"; done; SYS=${SYS#,}
++$CPUT python3 -u $C/fh_blend.py --ds gdeltfw --base tirgn --stage test --source fullrows --fullrows $FR --recb_dir $W/recb_stage2 \
++    --sel $W/controls/sel_gdeltfw.json --systems $SYS --threads $WORKERS --out $W/test_out > $L/blend_test.log 2>&1; tm blend_test $?
++wait $PC
++fh_gpu_wait
++GPUR="docker run --rm --gpus device=$FH_GPU -e CUDA_VISIBLE_DEVICES=0 --cpus $WORKERS -e OMP_NUM_THREADS=$WORKERS $ENVS $MNT tkg-gpu:latest"
++$GPUR python3 -u $CS/fw_ext.py --ds gdeltfw --stage test --hist $W/sa/hist --methods $CFGC=$FW/ct/$CFGC --fullrows $FR \
++    --comparator $COMP --out $W/test_out > $L/ext_test.log 2>&1; tm ext_test $?
++# ---- harvest (rank arrays + summaries)
++for f in $W/test_out/official_test_gdeltfw_tirgn.npz $W/test_out/blend_test_gdeltfw_tirgn.json $W/test_out/official_test_gdeltfw_sa.npz \
++         $W/test_out/official_test_gdeltfw_sa.json $W/test_out/official_test_gdeltfw_ext.npz $W/test_out/official_test_gdeltfw_ext.json \
++         $W/train_tirgn/apply_fh.json $W/train_tirgn/ranks_test.npz $W/sa/train/ranks_test_SA_W100.npz $W/sa/train/train_fw_sa.json \
++         $W/feat_tirgn/feat_summary_test.json $W/lists_tirgn/lists_summary_test.json $W/prep_summary_stage2.json $W/strata_test.npz \
++         $W/base_tirgn/rows_test_log.json $W/sa/hist/hist_summary_test.json $W/sa/pools/pools_summary_test.json \
++         $W/recb_stage2/recb_test_meta_GDELTFW.json $W/recb_xf_stage2/recb_test_meta_GDELTFW.json $FW/ct/$CFGC/dump_test/meta.json; do
++  [ -f $f ] && cp $f $J/h/
++done
++cp $FW/ct/$CFGC/dump_test/meta.json $J/h/ct_dump_test_meta.json 2>/dev/null; cp $FW/ct/$CFGC/ct_stage2.log $J/h/ 2>/dev/null
++cp $L/*test*.log $L/stage2_verify.json $L/prep_stage2.log $L/sa_apply.log $L/ct_score_*.log $J/h/ 2>/dev/null
+ echo "[stage2] end $(date -u +%FT%TZ)" >> $L/stage2_test.log; cp $L/stage2_test.log $J/h/

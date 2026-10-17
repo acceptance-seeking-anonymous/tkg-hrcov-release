@@ -1,0 +1,32 @@
+{
+ "ds": "gdeltfw",
+ "pools": [
+  "SA25",
+  "SA50",
+  "SA75"
+ ],
+ "checks": {
+  "htop_equal": 457168,
+  "n": 457168,
+  "evid_maxabs_vs_stored": {},
+  "base_feat_maxabs_vs_stored": {},
+  "htop_equal_frac": 1.0
+ },
+ "smoke": 0,
+ "SA25": {
+  "test": {
+   "n": 457168
+  }
+ },
+ "SA50": {
+  "test": {
+   "n": 457168
+  }
+ },
+ "SA75": {
+  "test": {
+   "n": 457168
+  }
+ },
+ "elapsed_s": 64.4
+}

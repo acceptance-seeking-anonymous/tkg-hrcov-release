@@ -1,0 +1,12 @@
+location,row,field,value
+main table,CognTKE base,MRR,0.2914
+main table,CognTKE base,H@10,0.4603
+main table,CognTKE + RecB blend (BASE⊕RecB; better control),MRR,0.2941
+main table,CognTKE + RecB blend (BASE⊕RecB; better control),H@10,0.4649
+main table,CognTKE + HR (seeds 0-2),MRR,0.3011
+main table,CognTKE + HR (seeds 0-2),H@10,0.4683
+main table,"CognTKE + HRCOV (HRCOV_PAT, bridge-free, seeds 0-2)",MRR,0.3040
+main table,"CognTKE + HRCOV (HRCOV_PAT, bridge-free, seeds 0-2)",H@10,0.4741
+§5.2,"""plus CognTKE on tkgl-polecat (\pend{G8})""",text,"plus CognTKE on tkgl-polecat (HRCOV 0.3040 vs.\ 0.2941 for the better control, $\Delta$ = +0.0099, 95\% CI [+0.0096, +0.0103])"
+rules table,CognTKE base (G8),Registered,2026-10-13T18:28:20Z (deviation B 2026-10-13T18:43:00Z; both before any CognTKE MRR)
+rules table,CognTKE base (G8),Outcome,PRACTICAL_ADVANCE_ON_COGNTKE

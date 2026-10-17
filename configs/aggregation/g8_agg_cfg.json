@@ -1,0 +1,24 @@
+{
+ "official": "$RESULTS_DIR/runs/official_test_polecat_cogn.npz",
+ "ninf_official": "$RESULTS_DIR/runs/official_test_polecat_cogn_ninf.npz",
+ "reach_test": "$RESULTS_DIR/runs/reach_test.npy",
+ "dd": "$RESULTS_DIR/runs/g8/data/dd",
+ "strata": "$RESULTS_DIR/runs/g8/data/strata_test.npz",
+ "tirgn_hcpat_official": "$RESULTS_DIR/runs/f/off_polecat_tirgn_hcpat.npz",
+ "tirgn_round1_official": "$RESULTS_DIR/runs/f/off_polecat_tirgn_ctrl.npz",
+ "blend_test_meta": "$RESULTS_DIR/runs/blend_test_polecat_cogn.json",
+ "rule": "g8_rule.json (file version redacted-id)",
+ "deviation": "g8_deviation_B.json (file version redacted-id)",
+ "references": {
+  "published_CognTKE_tkgl_polecat": {
+   "MRR": 0.287,
+   "H10": 0.455
+  },
+  "training": {
+   "best_epoch": 17,
+   "best_full_valid_MRR": 0.30120264232481964,
+   "epochs": 20,
+   "mode": "B (README configuration)"
+  }
+ }
+}

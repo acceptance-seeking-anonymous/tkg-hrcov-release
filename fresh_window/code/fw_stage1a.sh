@@ -1,0 +1,49 @@
+#!/bin/bash
+# phase2_fresh_window / fw_stage1a.sh -- STAGE 1 part A/B on GDELTFW (train/validation only; no test row is scored).
+#   A (CPU): valid sample (= full valid) + early-train TE tables + valid strata; RecB per-relation grid on valid; valid CSR
+#   B (GPU 0 only): TiRGN on the train window (forward-holdout recipe), then VALID full log-prob rows + valid dump
+set +e
+J=$PWD
+H=/home/anon/cs_scratch/open_ideas_harness
+FW=$H/tracks/phase2_fresh_window
+P=$FW/GDELTFW; W=$P/work; C=$FW/code; L=$FW/logs; RUN=$P/run_stage1
+mkdir -p $W/recb $W/controls $W/base_tirgn $L $RUN
+WORKERS=${WORKERS:-8}
+export FH_GPU_CAP_GB=${FH_GPU_CAP_GB:-30}
+source $C/fw_gpu_wait.sh
+T0=$(date +%s); tm() { echo "[stage-time] $1 rc=$2 $(( $(date +%s) - T0 ))s $(date -u +%FT%TZ)" >> $L/stage1_chain.log; }
+echo "[stage1a] start $(date -u +%FT%TZ) host $(hostname) workers $WORKERS" >> $L/stage1_chain.log
+uptime >> $L/stage1_chain.log; nvidia-smi >> $L/stage1_chain.log
+DD=$FW/data/GDELTFW
+ENVS="-e PC_HARNESS=$H -e FH_DIR=$FW -e PC_P=$P -e FH_DD=$DD -e G2_VALID_ROWS=$W/valid_sample_idx.npy -e PYTHONDONTWRITEBYTECODE=1 -e HD_HOST=serverA_(CPU)"
+MNT="-v /home/anon/cs_scratch:/home/anon/cs_scratch -w $RUN"
+CPU="docker run --rm --cpus $WORKERS -e OMP_NUM_THREADS=1 -e G2_THREADS=$WORKERS $ENVS $MNT tkg-gpu:latest"
+(
+  $CPU python3 -u $C/fh_prep.py --workers $WORKERS --stage 1 > $L/prep_stage1.log 2>&1; tm prep_stage1 $?
+  $CPU python3 -u $C/fh_recb.py --data_dir $DD --name GDELTFW --ts_step 1 --stage valid --workers $WORKERS --P 16 --out $W/recb > $L/recb_valid.log 2>&1; tm recb_valid $?
+  $CPU python3 -u $C/fh_recb.py --data_dir $DD --name GDELTFW --ts_step 1 --stage test --only_valid --workers $WORKERS --P 16 --out $W/recb > $L/recb_validcsr.log 2>&1; tm recb_validcsr $?
+) &
+PA=$!
+(
+  fh_gpu_wait
+  ENVG=$(echo "$ENVS" | sed "s|HD_HOST=serverA_(CPU)|HD_HOST=serverA_(GPU${FH_GPU}_RTX_PRO_6000)|")
+  GPUR="docker run --rm --name fw_tirgn_s1_$$ --gpus device=$FH_GPU -e CUDA_VISIBLE_DEVICES=0 -e FH_GPU_CAP_GB=$FH_GPU_CAP_GB --cpus 8 -e OMP_NUM_THREADS=8 -e PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True $ENVG $MNT tkg-gpu:latest"
+  echo "[gpu] tirgn_train start $(date -u +%FT%TZ) gpu $FH_GPU" >> $L/stage1_chain.log; G0=$(date +%s)
+  $GPUR python3 -u $C/fh_tirgn_train.py --data_dir $DD --n_ent 1209 --n_rel 215 --tree $FW/stage/TiRGN --ds GDELTFW \
+      --L 7 --hr 0.3 --lr 0.001 --epochs 30 --patience 5 --max_train_hours 10 --seed 42 --dec_chunk 8192 --no_dump \
+      --out $W/base_tirgn > $L/tirgn_train.log 2>&1; tm tirgn_train $?
+  nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv >> $L/stage1_chain.log
+  $GPUR python3 -u $C/fh_tirgn_rows.py --ckpt $W/base_tirgn/tirgn_GDELTFW_seed42.pt --split valid --tree $FW/stage/TiRGN \
+      --L 7 --hr 0.3 --dec_chunk 4096 > $L/tirgn_rows_valid.log 2>&1; tm tirgn_rows_valid $?
+  echo "[gpu] stage1 GPU wall seconds $(( $(date +%s) - G0 )) on gpu $FH_GPU" >> $L/stage1_chain.log
+) &
+PB=$!
+wait $PA; wait $PB
+mkdir -p $J/h
+cp $L/*.log $J/h/ 2>/dev/null
+for f in $W/prep_summary_stage1.json $W/recb/recb_selection_GDELTFW.json $W/recb/recb_valid_meta_GDELTFW.json $W/recb/recb_validcsr_meta_GDELTFW.json \
+         $W/base_tirgn/tirgn_GDELTFW_epoch_log.json $W/base_tirgn/rows_valid_log.json; do
+  [ -f $f ] && cp $f $J/h/
+done
+echo "[stage1a] end $(date -u +%FT%TZ)" >> $L/stage1_chain.log
+cp $L/stage1_chain.log $J/h/

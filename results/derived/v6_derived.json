@@ -1,0 +1,22 @@
+{
+ "g6_b1_p50_increment_ms": {
+  "tkgl-polecat": 2.73562,
+  "tkgl-smallpedia": 1.7807600000000001
+ },
+ "pool_minus_blend_MRR": {
+  "polecat_tirgn": 5.4996469863483055e-05,
+  "polecat_logcl": 4.336273911081934e-05,
+  "smallpedia_tirgn": -5.638443504407675e-05,
+  "smallpedia_regcn_tgb": -3.4034607993005395e-05
+ },
+ "pool_minus_blend_max_abs": 5.638443504407675e-05,
+ "fusion_alpha_range": [
+  0.03431848886146338,
+  0.07301198301217093
+ ],
+ "fusion_beta_range": [
+  0.908897697372054,
+  1.0037876730074013
+ ],
+ "_provenance": "derived in tables_v6.py from g6_latency_table.csv (b1 end_to_end p50), hcpat_all_decision_bases.json (POOL_MRR, BLEND_MRR) and case_fused_scores.json"
+}

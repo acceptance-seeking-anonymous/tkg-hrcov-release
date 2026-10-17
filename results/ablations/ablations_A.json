@@ -1,0 +1,427 @@
+{
+ "name": "ablations_A",
+ "label": "POST-HOC ABLATION (not a decision)",
+ "rule": "ablation_rule.json (redacted-id)",
+ "B": 2000,
+ "seed": 0,
+ "bases": {
+  "polecat_tirgn": {
+   "dataset": "tkgl-polecat",
+   "base": "TiRGN",
+   "evaluator": "exact fused rank = official statistic (validated; |dMRR| <= 1e-7 on HRCOV_PAT lists)",
+   "arms": {
+    "FULL": {
+     "MRR": 0.2823777711096128,
+     "H10": 0.45285585903568915,
+     "per_seed_MRR": [
+      0.2824961543083191,
+      0.28233644366264343,
+      0.282300740480423
+     ]
+    },
+    "A10_noBase": {
+     "MRR": 0.2803821491736058,
+     "H10": 0.44966418592309443,
+     "per_seed_MRR": [
+      0.2802627384662628,
+      0.2802404463291168,
+      0.28064319491386414
+     ],
+     "delta_MRR_vs_FULL": -0.001995621936007018,
+     "CI95": [
+      -0.002206954422743022,
+      -0.0017756064414435754
+     ],
+     "p_one_sided_le0": 1.0,
+     "delta_H10_vs_FULL": -0.0031916731125947173
+    },
+    "A11_noEvid": {
+     "MRR": 0.2520879012726483,
+     "H10": 0.4216663287248077,
+     "per_seed_MRR": [
+      0.2522769868373871,
+      0.2522698640823364,
+      0.25171685218811035
+     ],
+     "delta_MRR_vs_FULL": -0.03028986983696452,
+     "CI95": [
+      -0.03074436260679049,
+      -0.02982829858789483
+     ],
+     "p_one_sided_le0": 1.0,
+     "delta_H10_vs_FULL": -0.031189530310881453
+    },
+    "A11_noCov": {
+     "MRR": 0.27677096900291326,
+     "H10": 0.4444792816607715,
+     "per_seed_MRR": [
+      0.2763592600822449,
+      0.27695170044898987,
+      0.27700191736221313
+     ],
+     "delta_MRR_vs_FULL": -0.005606802106699612,
+     "CI95": [
+      -0.005872772879410243,
+      -0.0053517844883944265
+     ],
+     "p_one_sided_le0": 1.0,
+     "delta_H10_vs_FULL": -0.008376577374917649
+    },
+    "A11_minus_base": {
+     "same_as": "A10_noBase"
+    }
+   },
+   "validation": {
+    "base_rank_vs_official": {
+     "frac_equal": 0.9438791219519522,
+     "max_abs": 64151.5,
+     "MRR_harness": 0.22048835044716594,
+     "MRR_official": 0.22048833966255188
+    },
+    "FULL_vs_stored_official_HRCOV_PAT": {
+     "MRR_this": 0.2823777496814728,
+     "MRR_stored_official": 0.2823777496814728,
+     "frac_queries_equal": 0.9994236213849609,
+     "max_abs": 8.67750495672226e-05
+    }
+   }
+  },
+  "polecat_logcl": {
+   "dataset": "tkgl-polecat",
+   "base": "LogCL",
+   "evaluator": "exact fused rank = official statistic (validated; |dMRR| <= 1e-7 on HRCOV_PAT lists)",
+   "arms": {
+    "FULL": {
+     "MRR": 0.27078320361323743,
+     "H10": 0.43613837592652394,
+     "per_seed_MRR": [
+      0.27052024006843567,
+      0.27115508913993835,
+      0.27067428827285767
+     ]
+    },
+    "A10_noBase": {
+     "MRR": 0.2700655837174588,
+     "H10": 0.4348873652300383,
+     "per_seed_MRR": [
+      0.26992833614349365,
+      0.2698984742164612,
+      0.2703699767589569
+     ],
+     "delta_MRR_vs_FULL": -0.000717619895778517,
+     "CI95": [
+      -0.000900533221806952,
+      -0.000533068966178764
+     ],
+     "p_one_sided_le0": 1.0,
+     "delta_H10_vs_FULL": -0.0012510106964856438
+    },
+    "A11_noEvid": {
+     "MRR": 0.2308924179265665,
+     "H10": 0.39339060822024796,
+     "per_seed_MRR": [
+      0.23080158233642578,
+      0.23073795437812805,
+      0.2311376929283142
+     ],
+     "delta_MRR_vs_FULL": -0.0398907856866709,
+     "CI95": [
+      -0.04044145422601949,
+      -0.0393570171462452
+     ],
+     "p_one_sided_le0": 1.0,
+     "delta_H10_vs_FULL": -0.042747767706275974
+    },
+    "A11_noCov": {
+     "MRR": 0.26390196033659247,
+     "H10": 0.4277242494561639,
+     "per_seed_MRR": [
+      0.2638333737850189,
+      0.2649165987968445,
+      0.2629558742046356
+     ],
+     "delta_MRR_vs_FULL": -0.006881243276644922,
+     "CI95": [
+      -0.007149364394691145,
+      -0.006601852374417924
+     ],
+     "p_one_sided_le0": 1.0,
+     "delta_H10_vs_FULL": -0.00841412647036005
+    },
+    "A11_minus_base": {
+     "same_as": "A10_noBase"
+    }
+   },
+   "validation": {
+    "base_rank_vs_official": {
+     "frac_equal": 0.9936692225084298,
+     "max_abs": 1.5,
+     "MRR_harness": 0.17846012165079303,
+     "MRR_official": 0.17846012115478516
+    },
+    "FULL_vs_stored_official_HRCOV_PAT": {
+     "MRR_this": 0.2707832157611847,
+     "MRR_stored_official": 0.27079907059669495,
+     "frac_queries_equal": 0.7210289954115006,
+     "max_abs": 0.611111044883728
+    }
+   }
+  },
+  "smallpedia_tirgn": {
+   "dataset": "tkgl-smallpedia",
+   "base": "TiRGN",
+   "evaluator": "official py-tgb 2.3.0 Evaluator (CPU)",
+   "arms": {
+    "FULL": {
+     "MRR": 0.6585710699901894,
+     "H10": 0.7321926147459941,
+     "per_seed_MRR": [
+      0.6586652398109436,
+      0.6585150361061096,
+      0.658532977104187
+     ],
+     "harness_minus_official_MRR": 1.1369129859772897e-07,
+     "max_abs_per_query_rr_diff": 0.00952380895614624
+    },
+    "A10_noBase": {
+     "MRR": 0.6576807200358352,
+     "H10": 0.7314939654679316,
+     "per_seed_MRR": [
+      0.6575848460197449,
+      0.6573510766029358,
+      0.65810626745224
+     ],
+     "delta_MRR_vs_FULL": -0.0008903499543541654,
+     "CI95": [
+      -0.0012057481609912008,
+      -0.0006055434585480381
+     ],
+     "p_one_sided_le0": 1.0,
+     "delta_H10_vs_FULL": -0.0006986492780625131,
+     "harness_minus_official_MRR": 8.946199803183674e-08,
+     "max_abs_per_query_rr_diff": 0.00952380895614624
+    },
+    "A11_noEvid": {
+     "MRR": 0.6376713683521336,
+     "H10": 0.729974096863024,
+     "per_seed_MRR": [
+      0.6375643014907837,
+      0.6377519965171814,
+      0.6376978158950806
+     ],
+     "delta_MRR_vs_FULL": -0.02089970163805595,
+     "CI95": [
+      -0.02169226997076606,
+      -0.020108217076925006
+     ],
+     "p_one_sided_le0": 1.0,
+     "delta_H10_vs_FULL": -0.002218517882970117,
+     "harness_minus_official_MRR": 1.0228995628303039e-07,
+     "max_abs_per_query_rr_diff": 0.00952380895614624
+    },
+    "A11_noCov": {
+     "MRR": 0.6575037345494987,
+     "H10": 0.7309403574142621,
+     "per_seed_MRR": [
+      0.6572011113166809,
+      0.6574457883834839,
+      0.6578643321990967
+     ],
+     "delta_MRR_vs_FULL": -0.0010673354406907252,
+     "CI95": [
+      -0.001375805733262671,
+      -0.0007555849452422148
+     ],
+     "p_one_sided_le0": 1.0,
+     "delta_H10_vs_FULL": -0.001252257331731954,
+     "harness_minus_official_MRR": 2.2796728593732496e-07,
+     "max_abs_per_query_rr_diff": 0.027777791023254395
+    },
+    "A11_minus_base": {
+     "same_as": "A10_noBase"
+    }
+   },
+   "validation": {
+    "base_rank_vs_official": {
+     "frac_equal": 0.9871669158924326,
+     "max_abs": 1885.0,
+     "MRR_harness": 0.6180581704907541,
+     "MRR_official": 0.6180580854415894
+    },
+    "FULL_vs_stored_official_HRCOV_PAT": {
+     "MRR_this": 0.658571183681488,
+     "MRR_stored_official": 0.6584181785583496,
+     "frac_queries_equal": 0.9118660064226706,
+     "max_abs": 0.5277777910232544
+    }
+   }
+  },
+  "smallpedia_regcn_tgb": {
+   "dataset": "tkgl-smallpedia",
+   "base": "RE-GCN TGB-config (regcn_tgb)",
+   "evaluator": "official py-tgb 2.3.0 Evaluator (CPU)",
+   "arms": {
+    "FULL": {
+     "MRR": 0.6585423525056083,
+     "H10": 0.7268424321166214,
+     "per_seed_MRR": [
+      0.6584110856056213,
+      0.6583467125892639,
+      0.6588691473007202
+     ],
+     "harness_minus_official_MRR": -1.747219158243496e-08,
+     "max_abs_per_query_rr_diff": 2.6542693376541138e-05
+    },
+    "A10_noBase": {
+     "MRR": 0.6568048148951514,
+     "H10": 0.7259762704385556,
+     "per_seed_MRR": [
+      0.656286895275116,
+      0.6569783091545105,
+      0.6571493148803711
+     ],
+     "delta_MRR_vs_FULL": -0.0017375376104568304,
+     "CI95": [
+      -0.0020711379116316337,
+      -0.0013906716261724086
+     ],
+     "p_one_sided_le0": 1.0,
+     "delta_H10_vs_FULL": -0.0008661616780657466,
+     "harness_minus_official_MRR": -1.4861582076086677e-08,
+     "max_abs_per_query_rr_diff": 2.6542693376541138e-05
+    },
+    "A11_noEvid": {
+     "MRR": 0.6447863862546033,
+     "H10": 0.7244584446677943,
+     "per_seed_MRR": [
+      0.6448501348495483,
+      0.6449397802352905,
+      0.6445692777633667
+     ],
+     "delta_MRR_vs_FULL": -0.013755966251004954,
+     "CI95": [
+      -0.014510360788590465,
+      -0.01299148623268707
+     ],
+     "p_one_sided_le0": 1.0,
+     "delta_H10_vs_FULL": -0.002383987448827063,
+     "harness_minus_official_MRR": 3.1229680175215435e-08,
+     "max_abs_per_query_rr_diff": 2.6542693376541138e-05
+    },
+    "A11_noCov": {
+     "MRR": 0.6576390771907568,
+     "H10": 0.7265114929849076,
+     "per_seed_MRR": [
+      0.6582359075546265,
+      0.6569274663925171,
+      0.6577538847923279
+     ],
+     "delta_MRR_vs_FULL": -0.0009032753148514881,
+     "CI95": [
+      -0.001230293481338178,
+      -0.0005678833598043173
+     ],
+     "p_one_sided_le0": 1.0,
+     "delta_H10_vs_FULL": -0.0003309391317137811,
+     "harness_minus_official_MRR": 9.055733718454917e-09,
+     "max_abs_per_query_rr_diff": 2.6542693376541138e-05
+    },
+    "A11_minus_base": {
+     "same_as": "A10_noBase"
+    }
+   },
+   "validation": {
+    "base_rank_vs_official": {
+     "frac_equal": 0.9946682028779448,
+     "max_abs": 1.5,
+     "MRR_harness": 0.5906693999663841,
+     "MRR_official": 0.5906693935394287
+    },
+    "FULL_vs_stored_official_HRCOV_PAT": {
+     "MRR_this": 0.6585423350334167,
+     "MRR_stored_official": 0.6585639119148254,
+     "frac_queries_equal": 0.8977765793150786,
+     "max_abs": 0.7925925850868225
+    }
+   }
+  }
+ },
+ "rule_version_id": "redacted-id",
+ "notes": [
+  "POST-HOC ABLATION (not a decision): no hardening / pre-submission / G2 / G8 rule or configuration is changed by these numbers.",
+  "Candidate set = HRCOV bridge-free (HRCOV_PAT, W 100) on all four bases; arms change feature columns only; fusion alpha*log p + beta*f calibrated on valid-select for every arm; seeds 0-2; all test queries (polecat 532,636; smallpedia 163,172).",
+  "A11 'minus base' is the same column subset as A10 and is reported once (A10_noBase).",
+  "Evaluator: smallpedia arms scored by the official py-tgb 2.3.0 Evaluator on CPU (serverA); harness-minus-official MRR <= 2.3e-7 for every arm. Polecat arms use the exact fused rank (1 + #greater + 0.5 #ties over the non-filtered entities = the evaluator's statistic) because the official evaluator needs full polecat base rows, which exist only via GPU replay of TiRGN / LogCL (not allowed in this CPU-only add-on). Validation: the polecat TiRGN FULL arm reproduces the stored official HRCOV_PAT MRR exactly (0.2823777), and on the official HRCOV_PAT lists of polecat LogCL / TiRGN and smallpedia TiRGN the exact rank and the official evaluator agree to |dMRR| <= 8.4e-8.",
+  "FULL arms were re-trained on serverA CPU (8 threads); the decision HRCOV_PAT runs for polecat LogCL / smallpedia TiRGN / regcn_tgb were trained on GPU and differ by <= 1.6e-4 MRR (device numerics).",
+  "Inputs for smallpedia regcn_tgb (feature tensors, test rows) were copied from serverB to serverA (md5 verified; file copy only). Three small validation files (19 MB) were staged in $EXT_DIR/xfer_abl outside ablations_A (not deleted).",
+  "Host: serverA CPU only, 8 threads per job; wall time polecat 47 min, smallpedia 2.2 h incl. waiting for the Stage B window and the copy."
+ ],
+ "validation_official_vs_exact_on_HRCOV_PAT_lists": {
+  "polecat_tirgn": {
+   "0": {
+    "dMRR": 2.5175617701655995e-09,
+    "frac_equal": 0.9994236213849609,
+    "max_abs": 8.65348373298297e-05
+   },
+   "1": {
+    "dMRR": 2.53958531981624e-09,
+    "frac_equal": 0.9994236213849609,
+    "max_abs": 8.189986375245137e-05
+   },
+   "2": {
+    "dMRR": 2.5101269951477434e-09,
+    "frac_equal": 0.9994236213849609,
+    "max_abs": 9.335333911272142e-05
+   },
+   "base": {
+    "dMRR": 5.818279219527156e-09,
+    "frac_equal": 0.999376685015658,
+    "max_abs": 0.0014245011485539971
+   }
+  },
+  "polecat_logcl": {
+   "0": {
+    "dMRR": -6.881762937283042e-10,
+    "frac_equal": 0.9999549410854692,
+    "max_abs": 3.980596467286716e-05
+   },
+   "1": {
+    "dMRR": 6.189909701470597e-08,
+    "frac_equal": 0.9999530636306971,
+    "max_abs": 0.03333332836627961
+   },
+   "2": {
+    "dMRR": -6.880414016308123e-10,
+    "frac_equal": 0.9999549410854692,
+    "max_abs": 3.980596467286716e-05
+   },
+   "base": {
+    "dMRR": 3.820566668588654e-09,
+    "frac_equal": 0.9999173919900269,
+    "max_abs": 0.0029239762160513105
+   }
+  },
+  "smallpedia_tirgn": {
+   "0": {
+    "dMRR": 8.412801133506065e-08,
+    "frac_equal": 0.9999325864731694,
+    "max_abs": 0.009523802569934292
+   },
+   "1": {
+    "dMRR": 8.412748453423546e-08,
+    "frac_equal": 0.9999325864731694,
+    "max_abs": 0.009523802569934292
+   },
+   "2": {
+    "dMRR": 8.413081475922013e-08,
+    "frac_equal": 0.9999325864731694,
+    "max_abs": 0.009523802569934292
+   },
+   "base": {
+    "dMRR": 8.396685169387297e-08,
+    "frac_equal": 0.9999325864731694,
+    "max_abs": 0.009523802569934292
+   }
+  }
+ }
+}

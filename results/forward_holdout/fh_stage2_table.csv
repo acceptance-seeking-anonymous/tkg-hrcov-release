@@ -1,0 +1,32 @@
+section,name,MRR,H1,H3,H10,seed_sd_MRR,per_seed_MRR,evaluator,delta_MRR,block_CI95_lo,block_CI95_hi,block_p_one_sided,U_one_sided_95,n_blocks,query_CI95_lo,query_CI95_hi,query_p_one_sided
+arm,TiRGN base (GDELT25X-trained),0.397941,0.277886,0.441569,0.649178,,,harness exact filtered rank,,,,,,,,,
+arm,TiRGN(+)RecB BLEND [def MIX 0.3],0.415620,0.293728,0.463177,0.668780,,,harness exact filtered rank,,,,,,,,,
+arm,"RecB-POOL [K=100, def MIX 0.3]",0.415614,0.293728,0.463177,0.668780,,,harness exact filtered rank,,,,,,,,,
+arm,"HR (W=50, 19 feat., 3 seeds)",0.429495,0.308276,0.477857,0.683679,0.000179,0.429527;0.429302;0.429655,harness exact filtered rank,,,,,,,,,
+arm,"HRCOV_PAT (W=100, 25 feat., 3 seeds)",0.430494,0.309049,0.478830,0.684584,0.000219,0.430450;0.430731;0.430301,harness exact filtered rank,,,,,,,,,
+arm,RecB trained (clean),0.401124,0.285316,0.444247,0.641087,,,hd_recb formula (average ties),,,,,,,,,
+arm,RecB default (clean),0.391801,0.275975,0.434942,0.629881,,,hd_recb formula (average ties),,,,,,,,,
+arm,RecB trained (faithful),0.399961,0.283819,0.443340,0.640731,,,hd_recb formula (average ties),,,,,,,,,
+arm,RecB default (faithful),0.390110,0.273927,0.433667,0.628516,,,hd_recb formula (average ties),,,,,,,,,
+C1 (decision),HRCOV_PAT - BLEND,,,,,,,,0.014873,0.014023,0.015731,0.000000,0.015594,61,0.014417,0.015352,0.000000
+C1 (decision),HRCOV_PAT - POOL,,,,,,,,0.014880,0.014030,0.015738,0.000000,0.015600,61,0.014428,0.015382,0.000000
+C3 head guardrail,"HRCOV_PAT - BLEND on head (share 0.9242, n 337065)",,,,,,,,0.015656,0.014660,0.016620,0.000000,0.016415,61,0.015123,0.016181,0.000000
+secondary,HRCOV PAT - HR (pool widening),,,,,,,,0.000999,0.000636,0.001340,0.000000,0.001291,61,0.000763,0.001236,0.000000
+secondary,HR - BLEND,,,,,,,,0.013874,0.013078,0.014718,0.000000,0.014570,61,0.013396,0.014360,0.000000
+secondary,HRCOV PAT - RecB trained clean,,,,,,,,0.029370,0.028175,0.030576,0.000000,0.030377,61,0.028722,0.029994,0.000000
+secondary,BLEND - base,,,,,,,,0.017680,0.016815,0.018574,0.000000,0.018442,61,0.017173,0.018212,0.000000
+secondary,HRCOV PAT - base,,,,,,,,0.032553,0.031326,0.033753,0.000000,0.033536,61,0.031951,0.033166,0.000000
+paired H1 delta,HRCOV_PAT - BLEND,,,,,,,,0.015321,0.014345,0.016329,0.000000,0.016168,61,,,
+paired H1 delta,HRCOV_PAT - POOL,,,,,,,,0.015321,0.014345,0.016329,0.000000,0.016168,61,,,
+paired H3 delta,HRCOV_PAT - BLEND,,,,,,,,0.015653,0.014286,0.017092,0.000000,0.016892,61,,,
+paired H3 delta,HRCOV_PAT - POOL,,,,,,,,0.015653,0.014286,0.017092,0.000000,0.016892,61,,,
+paired H10 delta,HRCOV_PAT - BLEND,,,,,,,,0.015804,0.014536,0.017167,0.000000,0.016936,61,,,
+paired H10 delta,HRCOV_PAT - POOL,,,,,,,,0.015804,0.014536,0.017167,0.000000,0.016936,61,,,
+stratum (B=1000),head (gold train freq >= 500): HRCOV_PAT - BLEND (share 0.9242),,,,,,,,0.015656,0.014660,0.016620,,0.016415,,,,
+stratum (B=1000),mid (50-499): HRCOV_PAT - BLEND (share 0.0619),,,,,,,,0.005828,0.004172,0.007549,,0.007299,,,,
+stratum (B=1000),low-frequency (< 50): HRCOV_PAT - BLEND (share 0.0140),,,,,,,,0.003124,0.000082,0.006258,,0.005693,,,,
+stratum (B=1000),no-pair-history: HRCOV_PAT - BLEND (share 0.0178),,,,,,,,-0.007983,-0.009314,-0.006674,,-0.006893,,,,
+stratum (B=1000),pair-history: HRCOV_PAT - BLEND (share 0.9822),,,,,,,,0.015288,0.014366,0.016188,,0.016035,,,,
+stratum (B=1000),"exact recurrence (s,r,o) before t: HRCOV_PAT - BLEND (share 0.8374)",,,,,,,,0.012133,0.011190,0.013175,,0.013001,,,,
+stratum (B=1000),gold outside base top-50: HRCOV_PAT - BLEND (share 0.1209),,,,,,,,0.000511,0.000196,0.000821,,0.000767,,,,
+stratum (B=1000),gold in base top-50: HRCOV_PAT - BLEND (share 0.8791),,,,,,,,0.016849,0.015890,0.017846,,0.017650,,,,

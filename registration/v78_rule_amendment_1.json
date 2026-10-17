@@ -1,0 +1,101 @@
+{
+ "name": "v78_rule_amendment_1",
+ "amends": {
+  "file": "v78_framing_rule.json",
+  "registered_utc": "2026-10-15T17:34:21Z",
+  "sha256": "8e05c67b7ce8f3a475ac391e813463b9d435f8add5af13e5c4d03f78483a5f2d",
+  "version_id": "259e3c6c-718a-4698-bfc7-ad028629f664"
+ },
+ "purpose": "Fixes, before any v7.8 test number exists, every implementation choice the rule leaves open: the SA feature list, history tail order, pattern-block ordering, width-sweep settings, ladder rungs, seeds, REL_LIN shrinkage grid, EXT_blend grid, SA_ERM and EXT_adapted construction, and the statistics. The rule's comparators, criteria, outcome labels and stop rules are unchanged.",
+ "status_at_registration": "No SA, SA_ERM, ladder, width-sweep, REL_LIN or EXT test number has been computed. The investigators know the v7.7 HRcov test results (S1/S2/S3). For orientation only, the C2 results of v7 (CONF12 vs UTIL12, test inspected in v7) and the published G1/G1_xf numbers are also known.",
+ "common": {
+  "data": "Harness splits and query order as in v7.7. Validation queries: tkgl-polecat = the 200,000-query validation sample of the HRcov runs (feature rows identical for TiRGN and CognTKE, checked); tkgl-smallpedia = all 162,066 validation queries. Fit part = validation timestamps below the 70% timestamp cut; selection part = the rest, as in hcpat_train.py. Test = all queries (polecat 532,636; smallpedia 163,172).",
+  "RecB_xf": "The cross-fitted RecB of G1_xf: hd_blend.recb_row with the CSR files and per-relation (lambda, alpha) of hardening/v76/recb_xf (selected on the validation selection part), trained variant, xi = online object counts of all facts with ts < t. Score S(e) = 1000*alpha_r*psi(s,r,e) + 1000*(1-alpha_r)*xi_r(e); q(e) = S(e)/sum_e S(e).",
+  "history_order": "Strict total order over all entities: S(e) descending, then the entity's train frequency descending (Splits.freq = occurrences as head or tail in the training split), then entity id ascending. Implemented by a stable descending sort of S over entities pre-ordered by (freq desc, id asc); position 0 = first.",
+  "pattern_instantiation": "Identical to HRcov: 1- and 2-hop entity-anonymised path patterns of the subject (M1 = 64, M2 = 32, online history < t), te_hier from the HRcov TE tables (pc_tirgn/work/te_POLECAT.npz, identical md5 c56b3926... for the CognTKE run; pilot_smallpedia/work/te_SMALLPEDIA.npz), list length LP_LEN = 300.",
+  "conf_hist_list": "Base-free pattern list (confidence-only ordering): candidates ordered by max te_hier over their patterns (descending), then support = sum over their patterns of max(te_hier, 0) (descending), then RecB_xf score S recomputed in float64 on CPU from the same CSR and online counts (descending), then train frequency (descending), then entity id (ascending). No base probability enters the list.",
+  "util_list": "HRcov's list, re-derived as in v7_c2_lists.py UTIL12 (utility u = te_hier - log1p(mass_base (e-1)), ties by support then base log p); used only for the HRcov width sweep. Its 50-block must equal the stored HRcov block (checked; fraction reported).",
+  "block": "Block of a pool with first block F of size K: the first <= K list members not in F (dedupe in list order).",
+  "promotion_and_rank": "Unchanged from HRcov (selection budget): every first-block member is promoted; a block member is promoted iff its final score exceeds the minimum final score of the first block; filtered other true answers are masked in training and skipped in ranking. Exact filtered rank: gold promoted -> 1 + #(unfiltered promoted with higher score); otherwise r_tail(gold) + #(unfiltered promoted block members placed after the gold in the tail order), where r_tail is the strict filtered rank of the gold in the tail order (history order or base order).",
+  "official_scoring": "py-tgb 2.3.0 Evaluator with the shipped test negatives. A system's score vector = tail-order scores (history order: N - position; base order: base log p) with the promoted list lifted above all others in its final order (hd_blend.lift). Harness exact ranks are computed alongside; any |official - harness| MRR difference above 1e-4 is flagged. The pure history order (HIST) is reported as a descriptive row.",
+  "ranker": "As HRcov (hcpat_train.py): 2 x 64 ReLU MLP with zero-initialised output layer, listwise softmax cross-entropy over the pool with filtered other answers masked, Adam lr 1e-3, weight decay 1e-5, batch 512, <= 30 epochs, patience 5, fit queries = fit-part queries whose gold is in the pool (cap 120,000, subsample seed 0), standardisation from fit rows (3,000,000-candidate subsample, seed 0), early stopping on selection-part MRR of the exact rank under the arm's own tail order.",
+  "seeds": "Ranker seeds 0, 1, 2 for every learned arm (the HRcov runs have exactly these three seeds; bases are the single headline runs). The rule's 'S1 additionally 3 seeds' is therefore met in every configuration. Per-seed results are reported; decisions use the seed-mean per-query RR."
+ },
+ "SA": {
+  "pool": "First block = the first K = 50 entities of the history order (RecB_xf top-50, extended by frequency when fewer than 50 have S > 0); block = <= 50 members of conf_hist_list not in the first block; total width cap 100.",
+  "features_retained_16": [
+   "ev_log_ntrip",
+   "ev_log_ndyad",
+   "ev_rec_trip",
+   "ev_rec_dyad",
+   "ev_log_nobjrel",
+   "ev_log_nent",
+   "ev_rec_objrel",
+   "ev_log_ntrip_recent30",
+   "ev_dyad_lr",
+   "ev_q_log_nquery",
+   "ev_q_log_nsubj",
+   "pat_best_te",
+   "pat_log_npat",
+   "pat_reach",
+   "pat_log_pos",
+   "is_cov_cand"
+  ],
+  "features_dropped_9_plus_fusion": [
+   "logp",
+   "logp_minus_top1",
+   "log_base_rank",
+   "is_topKc",
+   "q_p1",
+   "q_entropy50",
+   "q_margin12",
+   "q_log_tailmass",
+   "pat_best_util",
+   "calibrated fusion alpha*log p_base + beta*f"
+  ],
+  "feature_notes": "Evidence features use the HRcov code (rs_features Hist / DyadReader, facts with ts < t). pat_log_pos = log1p(min(position in conf_hist_list, 300) + 1); pat_best_te, pat_log_npat, pat_reach as in HRcov; is_cov_cand = 1 for block columns. pat_best_util is dropped because its mass term uses base probabilities.",
+  "score_and_tail": "Final score = ranker score f (no fusion). Tail = history order.",
+  "S2_S3": "SA does not use the base, and the two polecat configurations share validation rows and test queries. One SA run on tkgl-polecat therefore serves as the standalone comparator for both S2 and S3."
+ },
+ "SA_ERM": "Built only if EdgeReMIND passes the reproduction gate AND its dumps cover every validation query used here (polecat 200,000-query sample, smallpedia full validation) and every test query. Same as SA, except that the first block is EdgeReMIND's top-50, and EdgeReMIND's score replaces S in conf_hist_list tie-breaking and in the tail order. Entities outside its top-1000 take its floor score; ties are then broken by the history order. Features are SA's 16. If not built, the standalone comparator is SA.",
+ "ladder": {
+  "rungs": "All at W = 100 with the same ranker, seeds and selection. SA -> +C: first block = base top-50; block from the same base-free conf_hist_list, deduplicated against the base top-50; SA's 16 features; score f; history tail. -> +S: add the 9 base-derived features (8 base slots + pat_best_util, computed on this pool exactly as in HRcov) and the calibrated fusion alpha*log p_base + beta*f (calibrate_ab on selection rows); history tail. -> +T: same as +S, with the base tail order (HRcov's exact rank formula) = HRcov-equivalent.",
+  "reproduction": "+T differs from HRcov only in the pattern-list ordering (base-free versus utility). |MRR(+T) - MRR(HRcov)| <= 0.002 (seed-mean, official) is checked; otherwise the discrepancy is reported. The residual HRcov - (+T) is reported as the rung '+P' (utility ordering of the pattern list).",
+  "decomposition": "Delta_C = (+C) - SA, Delta_S = (+S) - (+C), Delta_T = (+T) - (+S), Delta_P = HRcov - (+T); total = HRcov - SA. All descriptive, with both bootstraps."
+ },
+ "width_sweep": "W in {50, 150} in addition to W = 100. First block K = W/2 (25 or 75), block <= W/2 from the same list, promotion relative to that first block. SA_W uses the history-order first block and conf_hist_list; HR_W uses the base first block, util_list and HRcov's 25 features, fusion and base tail. HR_W50/HR_W150 are refitted; W = 100 entries are SA and the stored HRcov. Descriptive only.",
+ "REL_LIN": "Pool and features of HRcov (stored PT pool, W = 100, 25 features). Score = x.(w + delta_r) + b + c_r for query relation r (2R directions, inverse directions separate), penalty lambda * sum_r (||delta_r||^2 + c_r^2) added to the mean listwise loss. lambda is chosen from {1e-4, 1e-3, 1e-2, 1e-1, 1} by mean selection-part MRR over seeds (fused). Also refitted: the global linear scorer (no offsets, REL_LIN_global). Fused and base tail as HRcov. Diagnostic: REL_LIN vs HRcov and vs REL_LIN_global; not decision-relevant.",
+ "EXT": {
+  "inputs": "The sibling's EdgeReMIND / CountTRuCoLa top-1000 score dumps (harness query order, gold identity checked) with README, under tracks/v78_external/. A method enters only with its gate status from the README (rule's reproduction_gate).",
+  "EXT_alone": "Score vector = the method's scores on its top-1000; all other entities take the floor (= its minimum listed score for that query); official evaluator (ties at the floor are averaged, the official convention).",
+  "EXT_blend": "score = (1 - a) * log p_base + a * log_softmax(z / tau) over all N entities, where z = (s - mean_top1000(s)) / sd_top1000(s) per query (sd floored at 1e-6; z = 0 if fewer than 2 listed), s = floor outside the top-1000. a in {0.02, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.98} (the v7.7 BLEND beta grid), tau in {0.5, 1, 2, 4}; 52 configurations selected by the selection-part MRR (exact filtered ranks, average ties). TiRGN (S1, S2) and CognTKE (S3) bases as in HRcov. Requires validation-selection dumps; otherwise not assessed.",
+  "EXT_adapted": "Optional. Run only if the sibling can produce it cheaply (<= 6 GPU-h and <= 24 h wall per configuration). EdgeReMIND: refit its per-relation history weights on train + validation fit part with its own features and loss, other settings as released, choices on the selection part. CountTRuCoLa: re-learn rule confidences with the validation fit part appended to its learning data, settings as released. Adapted runs are labelled as adaptations and also enter as 'adapted blend' (same grid). Otherwise recorded as 'not assessed (optional, not run)'.",
+  "external_comparator": "As in the rule: per method, the variant among those available with the highest selection-part MRR; then the method with the higher selected MRR. A method with a failed gate enters only with the 'not reproduced' flag. A configuration without an assessed external method is 'not assessed' for the external comparator."
+ },
+ "statistics": "Per configuration and comparator X: per-query official RR, seed-mean over seeds 0-2 for learned systems (deterministic systems single). Paired delta HRcov - X; query Poisson(1) bootstrap and timestamp-block bootstrap (cluster = test timestamp), B = 2000 each, shared draws, seed 0 (v7_common.summ_multi). One-sided 95% bounds L = 5th, U = 95th percentile. BEATS / MATCHES / SMALL / not_assessed and the outcome labels F3 > F2 > F1 > F4 exactly as in the rule. S2 and S3 use the same SA. H@1/3/10 are reported for every system. HRcov base-rank identity check: the base official RR in each stored HRcov file must equal the base RR of the v7.8 official passes (mean |diff| < 1e-6), otherwise flagged.",
+ "sensitivity_registered_not_decision": "SA_GEN = SA plus the 8 RecB_xf generator features in the base slots (G1 formulas on q: log q floored at -30, log q - log q1, log history position, in-first-50 flag, q1, entropy of normalised top-50, log q1 - log q2, log tail mass outside the history top-200), 24 features, no fusion. It is reported descriptively, and the decision rule is re-applied with standalone_comparator = the better of {SA, SA_GEN} on the selection part. This re-application is labelled a sensitivity analysis; the registered verdict uses SA (or SA_ERM).",
+ "stored_HRcov_inputs": {
+  "S1": {
+   "train": "hardening/presub_hcpat2/train_smallpedia_tirgn",
+   "official_sha256": "74a36b024cc1c33b0e8bf8f3b1323eef876fb923ba10ec56a6eeca7936399ded"
+  },
+  "S2": {
+   "train": "hardening/presub_hcpat/train_polecat_tirgn",
+   "official_sha256": "46cf3d5efb59f7c0e3cba5136eb98d9291983eebc51597eef9f0fcb61ad20267"
+  },
+  "S3": {
+   "train": "hardening/g8_cogntke/pc/work/hcpat_cogn",
+   "official_sha256": "1fb79ddb61e719760e4cc9cc8c8ecee0d9c7f895fe532ab26edec1c15c352091",
+   "systems": "HRCOV_PAT_s0..s2 in the G8 official file"
+  }
+ },
+ "declared_interpretations": [
+  "SA's final score is the ranker score alone, because the rule lists fusion among the base-derived components; the fusion is added at +S.",
+  "The rule does not specify the width-sweep split; it is set to K = W/2 with a block of <= W/2, keeping HRcov's 1:1 design.",
+  "Ties in the pattern list are broken by RecB_xf, frequency and id, replacing the base log p tie-break of v7 CONF12.",
+  "The ladder keeps the base-free list up to +T, so that each rung adds exactly one base component; the list ordering is reported as the separate residual +P.",
+  "SA_GEN is added as a registered, non-decision sensitivity analysis."
+ ],
+ "registered_utc": "2026-10-15T18:54:33Z",
+ "sha256": "8fffffcaad75b066fe0fb35127e101c5bbe11f65de7ff4654068f5170962d84e"
+}

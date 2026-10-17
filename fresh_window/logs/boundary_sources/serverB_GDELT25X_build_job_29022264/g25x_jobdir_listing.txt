@@ -1,0 +1,23 @@
+total 224
+drwxrwxr-x   3 [REDACTED:~ANON] [REDACTED:~ANON]   4096 2026-10-13T16:24:20Z .
+drwxrwxr-x 223 [REDACTED:~ANON] [REDACTED:~ANON]  20480 2026-10-16T14:30:28Z ..
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]   1359 2026-10-13T16:24:14Z build_gdelt25x.log
+-rw-r--r--   1 [REDACTED:~ANON] [REDACTED:~ANON]    853 2026-10-13T16:24:14Z build_gdelt25x_summary.json
+-rw-r--r--   1 root root    853 2026-10-13T16:24:14Z build_gdelt_summary.json
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]     18 2026-10-13T15:51:06Z cmd.sh
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]      6 2026-10-13T16:24:14Z gdelt_files_after.txt
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]      6 2026-10-13T15:51:06Z gdelt_files_before.txt
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]   1355 2026-10-13T15:51:06Z job.sh
+drwxrwxr-x   2 [REDACTED:~ANON] [REDACTED:~ANON]   4096 2026-10-13T15:51:06Z _lock
+-rw-r--r--   1 [REDACTED:~ANON] [REDACTED:~ANON] 112627 2026-10-13T16:24:14Z missing_export_files.txt
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]      0 2026-10-13T15:51:06Z nohup.out
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]     15 2026-10-13T15:51:06Z _pgid
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]    542 2026-10-13T16:25:13Z probe.log
+-rw-r--r--   1 [REDACTED:~ANON] [REDACTED:~ANON]  12205 2026-10-13T15:51:05Z ps_build_gdelt.py
+-rw-r--r--   1 [REDACTED:~ANON] [REDACTED:~ANON]   5913 2026-10-13T15:51:05Z ps_ccnews_scan.py
+-rw-r--r--   1 [REDACTED:~ANON] [REDACTED:~ANON]   2183 2026-10-13T15:51:05Z ps_job_ccA.sh
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]     50 2026-10-13T15:51:05Z _staged
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]     46 2026-10-13T16:25:13Z _status.json
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]    142 2026-10-13T15:51:07Z _submitted
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]     64 2026-10-13T16:24:16Z targets_summary.json
+-rw-rw-r--   1 [REDACTED:~ANON] [REDACTED:~ANON]    846 2026-10-13T16:24:20Z warc_counts.txt

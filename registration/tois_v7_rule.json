@@ -1,0 +1,185 @@
+{
+ "name": "tois_v7_rule",
+ "label": "PRE-SPECIFIED LATER ANALYSES on previously inspected test sets (NOT untouched confirmation)",
+ "requested_by": "PI v6 review (TOREAD_tois_review_and_revision_plan.md, Sections 2-4), lead brief of 2026-10-14",
+ "question": "Do the v6 claims of Manuscript A survive (A) uniform reanalysis of the stored outputs and (B/C) controlled comparisons that separate ranker form, candidate generator, base contribution and feature/pattern design?",
+ "status_of_test_data": "All four test sets (tkgl-polecat, tkgl-smallpedia, ICEWS18, GDELT; tkgl-icews Stage B) were inspected in earlier rounds (pilot, hardening, G1-G3, HRCOV_PAT, ablations). Every v7 test number is a pre-specified later analysis; no wording of 'untouched' or 'confirmatory' is used.",
+ "existing_results_before_this_rule": [
+  "hardening verdict + HRCOV_PAT on all decision bases (54883d49)",
+  "G1 verdict (134c83e6)",
+  "G2 verdict (9a9e27b4)",
+  "G3",
+  "Stage B verdict (f3ff0466)",
+  "ablations A10/A11 (7a795468)",
+  "G6 latency",
+  "intro_loss_decomposition.json (79d67665)"
+ ],
+ "default_bases": {
+  "tkgl-polecat": "TiRGN (hardening checkpoint tirgn_POLECAT_seed42.pt, valid-best)",
+  "tkgl-smallpedia": "TiRGN (pilot-2 checkpoint, valid-best epoch 20)",
+  "ICEWS18 / GDELT (A-items only)": "TiRGN frozen base of G2"
+ },
+ "expansion_rule": "B/C items run on the two default bases only. A second base (polecat LogCL, smallpedia regcn_tgb) is added for an item only if its primary result is AMBIGUOUS: the timestamp-block 95% CI of the primary delta contains the bar (0.005) on either default base, or the two default bases give opposite signs with both 95% CIs excluding 0.",
+ "evaluators": {
+  "TGB (polecat, smallpedia, tkgl-icews)": "official py-tgb 2.3.0 Evaluator per-query RR / rank on the shipped *_test_ns.pkl negatives (polecat: TiRGN replay on <HOST> GPU 1; smallpedia: stored float32 full rows, CPU; tkgl-icews: as Stage B); harness exact filtered rank reported alongside; |dMRR| > 1e-4 flagged. If an arm cannot be scored officially within the budget it is scored with the exact fused rank (the evaluator's statistic, validated earlier to |dMRR| <= 1e-7) and labelled.",
+  "ICEWS18 / GDELT": "harness exact time-aware filtered rank (no TGB evaluator; as registered for G2)"
+ },
+ "learned_arms": "seeds 0, 1, 2; per-query RR averaged over seeds (= hd_agg convention); per-seed MRR reported; H@k = mean over seeds of per-seed H@k",
+ "statistics": {
+  "query_bootstrap": "paired Poisson(1) bootstrap over test queries, B = 2000, seed 0 (hd_agg.boot)",
+  "timestamp_block_bootstrap": "multinomial resampling of test timestamps (all queries of a timestamp, both directions), B = 2000, seed 0 (g7_cluster_bootstrap.boot_cluster); statistic = resampled sum of per-query deltas / resampled number of queries",
+  "intervals": "two-sided 95% percentile CI from both bootstraps; one-sided 95% bounds L = 5th and U = 95th percentile",
+  "positive_claim": "a difference is called present only if the one-sided lower bound L > 0 under BOTH bootstraps (Holm-adjusted one-sided p < 0.05 within an item when an item has several primary comparisons)",
+  "null_claim": "an effect is called EXCLUDED (smaller than the bar) only if the one-sided upper bound U of the relevant signed delta < bar under the timestamp-block bootstrap (the more conservative); otherwise 'not excluded'. bar = 0.005 MRR unless stated",
+  "MDE": "reported only as sensitivity: MDE_80 = (z_0.95 + z_0.80) x SE_ts = 2.486 x SE of the timestamp-block bootstrap; never used to support a null",
+  "practical_margin": "0.005 MRR = the project's operational criterion (not a significance threshold)"
+ },
+ "items": {
+  "A1_membership_and_loss_decomposition": {
+   "type": "descriptive reanalysis (no new model)",
+   "datasets": [
+    "tkgl-polecat",
+    "tkgl-smallpedia",
+    "ICEWS18",
+    "GDELT"
+   ],
+   "base": "TiRGN",
+   "definitions": {
+    "stored_list": "the base top-50 candidate list exactly as stored by the pipeline (unfiltered top-50 of the base score row; pc_features/sp_features/g2_features columns 0-49)",
+    "in_list": "gold in stored_list",
+    "rank_le_50": "time-aware filtered base rank of the gold <= 50 (harness exact rank; TGB ties at average position)",
+    "disagreement": "counts of in_list & ~rank_le_50 and ~in_list & rank_le_50; other true same-timestamp answers above the gold reported"
+   },
+   "loss_decomposition": "loss = 1 - RR_base (official per-query RR for TGB, harness for ICEWS18/GDELT). Cells, applied identically to all four datasets and base-only (no bridge or pattern candidates): history stratum {recurrent: (s,r,o) before t; pair_only: (s,o) pair before t in any relation/direction, not recurrent; no_pair_path: neither, both entities seen, gold reachable by a <= 2-hop path from s before t (strata two_hop); no_pair_no_path: neither, both entities seen, no 2-hop path; first_seen: s or o without any fact before t} x pool {in, out}. Report n, share, MRR_base, loss_share. Version 1 (primary): pool = in_list. Version 2: pool = rank_le_50 (the v6 TGB definition). The v6 ICEWS18/GDELT cells (taxonomy pool incl. promoted bridge candidates) are listed unchanged for reference."
+  },
+  "A2_exact_oracle": {
+   "type": "descriptive",
+   "datasets": [
+    "tkgl-polecat",
+    "tkgl-smallpedia",
+    "ICEWS18",
+    "GDELT"
+   ],
+   "base": "TiRGN",
+   "formula": "oracle MRR = mean[ I(g in C) + I(g not in C) / rank_tail(g) ], rank_tail = 1 + |C minus (other true answers and g)| + #{e not in C, not filtered, s_base(e) > s_base(g)} (the plug-in convention: candidate block above the tail, tail in base order; = hd_blend.pool_rank r_out)",
+   "pools": {
+    "T50": "stored base top-50",
+    "T100": "base top-100 (unfiltered)",
+    "U50": "T50 union RecB-trained (clean) top-50 with RecB > 0 (unfiltered)",
+    "POOL_sel": "the valid-selected RecB-POOL pool of the hardening controls (base top-K union RecB top-K, K and variant as selected)",
+    "HRCOV_PAT": "the ACTUAL HRCOV_PAT candidate set: T50 ++ first <= 50 pattern-prior candidates not in T50 (bridge columns masked)"
+   },
+   "also": "recall = P(g in C) for each pool (unfiltered membership); recall with the v6 filtered-rank definition shown for T50 / T100 / U50"
+  },
+  "A3_hits": {
+   "type": "descriptive",
+   "runs": "every final bridge-free decision run: HRCOV_PAT on polecat TiRGN, polecat LogCL, smallpedia TiRGN, smallpedia regcn_tgb, and G2 ICEWS18 (TiRGN, RE-GCN) / GDELT (TiRGN, LogCL); plus base, BLEND, POOL, HR rows from the same files",
+   "metrics": "MRR, H@1, H@3, H@10 (official evaluator ranks for TGB; harness ranks for ICEWS18/GDELT); seed-mean"
+  },
+  "A4_training_selection": {
+   "type": "descriptive",
+   "bases": "default bases (+ G2 TiRGN where the fit rows are stored)",
+   "definition": "fit rows = valid (sample) queries with ts < 70% cut; retained = gold in the arm's pool (HR: W 50; HRCOV_PAT: W 100); fit_max cap 120,000 (random, seed 0) reported; calibration rows = selection queries with gold in pool; selection MRR on all selection queries",
+   "breakdowns": "history stratum (A1 cells) and gold train-frequency bin (cold < 50, mid 50-499, head >= 500; plus deciles of log frequency) for fit population vs retained"
+  },
+  "A5_multi_positive": {
+   "type": "code reading + pre-specified sensitivity",
+   "question": "Are other true same-timestamp answers treated as negatives in Eq. (4)?",
+   "rule": "if they are NOT masked: fit a masked-denominator variant on polecat TiRGN. If they ARE masked (filt excluded from the softmax), report this and fit two sensitivity variants on polecat TiRGN, CPU: UNMASKED (other true answers kept as negatives) and MULTIPOS (loss = -log sum_{true answers in pool} softmax over the unmasked pool). Comparison vs HRCOV_PAT re-fit in the same run; descriptive deltas with both CIs; no claim beyond the bounds."
+  },
+  "A6_temporal_sensitivity": {
+   "type": "pre-specified sensitivity of existing margins",
+   "margins": "HRCOV_PAT - BLEND and HRCOV_PAT - better control (as in the decision) on polecat TiRGN, smallpedia TiRGN; ICEWS18 TiRGN and GDELT TiRGN as extension",
+   "procedures": {
+    "LOPO": "smallpedia: leave out each of the 17 test timestamps; others: leave out each of 10 contiguous blocks of test timestamps (equal counts)",
+    "moving_block": "circular moving-block bootstrap over the timestamp sequence, block length l = ceil(n_ts^(1/3)), B = 2000, seed 0",
+    "plots": "per-timestamp delta with per-timestamp 95% query-bootstrap CI and the running mean"
+   },
+   "report": "min / max over left-out periods, number of periods with delta < 0.005, moving-block CI"
+  },
+  "A7_selective_gain_loss": {
+   "type": "pre-specified test of the 'safe when the base is sharp' motivation",
+   "bins": "base top-1 probability p1 in [0, 0.1), [0.1, 0.2), [0.2, 0.3), [0.3, 0.5), [0.5, 0.7), [0.7, 0.9), [0.9, 1.0]",
+   "per_bin": "n, share, base MRR, HRCOV_PAT MRR, delta (both CIs), fraction improved / harmed (per-query RR), mean gain | improved, mean loss | harmed, H@1 overrides (base rank 1 -> rank > 1) and rescues; BLEND as reference",
+   "safety_claim": "'no material harm' in a bin only if the one-sided 95% lower bound (ts-block) of HRCOV_PAT - base > -0.005"
+  },
+  "B1_ranker_form": {
+   "bases": "default",
+   "pool": "HRCOV_PAT candidate set (W 100)",
+   "fixed": "fit rows, selection rows, 25 features, epochs/patience/lr/bs, calibrated alpha/beta fusion, evaluator",
+   "arms": {
+    "LIN": "linear scorer over the 25 features",
+    "MLP16": "1 hidden layer, 16 units (ReLU)",
+    "MLP64x2": "the HRCOV_PAT ranker (2 x 64), re-fit in the same run",
+    "QBLEND": "learned query-conditioned blend on the same pool: s = log p_b(c) + w(q) * log(q_RecB(c) + 1e-5), w(q) = softplus(MLP16(query features: p1, top-50 entropy, margin12, log tail mass, log n_query, log n_subj)), RecB = trained clean variant; fitted with the same listwise loss; no calibration step"
+   },
+   "primary": "MLP64x2 - LIN (does non-linearity add value?) and MLP64x2 - QBLEND (beyond the strongest blending control)",
+   "secondary": "MLP16 - LIN, MLP64x2 - MLP16"
+  },
+  "B2_matched_pool": {
+   "bases": "default",
+   "pools": {
+    "PT": "T50 ++ first <= 50 pattern-prior candidates not in T50 (= HRCOV_PAT pool)",
+    "RB": "T50 ++ first <= 50 RecB-trained (clean) candidates with RecB > 0 not in T50, by descending RecB score, ties by entity id"
+   },
+   "fixed": "total budget W = 100, overlap policy (dedupe against T50, fill in generator order), ranker (2 x 64 MLP, listwise loss with other true answers masked), fit/selection rows (gold-in-pool retention applied per pool and reported), calibration, evaluator",
+   "inputs": {
+    "common": "19 base + evidence features + is_extra_candidate flag (20)",
+    "generator_specific": "PT: + 5 pattern features (= HRCOV_PAT); RB: + 5 RecB features (log q_RecB, log q_RecB - log max q_RecB, log RecB rank, has-psi flag, in RecB top-50 flag)"
+   },
+   "primary": "PT_common - RB_common",
+   "secondary": "PT_gen - RB_gen; recall and exact oracle MRR of both pools"
+  },
+  "B3_common_pool_base_ablation": {
+   "bases": "default",
+   "arms": {
+    "FULL": "HRCOV_PAT (25 features, fused) = re-fit reference",
+    "NB_F": "no base features, fused (= A10 definition)",
+    "B_NF": "all 25 features, ranker score alone (no alpha log p fusion)",
+    "NB_NF": "no base features and no fusion (evidence + pattern features only, score alone) on the PT pool",
+    "EV_NF_PT": "evidence features 8-18 + is_extra flag only, no fusion, PT pool",
+    "EV_NF_RB": "same inputs on the RB pool",
+    "G1": "stored G1 (RecB top-150 pool, generator + evidence features)"
+   },
+   "primary": "FULL - NB_NF (base features + fusion on a common pool)",
+   "decomposition": "HRCOV_PAT - G1 = (FULL - EV_NF_PT) [base contribution, common pool] + (EV_NF_PT - EV_NF_RB) [candidate source, common inputs] + (EV_NF_RB - G1) [remaining: pool width, generator features, tail order]"
+  },
+  "B4_G1_tkgl_icews": {
+   "setting": "Stage B (full train bases, full test 4,651,378 queries, official evaluator)",
+   "bases": "RE-GCN and LogCL Stage B bases (for HRCOV - G1)",
+   "G1": "unchanged G1 recipe (RecB trained clean pool, 19 features, W 150 as chosen on both TGB datasets), seeds 0-2, fit/selection on the Stage B valid sample with the 70% timestamp cut",
+   "primary": "HRCOV_b - G1 per base (both CIs)",
+   "extension": "ICEWS18 / GDELT only if resources allow"
+  },
+  "C1_no_dyad_lr": {
+   "bases": "default",
+   "arm": "HRCOV_PAT minus ev_dyad_lr (feature 16) only, 24 features; everything else fixed",
+   "primary": "FULL - noDyadLR; exclusion claim only if U < 0.005"
+  },
+  "C2_pattern_design": {
+   "bases": "default",
+   "arms": {
+    "UTIL12": "proposed: utility u = te_hier - log1p(mass_base * (e - 1)), 1- and 2-hop patterns",
+    "CONF12": "confidence only: order by te_hier (no base-mass penalty), 1- and 2-hop",
+    "UTIL1": "utility, 1-hop patterns only",
+    "UTIL2": "utility, 2-hop patterns only (if non-empty)"
+   },
+   "fixed": "block budget <= 50 after T50, dedupe policy, 25 features recomputed from the same pattern instantiation, ranker, fit rows, evaluator",
+   "primary": "UTIL12 - CONF12 and UTIL12 - UTIL1"
+  },
+  "C3_relnorm_tkgl_icews": {
+   "setting": "Stage B, relation-normalised data (pi_relnorm map), evaluation with ORIGINAL ids/conflict sets",
+   "systems": "RE-GCN-RN base, RecB on RN data, G1-RN, HRCOV-RN (existing Stage B RN arms)",
+   "primary": "relative gains (HRCOV - base, HRCOV - G1, HRCOV - BLEND) with and without RN"
+  },
+  "C4_base_seed": {
+   "if_feasible": "second TiRGN seed on polecat (train under the same recipe), then HRCOV_PAT - better control on it",
+   "feasibility": "TiRGN polecat training peaked at 51.5 GB allocated; GPU 1 is capped at ~30 GB and GPU 0 is G8's -> infeasible unless memory can be reduced without changing the recipe; declared as a cut if so"
+  }
+ },
+ "selection_discipline": "every hyper-parameter, epoch, calibration weight and pool configuration is chosen on valid only (fit / selection split of the stored valid rows); no configuration changes after a v7 test number is read; any later addition is labelled post-hoc",
+ "budget": "<= 24 GPU-hours on <HOST> GPU 1 (<= ~30 GB), CPU as needed; GPU 0 untouched (G8). If the budget would be exceeded, depth is reduced (fewer datasets/arms) and every cut is declared",
+ "outputs": "results JSON per item (tracks/hardening/v7/), tois_v7_experiments.md + .csv, figures",
+ "registered_utc": "2026-10-14T10:13:36Z",
+ "sha256": "bfef91681490278623925e1494890719e9b4529d8ddbf9375dfa83ec2a954a8d"
+}

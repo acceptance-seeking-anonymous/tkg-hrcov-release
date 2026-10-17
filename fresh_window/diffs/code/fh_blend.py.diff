@@ -1,0 +1,65 @@
+--- a/phase2_forward_holdout/code/fh_blend.py
++++ b/code/fh_blend.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""phase2_forward_holdout / fh_blend.py = presub hd_blend.py + the gdelt25x dataset entry (no other change) --
++"""phase2_fresh_window / fh_blend.py = presub hd_blend.py + the gdeltfw dataset entry (no other change) --
+ recurrency-blend controls and scoring of every claim-bearing arm.
+ 
+ BASE(+)RecB : full-row blend of the base probabilities p with q = RecB / sum(RecB)  (RecB = Gastinger psi-Delta-xi,
+@@ -35,10 +35,10 @@
+     "gdelt": dict(name="GDELT", dd=f"{SCR}/gdelt_armAD/data/GDELT", N=7691, R=240,
+                   valid_rows=os.environ.get("G2_VALID_ROWS", f"{HD}/presub_g2/GDELT/work/valid_sample_idx.npy"), ns=None, zip=None,
+                   stage=None, official=False),
+-    # forward holdout (phase2_forward_holdout): GDELT25X post-cutoff slice, harness exact filtered ranks (no TGB evaluator)
+-    "gdelt25x": dict(name="GDELT25X", dd=os.environ.get("FH_DD", f"{TR}/phase2_forward_holdout/data/GDELT25X"), N=1173, R=218,
+-                     valid_rows=os.environ.get("G2_VALID_ROWS", f"{TR}/phase2_forward_holdout/GDELT25X/work/valid_sample_idx.npy"),
+-                     ns=None, zip=None, stage=None, official=False),
++    # forward holdout (phase2_fresh_window): GDELTFW post-cutoff slice, harness exact filtered ranks (no TGB evaluator)
++    "gdeltfw": dict(name="GDELTFW", dd=os.environ.get("FH_DD", f"{TR}/phase2_fresh_window/data/GDELTFW"), N=1209, R=215,
++                     valid_rows=os.environ.get("G2_VALID_ROWS", f"{TR}/phase2_fresh_window/GDELTFW/work/valid_sample_idx.npy"),
++                     ns=None, zip=None, stage=None, official="allent"),
+     "smallpedia": dict(name="tkgl-smallpedia", dd=f"{TR}/datasets/harness_data/tkgl-smallpedia", N=47433, R=283,
+                        valid_rows=None, ns=f"{TR}/pilot_smallpedia/work/tgb_ns/tkgl-smallpedia_test_ns.pkl",
+                        zip=f"{TR}/datasets/raw/tkgl-smallpedia.zip", stage=f"{TR}/pilot_smallpedia/stage"),
+@@ -311,7 +311,7 @@
+         arms = ["base"] + ([] if a.no_controls else ["BLEND", "POOL"]) + list(systems)
+         OUT = {k: np.zeros(n, np.float32) for nm in arms for k in (f"rr_{nm}", f"rank_{nm}", f"hrank_{nm}")}
+         max_dev = 0.0
+-    if a.stage == "test" and OFFICIAL:
++    if a.stage == "test" and OFFICIAL is True:
+         from tgb.linkproppred.tkg_negative_sampler import TKGNegativeEdgeSampler
+         from tgb.linkproppred.evaluate import Evaluator
+         import importlib.metadata as im
+@@ -393,6 +393,19 @@
+                         for nm, arr in systems.items():
+                             ids = torch.as_tensor(np.asarray(arr[rows]).astype(np.int64), device=dev)
+                             Ys[nm] = lift(lp, ids)
++                        if OFFICIAL == "allent":   # phase2_fresh_window (v79): all-entity time-aware filter, ties averaged + strict alongside
++                            arA = torch.arange(len(gold), device=dev)
++                            MA = torch.ones((len(gold), N), dtype=torch.bool, device=dev); MA[arA, gold] = False
++                            if len(fr): MA[fr, fc] = False
++                            for nm, Y in Ys.items():
++                                pos_ = Y[arA, gold]; Yn = torch.where(MA, Y, torch.full_like(Y, float("-inf")))
++                                opt = (Yn > pos_.unsqueeze(1)).sum(1); pes = (Yn >= pos_.unsqueeze(1)).sum(1)
++                                rk = 0.5 * (opt + pes).double() + 1
++                                OUT[f"rr_{nm}"][sl] = (1.0 / rk).float().cpu().numpy(); OUT[f"rank_{nm}"][sl] = rk.float().cpu().numpy()
++                                OUT[f"hrank_{nm}"][sl] = frank(Y, fr, fc, gold).float().cpu().numpy()
++                                del Yn
++                            del Ys, lp, X, Rv, qv, MA
++                            continue
+                         if not OFFICIAL:      # presub G2: harness exact filtered rank for every arm (same tie convention)
+                             for nm, Y in Ys.items():
+                                 hk = frank(Y, fr, fc, gold).float()
+@@ -433,8 +446,9 @@
+         log("valid base", meta["valid_MRR_base"], "best blend", float(mrr[:len(BLEND)].max()), "best pool", float(mrr[len(BLEND):].max()))
+     else:
+         assert all((OUT[f"rank_{nm}"] > 0).all() for nm in arms) or a.smoke, "unscored rows"
+-        meta["official_vs_formula_max_batch_dev"] = max_dev if OFFICIAL else None
+-        meta["evaluator"] = "official py-tgb Evaluator" if OFFICIAL else "harness exact filtered rank (frank) for every arm"
++        meta["official_vs_formula_max_batch_dev"] = max_dev if OFFICIAL is True else None
++        meta["evaluator"] = ("all-entity time-aware filtered rank, ties averaged (py-tgb Evaluator formula); harness strict frank in hrank_" if OFFICIAL == "allent"
++                             else "official py-tgb Evaluator" if OFFICIAL else "harness exact filtered rank (frank) for every arm")
+         res = {}
+         for nm in arms:
+             rk = OUT[f"rank_{nm}"].astype(np.float64); hr = OUT[f"hrank_{nm}"].astype(np.float64)

@@ -1,0 +1,9 @@
+--- a/phase2_forward_holdout/code/fh_recb.py
++++ b/code/fh_recb.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""phase2_forward_holdout / fh_recb.py = presub hd_recb.py + --only_valid (Stage 1 builds the valid blend CSR without the test split) -- vectorised re-implementation of the TGB Recurrency Baseline (Gastinger et al., IJCAI 2024,
++"""phase2_fresh_window / fh_recb.py = presub hd_recb.py + --only_valid (Stage 1 builds the valid blend CSR without the test split) -- vectorised re-implementation of the TGB Recurrency Baseline (Gastinger et al., IJCAI 2024,
+ TGB modules/recurrencybaseline_predictor.py + examples/linkproppred/<ds>/recurrencybaseline.py) on harness-format data.
+ 
+ Score of candidate o for query (s, r', ?, t)   (r' >= R are the inverse relations, TGB add_inverse_quadruples):

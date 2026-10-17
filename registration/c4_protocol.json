@@ -1,0 +1,33 @@
+{
+ "name": "C4 protocol (base-seed variation, tkgl-polecat TiRGN)",
+ "parent_rule": {
+  "file": "tois_v7_rule.json",
+  "version_id": "c13ffdbb-0301-4d5d-82fa-1065c67125e6",
+  "registered_utc": "2026-10-14T10:13:36Z",
+  "sha256": "bfef91681490278623925e1494890719e9b4529d8ddbf9375dfa83ec2a954a8d"
+ },
+ "item": "C4_base_seed",
+ "authorised_by": "lead message 2026-10-14 (C4 AUTHORISED on GPU 0 once G8's chain has released it)",
+ "status_of_test_data": "no test number of the second TiRGN seed exists at registration; seed-43 base not yet trained",
+ "base": {
+  "model": "TiRGN",
+  "seed": 43,
+  "original_seed": 42,
+  "recipe": "identical to the seed-42 run (hd_tirgn.py: L = 10, hr 0.3, lr 1e-3, <= 12 epochs, patience 3 on full-valid filtered MRR, max 7 training hours, valid-best checkpoint, harness top-200 dump; dec_chunk 4096 is an inference chunk size only)",
+  "host": "<HOST> GPU 0 (after the G8 chain releases it)"
+ },
+ "pipeline": [
+  "pilot-1 pc pipeline on base 'tirgn2' (pc_lists, hd_lookup exact base values, pc_features) with the code of tracks/pc_tirgn",
+  "HRCOV_PAT = v7 MLP64_PAT arm (25 features, W 100, masked listwise loss, calibrated fusion; seeds 0-2) and EV_NF_PT = v7 EV_PT arm (evidence features + is_extra flag, score alone), both from v7_btrain.py in one run, same fit/selection rows (valid sample, 70% timestamp cut)",
+  "controls: BASE(+)RecB blend and RecB-POOL selected on the valid grid only (hd_blend valid + hd_select), one official test pass (hd_blend test) for base, BLEND, POOL and the promoted lists"
+ ],
+ "comparisons": {
+  "primary": "on the seed-43 base: HRCOV_PAT - better control (by test MRR between BLEND and POOL, as in v7), and HRCOV_PAT - BLEND (lead request)",
+  "b3": "on the seed-43 base: FULL - EV_NF_PT (B3 base contribution on the common PT pool)",
+  "seed_variation": "seed 43 - seed 42 per-query paired differences for: base MRR; HRCOV_PAT MRR; (HRCOV_PAT - BLEND); (HRCOV_PAT - POOL); (FULL - EV_NF_PT); seed-42 values from the v7 official files"
+ },
+ "statistics": "as tois_v7_rule.json (paired Poisson query bootstrap + timestamp-block bootstrap, B = 2000, seed 0, shared draws; present iff one-sided L > 0 under both; exclusion only if ts U < 0.005); descriptive, no claim beyond the bounds",
+ "label": "pre-specified later analysis (C4)",
+ "registered_utc": "2026-10-14T18:54:49Z",
+ "sha256": "171774ea1da536fb8c0ad74aa24096c3fb4e5024ac0c944db78d0cc72da83d3f"
+}

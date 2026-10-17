@@ -1,0 +1,1 @@
+bash fw_freeze_job.sh

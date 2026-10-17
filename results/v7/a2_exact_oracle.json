@@ -1,0 +1,261 @@
+{
+ "rule": "tois_v7_rule.json (redacted-id, registered 2026-10-14T10:13:36Z)",
+ "label": "PRE-SPECIFIED LATER ANALYSIS (descriptive; test sets inspected earlier)",
+ "item": "A2",
+ "definition": "oracle MRR = mean[I(g in C) + I(g not in C)/rank_tail]; rank_tail = 1 + |C minus other true answers and g| + #{e not in C, not filtered, s_base(e) > s_base(g)} (candidate block above the tail, tail in base order; hd_blend.pool_rank); membership unfiltered; exact base rows (TiRGN replay on <HOST> GPU 1 for polecat, stored float32 full rows otherwise); TiRGN base on all four datasets",
+ "job": "redacted-id",
+ "datasets": {
+  "tkgl-polecat": {
+   "n": 532636,
+   "base_MRR_strict": 0.22048833966255188,
+   "t50_stored_vs_recomputed_equal": 0.9999699607236462,
+   "pools": {
+    "T50": {
+     "name": "base top-50 (stored)",
+     "recall": 0.5317402503773684,
+     "oracle_MRR_exact": 0.5332724544364723,
+     "tail_contribution": 0.0015322040591038708,
+     "mean_rank_tail_out": 24698.43111398008,
+     "mean_size": 50.0
+    },
+    "T100": {
+     "name": "base top-100",
+     "recall": 0.5905759280258939,
+     "oracle_MRR_exact": 0.5912544249346051,
+     "tail_contribution": 0.0006784969087112531,
+     "mean_rank_tail_out": 28237.374088612123,
+     "mean_size": 100.0
+    },
+    "U50": {
+     "name": "base top-50 ∪ RecB-trained top-50",
+     "recall": 0.5802818435103898,
+     "oracle_MRR_exact": 0.5812090785987902,
+     "tail_contribution": 0.0009272350884005578,
+     "mean_rank_tail_out": 27102.101969520078,
+     "size_bound": "<= 100"
+    },
+    "POOLSEL": {
+     "name": "valid-selected RecB-POOL pool",
+     "recall": 0.6342736878468598,
+     "oracle_MRR_exact": 0.6346776934993803,
+     "tail_contribution": 0.0004040056525205164,
+     "mean_rank_tail_out": 31049.28654151202,
+     "size_bound": "<= 2K = 200 (K = 100 selected on valid)"
+    },
+    "PT": {
+     "name": "HRCOV_PAT pool (actual)",
+     "recall": 0.6107379148236319,
+     "oracle_MRR_exact": 0.6114846638233224,
+     "tail_contribution": 0.000746748999690565,
+     "mean_rank_tail_out": 28414.747297851303,
+     "mean_size": 94.2588202825194
+    },
+    "RB": {
+     "name": "base top-50 ++ ≤50 RecB-trained (B2 pool)",
+     "recall": 0.5899338384938306,
+     "oracle_MRR_exact": 0.5907228026057209,
+     "tail_contribution": 0.0007889641118901933,
+     "mean_rank_tail_out": 27689.88632243059,
+     "mean_size": 99.170514197313
+    }
+   },
+   "T50_membership_equals_A1_in_list": 1.0,
+   "v6_recall_definitions": {
+    "base_top50_filtered": 0.5325963697534526,
+    "base_top100_filtered": 0.590955173889861,
+    "base_top50_union_RecB_top50_filtered": 0.5810159283262866
+   },
+   "HRCOV_PAT_realised_MRR": 0.2823777674082019,
+   "HRCOV_PAT_share_of_PT_oracle": 0.4617904325557867
+  },
+  "tkgl-smallpedia": {
+   "n": 163172,
+   "base_MRR_strict": 0.6180581450462341,
+   "t50_stored_vs_recomputed_equal": 0.9999938714975608,
+   "pools": {
+    "T50": {
+     "name": "base top-50 (stored)",
+     "recall": 0.7574093594489251,
+     "oracle_MRR_exact": 0.7588969565460649,
+     "tail_contribution": 0.0014875970971397676,
+     "mean_rank_tail_out": 6151.971907841552,
+     "mean_size": 50.0
+    },
+    "T100": {
+     "name": "base top-100",
+     "recall": 0.781886598190866,
+     "oracle_MRR_exact": 0.7824776918626657,
+     "tail_contribution": 0.0005910936717995528,
+     "mean_rank_tail_out": 6835.468980050576,
+     "mean_size": 100.0
+    },
+    "U50": {
+     "name": "base top-50 ∪ RecB-trained top-50",
+     "recall": 0.7682139092491359,
+     "oracle_MRR_exact": 0.7690521389619688,
+     "tail_contribution": 0.0008382297128329844,
+     "mean_rank_tail_out": 6407.696174083181,
+     "size_bound": "<= 100"
+    },
+    "POOLSEL": {
+     "name": "valid-selected RecB-POOL pool",
+     "recall": 0.7942171450984238,
+     "oracle_MRR_exact": 0.794560123715975,
+     "tail_contribution": 0.0003429786175512568,
+     "mean_rank_tail_out": 7192.853832866758,
+     "size_bound": "<= 2K = 200 (K = 100 selected on valid)"
+    },
+    "PT": {
+     "name": "HRCOV_PAT pool (actual)",
+     "recall": 0.7614235285465644,
+     "oracle_MRR_exact": 0.762055451944886,
+     "tail_contribution": 0.0006319233983216782,
+     "mean_rank_tail_out": 6252.171132060931,
+     "mean_size": 82.54860515284486
+    },
+    "RB": {
+     "name": "base top-50 ++ ≤50 RecB-trained (B2 pool)",
+     "recall": 0.7713884735126124,
+     "oracle_MRR_exact": 0.7720402863021057,
+     "tail_contribution": 0.0006518127894932776,
+     "mean_rank_tail_out": 6485.46915797657,
+     "mean_size": 95.61300958497782
+    }
+   },
+   "T50_membership_equals_A1_in_list": 1.0,
+   "v6_recall_definitions": {
+    "base_top50_filtered": 0.7655418821856691,
+    "base_top100_filtered": 0.7858394822641139,
+    "base_top50_union_RecB_top50_filtered": 0.773796974971196
+   },
+   "HRCOV_PAT_realised_MRR": 0.6584181855634673,
+   "HRCOV_PAT_share_of_PT_oracle": 0.8640029854560846
+  },
+  "ICEWS18": {
+   "n": 99090,
+   "base_MRR_strict": 0.3370080292224884,
+   "t50_stored_vs_recomputed_equal": 0.9999899081642951,
+   "pools": {
+    "T50": {
+     "name": "base top-50 (stored)",
+     "recall": 0.7413260672116257,
+     "oracle_MRR_exact": 0.742980080927886,
+     "tail_contribution": 0.0016540137162602275,
+     "mean_rank_tail_out": 1466.955602372035,
+     "mean_size": 50.0
+    },
+    "T100": {
+     "name": "base top-100",
+     "recall": 0.8097890806337673,
+     "oracle_MRR_exact": 0.8104407256333261,
+     "tail_contribution": 0.0006516449995587874,
+     "mean_rank_tail_out": 1969.3652376910018,
+     "mean_size": 100.0
+    },
+    "U50": {
+     "name": "base top-50 ∪ RecB-trained top-50",
+     "recall": 0.770531839741649,
+     "oracle_MRR_exact": 0.7715980336584616,
+     "tail_contribution": 0.0010661939168126304,
+     "mean_rank_tail_out": 1641.0830767877562,
+     "size_bound": "<= 100"
+    },
+    "POOLSEL": {
+     "name": "valid-selected RecB-POOL pool",
+     "recall": 0.8340498536683822,
+     "oracle_MRR_exact": 0.8344530813510321,
+     "tail_contribution": 0.00040322768264997093,
+     "mean_rank_tail_out": 2232.495682315738,
+     "size_bound": "<= 2K = 200 (K = 100 selected on valid)"
+    },
+    "PT": {
+     "name": "HRCOV_PAT pool (actual)",
+     "recall": 0.7831062670299728,
+     "oracle_MRR_exact": 0.7839862703871767,
+     "tail_contribution": 0.0008800033572040687,
+     "mean_rank_tail_out": 1706.0065140517402,
+     "mean_size": 98.14738116863458
+    },
+    "RB": {
+     "name": "base top-50 ++ ≤50 RecB-trained (B2 pool)",
+     "recall": 0.7821475426380059,
+     "oracle_MRR_exact": 0.7830162955293826,
+     "tail_contribution": 0.0008687528913767522,
+     "mean_rank_tail_out": 1726.674016769352,
+     "mean_size": 99.5008275305278
+    }
+   },
+   "T50_membership_equals_A1_in_list": 1.0,
+   "v6_recall_definitions": {
+    "base_top50_filtered": 0.7426884650317893,
+    "base_top100_filtered": 0.8105056009688162,
+    "base_top50_union_RecB_top50_filtered": 0.7717024926834191
+   },
+   "HRCOV_PAT_realised_MRR": 0.3708773118836521,
+   "HRCOV_PAT_share_of_PT_oracle": 0.47306608022675184
+  },
+  "GDELT": {
+   "n": 610482,
+   "base_MRR_strict": 0.2167004644870758,
+   "t50_stored_vs_recomputed_equal": 0.9999918097503284,
+   "pools": {
+    "T50": {
+     "name": "base top-50 (stored)",
+     "recall": 0.6214745070288723,
+     "oracle_MRR_exact": 0.6242112575090517,
+     "tail_contribution": 0.0027367504801794,
+     "mean_rank_tail_out": 390.8220769160864,
+     "mean_size": 50.0
+    },
+    "T100": {
+     "name": "base top-100",
+     "recall": 0.7320412395451463,
+     "oracle_MRR_exact": 0.7331748152619815,
+     "tail_contribution": 0.0011335757168351693,
+     "mean_rank_tail_out": 522.4625758020344,
+     "mean_size": 100.0
+    },
+    "U50": {
+     "name": "base top-50 ∪ RecB-trained top-50",
+     "recall": 0.6975144230296716,
+     "oracle_MRR_exact": 0.6991516405112851,
+     "tail_contribution": 0.0016372174816135091,
+     "mean_rank_tail_out": 464.40180437772796,
+     "size_bound": "<= 100"
+    },
+    "POOLSEL": {
+     "name": "valid-selected RecB-POOL pool",
+     "recall": 0.7871255827362641,
+     "oracle_MRR_exact": 0.7878233311892637,
+     "tail_contribution": 0.0006977484529996486,
+     "mean_rank_tail_out": 616.8476715195912,
+     "size_bound": "<= 2K = 200 (K = 100 selected on valid)"
+    },
+    "PT": {
+     "name": "HRCOV_PAT pool (actual)",
+     "recall": 0.6778185106194777,
+     "oracle_MRR_exact": 0.6793386364367807,
+     "tail_contribution": 0.0015201258173030234,
+     "mean_rank_tail_out": 459.8841503716584,
+     "mean_size": 99.90764674470336
+    },
+    "RB": {
+     "name": "base top-50 ++ ≤50 RecB-trained (B2 pool)",
+     "recall": 0.7324720466778709,
+     "oracle_MRR_exact": 0.7336473005263662,
+     "tail_contribution": 0.0011752538484953348,
+     "mean_rank_tail_out": 514.6473386765939,
+     "mean_size": 99.76824050504356
+    }
+   },
+   "T50_membership_equals_A1_in_list": 1.0,
+   "v6_recall_definitions": {
+    "base_top50_filtered": 0.6229471139198207,
+    "base_top100_filtered": 0.7330011368066545,
+    "base_top50_union_RecB_top50_filtered": 0.6987642551295534
+   },
+   "HRCOV_PAT_realised_MRR": 0.269330936388366,
+   "HRCOV_PAT_share_of_PT_oracle": 0.39646050135031585
+  }
+ }
+}
